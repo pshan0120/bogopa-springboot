@@ -4,10 +4,10 @@ const ALIGNMENT = {
 }
 
 const POSITION = {
-    TOWNS_FOLK: {name: "towns folk", title: "선"},
-    OUTSIDER: {name: "outsider", title: "악"},
-    MINION: {name: "minion", title: "악"},
-    IMP: {name: "imp", title: "악"},
+    TOWNS_FOLK: {name: "towns folk", title: "마을 주민"},
+    OUTSIDER: {name: "outsider", title: "이방인"},
+    MINION: {name: "minion", title: "하수인"},
+    DEMON: {name: "demon", title: "악마"},
 }
 
 /*const ROLE = {

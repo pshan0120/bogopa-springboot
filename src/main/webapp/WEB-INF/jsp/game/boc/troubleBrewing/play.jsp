@@ -11,6 +11,7 @@
     <script>
         const PLAY_NO = ${playNo};
         let playerList = [];
+        let roleList = [];
         /*
         1. 참가자 자리 배치
         2. 그리모어 준비
@@ -32,46 +33,7 @@
             }
             localStorage.play = play;
 
-
-            renderPlayMemberList();
-        });
-
-        const renderPlayMemberList = async () => {
-            playerList = await readPlayMemberList(PLAY_NO);
-
-            const $settingDiv = $("#settingDiv");
-            const $playersDiv = $settingDiv.find("div[name='playersDiv']");
-
-            const htmlString = playerList.reduce((prev, next) => {
-                return prev +
-                    "<div class=\"form-group form-inline\">" +
-                    "   <label class=\"form-control-label\">" + next.nickNm + "</label>" +
-                    "   <span> => </span>" +
-                    "   <input type=\"text\" class=\"form-control form-control-alternative\" name=\"roleName\" readonly" +
-                    "       data-member-id=\"" + next.mmbrNo + "\">" +
-                    "</div>";
-            }, "");
-
-            $playersDiv.append(htmlString);
-        }
-
-        const readPlayMemberList = playNo => {
-            return gfn_callGetApi("/api/game/play/member/list", {playNo})
-                .then(data => {
-                    console.log('data', data);
-                    return data;
-                })
-                .catch(response => console.error('error', response));
-        }
-
-        const setPlayersRole = () => {
-            const randomSortedPlayerList = playerList
-                .sort(() => Math.random() - 0.5);
-
-            const playerSetting = initializationSetting.player
-                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.imp);
-
-            const roleList = [
+            roleList = [
                 new WasherWoman(),
                 new Librarian(),
                 new Investigator(),
@@ -96,24 +58,73 @@
                 new Imp(),
             ];
 
-            const townsFolkPlayerList = createPlayerList(roleList, randomSortedPlayerList, playerSetting.townsFolk, POSITION.TOWNS_FOLK);
-            console.log('townsFolkPlayerList', townsFolkPlayerList);
-            const outsiderPlayerList = createPlayerList(roleList, randomSortedPlayerList, playerSetting.outsider, POSITION.OUTSIDER);
-            console.log('outsiderPlayerList', outsiderPlayerList);
+            renderPlayMemberList();
+        });
+
+        const renderPlayMemberList = async () => {
+            playerList = await readPlayMemberList(PLAY_NO);
+
+            const $settingDiv = $("#settingDiv");
+            const $playersDiv = $settingDiv.find("div[name='playersDiv']");
+
+            const htmlString = playerList.reduce((prev, next) => {
+                return prev +
+                    "<div class=\"form-group form-inline\">" +
+                    "   <label class=\"form-control-label\">" + next.nickNm + "</label>" +
+                    "   <input type=\"text\" class=\"form-control form-control-alternative\" name=\"roleName\" readonly" +
+                    "       data-member-id=\"" + next.mmbrNo + "\">" +
+                    "</div>";
+            }, "");
+
+            $playersDiv.append(htmlString);
+        }
+
+        const readPlayMemberList = playNo => {
+            return gfn_callGetApi("/api/game/play/member/list", {playNo})
+                .then(data => {
+                    console.log('data', data);
+                    return data;
+                })
+                .catch(response => console.error('error', response));
+        }
+
+        const setPlayersRole = () => {
+            const randomSortedPlayerList = [...playerList.sort(() => Math.random() - 0.5)];
+
+            const playerSetting = initializationSetting.player
+                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+
+            const demonPlayerList = createPlayerList(roleList, randomSortedPlayerList, playerSetting.demon, POSITION.DEMON);
+            console.log('demonPlayerList', demonPlayerList);
+
             const minionPlayerList = createPlayerList(roleList, randomSortedPlayerList, playerSetting.minion, POSITION.MINION);
             console.log('minionPlayerList', minionPlayerList);
-            const impPlayerList = createPlayerList(roleList, randomSortedPlayerList, playerSetting.imp, POSITION.IMP);
-            console.log('impPlayerList', impPlayerList);
+            // NOTE: 만약 minionPlayerList 중 Baron 이 있다면 townsFolkPlayerList, outsiderPlayerList 가 조정됨
+            const baronExists = minionPlayerList.some(minionPlayer => minionPlayer.name === Baron.name);
+
+            let townsFolkNumber = playerSetting.townsFolk;
+            if (baronExists) {
+                townsFolkNumber = townsFolkNumber - 2;
+            }
+            const townsFolkPlayerList = createPlayerList(roleList, randomSortedPlayerList, townsFolkNumber, POSITION.TOWNS_FOLK);
+            console.log('townsFolkPlayerList', townsFolkPlayerList);
+
+            let outsiderNumber = playerSetting.outsider;
+            if (baronExists) {
+                outsiderNumber = outsiderNumber + 2;
+            }
+            const outsiderPlayerList = createPlayerList(roleList, randomSortedPlayerList, outsiderNumber, POSITION.OUTSIDER);
+            console.log('outsiderPlayerList', outsiderPlayerList);
 
             showPlayerRoleList(townsFolkPlayerList);
             showPlayerRoleList(outsiderPlayerList);
             showPlayerRoleList(minionPlayerList);
-            showPlayerRoleList(impPlayerList);
+            showPlayerRoleList(demonPlayerList);
 
             /*localStorage.townsFolkPlayerList = JSON.stringify(townsFolkPlayerList);
             localStorage.outsiderPlayerList = JSON.stringify(outsiderPlayerList);
             localStorage.minionPlayerList = JSON.stringify(minionPlayerList);
-            localStorage.impPlayerList = JSON.stringify(impPlayerList);
+            localStorage.demonPlayerList = JSON.stringify(demonPlayerList);
 
             const savedTownsFolkPlayerList = JSON.parse(localStorage.townsFolkPlayerList);
             console.log('savedTownsFolkPlayerList', savedTownsFolkPlayerList);*/
@@ -137,7 +148,30 @@
                 const found = $playersDiv.find("input[name='roleName']").toArray()
                     .filter(roleNameObject => player.playerId == $(roleNameObject).data("memberId"));
                 $(found).val(player.title);
+                $(found).removeClass();
+                $(found).addClass("form-control form-control-alternative");
+                $(found).addClass(calculateRoleNameClass(player.position.name));
             });
+        }
+
+        const calculateRoleNameClass = positionName => {
+            if (positionName === "towns folk") {
+                return "text-primary";
+            }
+
+            if (positionName === "outsider") {
+                return "text-info";
+            }
+
+            if (positionName === "minion") {
+                return "text-warning";
+            }
+
+            return "text-danger"
+        }
+
+        const startGame = () => {
+
         }
 
     </script>
@@ -175,7 +209,7 @@
                     <div class="card-header bg-white border-0">
                         <div class="row">
                             <div class="col-lg-12">
-                                준비
+                                준비 단계
                             </div>
                         </div>
                     </div>
@@ -184,8 +218,11 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="form-control btn btn-info" onclick="setPlayersRole()">
-                                참가자 확정
+                            <button type="button" class="form-control btn btn-default" onclick="setPlayersRole()">
+                                역할 분배
+                            </button>
+                            <button type="button" class="form-control btn btn-primary" onclick="startGame()">
+                                게임 시작
                             </button>
                         </div>
                     </div>

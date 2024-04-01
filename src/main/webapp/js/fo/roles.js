@@ -53,7 +53,7 @@ class MinionRole extends EvilRole {
 
 class DemonRole extends EvilRole {
     constructor(name, title, order) {
-        super(name, title, order, POSITION.IMP);
+        super(name, title, order, POSITION.DEMON);
     }
 }
 
@@ -222,7 +222,7 @@ class Drunk extends OutsiderRole {
     constructor(townsFolkRole) {
         super(Drunk.name, Drunk.title, Drunk.order);
         this.fakeTownsFolkRole = townsFolkRole;
-        this.position = true;
+        this.drunken = true;
     }
 }
 

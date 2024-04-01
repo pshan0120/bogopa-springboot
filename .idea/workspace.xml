@@ -9,32 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/playList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/initializationSetting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="game 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/controller/FoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/controller/FoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/dao/FoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/dao/FoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/service/FoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/service/FoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/service/FoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/service/FoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/context-common.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/context-common.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/context-datasource.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/context-datasource.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Fo_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Fo_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/initializationSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +53,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/js",
@@ -259,8 +241,16 @@
       <workItem from="1711550949325" duration="1875000" />
       <workItem from="1711943274554" duration="305000" />
       <workItem from="1711945597912" duration="2908000" />
-      <workItem from="1711958020195" duration="18580000" />
+      <workItem from="1711958020195" duration="22281000" />
     </task>
+    <task id="LOCAL-00001" summary="game 추가">
+      <created>1711978001453</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711978001453</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +271,8 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="game 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="game 추가" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
