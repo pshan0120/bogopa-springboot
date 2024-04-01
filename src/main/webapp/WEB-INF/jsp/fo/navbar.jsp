@@ -68,6 +68,12 @@
 						<span class="nav-link-inner--text">플레이</span>
 					</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link nav-link-icon" href="/game/trouble-brewing/play">
+						<i class="ni ni-watch-time"></i>
+						<span class="nav-link-inner--text">B.O.C.</span>
+					</a>
+				</li>
 			<% if(isLogin) { %>
 				<li class="nav-item">
 					<a class="nav-link nav-link-icon" href="/myPage">

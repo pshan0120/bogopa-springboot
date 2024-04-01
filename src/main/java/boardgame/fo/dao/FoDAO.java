@@ -351,43 +351,43 @@ public class FoDAO extends AbstractDAO {
 	
 	/* 플레이 */
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selecPlayRcrdByAllList(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>) selectPagingListAjax("fo.selecPlayRcrdByAllList", map);
+	public List<Map<String, Object>> selectPlayRcrdByAllList(Map<String, Object> map) throws Exception{
+		return (List<Map<String, Object>>) selectPagingListAjax("fo.selectPlayRcrdByAllList", map);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selecPlayRcrdByAllListCnt(Map<String, Object> map) throws Exception{
-		return (Map<String, Object>) selectOne("fo.selecPlayRcrdByAllListCnt", map);
+	public Map<String, Object> selectPlayRcrdByAllListCnt(Map<String, Object> map) throws Exception{
+		return (Map<String, Object>) selectOne("fo.selectPlayRcrdByAllListCnt", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selecPlayRcrdByClubList(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>) selectPagingListAjax("fo.selecPlayRcrdByClubList", map);
+		return (List<Map<String, Object>>) selectPagingListAjax("fo.selectPlayRcrdByClubList", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selecPlayRcrdByClubListCnt(Map<String, Object> map) throws Exception{
-		return (Map<String, Object>) selectOne("fo.selecPlayRcrdByClubListCnt", map);
+		return (Map<String, Object>) selectOne("fo.selectPlayRcrdByClubListCnt", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selecPlayRcrdByMmbrList(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>) selectPagingListAjax("fo.selecPlayRcrdByMmbrList", map);
+		return (List<Map<String, Object>>) selectPagingListAjax("fo.selectPlayRcrdByMmbrList", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selecPlayRcrdByMmbrListCnt(Map<String, Object> map) throws Exception{
-		return (Map<String, Object>) selectOne("fo.selecPlayRcrdByMmbrListCnt", map);
+		return (Map<String, Object>) selectOne("fo.selectPlayRcrdByMmbrListCnt", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selecPlayRcrdByGameList(Map<String, Object> map) throws Exception{
-		return (List<Map<String, Object>>) selectPagingListAjax("fo.selecPlayRcrdByGameList", map);
+		return (List<Map<String, Object>>) selectPagingListAjax("fo.selectPlayRcrdByGameList", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selecPlayRcrdByGameListCnt(Map<String, Object> map) throws Exception{
-		return (Map<String, Object>) selectOne("fo.selecPlayRcrdByGameListCnt", map);
+		return (Map<String, Object>) selectOne("fo.selectPlayRcrdByGameListCnt", map);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -425,7 +425,15 @@ public class FoDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectGameSttngList(Map<String, Object> map) throws Exception{
 		return (List<Map<String, Object>>) selectList("fo.selectGameSttngList", map);
 	}
-	
-	
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectBocPlayRcrdList(Map<String, Object> map) throws Exception{
+		return (List<Map<String, Object>>) selectPagingListAjax("fo.selectBocPlayRcrdList", map);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectBocPlayRcrdListCnt(Map<String, Object> map) throws Exception{
+		return (Map<String, Object>) selectOne("fo.selectBocPlayRcrdListCnt", map);
+	}
 	
 }

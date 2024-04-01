@@ -63,7 +63,7 @@
 
 	function fn_selectPlayRcrd1List(pageNo) {
 		var comAjax = new ComAjax("playRcrd1Form");
-		comAjax.setUrl("<c:url value='/selecPlayRcrdByAllList' />");
+		comAjax.setUrl("<c:url value='/selectPlayRcrdByAllList' />");
 		comAjax.setCallback("fn_selectPlayRcrd1ListCallback");
 		comAjax.addParam("pageIndex", pageNo);
 		comAjax.addParam("pageRow", 5);
@@ -564,7 +564,7 @@
 		});
 		
 		if(gfn_validate("insertPlayForm")) {
-			if(confirm("바로 플레이를 시작됩니다. 진행하시겠습니까?")) {
+			if(confirm("바로 플레이가 시작됩니다. 진행하시겠습니까?")) {
 				var comAjax = new ComAjax("insertPlayForm");
 				comAjax.setUrl("<c:url value='/insertPlay' />");
 				comAjax.setCallback("gfn_defaultCallback");

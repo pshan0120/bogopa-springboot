@@ -1,15 +1,11 @@
 package boardgame.fo.service;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -354,15 +350,15 @@ public class FoServiceImpl implements FoService {
 	
 	/* 플레이 */
 	@Override
-	public Map<String, Object> selecPlayRcrdByAllList(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectPlayRcrdByAllList(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
-		resultMap.put("list", foDAO.selecPlayRcrdByAllList(map));
-		resultMap.put("cnt", foDAO.selecPlayRcrdByAllListCnt(map).get("cnt"));
+		resultMap.put("list", foDAO.selectPlayRcrdByAllList(map));
+		resultMap.put("cnt", foDAO.selectPlayRcrdByAllListCnt(map).get("cnt"));
 		return resultMap;
 	}
 	
 	@Override
-	public Map<String, Object> selecPlayRcrdByClubList(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectPlayRcrdByClubList(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("list", foDAO.selecPlayRcrdByClubList(map));
 		resultMap.put("cnt", foDAO.selecPlayRcrdByClubListCnt(map).get("cnt"));
@@ -370,7 +366,7 @@ public class FoServiceImpl implements FoService {
 	}
 	
 	@Override
-	public Map<String, Object> selecPlayRcrdByMmbrList(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectPlayRcrdByMmbrList(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("list", foDAO.selecPlayRcrdByMmbrList(map));
 		resultMap.put("cnt", foDAO.selecPlayRcrdByMmbrListCnt(map).get("cnt"));
@@ -378,13 +374,13 @@ public class FoServiceImpl implements FoService {
 	}
 	
 	@Override
-	public Map<String, Object> selecPlayRcrdByGameList(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectPlayRcrdByGameList(Map<String, Object> map) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
 		resultMap.put("list", foDAO.selecPlayRcrdByGameList(map));
 		resultMap.put("cnt", foDAO.selecPlayRcrdByGameListCnt(map).get("cnt"));
 		return resultMap;
 	}
-	
+
 	public List<Map<String, Object>> selectPlayJoinMmbrList(Map<String, Object> map) throws Exception{
 		return foDAO.selectPlayJoinMmbrList(map);
 	}
@@ -423,5 +419,12 @@ public class FoServiceImpl implements FoService {
 	public List<Map<String, Object>> selectGameSttngList(Map<String, Object> map) throws Exception{
 		return foDAO.selectGameSttngList(map);
 	}
-	
+
+	@Override
+	public Map<String, Object> selectBocPlayRcrdList(Map<String, Object> map) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("list", foDAO.selectBocPlayRcrdList(map));
+		resultMap.put("cnt", foDAO.selectBocPlayRcrdListCnt(map).get("cnt"));
+		return resultMap;
+	}
 }

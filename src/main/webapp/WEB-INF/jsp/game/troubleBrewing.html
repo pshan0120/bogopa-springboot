@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- head -->
+<head th:block th:include="common/include-head::head"></head>
+<!-- script -->
+<th:block th:insert="common/include-script::script"></th:block>
+
+<script type="text/javascript" th:src="@{/js/initializationSetting.js}"></script>
+<script type="text/javascript" th:src="@{/js/roles.js}"></script>
+<script type="text/javascript" th:src="@{/js/constants.js}"></script>
+
+<script>
+    /*
+    1. 참가자 자리 배치
+    2. 그리모어 준비
+    3. 에디션 선택
+    4. 마을 광장 준비
+    5. 규칙 설명
+    6. 비공개적으로 캐릭터 선택
+    7. 캐릭터 추가 및 제거
+    8. 알림 토큰 추가
+    9. 캐릭터 토큰 분배
+    10. 그리모어에 캐릭터 토큰 추가
+    11. 첫날 밤
+     */
+
+    $(() => {
+        console.log('initializationSetting', initializationSetting);
+        const play = {
+            round: 0,
+        }
+        localStorage.play = play;
+    });
+
+    const confirmNumberOfPlayers = () => {
+        const $settingDiv = $("#settingDiv");
+        const $numberOfPlayersDiv = $settingDiv.find("div[name='numberOfPlayersDiv']");
+        const numberOfPlayers = $numberOfPlayersDiv.find("input[name='numberOfPlayers']").val();
+
+        if (numberOfPlayers < 5 || numberOfPlayers > 20) {
+            alert("최소 5명, 최대 20명까지 참가 가능합니다.");
+            return;
+        }
+
+        $numberOfPlayersDiv.find("button[name='addButton']").hide();
+        $numberOfPlayersDiv.find("button[name='resetButton']").show();
+
+        let html = "";
+        for (let i = 0; i < numberOfPlayers; i++) {
+            html += "<div class=\"form-group form-inline\">" +
+                "<input type=\"text\" class=\"form-control\" name=\"playerName\" >" +
+                "<input type=\"text\" class=\"form-control\" name=\"roleName\" readonly>" +
+                "</div>";
+        }
+
+        const $playersDiv = $settingDiv.find("div[name='playersDiv']");
+        $playersDiv.append(html);
+
+        const $buttonDiv = $settingDiv.find("div[name='buttonDiv']");
+        $buttonDiv.find("button").attr("disabled", false);
+    }
+
+    const resetNumberOfPlayers = () => {
+        const $settingDiv = $("#settingDiv");
+        const $numberOfPlayersDiv = $settingDiv.find("div[name='numberOfPlayersDiv']");
+
+        $numberOfPlayersDiv.find("button[name='addButton']").show();
+        $numberOfPlayersDiv.find("button[name='resetButton']").hide();
+
+        const $playersDiv = $settingDiv.find("div[name='playersDiv']");
+        $playersDiv.empty();
+
+        const $buttonDiv = $settingDiv.find("div[name='buttonDiv']");
+        $buttonDiv.find("button").attr("disabled", true);
+    }
+
+    const createPlayerList = (roleList, playerNameList, playerNumber, position) => {
+        return roleList
+            .filter(role => role.position === position)
+            .sort(() => Math.random() - 0.5)
+            .slice(0, playerNumber)
+            .map(role => ({...role, playerName: playerNameList.pop()}));
+    };
+
+    const showPlayerRoleList = playerList => {
+        const $settingDiv = $("#settingDiv");
+        const $playersDiv = $settingDiv.find("div[name='playersDiv']");
+        playerList.forEach(player => {
+            const found = $playersDiv.find("div").toArray()
+                .filter(playerObject => player.playerName === $(playerObject).find("input[name='playerName']").val());
+            $(found).find("input[name='roleName']").val(player.title);
+        });
+    };
+
+    const setPlayersRole = () => {
+        const $settingDiv = $("#settingDiv");
+        const $playerNames = $settingDiv.find("div[name='playersDiv']").find("input[name='playerName']");
+        const emptyFound = $playerNames.toArray().some(playerName => $(playerName).val() === "");
+        if (emptyFound) {
+            alert("참가자 이름을 모두 입력해 주세요.");
+            return;
+        }
+
+        const playerNameList = $playerNames.toArray()
+            .sort(() => Math.random() - 0.5)
+            .map(playerName => $(playerName).val());
+        console.log('playerNameList', playerNameList);
+
+        const playerSetting = initializationSetting.player
+            .find(player => $playerNames.length === player.townsFolk + player.outsider + player.minion + player.imp);
+        console.log('playerSetting', playerSetting);
+
+        const ROLE_LIST = [
+            new WasherWoman(),
+            new Librarian(),
+            new Investigator(),
+            new Chef(),
+            new Empath(),
+            new FortuneTeller(),
+            new Undertaker(),
+            new Monk(),
+            new RavenKeeper(),
+            new Virgin(),
+            new Slayer(),
+            new Soldier(),
+            new Mayor(),
+            new Butler,
+            new Drunk(),
+            new Recluse(),
+            new Saint(),
+            new Poisoner(),
+            new Spy(),
+            new Baron(),
+            new ScarletWomen(),
+            new Imp(),
+        ];
+
+        const townsFolkPlayerList = createPlayerList(ROLE_LIST, playerNameList, playerSetting.townsFolk, POSITION.TOWNS_FOLK);
+        console.log('townsFolkPlayerList', townsFolkPlayerList);
+        const outsiderPlayerList = createPlayerList(ROLE_LIST, playerNameList, playerSetting.outsider, POSITION.OUTSIDER);
+        console.log('outsiderPlayerList', outsiderPlayerList);
+        const minionPlayerList = createPlayerList(ROLE_LIST, playerNameList, playerSetting.minion, POSITION.MINION);
+        console.log('minionPlayerList', minionPlayerList);
+        const impPlayerList = createPlayerList(ROLE_LIST, playerNameList, playerSetting.imp, POSITION.IMP);
+        console.log('impPlayerList', impPlayerList);
+
+        showPlayerRoleList(townsFolkPlayerList);
+        showPlayerRoleList(outsiderPlayerList);
+        showPlayerRoleList(minionPlayerList);
+        showPlayerRoleList(impPlayerList);
+
+        localStorage.townsFolkPlayerList = JSON.stringify(townsFolkPlayerList);
+        localStorage.outsiderPlayerList = JSON.stringify(outsiderPlayerList);
+        localStorage.minionPlayerList = JSON.stringify(minionPlayerList);
+        localStorage.impPlayerList = JSON.stringify(impPlayerList);
+
+        const savedTownsFolkPlayerList = JSON.parse(localStorage.townsFolkPlayerList);
+        console.log('savedTownsFolkPlayerList', savedTownsFolkPlayerList);
+    }
+</script>
+
+<body>
+<!-- header -->
+<header th:replace="layout/header::header(h1='사건 발생', p='Trouble Brewing')"></header>
+<!-- section -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="panel panel-primary" id="settingDiv">
+                <div class="panel-heading">
+                    <h1 class="panel-title">준비</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group form-inline" name="numberOfPlayersDiv">
+                        <label>인원</label>
+                        <input type="number" class="form-control" name="numberOfPlayers" min="5" max="20">
+                        <button type="button" class="form-control btn btn-primary" name="addButton"
+                                onclick="confirmNumberOfPlayers()">
+                            추가
+                        </button>
+                        <button type="button" class="form-control btn btn-danger" name="resetButton"
+                                style="display: none" onclick="resetNumberOfPlayers()">
+                            재설정
+                        </button>
+                    </div>
+                    <div name="playersDiv"></div>
+                    <div name="buttonDiv">
+                        <button type="button" class="form-control btn btn-info" onclick="setPlayersRole()" disabled>
+                            참가자 확정
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer th:replace="layout/footer::footer"></footer>
+
+</body>
+</html>

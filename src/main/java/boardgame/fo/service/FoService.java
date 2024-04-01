@@ -3,8 +3,6 @@ package boardgame.fo.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 public interface FoService {
 	
 	/* 메인 */
@@ -80,11 +78,11 @@ public interface FoService {
 	/* 플레이 */
 	Map<String, Object> selectPlayRcrd(Map<String, Object> map) throws Exception;
 	List<Map<String, Object>> selectPlayRcrdList(Map<String, Object> map) throws Exception;
-	Map<String, Object> selecPlayRcrdByAllList(Map<String, Object> map) throws Exception;
-	Map<String, Object> selecPlayRcrdByClubList(Map<String, Object> map) throws Exception;
-	Map<String, Object> selecPlayRcrdByMmbrList(Map<String, Object> map) throws Exception;
-	Map<String, Object> selecPlayRcrdByGameList(Map<String, Object> map) throws Exception;
-	
+	Map<String, Object> selectPlayRcrdByAllList(Map<String, Object> map) throws Exception;
+	Map<String, Object> selectPlayRcrdByClubList(Map<String, Object> map) throws Exception;
+	Map<String, Object> selectPlayRcrdByMmbrList(Map<String, Object> map) throws Exception;
+	Map<String, Object> selectPlayRcrdByGameList(Map<String, Object> map) throws Exception;
+
 	List<Map<String, Object>> selectPlayJoinMmbrList(Map<String, Object> map) throws Exception;
 	void insertPlay(Map<String, Object> map) throws Exception;
 	void updatePlay(Map<String, Object> map) throws Exception;
@@ -96,5 +94,7 @@ public interface FoService {
 	/* 게임 */
 	List<Map<String, Object>> selectGameNoList(Map<String, Object> map) throws Exception;
 	List<Map<String, Object>> selectGameSttngList(Map<String, Object> map) throws Exception;
-	
+
+	Map<String, Object> selectBocPlayRcrdList(Map<String, Object> map) throws Exception;
+
 }

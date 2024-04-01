@@ -2324,7 +2324,7 @@
 	</select>
 	
 	
-	<select id="selecPlayRcrdByAllList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByAllList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -2371,7 +2371,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 	
-	<select id="selecPlayRcrdByAllListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByAllListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -2405,7 +2405,7 @@
 	</select>
 	
 	
-	<select id="selecPlayRcrdByClubList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByClubList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -2482,7 +2482,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 	
-	<select id="selecPlayRcrdByClubListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByClubListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -2549,7 +2549,7 @@
 			</if>
 	</select>
 	
-	<select id="selecPlayRcrdByMmbrList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByMmbrList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -2647,7 +2647,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 	
-	<select id="selecPlayRcrdByMmbrListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByMmbrListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -2735,7 +2735,7 @@
 			</if>
 	</select>
 	
-	<select id="selecPlayRcrdByGameList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByGameList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -2844,7 +2844,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 	
-	<select id="selecPlayRcrdByGameListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRcrdByGameListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -3162,7 +3162,89 @@
 			ORDER BY
 				gs.ordr
 	</select>
-	
-	
+
+	<select id="selectBocPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+		SELECT
+		*
+		FROM
+		(SELECT
+		p.playNo,
+		p.playNm,
+		c.clubNo,
+		c.clubNm,
+		IFNULL(c.prflImgFileNm, '') AS clubPrflImgFileNm,
+		p.gameNo,
+		g.gameNm,
+		p.sttsCd,
+		cdNm('C002', p.sttsCd) AS sttsNm,
+		DATE_FORMAT(p.strtDt, "%Y.%m.%d %H:%i") AS strtDt,
+		IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt
+		FROM
+		play p,
+		game g,
+		club c
+		WHERE
+		p.gameNo = g.gameNo
+		AND
+		p.clubNo = c.clubNo
+		AND
+		c.useYn = 'Y'
+		AND
+		p.gameNo = 1951
+		) p1
+		WHERE
+		1=1
+		<if test="srchText != null and srchText != ''">
+			AND
+			(p1.playNm LIKE CONCAT('%',#{srchText},'%')
+			OR
+			p1.gameNm LIKE CONCAT('%',#{srchText},'%'))
+		</if>
+		<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+			p1.playNo DESC
+		</if>
+		<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+			p1.${orderBy}
+		</if>
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectBocPlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+		SELECT
+		COUNT(*) AS cnt
+		FROM
+		(SELECT
+		p.playNo,
+		p.playNm,
+		c.clubNo,
+		p.gameNo,
+		g.gameNm,
+		p.sttsCd,
+		cdNm('C002', p.sttsCd) AS sttsNm
+		FROM
+		play p,
+		game g,
+		club c
+		WHERE
+		p.playNo = g.gameNo
+		AND
+		p.clubNo = c.clubNo
+		AND
+		c.useYn = 'Y'
+		AND
+		p.gameNo = 1951
+		) p1
+		WHERE
+		1=1
+		<if test="srchText != null and srchText != ''">
+			AND
+			(p1.playNm LIKE CONCAT('%',#{srchText},'%')
+			OR
+			p1.gameNm LIKE CONCAT('%',#{srchText},'%'))
+		</if>
+	</select>
 	
 </mapper>
