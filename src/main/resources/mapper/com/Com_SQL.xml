@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com">
+
+	<sql id="pagingPre">
+		<![CDATA[
+			SELECT
+				PAGING.*
+			FROM
+				(
+		]]>
+	</sql>
+	 
+	<sql id="pagingPost">
+		<![CDATA[
+				) PAGING
+			LIMIT #{start}, #{end}
+		]]>
+	</sql>
+	
+	<select id="selectCdList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				cd,
+				nm
+			FROM
+				cd
+			WHERE
+				grpCd = #{grpCd}
+			AND
+				ordr != '0'
+			ORDER BY
+				ordr
+		]]>
+	</select>
+	
+	<select id="selectCdNm" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				c.cd,
+				c.nm,
+				c.rmrk
+			FROM
+				cd c
+			WHERE
+				c.grpCd = #{grpCd}
+			AND
+				c.cd = #{cd}
+		]]>
+	</select>
+	
+	<select id="selectGetId" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				getNewId(#{param1}, #{param2}) AS id
+			FROM
+				DUAL
+		]]>
+	</select>
+	
+	<select id="selectEmailTmplt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				TRIM(e.title) AS title,
+				TRIM(e.cntnts) AS cntnts
+			FROM
+				emailTmplt e
+			WHERE
+				e.tmpltNo = #{tmpltNo}
+		]]>
+	</select>
+	
+	<insert id="insertEmailHis" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO emailHis
+			(
+				emailFrom,
+				emailTo,
+				title,
+				cntnts,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{emailFrom},
+				encVal(#{emailTo}),
+				TRIM(#{title}),
+				TRIM(#{cntnts}),
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+	
+	<select id="selectFileInfo" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				f.seq,
+				f.fileId,
+				f.fileNm,
+				f.strdFileNm,
+				f.fileTypeCd
+			FROM
+				file f
+			WHERE
+				f.seq = #{seq}
+		]]>
+	</select>
+	
+	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				f.seq,
+				f.fileNm,
+				ROUND(f.fileSize/1024, 1) AS fileSize
+			FROM
+				file f
+			WHERE
+				f.fileTypeCd = #{fileTypeCd}
+			AND
+				f.fileId = #{fileId}
+			AND	
+				f.delYn = 'N'
+		]]>
+	</select>
+	
+	<insert id="insertFile" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO file
+			(
+				fileId,
+				fileTypeCd,
+				fileSize,
+				fileNm,
+				strdFileNm,
+				delYn,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{fileId},
+				#{fileTypeCd},
+				#{fileSize},
+				#{fileNm},
+				#{strdFileNm},
+				'N',
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+	
+	<update id="deleteFile" parameterType="hashmap">
+		<![CDATA[
+			UPDATE
+				file
+			SET
+				delYn = 'Y',
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				seq = #{seq}
+		]]>
+	</update>
+	
+	<update id="deleteFileList" parameterType="hashmap">
+		<![CDATA[
+			UPDATE
+				file
+			SET
+				delYn = 'Y',
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				fileTypeCd = {fileTypeCd}
+			AND
+				fileId = #{fileId}
+		]]>
+	</update>
+	
+</mapper>

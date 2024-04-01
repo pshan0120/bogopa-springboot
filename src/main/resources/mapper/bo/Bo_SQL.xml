@@ -1,0 +1,1994 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bo">
+	
+	<select id="selectMmbrList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				m.mmbrNo,
+				decVal(m.email) AS email,
+				m.pswrdErrCnt,
+				m.mmbrNm,
+				m.bizNo,
+				m.ceoNm,
+				decVal(m.ceoMpNo) AS ceoMpNo,
+				m.mngrNm,
+				decVal(m.mngrMpNo) AS mngrMpNo,
+				m.mrtngYn,
+				m.dcmntYn,
+				IFNULL(m.invtMmbrNo, '') AS invtMmbrNo,
+				m.useYn,
+				DATE_FORMAT(m.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				mmbr m
+			WHERE
+				1=1
+			<if test="mmbrNo != null and mmbrNo != ''">
+			AND
+				m.mmbrNo = #{mmbrNo}
+			</if>
+			<if test="mmbrNm != null and mmbrNm != ''">
+			AND
+				m.mmbrNm LIKE CONCAT('%',#{mmbrNm},'%')
+			</if>
+			<if test="email != null and email != ''">
+			AND
+				decVal(m.email) LIKE CONCAT('%',#{email},'%')
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				m.mmbrNo DESC
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				m.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectMmbrListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				mmbr m
+			WHERE
+				1=1
+			<if test="mmbrNo != null and mmbrNo != ''">
+			AND
+				m.mmbrNo = #{mmbrNo}
+			</if>
+			<if test="mmbrNm != null and mmbrNm != ''">
+			AND
+				m.mmbrNm LIKE CONCAT('%',#{mmbrNm},'%')
+			</if>
+			<if test="email != null and email != ''">
+			AND
+				decVal(m.email) LIKE CONCAT('%',#{email},'%')
+			</if>
+	</select>
+	
+	<select id="selectMmbr" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				m.mmbrNo,
+				decVal(m.email) AS email,
+				m.pswrdErrCnt,
+				m.mmbrNm,
+				m.bizNo,
+				m.ceoNm,
+				decVal(m.ceoMpNo) AS ceoMpNo,
+				m.mngrNm,
+				decVal(m.mngrMpNo) AS mngrMpNo,
+				m.mrtngYn,
+				m.dcmntYn,
+				IFNULL(m.invtMmbrNo, '') AS invtMmbrNo,
+				m.useYn,
+				DATE_FORMAT(m.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				mmbr m
+			WHERE
+				m.mmbrNo = #{mmbrNo}
+		]]>
+	</select>
+	
+	<select id="selectMmbrLogList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/> 
+			SELECT
+				*
+			FROM
+				(SELECT
+					m.mmbrIp,
+					DATE_FORMAT(m.logDt, "%Y.%m.%d %H:%i") AS logDt
+				FROM
+					mmbrLog m
+				WHERE
+					m.mmbrNo = #{mmbrNo}
+				) m2
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				m2.logDt DESC
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				m2.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/> 
+	</select>
+	
+	<select id="selectMmbrLogListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				mmbrLog m
+			WHERE
+				m.mmbrNo = #{mmbrNo}
+		]]>
+	</select>
+	
+	<select id="selectMmbrCmmrcList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/> 
+			SELECT
+				mc.cmmrcNo,
+				c.cmmrcNm,
+				mc.sllrId,
+				decVal(mc.sllrPswrd) AS sllrPswrd,
+				mc.bankCd,
+				cdNm('C003', mc.bankCd) AS bankNm,
+				decVal(mc.accntNo) AS accntNo,
+				mc.accntNm
+			FROM
+				mmbrCmmrc mc,
+				cmmrc c
+			WHERE
+				mc.cmmrcNo = c.cmmrcNo
+			AND
+				mc.mmbrNo = #{mmbrNo}
+			<if test="cmmrcNo != null and cmmrcNo != ''">
+			AND
+				mc.cmmrcNo = #{cmmrcNo}
+			</if>
+			ORDER BY
+				mc.cmmrcNo
+		<include refid="com.pagingPost"/> 
+	</select>
+	
+	<select id="selectMmbrCmmrcListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				mmbrCmmrc mc,
+				cmmrc c
+			WHERE
+				mc.cmmrcNo = c.cmmrcNo
+			AND
+				mc.mmbrNo = #{mmbrNo}
+		]]>
+	</select>
+	
+	<select id="selectMmbrRepayList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/> 
+			SELECT
+				rq.reqNo,
+				c.cmmrcNm,
+				rp.expctClcltDate,
+				rp.expctClcltAmt,
+				rp.realClcltDate,
+				rp.realClcltAmt,
+				rp.restTakeAmt,
+				rp.sttsCd,
+				cd.nm AS sttsNm
+			FROM
+				req rq,
+				repay rp,
+				cmmrc c,
+				cd cd
+			WHERE
+				rq.reqNo = rp.reqNo
+			AND
+				rq.cmmrcNo = c.cmmrcNo
+			AND
+				rp.sttsCd = cd.cd
+			AND
+				cd.grpCd = 'C002'
+			AND
+				rq.mmbrNo = #{mmbrNo}
+			<if test="sttsCd != null and sttsCd != ''">
+			AND
+				rp.sttsCd = #{sttsCd}
+			</if>
+			ORDER BY
+				rq.reqNo DESC
+		<include refid="com.pagingPost"/> 
+	</select>
+	
+	<select id="selectMmbrRepayListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				req rq,
+				repay rp,
+				cmmrc c,
+				cd cd
+			WHERE
+				rq.reqNo = rp.reqNo
+			AND
+				rq.cmmrcNo = c.cmmrcNo
+			AND
+				rp.sttsCd = cd.cd
+			AND
+				cd.grpCd = 'C002'
+			AND
+				rq.mmbrNo = #{mmbrNo}
+			<if test="sttsCd != null and sttsCd != ''">
+			AND
+				rp.sttsCd = #{sttsCd}
+			</if>
+	</select>
+	
+	<update id="updateMmbr" parameterType="hashmap">
+			UPDATE
+				mmbr
+			SET
+			<if test="email != null and email != ''">
+				email = encVal(#{email}),
+			</if>
+			<if test="pswrd != null and pswrd != ''">
+				pswrd = SHA2(#{pswrd}, 256),
+			</if>
+			<if test="mmbrNm != null and mmbrNm != ''">
+				mmbrNm = TRIM(#{mmbrNm}),
+			</if>
+			<if test="bizNo != null and bizNo != ''">
+				bizNo = #{bizNo},
+			</if>
+			<if test="ceoNm != null and ceoNm != ''">
+				ceoNm = #{ceoNm},
+			</if>
+			<if test="ceoMpNo != null and ceoMpNo != ''">
+				ceoMpNo = encVal(#{ceoMpNo}),
+			</if>
+			<if test="mngrNm != null and mngrNm != ''">
+				mngrNm = #{mngrNm},
+			</if>
+			<if test="mngrMpNo != null and mngrMpNo != ''">
+				mngrMpNo = encVal(#{mngrMpNo}),
+			</if>
+			<if test="mrtngYn != null and mrtngYn != ''">
+				mrtngYn = #{mrtngYn},
+			</if>
+			<if test="dcmntYn != null and dcmntYn != ''">
+				dcmntYn = #{dcmntYn},
+			</if>
+			<if test="useYn != null and useYn != ''">
+				useYn = #{useYn},
+			</if>
+			<if test="mode == 'pswrdErr'.toString()">
+				pswrdErrCnt = IFNULL(pswrdErrCnt, 0) + 1,
+			</if>
+			<if test="mode == 'pswrdErrReset'.toString()">
+				pswrdErrCnt = 0,
+			</if>
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				mmbrNo = #{mmbrNo}
+	</update>
+	
+	
+	<select id="selectMarketinfoList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				m.marketCode AS cd,
+				m.koreanNm AS nm
+			FROM
+				marketinfo m
+			WHERE
+				m.batchOk = 1
+			ORDER BY
+				m.koreanNm
+		]]>
+	</select>
+	
+	<select id="selectCryptoCandleList" parameterType="hashmap" resultType="hashmap">
+		<if test="chartTypeCd == '30M'.toString()">
+			SELECT	
+				c.candleDtKst AS tickDt,
+				c.tradePrice,
+				c.accTradeVol AS tradeVol
+			FROM	
+				minutecandle_30 c
+			WHERE
+				c.openPrice IS NOT NULL
+			AND
+				c.marketCode = #{mrktCd}
+			AND
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY	
+				c.candleDtKst
+		</if>
+		<if test="chartTypeCd == '60M'.toString()">
+			SELECT	
+				c.candleDtKst AS tickDt,
+				c.tradePrice,
+				c.accTradeVol AS tradeVol
+			FROM	
+				minutecandle_60 c
+			WHERE
+				c.openPrice IS NOT NULL
+			AND
+				c.marketCode = #{mrktCd}
+			AND
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY	
+				c.candleDtKst
+		</if>
+		<if test="chartTypeCd == '240M'.toString()">
+			SELECT	
+				c.candleDtKst AS tickDt,
+				c.tradePrice,
+				c.accTradeVol AS tradeVol
+			FROM	
+				minutecandle_240 c
+			WHERE	
+				c.marketCode = #{mrktCd}
+			AND	
+				c.openPrice IS NOT NULL
+			AND
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY	
+				c.candleDtKst
+		</if>
+		<if test="chartTypeCd == '1D'.toString()">
+			SELECT
+				DATE(c.candleDtKst) AS tickDt,
+				c.tradePrice,
+				c.accTradeVol AS tradeVol
+			FROM	
+				dayscandle c
+			WHERE	
+				c.marketCode = #{mrktCd}
+			AND	
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY	
+				c.candleDtKst
+		</if>
+	</select>
+	
+	
+	
+	<select id="selectCryptoCandleInfo" parameterType="hashmap" resultType="hashmap">
+		<if test="chartTypeCd == '30M'.toString()">
+			SELECT	
+				COUNT(*) AS cnt
+			FROM	
+				minutecandle_30 c
+			WHERE
+				c.marketCode = #{mrktCd}
+			AND
+				DATE(c.candleDtKst) <![CDATA[<]]> #{fromDate}
+		</if>
+		<if test="chartTypeCd == '60M'.toString()">
+			SELECT	
+				COUNT(*) AS cnt
+			FROM	
+				minutecandle_60 c
+			WHERE
+				c.marketCode = #{mrktCd}
+			AND
+				DATE(c.candleDtKst) <![CDATA[<]]> #{fromDate}
+		</if>
+		<if test="chartTypeCd == '240M'.toString()">
+			SELECT	
+				COUNT(*) AS cnt
+			FROM	
+				minutecandle_240 c
+			WHERE	
+				c.marketCode = #{mrktCd}
+			AND
+				DATE(c.candleDtKst) <![CDATA[<]]> #{fromDate}
+		</if>
+		<if test="chartTypeCd == '1D'.toString()">
+			SELECT
+				COUNT(*) AS cnt
+			FROM	
+				dayscandle c
+			WHERE	
+				c.marketCode = #{mrktCd}
+			AND	
+				DATE(c.candleDtKst) <![CDATA[<]]> #{fromDate}
+		</if>
+	</select>
+	
+	
+	<select id="selectCandleDtKstList" parameterType="hashmap" resultType="hashmap">
+		<if test="chartTypeCd == '30M'.toString()">
+			SELECT
+				c.candleDtKst
+			FROM	
+				minutecandle_30 c
+			WHERE
+				c.marketCode = #{mrktCd}
+			AND	
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY
+				c.candleDate
+		</if>
+		<if test="chartTypeCd == '60M'.toString()">
+			SELECT
+				c.candleDtKst
+			FROM	
+				minutecandle_60 c
+			WHERE
+				c.marketCode = #{mrktCd}
+			AND	
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY
+				c.candleDate
+		</if>
+		<if test="chartTypeCd == '240M'.toString()">
+			SELECT
+				c.candleDtKst
+			FROM	
+				minutecandle_240 c
+			WHERE
+				c.marketCode = #{mrktCd}
+			AND	
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY
+				c.candleDate
+		</if>
+		<if test="chartTypeCd == '1D'.toString()">
+			SELECT	
+				c.candleDtKst
+			FROM	
+				dayscandle c
+			WHERE
+				c.marketCode = #{mrktCd}
+			AND
+				DATE(c.candleDtKst) BETWEEN #{fromDate} AND #{toDate}
+			ORDER BY
+				c.candleDtKst
+		</if>
+	</select>
+	
+	<select id="selectCryptoCandleMoveLine" parameterType="hashmap" resultType="hashmap">
+		<if test="chartTypeCd == '30M'.toString()">
+			SELECT
+				c.seq,
+				c.accTradeVol,
+				c.candleDtKst,
+				DATE_FORMAT(DATE_ADD(c.candleDtKst, INTERVAL -30 MINUTE), '%Y-%m-%dT%H:%i:%s') AS candleDtKstBfr,
+				c.tradePrice,
+				c.accTradeVol,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_30 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{shortLineCnt} + 1) * 30 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS shortMovLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_30 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{middleLineCnt} + 1) * 30 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS middleMovLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_30 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{longLineCnt} + 1) * 30 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS longMovLine,
+				IFNULL(crht.own, 0) AS own
+			FROM
+				minutecandle_30 c
+				LEFT JOIN cryptoTradeHisTest crht
+					ON c.marketCode = crht.mrktCd
+					AND c.candleDtKst = crht.candleDtKst
+			WHERE
+				c.candleDtKst = #{candleDtKst}
+			AND
+				c.marketCode = #{mrktCd}
+		</if>
+		<if test="chartTypeCd == '60M'.toString()">
+			SELECT
+				c.seq,
+				c.accTradeVol,
+				c.candleDtKst,
+				DATE_FORMAT(DATE_ADD(c.candleDtKst, INTERVAL -60 MINUTE), '%Y-%m-%dT%H:%i:%s') AS candleDtKstBfr,
+				c.tradePrice,
+				c.accTradeVol,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_60 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{shortLineCnt} + 1) * 60 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS shortMovLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_60 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{middleLineCnt} + 1) * 60 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS middleMovLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_60 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{longLineCnt} + 1) * 60 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS longMovLine,
+				IFNULL(crht.own, 0) AS own
+			FROM
+				minutecandle_60 c
+				LEFT JOIN cryptoTradeHisTest crht
+					ON c.marketCode = crht.mrktCd
+					AND c.candleDtKst = crht.candleDtKst
+			WHERE
+				c.candleDtKst = #{candleDtKst}
+			AND
+				c.marketCode = #{mrktCd}
+		</if>
+		<if test="chartTypeCd == '240M'.toString()">
+			SELECT
+				c.seq,
+				c.accTradeVol,
+				c.candleDtKst,
+				DATE_FORMAT(DATE_ADD(c.candleDtKst, INTERVAL -240 MINUTE), '%Y-%m-%dT%H:%i:%s') AS candleDtKstBfr,
+				c.tradePrice,
+				c.accTradeVol,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_240 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{shortLineCnt} + 1) * 240 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS shortMovLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_240 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{middleLineCnt} + 1) * 240 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS middleMovLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					minutecandle_240 c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(c.candleDtKst, INTERVAL (-#{longLineCnt} + 1) * 240 MINUTE)
+						AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS longMovLine,
+				IFNULL(crht.own, 0) AS own
+			FROM
+				minutecandle_240 c
+				LEFT JOIN cryptoTradeHisTest crht
+					ON c.marketCode = crht.mrktCd
+					AND c.candleDtKst = crht.candleDtKst
+			WHERE
+				c.candleDtKst = #{candleDtKst}
+			AND
+				c.marketCode = #{mrktCd}
+		</if>
+		<if test="chartTypeCd == '1D'.toString()">
+			SELECT
+				c.seq,
+				c.marketCode,
+				c.candleDtKst,
+				DATE_FORMAT(DATE_ADD(c.candleDtKst, INTERVAL -1 DAY), '%Y-%m-%dT%H:%i:%s') AS candleDtKstBfr,
+				c.tradePrice,
+				c.accTradeVol,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					dayscandle c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(DATE(c.candleDtKst), INTERVAL -#{shortLineCnt} + 1 DAY)
+							AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS shortMoveLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					dayscandle c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(DATE(c.candleDtKst), INTERVAL -#{middleLineCnt} + 1 DAY)
+							AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS middleMoveLine,
+				(SELECT
+					ROUND(AVG(c1.tradePrice), 2)
+				FROM
+					dayscandle c1
+				WHERE
+					date(c1.candleDtKst)
+						BETWEEN DATE_ADD(DATE(c.candleDtKst), INTERVAL -#{longLineCnt} + 1 DAY)
+							AND c.candleDtKst
+				AND
+					c1.marketCode = #{mrktCd}
+				) AS longMoveLine,
+				IFNULL(crht.own, 0) AS own
+			FROM
+				dayscandle c
+				LEFT JOIN cryptoTradeHisTest crht
+					ON c.marketCode = crht.mrktCd
+					AND c.candleDtKst = crht.candleDtKst
+			WHERE
+				c.candleDtKst = #{candleDtKst}
+			AND
+				c.marketCode = #{mrktCd}
+		</if>
+	</select>
+	
+	
+	<select id="selectCryptoTradeHisTest" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				ctht.mrktCd,
+				ctht.candleDtKst,
+				ctht.tradePrice,
+				ctht.accTradeVol,
+				ctht.bnftRate,
+				ctht.shortMoveLine,
+				ctht.middleMoveLine,
+				ctht.longMoveLine,
+				ctht.lineStts,
+				ctht.actn,
+				ctht.own,
+				ctht.hldngBnftRate,
+				ctht.strtgyBnftRate
+			FROM
+				cryptoTradeHisTest ctht
+			WHERE
+				ctht.candleDtKst = #{candleDtKst}
+			AND
+				ctht.mrktCd = #{mrktCd}
+	</select>
+	
+	<insert id="insertCryptoTradeHisTest" parameterType="hashmap">
+			INSERT INTO cryptoTradeHisTest
+			(
+				mrktCd,
+				candleDtKst,
+				tradePrice,
+				accTradeVol,
+				bnftRate,
+				shortMoveLine,
+				middleMoveLine,
+				longMoveLine,
+				lineStts,
+				actn,
+				own,
+				hldngBnftRate,
+				strtgyBnftRate
+			)
+			VALUES
+			(
+				#{mrktCd},
+				#{candleDtKst},
+				#{tradePrice},
+				#{accTradeVol},
+				#{bnftRate},
+				#{shortMoveLine},
+				#{middleMoveLine},
+				#{longMoveLine},
+				#{lineStts},
+				#{actn},
+				#{own},
+				#{hldngBnftRate},
+				#{strtgyBnftRate}
+			)
+	</insert>
+	
+	<delete id="deleteCryptoTradeHisTest" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				cryptoTradeHisTest
+		]]>
+	</delete>
+	
+	
+	
+	
+	
+	
+	<select id="selectCmmrcList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				c.cmmrcNo,
+				c.cmmrcNm,
+				c.limitAmt,
+				c.dailyCmmtnRate,
+				c.useYn,
+				DATE_FORMAT(c.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				cmmrc c
+			WHERE
+				1=1
+			<if test="cmmrcNo != null and cmmrcNo != ''">
+			AND
+				c.cmmrcNo = #{cmmrcNo}
+			</if>
+			<if test="cmmrcNm != null and cmmrcNm != ''">
+			AND
+				c.cmmrcNm LIKE CONCAT('%',#{cmmrcNm},'%')
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				c.cmmrcNo
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				c.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectCmmrcListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				cmmrc c
+			WHERE
+				1=1
+			<if test="cmmrcNo != null and cmmrcNo != ''">
+			AND
+				c.cmmrcNo = #{cmmrcNo}
+			</if>
+			<if test="cmmrcNm != null and cmmrcNm != ''">
+			AND
+				c.cmmrcNm LIKE CONCAT('%',#{cmmrcNm},'%')
+			</if>
+	</select>
+	
+	<select id="selectCmmrc" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				c.cmmrcNo,
+				c.cmmrcNm,
+				c.limitAmt,
+				c.dailyCmmtnRate,
+				c.rmrk,
+				c.useYn,
+				DATE_FORMAT(c.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				cmmrc c
+			WHERE
+				c.cmmrcNo = #{cmmrcNo}
+		]]>
+	</select>
+	
+	<insert id="insertCmmrc" parameterType="hashmap">
+			INSERT INTO cmmrc
+			(
+				cmmrcNm,
+				limitAmt,
+				dailyCmmtnRate,
+				rmrk,
+				useYn,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{cmmrcNm},
+				REPLACE(#{limitAmt}, ',', ''),
+				#{dailyCmmtnRate},
+				TRIM(#{rmrk}),
+				'Y',
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+	
+	<update id="updateCmmrc" parameterType="hashmap">
+			UPDATE
+				cmmrc
+			SET
+			<if test="cmmrcNm != null and cmmrcNm != ''">
+				cmmrcNm = TRIM(#{cmmrcNm}),
+			</if>
+			<if test="limitAmt != null and limitAmt != ''">
+				limitAmt = REPLACE(#{limitAmt}, ',', ''),
+			</if>
+			<if test="dailyCmmtnRate != null and dailyCmmtnRate != ''">
+				dailyCmmtnRate = #{dailyCmmtnRate},
+			</if>
+			<if test="rmrk != null and rmrk != ''">
+				rmrk = TRIM(#{rmrk}),
+			</if>
+			<if test="useYn != null and useYn != ''">
+				useYn = #{useYn},
+			</if>
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				cmmrcNo = #{cmmrcNo}
+	</update>
+	
+	<delete id="deleteCmmrc" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				cmmrc
+			WHERE
+				cmmrcNo = #{cmmrcNo}
+		]]>
+	</delete>
+	
+	
+	<select id="selectReqList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				*
+			FROM
+				(SELECT
+					rq.reqNo,
+					rq.mmbrNo,
+					m.mmbrNm,
+					rq.cmmrcNo,
+					c.cmmrcNm,
+					IFNULL(rq.clcltAmt, '') AS clcltAmt,
+					IFNULL(rq.clcltDate, '') AS clcltDate,
+					IFNULL(rq.prepayAmt, '') AS prepayAmt,
+					IFNULL(rq.prepayDate, '') AS prepayDate,
+					rq.sttsCd,
+					cd.nm AS sttsNm,
+					DATE_FORMAT(rq.insDt, "%Y.%m.%d %H:%i") AS insDt
+				FROM
+					req rq,
+					mmbr m,
+					cmmrc c,
+					cd cd
+				WHERE
+					rq.mmbrNo = m.mmbrNo
+				AND
+					rq.cmmrcNo = c.cmmrcNo
+				AND
+					rq.sttsCd = cd.cd
+				AND
+					cd.grpCd = 'C001'
+				<if test="mmbrNo != null and mmbrNo != ''">
+				AND
+					rq.mmbrNo = #{mmbrNo}
+				</if>
+				<if test="mmbrNm != null and mmbrNm != ''">
+				AND
+					m.mmbrNm LIKE CONCAT('%',#{mmbrNm},'%')
+				</if>
+				<if test="cmmrcNo != null and cmmrcNo != ''">
+				AND
+					rq.cmmrcNo = #{cmmrcNo}
+				</if>
+				<if test="sttsCd != null and sttsCd != ''">
+				AND
+					rq.sttsCd = #{sttsCd}
+				</if>
+				) r
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				r.reqNo DESC
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				r.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectReqListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				req rq,
+				mmbr m,
+				cmmrc c,
+				cd cd
+			WHERE
+				rq.mmbrNo = m.mmbrNo
+			AND
+				rq.cmmrcNo = c.cmmrcNo
+			AND
+				rq.sttsCd = cd.cd
+			AND
+				cd.grpCd = 'C001'
+			<if test="mmbrNo != null and mmbrNo != ''">
+			AND
+				rq.mmbrNo = #{mmbrNo}
+			</if>
+			<if test="mmbrNm != null and mmbrNm != ''">
+			AND
+				m.mmbrNm LIKE CONCAT('%',#{mmbrNm},'%')
+			</if>
+			<if test="cmmrcNo != null and cmmrcNo != ''">
+			AND
+				rq.cmmrcNo = #{cmmrcNo}
+			</if>
+			<if test="sttsCd != null and sttsCd != ''">
+			AND
+				rq.sttsCd = #{sttsCd}
+			</if>
+	</select>
+	
+	<select id="selectReq" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				rq.reqNo,
+				rq.mmbrNo,
+				m.mmbrNm,
+				rq.cmmrcNo,
+				c.cmmrcNm,
+				IFNULL(rq.clcltAmt, '') AS clcltAmt,
+				IFNULL(rq.clcltDate, '') AS clcltDate,
+				IFNULL(rq.extra1Amt, '') AS extra1Amt,
+				IFNULL(rq.extra2Amt, '') AS extra2Amt,
+				IFNULL(rq.extra3Amt, '') AS extra3Amt,
+				IFNULL(rq.rfndRate, '') AS rfndRate,
+				c.dailyCmmtnRate,
+				(c.limitAmt -
+					IFNULL((SELECT
+						SUM(rq1.prepayAmt)
+					FROM
+						req rq1
+					WHERE
+						rq1.cmmrcNo = c.cmmrcNo
+					AND
+						rq1.sttsCd IN ('03', '05', '08', '09', '11')
+					), 0)
+				) AS cmmrcRestLimitAmt,
+				IFNULL(rq.evltnUserId, '') AS evltnUserId,
+				IFNULL(u.userNm, '') AS evltnUserNm,
+				IFNULL(rq.evltnDate, '') AS evltnDate,
+				IFNULL(rq.evltnAmt, '') AS evltnAmt,
+				IFNULL(rq.srvcCntrctSendDate, '') AS srvcCntrctSendDate,
+				IFNULL(rq.srvcCntrctDate, '') AS srvcCntrctDate,
+				IFNULL(rq.trnsfrCntrctReqDate, '') AS trnsfrCntrctReqDate,
+				IFNULL(rq.trnsfrCntrctDate, '') AS trnsfrCntrctDate,
+				IFNULL(rq.prepayAmt, '') AS prepayAmt,
+				IFNULL(rq.prepayDate, '') AS prepayDate,
+				IFNULL(rq.rmrk, '') AS rmrk,
+				rq.sttsCd,
+				cd.nm AS sttsNm,
+				DATE_FORMAT(rq.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				req rq
+				LEFT JOIN user u
+					ON rq.evltnUserId = u.userId,
+				mmbr m,
+				cmmrc c,
+				cd cd
+			WHERE
+				rq.mmbrNo = m.mmbrNo
+			AND
+				rq.cmmrcNo = c.cmmrcNo
+			AND
+				rq.sttsCd = cd.cd
+			AND
+				cd.grpCd = 'C001'
+			AND
+				rq.reqNo = #{reqNo}
+		]]>
+	</select>
+	
+	<insert id="insertReq" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO req
+			(
+				mmbrNo,
+				cmmrcNo,
+				sttsCd,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{mmbrNo},
+				#{cmmrcNo},
+				'01',
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+	
+	<update id="updateReq" parameterType="hashmap">
+			UPDATE
+				req
+			SET
+			<if test="clcltAmt != null and clcltAmt != ''">
+				clcltAmt = REPLACE(#{clcltAmt}, ',', ''),
+			</if>
+			<if test="clcltDate != null and clcltDate != ''">
+				clcltDate = #{clcltDate},
+			</if>
+			<if test="extra1Amt != null and extra1Amt != ''">
+				extra1Amt = REPLACE(#{extra1Amt}, ',', ''),
+			</if>
+			<if test="extra2Amt != null and extra2Amt != ''">
+				extra2Amt = REPLACE(#{extra2Amt}, ',', ''),
+			</if>
+			<if test="extra3Amt != null and extra3Amt != ''">
+				extra3Amt = REPLACE(#{extra3Amt}, ',', ''),
+			</if>
+			<if test="rfndRate != null and rfndRate != ''">
+				rfndRate = #{rfndRate},
+			</if>
+			<if test="evltnUserId != null and evltnUserId != ''">
+				evltnUserId = #{evltnUserId},
+			</if>
+			<if test="evltnDate != null and evltnDate != ''">
+				evltnDate = #{evltnDate},
+			</if>
+			<if test="evltnAmt != null and evltnAmt != ''">
+				evltnAmt = REPLACE(#{evltnAmt}, ',', ''),
+			</if>
+			<if test="srvcCntrctSendDate != null and srvcCntrctSendDate != ''">
+				srvcCntrctSendDate = #{srvcCntrctSendDate},
+			</if>
+			<if test="srvcCntrctDate != null and srvcCntrctDate != ''">
+				srvcCntrctDate = #{srvcCntrctDate},
+			</if>
+			<if test="trnsfrCntrctReqDate != null and trnsfrCntrctReqDate != ''">
+				trnsfrCntrctReqDate = #{trnsfrCntrctReqDate},
+			</if>
+			<if test="trnsfrCntrctDate != null and trnsfrCntrctDate != ''">
+				trnsfrCntrctDate = #{trnsfrCntrctDate},
+			</if>
+			<if test="prepayAmt != null and prepayAmt != ''">
+				prepayAmt = REPLACE(#{prepayAmt}, ',', ''),
+			</if>
+			<if test="prepayDate != null and prepayDate != ''">
+				prepayDate = #{prepayDate},
+			</if>
+			<if test="rmrk != null and rmrk != ''">
+				rmrk = TRIM(#{rmrk}),
+			</if>
+			<if test="sttsCd != null and sttsCd != ''">
+				sttsCd = #{sttsCd},
+			</if>
+			<if test="mode == 'evltnAccpt'.toString()">
+				evltnUserId = #{loginUserId},
+				sttsCd = '02',
+			</if>
+			<if test="mode == 'evltnApprvl'.toString()">
+				evltnDate = CURDATE(),
+				evltnAmt = REPLACE(#{evltnAmt}, ',', ''),
+				sttsCd = '03',
+			</if>
+			<if test="mode == 'evltnRjct'.toString()">
+				evltnDate = CURDATE(),
+				sttsCd = '04',
+			</if>
+			<if test="mode == 'srvcCntrctSend'.toString()">
+				srvcCntrctSendDate = CURDATE(),
+				sttsCd = '05',
+			</if>
+			<if test="mode == 'srvcCntrct'.toString()">
+				srvcCntrctDate = CURDATE(),
+				sttsCd = '06',
+			</if>
+			<if test="mode == 'srvcCntrctFail'.toString()">
+				sttsCd = '07',
+			</if>
+			<if test="mode == 'trnsfrCntrctReq'.toString()">
+				trnsfrCntrctReqDate = CURDATE(),
+				sttsCd = '08',
+			</if>
+			<if test="mode == 'trnsfrCntrct'.toString()">
+				trnsfrCntrctDate = CURDATE(),
+				sttsCd = '09',
+			</if>
+			<if test="mode == 'trnsfrCntrctFail'.toString()">
+				sttsCd = '10',
+			</if>
+			<if test="mode == 'prepay'.toString()">
+				prepayDate = CURDATE(),
+				prepayAmt = REPLACE(#{prepayAmt}, ',', ''),
+				sttsCd = '11',
+			</if>
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				reqNo = #{reqNo}
+	</update>
+	
+	<delete id="deleteReq" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				req
+			WHERE
+				reqNo = #{reqNo}
+		]]>
+	</delete>
+	
+	
+	<select id="selectRepayList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				*
+			FROM
+				(SELECT
+					rp.reqNo,
+					rq.mmbrNo,
+					m.mmbrNm,
+					rq.cmmrcNo,
+					c.cmmrcNm,
+					rp.rnd,
+					rp.useDay,
+					rp.expctRepayDate,
+					rp.expctRepayAmt,
+					IFNULL(rp.realRepayDate, '') AS realRepayDate,
+					IFNULL(rp.realRepayAmt, '') AS realRepayAmt,
+					IFNULL(rp.restRepayAmt, '') AS restRepayAmt,
+					IFNULL(rp.cmmtnAmt, '') AS cmmtnAmt,
+					rp.sttsCd,
+					cd.nm AS sttsNm,
+					DATE_FORMAT(c.insDt, "%Y.%m.%d %H:%i") AS insDt
+				FROM
+					repay rp,
+					req rq,
+					mmbr m,
+					cmmrc c,
+					cd cd
+				WHERE
+					rp.reqNo = rq.reqNo
+				AND
+					rq.mmbrNo = m.mmbrNo
+				AND
+					rq.cmmrcNo = c.cmmrcNo
+				AND
+					rp.sttsCd = cd.cd
+				AND
+					cd.grpCd = 'C002'
+				AND
+					rq.sttsCd = '11'
+				<if test="mmbrNo != null and mmbrNo != ''">
+				AND
+					rq.mmbrNo = #{mmbrNo}
+				</if>
+				<if test="mmbrNm != null and mmbrNm != ''">
+				AND
+					m.mmbrNm LIKE CONCAT('%',#{mmbrNm},'%')
+				</if>
+				<if test="cmmrcNo != null and cmmrcNo != ''">
+				AND
+					rq.cmmrcNo = #{cmmrcNo}
+				</if>
+				<if test="sttsCd != null and sttsCd != ''">
+				AND
+					rp.sttsCd = #{sttsCd}
+				</if>
+				) r
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				r.reqNo DESC
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				r.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectRepayListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				repay rp,
+				req rq,
+				mmbr m,
+				cmmrc c,
+				cd cd
+			WHERE
+				rp.reqNo = rq.reqNo
+			AND
+				rq.mmbrNo = m.mmbrNo
+			AND
+				rq.cmmrcNo = c.cmmrcNo
+			AND
+				rp.sttsCd = cd.cd
+			AND
+				cd.grpCd = 'C002'
+			AND
+				rq.sttsCd = '11'
+			<if test="mmbrNo != null and mmbrNo != ''">
+			AND
+				rq.mmbrNo = #{mmbrNo}
+			</if>
+			<if test="mmbrNm != null and mmbrNm != ''">
+			AND
+				m.mmbrNm LIKE CONCAT('%',#{mmbrNm},'%')
+			</if>
+			<if test="cmmrcNo != null and cmmrcNo != ''">
+			AND
+				rq.cmmrcNo = #{cmmrcNo}
+			</if>
+			<if test="sttsCd != null and sttsCd != ''">
+			AND
+				rp.sttsCd = #{sttsCd}
+			</if>
+	</select>
+	
+	<select id="selectRepay" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				rp.reqNo,
+				rq.mmbrNo,
+				m.mmbrNm,
+				rq.cmmrcNo,
+				c.cmmrcNm,
+				c.dailyCmmtnRate,
+				rp.rnd,
+				rp.useDay,
+				rp.expctRepayDate,
+				rp.expctRepayAmt,
+				IFNULL(rp.realRepayDate, '') AS realRepayDate,
+				IFNULL(rp.realRepayAmt, '') AS realRepayAmt,
+				IFNULL(rp.restRepayAmt, '') AS restRepayAmt,
+				IFNULL(rp.cmmtnAmt, '') AS cmmtnAmt,
+				rp.sttsCd,
+				cd.nm AS sttsNm,
+				DATE_FORMAT(c.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				repay rp,
+				req rq,
+				mmbr m,
+				cmmrc c,
+				cd cd
+			WHERE
+				rp.reqNo = rq.reqNo
+			AND
+				rq.mmbrNo = m.mmbrNo
+			AND
+				rq.cmmrcNo = c.cmmrcNo
+			AND
+				rp.sttsCd = cd.cd
+			AND
+				cd.grpCd = 'C002'
+			AND
+				rq.sttsCd = '11'
+			AND
+				rp.reqNo = #{reqNo}
+			AND
+				rp.rnd = #{rnd}
+		]]>
+	</select>
+	
+	<insert id="insertNewRepay" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO repay
+			(
+				reqNo,
+				rnd,
+				useDay,
+				expctRepayDate,
+				expctRepayAmt,
+				sttsCd,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			SELECT
+				rq.reqNo,
+				1,
+				DATEDIFF(rq.clcltDate, CURDATE()),
+				rq.clcltDate,
+				rq.clcltAmt,
+				'01',
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			FROM
+				req rq
+			WHERE
+				rq.reqNo = #{reqNo}
+		]]>
+	</insert>
+	
+	<insert id="insertRepay" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO repay
+			(
+				reqNo,
+				rnd,
+				useDay,
+				expctRepayDate,
+				expctRepayAmt,
+				sttsCd,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{reqNo},
+				#{rnd},
+				DATEDIFF(#{expctRepayDate}, CURDATE()),
+				#{expctRepayDate},
+				#{expctRepayAmt},
+				'01',
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+	
+	<update id="updateRepay" parameterType="hashmap">
+			UPDATE
+				repay
+			SET
+			<if test="useDay != null and useDay != ''">
+				useDay = #{useDay},
+			</if>
+			<if test="expctRepayDate != null and expctRepayDate != ''">
+				expctRepayDate = #{expctRepayDate},
+			</if>
+			<if test="expctRepayAmt != null and expctRepayAmt != ''">
+				expctRepayAmt = REPLACE(#{expctRepayAmt}, ',', ''),
+			</if>
+			<if test="realRepayDate != null and realRepayDate != ''">
+				realRepayDate = #{realRepayDate},
+			</if>
+			<if test="realRepayAmt != null and realRepayAmt != ''">
+				realRepayAmt = REPLACE(#{realRepayAmt}, ',', ''),
+			</if>
+			<if test="restRepayAmt != null and restRepayAmt != ''">
+				restRepayAmt = REPLACE(#{restRepayAmt}, ',', ''),
+			</if>
+			<if test="cmmtnAmt != null and cmmtnAmt != ''">
+				cmmtnAmt = REPLACE(#{cmmtnAmt}, ',', ''),
+			</if>
+			<if test="mode == 'repay'.toString()">
+				realRepayDate = #{realRepayDate},
+				realRepayAmt = REPLACE(#{realRepayAmt}, ',', ''),
+				restRepayAmt = REPLACE(#{restRepayAmt}, ',', ''),
+				cmmtnAmt = REPLACE(#{cmmtnAmt}, ',', ''),
+				sttsCd = #{sttsCd},
+			</if>
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				reqNo = #{reqNo}
+			AND
+				rnd = #{rnd}
+	</update>
+	
+	<delete id="deleteRepay" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				repay
+			WHERE
+				reqNo = #{reqNo}
+			AND
+				rnd = #{rnd}
+		]]>
+	</delete>
+	
+	
+	<select id="selectUserList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				u.userId,
+				u.userNm,
+				decVal(u.mpNo) AS mpNo,
+				decVal(u.email) AS email,
+				u.useYn
+			FROM
+				user u
+			WHERE
+				1=1
+			<if test="userId != null and userId != ''">
+			AND
+				u.userId = #{userId}
+			</if>
+			<if test="userNm != null and userNm != ''">
+			AND
+				u.userNm LIKE CONCAT('%',#{userNm},'%')
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				u.userId
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				u.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectUserListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				user u
+			WHERE
+				1=1
+			<if test="userId != null and userId != ''">
+			AND
+				u.userId = #{userId}
+			</if>
+			<if test="userNm != null and userNm != ''">
+			AND
+				u.userNm LIKE CONCAT('%',#{userNm},'%')
+			</if>
+	</select>
+	
+	<select id="selectUserPswrdYn" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				u.userId,
+				u.pswrdErrCnt,
+				IF(u.pswrd = SHA2(#{pswrd}, 256), 'Y', 'N') AS pswrdYn
+			FROM
+				user u
+			WHERE
+				u.userId = #{userId}
+	</select>
+	
+	<select id="selectUserIdExistYn" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				IF(COUNT(u.userId) > 0, 'Y', 'N') AS userIdExistYn
+			FROM
+				user u
+			WHERE
+				u.userId = #{userId}
+		]]>
+	</select>
+	
+	<select id="selectUser" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				u.userId,
+				u.userNm,
+				IFNULL(decVal(u.email), '') AS email,
+				IFNULL(decVal(u.mpNo), '') AS mpNo,
+				u.pswrdErrCnt,
+				u.useYn
+			FROM
+				user u
+			WHERE
+				u.userId = #{userId}
+		]]>
+	</select>
+	
+	<insert id="insertUserLog" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO userLog
+			(
+				userId,
+				userIp,
+				logDt
+			)
+			VALUES
+			(
+				#{userId},
+				#{userIp},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+	
+	<insert id="insertUser" parameterType="hashmap">
+			INSERT INTO user
+			(
+				userId,
+				userNm,
+				email,
+				mpNo,
+				pswrd,
+				pswrdErrCnt,
+				useYn,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{userId},
+				TRIM(#{userNm}),
+				encVal(#{email}),
+				encVal(REPLACE(#{mpNo}, '-', '')),
+				SHA2(#{pswrd}, 256),
+				0,
+				'Y',
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+	
+	<update id="updateUser" parameterType="hashmap">
+			UPDATE
+				user
+			SET
+			<if test="userNm != null and userNm != ''">
+				userNm = TRIM(#{userNm}),
+			</if>
+			<if test="email != null and email != ''">
+				email = encVal(REPLACE(#{email}, '-', '')),
+			</if>
+			<if test="mpNo != null and mpNo != ''">
+				mpNo = encVal(REPLACE(#{mpNo}, '-', '')),
+			</if>
+			<if test="pswrd != null and pswrd != ''">
+				pswrd = SHA2(#{pswrd}, 256),
+			</if>
+			<if test="useYn != null and useYn != ''">
+				useYn = #{useYn},
+			</if>
+			<if test="mode == 'pswrdErr'.toString()">
+				pswrdErrCnt = IFNULL(pswrdErrCnt, 0) + 1,
+			</if>
+			<if test="mode == 'pswrdErrReset'.toString()">
+				pswrdErrCnt = 0,
+			</if>
+				updId = 'system',
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				userId = #{userId}
+	</update>
+	
+	<delete id="deleteUser" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				user
+			WHERE
+				userId = #{userId}
+		]]>
+	</delete>
+	
+	
+	<select id="selectCdList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				c.grpCd,
+				gc.nm AS grpNm,
+				c.cd,
+				c.nm,
+				c.ordr,
+				IFNULL(c.rmrk, '') AS rmrk,
+				c.updId,
+				u.userNm AS updUserNm,
+				DATE(c.updDt) AS updDate
+			FROM
+				cd c,
+				cd gc,
+				user u
+			WHERE
+				c.grpCd = gc.cd
+			AND
+				c.updId = u.userId
+			<if test="grpCd != null and grpCd != ''">
+			AND
+				c.grpCd = #{grpCd}
+			</if>
+			<if test="cd != null and cd != ''">
+			AND
+				c.cd = #{cd}
+			</if>
+			<if test="nm != null and nm != ''">
+			AND
+				c.nm LIKE CONCAT('%',#{nm},'%')
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				c.grpCd,
+				c.ordr
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				c.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectCdListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				cd c,
+				cd gc,
+				user u
+			WHERE
+				c.grpCd = gc.cd
+			AND
+				c.updId = u.userId
+			<if test="grpCd != null and grpCd != ''">
+			AND
+				c.grpCd = #{grpCd}
+			</if>
+			<if test="cd != null and cd != ''">
+			AND
+				c.cd = #{cd}
+			</if>
+			<if test="nm != null and nm != ''">
+			AND
+				c.nm LIKE CONCAT('%',#{nm},'%')
+			</if>
+	</select>
+	
+	<select id="selectCd" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				c.grpCd,
+				gc.nm AS grpNm,
+				c.cd,
+				c.nm,
+				c.ordr,
+				IFNULL(c.rmrk, '') AS rmrk,
+				c.updId,
+				u.userNm AS updUserNm,
+				DATE(c.updDt) AS updDate
+			FROM
+				cd c,
+				cd gc,
+				user u
+			WHERE
+				c.grpCd = gc.cd
+			AND
+				c.updId = u.userId
+			AND
+				c.grpCd = #{grpCd}
+			AND
+				c.cd = #{cd}
+		]]>
+	</select>
+	
+	<select id="selectInsertCdYn" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				IF(COUNT(*) = 0, 'Y', 'N') AS insertYn
+			FROM
+				cd c
+			WHERE
+				c.grpCd = #{grpCd}
+			AND
+				c.cd = #{cd}
+		]]>
+	</select>
+	
+	<insert id="insertCd" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO cd
+			(
+				grpCd,
+				cd,
+				nm,
+				ordr,
+				rmrk,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{grpCd},
+				#{cd},
+				#{nm},
+				#{ordr},
+				TRIM(#{rmrk}),
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+	
+	<update id="updateCd" parameterType="hashmap">
+			UPDATE
+				cd
+			SET
+			<if test="cd != null and cd != ''">
+				cd = #{cd},
+			</if>
+			<if test="nm != null and nm != ''">
+				nm = #{nm},
+			</if>
+			<if test="ordr != null and ordr != ''">
+				ordr = #{ordr},
+			</if>
+			<if test="rmrk != null and rmrk != ''">
+				rmrk = TRIM(#{rmrk}),
+			</if>
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				grpCd = #{grpCd}
+			AND
+				cd = #{cd}
+	</update>
+	
+	<delete id="deleteCd" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				cd
+			WHERE
+				grpCd = #{grpCd}
+			AND
+				cd = #{cd}
+		]]>
+	</delete>
+	
+	
+	<select id="selectEmailHisList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/> 
+			SELECT
+				*
+			FROM
+				(SELECT
+					e.seq,
+					decVal(e.emailTo) AS emailTo,
+					IFNULL(m.mmbrNm, '') AS mmbrNm,
+					e.title,
+					DATE_FORMAT(e.insDt, "%Y.%m.%d %H:%i") AS insDt
+				FROM
+					emailHis e
+					LEFT JOIN mmbr m
+						ON e.emailTo = m.email
+				WHERE
+					1=1
+				<if test="mmbrNo != null and mmbrNo != ''">
+				AND
+					m.mmbrNo = #{mmbrNo}
+				</if>
+				<if test="emailTo != null and emailTo != ''">
+				AND
+					decVal(e.emailTo) = #{emailTo}
+				</if>
+				<if test="mmbrNm != null and mmbrNm != ''">
+				AND
+					m.mmbrNm = #{mmbrNm}
+				</if>
+				) e2
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				e2.insDt DESC
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				e2.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/> 
+	</select>
+	
+	<select id="selectEmailHisListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				emailHis e
+				LEFT JOIN mmbr m
+					ON e.emailTo = m.email
+			WHERE
+				1=1
+			<if test="emailTo != null and emailTo != ''">
+			AND
+				decVal(e.emailTo) = #{emailTo}
+			</if>
+			<if test="mmbrNm != null and mmbrNm != ''">
+			AND
+				m.mmbrNm = #{mmbrNm}
+			</if>
+	</select>
+	
+	<select id="selectEmail" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				e.seq,
+				e.emailFrom,
+				decVal(e.emailTo) AS emailTo,
+				IFNULL(m.mmbrNm, '') AS mmbrNm,
+				e.title,
+				e.cntnts,
+				DATE_FORMAT(e.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				emailHis e
+				LEFT JOIN mmbr m
+					ON e.emailTo = m.email
+			WHERE
+				e.seq = #{seq}
+		]]>
+	</select>
+	
+	<select id="selectEmailTmpltList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/> 
+			SELECT
+				e.tmpltNo,
+				e.tmpltNm,
+				e.title,
+				e.cntnts,
+				e.rmrk
+			FROM
+				emailTmplt e
+			WHERE
+				1=1
+			ORDER BY
+				e.insDt DESC
+		<include refid="com.pagingPost"/> 
+	</select>
+	
+	<select id="selectEmailTmpltListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				emailTmplt e
+			WHERE
+				1=1
+	</select>
+	
+	<select id="selectEmailTmplt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				e.tmpltNo,
+				e.tmpltNm,
+				e.title,
+				e.cntnts,
+				e.rmrk
+			FROM
+				emailTmplt e
+			WHERE
+				e.tmpltNo = #{tmpltNo}
+		]]>
+	</select>
+	
+	<insert id="insertEmailTmplt" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO emailTmplt
+			(
+				tmpltNm,
+				title,
+				cntnts,
+				rmrk,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				TRIM(#{tmpltNm}),
+				TRIM(#{title}),
+				TRIM(#{cntnts}),
+				TRIM(#{rmrk}),
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+	
+	<update id="updateEmailTmplt" parameterType="hashmap">
+			UPDATE
+				emailTmplt
+			SET
+			<if test="tmpltNm != null and tmpltNm != ''">
+				tmpltNm = TRIM(#{tmpltNm}),
+			</if>
+			<if test="title != null and title != ''">
+				title = TRIM(#{title}),
+			</if>
+			<if test="cntnts != null and cntnts != ''">
+				cntnts = TRIM(#{cntnts}),
+			</if>
+			<if test="rmrk != null and rmrk != ''">
+				rmrk = TRIM(#{rmrk}),
+			</if>
+				updId = #{loginUserId},
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				tmpltNo = #{tmpltNo}
+	</update>
+	
+	<delete id="deleteEmailTmplt" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				emailTmplt
+			WHERE
+				tmpltNo = #{tmpltNo}
+		]]>
+	</delete>
+	
+	
+	<select id="selectGameExistYn" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				IF(COUNT(g.gameNo) > 0, 'Y', 'N') AS existYn
+			FROM
+				game g
+			WHERE
+				g.gameNm = TRIM(#{gameNm})
+		]]>
+	</select>
+	
+	<insert id="insertGame" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO game
+			(
+				gameNm,
+				gameEngNm,
+				gnrCd,
+				minPlyrCnt,
+				maxPlyrCnt,
+				refUrl,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				TRIM(#{gameNm}),
+				TRIM(#{gameEngNm}),
+				#{gnrCd},
+				#{minPlyrCnt},
+				#{maxPlyrCnt},
+				#{refUrl},
+				#{loginUserId},
+				CURRENT_TIMESTAMP,
+				#{loginUserId},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+
+
+</mapper>

@@ -1,0 +1,59 @@
+<%@ page pageEncoding="utf-8"%>
+<!-- FastClick -->
+<script src="<c:url value='/vendors/fastclick/lib/fastclick.js'/>"></script>
+<!-- NProgress -->
+<script src="<c:url value='/vendors/nprogress/nprogress.js'/>"></script>
+<!-- bootstrap-progressbar -->
+<script src="<c:url value='/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'/>"></script>
+<!-- iCheck -->
+<script src="<c:url value='/vendors/iCheck/icheck.min.js'/>"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="<c:url value='/vendors/moment/min/moment.min.js'/>"></script>
+<script src="<c:url value='/vendors/bootstrap-daterangepicker/daterangepicker.js'/>"></script>
+<!-- bootstrap-datetimepicker -->
+<script src="<c:url value='/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'/>"></script>
+<!-- bootstrap-wysiwyg -->
+<script src="<c:url value='/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js'/>"></script>
+<script src="<c:url value='/vendors/jquery.hotkeys/jquery.hotkeys.js'/>"></script>
+<script src="<c:url value='/vendors/google-code-prettify/src/prettify.js'/>"></script>
+<!-- jQuery Tags Input -->
+<script src="<c:url value='/vendors/jquery.tagsinput/src/jquery.tagsinput.js'/>"></script>
+<!-- Switchery -->
+<script src="<c:url value='/vendors/switchery/dist/switchery.min.js'/>"></script>
+<!-- Select2 -->
+<script src="<c:url value='/vendors/select2/dist/js/select2.full.min.js'/>"></script>
+<!-- Parsley -->
+<script src="<c:url value='/vendors/parsleyjs/dist/parsley.min.js'/>"></script>
+<!-- Autosize -->
+<script src="<c:url value='/vendors/autosize/dist/autosize.min.js'/>"></script>
+<!-- jQuery autocomplete -->
+<script src="<c:url value='/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js'/>"></script>
+<!-- starrr -->
+<script src="<c:url value='/vendors/starrr/dist/starrr.js'/>"></script>
+<!-- validator -->
+<script src="<c:url value='/vendors/validator/validator.js'/>"></script>
+<!-- Datatables -->
+<!-- 
+<script src="<c:url value='/vendors/datatables.net/js/jquery.dataTables.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-buttons/js/buttons.flash.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-buttons/js/buttons.html5.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-buttons/js/buttons.print.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-responsive/js/dataTables.responsive.min.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js'/>"></script>
+<script src="<c:url value='/vendors/datatables.net-scroller/js/dataTables.scroller.min.js'/>"></script>
+<script src="<c:url value='/vendors/jszip/dist/jszip.min.js'/>"></script>
+<script src="<c:url value='/vendors/pdfmake/build/pdfmake.min.js'/>"></script>
+<script src="<c:url value='/vendors/pdfmake/build/vfs_fonts.js'/>"></script>
+ -->
+<!-- Custom Theme Scripts -->
+<script src="<c:url value='/js/bo/custom.js'/>"></script>
+<!-- Custom Scripts -->
+<script src="<c:url value='/vendors/table2excel/jquery.table2excel.js'/>"></script>
+<script src="<c:url value='/vendors/twbsPagination/jquery.twbsPagination.min.js'/>"></script>
+<script src="<c:url value='/vendors/jquery.form.js/jquery.form.js'/>"></script>
+<script src="<c:url value='/js/bo/common.js'/>"></script>

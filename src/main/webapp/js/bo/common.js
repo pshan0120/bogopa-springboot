@@ -1,0 +1,1289 @@
+/* 공용 폼 데이터 submit */
+function ComSubmit(opt_formId) {
+	this.formId = gfn_isEmpty(opt_formId) == true ? "commonForm" : opt_formId;
+	this.url = "";
+	 
+	if(this.formId == "commonForm") {
+		$("#commonForm").empty();
+	}
+	 
+	this.setUrl = function setUrl(url) {
+		this.url = url;
+	};
+	 
+	this.addParam = function addParam(key, value) {
+		$("#" + this.formId).append($("<input type='hidden' name='" + key + "' id='" + key + "' value='" + value + "' >"));
+	};
+	 
+	this.submit = function submit() {
+		var frm = $("#" + this.formId)[0];
+		frm.action = this.url;
+		frm.method = "post";
+		frm.submit();
+	};
+}
+
+/* 공통 폼 데이터 Ajax */
+var fv_ajaxCallback = "";
+function ComAjax(opt_formId) {
+	this.url = "";	  
+	this.formId = gfn_isEmpty(opt_formId) == true ? "commonForm" : opt_formId;
+	this.param = "";
+	 
+	if(this.formId == "commonForm") {
+		var frm = $("#commonForm");
+		if(frm.length > 0) {
+			frm.remove();
+		}
+		var str = "<form id='commonForm' name='commonForm'></form>";
+		$('body').append(str);
+	}
+	 
+	this.setUrl = function setUrl(url) {
+		this.url = url;
+	};
+	 
+	this.setCallback = function setCallback(callBack) {
+		fv_ajaxCallback = callBack;
+	};
+ 
+	this.addParam = function addParam(key,value) {
+		this.param = this.param + "&" + key + "=" + value; 
+	};
+	 
+	this.ajax = function ajax() {
+		if(this.formId != "commonForm") {
+			this.param += "&" + $("#" + this.formId).serialize();
+		}
+		$.ajax({
+			url : this.url,	
+			type : "POST",
+			data : this.param,
+			async : false, 
+			success : function(data, status) {
+				if(typeof(fv_ajaxCallback) == "function") {
+					fv_ajaxCallback(data);
+				}
+				else {
+					eval(fv_ajaxCallback + "(data);");
+				}
+			}
+			/*
+			,beforeSend:function() {
+				$('.wrap-loading').removeClass('display-none');
+			},complete:function() {
+				$('.wrap-loading').addClass('display-none');
+			}
+			*/
+		});
+	};
+}
+
+//ajax 공통 기본 콜백
+function gfn_defaultCallback(data) {
+	if(!this.gfn_isEmpty(data.resultMsg)) {
+		alert(data.resultMsg);
+	}
+	if(data.result) {
+		document.location.reload();
+	}
+}
+
+// ajax response data를 특정 폼에 DOM의 name기준으로 value에 입력
+function gfn_setDataVal(dataMap, divId) {
+	var array = new Array();
+	$("#" + divId + " [name]").each(function() {
+		array.push($(this).attr("name"));
+	});
+	
+	$.each(dataMap, function(key, value) {
+		if(array[$.inArray(key, array)] == key) {
+			if(key == "mpNo") {
+				$("#" + divId + " [name=" + key + "]").val(gfn_viewTelNo(value));
+			} else if(key == "telNo") {
+				$("#" + divId + " [name=" + key + "]").val(gfn_viewTelNo(value));
+			} else if(key.indexOf("Amt") > -1) {
+				$("#" + divId + " [name=" + key + "]").val(gfn_comma(value));
+			} else {
+				$("#" + divId + " [name=" + key + "]").val(value);
+			}
+		}
+	});
+}
+
+//ajax response data를 특정 폼에 DOM의 name기준으로 text에 입력
+function gfn_setDataText(dataMap, divId) {
+	var array = new Array();
+	$("#" + divId + " [name]").each(function() {
+		//console.log($(this).attr("name"));
+		array.push($(this).attr("name"));
+	});
+	
+	$.each(dataMap, function(key, value) {
+		if(array[$.inArray(key, array)] == key) {
+			if(key == "mpNo") {
+				$("#" + divId + " [name=" + key + "]").html(gfn_viewTelNo(value));
+			} else if(key == "telNo") {
+				$("#" + divId + " [name=" + key + "]").html(gfn_viewTelNo(value));
+			} else if(key.indexOf("Amt") > -1) {
+				$("#" + divId + " [name=" + key + "]").html(gfn_comma(value));
+			} else {
+				$("#" + divId + " [name=" + key + "]").html(value);
+			}
+		}
+	});
+}
+
+/* 마스킹 처리 */
+//이름 
+function gfn_maskCusNm(str) {
+	if(str == undefined || str === '') {
+		return '';
+	}
+	var firstStr = str.substr(0,1);
+	var lastStr = str.substr(str.length-1,1);
+	var star = "";
+	for(var i=0; i<str.length-2; i++) {
+		star += "*";
+	}
+	str =firstStr + star + lastStr; 
+	return str;
+}
+
+// 주민번호 
+function gfn_maskSsnNo(str) {
+	if(str == undefined || str === '') {
+		return '';
+	}
+	str = str.replace(/-/g, '').replace(/([0-9]{6})([0-9]{7})/g, "$1-$2");
+	return str.replace(/.{6}$/, "******");
+}
+
+// 이메일
+function gfn_maskEmail(str) {
+	if(str == undefined || str === '') {
+		return '';
+	}
+	
+	var at = str.indexOf("@");
+	var firstStr = str.substr(0,at);
+	var lastStr = str.substr(at+1,str.length);
+	var star = "";
+	
+	for(var i=0; i<firstStr.length-4; i++) {
+		star += "*";
+	}
+	
+	firstStr = firstStr.substr(0,4) + star;
+	str =firstStr + "@" + lastStr;
+	return str;
+}
+
+// 휴대전화번호
+function gfn_maskMpNo(str) {
+	var pattern = /^(\d{3})-?(\d{1,2})\d{2}-?\d(\d{3})$/;
+	var result = "";
+	if(!str) return result;
+
+	if(pattern.test(str)) {
+		result = str.replace(pattern, '$1-$2**-*$3');
+	} else {
+		result = "***";
+	}
+	return result;
+}
+
+/* 형 변환 */
+// 숫자 3자리마다 콤마 추가
+function gfn_comma(str) {
+	return str.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+//콤마 제거
+function gfn_uncomma(str) {
+	return str.toString().replace(/[^\d]+/g, '');
+}
+
+// 0자리수 2자리로 조정
+function gfn_2digits($num) {
+	$num < 10 ? $num = '0'+$num : $num;
+	return $num.toString();
+}
+
+// 날짜에서 1자리를 2자리로 조정(2018.8.29 -> 2018.08.29 같이 변환되어야 할 때 사용)
+/*function gfn_leadingZeros(n, digits) {
+	var zero = '';
+	n = n.toString();
+	if (n.length < digits) {
+		for (i = 0; i < digits - n.length; i++) zero += '0';
+	}
+	return zero + n;
+}*/
+
+// 휴대전화번호
+function gfn_viewMpNo(num, type) {
+	var formatNum = '';
+	if(num.length == 11) {
+		if(type == 0) {
+			formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-****-$3');
+		} else {
+			formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+		}
+	} else if(num.length == 8) {
+		formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+	} else {
+		if(num.indexOf('02') == 0) {
+			if(type == 0) {
+				formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-****-$3');
+			} else {
+				formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+			}
+		} else {
+			if(type == 0) {
+				formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-***-$3');
+			} else {
+				formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+			}
+		}
+	}
+	return formatNum;
+}
+
+//숫자를 한글로 변환
+function gfn_viewKorean(num) {
+	var hanA = new Array("","일","이","삼","사","오","육","칠","팔","구","십");
+	var danA = new Array("","십","백","천","","십","백","천","","십","백","천","","십","백","천");
+	var result = "";
+	for(i=0; i<num.length; i++) {		
+		str = "";
+		han = hanA[num.charAt(num.length-(i+1))];
+		if(han != "")
+			str += han+danA[i];
+		if(i == 4) str += "만 ";
+		if(i == 8) str += "억 ";
+		if(i == 12) str += "조 ";
+		result = str + result;
+	}
+	if(num != 0)
+		//result = result + "원";
+		result = result;
+	return result;
+}
+
+// 숫자를 전화번호 형식으로 변환
+function gfn_viewTelNo(num, type) {
+	var formatNum = '';
+	if(num.length==11) {
+		if(type==0) {
+			formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-****-$3');
+		} else {
+			formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+		}
+	} else if(num.length==8) {
+		formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+	} else {
+		if(num.indexOf('02')==0) {
+			if(type==0) {
+				formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-****-$3');
+			} else {
+				formatNum = num.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+			}
+		} else {
+			if(type==0) {
+				formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-***-$3');
+			} else {
+				formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+			}
+		}
+	}
+	return formatNum;
+}
+
+// 숫자를 계좌번호 형식(농협)으로 변환
+function gfn_viewNHAcntNo(num) {
+	return num.replace(/(\d{3})(\d{4})(\d{4})(\d{2})/, '$1-$2-$3-$4');
+}
+
+// 문자열 내 특수문자 변환
+function gfn_replaceChar(str) {
+	str = str.replace(/\&/g, "");
+	str = str.replace(/\@/g, "");
+	str = str.replace(/\'/g, "\"");
+	str = str.replace(/\"/g, "\"");
+	str = str.replace(/\$/g, "달러");
+	str = str.replace(/\%/g, "퍼센트");
+	return str;
+}
+
+// 날짜를 한글 날짜로
+function gfn_replaceKorDate(date) {
+	if(date == null) return false;
+	var year = parseInt(date.substr(0,4));
+	var month = parseInt(date.substr(4,2));
+	var day = parseInt(date.substr(6,2));
+	return year+"년 "+month+"월 "+day+"일";
+}
+
+
+/* 쿠키 */
+// 해당이름의 쿠키를 가져온다.
+/*function gfn_getCookie(cookie_name) {
+	var isCookie = false;
+	var start, end;
+	var i = 0;
+
+	// cookie 문자열 전체를 검색
+	while(i <= document.cookie.length) {
+		 start = i;
+		 end = start + cookie_name.length;
+		 // cookie_name과 동일한 문자가 있다면
+		 if(document.cookie.substring(start, end) == cookie_name) {
+			 isCookie = true;
+			 break;
+		 }
+		 i++;
+	}
+
+	// cookie_name 문자열을 cookie에서 찾았다면
+	if(isCookie) {
+		start = end + 1;
+		end = document.cookie.indexOf(";", start);
+		// 마지막 부분이라는 것을 의미(마지막에는 ";"가 없다)
+		if(end < start)
+			end = document.cookie.length;
+		// cookie_name에 해당하는 value값을 추출하여 리턴한다.
+		return document.cookie.substring(start, end);
+	}
+	// 찾지 못했다면
+	return "";
+}*/
+
+/* 쿠키 처리 */
+//쿠키 값 가져오기
+function gfn_getCookie(cookie_name) {
+	var isCookie = false;
+	var start, end;
+	var i = 0;
+
+	// cookie 문자열 전체를 검색
+	while(i <= document.cookie.length) {
+		start = i;
+		end = start + cookie_name.length;
+		// cookie_name과 동일한 문자가 있다면
+		if(document.cookie.substring(start, end) == cookie_name) {
+			isCookie = true;
+			break;
+		}
+		i++;
+	}
+
+	// cookie_name 문자열을 cookie에서 찾았다면
+	if(isCookie) {
+		start = end + 1;
+		end = document.cookie.indexOf(";", start);
+		// 마지막 부분이라는 것을 의미(마지막에는 ";"가 없다)
+		if(end < start)
+			end = document.cookie.length;
+		// cookie_name에 해당하는 value값을 추출하여 리턴한다.
+		return document.cookie.substring(start, end);
+	}
+	// 찾지 못했다면
+	return "";
+}
+
+//쿠키 등록
+function gfn_setCookie( name, value, expiredays ) {
+	var todayDate = new Date();
+	todayDate.setDate( todayDate.getDate() + expiredays );
+	document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+}
+
+/* 접속정보 */
+// 브라우저 유형
+function gfn_getBrowserTypeCd() {
+	var BrowserTypeCd = "PC";
+	var filter = "win16|win32|win64|mac";
+	 
+	if(navigator.platform) {
+		if(0 > filter.indexOf(navigator.platform.toLowerCase())) {
+			BrowserTypeCd = "MB";
+		}
+	}
+	return BrowserTypeCd;
+}
+
+// 브라우저 이름
+function gfn_getBrowserNm(browserTypeCd) {
+	var browserNm = "";
+	
+	if(browserTypeCd == "PC") {
+		browserNm = gfn_getPCBrowserNm();
+	} else {
+		browserNm = gfn_getMBBrowserNm();
+	}
+	return browserNm;
+}
+
+function gfn_getPCBrowserNm() {
+	var _ua = navigator.userAgent;
+	var rv = -1;
+	 
+	//IE 11,10,9,8
+	var trident = _ua.match(/Trident\/(\d.\d)/i);
+	if( trident != null )
+	{
+		if( trident[1] == "7.0" ) return rv = "IE" + 11;
+		if( trident[1] == "6.0" ) return rv = "IE" + 10;
+		if( trident[1] == "5.0" ) return rv = "IE" + 9;
+		if( trident[1] == "4.0" ) return rv = "IE" + 8;
+	}
+	 
+	//IE 7...
+	if( navigator.appName == 'Microsoft Internet Explorer' ) return rv = "IE" + 7;
+	 
+	//other
+	var agt = _ua.toLowerCase();
+	if(agt.indexOf("chrome") != -1) return 'Chrome';
+	if(agt.indexOf("opera") != -1) return 'Opera'; 
+	if(agt.indexOf("staroffice") != -1) return 'Star Office'; 
+	if(agt.indexOf("webtv") != -1) return 'WebTV'; 
+	if(agt.indexOf("beonex") != -1) return 'Beonex'; 
+	if(agt.indexOf("chimera") != -1) return 'Chimera'; 
+	if(agt.indexOf("netpositive") != -1) return 'NetPositive'; 
+	if(agt.indexOf("phoenix") != -1) return 'Phoenix'; 
+	if(agt.indexOf("firefox") != -1) return 'Firefox'; 
+	if(agt.indexOf("safari") != -1) return 'Safari'; 
+	if(agt.indexOf("skipstone") != -1) return 'SkipStone'; 
+	if(agt.indexOf("netscape") != -1) return 'Netscape'; 
+	if(agt.indexOf("mozilla/5.0") != -1) return 'Mozilla';
+}
+
+function gfn_getMBBrowserNm() {
+	var browserNm = "";
+	var mobileArr = new Array("iPhone", "iPod", "BlackBerry", "Android", "Windows CE", "LG", "MOT", "SAMSUNG", "SonyEricsson");
+	for(var txt in mobileArr) {
+		if(navigator.userAgent.match(mobileArr[txt]) != null) {
+			browserNm = mobileArr[txt];
+			break;
+		} else {
+			browserNm = "etc";
+		}
+	}
+	return browserNm;
+}
+
+
+/* validate */
+// 빈 값인지 체크
+function gfn_isEmpty(str) {
+	if(str == null) return true;
+	if(str == "NaN") return true;
+	if(str.trim() == "") return true;
+	var chkStr = new String(str);
+	if(chkStr.valueOf() == "undefined") return true;
+	if(chkStr == null) return true;	
+	if(chkStr.toString().length == 0) return true;
+	return false;
+}
+
+// 주민번호 유효성 체크
+function gfn_isSsnNo(ssnNo) {
+	var input = ssnNo.replace(/-/gi, "");
+	var mul = [2,3,4,5,6,7,8,9,2,3,4,5];
+	var sum = 0;
+
+	for(var i =0; i < mul.length; i++) {
+		var digit = parseInt(input[i]);
+		sum += digit * mul[i];
+	}
+
+	var eleven_spare = sum % 11;
+	var confirm_num = 11 - eleven_spare;
+
+	if(confirm_num > 9) {
+		confirm_num -= 10;
+	}
+
+	if(confirm_num == parseInt(input[input.length - 1]) && input.length == 13) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+//사업자번호 유효성 체크
+function gfn_isBizNo(bizNo) {
+	var input = bizNo.replace(/-/gi, "");
+	if(input.length == 10) {
+		if(gfn_isNumeric(bizNo, "5")) {
+			var checkArr = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1);
+			var tmpBizNo, i, chkSum=0, c2, remainder;
+			for(i=0; i<=7; i++) {
+				chkSum += checkArr[i] * bizNo.charAt(i);
+			}
+			c2 = "0" + (checkArr[8] * bizNo.charAt(8));
+			c2 = c2.substring(c2.length - 2, c2.length);
+			chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1));
+			remainder = (10 - (chkSum % 10)) % 10;
+
+			if(Math.floor(bizNo.charAt(9)) == remainder) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+}
+
+// 법인번호 유효성 체크
+function gfn_isCrprtnNo(crprtnNo) {
+	var input = crprtnNo.replace(/-/gi, "");
+	if(input.length == 13) {
+		if(gfn_isNumeric(crprtnNo, "5")) {
+			var crprtnNoArr  = crprtnNo.split("");
+			var checkArr = new Array(1,2,1,2,1,2,1,2,1,2,1,2);
+			var iSumCrprtnNo = 0;
+			var iCheckDigit = 0;
+			
+			for(i = 0; i < 12; i++) {
+				iSumCrprtnNo +=  eval(crprtnNoArr[i]) * eval(checkArr[i]);
+			}
+			
+			iCheckDigit = 10 - (iSumCrprtnNo % 10);
+			iCheckDigit = iCheckDigit % 10;
+			
+			if(iCheckDigit == crprtnNoArr[12]) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+}
+
+// 휴대전화번호 형식 체크
+function gfn_isMpNo(mpNo) {
+	var regExp = /(0[1|7][0|1|6|9|7])(\d{3}|\d{4})(\d{4}$)/g;
+	var result = regExp.exec(mpNo.replace(/-/gi, ""));
+	if(result) return true;
+	else return false;
+}
+
+// 한글로만 되어 있는지 체크
+function gfn_isKoreanOnly(koreanChar) {
+	if(koreanChar == null) return false;
+
+	for(var i=0; i < koreanChar.length; i++) {
+		var c=koreanChar.charCodeAt(i);
+		//( 0xAC00 <= c && c <= 0xD7A3 ) 초중종성이 모인 한글자
+		//( 0x3131 <= c && c <= 0x318E ) 자음 모음
+		if( !( ( 0xAC00 <= c && c <= 0xD7A3 ) || ( 0x3131 <= c && c <= 0x318E ) ) ) {
+			return false ; 
+		} 
+	}
+	return true;
+}
+
+// 6자리 텍스트가 날짜가 맞는지 체크
+function gfn_isDateSize6(date) {
+	var yyyyMM = String(date);
+	var year = yyyyMM.substring(0, 4);
+	var month = yyyyMM.substring(4, 6);
+
+	if(!gfn_isNumber(date) || date.length != 6)
+		return false;
+
+	if(Number(month) > 12 || Number(month) < 1)
+		return false;
+
+	return true;
+}
+
+// 6자리 텍스트가 날짜가 맞는지 체크
+function gfn_isDateSize8(date) {
+	var yyyyMMdd = String(date);
+	var year = yyyyMMdd.substring(0, 4);
+	var month = yyyyMMdd.substring(4, 6);
+	var day = yyyyMMdd.substring(6, 8);
+
+	if(!gfn_isNumber(date) || date.length != 8)
+		return false;
+
+	if(Number(month) > 12 || Number(month) < 1)
+		return false;
+
+	if(Number(gfn_lastDay(date)) < day)
+		return false;
+
+	return true;
+}
+
+function gfn_lastDay(date_str) {
+	var yyyyMMdd = String(date_str);
+	var days = "31";
+	var year = yyyyMMdd.substring(0, 4);
+	var month = yyyyMMdd.substring(4, 6);
+
+	if (Number(month) == 2) {
+		if (gfn_isLeapYear(year + month + "01"))
+			days = "29";
+		else
+			days = "28";
+	} else if (Number(month) == 4 || Number(month) == 6 || Number(month) == 9
+			|| Number(month) == 11)
+		days = "30";
+
+	return days;
+}
+
+function gfn_isLeapYear(date_str) {
+	var year = date_str.substring(0, 4);
+	if (year % 4 == 0) {
+		if (year % 100 == 0)
+			return (year % 400 == 0);
+		else
+			return true;
+	} else
+		return false;
+}
+
+// 숫자 체크
+function gfn_isNumber(num) {
+	var reg = /^\d+$/;
+	return reg.test(num);
+}
+
+// 특정 날짜의 마지막 날 가져오기
+function gfn_getMonthLastDay(date) {
+	var yyyyMMdd = String(date);
+	var days = "31";
+	var year = yyyyMMdd.substring(0, 4);
+	var month = yyyyMMdd.substring(4, 6);
+
+	if(Number(month) == 2) {
+		if(gfn_isLeapYear(year + month + "01")) {
+			days = "29";
+		} else {
+			days = "28";
+		}
+	} else if(Number(month) == 4 || Number(month) == 6 || Number(month) == 9 || Number(month) == 11) {
+		days = "30";
+	}
+	
+	return days;
+}
+
+// 윤달이 있는 년도인지 체크
+function gfn_isLeapYear(date_str) {
+	var year = date_str.substring(0, 4);
+	if(year % 4 == 0) {
+		if(year % 100 == 0) {
+			return (year % 400 == 0);
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+	}
+}
+
+// 옵션에 따른 숫자 체크
+function gfn_isNumeric(num, opt) {
+	// trim 처리
+	num = String(num).replace(/^\s+|\s+$/g, "");
+	num = num.replace(/,/g, "");
+	
+	if(typeof opt == "undefined" || opt == "1") {
+		// 모든 10진수 (부호 선택, 자릿수구분기호 선택, 소수점 선택)
+		var regex = /^[+\-]?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+) {1}(\.[0-9]+)?$/g;
+	} else if(opt == "2") {
+		// 부호 미사용, 자릿수구분기호 선택, 소수점 선택
+		var regex = /^(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+) {1}(\.[0-9]+)?$/g;
+	} else if(opt == "3") {
+		// 부호 미사용, 자릿수구분기호 미사용, 소수점 선택
+		var regex = /^[0-9]+(\.[0-9]+)?$/g;
+	} else if(opt == "4") {
+		// 한 자리 숫자만(부호 미사용, 자릿수구분기호 미사용, 소수점 미사용)
+		var regex = /^[0-9]$/g;
+	} else {
+		// 숫자만(부호 미사용, 자릿수구분기호 미사용, 소수점 미사용)
+		var regex = /^\d+$/;
+	}
+	
+	if(regex.test(num)) {
+		return isNaN(num) ? false : true;
+	} else {
+		return false;
+	}
+}
+
+// 비밀번호 유효성 체크
+function gfn_isPswrd(pswrd) {
+	var num = pswrd.search(/[0-9]/g);
+	var eng = pswrd.search(/[a-z]/ig);
+	var spe = pswrd.search(/[`~!@#$%&^*|\\\\'\";:\/?]/gi);
+	var ban1 = pswrd.search(/&/gi);
+	var ban2 = pswrd.search(/@@/gi);
+
+	if(pswrd.length < 8 || pswrd.length > 20) {
+		alert("비밀번호는 8~20자리 이내로 입력해 주세요.");
+		return false;
+	}
+	if(pswrd.search(/\s/) != -1) {
+		alert("비밀번호는 공백없이 입력해 주세요.");
+		return false;
+	}
+	if(num < 0 || eng < 0 || spe < 0 ) {
+		alert("비밀번호는 영문,숫자,특수문자(~,!,# 등)를 조합하여 입력해 주세요.");
+		return false;
+	}
+	
+	if(ban1 > -1) {
+		alert("비밀번호에서 특수문자 '&'는 보안 정책상 사용하실 수 없습니다.");
+		return false;
+	}
+	
+	if(ban2 > -1) {
+		alert("비밀번호에서 특수문자 '@@'는 보안 정책상 사용하실 수 없습니다.");
+		return false;
+	}
+	return true;
+}
+
+// 이메일 체크
+function gfn_isEmail(email) {
+	//'@'가 없으면 오류
+	if(email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+		alert('이메일 형식이 잘못된 것 같습니다.');
+		return false;
+	}
+	return true;
+}
+
+// form내 input 검증
+function gfn_validateForm(formId) {
+	var validate = true;
+	$("#" + formId + " .hasValue").each(function() {
+		if(validate) {
+			validate = !gfn_isEmpty($(this).val());
+			if(!validate) {
+				var labelText = $($(this.closest("div")).prev()).text();
+				alert("필수 항목을 입력해 주세요.[" + labelText + "]");
+				validate = false;
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .numberOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isNumeric($(this).val(), "5");
+			if(!validate) {
+				var labelText = $($(this.closest("div")).prev()).text();
+				alert("숫자로만 입력해 주세요.[" + labelText + "]");
+				validate = false;
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .floatOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isNumeric($(this).val(), "3");
+			if(!validate) {
+				var labelText = $($(this.closest("div")).prev()).text();
+				alert("숫자(소숫점 가능)로만 입력해 주세요.[" + labelText + "]");
+				validate = false;
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .commaOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			var testVal = $(this).val().replace(/,/g, "");
+			validate = gfn_isNumeric(testVal, "5");
+			if(!validate) {
+				var labelText = $($(this.closest("div")).prev()).text();
+				alert("숫자로만 입력해 주세요.[" + labelText + "]");
+				validate = false;
+				$(this).focus();
+			} else {
+				$(this).val(testVal);
+			}
+		}
+	});
+	
+	$("#" + formId + " .mpNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isMpNo($(this).val());
+			if(!validate) {
+				alert("휴대전화번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .emailOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isEmail($(this).val());
+			if(!validate) {
+				$(this).focus();
+			}
+		}
+	});
+	
+
+	$("#" + formId + " .pswrdOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isPswrd($(this).val());
+			if(!validate) {
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .pswrdReOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isPswrd($(this).val());
+			if(!validate) {
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .ssnNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isSsnNo($(this).val());
+			if(!validate) {
+				alert("주민등록번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .bizNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isBizNo($(this).val());
+			if(!validate) {
+				alert("사업자번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .crprtnNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isCrprtnNo($(this).val());
+			if(!validate) {
+				alert("법인번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .dateSize6Only").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isDateSize6($(this).val());
+			if(!validate) {
+				alert("년월일 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + formId + " .dateSize8Only").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isDateSize8($(this).val());
+			if(!validate) {
+				alert("년월 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	return validate;
+}
+
+// div내 input 검증
+function gfn_validate(divId) {
+	var validate = true;
+	$("#" + divId + " .hasValue").each(function() {
+		if(validate) {
+			if($(this).attr("type") == "checkbox") {
+				if(!$(this).prop("checked")) {
+					validate = false;
+				}
+			} else {
+				validate = !gfn_isEmpty($(this).val());
+			}
+			
+			if(!validate) {
+				if($(this).attr("type") == "checkbox") {
+					var labelText = $(this).data("name");
+					alert("필수 항목에 체크해 주세요.[" + labelText + "]");
+					validate = false;
+					$(this).focus();
+				} else {
+					var labelText = $(this).data("name");
+					alert("필수 항목을 입력해 주세요.[" + labelText + "]");
+					validate = false;
+					$(this).focus();
+				}
+			}
+		}
+	});
+	
+	$("#" + divId + " .numberOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isNumeric($(this).val(), "5");
+			if(!validate) {
+				var labelText = $(this).data("name");
+				alert("숫자로만 입력해 주세요.[" + labelText + "]");
+				validate = false;
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .floatOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isNumeric($(this).val(), "3");
+			if(!validate) {
+				var labelText = $(this).data("name");
+				alert("숫자(소숫점 가능)로만 입력해 주세요.[" + labelText + "]");
+				validate = false;
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .commaOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			var testVal = $(this).val().replace(/,/g, "");
+			validate = gfn_isNumeric(testVal, "5");
+			if(!validate) {
+				var labelText = $(this).data("name");
+				alert("숫자로만 입력해 주세요.[" + labelText + "]");
+				validate = false;
+				$(this).focus();
+			} else {
+				$(this).val(testVal);
+			}
+		}
+	});
+	
+	$("#" + divId + " .mpNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isMpNo($(this).val());
+			if(!validate) {
+				alert("휴대전화번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .emailOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isEmail($(this).val());
+			if(!validate) {
+				$(this).focus();
+			}
+		}
+	});
+	
+
+	$("#" + divId + " .pswrdOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isPswrd($(this).val());
+			if(!validate) {
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .pswrdReOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isPswrd($(this).val());
+			if(!validate) {
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .ssnNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isSsnNo($(this).val());
+			if(!validate) {
+				alert("주민등록번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .bizNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isBizNo($(this).val());
+			if(!validate) {
+				alert("사업자번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .crprtnNoOnly").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isCrprtnNo($(this).val());
+			if(!validate) {
+				alert("법인번호 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .dateSize6Only").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isDateSize6($(this).val());
+			if(!validate) {
+				alert("년월일 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	$("#" + divId + " .dateSize8Only").each(function() {
+		if(validate && !gfn_isEmpty($(this).val())) {
+			validate = gfn_isDateSize8($(this).val());
+			if(!validate) {
+				alert("년월 형식이 맞지 않습니다.");
+				$(this).focus();
+			}
+		}
+	});
+	
+	return validate;
+}
+
+
+
+/* form과 테이블 */
+//페이징 처리
+var gfv_pageIndex = null;
+function gfn_renderPaging(params) {
+	var divId = params.divId;	// div ID
+	var totalCount = params.totalCount;	// 전체 건수
+	var recordCount = params.recordCount;	// 페이지당 표시할 건수
+	var currentPage = 0;	// 현재 페이지
+	if(gfv_pageIndex == null) {
+		currentPage = $("#" + divId).twbsPagination('getCurrentPage');	// js에서 가져온 페이지
+	} else {
+		currentPage = gfv_pageIndex;	// 화면에서 지정한 페이지
+		gfv_pageIndex = null;
+	}
+	var visiblePages = 5;
+	var eventName = params.eventName;
+	$("#"+divId).twbsPagination('destroy');
+	$("#"+divId).twbsPagination({
+		startPage: currentPage,
+		totalPages: Math.ceil(totalCount/recordCount),
+		initiateStartPageClick: false,
+		first: "&laquo;",
+		prev: "&#60;",
+		next: "&#62;",
+		last: "&raquo;",
+		visiblePages: visiblePages,
+		onPageClick: function (event, page) {
+			_movePage(eventName, page);
+		}
+	});
+}
+
+function _movePage(eventName, value) {
+	if(typeof(eventName) == "function") {
+		eventName(value);
+	} else {
+		eval(eventName + "(value);");
+	}
+}
+
+// 테이블 Th클릭 정렬 세팅
+function gfn_setSortTh(sortId, funcNm) {
+	$("th[name=" + sortId + "SortTh]").click(function() {
+		var id = this.id.substring(7);
+		var asc = $("#" + sortId + "Sort_" + id).hasClass("glyphicon-sort-by-attributes");
+		var desc = $("#" + sortId + "Sort_" + id).hasClass("glyphicon-sort-by-attributes-alt");
+		
+		$("span[name=" + sortId + "Sort]").removeClass("glyphicon-sort-by-attributes");
+		$("span[name=" + sortId + "Sort]").removeClass("glyphicon-sort-by-attributes-alt");
+		if(desc) {
+			$("#" + sortId + "Sort_" + id).addClass("glyphicon-sort-by-attributes");
+			$("#" + sortId + "CurOrderBy").val(id);
+		} else if(asc) {
+			$("#" + sortId + "CurOrderBy").val("");
+		} else {
+			$("#" + sortId + "Sort_" + id).addClass("glyphicon-sort-by-attributes-alt");
+			$("#" + sortId + "CurOrderBy").val(id + " DESC");
+		}
+		gfv_pageIndex = 1;
+		eval(funcNm);
+	});
+}
+
+// 테이블 내 체크박스 전체선택 세팅
+function gfn_setAllCheckbox(allCheckboxNm, itemCheckboxNm) {
+	$("input:checkbox[name=" + allCheckboxNm + "]").on("change", function() {
+		if($(this).is(":checked")){
+			$("input:checkbox[name=" + itemCheckboxNm + "]").prop("checked", true);
+			$("input:checkbox[name=" + itemCheckboxNm + "]").attr("checked", true);
+		} else {
+			$("input:checkbox[name=" + itemCheckboxNm + "]").prop("checked", false);
+			$("input:checkbox[name=" + itemCheckboxNm + "]").attr("checked", false);
+		}
+	});
+}
+
+//특정 폼 내 셀렉트박스 값 변경시 onChange 클래스가 선언되어 있다면 펑션 실행
+function gfn_setOnChange(formId, funcNm) {
+	$("#" + formId + " .onChange").change(function(e) {
+		gfv_pageIndex = 1;
+		eval(funcNm);
+	});
+}
+
+//엔터 키 입력시 펑션 실행
+function gfn_hitEnter(event, fnNm) {
+	if(event.keyCode == 13) {
+		event.preventDefault();
+		gfv_pageIndex = 1;
+		eval(fnNm);
+	} else {
+		event.keyCode == 0;
+		return;
+	}
+}
+
+/* 파일처리 */
+// 파일 다운로드
+function gfn_downloadFile(seq) {
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("/com/downloadFile");
+	comSubmit.addParam("seq", seq);
+	comSubmit.submit();
+}
+
+// 파일 삭제
+function gfn_deleteFile(seq) {
+	if(confirm("해당 파일을 삭제하시겠습니까?")) {
+		var comAjax = new ComAjax();
+		comAjax.setUrl("/com/deleteFile");
+		comAjax.setCallback("gfn_defaultCallback");
+		comAjax.addParam("seq", seq);
+		comAjax.ajax();
+	} else {
+		return;
+	}
+}
+
+/* 엑셀처리 */
+// 엑셀 다운로드
+function gfn_downloadExcel(tblId, fileNm) {
+	var dt = new Date();
+	var year = gfn_2digits(dt.getFullYear());
+	var month = gfn_2digits(dt.getMonth() + 1);
+	var day = gfn_2digits(dt.getDate());
+	var hour = gfn_2digits(dt.getHours());
+	var mins = gfn_2digits(dt.getMinutes());
+
+	var postfix = year + month + day + "_" + hour + mins;
+	var fileNm = fileNm + "_" + postfix + ".xls";
+	$("#" + tblId).table2excel({
+		exclude: ".noExl",
+		name: fileNm,
+		filename: fileNm,
+		fileext: ".xls",
+		exclude_img: true,
+		exclude_links: true,
+		exclude_inputs: true
+	});
+	
+	//gfn_insertExprtHis(fileNm);
+}
+
+// 출력작업시 이력 저장
+/*function gfn_insertExprtHis(fileNm) {
+	var comAjax = new ComAjax();
+	comAjax.setUrl("/com/insertExprtHis");
+	comAjax.setCallback("gfn_insertExprtHisCallback");
+	comAjax.addParam("fileNm", fileNm);
+	comAjax.ajax();
+}
+
+function gfn_insertExprtHisCallback(data) {
+	alert(data.resultMsg);
+	return false;
+}*/
+
+/* 날짜, 시간 */
+//현재 년월일시분초
+function gfn_getCurrentDts() {
+	var d = new Date();
+	var yyyy = d.getFullYear();
+	var mm = d.getMonth() + 1;
+	var dd = d.getDate();
+	var h = d.getHours();
+	var m = d.getMinutes();
+	var s = d.getSeconds();
+	return yyyy + this.gfn_2digits(mm) + this.gfn_2digits(dd) + this.gfn_2digits(h) + this.gfn_2digits(m) + this.gfn_2digits(s);
+}
+
+//현재 년월일
+function gfn_getCurrentDate() {
+	var d = new Date();
+	var yyyy = d.getFullYear();
+	var mm = d.getMonth() + 1;
+	var dd = d.getDate();
+	return yyyy + this.gfn_2digits(mm) + this.gfn_2digits(dd);
+}
+
+function gfn_getCurrentDateDash() {
+	var d = new Date();
+	var yyyy = d.getFullYear();
+	var mm = d.getMonth() + 1;
+	var dd = d.getDate();
+	return yyyy + "-" + this.gfn_2digits(mm) + "-" + this.gfn_2digits(dd);
+}
+
+// 전후 년월일
+function gfn_getDate(day) {
+	var d = new Date();
+	var dayOfMonth = d.getDate();
+	d.setDate(dayOfMonth + day);
+	var yyyy = d.getFullYear();
+	var mm = d.getMonth() + 1;
+	var dd = d.getDate();
+	return yyyy + this.gfn_2digits(mm) + this.gfn_2digits(dd);
+}
+
+function gfn_getDateDash(day) {
+	var d = new Date();
+	var dayOfMonth = d.getDate();
+	d.setDate(dayOfMonth + day);
+	var yyyy = d.getFullYear();
+	var mm = d.getMonth() + 1;
+	var dd = d.getDate();
+	return yyyy + "-" + this.gfn_2digits(mm) + "-" + this.gfn_2digits(dd);
+}
+
+/* 기타 */
+//난수 생성
+function gfn_getRandomNo(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}

@@ -1,0 +1,8 @@
+<%@ page pageEncoding="utf-8"%>
+<!--	 Optional JS	 -->
+<!--	 Argon JS	 -->
+<script src="<c:url value='/vendors/argon/js/argon-dashboard.min.js?v=1.1.2'/>"></script>
+<script type="text/javascript" src="<c:url value='/vendors/twbsPagination/jquery.twbsPagination.min.js'/>"></script>
+
+<script type="text/javascript" charset="utf-8" src="<c:url value='/vendors/jquery.form.js/jquery.form.min.js'/>"></script>
+<script type="text/javascript" charset="utf-8" src="<c:url value='/js/fo/common.js'/>"></script>
