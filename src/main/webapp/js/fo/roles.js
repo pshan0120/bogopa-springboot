@@ -5,6 +5,7 @@ class Role {
         this.alignment = alignment;
         this.position = position;
         this.order = order;
+        this.nominating = false;
         this.died = false;
         this.diedRound = null;
         this.firstNightActive = true;

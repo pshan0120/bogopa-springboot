@@ -9,12 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="game 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="Baron 세팅 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/initializationSetting.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -241,7 +238,7 @@
       <workItem from="1711550949325" duration="1875000" />
       <workItem from="1711943274554" duration="305000" />
       <workItem from="1711945597912" duration="2908000" />
-      <workItem from="1711958020195" duration="22281000" />
+      <workItem from="1711958020195" duration="23244000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -250,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711978001453</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Baron 세팅 추가">
+      <created>1711981676300</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711981676300</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +276,8 @@
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
     <MESSAGE value="game 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="game 추가" />
+    <MESSAGE value="Baron 세팅 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="Baron 세팅 추가" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -171,6 +171,56 @@
         }
 
         const startGame = () => {
+            const $settingDiv = $("#settingDiv");
+            const $firstNightDiv = $("#firstNightDiv");
+
+            $settingDiv.hide();
+            $firstNightDiv.show();
+
+            // 1. 황혼 단계
+            // 2. 하수인 정보
+            // 3. 악마 정보
+            // 4. 독살범
+            // 5. 스파이
+            // 6. 세탁부
+            // 7. 사서
+            // 8. 조사관
+            // 9. 요리사
+            // 11. 공감능력자
+            // 12. 점쟁이
+            // 13. 집사
+            // 14. 새벽 단계
+
+        }
+
+        const renderOtherDay= () => {
+            const $settingDiv = $("#settingDiv");
+            const $firstNightDiv = $("#firstNightDiv");
+
+            $settingDiv.hide();
+            $firstNightDiv.show();
+
+        }
+
+        const renderOtherNight = () => {
+            const $settingDiv = $("#settingDiv");
+            const $firstNightDiv = $("#firstNightDiv");
+
+            $settingDiv.hide();
+            $firstNightDiv.show();
+
+            // 1. 황혼 단계
+            // 2. 독살범
+            // 3. 수도승
+            // 4. 스파이
+            // 5. 부정한 여자
+            // 6. 임프
+            // 7. 레이븐키퍼
+            // 8. 장의사
+            // 9. 공감능력자
+            // 10. 점쟁이
+            // 11. 집사
+            // 12. 새벽 단계
 
         }
 
@@ -218,15 +268,39 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="form-control btn btn-default" onclick="setPlayersRole()">
+                            <button type="button" class="btn btn-default" onclick="setPlayersRole()">
                                 역할 분배
                             </button>
-                            <button type="button" class="form-control btn btn-primary" onclick="startGame()">
+                            <button type="button" class="btn btn-primary" onclick="startGame()">
                                 게임 시작
                             </button>
                         </div>
                     </div>
                 </div>
+
+                <div class="card shadow mt-5 display-none" id="firstNightDiv">
+                    <div class="card-header bg-white border-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                첫번째 밤
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div name="playersDiv"></div>
+                    </div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-default" onclick="setPlayersRole()">
+                                역할 분배
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="startGame()">
+                                게임 시작
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
