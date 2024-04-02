@@ -300,6 +300,7 @@ class Imp extends DemonRole {
 
     constructor() {
         super(Imp.name, Imp.title, Imp.order);
+        this.offeredTownsFolkRoleList = [];
         this.killingPlayer = null;
     }
 }
