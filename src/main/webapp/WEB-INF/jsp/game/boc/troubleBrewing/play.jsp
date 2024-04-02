@@ -288,6 +288,7 @@
 
         const openMessageModal = messageHtml => {
             const $modal = $("#messageModal");
+            $modal.find(".modal-body").css("min-height", window.innerHeight * 0.8);
             $modal.find("[name='message']").empty().html(messageHtml);
             $("#messageModal").modal("show");
         }
@@ -297,7 +298,7 @@
                 return prev + " - " + next + "<br/>";
             }, "");
 
-            openMessageModal(messageHtml + "<br/>미참여 마을 주민 역할<br/>" + offeredTownsFolkRoleNameHtml);
+            openMessageModal(messageHtml + "<hr>미참여 마을 주민 역할<br/>" + offeredTownsFolkRoleNameHtml);
         }
 
         const openOfferTownsFolkRoleToImpModal = () => {
@@ -406,11 +407,9 @@
             <div class="col-xl-12 mb-5 mb-xl-0">
                 <div class="card shadow mt-5" id="settingDiv">
                     <div class="card-header bg-white border-0">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                준비 단계
-                            </div>
-                        </div>
+                        <h2>
+                            게임 세팅
+                        </h2>
                     </div>
                     <div class="card-body">
                         <div name="playersDiv"></div>
@@ -429,11 +428,9 @@
 
                 <div class="card shadow mt-5 display-none" id="firstNightDiv">
                     <div class="card-header bg-white border-0">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                첫번째 밤
-                            </div>
-                        </div>
+                        <h2>
+                            첫번째 밤
+                        </h2>
                     </div>
                     <div class="card-body" name="flowDiv">
                         <div name="duskStepDiv"></div>
@@ -452,7 +449,7 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-primary" onclick="proceedToFirstDay()">
+                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToFirstDay()">
                                 첫 라운드 진행
                             </button>
                         </div>
@@ -478,7 +475,7 @@
                 <h1 class="display-3" name="message"></h1>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -500,7 +497,7 @@
                 <div name="townsFolkRoleListDiv"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
             </div>
         </div>
         <!-- /.modal-content -->

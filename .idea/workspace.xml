@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="Baron 세팅 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="첫날 밤 진행중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/controller/FoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/controller/FoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +239,7 @@
       <workItem from="1711943274554" duration="305000" />
       <workItem from="1711945597912" duration="2908000" />
       <workItem from="1711958020195" duration="23244000" />
-      <workItem from="1712072048248" duration="11980000" />
+      <workItem from="1712072048248" duration="12520000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -257,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711981676300</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="첫날 밤 진행중">
+      <created>1712084106685</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712084106685</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +285,8 @@
     </ignored-roots>
     <MESSAGE value="game 추가" />
     <MESSAGE value="Baron 세팅 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="Baron 세팅 추가" />
+    <MESSAGE value="첫날 밤 진행중" />
+    <option name="LAST_COMMIT_MESSAGE" value="첫날 밤 진행중" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
