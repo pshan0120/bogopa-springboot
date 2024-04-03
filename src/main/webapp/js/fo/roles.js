@@ -6,6 +6,7 @@ class Role {
         this.position = position;
         this.order = order;
         this.nominating = false;
+        this.nominatable = true;
         this.died = false;
         this.diedRound = null;
         this.firstNightActive = true;
@@ -65,8 +66,8 @@ class WasherWoman extends TownsFolkRole {
 
     constructor() {
         super(WasherWoman.name, WasherWoman.title, WasherWoman.order);
-        this.identificationOfTownFolk = null;
-        this.identificationOfNotTownFolk = null;
+        this.identifyingPlayerList = [];
+        this.identifyingTownsFolkRole = null;
     }
 }
 
@@ -220,10 +221,8 @@ class Drunk extends OutsiderRole {
     static title = "주정뱅이";
     static order = 15;
 
-    constructor(townsFolkRole) {
+    constructor() {
         super(Drunk.name, Drunk.title, Drunk.order);
-        this.fakeTownsFolkRole = townsFolkRole;
-        this.drunken = true;
     }
 }
 
@@ -267,7 +266,8 @@ class Spy extends MinionRole {
 
     constructor() {
         super(Spy.name, Spy.title, Spy.order);
-        this.spyingPlayerByRound = [];
+        this.showingPlayStatusByRound = [];
+        this.mockingGoodPlayerByTargeting = [];
     }
 }
 

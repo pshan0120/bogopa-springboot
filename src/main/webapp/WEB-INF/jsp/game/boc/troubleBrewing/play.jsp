@@ -17,6 +17,10 @@
         let townsFolkPlayerList = [];
         let outsiderPlayerList = [];
         let offeredTownsFolkRoleTitleToImpList = [];
+        const playStatus = {
+            round: 0,
+            night: false,
+        }
         /*
         1. 참가자 자리 배치
         2. 그리모어 준비
@@ -52,7 +56,7 @@
                 new Slayer(),
                 new Soldier(),
                 new Mayor(),
-                new Butler,
+                new Butler(),
                 new Drunk(),
                 new Recluse(),
                 new Saint(),
@@ -183,11 +187,13 @@
             const $flowDiv = $firstNightDiv.find("div[name='flowDiv']").empty();
             $flowDiv.empty();
 
+            $flowDiv.append(createInitializationHtml());
             $flowDiv.append(createDuskHtml());
-
             $flowDiv.append(createMinionHtml());
-
             $flowDiv.append(createImpHtml());
+            $flowDiv.append(createPoisonerHtml());
+            $flowDiv.append(createSpyHtml());
+            $flowDiv.append(createWasherWomanHtml());
 
 
             /*
@@ -206,6 +212,7 @@
             <div name="butlerDiv"></div>
             <div name="dawnStepDiv"></div>*/
 
+            // 0. 초기화
             // 1. 황혼 단계
             // 2. 하수인 정보
             // 3. 악마 정보
@@ -220,6 +227,225 @@
             // 13. 집사
             // 14. 새벽 단계
 
+        }
+
+        const openMessageModal = messageHtml => {
+            const $modal = $("#messageModal");
+            $modal.find(".modal-body").css("min-height", window.innerHeight * 0.8);
+            $modal.find("[name='message']").empty().html(messageHtml);
+            $("#messageModal").modal("show");
+        }
+
+        const createAssignedPlayerList = () => [
+            ...townsFolkPlayerList,
+            ...outsiderPlayerList,
+            ...minionPlayerList,
+            ...demonPlayerList,
+        ];
+
+        const openShowPlayStatusModal = () => {
+            const playerListHtml = createAssignedPlayerList().reduce((prev, next) => {
+                const playerStatusHtml = createPlayerStatusHtml(next);
+                return prev + `<div>
+                                \${next.playerName} - \${next.title}(\${next.name})<br/>
+                                \${playerStatusHtml}
+                            </div>
+                            <hr>`
+            }, "");
+
+            const $modal = $("#openShowPlayStatusModal");
+            $modal.find("[name='playerListDiv']").empty().html(playerListHtml);
+            $("#openShowPlayStatusModal").modal("show");
+        }
+
+        const createPlayerStatusHtml = player => {
+            console.log('player', player);
+            let playerStatusHtml = "";
+            if (player.died) {
+                playerStatusHtml += "사망, ";
+            }
+
+            if (player.drunken) {
+                playerStatusHtml += "만취, ";
+            }
+
+            if (player.poisoned) {
+                playerStatusHtml += "중독, ";
+            }
+
+            if (player.redHerring) {
+                playerStatusHtml += "레드 헤링(점쟁이에게 악으로 보임), ";
+            }
+
+            if (player.name === Slayer.name
+                && !player.skillAvailable) {
+                playerStatusHtml += "슬레이어 능력 없음, ";
+            }
+
+            if (player.name === Butler.name
+                && player.masterPlayerByRound.length > 0) {
+                const lastChosen = player.masterPlayerByRound.at(-1);
+                playerStatusHtml += "'" + lastChosen.playerName + "'을(를) 주인으로 모심, ";
+            }
+
+            return playerStatusHtml;
+        }
+
+        const createChoiceButtonClass = role => {
+            if (role.position.name === POSITION.TOWNS_FOLK.name) {
+                return "btn btn-sm btn-outline-primary mr-1 my-1";
+            }
+
+            if (role.position.name === POSITION.OUTSIDER.name) {
+                return "btn btn-sm btn-outline-info mr-1 my-1";
+            }
+
+            if (role.position.name === POSITION.MINION.name) {
+                return "btn btn-sm btn-outline-warning mr-1 my-1";
+            }
+
+            if (role.position.name === POSITION.DEMON.name) {
+                return "btn btn-sm btn-outline-danger mr-1 my-1";
+            }
+
+            return "btn btn-sm btn-outline-default mr-1 my-1";
+        }
+
+        const createInitializationHtml = () => {
+            if (!townsFolkPlayerList.some(player => player.name === FortuneTeller.name)) {
+                return "";
+            }
+
+            // NOTE: 만약 townsFolkPlayerList 중에 fortune teller 가 있다면 선 플레이어 중 redHerring 세팅
+            let initializationHtml = "";
+
+            const fortuneTellerPlayer = townsFolkPlayerList.find(player => player.name === FortuneTeller.name);
+            if (fortuneTellerPlayer) {
+                initializationHtml += `<div name="redHerringDiv">
+                    <h4>레드 헤링 선택</h4>
+                    <p>
+                        1. 레드 헤링(점쟁이에게 악으로 보일 플레이어)을 선택하세요.
+                    </p>
+                    <button type="button" class="btn btn-primary btn-block" onclick="openSetRedHerringModal()">
+                        선택 모달 표시
+                    </button>
+                </div>
+                <hr/>`
+            }
+
+            // NOTE: 만약 outsiderPlayerList 중에 drunk 가 있다면 미참여 마을 주민 역할과 교환
+            const drunkPlayer = outsiderPlayerList.find(player => player.name === Drunk.name);
+            if (drunkPlayer) {
+                const drunkPlayerHtml = drunkPlayer.playerName;
+
+                initializationHtml += `<div name="drunkDiv">
+                    <h4>주정뱅이 마을 주민 역할 부여</h4>
+                    <p>
+                        1. 미참여 마을 주민 역할 중 하나를 선택합니다.
+                        2. 주정뱅이 플레이어는 해당 역할로 변경되면서 만취 상태가 됩니다.
+                    </p>
+                    <button type="button" class="btn btn-primary btn-block" onclick="openSetDrunkModal()">
+                        선택 모달 표시
+                    </button>
+                </div>
+                <hr/>`
+            }
+
+            return `<div name="initializationDiv">
+                        <h3>초기화 단계</h3>
+                        \${initializationHtml}
+                    </div>`;
+        }
+
+        const openSetRedHerringModal = () => {
+            const goodPlayerList = [
+                ...townsFolkPlayerList,
+                ...outsiderPlayerList,
+            ];
+
+            const chosen = goodPlayerList.find(player => player.redHerring);
+            if (chosen) {
+                alert("선택 완료된 상태입니다.\n" + chosen.playerName + "(" + chosen.title + ")");
+                return;
+            }
+
+            const goodPlayerListHtml = goodPlayerList.reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"addRedHerringPlayer('" + next.name + "')\" >"
+                    + " " + next.playerName + "(" + next.title + ")"
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setRedHerringPlayerModal");
+            $modal.find("[name='playerListDiv']").empty().html(goodPlayerListHtml);
+            $("#setRedHerringPlayerModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        }
+
+        const addRedHerringPlayer = roleName => {
+            const goodPlayerList = [
+                ...townsFolkPlayerList,
+                ...outsiderPlayerList,
+            ];
+
+            const chosen = goodPlayerList.find(player => player.redHerring);
+            if (chosen) {
+                return;
+            }
+
+            const redHerringPlayer = goodPlayerList.find(player => player.name === roleName);
+            redHerringPlayer.redHerring = true;
+
+            $("#setRedHerringPlayerModal").modal("hide");
+        }
+
+        const openSetDrunkModal = () => {
+            const chosen = townsFolkPlayerList.find(player => player.drunken);
+            if (chosen) {
+                alert("선택 완료된 상태입니다.\n" + chosen.playerName + "(" + chosen.title + ")");
+                return;
+            }
+
+            const unassignedTownsFolkRoleList = townsFolkPlayerList
+                .filter(role => role.position.name === POSITION.TOWNS_FOLK.name)
+                .filter(role => !townsFolkPlayerList.some(player => role.name === player.name));
+
+            const unassignedTownsFolkPlayerListHtml = unassignedTownsFolkRoleList.reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"replaceDrunkPlayerToTownsFolk('" + next + "')\" >"
+                    + " " + next.title
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setDrunkPlayerModal");
+            $modal.find("[name='roleListDiv']").empty().html(unassignedTownsFolkPlayerListHtml);
+            $("#setDrunkPlayerModal").modal("show");
+
+            $modal.find("[name='roleListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        }
+
+        const replaceDrunkPlayerToTownsFolk = unassignedTownsFolkRole => {
+            const drunkPlayer = outsiderPlayerList.find(player => player.name === Drunk.name);
+
+            const drunkPlayerIndex = outsiderPlayerList.findIndex(player => player.name === Drunk.name);
+            if (drunkPlayerIndex > -1) {
+                outsiderPlayerList.splice(drunkPlayerIndex, 1);
+            }
+
+            townsFolkPlayerList.push({
+                ...unassignedTownsFolkRole,
+                playerName: drunkPlayer.playerName,
+                playerId: drunkPlayer.playerId
+            });
+
+            $("#setDrunkPlayerModal").modal("hide");
         }
 
         const createDuskHtml = () => {
@@ -249,8 +475,10 @@
             return `<div name="minionDiv">
                 <h3>하수인 정보</h3>
                 <p>
-                    1. 다음 플레이어를(들을) 깨우세요: \${minionPlayerListHtml}<br/>
-                    2. 메세지 모달을 띄운 뒤 보여주세요.
+                    1. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${minionPlayerListHtml}<br/>
+                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    3. 눈을 감게 하세요.
                 </p>
                 <button type="button" class="btn btn-info btn-block" onclick="openMessageModal('\${messageHtml}')">
                     메세지 모달 표시
@@ -272,25 +500,20 @@
             return `<div name="impDiv">
                 <h3>악마 정보</h3>
                 <p>
-                    1. 다음 플레이어를(들을) 깨우세요: \${impPlayerHtml}<br/>
+                    1. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${impPlayerHtml}<br/>
                     2. 임프 플레이어에게 보여줄 3가지 선한 역할을 골라주세요.<br/>
-                    3. 메세지 모달을 띄운 뒤 보여주세요.
+                    3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    4. 눈을 감게 하세요.
                 </p>
                 <button type="button" class="btn btn-primary btn-block" onclick="openOfferTownsFolkRoleToImpModal()">
-                    선택 모달
+                    선택 모달 표시
                 </button>
                 <button type="button" class="btn btn-info btn-block" onclick="openImpMessageModal('\${messageHtml}')">
                     메세지 모달 표시
                 </button>
             </div>
             <hr/>`
-        }
-
-        const openMessageModal = messageHtml => {
-            const $modal = $("#messageModal");
-            $modal.find(".modal-body").css("min-height", window.innerHeight * 0.8);
-            $modal.find("[name='message']").empty().html(messageHtml);
-            $("#messageModal").modal("show");
         }
 
         const openImpMessageModal = messageHtml => {
@@ -317,7 +540,7 @@
 
             const offeredTownsFolkRoleListHtml = offeredTownsFolkRoleList.reduce((prev, next) => {
                 return prev
-                    + "<button class=\"btn btn-sm btn-outline-info mr-1 my-1\" "
+                    + "<button class=\"" + createChoiceButtonClass(next) + "\" "
                     + " onclick=\"addOfferedTownsFolkRoleList('" + next.title + "', '" + next.name + "')\" >"
                     + " " + next.title
                     + "</button>";
@@ -345,6 +568,264 @@
                 $("#offerTownsFolkRoleToImpModal").modal("hide");
                 return;
             }
+        }
+
+        const createPoisonerHtml = () => {
+            const poisonerPlayer = minionPlayerList.find(player => player.name === Poisoner.name);
+            if (!poisonerPlayer) {
+                return "";
+            }
+            const poisonerPlayerHtml = poisonerPlayer.playerName;
+
+            const minionPlayerListHtml = minionPlayerList.reduce((prev, next) => {
+                return prev + next.playerName + "(" + next.title + ") ";
+            }, "");
+
+            const messageHtml = `중독시킬 플레이어를 손가락으로 지목해 주세요.`;
+
+            return `<div name="poisonerDiv">
+                <h3>독살범</h3>
+                <p>
+                    1. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${poisonerPlayerHtml}<br/>
+                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    3. 그가 지목한 플레이어를 선택합니다.<br/>
+                    4. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-info btn-block" onclick="openMessageModal('\${messageHtml}')">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-primary btn-block" onclick="openSetPoisonedPlayerModal()">
+                    선택 모달 표시
+                </button>
+            </div>
+            <hr/>`
+        }
+
+        const openSetPoisonedPlayerModal = () => {
+            const poisonerPlayer = minionPlayerList.find(player => player.name === Poisoner.name);
+
+            const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                alert("선택 완료된 상태입니다.\n" + chosen.playerName);
+                return;
+            }
+
+            const offeredTownsFolkRoleListHtml = createAssignedPlayerList().reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"addPoisonedPlayer('" + next.playerName + "', '" + next.title + "')\" >"
+                    + " " + next.playerName
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setPoisonedPlayerModal");
+            $modal.find("[name='playerListDiv']").empty().html(offeredTownsFolkRoleListHtml);
+            $("#setPoisonedPlayerModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        }
+
+        const addPoisonedPlayer = (playerName, title) => {
+            const poisonerPlayer = minionPlayerList.find(player => player.name === Poisoner.name);
+
+            const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                return;
+            }
+
+            poisonerPlayer.poisoningPlayerByRound.push({
+                round: playStatus.round,
+                playerName,
+                title,
+            });
+
+            $("#setPoisonedPlayerModal").modal("hide");
+        }
+
+        const createSpyHtml = () => {
+            const spyPlayer = minionPlayerList.find(player => player.name === Spy.name);
+            if (!spyPlayer) {
+                return "";
+            }
+
+            const spyPlayerHtml = spyPlayer.playerName;
+
+            const messageHtml = `현재 플레이 상태를 보여드리겠습니다.`;
+
+            return `<div name="spyDiv">
+                <h3>스파이</h3>
+                <p>
+                    1. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${spyPlayerHtml}<br/>
+                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    3. 플레이 상태 모달을 띄운 뒤 보여주세요.<br/>
+                    4. 눈을 감게 하세요.<br/>
+                    * 그가 다른 플레이어들에게 감지될 때 보여지게 할 선한 역할은 플레이 중 스토리텔러가 선택합니다.
+                </p>
+                <button type="button" class="btn btn-info btn-block" onclick="openMessageModal('\${messageHtml}')">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-primary btn-block" onclick="openShowPlayStatusModal()">
+                    플레이 상태 모달 표시
+                </button>
+            </div>
+            <hr/>`
+        }
+
+        const createWasherWomanHtml = () => {
+            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            if (!washerWomanPlayer) {
+                return "";
+            }
+
+            const washerWomanPlayerHtml = washerWomanPlayer.playerName;
+
+            return `<div name="spyDiv">
+                <h3>세탁부</h3>
+                <p>
+                    1. 세탁부에게 알려줄 두 명의 플레이어와 역할 한 가지를 선택하세요.<br/>
+                    * 정상인 상태라면 둘 중 하나 이상은 마을 주민이어야 합니다.<br/>
+                    * 취했거나 중독된 상태라면 아무렇게나 고를 수 있습니다.<br/>
+                    2. 다음 플레이어를(들을) 깨우세요: \${washerWomanPlayerHtml}<br/>
+                    3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    4. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-primary btn-block" onclick="openIdentifyWasherWomanModal()">
+                    선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="openWasherWomanMessageModal()">
+                    메세지 모달 표시
+                </button>
+            </div>
+            <hr/>`
+        }
+
+        const openIdentifyWasherWomanModal = () => {
+            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+
+            let identifyingPlayerListHtml = "";
+            if (washerWomanPlayer.identifyingPlayerList.length == 2) {
+                alert(
+                    "플레이어들은 선택 완료된 상태입니다.\n"
+                    + washerWomanPlayer.identifyingPlayerList[0].playerName
+                    + "(" + washerWomanPlayer.identifyingPlayerList[0].title + ")\n"
+                    + washerWomanPlayer.identifyingPlayerList[1].playerName
+                    + "(" + washerWomanPlayer.identifyingPlayerList[1].title + ")"
+                );
+            } else {
+                identifyingPlayerListHtml = createAssignedPlayerList().reduce((prev, next) => {
+                    if (next.name === WasherWoman.name) {
+                        return prev;
+                    }
+
+                    if (washerWomanPlayer.identifyingPlayerList.some(player => player.playerName === next.playerName)) {
+                        return prev;
+                    }
+
+                    return prev
+                        + "<button class=\"" + createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"addIdentifiedPlayerForWasherWoman('" + next.playerName + "', '" + next.title + "')\" >"
+                        + " " + next.playerName + "(" + next.title + ")"
+                        + "</button>";
+                }, "");
+            }
+
+            let identifyingRoleListHtml = "";
+            if (washerWomanPlayer.identifyingTownsFolkRole) {
+                alert(
+                    "역할은 선택 완료된 상태입니다.\n"
+                    + washerWomanPlayer.identifyingTownsFolkRole.title
+                );
+            } else {
+                identifyingRoleListHtml = townsFolkPlayerList.reduce((prev, next) => {
+                    if (next.name === WasherWoman.name) {
+                        return prev;
+                    }
+
+                    return prev
+                        + "<button class=\"" + createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"addIdentifiedRoleForWasherWoman('" + next.name + "', '" + next.title + "')\" >"
+                        + " " + next.title
+                        + "</button>";
+                }, "");
+            }
+
+            const $modal = $("#setIdentifyWasherWomanModal");
+            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
+            $modal.find("[name='roleListDiv']").empty().html(identifyingRoleListHtml);
+
+            $("#setIdentifyWasherWomanModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        }
+
+        const addIdentifiedPlayerForWasherWoman = (playerName, title) => {
+            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+
+            if (washerWomanPlayer.identifyingPlayerList.length == 2) {
+                alert(
+                    "플레이어들은 선택 완료된 상태입니다.\n"
+                    + washerWomanPlayer.identifyingPlayerList[0].playerName
+                    + "(" + washerWomanPlayer.identifyingPlayerList[0].title + ")\n"
+                    + washerWomanPlayer.identifyingPlayerList[1].playerName
+                    + "(" + washerWomanPlayer.identifyingPlayerList[1].title + ")"
+                );
+                return;
+            }
+
+            washerWomanPlayer.identifyingPlayerList.push({
+                playerName,
+                title,
+            });
+
+            if (washerWomanPlayer.identifyingPlayerList.length == 2
+                && washerWomanPlayer.identifyingTownsFolkRole) {
+                $("#setIdentifyWasherWomanModal").modal("hide");
+            }
+        }
+
+        const addIdentifiedRoleForWasherWoman = (roleName, title) => {
+            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+
+            if (washerWomanPlayer.identifyingTownsFolkRole) {
+                alert(
+                    "역할은 선택 완료된 상태입니다.\n"
+                    + washerWomanPlayer.identifyingTownsFolkRole.title
+                );
+                return;
+            }
+
+            washerWomanPlayer.identifyingTownsFolkRole = {
+                roleName,
+                title
+            };
+
+            if (washerWomanPlayer.identifyingPlayerList.length == 2
+                && washerWomanPlayer.identifyingTownsFolkRole) {
+                $("#setIdentifyWasherWomanModal").modal("hide");
+            }
+        }
+
+        const openWasherWomanMessageModal = () => {
+            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            if (washerWomanPlayer.identifyingPlayerList.length !== 2
+                || !washerWomanPlayer.identifyingTownsFolkRole) {
+                alert("플레이어 2명과 알려줄 역할이 먼저 선택되어야 합니다.");
+                return;
+            }
+
+            let messageHtml = `다음 두 사람 중 한 명은 \${washerWomanPlayer.identifyingTownsFolkRole.title} 입니다.</br>`;
+
+            messageHtml += washerWomanPlayer.identifyingPlayerList.reduce((prev, next) => {
+                return prev + " - " + next.playerName + "<br/>";
+            }, "");
+
+            openMessageModal(messageHtml);
         }
 
 
@@ -483,18 +964,130 @@
     <!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade" id="openShowPlayStatusModal" role="dialog"
+     aria-labelledby="openShowPlayStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">현재 플레이 상태입니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="setRedHerringPlayerModal" role="dialog"
+     aria-labelledby="setRedHerringPlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">스토리텔러가 점쟁이에게 악으로 보일 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="setDrunkPlayerModal" role="dialog"
+     aria-labelledby="setDrunkPlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">주정뱅이와 교체될 마을 주민 역할을 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="roleListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <div class="modal fade" id="offerTownsFolkRoleToImpModal" role="dialog"
      aria-labelledby="offerTownsFolkRoleToImpModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">스토리텔러가 선택합니다.</h4>
+                <h4 class="">스토리텔러가 임프에게 제공할 역할을 선택합니다.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div name="townsFolkRoleListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="setPoisonedPlayerModal" role="dialog"
+     aria-labelledby="setPoisonedPlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">독살범이 중독시킬 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="setIdentifyWasherWomanModal" role="dialog"
+     aria-labelledby="setIdentifyWasherWomanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">세탁부에게 알려줄 플레이어와 역할을 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+                <hr>
+                <div name="roleListDiv"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
