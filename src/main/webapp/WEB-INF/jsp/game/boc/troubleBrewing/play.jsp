@@ -312,7 +312,8 @@
         }
 
         const createInitializationHtml = () => {
-            if (!townsFolkPlayerList.some(player => player.name === FortuneTeller.name)) {
+            if (!townsFolkPlayerList.some(player => player.name === FortuneTeller.name)
+                && !outsiderPlayerList.some(player => player.name === Drunk.name)) {
                 return "";
             }
 
@@ -336,8 +337,6 @@
             // NOTE: 만약 outsiderPlayerList 중에 drunk 가 있다면 미참여 마을 주민 역할과 교환
             const drunkPlayer = outsiderPlayerList.find(player => player.name === Drunk.name);
             if (drunkPlayer) {
-                const drunkPlayerHtml = drunkPlayer.playerName;
-
                 initializationHtml += `<div name="drunkDiv">
                     <h4>주정뱅이 마을 주민 역할 부여</h4>
                     <p>
@@ -410,14 +409,14 @@
                 return;
             }
 
-            const unassignedTownsFolkRoleList = townsFolkPlayerList
+            const unassignedTownsFolkRoleList = roleList
                 .filter(role => role.position.name === POSITION.TOWNS_FOLK.name)
                 .filter(role => !townsFolkPlayerList.some(player => role.name === player.name));
 
             const unassignedTownsFolkPlayerListHtml = unassignedTownsFolkRoleList.reduce((prev, next) => {
                 return prev
                     + "<button class=\"" + createChoiceButtonClass(next) + "\" "
-                    + " onclick=\"replaceDrunkPlayerToTownsFolk('" + next + "')\" >"
+                    + " onclick=\"replaceDrunkPlayerToTownsFolk('" + next.name + "')\" >"
                     + " " + next.title
                     + "</button>";
             }, "");
@@ -431,19 +430,21 @@
             });
         }
 
-        const replaceDrunkPlayerToTownsFolk = unassignedTownsFolkRole => {
+        const replaceDrunkPlayerToTownsFolk = unassignedTownsFolkRoleName => {
             const drunkPlayer = outsiderPlayerList.find(player => player.name === Drunk.name);
+            const unassignedTownsFolkRole = roleList.find(role => role.name === unassignedTownsFolkRoleName);
+
+            townsFolkPlayerList.push({
+                ...unassignedTownsFolkRole,
+                playerName: drunkPlayer.playerName,
+                playerId: drunkPlayer.playerId,
+                drunken: true,
+            });
 
             const drunkPlayerIndex = outsiderPlayerList.findIndex(player => player.name === Drunk.name);
             if (drunkPlayerIndex > -1) {
                 outsiderPlayerList.splice(drunkPlayerIndex, 1);
             }
-
-            townsFolkPlayerList.push({
-                ...unassignedTownsFolkRole,
-                playerName: drunkPlayer.playerName,
-                playerId: drunkPlayer.playerId
-            });
 
             $("#setDrunkPlayerModal").modal("hide");
         }

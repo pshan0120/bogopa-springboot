@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="첫날 밤 진행중">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="주정뱅이까지">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +240,7 @@
       <workItem from="1711945597912" duration="2908000" />
       <workItem from="1711958020195" duration="23244000" />
       <workItem from="1712072048248" duration="12543000" />
-      <workItem from="1712106089294" duration="25159000" />
+      <workItem from="1712106089294" duration="26098000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -271,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712084626647</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="주정뱅이까지">
+      <created>1712161699976</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712161699995</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,7 +301,8 @@
     <MESSAGE value="game 추가" />
     <MESSAGE value="Baron 세팅 추가" />
     <MESSAGE value="첫날 밤 진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="첫날 밤 진행중" />
+    <MESSAGE value="주정뱅이까지" />
+    <option name="LAST_COMMIT_MESSAGE" value="주정뱅이까지" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
