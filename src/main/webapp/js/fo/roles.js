@@ -18,6 +18,38 @@ class Role {
         this.diedToday = false;
     }
 
+    static calculatePlayerStatusList(player) {
+        const playerStatusList = [];
+        if (player.died) {
+            playerStatusList.push("사망");
+        }
+
+        if (player.drunken) {
+            playerStatusList.push("만취");
+        }
+
+        if (player.poisoned) {
+            playerStatusList.push("중독");
+        }
+
+        if (player.redHerring) {
+            playerStatusList.push("레드 헤링(점쟁이에게 악으로 보임)");
+        }
+
+        if (player.name === Slayer.name
+            && !player.skillAvailable) {
+            playerStatusList.push("슬레이어 능력 없음");
+        }
+
+        if (player.name === Butler.name
+            && player.masterPlayerByRound.length > 0) {
+            const lastChosen = player.masterPlayerByRound.at(-1);
+            playerStatusList.push("'" + lastChosen.playerName + "'을(를) 주인으로 모심");
+        }
+
+        return playerStatusList;
+    }
+
     isAlive() {
         return !this.died;
     }

@@ -245,10 +245,15 @@
 
         const openShowPlayStatusModal = () => {
             const playerListHtml = createAssignedPlayerList().reduce((prev, next) => {
-                const playerStatusHtml = createPlayerStatusHtml(next);
+                const playerStatusList = Role.calculatePlayerStatusList(next);
+
+                const playerStatusListHtml = playerStatusList.reduce((prev, next) => {
+                    return prev + next + ", ";
+                }, "");
+
                 return prev + `<div>
                                 \${next.playerName} - \${next.title}(\${next.name})<br/>
-                                \${playerStatusHtml}
+                                \${playerStatusListHtml}
                             </div>
                             <hr>`
             }, "");
@@ -256,39 +261,6 @@
             const $modal = $("#openShowPlayStatusModal");
             $modal.find("[name='playerListDiv']").empty().html(playerListHtml);
             $("#openShowPlayStatusModal").modal("show");
-        }
-
-        const createPlayerStatusHtml = player => {
-            console.log('player', player);
-            let playerStatusHtml = "";
-            if (player.died) {
-                playerStatusHtml += "사망, ";
-            }
-
-            if (player.drunken) {
-                playerStatusHtml += "만취, ";
-            }
-
-            if (player.poisoned) {
-                playerStatusHtml += "중독, ";
-            }
-
-            if (player.redHerring) {
-                playerStatusHtml += "레드 헤링(점쟁이에게 악으로 보임), ";
-            }
-
-            if (player.name === Slayer.name
-                && !player.skillAvailable) {
-                playerStatusHtml += "슬레이어 능력 없음, ";
-            }
-
-            if (player.name === Butler.name
-                && player.masterPlayerByRound.length > 0) {
-                const lastChosen = player.masterPlayerByRound.at(-1);
-                playerStatusHtml += "'" + lastChosen.playerName + "'을(를) 주인으로 모심, ";
-            }
-
-            return playerStatusHtml;
         }
 
         const createChoiceButtonClass = role => {
@@ -682,7 +654,13 @@
                 return "";
             }
 
-            const washerWomanPlayerHtml = washerWomanPlayer.playerName;
+            const playerStatusList = Role.calculatePlayerStatusList(washerWomanPlayer);
+            const playerStatusListHtml = playerStatusList.reduce((prev, next) => {
+                return prev + next + ", ";
+            }, "");
+
+            const washerWomanPlayerHtml = washerWomanPlayer.playerName
+                + (playerStatusList.length > 0 ? "(" + playerStatusListHtml + ")" : "");
 
             return `<div name="spyDiv">
                 <h3>세탁부</h3>
@@ -690,7 +668,8 @@
                     1. 세탁부에게 알려줄 두 명의 플레이어와 역할 한 가지를 선택하세요.<br/>
                     * 정상인 상태라면 둘 중 하나 이상은 마을 주민이어야 합니다.<br/>
                     * 취했거나 중독된 상태라면 아무렇게나 고를 수 있습니다.<br/>
-                    2. 다음 플레이어를(들을) 깨우세요: \${washerWomanPlayerHtml}<br/>
+                    2. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${washerWomanPlayerHtml}<br/>
                     3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     4. 눈을 감게 하세요.
                 </p>
@@ -700,12 +679,18 @@
                 <button type="button" class="btn btn-info btn-block" onclick="openWasherWomanMessageModal()">
                     메세지 모달 표시
                 </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="resetIdentifyWasherWoman()">
+                    선택 재설정
+                </button>
             </div>
             <hr/>`
         }
 
         const openIdentifyWasherWomanModal = () => {
             const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            if (!washerWomanPlayer.skillAvailable) {
+                return;
+            }
 
             let identifyingPlayerListHtml = "";
             if (washerWomanPlayer.identifyingPlayerList.length == 2) {
@@ -786,6 +771,7 @@
 
             if (washerWomanPlayer.identifyingPlayerList.length == 2
                 && washerWomanPlayer.identifyingTownsFolkRole) {
+                washerWomanPlayer.skillAvailable = false;
                 $("#setIdentifyWasherWomanModal").modal("hide");
             }
         }
@@ -808,25 +794,34 @@
 
             if (washerWomanPlayer.identifyingPlayerList.length == 2
                 && washerWomanPlayer.identifyingTownsFolkRole) {
+                washerWomanPlayer.skillAvailable = false;
                 $("#setIdentifyWasherWomanModal").modal("hide");
             }
         }
 
         const openWasherWomanMessageModal = () => {
             const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
-            if (washerWomanPlayer.identifyingPlayerList.length !== 2
-                || !washerWomanPlayer.identifyingTownsFolkRole) {
+            if (washerWomanPlayer.skillAvailable) {
+            /*if (washerWomanPlayer.identifyingPlayerList.length !== 2
+                || !washerWomanPlayer.identifyingTownsFolkRole) {*/
                 alert("플레이어 2명과 알려줄 역할이 먼저 선택되어야 합니다.");
                 return;
             }
 
-            let messageHtml = `다음 두 사람 중 한 명은 \${washerWomanPlayer.identifyingTownsFolkRole.title} 입니다.</br>`;
+            let messageHtml = `다음 두 플레이어 중 한 명은 \${washerWomanPlayer.identifyingTownsFolkRole.title} 입니다.</br>`;
 
             messageHtml += washerWomanPlayer.identifyingPlayerList.reduce((prev, next) => {
                 return prev + " - " + next.playerName + "<br/>";
             }, "");
 
             openMessageModal(messageHtml);
+        }
+
+        const resetIdentifyWasherWoman = () => {
+            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            washerWomanPlayer.identifyingPlayerList = [];
+            washerWomanPlayer.identifyingTownsFolkRole = null;
+            washerWomanPlayer.skillAvailable = true;
         }
 
 
