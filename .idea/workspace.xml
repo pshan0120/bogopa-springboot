@@ -9,10 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="모달로 변경">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="addPoisonedPlayer 오류 수정">
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +243,7 @@
       <workItem from="1711958020195" duration="23244000" />
       <workItem from="1712072048248" duration="12543000" />
       <workItem from="1712106089294" duration="26159000" />
-      <workItem from="1712247107154" duration="6235000" />
+      <workItem from="1712247107154" duration="6351000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -303,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712252723443</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="addPoisonedPlayer 오류 수정">
+      <created>1712253452657</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712253452657</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,7 +336,8 @@
     <MESSAGE value="주정뱅이까지 추가" />
     <MESSAGE value="세탁부 진행중" />
     <MESSAGE value="모달로 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="모달로 변경" />
+    <MESSAGE value="addPoisonedPlayer 오류 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="addPoisonedPlayer 오류 수정" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

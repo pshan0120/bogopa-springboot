@@ -289,7 +289,7 @@
                         선택 모달 표시
                     </button>
                 </div>
-                <hr/>`
+                <hr/>`;
             }
 
             // NOTE: 만약 outsiderPlayerList 중에 drunk 가 있다면 미참여 마을 주민 역할과 교환
@@ -305,7 +305,7 @@
                         선택 모달 표시
                     </button>
                 </div>
-                <hr/>`
+                <hr/>`;
             }
 
             return `<div name="initializationDiv">
@@ -415,7 +415,7 @@
                    * 일부 여행자와 전설은 행동합니다.
                 </p>
             </div>
-            <hr/>`
+            <hr/>`;
         }
 
         const createMinionHtml = () => {
@@ -443,7 +443,7 @@
                     메세지 모달 표시
                 </button>
             </div>
-            <hr/>`
+            <hr/>`;
         }
 
         const createImpHtml = () => {
@@ -475,7 +475,7 @@
                     선택 재설정
                 </button>
             </div>
-            <hr/>`
+            <hr/>`;
         }
 
         const openImpMessageModal = messageHtml => {
@@ -570,7 +570,7 @@
                     선택 모달 표시
                 </button>
             </div>
-            <hr/>`
+            <hr/>`;
         }
 
         const openSetPoisonedPlayerModal = () => {
@@ -646,7 +646,7 @@
                     플레이 상태 모달 표시
                 </button>
             </div>
-            <hr/>`
+            <hr/>`;
         }
 
         const createWasherWomanHtml = () => {
@@ -681,7 +681,7 @@
                     선택 재설정
                 </button>
             </div>
-            <hr/>`
+            <hr/>`;
         }
 
         const openIdentifyWasherWomanModal = () => {
