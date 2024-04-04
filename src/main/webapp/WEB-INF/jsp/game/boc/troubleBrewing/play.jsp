@@ -242,10 +242,6 @@
         ];
 
         const openShowPlayStatusModal = () => {
-            /*const $modal = $("#showPlayStatusModal");
-            $modal.find("[name='playerListDiv']").empty().html(playerListHtml);
-            $("#showPlayStatusModal").modal("show");*/
-
             showPlayStatusModal.open(createAssignedPlayerList());
         }
 
@@ -285,7 +281,7 @@
                     <p>
                         1. 레드 헤링(점쟁이에게 악으로 보일 플레이어)을 선택하세요.
                     </p>
-                    <button type="button" class="btn btn-primary btn-block" onclick="openSetRedHerringModal()">
+                    <button type="button" class="btn btn-info btn-block" onclick="openSetRedHerringModal()">
                         선택 모달 표시
                     </button>
                 </div>
@@ -301,7 +297,7 @@
                         1. 미참여 마을 주민 역할 중 하나를 선택합니다.<br/>
                         2. 주정뱅이 플레이어는 해당 역할로 변경되면서 만취 상태가 됩니다.
                     </p>
-                    <button type="button" class="btn btn-primary btn-block" onclick="openSetDrunkModal()">
+                    <button type="button" class="btn btn-info btn-block" onclick="openSetDrunkModal()">
                         선택 모달 표시
                     </button>
                 </div>
@@ -439,7 +435,7 @@
                     2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     3. 눈을 감게 하세요.
                 </p>
-                <button type="button" class="btn btn-info btn-block" onclick="openMessageModal('\${messageHtml}')">
+                <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
                     메세지 모달 표시
                 </button>
             </div>
@@ -465,10 +461,10 @@
                     3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     4. 눈을 감게 하세요.
                 </p>
-                <button type="button" class="btn btn-primary btn-block" onclick="openOfferTownsFolkRoleToImpModal()">
+                <button type="button" class="btn btn-info btn-block" onclick="openOfferTownsFolkRoleToImpModal()">
                     선택 모달 표시
                 </button>
-                <button type="button" class="btn btn-info btn-block" onclick="openImpMessageModal('\${messageHtml}')">
+                <button type="button" class="btn btn-success btn-block" onclick="openImpMessageModal('\${messageHtml}')">
                     메세지 모달 표시
                 </button>
                 <button type="button" class="btn btn-warning btn-block" onclick="resetOfferTownsFolkRoleToImp()">
@@ -563,10 +559,10 @@
                     3. 그가 지목한 플레이어를 선택합니다.<br/>
                     4. 눈을 감게 하세요.
                 </p>
-                <button type="button" class="btn btn-info btn-block" onclick="openMessageModal('\${messageHtml}')">
+                <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
                     메세지 모달 표시
                 </button>
-                <button type="button" class="btn btn-primary btn-block" onclick="openSetPoisonedPlayerModal()">
+                <button type="button" class="btn btn-info btn-block" onclick="openSetPoisonedPlayerModal()">
                     선택 모달 표시
                 </button>
             </div>
@@ -639,10 +635,10 @@
                     4. 눈을 감게 하세요.<br/>
                     * 그가 다른 플레이어들에게 감지될 때 보여지게 할 선한 역할은 플레이 중 스토리텔러가 선택합니다.
                 </p>
-                <button type="button" class="btn btn-info btn-block" onclick="openMessageModal('\${messageHtml}')">
+                <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
                     메세지 모달 표시
                 </button>
-                <button type="button" class="btn btn-primary btn-block" onclick="openShowPlayStatusModal()">
+                <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                     플레이 상태 모달 표시
                 </button>
             </div>
@@ -660,7 +656,7 @@
             const washerWomanPlayerHtml = washerWomanPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
-            return `<div name="spyDiv">
+            return `<div name="washerWomanDiv">
                 <h3>세탁부</h3>
                 <p>
                     1. 세탁부에게 알려줄 두 명의 플레이어와 역할 한 가지를 선택하세요.<br/>
@@ -671,10 +667,10 @@
                     3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     4. 눈을 감게 하세요.
                 </p>
-                <button type="button" class="btn btn-primary btn-block" onclick="openIdentifyWasherWomanModal()">
+                <button type="button" class="btn btn-info btn-block" onclick="openIdentifyWasherWomanModal()">
                     선택 모달 표시
                 </button>
-                <button type="button" class="btn btn-info btn-block" onclick="openWasherWomanMessageModal()">
+                <button type="button" class="btn btn-success btn-block" onclick="openWasherWomanMessageModal()">
                     메세지 모달 표시
                 </button>
                 <button type="button" class="btn btn-warning btn-block" onclick="resetIdentifyWasherWoman()">
@@ -924,6 +920,9 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                                플레이 상태 모달 표시
+                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToFirstDay()">
                                 첫 라운드 진행
                             </button>
