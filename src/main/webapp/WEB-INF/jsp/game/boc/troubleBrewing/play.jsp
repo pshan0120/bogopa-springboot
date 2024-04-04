@@ -613,6 +613,9 @@
                 title,
             });
 
+            const poisonedPlayer = Role.getPlayerByTitle(createAssignedPlayerList(), title);
+            poisonedPlayer.poisoned = true;
+
             $("#setPoisonedPlayerModal").modal("hide");
         }
 

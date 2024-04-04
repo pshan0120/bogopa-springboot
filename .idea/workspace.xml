@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="세탁부 진행중">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/modal/messageModal.jspf" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="모달로 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" afterDir="false" />
@@ -246,7 +245,7 @@
       <workItem from="1711958020195" duration="23244000" />
       <workItem from="1712072048248" duration="12543000" />
       <workItem from="1712106089294" duration="26159000" />
-      <workItem from="1712247107154" duration="5406000" />
+      <workItem from="1712247107154" duration="6235000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -297,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712250580754</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="모달로 변경">
+      <created>1712252723443</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712252723443</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +330,8 @@
     <MESSAGE value="주정뱅이까지" />
     <MESSAGE value="주정뱅이까지 추가" />
     <MESSAGE value="세탁부 진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="세탁부 진행중" />
+    <MESSAGE value="모달로 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="모달로 변경" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

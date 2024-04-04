@@ -60,6 +60,15 @@ class Role {
         return playerList.find(player => player.name === role.name);
     }
 
+    static getPlayerByRoleName(playerList, roleName) {
+        return playerList.find(player => player.name === roleName);
+    }
+
+    static getPlayerByTitle(playerList, title) {
+        return playerList.find(player => player.title === title);
+    }
+
+
     isAlive() {
         return !this.died;
     }
