@@ -16,7 +16,6 @@
         let minionPlayerList = [];
         let townsFolkPlayerList = [];
         let outsiderPlayerList = [];
-        let offeredTownsFolkRoleTitleToImpList = [];
         const playStatus = {
             round: 0,
             night: false,
@@ -197,9 +196,7 @@
 
 
             /*
-            <div name="minionDiv">
-                <p>플레이어가 </p>
-            </div>
+            <div name="minionDiv"></div>
             <div name="impDiv"></div>
             <div name="poisonerDiv"></div>
             <div name="spyDiv"></div>
@@ -230,10 +227,11 @@
         }
 
         const openMessageModal = messageHtml => {
-            const $modal = $("#messageModal");
+            messageModal.open(messageHtml);
+            /*const $modal = $("#messageModal");
             $modal.find(".modal-body").css("min-height", window.innerHeight * 0.8);
             $modal.find("[name='message']").empty().html(messageHtml);
-            $("#messageModal").modal("show");
+            $("#messageModal").modal("show");*/
         }
 
         const createAssignedPlayerList = () => [
@@ -244,23 +242,11 @@
         ];
 
         const openShowPlayStatusModal = () => {
-            const playerListHtml = createAssignedPlayerList().reduce((prev, next) => {
-                const playerStatusList = Role.calculatePlayerStatusList(next);
-
-                const playerStatusListHtml = playerStatusList.reduce((prev, next) => {
-                    return prev + next + ", ";
-                }, "");
-
-                return prev + `<div>
-                                \${next.playerName} - \${next.title}(\${next.name})<br/>
-                                \${playerStatusListHtml}
-                            </div>
-                            <hr>`
-            }, "");
-
-            const $modal = $("#openShowPlayStatusModal");
+            /*const $modal = $("#showPlayStatusModal");
             $modal.find("[name='playerListDiv']").empty().html(playerListHtml);
-            $("#openShowPlayStatusModal").modal("show");
+            $("#showPlayStatusModal").modal("show");*/
+
+            showPlayStatusModal.open(createAssignedPlayerList());
         }
 
         const createChoiceButtonClass = role => {
@@ -292,7 +278,7 @@
             // NOTE: 만약 townsFolkPlayerList 중에 fortune teller 가 있다면 선 플레이어 중 redHerring 세팅
             let initializationHtml = "";
 
-            const fortuneTellerPlayer = townsFolkPlayerList.find(player => player.name === FortuneTeller.name);
+            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
             if (fortuneTellerPlayer) {
                 initializationHtml += `<div name="redHerringDiv">
                     <h4>레드 헤링 선택</h4>
@@ -307,12 +293,12 @@
             }
 
             // NOTE: 만약 outsiderPlayerList 중에 drunk 가 있다면 미참여 마을 주민 역할과 교환
-            const drunkPlayer = outsiderPlayerList.find(player => player.name === Drunk.name);
+            const drunkPlayer = Role.getPlayerByRole(outsiderPlayerList, Drunk);
             if (drunkPlayer) {
                 initializationHtml += `<div name="drunkDiv">
                     <h4>주정뱅이 마을 주민 역할 부여</h4>
                     <p>
-                        1. 미참여 마을 주민 역할 중 하나를 선택합니다.
+                        1. 미참여 마을 주민 역할 중 하나를 선택합니다.<br/>
                         2. 주정뱅이 플레이어는 해당 역할로 변경되면서 만취 상태가 됩니다.
                     </p>
                     <button type="button" class="btn btn-primary btn-block" onclick="openSetDrunkModal()">
@@ -403,7 +389,7 @@
         }
 
         const replaceDrunkPlayerToTownsFolk = unassignedTownsFolkRoleName => {
-            const drunkPlayer = outsiderPlayerList.find(player => player.name === Drunk.name);
+            const drunkPlayer = Role.getPlayerByRole(outsiderPlayerList, Drunk);
             const unassignedTownsFolkRole = roleList.find(role => role.name === unassignedTownsFolkRoleName);
 
             townsFolkPlayerList.push({
@@ -441,7 +427,7 @@
                 return prev + next.playerName + "(" + next.title + ") ";
             }, "");
 
-            const impPlayer = demonPlayerList.find(player => player.name === Imp.name);
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
             const impPlayerHtml = impPlayer.playerName;
             const messageHtml = `임프<br/> - \${impPlayerHtml}`;
 
@@ -461,7 +447,7 @@
         }
 
         const createImpHtml = () => {
-            const impPlayer = demonPlayerList.find(player => player.name === Imp.name);
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
             const impPlayerHtml = impPlayer.playerName;
 
             const minionPlayerListHtml = minionPlayerList.reduce((prev, next) => {
@@ -485,12 +471,17 @@
                 <button type="button" class="btn btn-info btn-block" onclick="openImpMessageModal('\${messageHtml}')">
                     메세지 모달 표시
                 </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="resetOfferTownsFolkRoleToImp()">
+                    선택 재설정
+                </button>
             </div>
             <hr/>`
         }
 
         const openImpMessageModal = messageHtml => {
-            const offeredTownsFolkRoleNameHtml = offeredTownsFolkRoleTitleToImpList.reduce((prev, next) => {
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+
+            const offeredTownsFolkRoleNameHtml = impPlayer.offeredTownsFolkRoleList.reduce((prev, next) => {
                 return prev + " - " + next + "<br/>";
             }, "");
 
@@ -498,8 +489,10 @@
         }
 
         const openOfferTownsFolkRoleToImpModal = () => {
-            if (offeredTownsFolkRoleTitleToImpList.length > 2) {
-                const offeredTownsFolkRoleNameHtml = offeredTownsFolkRoleTitleToImpList.reduce((prev, next) => {
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+
+            if (impPlayer.offeredTownsFolkRoleList.length > 2) {
+                const offeredTownsFolkRoleNameHtml = impPlayer.offeredTownsFolkRoleList.reduce((prev, next) => {
                     return prev + next + " ";
                 }, "");
 
@@ -529,22 +522,27 @@
         }
 
         const addOfferedTownsFolkRoleList = (roleTitle, roleName) => {
-            if (offeredTownsFolkRoleTitleToImpList.length > 2) {
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+
+            if (impPlayer.offeredTownsFolkRoleList.length > 2) {
                 return;
             }
 
-            const impPlayer = demonPlayerList.find(player => player.name === Imp.name);
-            impPlayer.offeredTownsFolkRoleList.push(roleName);
-            offeredTownsFolkRoleTitleToImpList.push(roleTitle);
+            impPlayer.offeredTownsFolkRoleList.push(roleTitle);
 
-            if (offeredTownsFolkRoleTitleToImpList.length > 2) {
+            if (impPlayer.offeredTownsFolkRoleList.length > 2) {
                 $("#offerTownsFolkRoleToImpModal").modal("hide");
                 return;
             }
         }
 
+        const resetOfferTownsFolkRoleToImp = () => {
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+            impPlayer.offeredTownsFolkRoleList = [];
+        }
+
         const createPoisonerHtml = () => {
-            const poisonerPlayer = minionPlayerList.find(player => player.name === Poisoner.name);
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
             if (!poisonerPlayer) {
                 return "";
             }
@@ -576,7 +574,7 @@
         }
 
         const openSetPoisonedPlayerModal = () => {
-            const poisonerPlayer = minionPlayerList.find(player => player.name === Poisoner.name);
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
 
             const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
@@ -602,7 +600,7 @@
         }
 
         const addPoisonedPlayer = (playerName, title) => {
-            const poisonerPlayer = minionPlayerList.find(player => player.name === Poisoner.name);
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
 
             const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
@@ -619,7 +617,7 @@
         }
 
         const createSpyHtml = () => {
-            const spyPlayer = minionPlayerList.find(player => player.name === Spy.name);
+            const spyPlayer = Role.getPlayerByRole(minionPlayerList, Spy);
             if (!spyPlayer) {
                 return "";
             }
@@ -649,18 +647,15 @@
         }
 
         const createWasherWomanHtml = () => {
-            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            const washerWomanPlayer = Role.getPlayerByRole(townsFolkPlayerList, WasherWoman);
             if (!washerWomanPlayer) {
                 return "";
             }
 
-            const playerStatusList = Role.calculatePlayerStatusList(washerWomanPlayer);
-            const playerStatusListHtml = playerStatusList.reduce((prev, next) => {
-                return prev + next + ", ";
-            }, "");
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(washerWomanPlayer);
 
             const washerWomanPlayerHtml = washerWomanPlayer.playerName
-                + (playerStatusList.length > 0 ? "(" + playerStatusListHtml + ")" : "");
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
             return `<div name="spyDiv">
                 <h3>세탁부</h3>
@@ -687,7 +682,7 @@
         }
 
         const openIdentifyWasherWomanModal = () => {
-            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            const washerWomanPlayer = Role.getPlayerByRole(townsFolkPlayerList, WasherWoman);
             if (!washerWomanPlayer.skillAvailable) {
                 return;
             }
@@ -751,7 +746,7 @@
         }
 
         const addIdentifiedPlayerForWasherWoman = (playerName, title) => {
-            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            const washerWomanPlayer = Role.getPlayerByRole(townsFolkPlayerList, WasherWoman);
 
             if (washerWomanPlayer.identifyingPlayerList.length == 2) {
                 alert(
@@ -777,7 +772,7 @@
         }
 
         const addIdentifiedRoleForWasherWoman = (roleName, title) => {
-            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            const washerWomanPlayer = Role.getPlayerByRole(townsFolkPlayerList, WasherWoman);
 
             if (washerWomanPlayer.identifyingTownsFolkRole) {
                 alert(
@@ -800,7 +795,7 @@
         }
 
         const openWasherWomanMessageModal = () => {
-            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            const washerWomanPlayer = Role.getPlayerByRole(townsFolkPlayerList, WasherWoman);
             if (washerWomanPlayer.skillAvailable) {
             /*if (washerWomanPlayer.identifyingPlayerList.length !== 2
                 || !washerWomanPlayer.identifyingTownsFolkRole) {*/
@@ -818,7 +813,7 @@
         }
 
         const resetIdentifyWasherWoman = () => {
-            const washerWomanPlayer = townsFolkPlayerList.find(player => player.name === WasherWoman.name);
+            const washerWomanPlayer = Role.getPlayerByRole(townsFolkPlayerList, WasherWoman);
             washerWomanPlayer.identifyingPlayerList = [];
             washerWomanPlayer.identifyingTownsFolkRole = null;
             washerWomanPlayer.skillAvailable = true;
@@ -939,49 +934,6 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<div class="modal fade" id="messageModal" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">당신에게 알려드립니다.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h1 class="display-3" name="message"></h1>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="openShowPlayStatusModal" role="dialog"
-     aria-labelledby="openShowPlayStatusModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">현재 플레이 상태입니다.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div name="playerListDiv"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
 <div class="modal fade" id="setRedHerringPlayerModal" role="dialog"
      aria-labelledby="setRedHerringPlayerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -1093,6 +1045,9 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/modal/messageModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/modal/showPlayStatusModal.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>

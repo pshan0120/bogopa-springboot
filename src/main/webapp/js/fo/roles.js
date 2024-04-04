@@ -50,6 +50,16 @@ class Role {
         return playerStatusList;
     }
 
+    static createPlayerStatusListHtml(player) {
+        return Role.calculatePlayerStatusList(player).reduce((prev, next) => {
+            return prev + next + ", ";
+        }, "");
+    }
+
+    static getPlayerByRole(playerList, role) {
+        return playerList.find(player => player.name === role.name);
+    }
+
     isAlive() {
         return !this.died;
     }
