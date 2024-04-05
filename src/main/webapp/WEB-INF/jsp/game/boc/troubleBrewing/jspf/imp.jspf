@@ -91,7 +91,7 @@
         resetOfferTownsFolkRoleToImp: () => {
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
             impPlayer.offeredTownsFolkRoleList = [];
-            alert("악마에게 제공할 역할이 초기화 되었습니다.");
+            alert("초기화 되었습니다.");
         },
         close: () => {
         },

@@ -164,8 +164,8 @@ class Librarian extends TownsFolkRole {
 
     constructor() {
         super(Librarian.name, Librarian.title, Librarian.order);
-        this.identificationOfOutsider = null;
-        this.identificationOfNotOutsider = null;
+        this.identifyingPlayerList = [];
+        this.identifyingOutsiderRole = null;
     }
 }
 
@@ -176,8 +176,8 @@ class Investigator extends TownsFolkRole {
 
     constructor() {
         super(Investigator.name, Investigator.title, Investigator.order);
-        this.identificationOfMinion = null;
-        this.identificationOfNotMinion = null;
+        this.identifyingPlayerList = [];
+        this.identifyingMinionRole = null;
     }
 }
 

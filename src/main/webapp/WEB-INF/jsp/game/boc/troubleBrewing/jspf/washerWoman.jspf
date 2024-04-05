@@ -168,6 +168,7 @@
             washerWomanPlayer.identifyingPlayerList = [];
             washerWomanPlayer.identifyingTownsFolkRole = null;
             washerWomanPlayer.skillAvailable = true;
+            alert("초기화 되었습니다.");
         },
         close: () => {
         },

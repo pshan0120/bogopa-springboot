@@ -179,6 +179,7 @@
             $flowDiv.append(poisoner.createPoisonerHtml());
             $flowDiv.append(spy.createSpyHtml());
             $flowDiv.append(washerWoman.createWasherWomanHtml());
+            $flowDiv.append(librarian.createLibrarianHtml());
 
 
             /*
@@ -214,10 +215,6 @@
 
         const openMessageModal = messageHtml => {
             messageModal.open(messageHtml);
-            /*const $modal = $("#messageModal");
-            $modal.find(".modal-body").css("min-height", window.innerHeight * 0.8);
-            $modal.find("[name='message']").empty().html(messageHtml);
-            $("#messageModal").modal("show");*/
         }
 
         const createAssignedPlayerList = () => [
@@ -558,6 +555,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/poisoner.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/spy.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/washerWoman.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/librarian.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
