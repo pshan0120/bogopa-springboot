@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const spy = {
+        createSpyHtml: () => {
+            const spyPlayer = Role.getPlayerByRole(minionPlayerList, Spy);
+            if (!spyPlayer) {
+                return "";
+            }
+
+            const spyPlayerHtml = spyPlayer.playerName;
+
+            const messageHtml = `현재 플레이 상태를 보여드리겠습니다.`;
+
+            return `<div name="spyDiv">
+                <h3>스파이</h3>
+                <p>
+                    1. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${spyPlayerHtml}<br/>
+                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    3. 플레이 상태 모달을 띄운 뒤 보여주세요.<br/>
+                    4. 눈을 감게 하세요.<br/>
+                    * 그가 다른 플레이어들에게 감지될 때 보여지게 할 선한 역할은 플레이 중 스토리텔러가 선택합니다.
+                </p>
+                <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                    플레이 상태 모달 표시
+                </button>
+            </div>
+            <hr/>`;
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="setPoisonedPlayerModal" role="dialog"
+     aria-labelledby="setPoisonedPlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">독살범이 중독시킬 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

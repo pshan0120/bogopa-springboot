@@ -10,8 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="addPoisonedPlayer 오류 수정">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/minion.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/poisoner.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/spy.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/washerWoman.jspf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/modal/messageModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/modal/showPlayStatusModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/showPlayStatusModal.jspf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/troubleBrewing/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/troubleBrewing/initializationSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/troubleBrewing/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +49,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2eHA3fct1a9bGsS5ZRBM3WuZOkv" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -52,7 +64,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "false",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/modal",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -70,17 +82,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\modal" />
       <recent name="D:\dev\bogopa\src\main\webapp\js" />
       <recent name="D:\dev\bogopa\src\main\java\boardgame\fo\game\service" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo\play" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\js\game\boc\troubleBrewing" />
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\js" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\com" />
       <recent name="D:\dev\bogopa\src\main\resources\mapper\game" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="boardgame.fo.game.dao" />
@@ -244,7 +257,8 @@
       <workItem from="1711958020195" duration="23244000" />
       <workItem from="1712072048248" duration="12543000" />
       <workItem from="1712106089294" duration="26159000" />
-      <workItem from="1712247107154" duration="6694000" />
+      <workItem from="1712247107154" duration="6771000" />
+      <workItem from="1712332463049" duration="4901000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -316,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712253509170</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="addPoisonedPlayer 오류 수정">
+      <created>1712253910098</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712253910098</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

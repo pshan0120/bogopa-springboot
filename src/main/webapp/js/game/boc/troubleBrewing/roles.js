@@ -68,6 +68,41 @@ class Role {
         return playerList.find(player => player.title === title);
     }
 
+    static createChoiceButtonClass(role) {
+        if (role.position.name === POSITION.TOWNS_FOLK.name) {
+            return "btn btn-sm btn-outline-primary mr-1 my-1";
+        }
+
+        if (role.position.name === POSITION.OUTSIDER.name) {
+            return "btn btn-sm btn-outline-info mr-1 my-1";
+        }
+
+        if (role.position.name === POSITION.MINION.name) {
+            return "btn btn-sm btn-outline-warning mr-1 my-1";
+        }
+
+        if (role.position.name === POSITION.DEMON.name) {
+            return "btn btn-sm btn-outline-danger mr-1 my-1";
+        }
+
+        return "btn btn-sm btn-outline-default mr-1 my-1";
+    }
+
+    static calculateRoleNameClass(positionName) {
+        if (positionName === "towns folk") {
+            return "text-primary";
+        }
+
+        if (positionName === "outsider") {
+            return "text-info";
+        }
+
+        if (positionName === "minion") {
+            return "text-warning";
+        }
+
+        return "text-danger";
+    }
 
     isAlive() {
         return !this.died;

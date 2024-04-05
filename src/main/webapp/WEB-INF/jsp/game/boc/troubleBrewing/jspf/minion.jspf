@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const minion = {
+        createMinionHtml: () => {
+            if (minionPlayerList.length === 0) {
+                return "";
+            }
+
+            const minionPlayerListHtml = minionPlayerList.reduce((prev, next) => {
+                return prev + next.playerName + "(" + next.title + ") ";
+            }, "");
+
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+            const impPlayerHtml = impPlayer.playerName;
+            const messageHtml = `임프<br/> - \${impPlayerHtml}`;
+
+            return `<div name="minionDiv">
+                <h3>하수인 정보</h3>
+                <p>
+                    1. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${minionPlayerListHtml}<br/>
+                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    3. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
+                    메세지 모달 표시
+                </button>
+            </div>
+            <hr/>`;
+        },
+        close: () => {
+        },
+    }
+</script>

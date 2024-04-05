@@ -1,0 +1,118 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const poisoner = {
+        createPoisonerHtml: () => {
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
+            if (!poisonerPlayer) {
+                return "";
+            }
+            const poisonerPlayerHtml = poisonerPlayer.playerName;
+
+            const minionPlayerListHtml = minionPlayerList.reduce((prev, next) => {
+                return prev + next.playerName + "(" + next.title + ") ";
+            }, "");
+
+            const messageHtml = `중독시킬 플레이어를 손가락으로 지목해 주세요.`;
+
+            return `<div name="poisonerDiv">
+                <h3>독살범</h3>
+                <p>
+                    1. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${poisonerPlayerHtml}<br/>
+                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    3. 그가 지목한 플레이어를 선택합니다.<br/>
+                    4. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="poisoner.openSetPoisonedPlayerModal()">
+                    선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="poisoner.resetPoisonedPlayer()">
+                    선택 재설정
+                </button>
+            </div>
+            <hr/>`;
+        },
+        openSetPoisonedPlayerModal: () => {
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
+
+            const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                alert("선택 완료된 상태입니다.\n" + chosen.playerName);
+                return;
+            }
+
+            const poisoningPlayerListHtml = createAssignedPlayerList().reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"poisoner.addPoisonedPlayer('" + next.playerName + "', '" + next.title + "')\" >"
+                    + " " + next.playerName
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setPoisonedPlayerModal");
+            $modal.find("[name='playerListDiv']").empty().html(poisoningPlayerListHtml);
+            $("#setPoisonedPlayerModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        addPoisonedPlayer: (playerName, title) => {
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
+
+            const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                return;
+            }
+
+            poisonerPlayer.poisoningPlayerByRound.push({
+                round: playStatus.round,
+                playerName,
+                title,
+            });
+
+            const poisonedPlayer = Role.getPlayerByTitle(createAssignedPlayerList(), title);
+            poisonedPlayer.poisoned = true;
+
+            $("#setPoisonedPlayerModal").modal("hide");
+        },
+        resetPoisonedPlayer: () => {
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
+            const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (!chosen) {
+                return;
+            }
+            chosen.poisoned = false;
+            poisonerPlayer.poisoningPlayerByRound = [];
+            alert("독살범의 선택이 초기화 되었습니다.");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="setPoisonedPlayerModal" role="dialog"
+     aria-labelledby="setPoisonedPlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">독살범이 중독시킬 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
