@@ -69,6 +69,10 @@ class Role {
     }
 
     static createChoiceButtonClass(role) {
+        if (!role) {
+            return "btn btn-sm btn-outline-default mr-1 my-1";
+        }
+
         if (role.position.name === POSITION.TOWNS_FOLK.name) {
             return "btn btn-sm btn-outline-primary mr-1 my-1";
         }

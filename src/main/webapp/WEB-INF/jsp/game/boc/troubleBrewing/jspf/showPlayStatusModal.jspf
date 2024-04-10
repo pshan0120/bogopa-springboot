@@ -8,7 +8,7 @@
         open: playerList => {
             const playerListHtml = playerList.reduce((prev, next) => {
                 const playerStatusListHtml = Role.createPlayerStatusListHtml(next);
-                return prev + `<div>
+                return prev + `<div class=\${Role.calculateRoleNameClass(next.position.name)}>
                                 \${next.playerName} - \${next.title}(\${next.name})<br/>
                                 \${playerStatusListHtml}
                             </div>

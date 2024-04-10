@@ -181,6 +181,7 @@
             $flowDiv.append(washerWoman.createHtml());
             $flowDiv.append(librarian.createHtml());
             $flowDiv.append(investigator.createHtml());
+            $flowDiv.append(chef.createHtml());
 
 
             /*
@@ -558,6 +559,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/washerWoman.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/librarian.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/investigator.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>

@@ -1,0 +1,130 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const chef = {
+        createHtml: () => {
+            const chefPlayer = Role.getPlayerByRole(townsFolkPlayerList, Chef);
+            if (!chefPlayer) {
+                return "";
+            }
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(chefPlayer);
+
+            const chefPlayerHtml = chefPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+
+            return `<div name="chefDiv">
+                <h3>요리사</h3>
+                <p>
+                    1. 요리사는 사악한 플레이어가 나란히 앉아 있는지에 대해 알 수 있습니다.<br/>
+                    * 정상인 상태라면 정확한 정보를 제공해야 합니다.<br/>
+                    * 취했거나 중독된 상태라면 잘못된 정보도 제공할 수 있습니다.<br/>
+                    * 은둔자는 임프-은둔자라면 사악하게, 하수인(예를 들어 독살범)-은둔자라면 선하게 보여야 합니다.<br/>
+                    2. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${chefPlayerHtml}<br/>
+                    3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    4. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-info btn-block" onclick="chef.openSetNumberOfConcatenateEvilModal()">
+                    선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-success btn-block" onclick="chef.openChefMessageModal()">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="chef.resetIdentifyChef()">
+                    선택 재설정
+                </button>
+            </div>
+            <hr/>`;
+        },
+        openSetNumberOfConcatenateEvilModal: () => {
+            const chefPlayer = Role.getPlayerByRole(townsFolkPlayerList, Chef);
+            if (!chefPlayer.skillAvailable) {
+                alert(
+                    "나란히 앉은 사악한 플레이어의 쌍의 수는 선택 완료된 상태입니다.\n"
+                    + "- " + chefPlayer.numberOfConcatenateEvil + "명"
+                );
+                return;
+            }
+
+            const evilPlayer = [
+                ...minionPlayerList,
+                ...demonPlayerList,
+            ];
+            let setNumberOfConcatenateEvilHtml = "";
+
+            for (let index = 0; index <= evilPlayer.length; index++) {
+                setNumberOfConcatenateEvilHtml +=
+                    "<button class=\"" + Role.createChoiceButtonClass() + "\" "
+                    + " onclick=\"chef.setNumberOfConcatenateEvil('" + index + "')\" >"
+                    + " " + index
+                    + "</button>";
+            }
+
+            const $modal = $("#setIdentifyChefModal");
+            $modal.find("[name='numberListDiv']").empty().html(setNumberOfConcatenateEvilHtml);
+
+            $("#setIdentifyChefModal").modal("show");
+
+            $modal.find("[name='numberListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        setNumberOfConcatenateEvil: numberOfConcatenateEvil => {
+            const chefPlayer = Role.getPlayerByRole(townsFolkPlayerList, Chef);
+
+            if (chefPlayer.numberOfConcatenateEvil) {
+                alert(
+                    "나란히 앉은 사악한 플레이어의 쌍의 수는 선택 완료된 상태입니다.\n"
+                    + "- " + chefPlayer.numberOfConcatenateEvil + "명"
+                );
+                return;
+            }
+
+            chefPlayer.numberOfConcatenateEvil = numberOfConcatenateEvil;
+            chefPlayer.skillAvailable = false;
+            $("#setIdentifyChefModal").modal("hide");
+        },
+        openChefMessageModal: () => {
+            const chefPlayer = Role.getPlayerByRole(townsFolkPlayerList, Chef);
+            if (chefPlayer.skillAvailable) {
+                alert("나란히 앉은 사악한 플레이어의 쌍의 수가 먼저 선택되어야 합니다.");
+                return;
+            }
+
+            let messageHtml = `나란히 앉은 사악한 플레이어의 쌍의 수는 \${chefPlayer.numberOfConcatenateEvil}명 입니다.</br>`;
+
+            openMessageModal(messageHtml);
+        },
+        resetIdentifyChef: () => {
+            const chefPlayer = Role.getPlayerByRole(townsFolkPlayerList, Chef);
+            chefPlayer.numberOfConcatenateEvil = null;
+            chefPlayer.skillAvailable = true;
+            alert("초기화 되었습니다.");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="setIdentifyChefModal" role="dialog"
+     aria-labelledby="setIdentifyChefModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">요리사에게 알려줄 나란히 앉은 사악한 플레이어의 쌍의 수를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="numberListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
