@@ -1,21 +1,15 @@
 package boardgame.bo.service;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import boardgame.bo.dao.BoDAO;
-import boardgame.com.dao.ComDAO;
-import boardgame.com.util.FileUtils;
+import boardgame.bo.dao.BoDao;
 
 
 @Service("boService")
@@ -23,7 +17,7 @@ public class BoServiceImpl implements BoService{
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="boDAO")
-	private BoDAO boDAO;
+	private BoDao boDAO;
 	
 	@Override
 	public Map<String, Object> selectMmbrList(Map<String, Object> map) throws Exception {

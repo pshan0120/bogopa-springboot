@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import boardgame.fo.dao.FoDAO;
+import boardgame.fo.dao.FoDao;
 
 
 @Service("foService")
@@ -17,7 +17,7 @@ public class FoServiceImpl implements FoService {
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="foDAO")
-	private FoDAO foDAO;
+	private FoDao foDAO;
 	
 	/* 메인 */
 	public List<Map<String, Object>> selectMainPlayRcrdList(Map<String, Object> map) throws Exception{

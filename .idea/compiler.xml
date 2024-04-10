@@ -24,7 +24,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="boardgame" options="-Xlint:all" />
-      <module name="bogopa" options="-Xlint:all -Xlint:all -Xlint:-processing" />
+      <module name="bogopa" options="-Xlint:all -Xlint:-processing" />
     </option>
   </component>
 </project>

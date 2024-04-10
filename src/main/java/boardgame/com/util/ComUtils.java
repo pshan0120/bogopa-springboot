@@ -18,7 +18,7 @@ import org.apache.commons.codec.binary.Base32;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import boardgame.com.dao.ComDAO;
+import boardgame.com.dao.ComDao;
 
 @Component("comUtils")
 public class ComUtils {
@@ -26,7 +26,7 @@ public class ComUtils {
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="comDAO")
-	private ComDAO comDAO;
+	private ComDao comDAO;
 	
 	public static String getRandomString(){
 		return UUID.randomUUID().toString().replaceAll("-", "");

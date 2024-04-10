@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository("comDAO")
-public class ComDAO extends AbstractDAO {
+public class ComDao extends AbstractDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectCdList(Map<String, Object> map) throws Exception{

@@ -1,0 +1,227 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const investigator = {
+        createHtml: () => {
+            const investigatorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Investigator);
+            if (!investigatorPlayer) {
+                return "";
+            }
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(investigatorPlayer);
+
+            const investigatorPlayerHtml = investigatorPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+
+            return `<div name="investigatorDiv">
+                <h3>조사관</h3>
+                <p>
+                    1. 조사관에게 알려줄 두 명의 플레이어와 역할 한 가지를 선택하세요.<br/>
+                    * 정상인 상태라면 둘 중 하나 이상은 하수인이어야 합니다.<br/>
+                    * 취했거나 중독된 상태라면 아무렇게나 고를 수 있습니다.<br/>
+                    2. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${investigatorPlayerHtml}<br/>
+                    3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    4. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-info btn-block" onclick="investigator.openIdentifyInvestigatorModal()">
+                    선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-success btn-block" onclick="investigator.openInvestigatorMessageModal()">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="investigator.resetIdentifyInvestigator()">
+                    선택 재설정
+                </button>
+            </div>
+            <hr/>`;
+        },
+        openIdentifyInvestigatorModal: () => {
+            const investigatorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Investigator);
+            if (!investigatorPlayer.skillAvailable) {
+                return;
+            }
+
+            let identifyingPlayerListHtml = "";
+            if (investigatorPlayer.identifyingPlayerList.length == 2) {
+                alert(
+                    "플레이어들은 선택 완료된 상태입니다.\n"
+                    + investigatorPlayer.identifyingPlayerList[0].playerName
+                    + "(" + investigatorPlayer.identifyingPlayerList[0].title + ")\n"
+                    + investigatorPlayer.identifyingPlayerList[1].playerName
+                    + "(" + investigatorPlayer.identifyingPlayerList[1].title + ")"
+                );
+            } else {
+                identifyingPlayerListHtml = createAssignedPlayerList().reduce((prev, next) => {
+                    if (next.name === Investigator.name) {
+                        return prev;
+                    }
+
+                    if (investigatorPlayer.identifyingPlayerList.some(player => player.playerName === next.playerName)) {
+                        return prev;
+                    }
+
+                    if (next.drunken) {
+                        const drunk = new Drunk();
+
+                        return prev
+                            + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
+                            + " onclick=\"investigator.addIdentifiedPlayerForInvestigator('" + next.playerName + "', '" + drunk.title + "')\" >"
+                            + " " + next.playerName + "(" + drunk.title + ")"
+                            + "</button>";
+                    }
+
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"investigator.addIdentifiedPlayerForInvestigator('" + next.playerName + "', '" + next.title + "')\" >"
+                        + " " + next.playerName + "(" + next.title + ")"
+                        + "</button>";
+                }, "");
+            }
+
+            let identifyingRoleListHtml = "";
+            if (investigatorPlayer.identifyingMinionRole) {
+                alert(
+                    "역할은 선택 완료된 상태입니다.\n"
+                    + investigatorPlayer.identifyingMinionRole.title
+                );
+            } else {
+                const originalMinionPlayerList = [
+                    ...minionPlayerList,
+                    townsFolkPlayerList.find(player => player.drunken)
+                ];
+                identifyingRoleListHtml = originalMinionPlayerList.reduce((prev, next) => {
+                    if (!next) {
+                        return prev;
+                    }
+
+                    if (next.name === Investigator.name) {
+                        return prev;
+                    }
+
+                    if (next.drunken) {
+                        const drunk = new Drunk();
+                        return prev
+                            + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
+                            + " onclick=\"investigator.addIdentifiedRoleForInvestigator('" + drunk.name + "', '" + drunk.title + "')\" >"
+                            + " " + drunk.title
+                            + "</button>";
+                    }
+
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"investigator.addIdentifiedRoleForInvestigator('" + next.name + "', '" + next.title + "')\" >"
+                        + " " + next.title
+                        + "</button>";
+                }, "");
+            }
+
+            const $modal = $("#setIdentifyInvestigatorModal");
+            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
+            $modal.find("[name='roleListDiv']").empty().html(identifyingRoleListHtml);
+
+            $("#setIdentifyInvestigatorModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        addIdentifiedPlayerForInvestigator: (playerName, title) => {
+            const investigatorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Investigator);
+
+            if (investigatorPlayer.identifyingPlayerList.length == 2) {
+                alert(
+                    "플레이어들은 선택 완료된 상태입니다.\n"
+                    + investigatorPlayer.identifyingPlayerList[0].playerName
+                    + "(" + investigatorPlayer.identifyingPlayerList[0].title + ")\n"
+                    + investigatorPlayer.identifyingPlayerList[1].playerName
+                    + "(" + investigatorPlayer.identifyingPlayerList[1].title + ")"
+                );
+                return;
+            }
+
+            investigatorPlayer.identifyingPlayerList.push({
+                playerName,
+                title,
+            });
+
+            if (investigatorPlayer.identifyingPlayerList.length == 2
+                && investigatorPlayer.identifyingMinionRole) {
+                investigatorPlayer.skillAvailable = false;
+                $("#setIdentifyInvestigatorModal").modal("hide");
+            }
+        },
+        addIdentifiedRoleForInvestigator: (roleName, title) => {
+            const investigatorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Investigator);
+
+            if (investigatorPlayer.identifyingMinionRole) {
+                alert(
+                    "역할은 선택 완료된 상태입니다.\n"
+                    + investigatorPlayer.identifyingMinionRole.title
+                );
+                return;
+            }
+
+            investigatorPlayer.identifyingMinionRole = {
+                roleName,
+                title
+            };
+
+            if (investigatorPlayer.identifyingPlayerList.length == 2
+                && investigatorPlayer.identifyingMinionRole) {
+                investigatorPlayer.skillAvailable = false;
+                $("#setIdentifyInvestigatorModal").modal("hide");
+            }
+        },
+        openInvestigatorMessageModal: () => {
+            const investigatorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Investigator);
+            if (investigatorPlayer.skillAvailable) {
+                /*if (investigatorPlayer.identifyingPlayerList.length !== 2
+                    || !investigatorPlayer.identifyingMinionRole) {*/
+                alert("플레이어 2명과 알려줄 역할이 먼저 선택되어야 합니다.");
+                return;
+            }
+
+            let messageHtml = `다음 두 플레이어 중 한 명은 \${investigatorPlayer.identifyingMinionRole.title} 입니다.</br>`;
+
+            messageHtml += investigatorPlayer.identifyingPlayerList.reduce((prev, next) => {
+                return prev + " - " + next.playerName + "<br/>";
+            }, "");
+
+            openMessageModal(messageHtml);
+        },
+        resetIdentifyInvestigator: () => {
+            const investigatorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Investigator);
+            investigatorPlayer.identifyingPlayerList = [];
+            investigatorPlayer.identifyingMinionRole = null;
+            investigatorPlayer.skillAvailable = true;
+            alert("초기화 되었습니다.");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="setIdentifyInvestigatorModal" role="dialog"
+     aria-labelledby="setIdentifyInvestigatorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">조사관에게 알려줄 플레이어와 역할을 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+                <hr>
+                <div name="roleListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

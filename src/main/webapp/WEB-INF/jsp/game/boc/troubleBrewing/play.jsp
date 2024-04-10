@@ -174,12 +174,13 @@
 
             $flowDiv.append(createInitializationHtml());
             $flowDiv.append(createDuskHtml());
-            $flowDiv.append(minion.createMinionHtml());
-            $flowDiv.append(imp.createImpHtml());
-            $flowDiv.append(poisoner.createPoisonerHtml());
-            $flowDiv.append(spy.createSpyHtml());
-            $flowDiv.append(washerWoman.createWasherWomanHtml());
-            $flowDiv.append(librarian.createLibrarianHtml());
+            $flowDiv.append(minion.createHtml());
+            $flowDiv.append(imp.createHtml());
+            $flowDiv.append(poisoner.createHtml());
+            $flowDiv.append(spy.createHtml());
+            $flowDiv.append(washerWoman.createHtml());
+            $flowDiv.append(librarian.createHtml());
+            $flowDiv.append(investigator.createHtml());
 
 
             /*
@@ -556,6 +557,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/spy.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/washerWoman.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/librarian.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/investigator.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>

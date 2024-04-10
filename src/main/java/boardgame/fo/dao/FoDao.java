@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import boardgame.com.dao.AbstractDAO;
+import boardgame.com.dao.AbstractDao;
 
 @Repository("foDAO")
-public class FoDAO extends AbstractDAO {
+public class FoDao extends AbstractDao {
 	
 	/* 메인 */
 	@SuppressWarnings("unchecked")

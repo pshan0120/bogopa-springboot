@@ -5,15 +5,11 @@ import java.util.Map;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import boardgame.com.dao.ComDAO;
+import boardgame.com.dao.ComDao;
 import boardgame.com.util.FileUtils;
 
 
@@ -22,7 +18,7 @@ public class ComServiceImpl implements ComService{
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="comDAO")
-	private ComDAO comDAO;
+	private ComDao comDAO;
 	
 	@Resource(name="fileUtils")
 	private FileUtils fileUtils;

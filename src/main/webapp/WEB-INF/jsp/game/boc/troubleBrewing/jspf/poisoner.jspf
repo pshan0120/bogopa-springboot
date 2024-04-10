@@ -2,7 +2,7 @@
 
 <script>
     const poisoner = {
-        createPoisonerHtml: () => {
+        createHtml: () => {
             const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
             if (!poisonerPlayer) {
                 return "";

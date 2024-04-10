@@ -2,7 +2,7 @@
 
 <script>
     const spy = {
-        createSpyHtml: () => {
+        createHtml: () => {
             const spyPlayer = Role.getPlayerByRole(minionPlayerList, Spy);
             if (!spyPlayer) {
                 return "";

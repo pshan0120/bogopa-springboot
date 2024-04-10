@@ -2,7 +2,7 @@
 
 <script>
     const imp = {
-        createImpHtml: () => {
+        createHtml: () => {
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
             const impPlayerHtml = impPlayer.playerName;
 

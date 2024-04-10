@@ -2,7 +2,7 @@
 
 <script>
     const washerWoman = {
-        createWasherWomanHtml: () => {
+        createHtml: () => {
             const washerWomanPlayer = Role.getPlayerByRole(townsFolkPlayerList, WasherWoman);
             if (!washerWomanPlayer) {
                 return "";

@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import boardgame.com.dao.AbstractDAO;
+import boardgame.com.dao.AbstractDao;
 
 @Repository("boDAO")
-public class BoDAO extends AbstractDAO {
+public class BoDao extends AbstractDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> selectMmbrList(Map<String, Object> map) throws Exception{

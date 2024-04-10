@@ -2,7 +2,7 @@
 
 <script>
     const librarian = {
-        createLibrarianHtml: () => {
+        createHtml: () => {
             const librarianPlayer = Role.getPlayerByRole(townsFolkPlayerList, Librarian);
             if (!librarianPlayer) {
                 return "";

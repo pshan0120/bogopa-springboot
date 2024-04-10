@@ -290,7 +290,7 @@ public class BoController {
 			int longLineCnt = Integer.parseInt(String.valueOf(commandMap.get("longLineCnt")));
 			
 			List<Map<String, Object>> resultlist = new ArrayList<Map<String, Object>>();
-			List<Map<String, Object>> list = (List<Map<String, Object>>) boService.selectCryptoCandleList(commandMap.getMap());
+			List<Map<String, Object>> list = boService.selectCryptoCandleList(commandMap.getMap());
 			// 최소한 분석차트 데이터가 장기일평선 수 + 1보다 커야 함(장기일평선 다음 날부터 이전 일평선과 계산할 수 있기 때문에)
 			if(list.size() > longLineCnt + 1) {
 				double bnftRate = 0.0d;
@@ -500,13 +500,13 @@ public class BoController {
 			&& shortLineCnt < longLineCnt
 			&& middleLineCnt < longLineCnt) {
 				// - 시작일 이전의 캔들차트 데이터가  장기이평선 수보다 많은지 체크
-				Map<String, Object> checkMap = (Map<String, Object>) boService.selectCryptoCandleInfo(commandMap.getMap());
+				Map<String, Object> checkMap = boService.selectCryptoCandleInfo(commandMap.getMap());
 				long cnt = (long) checkMap.get("cnt");
 				if(longLineCnt < cnt) {	// ex) 장기 이평선 수가 60이면 전략 데이터는 61일 이전까지 있어야 함
 					// 테스트데이터 초기화
 					boService.deleteCryptoTradeHisTest(commandMap.getMap());
 					
-					List<Map<String, Object>> resultlist = new ArrayList<Map<String, Object>>();
+					List<Map<String, Object>> resultlist = new ArrayList<>();
 					
 					double hldngBnftRate = fromRate;
 					double strtgyBnftRate = fromRate;
@@ -520,7 +520,7 @@ public class BoController {
 					double strtgyDayAvgBnftRate = 0.0d;
 					
 					// 실행틱 리스트 조회
-					List<Map<String, Object>> dtlist = (List<Map<String, Object>>) boService.selectCandleDtKstList(commandMap.getMap());
+					List<Map<String, Object>> dtlist = boService.selectCandleDtKstList(commandMap.getMap());
 					// 최소한 분석차트 데이터가 장기일평선 수 + 1보다 커야 함(장기일평선 다음 날부터 이전 일평선과 계산할 수 있기 때문에)
 					for(Map<String, Object> dtMap : dtlist){
 						String candleDtKst = String.valueOf(dtMap.get("candleDtKst"));
@@ -528,7 +528,7 @@ public class BoController {
 						
 						// 2. 실행일부터 일별 필요데이터 조회
 						// - 수익률, 단기이평선, 중기이평선, 장기이평선 값
-						Map<String, Object> moveLineMap = (Map<String, Object>) boService.selectCryptoCandleMoveLine(commandMap.getMap());
+						Map<String, Object> moveLineMap = boService.selectCryptoCandleMoveLine(commandMap.getMap());
 						String candleDtKstBfr = String.valueOf(moveLineMap.get("candleDtKstBfr"));	// 조회 전일
 						double tradePrice = (double) moveLineMap.get("tradePrice");
 						double accTradeVol = (double) moveLineMap.get("accTradeVol");
@@ -546,7 +546,7 @@ public class BoController {
 						long ownBfr = 0;
 								
 						// 전 틱에서 기록된 데이터가 있는지 체크
-						Map<String, Object> hisBfrMap = (Map<String, Object>) boService.selectCryptoTradeHisTest(commandMap.getMap());
+						Map<String, Object> hisBfrMap = boService.selectCryptoTradeHisTest(commandMap.getMap());
 						if(MapUtils.isNotEmpty(hisBfrMap)) {
 							tradePriceBfr = (double) hisBfrMap.get("tradePrice");
 							shortMoveLineBfr = (double) hisBfrMap.get("shortMoveLine");
@@ -555,7 +555,7 @@ public class BoController {
 							ownBfr = (int) hisBfrMap.get("own");
 						} else {
 							// 기록된 데이터가 없으면 새로 조회
-							Map<String, Object> moveLineBfrMap = (Map<String, Object>) boService.selectCryptoCandleMoveLine(commandMap.getMap());
+							Map<String, Object> moveLineBfrMap = boService.selectCryptoCandleMoveLine(commandMap.getMap());
 							tradePriceBfr = (double) moveLineBfrMap.get("tradePrice");
 							shortMoveLineBfr = (double) moveLineBfrMap.get("shortMoveLine");
 							middleMoveLineBfr = (double) moveLineBfrMap.get("middleMoveLine");

@@ -10,10 +10,6 @@ import org.springframework.stereotype.Component;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
@@ -23,7 +19,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import boardgame.bo.dao.BoDAO;
+import boardgame.bo.dao.BoDao;
 
 @Component("upbitUtils")
 public class UpbitUtils {
@@ -31,7 +27,7 @@ public class UpbitUtils {
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="boDAO")
-	private BoDAO boDAO;
+	private BoDao boDAO;
 	
 	private String userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36";
 	@SuppressWarnings("static-access")
