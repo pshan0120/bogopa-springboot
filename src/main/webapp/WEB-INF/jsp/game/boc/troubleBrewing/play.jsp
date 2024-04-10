@@ -70,7 +70,13 @@
         });
 
         const renderPlayMemberList = async () => {
-            playerList = await readPlayMemberList(PLAY_NO);
+            const originalPlayerList = await readPlayMemberList(PLAY_NO);
+
+            playerList = originalPlayerList
+                .sort(() => Math.random() - 0.5)
+                .map((originalPlayer, index) => {
+                    return {...originalPlayer, seatNumber: index};
+                });
 
             const $settingDiv = $("#settingDiv");
             const $playersDiv = $settingDiv.find("div[name='playersDiv']");
@@ -145,7 +151,7 @@
                 .slice(0, playerNumber)
                 .map(role => {
                     const player = playerList.pop();
-                    return {...role, playerName: player.nickNm, playerId: player.mmbrNo};
+                    return {...role, playerName: player.nickNm, playerId: player.mmbrNo, seatNumber: player.seatNumber};
                 });
         }
 

@@ -6,14 +6,16 @@
 
     const showPlayStatusModal = {
         open: playerList => {
-            const playerListHtml = playerList.reduce((prev, next) => {
-                const playerStatusListHtml = Role.createPlayerStatusListHtml(next);
-                return prev + `<div class=\${Role.calculateRoleNameClass(next.position.name)}>
+            const playerListHtml = playerList
+                .sort((prev, next) => prev.seatNumber - next.seatNumber)
+                .reduce((prev, next) => {
+                    const playerStatusListHtml = Role.createPlayerStatusListHtml(next);
+                    return prev + `<div class=\${Role.calculateRoleNameClass(next.position.name)}>
                                 \${next.playerName} - \${next.title}(\${next.name})<br/>
                                 \${playerStatusListHtml}
                             </div>
                             <hr>`
-            }, "");
+                }, "");
 
             const $modal = $("#showPlayStatusModal");
             $modal.find("[name='playerListDiv']").empty().html(playerListHtml);
