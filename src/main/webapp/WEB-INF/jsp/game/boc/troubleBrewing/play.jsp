@@ -18,7 +18,7 @@
         let outsiderPlayerList = [];
         const playStatus = {
             round: 0,
-            night: false,
+            night: true,
         }
         /*
         1. 참가자 자리 배치
@@ -181,7 +181,7 @@
             $flowDiv.append(createInitializationHtml());
             $flowDiv.append(createDuskHtml());
             $flowDiv.append(minion.createHtml());
-            $flowDiv.append(imp.createHtml());
+            $flowDiv.append(imp.createInitializationHtml());
             $flowDiv.append(poisoner.createHtml());
             $flowDiv.append(spy.createHtml());
             $flowDiv.append(washerWoman.createHtml());
@@ -392,17 +392,21 @@
             <hr/>`;
         }
 
-
-
-
-
-
-
-
-
-
-
         const proceedToFirstDay = () => {
+            localStorage.townsFolkPlayerList = JSON.stringify(townsFolkPlayerList);
+            localStorage.outsiderPlayerList = JSON.stringify(outsiderPlayerList);
+            localStorage.minionPlayerList = JSON.stringify(minionPlayerList);
+            localStorage.demonPlayerList = JSON.stringify(demonPlayerList);
+
+            console.log('saved - townsFolkPlayerList', JSON.parse(localStorage.townsFolkPlayerList));
+            console.log('saved - outsiderPlayerList', JSON.parse(localStorage.outsiderPlayerList));
+            console.log('saved - minionPlayerList', JSON.parse(localStorage.minionPlayerList));
+            console.log('saved - demonPlayerList', JSON.parse(localStorage.demonPlayerList));
+
+            playStatus.round = 1;
+            playStatus.night = false;
+            localStorage.playStatus = JSON.stringify(playStatus);
+            console.log('savedPlayStatus', JSON.parse(localStorage.playStatus));
 
             renderOtherDay();
         }
