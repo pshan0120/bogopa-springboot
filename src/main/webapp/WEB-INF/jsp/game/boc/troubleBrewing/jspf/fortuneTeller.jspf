@@ -34,10 +34,10 @@
                 <button type="button" class="btn btn-success btn-block" onclick="fortuneTeller.openFortuneTellerChoiceMessageModal()">
                     선택 안내 메세지 모달 표시
                 </button>
-                <button type="button" class="btn btn-info btn-block" onclick="fortuneTeller.openSetExistenceEvilAmongTwoPlayersModal()">
+                <button type="button" class="btn btn-info btn-block" onclick="fortuneTeller.openAddExistenceEvilAmongTwoPlayersModal()">
                     선택 모달 표시
                 </button>
-                <button type="button" class="btn btn-warning btn-block" onclick="fortuneTeller.resetIdentifyFortuneTeller()">
+                <button type="button" class="btn btn-warning btn-block" onclick="fortuneTeller.resetChoiceOfFortuneTeller()">
                     선택 재설정
                 </button>
                 <button type="button" class="btn btn-success btn-block" onclick="fortuneTeller.openFortuneTellerMessageModal()">
@@ -74,7 +74,7 @@
 
             openMessageModal(messageHtml);
         },
-        openSetExistenceEvilAmongTwoPlayersModal: () => {
+        openAddExistenceEvilAmongTwoPlayersModal: () => {
             const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
 
             const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
@@ -86,26 +86,26 @@
                 return;
             }
 
-            let setExistenceEvilAmongTwoPlayersHtml =
+            let addExistenceEvilAmongTwoPlayersHtml =
                 "<button class=\"" + Role.createChoiceButtonClass() + "\" "
-                + " onclick=\"fortuneTeller.setExistenceEvilAmongTwoPlayers(true)\" >"
+                + " onclick=\"fortuneTeller.addExistenceEvilAmongTwoPlayers(true)\" >"
                 + " 있음"
                 + "</button>"
                 + "<button class=\"" + Role.createChoiceButtonClass() + "\" "
-                + " onclick=\"fortuneTeller.setExistenceEvilAmongTwoPlayers(false)\" >"
+                + " onclick=\"fortuneTeller.addExistenceEvilAmongTwoPlayers(false)\" >"
                 + " 없음"
                 + "</button>";
 
-            const $modal = $("#setIdentifyFortuneTellerModal");
-            $modal.find("[name='existenceDiv']").empty().html(setExistenceEvilAmongTwoPlayersHtml);
+            const $modal = $("#addChoiceOfFortuneTellerModal");
+            $modal.find("[name='existenceDiv']").empty().html(addExistenceEvilAmongTwoPlayersHtml);
 
-            $("#setIdentifyFortuneTellerModal").modal("show");
+            $("#addChoiceOfFortuneTellerModal").modal("show");
 
             $modal.find("[name='existenceDiv']").find("button").on("click", event => {
                 $(event.currentTarget).hide();
             });
         },
-        setExistenceEvilAmongTwoPlayers: existenceEvilAmongTwoPlayers => {
+        addExistenceEvilAmongTwoPlayers: existenceEvilAmongTwoPlayers => {
             const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
 
             const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
@@ -121,7 +121,7 @@
                 round: playStatus.round,
                 existenceEvilAmongTwoPlayers,
             });
-            $("#setIdentifyFortuneTellerModal").modal("hide");
+            $("#addChoiceOfFortuneTellerModal").modal("hide");
         },
         openFortuneTellerMessageModal: () => {
             const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
@@ -141,7 +141,7 @@
 
             openMessageModal(messageHtml);
         },
-        resetIdentifyFortuneTeller: () => {
+        resetChoiceOfFortuneTeller: () => {
             const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
 
             const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
@@ -158,12 +158,12 @@
     }
 </script>
 
-<div class="modal fade" id="setIdentifyFortuneTellerModal" role="dialog"
-     aria-labelledby="setIdentifyFortuneTellerModalLabel" aria-hidden="true">
+<div class="modal fade" id="addChoiceOfFortuneTellerModal" role="dialog"
+     aria-labelledby="addChoiceOfFortuneTellerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">점쟁이에게 알려주었던 정보를 선택합니다.</h4>
+                <h4 class="">점쟁이의 예감을 선택합니다.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -190,6 +190,7 @@
             $flowDiv.append(chef.createHtml());
             $flowDiv.append(empath.createHtml());
             $flowDiv.append(fortuneTeller.createHtml());
+            $flowDiv.append(butler.createHtml());
 
 
             /*
@@ -574,6 +575,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/empath.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/fortuneTeller.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/butler.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
