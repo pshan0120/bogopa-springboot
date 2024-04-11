@@ -87,7 +87,9 @@
                 return;
             }
             chosen.poisoned = false;
-            poisonerPlayer.poisoningPlayerByRound = [];
+
+            const filteredList = poisonerPlayer.poisoningPlayerByRound.filter(choice => choice.round !== playStatus.round);
+            poisonerPlayer.poisoningPlayerByRound = [...filteredList];
             alert("초기화 되었습니다.");
         },
         close: () => {

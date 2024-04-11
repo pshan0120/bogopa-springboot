@@ -19,7 +19,7 @@
                     1. 요리사는 사악한 플레이어가 나란히 앉아 있는지에 대해 알 수 있습니다.<br/>
                     * 정상인 상태라면 정확한 정보를 제공해야 합니다.<br/>
                     * 취했거나 중독된 상태라면 잘못된 정보도 제공할 수 있습니다.<br/>
-                    * 은둔자는 임프-은둔자라면 사악하게, 하수인(예를 들어 독살범)-은둔자라면 선하게 보여야 합니다.<br/>
+                    * 은둔자는 스토리텔러가 어떤 역할로 보이게 하느냐에 따라 제공할 정보가 달라집니다.<br/>
                     2. 다음 플레이어를(들을) 깨우세요.<br/>
                     \${chefPlayerHtml}<br/>
                     3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
@@ -42,7 +42,7 @@
             if (!chefPlayer.skillAvailable) {
                 alert(
                     "나란히 앉은 사악한 플레이어의 쌍의 수는 선택 완료된 상태입니다.\n"
-                    + "- " + chefPlayer.numberOfConcatenateEvil + "명"
+                    + "-> " + chefPlayer.numberOfConcatenateEvil + "명"
                 );
                 return;
             }
@@ -51,9 +51,13 @@
                 ...minionPlayerList,
                 ...demonPlayerList,
             ];
+
+            const reclusePlayer = Role.getPlayerByRole(outsiderPlayerList, Recluse);
+            const maxCount = evilPlayer.length + (reclusePlayer ? 1 : 0);
+
             let setNumberOfConcatenateEvilHtml = "";
 
-            for (let index = 0; index <= evilPlayer.length; index++) {
+            for (let index = 0; index <= maxCount; index++) {
                 setNumberOfConcatenateEvilHtml +=
                     "<button class=\"" + Role.createChoiceButtonClass() + "\" "
                     + " onclick=\"chef.setNumberOfConcatenateEvil('" + index + "')\" >"
@@ -76,7 +80,7 @@
             if (chefPlayer.numberOfConcatenateEvil) {
                 alert(
                     "나란히 앉은 사악한 플레이어의 쌍의 수는 선택 완료된 상태입니다.\n"
-                    + "- " + chefPlayer.numberOfConcatenateEvil + "명"
+                    + "-> " + chefPlayer.numberOfConcatenateEvil + "명"
                 );
                 return;
             }

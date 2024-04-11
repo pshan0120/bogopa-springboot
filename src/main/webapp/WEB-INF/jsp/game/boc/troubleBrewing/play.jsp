@@ -188,6 +188,7 @@
             $flowDiv.append(librarian.createHtml());
             $flowDiv.append(investigator.createHtml());
             $flowDiv.append(chef.createHtml());
+            $flowDiv.append(empath.createHtml());
 
 
             /*
@@ -214,10 +215,10 @@
             // 7. 사서
             // 8. 조사관
             // 9. 요리사
-            // 11. 공감능력자
-            // 12. 점쟁이
-            // 13. 집사
-            // 14. 새벽 단계
+            // 10. 공감능력자
+            // 11. 점쟁이
+            // 12. 집사
+            // 13. 새벽 단계
 
         }
 
@@ -566,6 +567,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/librarian.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/investigator.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/empath.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
