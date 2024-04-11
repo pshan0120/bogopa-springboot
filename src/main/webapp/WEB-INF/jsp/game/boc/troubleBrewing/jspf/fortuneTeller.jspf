@@ -1,0 +1,181 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const fortuneTeller = {
+        createHtml: () => {
+            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
+            if (!fortuneTellerPlayer) {
+                return "";
+            }
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(fortuneTellerPlayer);
+
+            const fortuneTellerPlayerHtml = fortuneTellerPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+            const impPlayerHtml = impPlayer.playerName;
+
+            return `<div name="fortuneTellerDiv">
+                <h3>점쟁이</h3>
+                <p>
+                    1. 점쟁이는 악마가 누구인지 알아낼 수 있지만 때로는 선한 플레이어가 악마라고 생각합니다.<br/>
+                    * 정상인 상태라면 정확한 정보를 제공해야 합니다.<br/>
+                    * 취했거나 중독된 상태라면 잘못된 정보도 제공할 수 있습니다.<br/>
+                    2. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${fortuneTellerPlayerHtml}<br/>
+                    3. 점쟁이에게 임프 플레이어와 레드 헤링(플레이 상태 모달 참조)은 악마로 느껴집니다.<br/>
+                    \${impPlayerHtml}<br/>
+                    4. 선택 안내 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    5. 그가 지목한 플레이어를 선택합니다.<br/>
+                    6. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    7. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-success btn-block" onclick="fortuneTeller.openFortuneTellerChoiceMessageModal()">
+                    선택 안내 메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="fortuneTeller.openSetExistenceEvilAmongTwoPlayersModal()">
+                    선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="fortuneTeller.resetIdentifyFortuneTeller()">
+                    선택 재설정
+                </button>
+                <button type="button" class="btn btn-success btn-block" onclick="fortuneTeller.openFortuneTellerMessageModal()">
+                    메세지 모달 표시
+                </button>
+            </div>
+            <hr/>`;
+        },
+        openFortuneTellerChoiceMessageModal: () => {
+            const redHerringPlayerList = [
+                ...townsFolkPlayerList,
+                ...outsiderPlayerList,
+                ...minionPlayerList,
+            ];
+            const redHerringPlayer = redHerringPlayerList.find(player => player.redHerring);
+
+            if (!redHerringPlayer) {
+                alert("레드 헤링이 먼저 선택되어야 합니다.");
+                return;
+            }
+
+            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
+
+            const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                alert(
+                    "점쟁이의 예감은 선택 완료된 상태입니다.\n"
+                    + "-> " + chosen.existenceEvilAmongTwoPlayers
+                );
+                return;
+            }
+
+            let messageHtml = `두 명의 플레이어를 지목하세요. 그 중 악마가 있는지 알려드리겠습니다.</br>`;
+
+            openMessageModal(messageHtml);
+        },
+        openSetExistenceEvilAmongTwoPlayersModal: () => {
+            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
+
+            const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                alert(
+                    "점쟁이의 예감은 선택 완료된 상태입니다.\n"
+                    + "-> " + chosen.existenceEvilAmongTwoPlayers
+                );
+                return;
+            }
+
+            let setExistenceEvilAmongTwoPlayersHtml =
+                "<button class=\"" + Role.createChoiceButtonClass() + "\" "
+                + " onclick=\"fortuneTeller.setExistenceEvilAmongTwoPlayers(true)\" >"
+                + " 있음"
+                + "</button>"
+                + "<button class=\"" + Role.createChoiceButtonClass() + "\" "
+                + " onclick=\"fortuneTeller.setExistenceEvilAmongTwoPlayers(false)\" >"
+                + " 없음"
+                + "</button>";
+
+            const $modal = $("#setIdentifyFortuneTellerModal");
+            $modal.find("[name='existenceDiv']").empty().html(setExistenceEvilAmongTwoPlayersHtml);
+
+            $("#setIdentifyFortuneTellerModal").modal("show");
+
+            $modal.find("[name='existenceDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        setExistenceEvilAmongTwoPlayers: existenceEvilAmongTwoPlayers => {
+            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
+
+            const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                alert(
+                    "점쟁이의 예감은 선택 완료된 상태입니다.\n"
+                    + "-> " + chosen.existenceEvilAmongTwoPlayers
+                );
+                return;
+            }
+
+            fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.push({
+                round: playStatus.round,
+                existenceEvilAmongTwoPlayers,
+            });
+            $("#setIdentifyFortuneTellerModal").modal("hide");
+        },
+        openFortuneTellerMessageModal: () => {
+            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
+
+            const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
+            if (!chosen) {
+                alert("점쟁이와 예감이 먼저 선택되어야 합니다.");
+                return;
+            }
+
+            let messageHtml = "";
+            if (chosen.existenceEvilAmongTwoPlayers) {
+                messageHtml = `선택한 두 플레이어 중 악마의 기운이 느껴지는 자가 있습니다.</br>`;
+            } else {
+                messageHtml = `선택한 두 플레이어들은 악마의 기운이 느껴지지 않습니다.</br>`;
+            }
+
+            openMessageModal(messageHtml);
+        },
+        resetIdentifyFortuneTeller: () => {
+            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
+
+            const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
+            if (!chosen) {
+                return;
+            }
+
+            const filteredList = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.filter(choice => choice.round !== playStatus.round);
+            fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound = [...filteredList];
+            alert("초기화 되었습니다.");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="setIdentifyFortuneTellerModal" role="dialog"
+     aria-labelledby="setIdentifyFortuneTellerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">점쟁이에게 알려주었던 정보를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="existenceDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

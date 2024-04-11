@@ -51,12 +51,9 @@
                 ...minionPlayerList,
                 ...demonPlayerList,
             ];
-
             const reclusePlayer = Role.getPlayerByRole(outsiderPlayerList, Recluse);
             const maxCount = evilPlayer.length + (reclusePlayer ? 1 : 0);
-
             let setNumberOfConcatenateEvilHtml = "";
-
             for (let index = 0; index <= maxCount; index++) {
                 setNumberOfConcatenateEvilHtml +=
                     "<button class=\"" + Role.createChoiceButtonClass() + "\" "

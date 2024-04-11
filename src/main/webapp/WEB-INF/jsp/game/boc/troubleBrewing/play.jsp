@@ -189,6 +189,7 @@
             $flowDiv.append(investigator.createHtml());
             $flowDiv.append(chef.createHtml());
             $flowDiv.append(empath.createHtml());
+            $flowDiv.append(fortuneTeller.createHtml());
 
 
             /*
@@ -251,7 +252,8 @@
                 initializationHtml += `<div name="redHerringDiv">
                     <h4>레드 헤링 선택</h4>
                     <p>
-                        1. 레드 헤링(점쟁이에게 악으로 보일 플레이어)을 선택하세요.
+                        1. 레드 헤링(점쟁이에게 악으로 보일 플레이어)을 선택하세요.<br/>
+                        * 소규모 게임일 때는 점쟁의 정보가 중요하기 때문에 레드 헤링을 점쟁이 스스로 하는 것도 좋습니다.
                     </p>
                     <button type="button" class="btn btn-info btn-block" onclick="openSetRedHerringModal()">
                         선택 모달 표시
@@ -283,18 +285,19 @@
         }
 
         const openSetRedHerringModal = () => {
-            const goodPlayerList = [
+            const redHerringPlayerList = [
                 ...townsFolkPlayerList,
                 ...outsiderPlayerList,
+                ...minionPlayerList,
             ];
 
-            const chosen = goodPlayerList.find(player => player.redHerring);
+            const chosen = redHerringPlayerList.find(player => player.redHerring);
             if (chosen) {
                 alert("선택 완료된 상태입니다.\n" + chosen.playerName + "(" + chosen.title + ")");
                 return;
             }
 
-            const goodPlayerListHtml = goodPlayerList.reduce((prev, next) => {
+            const goodPlayerListHtml = redHerringPlayerList.reduce((prev, next) => {
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
                     + " onclick=\"addRedHerringPlayer('" + next.name + "')\" >"
@@ -312,17 +315,18 @@
         }
 
         const addRedHerringPlayer = roleName => {
-            const goodPlayerList = [
+            const redHerringPlayerList = [
                 ...townsFolkPlayerList,
                 ...outsiderPlayerList,
+                ...minionPlayerList,
             ];
 
-            const chosen = goodPlayerList.find(player => player.redHerring);
+            const chosen = redHerringPlayerList.find(player => player.redHerring);
             if (chosen) {
                 return;
             }
 
-            const redHerringPlayer = goodPlayerList.find(player => player.name === roleName);
+            const redHerringPlayer = redHerringPlayerList.find(player => player.name === roleName);
             redHerringPlayer.redHerring = true;
 
             $("#setRedHerringPlayerModal").modal("hide");
@@ -364,6 +368,7 @@
                 ...unassignedTownsFolkRole,
                 playerName: drunkPlayer.playerName,
                 playerId: drunkPlayer.playerId,
+                redHerring: drunkPlayer.redHerring,
                 drunken: true,
             });
 
@@ -568,6 +573,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/investigator.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/empath.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/fortuneTeller.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
