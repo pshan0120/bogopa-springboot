@@ -18,26 +18,27 @@
                     1. 다음 플레이어를(들을) 깨우세요.<br/>
                     \${impPlayerHtml}<br/>
                     2. 임프 플레이어에게 보여줄 3가지 선한 역할을 골라주세요.<br/>
+                    * 일반적으로 마을 주민 2개와 이방인 1개를 보여주는 것이 가장 좋습니다.<br/>
                     3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     4. 눈을 감게 하세요.
                 </p>
-                <button type="button" class="btn btn-info btn-block" onclick="imp.openOfferTownsFolkRoleToImpModal()">
+                <button type="button" class="btn btn-info btn-block" onclick="imp.openOfferGoodRoleToImpModal()">
                     선택 모달 표시
                 </button>
                 <button type="button" class="btn btn-success btn-block" onclick="imp.openImpMessageModal('\${messageHtml}')">
                     메세지 모달 표시
                 </button>
-                <button type="button" class="btn btn-warning btn-block" onclick="imp.resetOfferTownsFolkRoleToImp()">
+                <button type="button" class="btn btn-warning btn-block" onclick="imp.resetOfferGoodRoleToImp()">
                     선택 재설정
                 </button>
             </div>
             <hr/>`;
         },
-        openOfferTownsFolkRoleToImpModal: () => {
+        openOfferGoodRoleToImpModal: () => {
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
 
-            if (impPlayer.offeredTownsFolkRoleList.length > 2) {
-                const offeredTownsFolkRoleNameHtml = impPlayer.offeredTownsFolkRoleList.reduce((prev, next) => {
+            if (impPlayer.offeredGoodRoleList.length > 2) {
+                const offeredTownsFolkRoleNameHtml = impPlayer.offeredGoodRoleList.reduce((prev, next) => {
                     return prev + next + " ";
                 }, "");
 
@@ -49,48 +50,54 @@
                 .filter(role => role.position.name === POSITION.TOWNS_FOLK.name)
                 .filter(role => !townsFolkPlayerList.some(player => role.name === player.name));
 
-            const offeredTownsFolkRoleListHtml = offeredTownsFolkRoleList.reduce((prev, next) => {
+            const offeredOutsiderRoleList = [...roleList]
+                .filter(role => role.position.name === POSITION.OUTSIDER.name)
+                .filter(role => !outsiderPlayerList.some(player => role.name === player.name));
+
+            const offeredGoodRoleList = [...offeredTownsFolkRoleList, ...offeredOutsiderRoleList];
+
+            const offeredGoodRoleListHtml = offeredGoodRoleList.reduce((prev, next) => {
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                    + " onclick=\"imp.addOfferedTownsFolkRoleList('" + next.title + "', '" + next.name + "')\" >"
+                    + " onclick=\"imp.addOfferedGoodRoleList('" + next.title + "', '" + next.name + "')\" >"
                     + " " + next.title
                     + "</button>";
             }, "");
 
-            const $modal = $("#offerTownsFolkRoleToImpModal");
-            $modal.find("[name='townsFolkRoleListDiv']").empty().html(offeredTownsFolkRoleListHtml);
-            $("#offerTownsFolkRoleToImpModal").modal("show");
+            const $modal = $("#offerRoleToImpModal");
+            $modal.find("[name='townsFolkRoleListDiv']").empty().html(offeredGoodRoleListHtml);
+            $("#offerRoleToImpModal").modal("show");
 
             $modal.find("[name='townsFolkRoleListDiv']").find("button").on("click", event => {
                 $(event.currentTarget).hide();
             });
         },
-        addOfferedTownsFolkRoleList: (roleTitle, roleName) => {
+        addOfferedGoodRoleList: (roleTitle, roleName) => {
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
 
-            if (impPlayer.offeredTownsFolkRoleList.length > 2) {
+            if (impPlayer.offeredGoodRoleList.length > 2) {
                 return;
             }
 
-            impPlayer.offeredTownsFolkRoleList.push(roleTitle);
+            impPlayer.offeredGoodRoleList.push(roleTitle);
 
-            if (impPlayer.offeredTownsFolkRoleList.length > 2) {
-                $("#offerTownsFolkRoleToImpModal").modal("hide");
+            if (impPlayer.offeredGoodRoleList.length > 2) {
+                $("#offerRoleToImpModal").modal("hide");
                 return;
             }
         },
         openImpMessageModal: messageHtml => {
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
 
-            const offeredTownsFolkRoleNameHtml = impPlayer.offeredTownsFolkRoleList.reduce((prev, next) => {
+            const offeredTownsFolkRoleNameHtml = impPlayer.offeredGoodRoleList.reduce((prev, next) => {
                 return prev + " - " + next + "<br/>";
             }, "");
 
             openMessageModal(messageHtml + "<hr>미참여 마을 주민 역할<br/>" + offeredTownsFolkRoleNameHtml);
         },
-        resetOfferTownsFolkRoleToImp: () => {
+        resetOfferGoodRoleToImp: () => {
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
-            impPlayer.offeredTownsFolkRoleList = [];
+            impPlayer.offeredGoodRoleList = [];
             alert("초기화 되었습니다.");
         },
         close: () => {
@@ -98,8 +105,8 @@
     }
 </script>
 
-<div class="modal fade" id="offerTownsFolkRoleToImpModal" role="dialog"
-     aria-labelledby="offerTownsFolkRoleToImpModalLabel" aria-hidden="true">
+<div class="modal fade" id="offerRoleToImpModal" role="dialog"
+     aria-labelledby="offerRoleToImpModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
