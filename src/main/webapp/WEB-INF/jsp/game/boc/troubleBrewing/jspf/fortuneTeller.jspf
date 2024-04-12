@@ -64,7 +64,7 @@
             const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
                 alert(
-                    "점쟁이의 예감은 선택 완료된 상태입니다.\n"
+                    "점쟁이에게 알려줄 정보는 선택 완료된 상태입니다.\n"
                     + "-> " + chosen.existenceEvilAmongTwoPlayers
                 );
                 return;
@@ -80,7 +80,7 @@
             const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
                 alert(
-                    "점쟁이의 예감은 선택 완료된 상태입니다.\n"
+                    "점쟁이에게 알려줄 정보는 선택 완료된 상태입니다.\n"
                     + "-> " + chosen.existenceEvilAmongTwoPlayers
                 );
                 return;
@@ -111,7 +111,7 @@
             const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
                 alert(
-                    "점쟁이의 예감은 선택 완료된 상태입니다.\n"
+                    "점쟁이에게 알려줄 정보는 선택 완료된 상태입니다.\n"
                     + "-> " + chosen.existenceEvilAmongTwoPlayers
                 );
                 return;
@@ -128,7 +128,7 @@
 
             const chosen = fortuneTellerPlayer.existenceEvilAmongTwoPlayersByRound.find(choice => choice.round === playStatus.round);
             if (!chosen) {
-                alert("점쟁이와 예감이 먼저 선택되어야 합니다.");
+                alert("점쟁이에게 알려줄 정보가 먼저 선택되어야 합니다.");
                 return;
             }
 
@@ -163,7 +163,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">점쟁이의 예감을 선택합니다.</h4>
+                <h4 class="">점쟁이 플레이어에게 알려줄 정보를 선택합니다.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -22,6 +22,9 @@
                     3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     4. 눈을 감게 하세요.
                 </p>
+                <button type="button" class="btn btn-success btn-block" onclick="imp.openImpChoiceMessageModal()">
+                    선택 안내 메세지 모달 표시
+                </button>
                 <button type="button" class="btn btn-info btn-block" onclick="imp.openOfferGoodRoleToImpModal()">
                     선택 모달 표시
                 </button>
@@ -33,6 +36,11 @@
                 </button>
             </div>
             <hr/>`;
+        },
+        openImpChoiceMessageModal: () => {
+            let messageHtml = `이제 보여드릴 역할은 참가중이 아닌 선한 역할입니다. 이 정보를 잘 활용하시기 바랍니다.`;
+
+            openMessageModal(messageHtml);
         },
         openOfferGoodRoleToImpModal: () => {
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);

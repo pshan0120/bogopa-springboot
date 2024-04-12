@@ -16,7 +16,7 @@
         let minionPlayerList = [];
         let townsFolkPlayerList = [];
         let outsiderPlayerList = [];
-        const playStatus = {
+        let playStatus = {
             round: 0,
             night: true,
         }
@@ -35,11 +35,30 @@
          */
 
         $(() => {
-            console.log('initializationSetting', initializationSetting);
-            const play = {
-                round: 0,
+            if (localStorage.playStatus) {
+                const savedPlayStatus = JSON.parse(localStorage.playStatus);
+                console.log('savedPlayStatus', savedPlayStatus);
+                if (0 < savedPlayStatus.round) {
+                    $("#settingDiv").hide();
+                    loadGameStatus();
+
+                    if (savedPlayStatus.night) {
+                        renderOtherNight();
+                    } else {
+                        renderOtherDay();
+                    }
+                }
             }
-            localStorage.play = play;
+
+            initializeGame();
+        });
+
+        const initializeGame = () => {
+            console.log('initializationSetting', initializationSetting);
+            $("#settingDiv").show();
+            $("#firstNightDiv").hide();
+            $("#otherDayDiv").hide();
+            $("#otherNightDiv").hide();
 
             roleList = [
                 new WasherWoman(),
@@ -67,7 +86,7 @@
             ];
 
             renderPlayMemberList();
-        });
+        };
 
         const renderPlayMemberList = async () => {
             const originalPlayerList = await readPlayMemberList(PLAY_NO);
@@ -169,7 +188,6 @@
         }
 
 
-
         const beginGame = () => {
             $("#settingDiv").hide();
 
@@ -191,7 +209,7 @@
             $flowDiv.append(empath.createHtml());
             $flowDiv.append(fortuneTeller.createHtml());
             $flowDiv.append(butler.createHtml());
-
+            $flowDiv.append(createDawnHtml());
 
             /*
             <div name="minionDiv"></div>
@@ -383,7 +401,7 @@
 
         const createDuskHtml = () => {
             return `<div name="duskStepDiv">
-                <h3>새벽 단계</h3>
+                <h3>황혼 단계</h3>
                 <p>
                    1. 모두 눈을 감았는지 확인하세요.<br/>
                    * 일부 여행자와 전설은 행동합니다.
@@ -392,30 +410,138 @@
             <hr/>`;
         }
 
-        const proceedToFirstDay = () => {
+        const createDawnHtml = () => {
+            return `<div name="dawnStepDiv">
+                <h3>새벽 단계</h3>
+                <p>
+                   1. 몇 초 기다린 뒤, 모두 눈을 뜨라고 선언합니다.
+                </p>
+            </div>
+            <hr/>`;
+        }
+
+        const createMorningHtml = () => {
+            return `<div name="morningStepDiv">
+                <h3>아침 단계</h3>
+                <p>
+                    1. 밤 사이 사망한 플레이어를 즉시 선언합니다. 사망한 플레이어가 없다면 아무도 죽지 않았다고 말합니다.<br/>
+                    * 이 때 사망하거나 사망하지 않은 이유는 말하면 안됩니다.<br/>
+                    2. 플레이어들끼리 토론을 시작하게 합니다.
+                </p>
+            </div>
+            <hr/>`;
+        }
+
+        const saveGameStatus = () => {
+            localStorage.playerList = JSON.stringify(playerList);
+            localStorage.roleList = JSON.stringify(roleList);
             localStorage.townsFolkPlayerList = JSON.stringify(townsFolkPlayerList);
             localStorage.outsiderPlayerList = JSON.stringify(outsiderPlayerList);
             localStorage.minionPlayerList = JSON.stringify(minionPlayerList);
             localStorage.demonPlayerList = JSON.stringify(demonPlayerList);
 
+            console.log('saved - playerList', JSON.parse(localStorage.playerList));
+            console.log('saved - roleList', JSON.parse(localStorage.roleList));
             console.log('saved - townsFolkPlayerList', JSON.parse(localStorage.townsFolkPlayerList));
             console.log('saved - outsiderPlayerList', JSON.parse(localStorage.outsiderPlayerList));
             console.log('saved - minionPlayerList', JSON.parse(localStorage.minionPlayerList));
             console.log('saved - demonPlayerList', JSON.parse(localStorage.demonPlayerList));
 
-            playStatus.round = 1;
-            playStatus.night = false;
             localStorage.playStatus = JSON.stringify(playStatus);
             console.log('savedPlayStatus', JSON.parse(localStorage.playStatus));
+        }
+
+        const loadGameStatus = () => {
+            playerList = JSON.parse(localStorage.playerList);
+            roleList = JSON.parse(localStorage.roleList);
+            townsFolkPlayerList = JSON.parse(localStorage.townsFolkPlayerList);
+            outsiderPlayerList = JSON.parse(localStorage.outsiderPlayerList);
+            minionPlayerList = JSON.parse(localStorage.minionPlayerList);
+            demonPlayerList = JSON.parse(localStorage.demonPlayerList);
+            playStatus = JSON.parse(localStorage.playStatus);
+        }
+
+        const proceedToNextDay = () => {
+            playStatus.round = playStatus.round + 1;
+            playStatus.night = false;
+            saveGameStatus();
+            $("#firstNightDiv").hide();
+            $("#otherNightDiv").hide();
 
             renderOtherDay();
         }
 
         const renderOtherDay = () => {
+            const $otherDayDiv = $("#otherDayDiv");
+            $otherDayDiv.show();
+
+            $otherDayDiv.find("span[name='roundTitle']").text(playStatus.round);
+
+            const $flowDiv = $otherDayDiv.find("div[name='flowDiv']").empty();
+            $flowDiv.empty();
+
+            /*$flowDiv.append(createInitializationHtml());
+            $flowDiv.append(createDuskHtml());
+            $flowDiv.append(minion.createHtml());
+            $flowDiv.append(imp.createInitializationHtml());
+            $flowDiv.append(poisoner.createHtml());
+            $flowDiv.append(spy.createHtml());
+            $flowDiv.append(washerWoman.createHtml());
+            $flowDiv.append(librarian.createHtml());
+            $flowDiv.append(investigator.createHtml());
+            $flowDiv.append(chef.createHtml());
+            $flowDiv.append(empath.createHtml());
+            $flowDiv.append(fortuneTeller.createHtml());
+            $flowDiv.append(butler.createHtml());
+            $flowDiv.append(createDawnHtml());*/
+
+
+            /*
+            <div name="minionDiv"></div>
+            <div name="impDiv"></div>
+            <div name="poisonerDiv"></div>
+            <div name="spyDiv"></div>
+            <div name="washerWomanDiv"></div>
+            <div name="librarianDiv"></div>
+            <div name="investigatorDiv"></div>
+            <div name="chefDiv"></div>
+            <div name="empathDiv"></div>
+            <div name="fortuneTellerDiv"></div>
+            <div name="butlerDiv"></div>
+            <div name="dawnStepDiv"></div>*/
+
+            // 0. 초기화
+            // 1. 황혼 단계
+            // 2. 하수인 정보
+            // 3. 악마 정보
+            // 4. 독살범
+            // 5. 스파이
+            // 6. 세탁부
+            // 7. 사서
+            // 8. 조사관
+            // 9. 요리사
+            // 10. 공감능력자
+            // 11. 점쟁이
+            // 12. 집사
+            // 13. 새벽 단계
 
         }
 
+        const proceedToNextNight = () => {
+            playStatus.night = true;
+            saveGameStatus();
+            $("#firstNightDiv").hide();
+            $("#otherDayDiv").hide();
+
+            renderOtherNight();
+        }
+
         const renderOtherNight = () => {
+            const $otherNightDiv = $("#otherNightDiv");
+            $otherNightDiv.show();
+
+            $otherNightDiv.find("span[name='roundTitle']").text(playStatus.round);
+
 
             // 1. 황혼 단계
             // 2. 독살범
@@ -430,6 +556,22 @@
             // 11. 집사
             // 12. 새벽 단계
 
+        }
+
+        const resetGame = () => {
+            if (!confirm("현재까지의 모든 진행 상황을 초기화하고 게임을 처음부터 진행합니다.")) {
+                return;
+            }
+
+            localStorage.removeItem("playerList");
+            localStorage.removeItem("roleList");
+            localStorage.removeItem("townsFolkPlayerList");
+            localStorage.removeItem("outsiderPlayerList");
+            localStorage.removeItem("minionPlayerList");
+            localStorage.removeItem("demonPlayerList");
+            localStorage.removeItem("playStatus");
+
+            initializeGame();
         }
 
     </script>
@@ -463,7 +605,7 @@
     <div class="container mt--7">
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5" id="settingDiv">
+                <div class="card shadow mt-5 display-none" id="settingDiv">
                     <div class="card-header bg-white border-0">
                         <h2>
                             게임 세팅
@@ -491,7 +633,7 @@
                         </h2>
                     </div>
                     <div class="card-body" name="flowDiv">
-                        <div name="duskStepDiv"></div>
+                        <%--<div name="duskStepDiv"></div>
                         <div name="minionDiv"></div>
                         <div name="demonDiv"></div>
                         <div name="poisonerDiv"></div>
@@ -503,15 +645,62 @@
                         <div name="empathDiv"></div>
                         <div name="fortuneTellerDiv"></div>
                         <div name="butlerDiv"></div>
-                        <div name="dawnStepDiv"></div>
+                        <div name="dawnStepDiv"></div>--%>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToFirstDay()">
-                                첫 라운드 진행
+                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
+                                첫 라운드 낮 순서 진행
+                            </button>
+                            <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
+                                게임 재설정
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mt-5 display-none" id="otherDayDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            [<span name="roundTitle"></span>] 번째 낮
+                        </h2>
+                    </div>
+                    <div class="card-body" name="flowDiv"></div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                                플레이 상태 모달 표시
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextNight()">
+                                이번 라운드 밤 순서 진행
+                            </button>
+                            <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
+                                게임 재설정
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mt-5 display-none" id="otherNightDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            [<span name="roundTitle"></span>] 번째 밤
+                        </h2>
+                    </div>
+                    <div class="card-body" name="flowDiv"></div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                                플레이 상태 모달 표시
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
+                                다음 라운드 낮 순서 진행
+                            </button>
+                            <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
+                                게임 재설정
                             </button>
                         </div>
                     </div>
