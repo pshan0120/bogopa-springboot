@@ -16,8 +16,49 @@
             pm.mmbrNo = m.mmbrNo
           AND
             p.sttsCd = '1'
+          AND
+            p.playNo = #{playNo}
         ORDER BY
             m.nickNm
     </select>
+
+    <insert id="insertPlayLog" parameterType="boardgame.fo.game.dto.SavePlayRequestDto">
+        INSERT INTO playLog
+        (
+            playNo,
+            log
+        )
+        VALUES
+        (
+            #{playNo},
+            #{log}
+        )
+    </insert>
+
+    <select id="selectLastPlayLog" parameterType="long" resultType="hashmap">
+        SELECT
+            pl.log
+        FROM
+            play p,
+            playLog pl
+        WHERE
+            p.playNo = pl.playNo
+          AND
+            p.sttsCd = '1'
+          AND
+            pl.playNo = #{playNo}
+        ORDER BY
+            pl.dateTime DESC
+        LIMIT
+            1
+    </select>
+
+    <delete id="deletePlayLogByPlayNo" parameterType="boardgame.fo.game.dto.DeletePlayLogByPlayNoRequestDto">
+        DELETE FROM
+            playLog
+        WHERE
+            playNo = #{playNo}
+    </delete>
+
 
 </mapper>

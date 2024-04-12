@@ -28,11 +28,11 @@
                 <button type="button" class="btn btn-info btn-block" onclick="imp.openOfferGoodRoleToImpModal()">
                     선택 모달 표시
                 </button>
-                <button type="button" class="btn btn-success btn-block" onclick="imp.openImpMessageModal('\${messageHtml}')">
-                    메세지 모달 표시
-                </button>
                 <button type="button" class="btn btn-warning btn-block" onclick="imp.resetOfferGoodRoleToImp()">
                     선택 재설정
+                </button>
+                <button type="button" class="btn btn-success btn-block" onclick="imp.openImpMessageModal('\${messageHtml}')">
+                    메세지 모달 표시
                 </button>
             </div>
             <hr/>`;

@@ -16,10 +16,7 @@
         let minionPlayerList = [];
         let townsFolkPlayerList = [];
         let outsiderPlayerList = [];
-        let playStatus = {
-            round: 0,
-            night: true,
-        }
+        let playStatus = {};
         /*
         1. 참가자 자리 배치
         2. 그리모어 준비
@@ -34,27 +31,40 @@
         11. 첫날 밤
          */
 
-        $(() => {
-            if (localStorage.playStatus) {
-                const savedPlayStatus = JSON.parse(localStorage.playStatus);
-                console.log('savedPlayStatus', savedPlayStatus);
-                if (0 < savedPlayStatus.round) {
-                    $("#settingDiv").hide();
-                    loadGameStatus();
+        $(async () => {
+            await loadGameStatus();
 
-                    if (savedPlayStatus.night) {
-                        renderOtherNight();
-                    } else {
-                        renderOtherDay();
-                    }
-                }
+            if (!playStatus) {
+                await initializeGame();
+                return;
             }
 
-            initializeGame();
+            console.log('playStatus', playStatus);
+            if (0 < playStatus.round) {
+                if (playStatus.night) {
+                    renderOtherNight();
+                    return;
+                }
+
+                renderOtherDay();
+                return;
+            }
+
+            playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
+
+            renderPlayMemberList(playerList);
+            showAllPlayerRoleList();
+            $("#settingDiv").show();
         });
 
-        const initializeGame = () => {
+        const initializeGame = async () => {
             console.log('initializationSetting', initializationSetting);
+
+            playStatus = {
+                round: 0,
+                night: true,
+            }
+
             $("#settingDiv").show();
             $("#firstNightDiv").hide();
             $("#otherDayDiv").hide();
@@ -85,10 +95,6 @@
                 new Imp(),
             ];
 
-            renderPlayMemberList();
-        };
-
-        const renderPlayMemberList = async () => {
             const originalPlayerList = await readPlayMemberList(PLAY_NO);
 
             playerList = originalPlayerList
@@ -97,6 +103,10 @@
                     return {...originalPlayer, seatNumber: index};
                 });
 
+            renderPlayMemberList(playerList);
+        };
+
+        const renderPlayMemberList = playerList => {
             const $settingDiv = $("#settingDiv");
             const $playersDiv = $settingDiv.find("div[name='playersDiv']");
 
@@ -115,7 +125,7 @@
         const readPlayMemberList = playNo => {
             return gfn_callGetApi("/api/game/play/member/list", {playNo})
                 .then(data => {
-                    console.log('data', data);
+                    // console.log('data', data);
                     return data;
                 })
                 .catch(response => console.error('error', response));
@@ -148,19 +158,6 @@
             }
             outsiderPlayerList = createPlayerList(roleList, randomSortedPlayerList, outsiderNumber, POSITION.OUTSIDER);
             console.log('outsiderPlayerList', outsiderPlayerList);
-
-            showPlayerRoleList(townsFolkPlayerList);
-            showPlayerRoleList(outsiderPlayerList);
-            showPlayerRoleList(minionPlayerList);
-            showPlayerRoleList(demonPlayerList);
-
-            /*localStorage.townsFolkPlayerList = JSON.stringify(townsFolkPlayerList);
-            localStorage.outsiderPlayerList = JSON.stringify(outsiderPlayerList);
-            localStorage.minionPlayerList = JSON.stringify(minionPlayerList);
-            localStorage.demonPlayerList = JSON.stringify(demonPlayerList);
-
-            const savedTownsFolkPlayerList = JSON.parse(localStorage.townsFolkPlayerList);
-            console.log('savedTownsFolkPlayerList', savedTownsFolkPlayerList);*/
         }
 
         const createPlayerList = (roleList, playerList, playerNumber, position) => {
@@ -172,6 +169,13 @@
                     const player = playerList.pop();
                     return {...role, playerName: player.nickNm, playerId: player.mmbrNo, seatNumber: player.seatNumber};
                 });
+        }
+
+        const showAllPlayerRoleList = () => {
+            showPlayerRoleList(townsFolkPlayerList);
+            showPlayerRoleList(outsiderPlayerList);
+            showPlayerRoleList(minionPlayerList);
+            showPlayerRoleList(demonPlayerList);
         }
 
         const showPlayerRoleList = playerList => {
@@ -186,7 +190,6 @@
                 $(found).addClass(Role.calculateRoleNameClass(player.position.name));
             });
         }
-
 
         const beginGame = () => {
             $("#settingDiv").hide();
@@ -211,6 +214,7 @@
             $flowDiv.append(butler.createHtml());
             $flowDiv.append(createDawnHtml());
 
+            saveGameStatus();
             /*
             <div name="minionDiv"></div>
             <div name="impDiv"></div>
@@ -255,6 +259,11 @@
 
         const openShowPlayStatusModal = () => {
             showPlayStatusModal.open(createAssignedPlayerList());
+        }
+
+        const openTownModal = () => {
+            // showPlayStatusModal.open(createAssignedPlayerList());
+            window.open("/game/trouble-brewing/town/" + PLAY_NO, "_blank");
         }
 
         const createInitializationHtml = () => {
@@ -432,33 +441,13 @@
             <hr/>`;
         }
 
-        const saveGameStatus = () => {
-            localStorage.playerList = JSON.stringify(playerList);
-            localStorage.roleList = JSON.stringify(roleList);
-            localStorage.townsFolkPlayerList = JSON.stringify(townsFolkPlayerList);
-            localStorage.outsiderPlayerList = JSON.stringify(outsiderPlayerList);
-            localStorage.minionPlayerList = JSON.stringify(minionPlayerList);
-            localStorage.demonPlayerList = JSON.stringify(demonPlayerList);
-
-            console.log('saved - playerList', JSON.parse(localStorage.playerList));
-            console.log('saved - roleList', JSON.parse(localStorage.roleList));
-            console.log('saved - townsFolkPlayerList', JSON.parse(localStorage.townsFolkPlayerList));
-            console.log('saved - outsiderPlayerList', JSON.parse(localStorage.outsiderPlayerList));
-            console.log('saved - minionPlayerList', JSON.parse(localStorage.minionPlayerList));
-            console.log('saved - demonPlayerList', JSON.parse(localStorage.demonPlayerList));
-
-            localStorage.playStatus = JSON.stringify(playStatus);
-            console.log('savedPlayStatus', JSON.parse(localStorage.playStatus));
-        }
-
-        const loadGameStatus = () => {
-            playerList = JSON.parse(localStorage.playerList);
-            roleList = JSON.parse(localStorage.roleList);
-            townsFolkPlayerList = JSON.parse(localStorage.townsFolkPlayerList);
-            outsiderPlayerList = JSON.parse(localStorage.outsiderPlayerList);
-            minionPlayerList = JSON.parse(localStorage.minionPlayerList);
-            demonPlayerList = JSON.parse(localStorage.demonPlayerList);
-            playStatus = JSON.parse(localStorage.playStatus);
+        const readLastPlayLog = playNo => {
+            return gfn_callGetApi("/api/game/play/log/last", {playNo})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
         }
 
         const proceedToNextDay = () => {
@@ -563,16 +552,64 @@
                 return;
             }
 
-            localStorage.removeItem("playerList");
-            localStorage.removeItem("roleList");
-            localStorage.removeItem("townsFolkPlayerList");
-            localStorage.removeItem("outsiderPlayerList");
-            localStorage.removeItem("minionPlayerList");
-            localStorage.removeItem("demonPlayerList");
-            localStorage.removeItem("playStatus");
+            const request = {
+                playNo: PLAY_NO
+            }
+
+            gfn_callDeleteApi("/api/game/play/log/all", request)
+                .then(data => {
+                    console.log('data', data);
+                })
+                .catch(response => console.error('error', response));
 
             initializeGame();
         }
+
+        const saveGameStatus = () => {
+            const log = {
+                playerList: JSON.stringify(playerList),
+                roleList: JSON.stringify(roleList),
+                townsFolkPlayerList: JSON.stringify(townsFolkPlayerList),
+                outsiderPlayerList: JSON.stringify(outsiderPlayerList),
+                minionPlayerList: JSON.stringify(minionPlayerList),
+                demonPlayerList: JSON.stringify(demonPlayerList),
+                playStatus: JSON.stringify(playStatus),
+            }
+
+            const request = {
+                playNo: PLAY_NO,
+                log: JSON.stringify(log)
+            }
+
+            gfn_callPostApi("/api/game/play/save", request)
+                .then(data => {
+                    console.log('data', data);
+                    alert("저장되었습니다.");
+                })
+                .catch(response => console.error('error', response));
+        }
+
+        const loadGameStatus = async () => {
+            const lastPlayLog = await readLastPlayLog(PLAY_NO);
+            if (!lastPlayLog) {
+                return;
+            }
+            // console.log('lastPlayLog', lastPlayLog);
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+            console.log('lastPlayLogJson', lastPlayLogJson);
+
+            playerList = JSON.parse(lastPlayLogJson.playerList);
+            roleList = JSON.parse(lastPlayLogJson.roleList);
+            townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
+            outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
+            minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
+            demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
+            playStatus = JSON.parse(lastPlayLogJson.playStatus);
+
+            console.log('game status loaded !!');
+        }
+
 
     </script>
 </head>
@@ -652,6 +689,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
+                                마을 광장 보기
+                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
                                 첫 라운드 낮 순서 진행
                             </button>
@@ -674,6 +714,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
+                                마을 광장 보기
+                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextNight()">
                                 이번 라운드 밤 순서 진행
                             </button>
@@ -695,6 +738,9 @@
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
+                                마을 광장 보기
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
                                 다음 라운드 낮 순서 진행

@@ -144,7 +144,7 @@ const gfn_callDeleteApi = (url, jsonData) => {
     return new Promise((resolve, reject) => {
         $.ajax({
             url,
-            data: jsonData,
+            data: stringifyJsonIfExists(jsonData),
             type: "DELETE",
             contentType: "application/json; charset=utf-8",
             success: function (result) {
