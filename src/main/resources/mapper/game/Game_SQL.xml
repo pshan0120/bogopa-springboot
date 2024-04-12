@@ -53,12 +53,11 @@
             1
     </select>
 
-    <delete id="deletePlayLogByPlayNo" parameterType="boardgame.fo.game.dto.DeletePlayLogByPlayNoRequestDto">
+    <delete id="deletePlayLogByPlayNo" parameterType="boardgame.fo.game.dto.DeletePlayLogAllRequestDto">
         DELETE FROM
             playLog
         WHERE
             playNo = #{playNo}
     </delete>
-
 
 </mapper>

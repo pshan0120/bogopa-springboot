@@ -1,7 +1,7 @@
 package boardgame.fo.game.service;
 
 import boardgame.fo.game.dao.GameDao;
-import boardgame.fo.game.dto.DeletePlayLogByPlayNoRequestDto;
+import boardgame.fo.game.dto.DeletePlayLogAllRequestDto;
 import boardgame.fo.game.dto.SavePlayRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void deletePlayLogByPlayNo(DeletePlayLogByPlayNoRequestDto dto) {
-        gameDao.deletePlayLogByPlayNo(dto);
+    public void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto playNo) {
+        gameDao.deletePlayLogByPlayNo(playNo);
     }
 }

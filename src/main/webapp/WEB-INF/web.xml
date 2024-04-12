@@ -66,6 +66,10 @@
 				/WEB-INF/config/*-servlet.xml
 			</param-value>
 		</init-param>
+		<init-param>
+			<param-name>readonly</param-name>
+			<param-value>false</param-value>
+		</init-param>
 		<!-- 
 		<load-on-startup>1</load-on-startup>
 		 -->
@@ -106,7 +110,8 @@
 		<web-resource-collection>
 			<web-resource-name>Forbidden</web-resource-name>
 			<url-pattern>/*</url-pattern>
-			<http-method>DELETE</http-method>
+			<!--<http-method>DELETE</http-method>-->
+			<!--<http-method>PUT</http-method>-->
 			<http-method>SEARCH</http-method>
 			<http-method>COPY</http-method>
 			<http-method>MOVE</http-method>
@@ -114,7 +119,6 @@
 			<http-method>PROPPATCH</http-method>
 			<http-method>MKCOLLOCK</http-method>
 			<http-method>UNLOCK</http-method>
-			<http-method>PUT</http-method>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name></role-name>

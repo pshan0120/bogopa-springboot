@@ -1,6 +1,6 @@
 package boardgame.fo.game.presentation;
 
-import boardgame.fo.game.dto.DeletePlayLogByPlayNoRequestDto;
+import boardgame.fo.game.dto.DeletePlayLogAllRequestDto;
 import boardgame.fo.game.dto.SavePlayRequestDto;
 import boardgame.fo.game.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class GameRestController {
     }
 
     @DeleteMapping("/play/log/all")
-    public void deletePlayLogAll(@Validated @RequestBody DeletePlayLogByPlayNoRequestDto dto) {
+    public void deletePlayLogAll(@Validated @RequestBody DeletePlayLogAllRequestDto dto) {
         gameService.deletePlayLogByPlayNo(dto);
     }
 

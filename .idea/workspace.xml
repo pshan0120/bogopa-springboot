@@ -9,30 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="게임저장, 불러오기 추가">
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/aop/DaoAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/aop/PrintQueryId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/KeywordValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/DeletePlayLogByPlayNoRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/SavePlayRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/town.jsp" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="town 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/bo/dao/BoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/bo/dao/BoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/AbstractDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/AbstractDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/ComDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/ComDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/dao/FoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/dao/FoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dao/GameDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dao/GameDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/DeletePlayLogByPlayNoRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/DeletePlayLogAllRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/ajax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -334,7 +319,7 @@
       <workItem from="1712713825466" duration="2001000" />
       <workItem from="1712764493990" duration="3368000" />
       <workItem from="1712849054878" duration="9358000" />
-      <workItem from="1712921980602" duration="16227000" />
+      <workItem from="1712921980602" duration="17443000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -483,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712934526619</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="town 추가">
+      <created>1712944456459</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1712944456459</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +513,8 @@
     <MESSAGE value="proceedToFirstDay 추가" />
     <MESSAGE value="임프 수정" />
     <MESSAGE value="게임저장, 불러오기 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="게임저장, 불러오기 추가" />
+    <MESSAGE value="town 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="town 추가" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

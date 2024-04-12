@@ -1,7 +1,7 @@
 package boardgame.fo.game.dao;
 
 import boardgame.com.dao.AbstractDao;
-import boardgame.fo.game.dto.DeletePlayLogByPlayNoRequestDto;
+import boardgame.fo.game.dto.DeletePlayLogAllRequestDto;
 import boardgame.fo.game.dto.SavePlayRequestDto;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +23,8 @@ public class GameDao extends AbstractDao {
         return selectOne("game.selectLastPlayLog", playNo);
     }
 
-    public void deletePlayLogByPlayNo(DeletePlayLogByPlayNoRequestDto dto) {
-        insert("game.deletePlayLogByPlayNo", dto);
+    public void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto playNo) {
+        insert("game.deletePlayLogByPlayNo", playNo);
     }
 
 }

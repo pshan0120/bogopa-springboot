@@ -1,6 +1,6 @@
 package boardgame.fo.game.service;
 
-import boardgame.fo.game.dto.DeletePlayLogByPlayNoRequestDto;
+import boardgame.fo.game.dto.DeletePlayLogAllRequestDto;
 import boardgame.fo.game.dto.SavePlayRequestDto;
 
 import java.util.List;
@@ -14,6 +14,6 @@ public interface GameService {
 
     Map<String, Object> readLastPlayLog(long playNo);
 
-    void deletePlayLogByPlayNo(DeletePlayLogByPlayNoRequestDto dto);
+    void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto playNo);
 
 }
