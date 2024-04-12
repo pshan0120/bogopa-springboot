@@ -34,12 +34,12 @@
         $(async () => {
             await loadGameStatus();
 
-            if (!playStatus) {
+            console.log('playStatus', playStatus);
+            if (Object.keys(playStatus).length === 0) {
                 await initializeGame();
                 return;
             }
 
-            console.log('playStatus', playStatus);
             if (0 < playStatus.round) {
                 if (playStatus.night) {
                     renderOtherNight();
