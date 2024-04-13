@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const townModal = {
+        open: async () => {
+            await townModal.loadGameStatus();
+
+            const $townModal = $("#townModal");
+            const $townDiv = $townModal.find("div[name='townDiv']");
+            $townDiv.empty();
+
+            if (Object.keys(playStatus).length === 0) {
+                const htmlString = `게임이 시작되지 않았습니다.`;
+                $townDiv.append(htmlString);
+                return;
+            }
+
+            console.log('playStatus', playStatus);
+
+            playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
+
+            const htmlString = playerList.reduce((prev, next) => {
+                const found = [
+                    ...demonPlayerList,
+                    ...minionPlayerList,
+                    ...townsFolkPlayerList,
+                    ...outsiderPlayerList,
+                ].find(player => player.playerId === next.mmbrNo);
+
+                if (found) {
+                    console.log('found', found);
+                    const shroudHtml = found.died ? `<i class="ni ni-tie-bow"></i>` : "";
+                    const nominatableHtml = found.nominatable ? "투표가능" : "투표불가";
+
+                    return prev +
+                        `<div class="row">
+                            <div class="col-8">
+                                \${found.playerName} \${shroudHtml}
+                            </div>
+                            <div class="col-4">
+                                \${nominatableHtml}
+                            </div>
+                        </div>
+                        <hr>`;
+                }
+
+                return "";
+            }, "");
+
+            $townDiv.append(htmlString);
+
+            $townModal.modal("show");
+        },
+        loadGameStatus: async () => {
+            const lastPlayLog = await townModal.readLastPlayLog(PLAY_NO);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+
+            playerList = JSON.parse(lastPlayLogJson.playerList);
+            roleList = JSON.parse(lastPlayLogJson.roleList);
+            townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
+            outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
+            minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
+            demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
+            playStatus = JSON.parse(lastPlayLogJson.playStatus);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playNo => {
+            return gfn_callGetApi("/api/game/play/log/last", {playNo})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="townModal" role="dialog"
+     aria-labelledby="townModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">마을 광장</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="townDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

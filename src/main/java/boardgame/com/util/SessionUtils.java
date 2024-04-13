@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SessionUtils {
 
+    private static String ADMIN_MEMBER_ID = "1000000004";
+
     public static String getCurrentUserId() {
         try {
             String loginUserId = String.valueOf(getSessionAttribute("userId"));
+            System.out.println("loginUserId : " + loginUserId);
             if (loginUserId == null || loginUserId.isEmpty()) {
                 throw new RuntimeException();
             }
@@ -19,10 +22,30 @@ public class SessionUtils {
         }
     }
 
+    public static String getCurrentMemberId() {
+        try {
+            String loginMemberId = String.valueOf(getSessionAttribute("mmbrNo"));
+            if (loginMemberId == null || loginMemberId.isEmpty()) {
+                throw new RuntimeException();
+            }
+            return loginMemberId;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
     public static Boolean isUserLogin() {
         try {
             getCurrentUserId();
             return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static Boolean isAdminMemberLogin() {
+        try {
+            return ADMIN_MEMBER_ID.equals(getCurrentMemberId());
         } catch (Exception e) {
             return false;
         }

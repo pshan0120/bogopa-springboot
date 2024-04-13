@@ -158,6 +158,8 @@
             }
             outsiderPlayerList = createPlayerList(roleList, randomSortedPlayerList, outsiderNumber, POSITION.OUTSIDER);
             console.log('outsiderPlayerList', outsiderPlayerList);
+
+            showAllPlayerRoleList();
         }
 
         const createPlayerList = (roleList, playerList, playerNumber, position) => {
@@ -172,6 +174,7 @@
         }
 
         const showAllPlayerRoleList = () => {
+            console.log('showAllPlayerRoleList');
             showPlayerRoleList(townsFolkPlayerList);
             showPlayerRoleList(outsiderPlayerList);
             showPlayerRoleList(minionPlayerList);
@@ -262,8 +265,7 @@
         }
 
         const openTownModal = () => {
-            // showPlayStatusModal.open(createAssignedPlayerList());
-            window.open("/game/trouble-brewing/town/" + PLAY_NO, "_blank");
+            townModal.open();
         }
 
         const createInitializationHtml = () => {
@@ -804,6 +806,7 @@
 
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/showPlayStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/minion.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/poisoner.jspf" %>

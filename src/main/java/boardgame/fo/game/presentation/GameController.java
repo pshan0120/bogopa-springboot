@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import static boardgame.com.util.SessionUtils.isAdminMemberLogin;
+
 @ResponseStatus(HttpStatus.OK)
 @RequestMapping("/game")
 @Controller
@@ -21,7 +23,27 @@ public class GameController {
 
     @GetMapping("/trouble-brewing/play/{playNo}")
     public ModelAndView openPlayByPlayNo(@PathVariable("playNo") long playNo) {
-        ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/play");
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("playNo", playNo);
+
+        if (isAdminMemberLogin()) {
+            mv.setViewName("/game/boc/troubleBrewing/hostPlay");
+        } else {
+            mv.setViewName("/game/boc/troubleBrewing/clientPlay");
+        }
+        return mv;
+    }
+
+    @GetMapping("/trouble-brewing/play/host/{playNo}")
+    public ModelAndView openHostPlayByPlayNo(@PathVariable("playNo") long playNo) {
+        ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/hostPlay");
+        mv.addObject("playNo", playNo);
+        return mv;
+    }
+
+    @GetMapping("/trouble-brewing/play/client/{playNo}")
+    public ModelAndView openClientPlayByPlayNo(@PathVariable("playNo") long playNo) {
+        ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/clientPlay");
         mv.addObject("playNo", playNo);
         return mv;
     }
