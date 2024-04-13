@@ -94,7 +94,7 @@
                 return;
             }
 
-            let messageHtml = `나란히 앉은 사악한 플레이어의 쌍의 수는 \${chefPlayer.numberOfConcatenateEvil}명 입니다.</br>`;
+            let messageHtml = `나란히 앉은 사악한 플레이어의 쌍의 수는 \${chefPlayer.numberOfConcatenateEvil} 입니다.</br>`;
 
             openMessageModal(messageHtml);
         },
