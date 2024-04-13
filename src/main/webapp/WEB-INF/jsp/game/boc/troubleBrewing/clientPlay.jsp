@@ -77,7 +77,15 @@
 
 
         const openGuideModal = () => {
-            guideModal.open();
+            guideModal.openRuleGuideModal();
+        }
+
+        const openRoleGuideModal = () => {
+            guideModal.openRoleGuideModal();
+        }
+
+        const openNightStepGuideModal = () => {
+            guideModal.openNightStepGuideModal();
         }
 
         const openTownModal = () => {
@@ -121,16 +129,22 @@
                 <div class="card shadow mt-5">
                     <div class="card-header bg-white border-0">
                         <h2>
-                            개인 보드
+                            개인 참조
                         </h2>
                     </div>
                     <div class="card-body">
-                        설명
+                        게임 진행을 돕기 위한 참조 페이지입니다.
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                                역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
+                                밤 역할 진행 순서
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장

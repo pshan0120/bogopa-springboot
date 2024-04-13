@@ -50,10 +50,16 @@
                 return;
             }
 
+            if (playStatus.night) {
+                beginGame();
+                return;
+            }
+
             playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
 
             renderPlayMemberList(playerList);
             showAllPlayerRoleList();
+
             $("#settingDiv").show();
         });
 
@@ -109,6 +115,7 @@
         const renderPlayMemberList = playerList => {
             const $settingDiv = $("#settingDiv");
             const $playersDiv = $settingDiv.find("div[name='playersDiv']");
+            $playersDiv.empty();
 
             const htmlString = playerList.reduce((prev, next) => {
                 return prev +
@@ -164,7 +171,7 @@
 
         const createPlayerList = (roleList, playerList, playerNumber, position) => {
             return roleList
-                .filter(role => role.position === position)
+                .filter(role => role.position.name === position.name)
                 .sort(() => Math.random() - 0.5)
                 .slice(0, playerNumber)
                 .map(role => {
@@ -174,7 +181,6 @@
         }
 
         const showAllPlayerRoleList = () => {
-            console.log('showAllPlayerRoleList');
             showPlayerRoleList(townsFolkPlayerList);
             showPlayerRoleList(outsiderPlayerList);
             showPlayerRoleList(minionPlayerList);
@@ -262,6 +268,14 @@
 
         const openShowPlayStatusModal = () => {
             showPlayStatusModal.open(createAssignedPlayerList());
+        }
+
+        const openRoleGuideModal = () => {
+            guideModal.openRoleGuideModal();
+        }
+
+        const openNightStepGuideModal = () => {
+            guideModal.openNightStepGuideModal();
         }
 
         const openTownModal = () => {
@@ -411,11 +425,29 @@
         }
 
         const createDuskHtml = () => {
+            /*const assignedPlayerList = createAssignedPlayerList();
+            assignedPlayerList.sort((prev, next) => prev.seatNumber - next.seatNumber);*/
+
+            const assignedPlayerListHtml = createAssignedPlayerList()
+                .sort((prev, next) => prev.seatNumber - next.seatNumber)
+                .reduce((prev, next) => {
+                    const nameClass = Role.calculateRoleNameClass(next.position.name);
+                    const message = `당신의 역할입니다.<br/><span class=\${nameClass}>\${next.title}</span>`;
+
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"openMessageModal('" + message + "')\" >"
+                        + " " + next.playerName + "(" + next.title + ")"
+                        + "</button>";
+                }, "");
+
             return `<div name="duskStepDiv">
                 <h3>황혼 단계</h3>
                 <p>
-                   1. 모두 눈을 감았는지 확인하세요.<br/>
-                   * 일부 여행자와 전설은 행동합니다.
+                    1. 모두 눈을 감았는지 확인하세요.<br/>
+                    * 일부 여행자와 전설은 행동합니다.<br/>
+                    2. 첫 번째 플레이어부터 순서대로 깨워서 역할을 보여줍니다.<br/>
+                    \${assignedPlayerListHtml}<br/>
                 </p>
             </div>
             <hr/>`;
@@ -610,6 +642,7 @@
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
             console.log('game status loaded !!');
+            console.log('townsFolkPlayerList', townsFolkPlayerList);
         }
 
 
@@ -691,6 +724,12 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                                역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
+                                밤 역할 진행 순서
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
@@ -716,6 +755,12 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                                역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
+                                밤 역할 진행 순서
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
@@ -740,6 +785,12 @@
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                                역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
+                                밤 역할 진행 순서
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
@@ -804,6 +855,7 @@
     <!-- /.modal-dialog -->
 </div>
 
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/showPlayStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
