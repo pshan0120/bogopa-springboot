@@ -103,7 +103,7 @@
         setDiedPlayerNotNominatable: name => {
             const player = Role.getPlayerByRoleName(createAssignedPlayerList(), name);
             player.nominatable = false;
-            diePlayer(player);
+            saveGameStatus();
 
             $("#setDiedPlayerNotNominatableModal").modal("hide");
         },
