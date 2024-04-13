@@ -1,0 +1,151 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const undertaker = {
+        createHtml: () => {
+            const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
+            if (!undertakerPlayer) {
+                return "";
+            }
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(undertakerPlayer);
+
+            const undertakerPlayerHtml = undertakerPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+
+            return `<div name="undertakerDiv">
+                <h3>장의사</h3>
+                <p>
+                    1. 장의사는 오늘 처형당한 플레이어의 역할을 알게 됩니다.<br/>
+                    * 아래 순서는 이번 낮에 처형당한 플레이어가 있을 때만 진행합니다.<br/>
+                    * 취했거나 중독된 상태라면 아무렇게나 고를 수 있습니다.<br/>
+                    2. 장의사에게 제공할 처형당한 플레이어의 역할을 선택하세요.<br/>
+                    3. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${undertakerPlayerHtml}<br/>
+                    4. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    5. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-info btn-block" onclick="undertaker.openAddIdentifyPlayerModal()">
+                    선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-success btn-block" onclick="undertaker.openUndertakerMessageModal()">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="undertaker.resetChoiceOfUndertaker()">
+                    선택 재설정
+                </button>
+            </div>
+            <hr/>`;
+        },
+        openUndertakerChoiceMessageModal: () => {
+            let messageHtml = `오늘 낮에 처형당했던 플레이어의 역할을 선택하세요.`;
+
+            openMessageModal(messageHtml);
+        },
+        openAddIdentifyPlayerModal: () => {
+            const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
+
+            const chosen = undertakerPlayer.roleOfDiedPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                alert("장의사에게 알려줄 역할은 선택 완료된 상태입니다.\n-> " + chosen.playerName);
+                return;
+            }
+
+            let addIdentifyPlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
+                if (next.name === Undertaker.name) {
+                    return prev;
+                }
+
+                if (next.drunken) {
+                    const drunk = new Drunk();
+
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
+                        + " onclick=\"undertaker.addIdentifyPlayer('" + next.playerName + "', '" + drunk.title + "')\" >"
+                        + " " + next.playerName + "(" + drunk.title + ")"
+                        + "</button>";
+                }
+
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"undertaker.addIdentifyPlayer('" + next.playerName + "', '" + next.title + "')\" >"
+                    + " " + next.playerName + "(" + next.title + ")"
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#addChoiceOfUndertakerModal");
+            $modal.find("[name='playerListDiv']").empty().html(addIdentifyPlayerHtml);
+
+            $("#addChoiceOfUndertakerModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        addIdentifyPlayer: (playerName, title) => {
+            const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
+
+            const chosen = undertakerPlayer.roleOfDiedPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (chosen) {
+                alert("장의사에게 알려줄 역할은 선택 완료된 상태입니다.\n-> " + chosen.playerName);
+                return;
+            }
+
+            undertakerPlayer.roleOfDiedPlayerByRound.push({
+                round: playStatus.round,
+                playerName,
+                title,
+            });
+            $("#addChoiceOfUndertakerModal").modal("hide");
+        },
+        openUndertakerMessageModal: () => {
+            const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
+
+            const chosen = undertakerPlayer.roleOfDiedPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (!chosen) {
+                alert("장의사에게 알려줄 역할이 먼저 선택되어야 합니다.");
+                return;
+            }
+
+            let messageHtml = `처형당했던 플레이어의 역할은 [\${chosen.title}] 입니다.</br>`;
+
+            openMessageModal(messageHtml);
+        },
+        resetChoiceOfUndertaker: () => {
+            const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
+
+            const chosen = undertakerPlayer.roleOfDiedPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (!chosen) {
+                return;
+            }
+
+            const filteredList = undertakerPlayer.roleOfDiedPlayerByRound.filter(choice => choice.round !== playStatus.round);
+            undertakerPlayer.roleOfDiedPlayerByRound = [...filteredList];
+            alert("초기화 되었습니다.");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="addChoiceOfUndertakerModal" role="dialog"
+     aria-labelledby="addChoiceOfUndertakerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">장의사에게 알려줄 역할을 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

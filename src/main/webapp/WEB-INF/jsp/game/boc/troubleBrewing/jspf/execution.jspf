@@ -17,12 +17,7 @@
             const scarletWomenPlayerHtml = (scarletWomenPlayer ? scarletWomenPlayer.playerName : "")
                 + (scarletWomenPlayerStatusListHtml === "" ? "" : "(" + scarletWomenPlayerStatusListHtml + ")");
 
-            const alivePlayerList = [
-                ...townsFolkPlayerList,
-                ...outsiderPlayerList,
-                ...minionPlayerList,
-                ...demonPlayerList,
-            ].filter(player => !player.died);
+            const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
 
             const voteCountHtml = Math.ceil(alivePlayerList.length / 2);
 
@@ -55,6 +50,9 @@
                 <button type="button" class="btn btn-warning btn-block" onclick="execution.resetVirginSkillNotAvailable()">
                     처녀 능력 사용됨 재설정
                 </button>
+                <button type="button" class="btn btn-info btn-block" onclick="execution.openSetDiedPlayerNotNominatableModal()">
+                    사망 플레이어 투표권 사용 지정
+                </button>
                 <button type="button" class="btn btn-info btn-block" onclick="execution.openSetDiedPlayerByExecutionModal()">
                     처형 플레이어 지정
                 </button>
@@ -81,6 +79,34 @@
             virginPlayer.skillAvailable = true;
             alert("처녀 능력이 초기화 되었습니다.");
         },
+        openSetDiedPlayerNotNominatableModal: () => {
+            const diedAndNominatablePlayerList = createAssignedPlayerList()
+                .filter(player => player.died && player.nominatable);
+
+            let setDiedPlayerNotNominatableHtml = diedAndNominatablePlayerList.reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"execution.setDiedPlayerNotNominatable('" + next.name + "')\" >"
+                    + " " + next.playerName + "(" + next.title + ")"
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setDiedPlayerNotNominatableModal");
+            $modal.find("[name='playerListDiv']").empty().html(setDiedPlayerNotNominatableHtml);
+
+            $("#setDiedPlayerNotNominatableModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        setDiedPlayerNotNominatable: name => {
+            const player = Role.getPlayerByRoleName(createAssignedPlayerList(), name);
+            player.nominatable = false;
+            diePlayer(player);
+
+            $("#setDiedPlayerNotNominatableModal").modal("hide");
+        },
         openSetDiedPlayerByExecutionModal: () => {
             let setDiedPlayerByExecutionHtml = createAssignedPlayerList().reduce((prev, next) => {
                 if (next.died) {
@@ -105,6 +131,16 @@
         },
         setDiedPlayerByExecution: name => {
             const diedPlayer = Role.getPlayerByRoleName(createAssignedPlayerList(), name);
+            diedPlayer.executed = true;
+
+            if (diedPlayer.name === Saint.name) {
+                alert("성자가 사망하여 악한 팀이 승리했습니다.");
+                $("#setDiedPlayerByExecutionModal").modal("hide");
+                winByEvil();
+                saveGameStatus();
+                return;
+            }
+
             diePlayer(diedPlayer);
 
             $("#setDiedPlayerByExecutionModal").modal("hide");
@@ -113,6 +149,28 @@
         },
     }
 </script>
+
+<div class="modal fade" id="setDiedPlayerNotNominatableModal" role="dialog"
+     aria-labelledby="setDiedPlayerNotNominatableModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">사망 플레이어 중 투표권을 사용한 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 <div class="modal fade" id="setDiedPlayerByExecutionModal" role="dialog"
      aria-labelledby="setDiedPlayerByExecutionModalLabel" aria-hidden="true">

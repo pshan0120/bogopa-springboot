@@ -1,35 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script>
-    const spy = {
+    const scarletWomen = {
         createHtml: () => {
-            const spyPlayer = Role.getPlayerByRole(minionPlayerList, Spy);
-            if (!spyPlayer) {
+            const scarletWomenPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWomen);
+            if (!scarletWomenPlayer) {
                 return "";
             }
 
-            const playerStatusListHtml = Role.createPlayerStatusListHtml(spyPlayer);
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(scarletWomenPlayer);
 
-            const spyPlayerHtml = spyPlayer.playerName
+            const scarletWomenPlayerHtml = scarletWomenPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
-            const messageHtml = `현재 플레이 상태를 보여드리겠습니다.`;
+            const messageHtml = `당신은 새로운 임프가 되었습니다.`;
 
-            return `<div name="spyDiv">
-                <h3>스파이</h3>
+            return `<div name="scarletWomenDiv">
+                <h3>부정한 여자</h3>
                 <p>
                     1. 다음 플레이어를(들을) 깨우세요.<br/>
-                    \${spyPlayerHtml}<br/>
-                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
-                    3. 플레이 상태 모달을 띄운 뒤 보여주세요.<br/>
-                    4. 눈을 감게 하세요.<br/>
-                    * 그가 다른 플레이어들에게 감지될 때 보여지게 할 선한 역할은 플레이 중 스토리텔러가 선택합니다.
+                    \${scarletWomenPlayerHtml}<br/>
+                    2. 만약 오늘 부정한 여자가 임프가 되었다면 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    3. 눈을 감게 하세요.
                 </p>
                 <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
                     메세지 모달 표시
-                </button>
-                <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
-                    플레이 상태 모달 표시
                 </button>
             </div>
             <hr/>`;

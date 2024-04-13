@@ -7,6 +7,7 @@ class Role {
         this.order = order;
         this.nominating = false;
         this.nominatable = true;
+        this.executed = false;
         this.died = false;
         this.diedRound = null;
         this.firstNightActive = true;
@@ -16,6 +17,7 @@ class Role {
         this.poisoned = false;
         this.redHerring = false;
         this.diedToday = false;
+        this.diedTonight = false;
         this.safeByMonk = false;
     }
 
@@ -54,6 +56,11 @@ class Role {
             && player.masterPlayerByRound.length > 0) {
             const lastChosen = player.masterPlayerByRound.at(-1);
             playerStatusList.push("'" + lastChosen.playerName + "'을(를) 주인으로 모심");
+        }
+
+        if (player.position.name === POSITION.MINION.name
+            && player.changedToImp) {
+            playerStatusList.push("새로운 임프가 됨");
         }
 
         return playerStatusList;
@@ -126,7 +133,8 @@ class Role {
     }
 }
 
-class GoodRole extends Role {
+class GoodRole
+    extends Role {
     constructor(name, title, order, position) {
         super(name, title, order, ALIGNMENT.GOOD, position);
     }
@@ -147,6 +155,7 @@ class OutsiderRole extends GoodRole {
 class EvilRole extends Role {
     constructor(name, title, order, position) {
         super(name, title, order, ALIGNMENT.EVIL, position);
+        this.attackingPlayerByRound = [];
     }
 }
 
@@ -262,7 +271,6 @@ class RavenKeeper extends TownsFolkRole {
     constructor() {
         super(RavenKeeper.name, RavenKeeper.title, RavenKeeper.order);
         this.identificationOfPlayer = null;
-        this.diedRound = null;
     }
 }
 
@@ -405,6 +413,5 @@ class Imp extends DemonRole {
     constructor() {
         super(Imp.name, Imp.title, Imp.order);
         this.offeredGoodRoleList = [];
-        this.attackingPlayerByRound = [];
     }
 }

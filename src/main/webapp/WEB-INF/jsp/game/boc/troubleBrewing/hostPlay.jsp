@@ -474,6 +474,12 @@
             $("#firstNightDiv").hide();
             $("#otherNightDiv").hide();
 
+            createAssignedPlayerList().forEach(player => {
+                player.diedToday = false;
+                player.diedTonight = false;
+                player.safeByMonk = false;
+            });
+
             renderOtherDay();
         }
 
@@ -491,10 +497,31 @@
         }
 
         const proceedToNextNight = () => {
+            const mayorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Mayor);
+            if (mayorPlayer
+                && !mayorPlayer.poisoned
+                && !mayorPlayer.drunken) {
+
+                const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
+                const diedTodayPlayerList = createAssignedPlayerList().filter(player => player.diedToday);
+                if (alivePlayerList.length === 3
+                    && diedTodayPlayerList.length === 0) {
+                    alert("낮 단계가 끝날 때 생존 플레이어가 3명이고 처형이 발생하지 않았기에 시장 승리조건이 달성되었습니다.");
+                    winByGood();
+                    mayorPlayer.archivedGoodVictoryCondition = true;
+                    saveGameStatus();
+                    return;
+                }
+            }
+
             playStatus.night = true;
             saveGameStatus();
             $("#firstNightDiv").hide();
             $("#otherDayDiv").hide();
+
+            createAssignedPlayerList().forEach(player => {
+                player.poisoned = false;
+            });
 
             renderOtherNight();
         }
@@ -512,10 +539,10 @@
             $flowDiv.append(poisoner.createHtml());
             $flowDiv.append(monk.createHtml());
             $flowDiv.append(spy.createHtml());
-            //$flowDiv.append(scarletWomen.createHtml());
+            $flowDiv.append(scarletWomen.createHtml());
             $flowDiv.append(imp.createHtml());
-            //$flowDiv.append(ravenKeeper.createHtml());
-            //$flowDiv.append(undertaker.createHtml());
+            $flowDiv.append(ravenKeeper.createHtml());
+            $flowDiv.append(undertaker.createHtml());
             $flowDiv.append(empath.createHtml());
             $flowDiv.append(fortuneTeller.createHtml());
             $flowDiv.append(butler.createHtml());
@@ -583,7 +610,6 @@
             if (!lastPlayLog) {
                 return;
             }
-            // console.log('lastPlayLog', lastPlayLog);
 
             const lastPlayLogJson = JSON.parse(lastPlayLog);
             console.log('lastPlayLogJson', lastPlayLogJson);
@@ -597,20 +623,19 @@
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
             console.log('game status loaded !!');
-            console.log('townsFolkPlayerList', townsFolkPlayerList);
         }
 
         const diePlayer = diedPlayer => {
             diedPlayer.died = true;
-            diedPlayer.diedToday = true;
             diedPlayer.diedRound = playStatus.round;
 
-            const alivePlayerList = [
-                ...townsFolkPlayerList,
-                ...outsiderPlayerList,
-                ...minionPlayerList,
-                ...demonPlayerList,
-            ].filter(player => !player.died);
+            if (playStatus.night) {
+                diedPlayer.diedTonight = true;
+            } else {
+                diedPlayer.diedToday = true;
+            }
+
+            const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
 
             if (diedPlayer.name === Imp.name) {
                 const scarletWomenPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWomen);
@@ -626,6 +651,7 @@
 
                 alert("모든 악마가 사망하여 선한 팀이 승리했습니다.");
                 winByGood();
+                saveGameStatus();
                 return;
             }
 
@@ -634,6 +660,7 @@
                 if (minionPlayer.changedToImp) {
                     alert("임프가 된 하수인이 사망하여 선한 팀이 승리했습니다.");
                     winByGood();
+                    saveGameStatus();
                     return;
                 }
             }
@@ -645,6 +672,7 @@
                 if (alivePlayerList.length <= 2) {
                     alert("임프가 생존한 상태에서 생존한 플레이어의 수가 2 이하가 되어 악한 팀이 승리했습니다.");
                     winByEvil();
+                    saveGameStatus();
                     return;
                 }
             }
@@ -864,6 +892,9 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/slayer.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/monk.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWomen.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/undertaker.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>

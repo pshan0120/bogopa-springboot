@@ -1,0 +1,155 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const ravenKeeper = {
+        createHtml: () => {
+            const ravenKeeperPlayer = Role.getPlayerByRole(townsFolkPlayerList, RavenKeeper);
+            if (!ravenKeeperPlayer) {
+                return "";
+            }
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(ravenKeeperPlayer);
+
+            const ravenKeeperPlayerHtml = ravenKeeperPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+
+            return `<div name="ravenKeeperDiv">
+                <h3>레이븐키퍼</h3>
+                <p>
+                    1. 레이븐키퍼는 플레이어의 캐릭터를 알 수 있지만, 그가 밤에 죽을 때만 가능합니다.<br/>
+                    * 아래 순서는 레이븐키퍼가 이번 밤에 죽었을 때만 진행합니다.<br/>
+                    * 취했거나 중독된 상태라면 아무렇게나 고를 수 있습니다.<br/>
+                    2. 다음 플레이어를(들을) 깨우세요.<br/>
+                    \${ravenKeeperPlayerHtml}<br/>
+                    3. 선택 안내 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    4. 그가 지목한 플레이어를 선택합니다.<br/>
+                    5. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    6. 눈을 감게 하세요.
+                </p>
+                <button type="button" class="btn btn-success btn-block" onclick="ravenKeeper.openRavenKeeperChoiceMessageModal()">
+                    선택 안내 메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="ravenKeeper.openSetIdentifyPlayerModal()">
+                    선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-success btn-block" onclick="ravenKeeper.openRavenKeeperMessageModal()">
+                    메세지 모달 표시
+                </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="ravenKeeper.resetChoiceOfRavenKeeper()">
+                    선택 재설정
+                </button>
+            </div>
+            <hr/>`;
+        },
+        openRavenKeeperChoiceMessageModal: () => {
+            let messageHtml = `정체를 알고 싶은 플레이어를 선택하세요.`;
+
+            openMessageModal(messageHtml);
+        },
+        openSetIdentifyPlayerModal: () => {
+            const ravenKeeperPlayer = Role.getPlayerByRole(townsFolkPlayerList, RavenKeeper);
+
+            if (ravenKeeperPlayer.identificationOfPlayer) {
+                alert("레이븐키퍼가 지목한 플레이어는 선택 완료된 상태입니다.\n-> " + ravenKeeperPlayer.identificationOfPlayer);
+                return;
+            }
+
+            if (!ravenKeeperPlayer.diedTonight) {
+                alert("레이븐키퍼가 오늘 밤에 죽었을 때만 선택 가능합니다.");
+                return;
+            }
+
+            let identifyPlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
+                if (next.name === RavenKeeper.name) {
+                    return prev;
+                }
+
+                if (next.drunken) {
+                    const drunk = new Drunk();
+
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
+                        + " onclick=\"ravenKeeper.identifyPlayer('" + next.playerName + "', '" + drunk.title + "')\" >"
+                        + " " + next.playerName + "(" + drunk.title + ")"
+                        + "</button>";
+                }
+
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"ravenKeeper.identifyPlayer('" + next.playerName + "', '" + next.title + "')\" >"
+                    + " " + next.playerName + "(" + next.title + ")"
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#addChoiceOfRavenKeeperModal");
+            $modal.find("[name='playerListDiv']").empty().html(identifyPlayerHtml);
+
+            $("#addChoiceOfRavenKeeperModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        identifyPlayer: (playerName, title) => {
+            const ravenKeeperPlayer = Role.getPlayerByRole(townsFolkPlayerList, RavenKeeper);
+
+            if (ravenKeeperPlayer.identificationOfPlayer) {
+                alert("레이븐키퍼가 지목한 플레이어는 선택 완료된 상태입니다.\n-> " + ravenKeeperPlayer.identificationOfPlayer);
+                return;
+            }
+
+            ravenKeeperPlayer.identificationOfPlayer = {
+                round: playStatus.round,
+                playerName,
+                title
+            };
+            $("#addChoiceOfRavenKeeperModal").modal("hide");
+        },
+        openRavenKeeperMessageModal: () => {
+            const ravenKeeperPlayer = Role.getPlayerByRole(townsFolkPlayerList, RavenKeeper);
+
+            if (!ravenKeeperPlayer.identificationOfPlayer) {
+                alert("레이븐키퍼가 지목한 플레이어가 먼저 선택되어야 합니다.");
+                return;
+            }
+            const identificationOfPlayer = ravenKeeperPlayer.identificationOfPlayer;
+            let messageHtml = `지목한 플레이어는 [\${identificationOfPlayer.title}] 입니다.</br>`;
+
+            openMessageModal(messageHtml);
+        },
+        resetChoiceOfRavenKeeper: () => {
+            const ravenKeeperPlayer = Role.getPlayerByRole(townsFolkPlayerList, RavenKeeper);
+
+            if (!ravenKeeperPlayer.identificationOfPlayer) {
+                return;
+            }
+
+            ravenKeeperPlayer.identificationOfPlayer = null;
+            alert("초기화 되었습니다.");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="addChoiceOfRavenKeeperModal" role="dialog"
+     aria-labelledby="addChoiceOfRavenKeeperModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">레이븐키퍼가 지목한 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

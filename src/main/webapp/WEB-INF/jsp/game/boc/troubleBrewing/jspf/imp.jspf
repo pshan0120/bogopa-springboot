@@ -129,6 +129,8 @@
                 <h3>악마</h3>
                 <p>
                     1. 악마는 아무 플레이어(본인이나 죽은 플레이어까지도) 공격할 수 있습니다.<br/>
+                    * 만약 시장을 공격했다면 스토리텔러의 판단에 따라 다른 플레이어로 대상을 바꿀 수 있습니다.
+                    그 대상이 군인이거나 수도승으로부터 보호받는다면 아무도 죽지 않습니다.<br/>
                     2. 다음 플레이어를(들을) 깨우세요.<br/>
                     \${impPlayerHtml}<br/>
                     3. 선택 안내 메세지 모달을 띄운 뒤 보여주세요.<br/>
@@ -147,6 +149,15 @@
                 </button>
                 <button type="button" class="btn btn-warning btn-block" onclick="imp.resetChoiceOfImpAttack()">
                     선택 재설정
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="imp.openSetAttackedPlayerModal()">
+                    사망 플레이어 직접 선택
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="imp.openSetNewImpModal()">
+                    새로운 임프 선택
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="imp.openNewImpMessageModal()">
+                    새로운 임프에게 안내
                 </button>
             </div>
             <hr/>`;
@@ -200,15 +211,61 @@
                 alert("공격할 플레이어는 선택 완료된 상태입니다.\n-> " + chosen.playerName);
                 return;
             }
-            
+
+            if (impPlayer.poisoned
+                || impPlayer.drunken) {
+                alert("중독되거나 만취된 상태라서 아무 일도 일어나지 않습니다.");
+                $("#addChoiceOfImpAttackModal").modal("hide");
+                return;
+            }
+
+            const attackedPlayer = Role.getPlayerByTitle(createAssignedPlayerList(), title);
             impPlayer.attackingPlayerByRound.push({
                 round: playStatus.round,
                 playerName,
                 title,
             });
 
-            // TODO: 공격 결과에 대한 부분
+            if (attackedPlayer.name === Soldier.name) {
+                const soldierPlayer = Role.getPlayerByRole(townsFolkPlayerList, Soldier);
+                if (!soldierPlayer.poisoned
+                    && !soldierPlayer.drunken) {
+                    alert("공격당한 플레이어가 군인이라서 아무 일도 일어나지 않습니다.");
+                    $("#addChoiceOfImpAttackModal").modal("hide");
+                    return;
+                }
+            }
 
+            if (attackedPlayer.safeByMonk) {
+                const monkPlayer = Role.getPlayerByRole(townsFolkPlayerList, Monk);
+                if (!monkPlayer.poisoned
+                    && !monkPlayer.drunken) {
+                    alert("공격당한 플레이어가 수도승으로부터 보호받고 있어서 아무 일도 일어나지 않습니다.");
+                    $("#addChoiceOfImpAttackModal").modal("hide");
+                    return;
+                }
+            }
+
+            if (attackedPlayer.name === Mayor.name) {
+                const mayorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Mayor);
+                if (!mayorPlayer.poisoned
+                    && !mayorPlayer.drunken) {
+                    alert("공격당한 플레이어가 시장입니다. 판단에 따라 사망 플레이어 직접 선택을 진행하세요.");
+                    $("#addChoiceOfImpAttackModal").modal("hide");
+                    return;
+                }
+            }
+
+            if (attackedPlayer.name === Imp.name) {
+                alert("악마 플레이어가 스스로를 죽였습니다. 이어서 악마가 될 하수인을 선택하세요.");
+                attackedPlayer.died = true;
+                attackedPlayer.diedTonight = true;
+                attackedPlayer.diedRound = playStatus.round;
+                $("#addChoiceOfImpAttackModal").modal("hide");
+                return;
+            }
+
+            diePlayer(attackedPlayer);
             $("#addChoiceOfImpAttackModal").modal("hide");
         },
         openImpAttackMessageModal: () => {
@@ -235,6 +292,60 @@
             const filteredList = impPlayer.attackingPlayerByRound.filter(choice => choice.round !== playStatus.round);
             impPlayer.attackingPlayerByRound = [...filteredList];
             alert("초기화 되었습니다.");
+        },
+        openSetAttackedPlayerModal: () => {
+            let setAttackedPlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"imp.setAttackedPlayer('" + next.name + "')\" >"
+                    + " " + next.playerName + "(" + next.title + ")"
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setAttackedPlayerModal");
+            $modal.find("[name='playerListDiv']").empty().html(setAttackedPlayerHtml);
+
+            $("#setAttackedPlayerModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        setAttackedPlayer: roleName => {
+            const attackedPlayer = Role.getPlayerByRoleName(createAssignedPlayerList(), roleName);
+            diePlayer(attackedPlayer);
+            $("#setAttackedPlayerModal").modal("hide");
+        },
+        openSetNewImpModal: () => {
+            const changedToImpMinionPlayerList = minionPlayerList.filter(minionPlayer => !minionPlayer.died && !minionPlayer.changedToImp);
+
+            let setNewImpHtml = changedToImpMinionPlayerList.reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"imp.setNewImp('" + next.name + "')\" >"
+                    + " " + next.playerName + "(" + next.title + ")"
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setNewImpModal");
+            $modal.find("[name='playerListDiv']").empty().html(setNewImpHtml);
+
+            $("#setNewImpModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        setNewImp: roleName => {
+            const newImpPlayer = Role.getPlayerByRoleName(minionPlayerList, roleName);
+            newImpPlayer.changedToImp = true;
+            newImpPlayer.attackingPlayerByRound = [];
+            $("#setNewImpModal").modal("hide");
+        },
+        openNewImpMessageModal: () => {
+            let messageHtml = `당신은 새로운 임프가 되었습니다.`;
+
+            openMessageModal(messageHtml);
         },
         close: () => {
         },
@@ -269,6 +380,50 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="">임프가 공격할 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="setAttackedPlayerModal" role="dialog"
+     aria-labelledby="setAttackedPlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">임프의 공격을 받고 사망한 플레이어를 직접 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="setNewImpModal" role="dialog"
+     aria-labelledby="setNewImpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">새로운 임프가 될 하수인 플레이어를 선택합니다.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
