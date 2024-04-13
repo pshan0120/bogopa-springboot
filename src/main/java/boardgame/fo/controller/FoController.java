@@ -244,6 +244,32 @@ public class FoController {
         return mv;
     }
 
+    @RequestMapping(value = "/login/{id}/{id2}/{id3}/{id4}/{id5}")
+    public ModelAndView openLoginId(
+            @PathVariable("id") String id,
+            @PathVariable("id2") String id2,
+            @PathVariable("id3") String id3,
+            @PathVariable("id4") String id4,
+            @PathVariable("id5") String id5,
+            HttpServletRequest request
+    ) {
+        ModelAndView mv = new ModelAndView(mvPrefix + "/login");
+        HttpSession session = request.getSession();
+        String fromUri = id + "/" + id2 + "/" + id3 + "/" + id4 + "/" + id5;
+        if (StringUtils.equals("/login", fromUri)) {
+            session.setAttribute("fromUri", "/");
+        } else {
+            session.setAttribute("fromUri", "/" + fromUri);
+        }
+
+        String ip = request.getHeader("X-FORWARDED-FOR");
+        if (ip == null) {
+            ip = request.getRemoteAddr();
+        }
+        mv.addObject("userIp", ip);
+        return mv;
+    }
+
     @RequestMapping(value = "/doLogin")
     public ModelAndView doLogin(CommandMap commandMap, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView("jsonView");

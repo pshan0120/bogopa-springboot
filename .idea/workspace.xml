@@ -9,15 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="initializeGame 조건 변경">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/qrModal.jspf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="town 분리">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/controller/FoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/controller/FoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,30 +54,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.15136719",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.kotlinCompiler",
-    "show.migrate.to.gradle.popup": "false",
-    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.kotlinCompiler&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
@@ -321,7 +316,8 @@
       <workItem from="1712849054878" duration="9358000" />
       <workItem from="1712921980602" duration="18248000" />
       <workItem from="1712946701807" duration="349000" />
-      <workItem from="1712968969639" duration="3582000" />
+      <workItem from="1712968969639" duration="4259000" />
+      <workItem from="1713006568865" duration="1798000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -491,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712947059371</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="town 분리">
+      <created>1712972592679</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1712972592679</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +535,8 @@
     <MESSAGE value="town 추가" />
     <MESSAGE value="resetGame 추가" />
     <MESSAGE value="initializeGame 조건 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="initializeGame 조건 변경" />
+    <MESSAGE value="town 분리" />
+    <option name="LAST_COMMIT_MESSAGE" value="town 분리" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
