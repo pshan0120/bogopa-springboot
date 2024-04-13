@@ -16,10 +16,15 @@ class Role {
         this.poisoned = false;
         this.redHerring = false;
         this.diedToday = false;
+        this.safeByMonk = false;
     }
 
     static calculatePlayerStatusList(player) {
         const playerStatusList = [];
+        if (!player) {
+            return playerStatusList;
+        }
+
         if (player.died) {
             playerStatusList.push("사망");
         }
@@ -34,6 +39,10 @@ class Role {
 
         if (player.redHerring) {
             playerStatusList.push("레드 헤링(점쟁이에게 악으로 보임)");
+        }
+
+        if (player.safeByMonk) {
+            playerStatusList.push("수도승에게 보호받음");
         }
 
         if (player.name === Slayer.name
@@ -66,6 +75,10 @@ class Role {
 
     static getPlayerByTitle(playerList, title) {
         return playerList.find(player => player.title === title);
+    }
+
+    static getPlayerByPlayerName(playerList, playerName) {
+        return playerList.find(player => player.playerName === playerName);
     }
 
     static createChoiceButtonClass(role) {
@@ -140,6 +153,7 @@ class EvilRole extends Role {
 class MinionRole extends EvilRole {
     constructor(name, title, order) {
         super(name, title, order, POSITION.MINION);
+        this.changedToImp = null;
     }
 }
 
@@ -280,6 +294,7 @@ class Soldier extends TownsFolkRole {
 
     constructor() {
         super(Soldier.name, Soldier.title, Soldier.order);
+        this.slayingPlayer = null;
     }
 }
 
@@ -379,7 +394,6 @@ class ScarletWomen extends MinionRole {
 
     constructor() {
         super(ScarletWomen.name, ScarletWomen.title, ScarletWomen.order);
-        this.changedToImp = null;
     }
 }
 
@@ -391,6 +405,6 @@ class Imp extends DemonRole {
     constructor() {
         super(Imp.name, Imp.title, Imp.order);
         this.offeredGoodRoleList = [];
-        this.killingPlayer = null;
+        this.attackingPlayerByRound = [];
     }
 }

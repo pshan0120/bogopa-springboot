@@ -99,14 +99,14 @@
                         return prev;
                     }
 
-                    if (next.drunken) {
+                    /*if (next.drunken) {
                         const drunk = new Drunk();
                         return prev
                             + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
                             + " onclick=\"investigator.addIdentifiedRoleForInvestigator('" + drunk.name + "', '" + drunk.title + "')\" >"
                             + " " + drunk.title
                             + "</button>";
-                    }
+                    }*/
 
                     return prev
                         + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "

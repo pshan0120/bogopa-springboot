@@ -46,10 +46,24 @@
             }
 
             const poisoningPlayerListHtml = createAssignedPlayerList().reduce((prev, next) => {
+                if (next.name === Poisoner.name) {
+                    return prev;
+                }
+
+                if (next.drunken) {
+                    const drunk = new Drunk();
+
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
+                        + " onclick=\"poisoner.addPoisonedPlayer('" + next.playerName + "', '" + drunk.title + "')\" >"
+                        + " " + next.playerName + "(" + drunk.title + ")"
+                        + "</button>";
+                }
+
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
                     + " onclick=\"poisoner.addPoisonedPlayer('" + next.playerName + "', '" + next.title + "')\" >"
-                    + " " + next.playerName
+                    + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
 

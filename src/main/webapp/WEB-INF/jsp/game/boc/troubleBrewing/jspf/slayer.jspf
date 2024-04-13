@@ -1,0 +1,152 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<script>
+    const slayer = {
+        createHtml: () => {
+            const slayerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Slayer);
+            const slayerPlayerStatusListHtml = Role.createPlayerStatusListHtml(slayerPlayer);
+            const slayerPlayerHtml = (slayerPlayer ? slayerPlayer.playerName : "")
+                + (slayerPlayerStatusListHtml === "" ? "" : "(" + slayerPlayerStatusListHtml + ")");
+
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+            const impPlayerStatusListHtml = Role.createPlayerStatusListHtml(impPlayer);
+            const impPlayerHtml = impPlayer.playerName
+                + (impPlayerStatusListHtml === "" ? "" : "(" + impPlayerStatusListHtml + ")");
+
+            return `<div name="slayerDiv">
+                <h3>슬레이어</h3>
+                <p>
+                    1. 슬레이어 능력을 사용한다면 지목한 상대에 대해 결과를 알려줘야 합니다.<br/>
+                    <span class="font-blue">- 슬레이어 : \${slayerPlayerHtml}</span><br/>
+                    * 취했거나 중독된 상태라면 아무 일도 없습니다.<br/>
+                    * 이미 능력을 사용한 상태라면 아무 일도 없습니다.<br/>
+                    * 어떤 경우에든 선언한 사람이 정말 슬레이어라면 '슬레이어 능력 사용됨'으로 변경해야 합니다.<br/>
+                    2. 슬레이어가 임프를 선택한다면 특수한 경우(부정한 여자)를 제외하고는 선한 편이 승리합니다.<br/>
+                    <span class="font-red">- 임프 : \${impPlayerHtml}</span><br/>
+                    3. 플레이어들은 원하는 대로 말할 수 있기 때문에 슬레이어인 척 하는 플레이어도 능력을 사용하는 것처럼 보이게 할 수 있습니다.<br/>
+                    4. 슬레이어가 은둔자를 선택하고 스토리텔러가 은둔자를 임프처럼 보이게 한다면 은둔자는 사망하고 게임은 계속됩니다.<br/>
+                    5. 슬레이어가 아닌 플레이어가 능력 사용을 선언한다면 아무 일도 발생하지 않습니다.<br/>
+                </p>
+                <button type="button" class="btn btn-info btn-block" onclick="slayer.setSkillNotAvailable()">
+                    슬레이어 능력 사용됨
+                </button>
+                <button type="button" class="btn btn-warning btn-block" onclick="slayer.resetSkillNotAvailable()">
+                    슬레이어 능력 사용됨 재설정
+                </button>
+                <button type="button" class="btn btn-info btn-block" onclick="slayer.openSetDiedPlayerBySlayerModal()">
+                    사망 플레이어 지정
+                </button>
+            </div>
+            <hr/>`;
+        },
+        setSkillNotAvailable: () => {
+            const slayerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Slayer);
+            if (!slayerPlayer) {
+                alert("참여중인 플레이어가 아닙니다.");
+                return;
+            }
+
+            slayerPlayer.skillAvailable = false;
+            alert("능력이 사용되었습니다.");
+        },
+        resetSkillNotAvailable: () => {
+            const slayerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Slayer);
+            if (!slayerPlayer) {
+                alert("참여중인 플레이어가 아닙니다.");
+                return;
+            }
+
+            slayerPlayer.skillAvailable = true;
+            alert("초기화 되었습니다.");
+        },
+        openSetDiedPlayerBySlayerModal: () => {
+            const slayerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Slayer);
+            if (!slayerPlayer) {
+                alert("참여중인 플레이어가 아닙니다.");
+                return;
+            }
+
+            if (!slayerPlayer.skillAvailable) {
+                alert("슬레이어는 이미 능력을 사용했습니다.");
+                return;
+            }
+
+            let setDiedPlayerBySlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
+                if (next.name === Slayer.name) {
+                    return prev;
+                }
+
+                if (next.died) {
+                    return prev;
+                }
+
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"slayer.setDiedPlayerBySlayer('" + next.name + "')\" >"
+                    + " " + next.playerName + "(" + next.title + ")"
+                    + "</button>";
+            }, "");
+
+            const $modal = $("#setDiedPlayerBySlayerModal");
+            $modal.find("[name='playerListDiv']").empty().html(setDiedPlayerBySlayerHtml);
+
+            $("#setDiedPlayerBySlayerModal").modal("show");
+
+            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+        },
+        setDiedPlayerBySlayer: name => {
+            const slayerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Slayer);
+            if (!slayerPlayer.skillAvailable) {
+                alert("슬레이어는 이미 능력을 사용했습니다.");
+                return;
+            }
+
+            const slayedPlayer = Role.getPlayerByRoleName(createAssignedPlayerList(), name);
+            slayerPlayer.slayingPlayer = slayedPlayer.name;
+            slayerPlayer.skillAvailable = false;
+
+            if (slayedPlayer.name === Imp.name
+                || slayedPlayer.name === Recluse.name) {
+                diePlayer(slayedPlayer);
+                $("#setDiedPlayerBySlayerModal").modal("hide");
+                return;
+            }
+
+            const minionPlayer = minionPlayerList.find(minionPlayer => minionPlayer.name === slayedPlayer.name);
+            if (minionPlayer
+                && minionPlayer.changedToImp) {
+                diePlayer(slayedPlayer);
+                $("#setDiedPlayerBySlayerModal").modal("hide");
+                return;
+            }
+
+            alert("아무 일도 일어나지 않았습니다.");
+            $("#setDiedPlayerBySlayerModal").modal("hide");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="setDiedPlayerBySlayerModal" role="dialog"
+     aria-labelledby="setDiedPlayerBySlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">슬레이어에게 사망한 플레이어를 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

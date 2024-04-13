@@ -224,35 +224,14 @@
             $flowDiv.append(createDawnHtml());
 
             saveGameStatus();
-            /*
-            <div name="minionDiv"></div>
-            <div name="impDiv"></div>
-            <div name="poisonerDiv"></div>
-            <div name="spyDiv"></div>
-            <div name="washerWomanDiv"></div>
-            <div name="librarianDiv"></div>
-            <div name="investigatorDiv"></div>
-            <div name="chefDiv"></div>
-            <div name="empathDiv"></div>
-            <div name="fortuneTellerDiv"></div>
-            <div name="butlerDiv"></div>
-            <div name="dawnStepDiv"></div>*/
+        }
 
-            // 0. 초기화
-            // 1. 황혼 단계
-            // 2. 하수인 정보
-            // 3. 악마 정보
-            // 4. 독살범
-            // 5. 스파이
-            // 6. 세탁부
-            // 7. 사서
-            // 8. 조사관
-            // 9. 요리사
-            // 10. 공감능력자
-            // 11. 점쟁이
-            // 12. 집사
-            // 13. 새벽 단계
+        const winByGood = () => {
+            messageModal.open("선한 편이 승리했습니다.");
+        }
 
+        const winByEvil = () => {
+            messageModal.open("악한 편이 승리했습니다.");
         }
 
         const openMessageModal = messageHtml => {
@@ -425,18 +404,12 @@
         }
 
         const createDuskHtml = () => {
-            /*const assignedPlayerList = createAssignedPlayerList();
-            assignedPlayerList.sort((prev, next) => prev.seatNumber - next.seatNumber);*/
-
             const assignedPlayerListHtml = createAssignedPlayerList()
                 .sort((prev, next) => prev.seatNumber - next.seatNumber)
                 .reduce((prev, next) => {
-                    const nameClass = Role.calculateRoleNameClass(next.position.name);
-                    const message = `당신의 역할입니다.<br/><span class=\${nameClass}>\${next.title}</span>`;
-
                     return prev
                         + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                        + " onclick=\"openMessageModal('" + message + "')\" >"
+                        + " onclick=\"openDuskStepMessageModal('" + next.playerName + "')\" >"
                         + " " + next.playerName + "(" + next.title + ")"
                         + "</button>";
                 }, "");
@@ -446,11 +419,21 @@
                 <p>
                     1. 모두 눈을 감았는지 확인하세요.<br/>
                     * 일부 여행자와 전설은 행동합니다.<br/>
-                    2. 첫 번째 플레이어부터 순서대로 깨워서 역할을 보여줍니다.<br/>
+                    2. 첫날 밤이라면 첫번째 플레이어부터 순서대로 깨워서 역할을 보여줍니다.<br/>
+                    * 이 때 주정뱅이에게는 변경된 직업으로 보여주게 됩니다.<br/>
                     \${assignedPlayerListHtml}<br/>
                 </p>
             </div>
             <hr/>`;
+        }
+
+        const openDuskStepMessageModal = playerName => {
+            const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
+
+            const nameClass = Role.calculateRoleNameClass(player.position.name);
+            const message = `당신의 역할입니다.<br/><span class=\${nameClass}>\${player.title}</span>`;
+
+            openMessageModal(message);
         }
 
         const createDawnHtml = () => {
@@ -503,51 +486,8 @@
             const $flowDiv = $otherDayDiv.find("div[name='flowDiv']").empty();
             $flowDiv.empty();
 
-            /*$flowDiv.append(createInitializationHtml());
-            $flowDiv.append(createDuskHtml());
-            $flowDiv.append(minion.createHtml());
-            $flowDiv.append(imp.createInitializationHtml());
-            $flowDiv.append(poisoner.createHtml());
-            $flowDiv.append(spy.createHtml());
-            $flowDiv.append(washerWoman.createHtml());
-            $flowDiv.append(librarian.createHtml());
-            $flowDiv.append(investigator.createHtml());
-            $flowDiv.append(chef.createHtml());
-            $flowDiv.append(empath.createHtml());
-            $flowDiv.append(fortuneTeller.createHtml());
-            $flowDiv.append(butler.createHtml());
-            $flowDiv.append(createDawnHtml());*/
-
-
-            /*
-            <div name="minionDiv"></div>
-            <div name="impDiv"></div>
-            <div name="poisonerDiv"></div>
-            <div name="spyDiv"></div>
-            <div name="washerWomanDiv"></div>
-            <div name="librarianDiv"></div>
-            <div name="investigatorDiv"></div>
-            <div name="chefDiv"></div>
-            <div name="empathDiv"></div>
-            <div name="fortuneTellerDiv"></div>
-            <div name="butlerDiv"></div>
-            <div name="dawnStepDiv"></div>*/
-
-            // 0. 초기화
-            // 1. 황혼 단계
-            // 2. 하수인 정보
-            // 3. 악마 정보
-            // 4. 독살범
-            // 5. 스파이
-            // 6. 세탁부
-            // 7. 사서
-            // 8. 조사관
-            // 9. 요리사
-            // 10. 공감능력자
-            // 11. 점쟁이
-            // 12. 집사
-            // 13. 새벽 단계
-
+            $flowDiv.append(slayer.createHtml());
+            $flowDiv.append(execution.createHtml());
         }
 
         const proceedToNextNight = () => {
@@ -565,6 +505,23 @@
 
             $otherNightDiv.find("span[name='roundTitle']").text(playStatus.round);
 
+            const $flowDiv = $otherNightDiv.find("div[name='flowDiv']").empty();
+            $flowDiv.empty();
+
+            $flowDiv.append(createDuskHtml());
+            $flowDiv.append(poisoner.createHtml());
+            $flowDiv.append(monk.createHtml());
+            $flowDiv.append(spy.createHtml());
+            //$flowDiv.append(scarletWomen.createHtml());
+            $flowDiv.append(imp.createHtml());
+            //$flowDiv.append(ravenKeeper.createHtml());
+            //$flowDiv.append(undertaker.createHtml());
+            $flowDiv.append(empath.createHtml());
+            $flowDiv.append(fortuneTeller.createHtml());
+            $flowDiv.append(butler.createHtml());
+            $flowDiv.append(createDawnHtml());
+
+            saveGameStatus();
 
             // 1. 황혼 단계
             // 2. 독살범
@@ -578,7 +535,6 @@
             // 10. 점쟁이
             // 11. 집사
             // 12. 새벽 단계
-
         }
 
         const resetGame = () => {
@@ -617,8 +573,7 @@
 
             gfn_callPostApi("/api/game/play/save", request)
                 .then(data => {
-                    console.log('data', data);
-                    alert("저장되었습니다.");
+                    console.log('game status saved !!', data);
                 })
                 .catch(response => console.error('error', response));
         }
@@ -645,7 +600,57 @@
             console.log('townsFolkPlayerList', townsFolkPlayerList);
         }
 
+        const diePlayer = diedPlayer => {
+            diedPlayer.died = true;
+            diedPlayer.diedToday = true;
+            diedPlayer.diedRound = playStatus.round;
 
+            const alivePlayerList = [
+                ...townsFolkPlayerList,
+                ...outsiderPlayerList,
+                ...minionPlayerList,
+                ...demonPlayerList,
+            ].filter(player => !player.died);
+
+            if (diedPlayer.name === Imp.name) {
+                const scarletWomenPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWomen);
+
+                if (scarletWomenPlayer
+                    && !scarletWomenPlayer.died) {
+                    if (4 <= alivePlayerList.length) {
+                        scarletWomenPlayer.changedToImp = true;
+                        alert("임프는 사망하였지만 부정한 여자가 새로운 임프가 되었습니다. 게임이 계속 진행됩니다.");
+                        return;
+                    }
+                }
+
+                alert("모든 악마가 사망하여 선한 팀이 승리했습니다.");
+                winByGood();
+                return;
+            }
+
+            const minionPlayer = minionPlayerList.find(minionPlayer => minionPlayer.name === diedPlayer.name);
+            if (minionPlayer) {
+                if (minionPlayer.changedToImp) {
+                    alert("임프가 된 하수인이 사망하여 선한 팀이 승리했습니다.");
+                    winByGood();
+                    return;
+                }
+            }
+
+            const aliveImpPlayer = Role.getPlayerByRole(alivePlayerList, Imp);
+            const changedToImpMinionPlayer = minionPlayerList.find(minionPlayer => !minionPlayer.died && minionPlayer.changedToImp);
+            if (aliveImpPlayer
+                || changedToImpMinionPlayer) {
+                if (alivePlayerList.length <= 2) {
+                    alert("임프가 생존한 상태에서 생존한 플레이어의 수가 2 이하가 되어 악한 팀이 승리했습니다.");
+                    winByEvil();
+                    return;
+                }
+            }
+
+            alert(diedPlayer.playerName + "(" + diedPlayer.title + ") 플레이어가 사망하였습니다.");
+        }
     </script>
 </head>
 
@@ -704,21 +709,7 @@
                             첫번째 밤
                         </h2>
                     </div>
-                    <div class="card-body" name="flowDiv">
-                        <%--<div name="duskStepDiv"></div>
-                        <div name="minionDiv"></div>
-                        <div name="demonDiv"></div>
-                        <div name="poisonerDiv"></div>
-                        <div name="spyDiv"></div>
-                        <div name="washerWomanDiv"></div>
-                        <div name="librarianDiv"></div>
-                        <div name="investigatorDiv"></div>
-                        <div name="chefDiv"></div>
-                        <div name="empathDiv"></div>
-                        <div name="fortuneTellerDiv"></div>
-                        <div name="butlerDiv"></div>
-                        <div name="dawnStepDiv"></div>--%>
-                    </div>
+                    <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
@@ -870,6 +861,9 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/empath.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/fortuneTeller.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/butler.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/slayer.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/monk.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
