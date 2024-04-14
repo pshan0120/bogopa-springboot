@@ -6,7 +6,9 @@ class Role {
         this.position = position;
         this.order = order;
         this.nominating = false;
+        this.nominated = false;
         this.nominatable = true;
+        this.votable = true;
         this.executed = false;
         this.died = false;
         this.diedRound = null;

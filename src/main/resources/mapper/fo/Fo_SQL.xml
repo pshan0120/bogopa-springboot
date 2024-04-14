@@ -1160,6 +1160,7 @@
 				p.hostMmbrNo,
 				m.nickNm AS hostMmbrNm,
 				c.clubNm,
+				g.gameNo,
 				g.gameNm,
 				DATE_FORMAT(p.strtDt, "%Y.%m.%d %H:%i") AS strtDt,
 				IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,

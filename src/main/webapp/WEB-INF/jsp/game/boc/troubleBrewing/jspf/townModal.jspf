@@ -30,7 +30,7 @@
                 if (found) {
                     console.log('found', found);
                     const shroudHtml = found.died ? `<i class="ni ni-tie-bow"></i>` : "";
-                    const nominatableHtml = found.nominatable ? "투표가능" : "투표불가";
+                    const votableHtml = found.votable ? "투표가능" : "투표불가";
 
                     return prev +
                         `<div class="row">
@@ -38,7 +38,7 @@
                                 \${found.playerName} \${shroudHtml}
                             </div>
                             <div class="col-4">
-                                \${nominatableHtml}
+                                \${votableHtml}
                             </div>
                         </div>
                         <hr>`;
