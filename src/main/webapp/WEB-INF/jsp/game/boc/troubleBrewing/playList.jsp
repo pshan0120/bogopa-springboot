@@ -255,7 +255,7 @@
         }
 
         function fn_insertPlayCallback(data) {
-            location.href = "/game/" + data.playNo;
+            location.href = "/game/trouble-brewing/play/" + data.playNo;
         }
 
     </script>

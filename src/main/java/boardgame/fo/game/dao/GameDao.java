@@ -11,8 +11,12 @@ import java.util.Map;
 @Repository
 public class GameDao extends AbstractDao {
 
-    public List<Map<String, Object>> selectPlayMemberList(long playNo) {
-        return selectList("game.selectPlayMemberList", playNo);
+    public List<Map<String, Object>> selectClientPlayMemberList(long playNo) {
+        return selectList("game.selectClientPlayMemberList", playNo);
+    }
+
+    public Map<String, Object> selectHostPlayMember(long playNo) {
+        return selectOne("game.selectHostPlayMember", playNo);
     }
 
     public void insertPlayLog(SavePlayRequestDto dto) {

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="game">
 
-    <select id="selectPlayMemberList" parameterType="hashmap" resultType="hashmap">
+    <select id="selectClientPlayMemberList" parameterType="hashmap" resultType="hashmap">
         SELECT
             pm.mmbrNo,
             m.nickNm
@@ -20,6 +20,21 @@
             p.playNo = #{playNo}
         ORDER BY
             m.nickNm
+    </select>
+
+    <select id="selectHostPlayMember" parameterType="hashmap" resultType="hashmap">
+        SELECT
+            m.mmbrNo,
+            m.nickNm
+        FROM
+            play p,
+            mmbr m
+        WHERE
+            p.hostMmbrNo = m.mmbrNo
+          AND
+            p.sttsCd = '1'
+          AND
+            p.playNo = #{playNo}
     </select>
 
     <insert id="insertPlayLog" parameterType="boardgame.fo.game.dto.SavePlayRequestDto">

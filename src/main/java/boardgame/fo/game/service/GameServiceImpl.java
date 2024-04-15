@@ -2,6 +2,7 @@ package boardgame.fo.game.service;
 
 import boardgame.fo.game.dao.GameDao;
 import boardgame.fo.game.dto.DeletePlayLogAllRequestDto;
+import boardgame.fo.game.dto.ReadPlayMemberListResponseDto;
 import boardgame.fo.game.dto.SavePlayRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,13 @@ public class GameServiceImpl implements GameService {
     private final GameDao gameDao;
 
     @Override
-    public List<Map<String, Object>> readPlayMemberList(long playNo)  {
-        return gameDao.selectPlayMemberList(playNo);
+    public ReadPlayMemberListResponseDto readPlayMemberList(long playNo)  {
+        List<Map<String, Object>> clientPlayMemberList = gameDao.selectClientPlayMemberList(playNo);
+        Map<String, Object> hostPlayMember = gameDao.selectHostPlayMember(playNo);
+        return ReadPlayMemberListResponseDto.builder()
+                .clientPlayMemberList(clientPlayMemberList)
+                .hostPlayMember(hostPlayMember)
+                .build();
     }
 
     @Override

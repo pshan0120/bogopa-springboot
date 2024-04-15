@@ -101,9 +101,10 @@
                 new Imp(),
             ];
 
-            const originalPlayerList = await readPlayMemberList(PLAY_NO);
+            const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
+            const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
 
-            playerList = originalPlayerList
+            playerList = clientPlayMemberList
                 .sort(() => Math.random() - 0.5)
                 .map((originalPlayer, index) => {
                     return {...originalPlayer, seatNumber: index};
@@ -681,6 +682,10 @@
 
             alert(diedPlayer.playerName + "(" + diedPlayer.title + ") 플레이어가 사망하였습니다.");
         }
+
+        const openNoteModal = () => {
+            noteModal.open();
+        }
     </script>
 </head>
 
@@ -754,6 +759,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
+                                노트
+                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
                                 첫 라운드 낮 순서 진행
                             </button>
@@ -785,6 +793,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
+                                노트
+                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextNight()">
                                 이번 라운드 밤 순서 진행
                             </button>
@@ -815,6 +826,9 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
+                                노트
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
                                 다음 라운드 낮 순서 진행
@@ -897,6 +911,9 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWomen.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/undertaker.jspf" %>
+
+
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>

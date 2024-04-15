@@ -95,6 +95,11 @@
         const openQrModal = () => {
             qrModal.open();
         }
+
+        const openNoteModal = () => {
+            noteModal.open();
+        }
+
     </script>
 </head>
 
@@ -152,6 +157,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openQrModal()">
                                 QR 이미지로 공유
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
+                                노트
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -164,6 +172,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/qrModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

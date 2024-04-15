@@ -1,6 +1,7 @@
 package boardgame.fo.game.presentation;
 
 import boardgame.fo.game.dto.DeletePlayLogAllRequestDto;
+import boardgame.fo.game.dto.ReadPlayMemberListResponseDto;
 import boardgame.fo.game.dto.SavePlayRequestDto;
 import boardgame.fo.game.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @ResponseStatus(HttpStatus.OK)
@@ -20,7 +20,7 @@ public class GameRestController {
     private final GameService gameService;
 
     @GetMapping("/play/member/list")
-    public List<Map<String, Object>> readPlayMemberList(@RequestParam long playNo) {
+    public ReadPlayMemberListResponseDto readPlayMemberList(@RequestParam long playNo) {
         return gameService.readPlayMemberList(playNo);
     }
 

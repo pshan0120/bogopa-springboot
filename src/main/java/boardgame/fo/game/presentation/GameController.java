@@ -1,5 +1,8 @@
 package boardgame.fo.game.presentation;
 
+import boardgame.fo.game.dto.ReadPlayMemberListResponseDto;
+import boardgame.fo.game.service.GameService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,10 @@ import static boardgame.com.util.SessionUtils.isAdminMemberLogin;
 @ResponseStatus(HttpStatus.OK)
 @RequestMapping("/game")
 @Controller
+@RequiredArgsConstructor
 public class GameController {
+
+    private final GameService gameService;
 
     @GetMapping("/trouble-brewing/play")
     // @GetMapping({"", "/"})
@@ -25,6 +31,10 @@ public class GameController {
     public ModelAndView openPlayByPlayNo(@PathVariable("playNo") long playNo) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("playNo", playNo);
+
+        // TODO: 나중에 호스트 적용
+        /*ReadPlayMemberListResponseDto readPlayMemberList = gameService.readPlayMemberList(playNo);
+        readPlayMemberList.getHostPlayMember();*/
 
         if (isAdminMemberLogin()) {
             mv.setViewName("/game/boc/troubleBrewing/hostPlay");
