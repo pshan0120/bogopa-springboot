@@ -1,47 +1,31 @@
 package boardgame.com.util;
 
-import java.io.File;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import boardgame.com.service.ComService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.springframework.stereotype.Component;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.annotation.Resource;
-import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-import org.springframework.stereotype.Component;
-
-import boardgame.com.service.ComService;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.Map;
+import java.util.Properties;
 
  
+@Slf4j
 @Component("mailUtils")
+@RequiredArgsConstructor
 public class MailUtils {
 	
-	@Resource(name = "comService")
-	private ComService comService;
-	
-	Logger log = Logger.getLogger(this.getClass());
-	
+	private final ComService comService;
+
 	private String host = "";
 	private String username = "";
 	private String password = "";
