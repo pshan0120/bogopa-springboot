@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<select id="selectMmbrPswrdYn" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT
+			m.mmbrNo,
+			m.pswrdErrCnt,
+			IF(m.pswrd = SHA2(#{pswrd}, 256), 'Y', 'N') AS pswrdYn
+		FROM
+			mmbr m
+		WHERE
+			m.email = encVal(#{email})
+		]]>
+	</select>
+
+	<select id="selectMmbr" parameterType="hashmap" resultType="hashmap">
+		SELECT
+		m.mmbrNo,
+		IFNULL(decVal(m.email), '') AS email,
+		m.nickNm,
+		m.pswrdErrCnt,
+		m.useYn,
+		m.mmbrTypeCd,
+		IFNULL(cm.clubNo, '') AS clubNo
+		FROM
+		mmbr m
+		LEFT JOIN clubMmbr cm
+		ON m.mmbrNo = cm.mmbrNo
+		WHERE
+		1=1
+		<if test="mmbrNo != null and mmbrNo != ''">
+			AND
+			m.mmbrNo = #{mmbrNo}
+		</if>
+		<if test="email != null and email != ''">
+			AND
+			m.email = encVal(#{email})
+		</if>
+		<if test="mmbrScrtKey != null and mmbrScrtKey != ''">
+			AND
+			encVal(m.mmbrNo) = #{mmbrScrtKey}
+		</if>
+		<if test="useYn != null and useYn != ''">
+			AND
+			m.useYn = #{useYn}
+		</if>
+	</select>
+
+	<select id="selectMmbrPrfl" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			m.mmbrNo,
+			IFNULL(m.nickNm, '') AS nickNm,
+			m.mmbrTypeCd,
+			cd.nm AS mmbrTypeNm,
+			IFNULL(m.intrdctn, '') AS intrdctn,
+			IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
+			IFNULL(cm2.clubNm, '무소속') AS mmbrClubNm,
+			(SELECT
+				 COUNT(*)
+			 FROM
+				 playMmbr pm1
+			 WHERE
+				 pm1.mmbrNo = m.mmbrNo
+			) AS playCnt
+		FROM
+			mmbr m
+				LEFT JOIN (
+				SELECT
+					cm1.mmbrNo,
+					c1.clubNm
+				FROM
+					club c1,
+					clubMmbr cm1
+				WHERE
+					c1.clubNo = cm1.clubNo
+			) cm2 ON m.mmbrNo = cm2.mmbrNo,
+			cd cd
+		WHERE
+			m.mmbrTypeCd = cd.cd
+		  AND
+			cd.grpCd = 'C001'
+		  AND
+			m.useYn = 'Y'
+		  AND
+			m.mmbrNo = #{mmbrNo}
+	</select>
+
+	<insert id="insertMmbrLog" parameterType="hashmap">
+		<![CDATA[
+		INSERT INTO mmbrLog
+		(
+			mmbrNo,
+			mmbrIp,
+			logDt
+		)
+		VALUES
+			(
+				#{mmbrNo},
+				#{mmbrIp},
+				CURRENT_TIMESTAMP
+			)
+		]]>
+	</insert>
+
+	<insert id="insertMmbr" parameterType="hashmap">
+		INSERT INTO mmbr
+		(
+		mmbrNo,
+		email,
+		nickNm,
+		pswrd,
+		pswrdErrCnt,
+		mmbrTypeCd,
+		<if test="invtMmbrNo != null and invtMmbrNo != ''">
+			invtMmbrNo,
+		</if>
+		useYn,
+		insId,
+		insDt,
+		updId,
+		updDt
+		)
+		VALUES
+		(
+		#{mmbrNo},
+		encVal(#{email}),
+		TRIM(#{nickNm}),
+		SHA2(#{pswrd}, 256),
+		0,
+		'1',
+		<if test="invtMmbrNo != null and invtMmbrNo != ''">
+			#{invtMmbrNo},
+		</if>
+		'Y',
+		'system',
+		CURRENT_TIMESTAMP,
+		'system',
+		CURRENT_TIMESTAMP
+		)
+	</insert>
+
+	<update id="updateMmbr" parameterType="hashmap">
+		UPDATE
+		mmbr
+		SET
+		<if test="email != null and email != ''">
+			email = encVal(#{email}),
+		</if>
+		<if test="nickNm != null and nickNm != ''">
+			nickNm = TRIM(#{nickNm}),
+		</if>
+		<if test="pswrd != null and pswrd != ''">
+			pswrd = SHA2(#{pswrd}, 256),
+		</if>
+		<if test="mmbrTypeCd != null and mmbrTypeCd != ''">
+			mmbrTypeCd = #{mmbrTypeCd},
+		</if>
+		<if test="intrdctn != null and intrdctn != ''">
+			intrdctn = TRIM(#{intrdctn}),
+		</if>
+		<if test="prflImgFileNm != null and prflImgFileNm != ''">
+			prflImgFileNm = TRIM(#{prflImgFileNm}),
+		</if>
+		<if test="useYn != null and useYn != ''">
+			useYn = #{useYn},
+		</if>
+		<if test="mode == 'pswrdErr'.toString()">
+			pswrdErrCnt = IFNULL(pswrdErrCnt, 0) + 1,
+		</if>
+		<if test="mode == 'pswrdErrReset'.toString()">
+			pswrdErrCnt = 0,
+		</if>
+		updId = 'system',
+		updDt = CURRENT_TIMESTAMP
+		WHERE
+		mmbrNo = #{mmbrNo}
+	</update>
+
+	<delete id="deleteMmbr" parameterType="hashmap">
+		<![CDATA[
+		DELETE FROM
+			mmbr
+		WHERE
+			mmbrNo = #{mmbrNo}
+		]]>
+	</delete>
+
+	<select id="selectEmailExistYn" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT
+			IF(COUNT(m.mmbrNo) > 0, 'Y', 'N') AS existYn
+		FROM
+			mmbr m
+		WHERE
+			m.email = encVal(TRIM(#{email}))
+		]]>
+	</select>
+
+	<select id="selectNickNmExistYn" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT
+			IF(COUNT(m.mmbrNo) > 0, 'Y', 'N') AS existYn
+		FROM
+			mmbr m
+		WHERE
+			m.nickNm = TRIM(#{nickNm})
+		]]>
+	</select>
+
+</mapper>

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-@Repository("comDAO")
+@Repository
 public class ComDao extends AbstractDao {
 
     @SuppressWarnings("unchecked")

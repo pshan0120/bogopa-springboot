@@ -43,6 +43,15 @@ public class SessionUtils {
         }
     }
 
+    public static Boolean isMemberLogin() {
+        try {
+            getCurrentMemberId();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static Boolean isAdminMemberLogin() {
         try {
             return ADMIN_MEMBER_ID.equals(getCurrentMemberId());

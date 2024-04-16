@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+
+	<select id="selectMyPage" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				m.mmbrNo,
+				encVal(m.mmbrNo) AS mmbrScrtKey,
+				IFNULL(decVal(m.email), '') AS email,
+				IFNULL(m.nickNm, '') AS nickNm,
+				m.mmbrTypeCd,
+				cd.nm AS mmbrTypeNm,
+				IFNULL(m.intrdctn, '') AS intrdctn,
+				IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
+				IFNULL(cm2.clubNm, '무소속') AS mmbrClubNm,
+				(SELECT
+					COUNT(*)
+				FROM
+					playMmbr pm1
+				WHERE
+					pm1.mmbrNo = m.mmbrNo
+				) AS playCnt,
+				IF(cm2.mstrMmbrNo = m.mmbrNo,
+					'Y',
+					'N'
+				) AS mstrMmbrYn,
+				IFNULL(cm2.clubNo, '') AS clubNo,
+				IFNULL((SELECT
+					IF((CURDATE() BETWEEN cf3.feeFromDate AND cf3.feeToDate),
+						'Y',
+						'N'
+					)
+				FROM
+					clubFee cf3,
+					mmbr m3,
+					club c3
+				WHERE
+					cf3.mmbrNo = m3.mmbrNo
+				AND
+					cf3.clubNo = c3.clubNo
+				AND
+					cf3.clubNo = cm2.clubNo
+				AND
+					cf3.mmbrNo = m.mmbrNo
+				AND
+					cf3.payYn = 'Y'
+				AND
+					cf3.cnfrmYn = 'Y'
+				AND
+					cf3.feeTypeCd = '2'
+				), 'N') AS myClubFee2Yn,
+				IFNULL(cm2.feeType2Amt, '') AS feeType2Amt
+			FROM
+				mmbr m
+				LEFT JOIN (
+					SELECT
+						cm1.mmbrNo,
+						c1.clubNo,
+						c1.clubNm,
+						c1.mstrMmbrNo,
+						c1.feeType2Amt
+					FROM
+						club c1,
+						clubMmbr cm1
+					WHERE
+						c1.clubNo = cm1.clubNo
+				) cm2 ON m.mmbrNo = cm2.mmbrNo,
+				cd cd
+			WHERE
+				m.mmbrTypeCd = cd.cd
+			AND
+				cd.grpCd = 'C001'
+			AND
+				m.useYn = 'Y'
+			AND
+				m.mmbrNo = #{mmbrNo}
+		]]>
+	</select>
+	
+	<select id="selectMyPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				c.clubNo,
+				c.clubNm,
+				p.playNo,
+				p.playNm,
+				g.gameNo,
+				g.gameNm,
+				IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,
+				p.sttsCd,
+				cdNm('C002', p.sttsCd) AS sttsNm,
+				(SELECT
+					GROUP_CONCAT(m1.nickNm ORDER BY m1.mmbrNo SEPARATOR ',')
+				FROM
+					play p1,
+					playMmbr pm1,
+					mmbr m1
+				WHERE
+					p1.playNo = pm1.playNo
+				AND
+					pm1.mmbrNo = m1.mmbrNo
+				AND
+					p1.playNo = p.playNo
+				) AS playNickNms,
+				(SELECT
+					GROUP_CONCAT(m2.mmbrNo ORDER BY m2.mmbrNo SEPARATOR ',')
+				FROM
+					play p2,
+					playMmbr pm2,
+					mmbr m2
+				WHERE
+					p2.playNo = pm2.playNo
+				AND
+					pm2.mmbrNo = m2.mmbrNo
+				AND
+					p2.playNo = p.playNo
+				) AS playMmbrNos,
+				(SELECT
+					GROUP_CONCAT(IFNULL(m3.prflImgFileNm, 'default') ORDER BY m3.mmbrNo SEPARATOR ',')
+				FROM
+					play p3,
+					playMmbr pm3,
+					mmbr m3
+				WHERE
+					p3.playNo = pm3.playNo
+				AND
+					pm3.mmbrNo = m3.mmbrNo
+				AND
+					p3.playNo = p.playNo
+				) AS playMmbrPrflImgFileNms,
+				IFNULL(pm.rsltRnk, '') AS rsltRnk,
+				IFNULL(pm.rsltScr, '') AS rsltScr,
+				IFNULL(pm.rsltPnt, '') AS rsltPnt
+			FROM
+				play p,
+				playMmbr pm,
+				game g,
+				mmbr m,
+				club c
+			WHERE
+				p.playNo = pm.playNo
+			AND
+				p.gameNo = g.gameNo
+			AND
+				pm.mmbrNo = m.mmbrNo
+			AND
+				p.clubNo = c.clubNo
+			AND
+				pm.mmbrNo = #{mmbrNo}
+			ORDER BY
+				p.playNo DESC
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectMyPlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				play p,
+				playMmbr pm,
+				game g,
+				mmbr m,
+				club c
+			WHERE
+				p.playNo = pm.playNo
+			AND
+				p.gameNo = g.gameNo
+			AND
+				pm.mmbrNo = m.mmbrNo
+			AND
+				p.clubNo = c.clubNo
+			AND
+				pm.mmbrNo = #{mmbrNo}
+		]]>
+	</select>
+	
+	
+	<select id="selectMyClubMmbrList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				c.clubNo,
+				c.clubNm,
+				cm.mmbrNo,
+				cm.clubMmbrGrdCd,
+				cdNm('C003', cm.clubMmbrGrdCd) AS clubMmbrGrdNm,
+				cm.fromDate,
+				m.nickNm,
+				IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
+				IFNULL(m.intrdctn, '') AS intrdctn,
+				(SELECT
+					COUNT(*)
+				FROM
+					playMmbr pm1
+				WHERE
+					pm1.mmbrNo = m.mmbrNo
+				) AS playCnt,
+				IFNULL(
+					(SELECT
+						CONCAT(MIN(cf1.feeFromDate), ' ~ ', MAX(cf1.feeToDate))
+					FROM
+						clubFee cf1,
+						club c1
+					WHERE
+						cf1.clubNo = c1.clubNo
+					AND
+						cf1.clubNo = c.clubNo
+					AND
+						cf1.mmbrNo = m.mmbrNo
+					AND
+						cf1.feeTypeCd = '2'
+					AND
+						cf1.cnfrmYn = 'Y'
+					AND
+						CURDATE() BETWEEN cf1.feeFromDate AND cf1.feeToDate
+					GROUP BY
+						cf1.clubNo,
+						cf1.mmbrNo
+					), '') AS feeDate
+			FROM
+				club c,
+				clubMmbr cm,
+				mmbr m
+			WHERE
+				c.clubNo = cm.clubNo
+			AND
+				cm.mmbrNo = m.mmbrNo
+			AND
+				EXISTS
+				(SELECT
+					*
+				FROM
+					clubMmbr
+				WHERE
+					mmbrNo = #{mmbrNo}
+				AND
+					clubNo = c.clubNo
+				)
+			ORDER BY
+				cm.fromDate
+		<include refid="com.pagingPost"/>
+	</select>
+	
+	<select id="selectMyClubMmbrListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				club c,
+				clubMmbr cm,
+				mmbr m
+			WHERE
+				c.clubNo = cm.clubNo
+			AND
+				cm.mmbrNo = m.mmbrNo
+			AND
+				EXISTS
+				(SELECT
+					*
+				FROM
+					clubMmbr
+				WHERE
+					mmbrNo = #{mmbrNo}
+				AND
+					clubNo = c.clubNo
+				)
+		]]>
+	</select>
+	
+</mapper>

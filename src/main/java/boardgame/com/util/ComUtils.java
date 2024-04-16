@@ -1,32 +1,22 @@
 package boardgame.com.util;
 
+import boardgame.com.dao.ComDao;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.codec.binary.Base32;
+import org.springframework.stereotype.Component;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.lang.reflect.Array;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
-import javax.annotation.Resource;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.codec.binary.Base32;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
-
-import boardgame.com.dao.ComDao;
-
-@Component("comUtils")
+@Component
+@RequiredArgsConstructor
 public class ComUtils {
-	
-	Logger log = Logger.getLogger(this.getClass());
-	
-	@Resource(name="comDAO")
-	private ComDao comDAO;
+
+	private final ComDao comDAO;
 	
 	public static String getRandomString(){
 		return UUID.randomUUID().toString().replaceAll("-", "");
@@ -140,7 +130,7 @@ public class ComUtils {
 		return (int) truncatedHash;
 	}
 	
-	public static String getNewPswd() throws Exception {
+	public static String getNewPswd() {
 		// 1. 임의의 문자열 생성
 		StringBuffer sb = new StringBuffer();
 		StringBuffer sc = new StringBuffer("#!$"); // 특수문자 모음, {}[] 같은
@@ -165,13 +155,13 @@ public class ComUtils {
 		return sb.toString();
 	}
 	
-	public List<Map<String, Object>> getCdList(String groupCd) throws Exception {
+	public List<Map<String, Object>> getCdList(String groupCd) {
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("grpCd", groupCd);
 		return comDAO.selectCdList(map);
 	}
 	
-	public String getCdNm(String groupCd, String cd) throws Exception {
+	public String getCdNm(String groupCd, String cd) {
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("grpCd", groupCd);
 		map.put("cd", cd);

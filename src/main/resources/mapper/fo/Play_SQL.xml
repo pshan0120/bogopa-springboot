@@ -1,0 +1,2116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="play">
+
+	<select id="selectPlayRcrd" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				p.playNo,
+				p.playNm,
+				COUNT(pm.seq) AS playMmbrCnt,
+				p.hostMmbrNo,
+				m.nickNm AS hostMmbrNm,
+				c.clubNm,
+				g.gameNo,
+				g.gameNm,
+				DATE_FORMAT(p.strtDt, "%Y.%m.%d %H:%i") AS strtDt,
+				IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,
+				p.sttsCd,
+				cdNm('C002', p.sttsCd) AS sttsNm
+			FROM
+				play p,
+				playMmbr pm,
+				club c,
+				game g,
+				mmbr m
+			WHERE
+				p.playNo = pm.playNo
+			AND
+				p.clubNo = c.clubNo
+			AND
+				p.gameNo = g.gameNo
+			AND
+				p.hostMmbrNo = m.mmbrNo
+			AND
+				p.playNo = #{playNo}
+			GROUP BY
+				p.playNo
+		]]>
+	</select>
+
+	<select id="selectPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				pm.seq,
+				p.playNo,
+				pm.mmbrNo,
+				m.nickNm,
+				getGameSttngNm(p.gameNo, g.sttng1GrpCd, pm.sttng1Cd) AS sttng1Nm,
+				getGameSttngNm(p.gameNo, g.sttng2GrpCd, pm.sttng2Cd) AS sttng2Nm,
+				getGameSttngNm(p.gameNo, g.sttng3GrpCd, pm.sttng3Cd) AS sttng3Nm,
+				IFNULL(pm.rsltRnk, '') AS rsltRnk,
+				IFNULL(pm.rsltScr, '') AS rsltScr,
+				IFNULL(pm.rsltPnt, '') AS rsltPnt,
+				IFNULL(pm.fdbck, '') AS fdbck,
+				IFNULL(pm.fdbckImgFileNm, '') AS fdbckImgFileNm,
+				(SELECT
+					IFNULL(ROUND(AVG(pm1.rsltPnt), 0), 0)
+				FROM
+					play p1,
+					game g1,
+					playMmbr pm1
+				WHERE
+					p1.gameNo = g1.gameNo
+				AND
+					p1.playNo = pm1.playNo
+				AND
+					p1.gameNo = p.gameNo
+				AND
+					pm1.mmbrNo = m.mmbrNo
+				) AS playPnt
+			FROM
+				play p,
+				game g,
+				playMmbr pm,
+				mmbr m
+			WHERE
+				p.gameNo = g.gameNo
+			AND
+				p.playNo = pm.playNo
+			AND
+				pm.mmbrNo = m.mmbrNo
+			AND
+				p.playNo = #{playNo}
+			ORDER BY
+				pm.rsltRnk
+		]]>
+	</select>
+
+
+	<select id="selectClubList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				c.clubNo,
+				c.clubNm,
+				c.mstrMmbrNo,
+				m.nickNm AS mstrNickNm,
+				IFNULL(m.prflImgFileNm, '') AS mstrPrflImgFileNm,
+				c.clubTypeCd,
+				cdNm('C004', c.clubTypeCd) AS clubTypeNm,
+				c.clubGrdCd,
+				cdNm('C005', c.clubGrdCd) AS clubGrdNm,
+				IFNULL(c.telNo, '') AS telNo,
+				CONCAT(IFNULL(c.addrs1, ''), ' ', IFNULL(c.addrs2, '')) AS addrs,
+				IFNULL(c.lat, '') AS lat,
+				IFNULL(c.lng, '') AS lng,
+				IFNULL(c.prflImgFileNm, '') AS prflImgFileNm,
+				(SELECT
+					IF(COUNT(*) > 0, 'Y', 'N')
+				FROM
+					clubMmbr cm1
+				WHERE
+					c.clubNo = cm1.clubNo
+				AND
+					cm1.mmbrNo = #{mmbrNo}
+				) AS myClubYn,
+				(SELECT
+					COUNT(*)
+				FROM
+					clubGame cg1
+				WHERE
+					c.clubNo = cg1.clubNo
+				) AS clubGameHasYCnt,
+				(SELECT
+					COUNT(*)
+				FROM
+					clubMmbr cm2
+				WHERE
+					c.clubNo = cm2.clubNo
+				) AS clubMmbrCnt,
+				IFNULL((SELECT
+					MAX(DATE(p1.endDt))
+				FROM
+					play p1
+				WHERE
+					c.clubNo = p1.clubNo
+				), '') AS clubPlayDateMax
+			FROM
+				club c,
+				mmbr m
+			WHERE
+				c.mstrMmbrNo = m.mmbrNo
+			AND
+				c.useYn = 'Y'
+			<if test="srchText != null and srchText != ''">
+			AND
+				(c.clubNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				c.addrs1 LIKE CONCAT('%',#{srchText},'%')
+				OR
+				m.nickNm LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+			ORDER BY
+				c.clubNo
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectClubListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				club c,
+				mmbr m
+			WHERE
+				c.mstrMmbrNo = m.mmbrNo
+			AND
+				c.useYn = 'Y'
+			<if test="srchText != null and srchText != ''">
+			AND
+				(c.clubNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				c.addrs1 LIKE CONCAT('%',#{srchText},'%')
+				OR
+				m.nickNm LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+	</select>
+
+	<select id="selectClubBrdList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				cb.seq,
+				cb.mmbrNo,
+				m.nickNm,
+				IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
+				cb.brdTypeCd,
+				cdNm('C007', cb.brdTypeCd) AS brdTypeNm,
+				cb.title,
+				cb.cntnts,
+				DATE_FORMAT(cb.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				clubBrd cb,
+				mmbr m
+			WHERE
+				cb.mmbrNo = m.mmbrNo
+			AND
+				cb.useYn = 'Y'
+			AND
+				m.useYn = 'Y'
+			ORDER BY
+				cb.seq
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectClubBrdListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				clubBrd cb,
+				mmbr m
+			WHERE
+				cb.mmbrNo = m.mmbrNo
+			AND
+				cb.useYn = 'Y'
+			AND
+				m.useYn = 'Y'
+		]]>
+	</select>
+
+	<select id="selectClubBrd" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				cb.seq,
+				cb.mmbrNo,
+				m.nickNm,
+				IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
+				cb.brdTypeCd,
+				cdNm('C007', cb.brdTypeCd) AS brdTypeNm,
+				cb.title,
+				cb.cntnts,
+				DATE_FORMAT(cb.insDt, "%Y.%m.%d %H:%i") AS insDt
+			FROM
+				clubBrd cb,
+				mmbr m
+			WHERE
+				cb.mmbrNo = m.mmbrNo
+			AND
+				cb.seq = #{seq}
+		]]>
+	</select>
+
+	<insert id="insertClubBrd" parameterType="hashmap">
+			INSERT INTO clubBrd
+			(
+				clubNo,
+				mmbrNo,
+				brdTypeCd,
+				title,
+				cntnts,
+				useYn,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{clubNo},
+				#{mmbrNo},
+				#{brdTypeCd},
+				TRIM(#{title}),
+				TRIM(#{cntnts}),
+				'Y',
+				'system',
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+
+	<update id="updateClubBrd" parameterType="hashmap">
+			UPDATE
+				clubBrd
+			SET
+			<if test="brdTypeCd != null and brdTypeCd != ''">
+				brdTypeCd = #{brdTypeCd},
+			</if>
+			<if test="title != null and title != ''">
+				title = TRIM(#{title}),
+			</if>
+			<if test="cntnts != null and cntnts != ''">
+				cntnts = TRIM(#{cntnts}),
+			</if>
+			<if test="useYn != null and useYn != ''">
+				useYn = #{useYn},
+			</if>
+				updId = 'system',
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				seq = #{seq}
+	</update>
+
+	<delete id="deleteClubBrd" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				clubBrd
+			WHERE
+				seq = #{seq}
+		]]>
+	</delete>
+
+
+	<insert id="insertClub" parameterType="hashmap">
+			INSERT INTO club
+			(
+				clubNo,
+				clubNm,
+				mstrMmbrNo,
+				clubTypeCd,
+				clubGrdCd,
+			<if test="telNo != null and telNo != ''">
+				telNo,
+			</if>
+			<if test="addrs1 != null and addrs1 != ''">
+				addrs1,
+			</if>
+			<if test="addrs2 != null and addrs2 != ''">
+				addrs2,
+			</if>
+			<if test="zipCd != null and zipCd != ''">
+				zipCd,
+			</if>
+			<if test="lat != null and lat != ''">
+				lat,
+			</if>
+			<if test="lng != null and lng != ''">
+				lng,
+			</if>
+			<if test="feeAccntBankCd != null and feeAccntBankCd != ''">
+				feeAccntBankCd,
+			</if>
+			<if test="feeAccntNo != null and feeAccntNo != ''">
+				feeAccntNo,
+			</if>
+			<if test="feeAccntNm != null and feeAccntNm != ''">
+				feeAccntNm,
+			</if>
+			<if test="feeType1Amt != null and feeType1Amt != ''">
+				feeType1Amt,
+			</if>
+			<if test="feeType2Amt != null and feeType2Amt != ''">
+				feeType2Amt,
+			</if>
+			<if test="prflImgFileNm != null and prflImgFileNm != ''">
+				prflImgFileNm,
+			</if>
+			<if test="intrdctn != null and intrdctn != ''">
+				intrdctn,
+			</if>
+			<if test="joinQstn != null and joinQstn != ''">
+				joinQstn,
+			</if>
+				useYn,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{clubNo},
+				#{clubNm},
+				#{mmbrNo},
+				#{clubTypeCd},
+				#{clubGrdCd},
+			<if test="telNo != null and telNo != ''">
+				#{telNo},
+			</if>
+			<if test="addrs1 != null and addrs1 != ''">
+				#{addrs1},
+			</if>
+			<if test="addrs2 != null and addrs2 != ''">
+				#{addrs2},
+			</if>
+			<if test="zipCd != null and zipCd != ''">
+				#{zipCd},
+			</if>
+			<if test="lat != null and lat != ''">
+				#{lat},
+			</if>
+			<if test="lng != null and lng != ''">
+				#{lng},
+			</if>
+			<if test="feeAccntBankCd != null and feeAccntBankCd != ''">
+				#{feeAccntBankCd},
+			</if>
+			<if test="feeAccntNo != null and feeAccntNo != ''">
+				#{feeAccntNo},
+			</if>
+			<if test="feeAccntNm != null and feeAccntNm != ''">
+				#{feeAccntNm},
+			</if>
+			<if test="feeType1Amt != null and feeType1Amt != ''">
+				REPLACE(#{feeType1Amt}, ',', ''),
+			</if>
+			<if test="feeType2Amt != null and feeType2Amt != ''">
+				REPLACE(#{feeType2Amt}, ',', ''),
+			</if>
+			<if test="prflImgFileNm != null and prflImgFileNm != ''">
+				#{prflImgFileNm},
+			</if>
+			<if test="intrdctn != null and intrdctn != ''">
+				TRIM(#{intrdctn}),
+			</if>
+			<if test="joinQstn != null and joinQstn != ''">
+				TRIM(#{joinQstn}),
+			</if>
+				'Y',
+				'system',
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+
+	<update id="updateClub" parameterType="hashmap">
+			UPDATE
+				club
+			SET
+			<if test="clubNm != null and clubNm != ''">
+				clubNm = #{clubNm},
+			</if>
+			<if test="mstrMmbrNo != null and mstrMmbrNo != ''">
+				mstrMmbrNo = #{mstrMmbrNo},
+			</if>
+			<if test="clubTypeCd != null and clubTypeCd != ''">
+				clubTypeCd = #{clubTypeCd},
+			</if>
+			<if test="clubGrdCd != null and clubGrdCd != ''">
+				clubGrdCd = #{clubGrdCd},
+			</if>
+			<if test="prmmFromDate != null and prmmFromDate != ''">
+				prmmFromDate = #{prmmFromDate},
+			</if>
+			<if test="prmmToDate != null and prmmToDate != ''">
+				prmmToDate = #{prmmToDate},
+			</if>
+			<if test="telNo != null and telNo != ''">
+				telNo = #{telNo},
+			</if>
+			<if test="addrs1 != null and addrs1 != ''">
+				addrs1 = #{addrs1},
+			</if>
+			<if test="addrs2 != null and addrs2 != ''">
+				addrs2 = #{addrs2},
+			</if>
+			<if test="zipCd != null and zipCd != ''">
+				zipCd = #{zipCd},
+			</if>
+			<if test="lat != null and lat != ''">
+				lat = #{lat},
+			</if>
+			<if test="lng != null and lng != ''">
+				lng = #{lng},
+			</if>
+			<if test="feeAccntBankCd != null and feeAccntBankCd != ''">
+				feeAccntBankCd = #{feeAccntBankCd},
+			</if>
+			<if test="feeAccntNo != null and feeAccntNo != ''">
+				feeAccntNo = #{feeAccntNo},
+			</if>
+			<if test="feeAccntNm != null and feeAccntNm != ''">
+				feeAccntNm = #{feeAccntNm},
+			</if>
+			<if test="feeType1Amt != null and feeType1Amt != ''">
+				feeType1Amt = REPLACE(#{feeType1Amt}, ',', ''),
+			</if>
+			<if test="feeType2Amt != null and feeType2Amt != ''">
+				feeType2Amt = REPLACE(#{feeType2Amt}, ',', ''),
+			</if>
+			<if test="prflImgFileNm != null and prflImgFileNm != ''">
+				prflImgFileNm = #{prflImgFileNm},
+			</if>
+			<if test="intrdctn != null and intrdctn != ''">
+				intrdctn = TRIM(#{intrdctn}),
+			</if>
+			<if test="joinQstn != null and joinQstn != ''">
+				joinQstn = TRIM(#{joinQstn}),
+			</if>
+			<if test="useYn != null and useYn != ''">
+				useYn = #{useYn},
+			</if>
+				updId = 'system',
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				clubNo = #{clubNo}
+	</update>
+
+	<delete id="deleteClub" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				club
+			WHERE
+				clubNo = #{clubNo}
+		]]>
+	</delete>
+
+
+	<insert id="insertClubMmbr" parameterType="hashmap">
+			INSERT INTO clubMmbr
+			(
+				clubNo,
+				mmbrNo,
+				clubMmbrGrdCd,
+				fromDate,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{clubNo},
+				#{mmbrNo},
+				#{clubMmbrGrdCd},
+				CURDATE(),
+				'system',
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+
+	<update id="updateClubMmbr" parameterType="hashmap">
+			UPDATE
+				clubMmbr
+			SET
+			<if test="clubMmbrGrdCd != null and clubMmbrGrdCd != ''">
+				clubMmbrGrdCd = #{clubMmbrGrdCd},
+			</if>
+			<if test="fromDate != null and fromDate != ''">
+				fromDate = #{fromDate},
+			</if>
+				updId = 'system',
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				clubNo = #{clubNo}
+			AND
+				mmbrNo = #{mmbrNo}
+	</update>
+
+	<delete id="deleteClubMmbr" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				clubMmbr
+			WHERE
+				clubNo = #{clubNo}
+			AND
+				mmbrNo = #{mmbrNo}
+		]]>
+	</delete>
+
+
+	<insert id="insertClubJoin" parameterType="hashmap">
+			INSERT INTO clubJoin
+			(
+				clubNo,
+				mmbrNo,
+				joinAnswr,
+				reqDate,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{clubNo},
+				#{mmbrNo},
+				TRIM(#{joinAnswr}),
+				CURDATE(),
+				'system',
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+
+	<update id="updateClubJoin" parameterType="hashmap">
+			UPDATE
+				clubJoin
+			SET
+			<if test="mode == 'cnfrm'.toString()">
+				cnfrmYn = 'Y',
+				cnfrmDate = CURDATE(),
+			</if>
+			<if test="mode == 'rjct'.toString()">
+				cnfrmYn = 'N',
+				cnfrmDate = CURDATE(),
+			</if>
+				updId = 'system',
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				seq = #{seq}
+	</update>
+
+	<delete id="deleteClubJoin" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				clubJoin
+			WHERE
+				clubNo = #{clubNo}
+			AND
+				mmbrNo = #{mmbrNo}
+		]]>
+	</delete>
+
+
+	<select id="selectClubPrfl" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				c.clubNo,
+				c.clubNm,
+				c.mstrMmbrNo,
+				m.nickNm AS mstrMmbrNm,
+				c.clubTypeCd,
+				cdNm('C004', c.clubTypeCd) AS clubTypeNm,
+				c.clubGrdCd,
+				cdNm('C005', c.clubGrdCd) AS clubGrdNm,
+				IFNULL(c.telNo, '') AS telNo,
+				CONCAT(IFNULL(c.addrs1, ''), ' ', IFNULL(c.addrs2, '')) AS addrs,
+				IFNULL(c.prflImgFileNm, '') AS prflImgFileNm,
+				IFNULL(c.intrdctn, '') AS intrdctn,
+				IFNULL(c.joinQstn, '') AS joinQstn,
+				(SELECT
+					IF(COUNT(*) > 0, 'Y', 'N')
+				FROM
+					clubMmbr cm1
+				WHERE
+					cm1.mmbrNo = #{mmbrNo}
+				) AS clubJoinYn,
+				(SELECT
+					IF(COUNT(*) > 0, 'Y', 'N')
+				FROM
+					clubMmbr cm1
+				WHERE
+					c.clubNo = cm1.clubNo
+				AND
+					cm1.mmbrNo = #{mmbrNo}
+				) AS quitClubYn,
+				(SELECT
+					IF(COUNT(*) > 0, 'Y', 'N')
+				FROM
+					clubJoin cj1
+				WHERE
+					cj1.cnfrmYn IS NULL
+				AND
+					cj1.mmbrNo = #{mmbrNo}
+				) AS mmbrClubJoinIngYn,
+				(SELECT
+					IF(COUNT(*) > 0, 'Y', 'N')
+				FROM
+					clubJoin cj2
+				WHERE
+					c.clubNo = cj2.clubNo
+				AND
+					cj2.cnfrmYn IS NULL
+				AND
+					cj2.mmbrNo = #{mmbrNo}
+				) AS joinClubIngYn,
+				IF(c.mstrMmbrNo = #{mmbrNo},
+					'Y',
+					'N'
+				) AS mstrMmbrYn
+			FROM
+				club c,
+				mmbr m
+			WHERE
+				c.mstrMmbrNo = m.mmbrNo
+			AND
+				c.clubNo = #{clubNo}
+		]]>
+	</select>
+
+	<select id="selectClubMmbrList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				cm.mmbrNo,
+				m.nickNm,
+				cm.clubMmbrGrdCd,
+				cdNm('C003', cm.clubMmbrGrdCd) AS clubMmbrGrdNm,
+				cm.fromDate,
+				IFNULL(m.prflImgFileNm, 'default') AS prflImgFileNm,
+				(SELECT
+					COUNT(*)
+				FROM
+					playMmbr pm1
+				WHERE
+					pm1.mmbrNo = m.mmbrNo
+				) AS playCnt
+			FROM
+				club c,
+				clubMmbr cm,
+				mmbr m
+			WHERE
+				c.clubNo = cm.clubNo
+			AND
+				cm.mmbrNo = m.mmbrNo
+			AND
+				c.useYn = 'Y'
+			AND
+				m.useYn = 'Y'
+			AND
+				c.clubNo = #{clubNo}
+			ORDER BY
+				cm.fromDate
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectClubMmbrListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				club c,
+				clubMmbr cm,
+				mmbr m
+			WHERE
+				c.clubNo = cm.clubNo
+			AND
+				cm.mmbrNo = m.mmbrNo
+			AND
+				c.useYn = 'Y'
+			AND
+				m.useYn = 'Y'
+			AND
+				c.clubNo = #{clubNo}
+		]]>
+	</select>
+
+
+	<select id="selectClubGameList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				cg.gameNo,
+				g.gameNm,
+				g.minPlyrCnt,
+				g.maxPlyrCnt,
+				(SELECT
+					COUNT(*)
+				FROM
+					play p1
+				WHERE
+					p1.clubNo = cg.clubNo
+				AND
+					p1.gameNo = cg.gameNo
+				) AS playCnt
+			FROM
+				club c,
+				clubGame cg,
+				game g
+			WHERE
+				c.clubNo = cg.clubNo
+			AND
+				cg.gameNo = g.gameNo
+			AND
+				c.useYn = 'Y'
+			AND
+				c.clubNo = #{clubNo}
+			ORDER BY
+				cg.gameNo
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectClubGameListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				club c,
+				clubGame cg,
+				game g
+			WHERE
+				c.clubNo = cg.clubNo
+			AND
+				cg.gameNo = g.gameNo
+			AND
+				c.useYn = 'Y'
+			AND
+				c.clubNo = #{clubNo}
+		]]>
+	</select>
+
+
+	<select id="selectClubMapList" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				c.clubNo,
+				c.clubNm,
+				c.mstrMmbrNo,
+				m.nickNm AS mstrNickNm,
+				IFNULL(m.prflImgFileNm, '') AS mstrPrflImgFileNm,
+				c.clubTypeCd,
+				cdNm('C004', c.clubTypeCd) AS clubTypeNm,
+				c.clubGrdCd,
+				cdNm('C005', c.clubGrdCd) AS clubGrdNm,
+				IFNULL(c.telNo, '') AS telNo,
+				CONCAT(IFNULL(c.addrs1, ''), ' ', IFNULL(c.addrs2, '')) AS addrs,
+				IFNULL(c.lat, '') AS lat,
+				IFNULL(c.lng, '') AS lng,
+				IFNULL(c.prflImgFileNm, '') AS prflImgFileNm,
+				(SELECT
+					COUNT(*)
+				FROM
+					clubGame cg1
+				WHERE
+					c.clubNo = cg1.clubNo
+				) AS clubGameHasYCnt,
+				(SELECT
+					COUNT(*)
+				FROM
+					clubMmbr cm2
+				WHERE
+					c.clubNo = cm2.clubNo
+				) AS clubMmbrCnt,
+				IFNULL((SELECT
+					MAX(DATE(p1.endDt))
+				FROM
+					play p1
+				WHERE
+					c.clubNo = p1.clubNo
+				), '') AS clubPlayDateMax
+			FROM
+				club c,
+				mmbr m
+			WHERE
+				c.mstrMmbrNo = m.mmbrNo
+			AND
+				c.useYn = 'Y'
+			<if test="srchText != null and srchText != ''">
+			AND
+				(c.clubNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				c.addrs1 LIKE CONCAT('%',#{srchText},'%')
+				OR
+				m.nickNm LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+			ORDER BY
+				c.clubNo
+	</select>
+
+
+	<select id="selectMyClub" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				c.clubNo,
+				c.clubNm,
+				c.mstrMmbrNo,
+				m.nickNm AS mstrMmbrNm,
+				c.clubTypeCd,
+				cdNm('C004', c.clubTypeCd) AS clubTypeNm,
+				c.clubGrdCd,
+				cdNm('C005', c.clubGrdCd) AS clubGrdNm,
+				IFNULL(c.prmmFromDate, '') AS prmmFromDate,
+				IFNULL(c.prmmToDate, '') AS prmmToDate,
+				IFNULL(c.telNo, '') AS telNo,
+				IFNULL(c.addrs1, '') AS addrs1,
+				IFNULL(c.addrs2, '') AS addrs2,
+				IFNULL(c.zipCd, '') AS zipCd,
+				IFNULL(c.feeAccntBankCd, '') AS feeAccntBankCd,
+				IFNULL(c.feeAccntNo, '') AS feeAccntNo,
+				IFNULL(c.feeAccntNm, '') AS feeAccntNm,
+				IFNULL(c.feeType1Amt, 0) AS feeType1Amt,
+				IFNULL(c.feeType2Amt, 0) AS feeType2Amt,
+				IFNULL(c.prflImgFileNm, '') AS prflImgFileNm,
+				IFNULL(c.intrdctn, '') AS intrdctn,
+				IFNULL(c.joinQstn, '') AS joinQstn,
+				IFNULL((SELECT
+					ca.attndDate
+				FROM
+					clubAttnd ca
+				WHERE
+					ca.clubNo = c.clubNo
+				AND
+					ca.attndDate >= CURDATE()
+				AND
+					ca.cnfrmYn IS NULL
+				GROUP BY
+					ca.attndDate
+				ORDER BY
+					ca.attndDate
+				LIMIT 1
+				), '') AS attndDateMin
+			FROM
+				club c,
+				mmbr m
+			WHERE
+				c.mstrMmbrNo = m.mmbrNo
+			AND
+				c.mstrMmbrNo = #{mmbrNo}
+		]]>
+	</select>
+
+
+	<select id="selectMyClubPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				p.playNo,
+				p.playNm,
+				g.gameNo,
+				g.gameNm,
+				IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,
+				p.sttsCd,
+				cdNm('C002', p.sttsCd) AS sttsNm,
+				(SELECT
+					GROUP_CONCAT(m1.nickNm ORDER BY pm1.rsltRnk, m1.mmbrNo SEPARATOR ',')
+				FROM
+					play p1,
+					playMmbr pm1,
+					mmbr m1
+				WHERE
+					p1.playNo = pm1.playNo
+				AND
+					pm1.mmbrNo = m1.mmbrNo
+				AND
+					p1.playNo = p.playNo
+				) AS playNickNms,
+				(SELECT
+					GROUP_CONCAT(m2.mmbrNo ORDER BY pm2.rsltRnk, m2.mmbrNo SEPARATOR ',')
+				FROM
+					play p2,
+					playMmbr pm2,
+					mmbr m2
+				WHERE
+					p2.playNo = pm2.playNo
+				AND
+					pm2.mmbrNo = m2.mmbrNo
+				AND
+					p2.playNo = p.playNo
+				) AS playMmbrNos,
+				(SELECT
+					GROUP_CONCAT(IFNULL(m3.prflImgFileNm, 'default') ORDER BY pm3.rsltRnk, m3.mmbrNo SEPARATOR ',')
+				FROM
+					play p3,
+					playMmbr pm3,
+					mmbr m3
+				WHERE
+					p3.playNo = pm3.playNo
+				AND
+					pm3.mmbrNo = m3.mmbrNo
+				AND
+					p3.playNo = p.playNo
+				) AS playMmbrPrflImgFileNms,
+				IFNULL((SELECT
+					GROUP_CONCAT(m4.nickNm ORDER BY m4.mmbrNo SEPARATOR ',')
+				FROM
+					play p4,
+					playMmbr pm4,
+					mmbr m4
+				WHERE
+					p4.playNo = pm4.playNo
+				AND
+					pm4.mmbrNo = m4.mmbrNo
+				AND
+					p4.playNo = p.playNo
+				AND
+					pm4.rsltRnk = 1
+				), '') AS bestPlayNickNms
+			FROM
+				play p,
+				game g,
+				club c
+			WHERE
+				p.gameNo = g.gameNo
+			AND
+				p.clubNo = c.clubNo
+			AND
+				p.clubNo = #{clubNo}
+			ORDER BY
+				p.playNo DESC
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectMyClubPlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				play p,
+				game g,
+				club c
+			WHERE
+				p.gameNo = g.gameNo
+			AND
+				p.clubNo = c.clubNo
+			AND
+				p.clubNo = #{clubNo}
+		]]>
+	</select>
+
+	<select id="selectMyClubJoinList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				cj.seq,
+				cj.mmbrNo,
+				m.nickNm,
+				cj.reqDate,
+				(SELECT
+					COUNT(*)
+				FROM
+					playMmbr pm1
+				WHERE
+					pm1.mmbrNo = m.mmbrNo
+				) AS playCnt,
+				IFNULL(m.intrdctn, '') AS intrdctn,
+				IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
+				IFNULL(cj.joinAnswr, '') AS joinAnswr
+			FROM
+				club c,
+				clubJoin cj,
+				mmbr m
+			WHERE
+				c.clubNo = cj.clubNo
+			AND
+				cj.mmbrNo = m.mmbrNo
+			AND
+				m.useYn = 'Y'
+			AND
+				m.mmbrTypeCd = '1'
+			AND
+				IFNULL(cj.cnfrmYn, '') = ''
+			AND
+				c.clubNo = #{clubNo}
+			ORDER BY
+				cj.seq
+		]]>
+	</select>
+
+	<select id="selectMyClubAttndNotCnfrmList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				ca.seq,
+				ca.clubNo,
+				c.clubNm,
+				IFNULL(c.prflImgFileNm, '') AS prflImgFileNm,
+				ca.attndDate,
+				IFNULL(ca.attndYn, 'N') AS attndYn
+			FROM
+				clubAttnd ca,
+				mmbr m,
+				club c
+			WHERE
+				ca.mmbrNo = m.mmbrNo
+			AND
+				ca.clubNo = c.clubNo
+			AND
+				ca.clubNo = #{clubNo}
+			AND
+				ca.mmbrNo = #{mmbrNo}
+			AND
+				IFNULL(ca.cnfrmYn, 'N') = 'N'
+			ORDER BY
+				ca.seq DESC
+		]]>
+	</select>
+
+	<select id="selectMyClubFeePayList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				cf.seq,
+				cf.clubNo,
+				c.clubNm,
+				IFNULL(c.prflImgFileNm, '') AS prflImgFileNm,
+				cf.feeAmt,
+				cf.feeTypeCd,
+				cdNm('C008', cf.feeTypeCd) AS feeTypeNm,
+				CONCAT(cf.feeFromDate, ' ~ ', cf.feeToDate) AS feeDate,
+				IFNULL(cf.payYn, 'N') AS payYn,
+				IFNULL(cf.payDate, '') AS payDate,
+				IFNULL(cf.cnfrmYn, 'N') AS cnfrmYn,
+				IFNULL(cf.cnfrmDate, '') AS cnfrmDate
+			FROM
+				clubFee cf,
+				mmbr m,
+				club c
+			WHERE
+				cf.mmbrNo = m.mmbrNo
+			AND
+				cf.clubNo = c.clubNo
+			AND
+				cf.mmbrNo = #{mmbrNo}
+			<if test="payYn != null and payYn != ''">
+			AND
+				IFNULL(cf.payYn, 'N') = #{payYn}
+			</if>
+			<if test="cnfrmYn != null and cnfrmYn != ''">
+			AND
+				IFNULL(cf.cnfrmYn, 'N') = #{cnfrmYn}
+			</if>
+			ORDER BY
+				cf.seq DESC
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectMyClubFeePayListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				clubFee cf,
+				mmbr m,
+				club c
+			WHERE
+				cf.mmbrNo = m.mmbrNo
+			AND
+				cf.clubNo = c.clubNo
+			AND
+				cf.mmbrNo = #{mmbrNo}
+			<if test="payYn != null and payYn != ''">
+			AND
+				IFNULL(cf.payYn, 'N') = #{payYn}
+			</if>
+			<if test="cnfrmYn != null and cnfrmYn != ''">
+			AND
+				IFNULL(cf.cnfrmYn, 'N') = #{cnfrmYn}
+			</if>
+	</select>
+
+	<select id="selectMyClubFeeList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				cf.seq,
+				cf.clubNo,
+				cf.mmbrNo,
+				m.nickNm,
+				IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
+				cf.feeAmt,
+				cf.feeTypeCd,
+				cdNm('C008', cf.feeTypeCd) AS feeTypeNm,
+				CONCAT(cf.feeFromDate, ' ~ ', cf.feeToDate) AS feeDate,
+				IFNULL(cf.payYn, 'N') AS payYn,
+				IFNULL(cf.payDate, '') AS payDate,
+				IFNULL(cf.cnfrmYn, 'N') AS cnfrmYn,
+				IFNULL(cf.cnfrmDate, '') AS cnfrmDate
+			FROM
+				clubFee cf,
+				mmbr m,
+				club c
+			WHERE
+				cf.mmbrNo = m.mmbrNo
+			AND
+				cf.clubNo = c.clubNo
+			AND
+				cf.clubNo = #{clubNo}
+			<if test="payYn != null and payYn != ''">
+			AND
+				IFNULL(cf.payYn, 'N') = #{payYn}
+			</if>
+			<if test="cnfrmYn != null and cnfrmYn != ''">
+			AND
+				IFNULL(cf.cnfrmYn, 'N') = #{cnfrmYn}
+			</if>
+			ORDER BY
+				cf.seq DESC
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectMyClubFeeListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				clubFee cf,
+				mmbr m,
+				club c
+			WHERE
+				cf.mmbrNo = m.mmbrNo
+			AND
+				cf.clubNo = c.clubNo
+			AND
+				cf.clubNo = #{clubNo}
+			<if test="payYn != null and payYn != ''">
+			AND
+				IFNULL(cf.payYn, 'N') = #{payYn}
+			</if>
+			<if test="cnfrmYn != null and cnfrmYn != ''">
+			AND
+				IFNULL(cf.cnfrmYn, 'N') = #{cnfrmYn}
+			</if>
+	</select>
+
+
+	<select id="selectPlayRcrdByAllList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				*
+			FROM
+				(SELECT
+					p.playNo,
+					p.playNm,
+					c.clubNo,
+					c.clubNm,
+					IFNULL(c.prflImgFileNm, '') AS clubPrflImgFileNm,
+					p.gameNo,
+					g.gameNm,
+					p.sttsCd,
+					cdNm('C002', p.sttsCd) AS sttsNm,
+					DATE_FORMAT(p.strtDt, "%Y.%m.%d %H:%i") AS strtDt,
+					IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt
+				FROM
+					play p,
+					game g,
+					club c
+				WHERE
+					p.gameNo = g.gameNo
+				AND
+					p.clubNo = c.clubNo
+				AND
+					c.useYn = 'Y'
+				) p1
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p1.playNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p1.gameNm LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				p1.playNo DESC
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				p1.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectPlayRcrdByAllListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				(SELECT
+					p.playNo,
+					p.playNm,
+					c.clubNo,
+					p.gameNo,
+					g.gameNm,
+					p.sttsCd,
+					cdNm('C002', p.sttsCd) AS sttsNm
+				FROM
+					play p,
+					game g,
+					club c
+				WHERE
+					p.playNo = g.gameNo
+				AND
+					p.clubNo = c.clubNo
+				AND
+					c.useYn = 'Y'
+				) p1
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p1.playNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p1.gameNm LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+	</select>
+
+
+	<select id="selectPlayRcrdByClubList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				*
+			FROM
+				(SELECT
+					c1.clubNo,
+					c1.clubNm,
+					IFNULL(c1.prflImgFileNm, '') AS prflImgFileNm,
+					c1.clubGrdCd,
+					cdNm('C005', c1.clubGrdCd) AS clubGrdNm,
+					GROUP_CONCAT(g1.gameNm ORDER BY p1.gamePlayCnt SEPARATOR ',') AS mostPlay3GameNms,
+					(SELECT
+						COUNT(playNo)
+					FROM
+						play
+					WHERE
+						clubNo = c1.clubNo
+					) AS clubPlayCnt,
+					(SELECT
+						COUNT(mmbrNo)
+					FROM
+						clubMmbr
+					WHERE
+						clubNo = c1.clubNo
+					) AS clubMmbrCnt
+				FROM
+					(SELECT
+						c.clubNo,
+						p.gameNo,
+						COUNT(p.playNo) AS gamePlayCnt
+					FROM
+						play p,
+						game g,
+						club c
+					WHERE
+						p.playNo = g.gameNo
+					AND
+						p.clubNo = c.clubNo
+					GROUP BY
+						c.clubNo,
+						p.gameNo
+					ORDER BY
+						COUNT(p.playNo) DESC
+					LIMIT 3
+					) p1,
+					club c1,
+					game g1
+				WHERE
+					p1.clubNo = c1.clubNo
+				AND
+					p1.gameNo = g1.gameNo
+				AND
+					c1.useYn = 'Y'
+				GROUP BY
+					c1.clubNo,
+					c1.clubNm
+				) p2
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p2.clubNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p2.mostPlay3GameNms LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				p2.clubNm
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				p2.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectPlayRcrdByClubListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				(SELECT
+					c1.clubNo,
+					c1.clubNm,
+					IFNULL(c1.prflImgFileNm, '') AS prflImgFileNm,
+					c1.clubGrdCd,
+					cdNm('C005', c1.clubGrdCd) AS clubGrdNm,
+					GROUP_CONCAT(g1.gameNm ORDER BY p1.gamePlayCnt SEPARATOR ',') AS mostPlay3GameNms,
+					(SELECT
+						COUNT(playNo)
+					FROM
+						play
+					WHERE
+						clubNo = c1.clubNo
+					) AS clubPlayCnt,
+					(SELECT
+						COUNT(mmbrNo)
+					FROM
+						clubMmbr
+					WHERE
+						clubNo = c1.clubNo
+					) AS clubMmbrCnt
+				FROM
+					(SELECT
+						c.clubNo,
+						p.gameNo,
+						COUNT(p.playNo) AS gamePlayCnt
+					FROM
+						play p,
+						game g,
+						club c
+					WHERE
+						p.playNo = g.gameNo
+					AND
+						p.clubNo = c.clubNo
+					GROUP BY
+						c.clubNo,
+						p.gameNo
+					ORDER BY
+						COUNT(p.playNo) DESC
+					LIMIT 3
+					) p1,
+					club c1,
+					game g1
+				WHERE
+					p1.clubNo = c1.clubNo
+				AND
+					p1.gameNo = g1.gameNo
+				AND
+					c1.useYn = 'Y'
+				GROUP BY
+					c1.clubNo,
+					c1.clubNm
+				) p2
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p2.clubNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p2.mostPlay3GameNms LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+	</select>
+
+	<select id="selectPlayRcrdByMmbrList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				*
+			FROM
+				(SELECT
+					p2.mmbrNo,
+					m2.nickNm,
+					IFNULL(m2.prflImgFileNm, '') AS prflImgFileNm,
+					GROUP_CONCAT(g2.gameNm ORDER BY p2.rnum SEPARATOR ',') AS mostPlay3GameNms,
+					(SELECT
+						ROUND(AVG(rsltPnt), 2)
+					FROM
+						play p3,
+						playMmbr pm3
+					WHERE
+						p3.sttsCd = '2'
+					AND
+						pm3.mmbrNo = p2.mmbrNo
+					) AS rsltPntAvg,
+					(SELECT
+						COUNT(*)
+					FROM
+						playMmbr pm4
+					WHERE
+						pm4.mmbrNo = p2.mmbrNo
+					) AS playCnt
+				FROM
+					(SELECT
+						p1.mmbrNo,
+						p1.gameNo,
+						(CASE
+							@vMmbrNo
+							WHEN p1.mmbrNo
+							THEN @rownum:=@rownum+1
+							ELSE @rownum:=1
+						END) rnum,
+						(@vMmbrNo:=mmbrNo)
+					FROM
+						(SELECT
+							m.mmbrNo,
+							p.gameNo,
+							COUNT(p.playNo) AS gamePlayCnt
+						FROM
+							play p,
+							playMmbr pm,
+							mmbr m,
+							game g
+						WHERE
+							p.playNo = pm.playNo
+						AND
+							pm.mmbrNo = m.mmbrNo
+						AND
+							p.playNo = g.gameNo
+						GROUP BY
+							m.mmbrNo,
+							p.gameNo
+						ORDER BY
+							m.mmbrNo,
+							p.gameNo
+						) p1,
+						(SELECT
+							@vMmbrNo:='',
+							@rownum:=0
+						FROM
+							DUAL
+						) r
+					) p2,
+					game g2,
+					mmbr m2
+				WHERE
+					p2.gameNo = g2.gameNo
+				AND
+					p2.mmbrNo = m2.mmbrNo
+				AND
+					p2.rnum <![CDATA[<]]> 4
+				GROUP BY
+					p2.mmbrNo
+				) p3
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p3.nickNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p3.mostPlay3GameNms LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				p3.nickNm
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				p3.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectPlayRcrdByMmbrListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				(SELECT
+					p2.mmbrNo,
+					m2.nickNm,
+					IFNULL(m2.prflImgFileNm, '') AS prflImgFileNm,
+					GROUP_CONCAT(g2.gameNm ORDER BY p2.rnum SEPARATOR ',') AS mostPlay3GameNmss,
+					(SELECT
+						ROUND(AVG(rsltPnt), 2)
+					FROM
+						play p3,
+						playMmbr pm3
+					WHERE
+						p3.sttsCd = '2'
+					AND
+						pm3.mmbrNo = p2.mmbrNo
+					) AS rsltPntAvg,
+					(SELECT
+						COUNT(*)
+					FROM
+						playMmbr pm4
+					WHERE
+						pm4.mmbrNo = p2.mmbrNo
+					) AS playCnt
+				FROM
+					(SELECT
+						p1.mmbrNo,
+						p1.gameNo,
+						(CASE
+							@vMmbrNo
+							WHEN p1.mmbrNo
+							THEN @rownum:=@rownum+1
+							ELSE @rownum:=1
+						END) rnum,
+						(@vMmbrNo:=mmbrNo)
+					FROM
+						(SELECT
+							m.mmbrNo,
+							p.gameNo,
+							COUNT(p.playNo) AS gamePlayCnt
+						FROM
+							play p,
+							playMmbr pm,
+							mmbr m,
+							game g
+						WHERE
+							p.playNo = pm.playNo
+						AND
+							pm.mmbrNo = m.mmbrNo
+						AND
+							p.playNo = g.gameNo
+						GROUP BY
+							m.mmbrNo,
+							p.gameNo
+						ORDER BY
+							m.mmbrNo,
+							p.gameNo
+						) p1,
+						(SELECT
+							@vMmbrNo:='',
+							@rownum:=0
+						FROM
+							DUAL
+						) r
+					) p2,
+					game g2,
+					mmbr m2
+				WHERE
+					p2.gameNo = g2.gameNo
+				AND
+					p2.mmbrNo = m2.mmbrNo
+				AND
+					p2.rnum <![CDATA[<]]> 4
+				GROUP BY
+					p2.mmbrNo
+				) p3
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p3.nickNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p3.mostPlay3GameNms LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+	</select>
+
+	<select id="selectPlayRcrdByGameList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+			SELECT
+				*
+			FROM
+				(SELECT
+					g2.gameNo,
+					g2.gameNm,
+					g2.gameEngNm,
+					GROUP_CONCAT(m2.mmbrNo ORDER BY p2.rnum SEPARATOR ',') AS mostPlay3MmbrNos,
+					GROUP_CONCAT(m2.nickNm ORDER BY p2.rnum SEPARATOR ',') AS mostPlay3NickNms,
+					GROUP_CONCAT(IFNULL(m2.prflImgFileNm, 'default') ORDER BY p2.rnum SEPARATOR ',') AS mostPlay3MmbrPrflImgFileNms,
+					IFNULL((SELECT
+						c3.clubNm
+					FROM
+						play p3,
+						club c3
+					WHERE
+						p3.clubNo = c3.clubNo
+					AND
+						p3.sttsCd = '2'
+					AND
+						p3.gameNo = p2.gameNo
+					GROUP BY
+						p3.clubNo
+					ORDER BY
+						COUNT(p3.playNo) DESC
+					LIMIT
+						1
+					), '') AS mostPlayClubNm,
+					(SELECT
+						COUNT(*)
+					FROM
+						play p4,
+						club c4
+					WHERE
+						p4.clubNo = c4.clubNo
+					AND
+						p4.gameNo = p2.gameNo
+					) AS playCnt
+				FROM
+					(SELECT
+						p1.gameNo,
+						p1.mmbrNo,
+						(CASE
+							@vGameNo
+							WHEN p1.gameNo
+							THEN @rownum:=@rownum+1
+							ELSE @rownum:=1
+						END) rnum,
+						(@vGameNo:=gameNo)
+					FROM
+						(SELECT
+							p.gameNo,
+							pm.mmbrNo,
+							COUNT(p.playNo) AS gamePlayCnt
+						FROM
+							game g,
+							play p,
+							playMmbr pm,
+							mmbr m
+						WHERE
+							p.playNo = g.gameNo
+						AND
+							p.playNo = pm.playNo
+						GROUP BY
+							p.gameNo,
+							pm.mmbrNo
+						ORDER BY
+							p.gameNo,
+							pm.mmbrNo
+						) p1,
+						(SELECT
+							@vGameNo:='',
+							@rownum:=0
+						FROM
+							DUAL
+						) r
+					) p2,
+					game g2,
+					mmbr m2
+				WHERE
+					p2.gameNo = g2.gameNo
+				AND
+					p2.mmbrNo = m2.mmbrNo
+				AND
+					p2.rnum <![CDATA[<]]> 4
+				GROUP BY
+					p2.gameNo
+				) p3
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p3.gameNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p3.gameEngNm LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+			<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+				p3.gameNm
+			</if>
+			<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+				p3.${orderBy}
+			</if>
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectPlayRcrdByGameListCnt" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				(SELECT
+					g2.gameNo,
+					g2.gameNm,
+					g2.gameEngNm,
+					GROUP_CONCAT(m2.nickNm ORDER BY p2.rnum SEPARATOR ',') AS mostPlay3NicnkNm,
+					(SELECT
+						c3.clubNm
+					FROM
+						play p3,
+						club c3
+					WHERE
+						p3.clubNo = c3.clubNo
+					AND
+						p3.sttsCd = '2'
+					AND
+						p3.gameNo = p2.gameNo
+					GROUP BY
+						p3.clubNo
+					ORDER BY
+						COUNT(p3.playNo) DESC
+					LIMIT
+						1
+					) AS mostPlayClubNm,
+					(SELECT
+						COUNT(*)
+					FROM
+						play p4,
+						club c4
+					WHERE
+						p4.clubNo = c4.clubNo
+					AND
+						p4.gameNo = p2.gameNo
+					) AS playCnt
+				FROM
+					(SELECT
+						p1.gameNo,
+						p1.mmbrNo,
+						(CASE
+							@vGameNo
+							WHEN p1.gameNo
+							THEN @rownum:=@rownum+1
+							ELSE @rownum:=1
+						END) rnum,
+						(@vGameNo:=gameNo)
+					FROM
+						(SELECT
+							p.gameNo,
+							pm.mmbrNo,
+							COUNT(p.playNo) AS gamePlayCnt
+						FROM
+							game g,
+							play p,
+							playMmbr pm,
+							mmbr m
+						WHERE
+							p.playNo = g.gameNo
+						AND
+							p.playNo = pm.playNo
+						GROUP BY
+							p.gameNo,
+							pm.mmbrNo
+						ORDER BY
+							p.gameNo,
+							pm.mmbrNo
+						) p1,
+						(SELECT
+							@vGameNo:='',
+							@rownum:=0
+						FROM
+							DUAL
+						) r
+					) p2,
+					game g2,
+					mmbr m2
+				WHERE
+					p2.gameNo = g2.gameNo
+				AND
+					p2.mmbrNo = m2.mmbrNo
+				AND
+					p2.rnum <![CDATA[<]]> 4
+				GROUP BY
+					p2.gameNo
+				) p3
+			WHERE
+				1=1
+			<if test="srchText != null and srchText != ''">
+			AND
+				(p3.gameNm LIKE CONCAT('%',#{srchText},'%')
+				OR
+				p3.gameEngNm LIKE CONCAT('%',#{srchText},'%'))
+			</if>
+	</select>
+
+	<select id="selectPlayJoinMmbrList" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				m.mmbrNo,
+				m.nickNm
+			FROM
+				mmbr m
+			WHERE
+				m.useYn = 'Y'
+			AND
+				m.mmbrNo != #{hostMmbrNo}
+			AND
+				EXISTS
+				(SELECT
+					*
+				FROM
+					clubMmbr
+				WHERE
+					mmbrNo = m.mmbrNo
+				AND
+					clubNo = #{clubNo}
+				)
+			/*AND
+				NOT EXISTS
+				(SELECT
+					*
+				FROM
+					play p1,
+					playMmbr pm1
+				WHERE
+					p1.playNo = pm1.playNo
+				AND
+					pm1.mmbrNo = m.mmbrNo
+				AND
+					p1.sttsCd = '1'
+				)*/
+			ORDER BY
+				m.nickNm
+	</select>
+
+
+	<insert id="insertPlay" parameterType="hashmap" useGeneratedKeys="true"  keyProperty="playNo">
+			INSERT INTO play
+			(
+				playNm,
+				gameNo,
+				clubNo,
+				hostMmbrNo,
+				sttsCd,
+				strtDt,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{playNm},
+				#{gameNo},
+				#{clubNo},
+				#{hostMmbrNo},
+				#{sttsCd},
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+
+	<update id="updatePlay" parameterType="hashmap">
+			UPDATE
+				play
+			SET
+			<if test="playNm != null and playNm != ''">
+				playNm = TRIM(#{playNm}),
+			</if>
+			<if test="mode == 'end'.toString()">
+				sttsCd = '2',
+				endDt = CURRENT_TIMESTAMP,
+			</if>
+				updId = 'system',
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				playNo = #{playNo}
+	</update>
+
+	<delete id="deletePlay" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				play
+			WHERE
+				playNo = #{playNo}
+		]]>
+	</delete>
+
+
+	<insert id="insertPlayMmbr" parameterType="hashmap">
+			INSERT INTO playMmbr
+			(
+				playNo,
+				mmbrNo,
+			<if test="sttng1Cd != null and sttng1Cd != ''">
+				sttng1Cd,
+			</if>
+			<if test="sttng2Cd != null and sttng2Cd != ''">
+				sttng2Cd,
+			</if>
+			<if test="sttng3Cd != null and sttng3Cd != ''">
+				sttng3Cd,
+			</if>
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{playNo},
+				#{mmbrNo},
+			<if test="sttng1Cd != null and sttng1Cd != ''">
+				#{sttng1Cd},
+			</if>
+			<if test="sttng2Cd != null and sttng2Cd != ''">
+				#{sttng2Cd},
+			</if>
+			<if test="sttng3Cd != null and sttng3Cd != ''">
+				#{sttng3Cd},
+			</if>
+				'system',
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+
+	<update id="updatePlayMmbr" parameterType="hashmap">
+			UPDATE
+				playMmbr
+			SET
+			<if test="sttng1Cd != null and sttng1Cd != ''">
+				sttng1Cd = #{sttng1Cd},
+			</if>
+			<if test="sttng2Cd != null and sttng2Cd != ''">
+				sttng2Cd = #{sttng2Cd},
+			</if>
+			<if test="sttng3Cd != null and sttng3Cd != ''">
+				sttng3Cd = #{sttng3Cd},
+			</if>
+			<if test="rsltRnk != null and rsltRnk != ''">
+				rsltRnk = #{rsltRnk},
+			</if>
+			<if test="rsltScr != null and rsltScr != ''">
+				rsltScr = #{rsltScr},
+			</if>
+			<if test="rsltPnt != null and rsltPnt != ''">
+				rsltPnt = #{rsltPnt},
+			</if>
+			<if test="fdbck != null and fdbck != ''">
+				fdbck = TRIM(#{fdbck}),
+			</if>
+			<if test="fdbckImgFileNm != null and fdbckImgFileNm != ''">
+				fdbckImgFileNm = TRIM(#{fdbckImgFileNm}),
+			</if>
+				updId = 'system',
+				updDt = CURRENT_TIMESTAMP
+			WHERE
+				seq = #{seq}
+	</update>
+
+	<select id="selectBocPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+		SELECT
+		*
+		FROM
+		(SELECT
+		p.playNo,
+		p.playNm,
+		c.clubNo,
+		c.clubNm,
+		IFNULL(c.prflImgFileNm, '') AS clubPrflImgFileNm,
+		p.gameNo,
+		g.gameNm,
+		p.sttsCd,
+		cdNm('C002', p.sttsCd) AS sttsNm,
+		DATE_FORMAT(p.strtDt, "%Y.%m.%d %H:%i") AS strtDt,
+		IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt
+		FROM
+		play p,
+		game g,
+		club c
+		WHERE
+		p.gameNo = g.gameNo
+		AND
+		p.clubNo = c.clubNo
+		AND
+		c.useYn = 'Y'
+		AND
+		p.gameNo = 1951
+		) p1
+		WHERE
+		1=1
+		<if test="srchText != null and srchText != ''">
+			AND
+			(p1.playNm LIKE CONCAT('%',#{srchText},'%')
+			OR
+			p1.gameNm LIKE CONCAT('%',#{srchText},'%'))
+		</if>
+		<if test="orderBy == null or orderBy == ''">
+			ORDER BY
+			p1.playNo DESC
+		</if>
+		<if test="orderBy != null and orderBy != ''">
+			ORDER BY
+			p1.${orderBy}
+		</if>
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectBocPlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+		SELECT
+		COUNT(*) AS cnt
+		FROM
+		(SELECT
+		p.playNo,
+		p.playNm,
+		c.clubNo,
+		p.gameNo,
+		g.gameNm,
+		p.sttsCd,
+		cdNm('C002', p.sttsCd) AS sttsNm
+		FROM
+		play p,
+		game g,
+		club c
+		WHERE
+		p.playNo = g.gameNo
+		AND
+		p.clubNo = c.clubNo
+		AND
+		c.useYn = 'Y'
+		AND
+		p.gameNo = 1951
+		) p1
+		WHERE
+		1=1
+		<if test="srchText != null and srchText != ''">
+			AND
+			(p1.playNm LIKE CONCAT('%',#{srchText},'%')
+			OR
+			p1.gameNm LIKE CONCAT('%',#{srchText},'%'))
+		</if>
+	</select>
+
+	<select id="selectMainPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT
+			c.clubNo,
+			c.clubNm,
+			p.playNo,
+			p.playNm,
+			g.gameNo,
+			g.gameNm,
+			DATE_FORMAT(p.strtDt, "%Y.%m.%d %H:%i") AS strtDt,
+			IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,
+			(SELECT
+				 GROUP_CONCAT(m1.nickNm ORDER BY m1.mmbrNo SEPARATOR ',')
+			 FROM
+				 play p1,
+				 playMmbr pm1,
+				 mmbr m1
+			 WHERE
+				 p1.playNo = pm1.playNo
+			   AND
+				 pm1.mmbrNo = m1.mmbrNo
+			   AND
+				 p1.playNo = p.playNo
+			) AS playNickNms,
+			(SELECT
+				 GROUP_CONCAT(m2.mmbrNo ORDER BY m2.mmbrNo SEPARATOR ',')
+			 FROM
+				 play p2,
+				 playMmbr pm2,
+				 mmbr m2
+			 WHERE
+				 p2.playNo = pm2.playNo
+			   AND
+				 pm2.mmbrNo = m2.mmbrNo
+			   AND
+				 p2.playNo = p.playNo
+			) AS playMmbrNos,
+			(SELECT
+				 GROUP_CONCAT(IFNULL(m3.prflImgFileNm, 'default') ORDER BY m3.mmbrNo SEPARATOR ',')
+			 FROM
+				 play p3,
+				 playMmbr pm3,
+				 mmbr m3
+			 WHERE
+				 p3.playNo = pm3.playNo
+			   AND
+				 pm3.mmbrNo = m3.mmbrNo
+			   AND
+				 p3.playNo = p.playNo
+			) AS playMmbrPrflImgFileNms,
+			IFNULL(c.prflImgFileNm, '') AS clubPrflImgFileNm
+		FROM
+			play p,
+			game g,
+			club c
+		WHERE
+			p.gameNo = g.gameNo
+		  AND
+			p.clubNo = c.clubNo
+		  AND
+			c.useYn = 'Y'
+		ORDER BY
+			p.playNo DESC
+			LIMIT 10
+		]]>
+	</select>
+
+</mapper>

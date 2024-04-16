@@ -41,4 +41,13 @@ public class GameServiceImpl implements GameService {
     public void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto playNo) {
         gameDao.deletePlayLogByPlayNo(playNo);
     }
+
+    public List<Map<String, Object>> selectGameNoList(Map<String, Object> map) {
+        return gameDao.selectGameNoList(map);
+    }
+
+    public List<Map<String, Object>> selectGameSttngList(Map<String, Object> map) {
+        return gameDao.selectGameSttngList(map);
+    }
+    
 }

@@ -31,4 +31,13 @@ public class GameDao extends AbstractDao {
         insert("game.deletePlayLogByPlayNo", playNo);
     }
 
+    /* 게임 */
+    public List<Map<String, Object>> selectGameNoList(Map<String, Object> map) {
+        return selectList("game.selectGameNoList", map);
+    }
+
+    public List<Map<String, Object>> selectGameSttngList(Map<String, Object> map) {
+        return selectList("game.selectGameSttngList", map);
+    }
+
 }

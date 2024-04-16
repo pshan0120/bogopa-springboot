@@ -1,57 +1,43 @@
 package boardgame.bo.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletRequest;
-import javax.annotation.Resource;
-
+import boardgame.bo.service.BoService;
+import boardgame.com.mapping.CommandMap;
+import boardgame.com.service.ComService;
+import boardgame.com.session.SessionListener;
+import boardgame.com.util.ScrapUtils;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import boardgame.bo.service.BoService;
-import boardgame.com.mapping.CommandMap;
-import boardgame.com.service.ComService;
-import boardgame.com.session.SessionListener;
-import boardgame.com.util.ComUtils;
-import boardgame.com.util.ScrapUtils;
-import boardgame.com.util.MailUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Controller
+@RequiredArgsConstructor
 public class BoController {
-	Logger log = Logger.getLogger(this.getClass());
-	
+
 	public String mvPrefix = "/bo";
 	
-	@Resource(name="boService")
-	private BoService boService;
+	private final BoService boService;
 	
-	@Resource(name="comService")
-	private ComService comService;
-	
-	@Resource(name="comUtils")
-	private ComUtils comUtils;
-	
-	@Resource(name="mailUtils")
-	private MailUtils mailUtils;
-	
-	@Resource(name="scrapUtils")
-	private ScrapUtils scrapUtils;
+	private final ComService comService;
+
+	private final ScrapUtils scrapUtils;
 	
 	
 	/* 공통 */
 	@RequestMapping(value = "/bo")
-	public ModelAndView openBo(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openBo(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		String loginUserId = (String) session.getAttribute("userId");
@@ -64,7 +50,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/login")
-	public ModelAndView openLogin(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openLogin(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/login");
 		HttpSession session = request.getSession();
 		String fromUri = (String) session.getAttribute("fromUri");
@@ -81,7 +67,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value="/bo/login/bo/{id}")
-	public ModelAndView openLoginId(@PathVariable("id") String id, CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openLoginId(@PathVariable("id") String id, CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/login");
 		HttpSession session = request.getSession();
 		String fromUri = id;
@@ -100,7 +86,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/doLogin")
-	public ModelAndView doLogin(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView doLogin(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -135,7 +121,7 @@ public class BoController {
 		return mv;
 	}
 	
-	public void setLogin(Map<String, Object> map, HttpServletRequest request) throws Exception {
+	public void setLogin(Map<String, Object> map, HttpServletRequest request) {
 		SessionListener sessionListener = new SessionListener();
 		// IP 정보 입력
 		String ip = request.getHeader("X-FORWARDED-FOR");
@@ -162,13 +148,13 @@ public class BoController {
 		boService.insertUserLog(userMap);
 	}
 	
-	private String getLoginUserId(HttpServletRequest request) throws Exception {
+	private String getLoginUserId(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		return (String) session.getAttribute("userId");
 	}
 	
 	@RequestMapping(value = "/bo/logout")
-	public ModelAndView logout(CommandMap commandMap, HttpServletRequest request) throws Exception{
+	public ModelAndView logout(CommandMap commandMap, HttpServletRequest request){
 		// 동시접속자 접속(대기)를 위한 Listener 생성
 		SessionListener sessionListener = new SessionListener();
 		HttpSession session = request.getSession();
@@ -184,7 +170,7 @@ public class BoController {
 	
 	/* 회원관리 */
 	@RequestMapping(value = "/bo/mmbrList")
-	public ModelAndView openMmbrList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openMmbrList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/mmbrList");
 		// 상환상태
 		commandMap.put("grpCd", "C002");
@@ -193,42 +179,42 @@ public class BoController {
 	}
 	
 	@RequestMapping(value="/bo/selectMmbrList")
-	public ModelAndView selectMmbrList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectMmbrList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectMmbrList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/selectMmbr")
-	public ModelAndView selectMmbr(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectMmbr(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectMmbr(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectMmbrLogList")
-	public ModelAndView selectMmbrLogList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectMmbrLogList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectMmbrLogList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectMmbrCmmrcList")
-	public ModelAndView selectMmbrCmmrcList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectMmbrCmmrcList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectMmbrCmmrcList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectMmbrRepayList")
-	public ModelAndView selectMmbrRepayList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectMmbrRepayList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectMmbrRepayList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/updateMmbr")
-	public ModelAndView updateMmbr(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView updateMmbr(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -251,7 +237,7 @@ public class BoController {
 	
 	/* CRYPTO */
 	@RequestMapping(value = "/bo/cryptoBackTest")
-	public ModelAndView openCryptoBackTest(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openCryptoBackTest(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/cryptoBackTest");
 		// 챠트유형코드
 		commandMap.put("grpCd", "K001");
@@ -262,11 +248,11 @@ public class BoController {
 	}
 	
 	@RequestMapping(value="/bo/doCryptoBackTest")
-	public ModelAndView doCryptoBackTest(CommandMap commandMap) throws Exception {
+	public ModelAndView doCryptoBackTest(CommandMap commandMap) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<>();
 		
 		String apiId = String.valueOf(commandMap.get("apiId"));
 		resultMap.put("apiId", apiId);
@@ -625,7 +611,7 @@ public class BoController {
 							strtgyOwnDays++;
 						}
 						
-						Map<String, Object> strtgyMap = new HashMap<String, Object>();
+						Map<String, Object> strtgyMap = new HashMap<>();
 						strtgyMap.put("mrktCd", mrktCd);
 						strtgyMap.put("candleDtKst", candleDtKst);
 						strtgyMap.put("tradePrice", tradePrice);
@@ -691,13 +677,13 @@ public class BoController {
 	
 	
 	@RequestMapping(value = "/bo/cryptoApiTest")
-	public ModelAndView openCryptoApiTest(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openCryptoApiTest(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/cryptoApiTest");
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/doCryptoApiTest")
-	public ModelAndView doTestCryptoApiTest(CommandMap commandMap) throws Exception {
+	public ModelAndView doTestCryptoApiTest(CommandMap commandMap) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		
 		//mv.addObject("map", scrapUtils.scrapPortal(commandMap.getMap()));
@@ -709,7 +695,7 @@ public class BoController {
 	
 	/* MISC */
 	@RequestMapping(value = "/bo/testScrap")
-	public ModelAndView openTestScrap(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openTestScrap(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/testScrap");
 		return mv;
 	}
@@ -742,27 +728,27 @@ public class BoController {
 	/*---------- 참조 코드 ----------*/
 	/* 커머스관리 */
 	@RequestMapping(value = "/bo/cmmrcList")
-	public ModelAndView openCmmrcList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openCmmrcList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/cmmrcList");
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectCmmrcList")
-	public ModelAndView selectCmmrcList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectCmmrcList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectCmmrcList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectCmmrc")
-	public ModelAndView selectCmmrc(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectCmmrc(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectCmmrc(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/insertCmmrc")
-	public ModelAndView insertCmmrc(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView insertCmmrc(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -783,7 +769,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/updateCmmrc")
-	public ModelAndView updateCmmrc(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView updateCmmrc(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -804,7 +790,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/deleteCmmrc")
-	public ModelAndView deleteCmmrc(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView deleteCmmrc(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -826,7 +812,7 @@ public class BoController {
 	
 	/* 정산관리 */
 	@RequestMapping(value = "/bo/reqList")
-	public ModelAndView openReqList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openReqList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/reqList");
 		// 신청상태
 		commandMap.put("grpCd", "C001");
@@ -835,21 +821,21 @@ public class BoController {
 	}
 	
 	@RequestMapping(value="/bo/selectReqList")
-	public ModelAndView selectReqList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectReqList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectReqList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectReq")
-	public ModelAndView selectReq(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectReq(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectReq(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/insertReq")
-	public ModelAndView insertReq(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView insertReq(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -870,7 +856,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/updateReq")
-	public ModelAndView updateReq(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView updateReq(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -891,7 +877,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/deleteReq")
-	public ModelAndView deleteReq(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView deleteReq(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -911,11 +897,11 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/scrapCmmrc")
-	public ModelAndView scrapCmmrc(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView scrapCmmrc(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<>();
 		
 		Map<String, Object> map = boService.selectMmbrCmmrcList(commandMap.getMap());
 		List<Map<String, Object>> mmbrCmmrclist = (List<Map<String, Object>>) map.get("list");
@@ -944,7 +930,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/prepay")
-	public ModelAndView prepay(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView prepay(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -968,7 +954,7 @@ public class BoController {
 	
 	
 	@RequestMapping(value = "/bo/repayList")
-	public ModelAndView openRepayList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openRepayList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/repayList");
 		// 회차상환상태
 		commandMap.put("grpCd", "C002");
@@ -977,21 +963,21 @@ public class BoController {
 	}
 	
 	@RequestMapping(value="/bo/selectRepayList")
-	public ModelAndView selectRepayList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectRepayList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectRepayList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectRepay")
-	public ModelAndView selectRepay(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectRepay(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectRepay(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/insertRepay")
-	public ModelAndView insertRepay(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView insertRepay(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -1012,7 +998,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/updateRepay")
-	public ModelAndView updateRepay(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView updateRepay(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -1033,7 +1019,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/deleteRepay")
-	public ModelAndView deleteRepay(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView deleteRepay(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -1056,20 +1042,20 @@ public class BoController {
 	
 	/* 시스템관리 */
 	@RequestMapping(value = "/bo/userList")
-	public ModelAndView openUserList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openUserList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/userList");
 		return mv;
 	}
 	
 	@RequestMapping(value="/bo/selectUserList")
-	public ModelAndView selectUserList(CommandMap commandMap) throws Exception {
+	public ModelAndView selectUserList(CommandMap commandMap) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectUserList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/insertUser")
-	public ModelAndView insertUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView insertUser(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		String resultMsg = "";
 		Boolean result = false;
@@ -1096,14 +1082,14 @@ public class BoController {
 	}
 	
 	@RequestMapping(value="/bo/selectUser")
-	public ModelAndView selectUser(CommandMap commandMap) throws Exception {
+	public ModelAndView selectUser(CommandMap commandMap) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectUser(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/updateUser")
-	public ModelAndView updateUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView updateUser(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		String resultMsg = "";
 		Boolean result = false;
@@ -1119,7 +1105,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/deleteUser")
-	public ModelAndView deleteUser(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView deleteUser(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		String resultMsg = "";
 		Boolean result = false;
@@ -1135,7 +1121,7 @@ public class BoController {
 	
 	
 	@RequestMapping(value = "/bo/cdList")
-	public ModelAndView openCdList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView openCdList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(mvPrefix + "/cdList");
 		// 그룹코드
 		commandMap.put("grpCd", "GRPC");
@@ -1144,21 +1130,21 @@ public class BoController {
 	}
 	
 	@RequestMapping(value="/bo/selectCdList")
-	public ModelAndView selectCdList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectCdList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectCdList(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/selectCd")
-	public ModelAndView selectCd(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectCd(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectCd(commandMap.getMap()));
 		return mv;
 	}
 	
 	@RequestMapping(value = "/bo/insertCd")
-	public ModelAndView insertCd(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView insertCd(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -1180,7 +1166,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/updateCd")
-	public ModelAndView updateCd(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView updateCd(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		Boolean result = false;
 		String resultMsg = "";
@@ -1197,7 +1183,7 @@ public class BoController {
 	}
 	
 	@RequestMapping(value = "/bo/deleteCd")
-	public ModelAndView deleteCd(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView deleteCd(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		String resultMsg = "";
 		Boolean result = false;
@@ -1213,7 +1199,7 @@ public class BoController {
 	
 	
 	@RequestMapping(value="/bo/selectEmailHisList")
-	public ModelAndView selectEmailHisList(CommandMap commandMap, HttpServletRequest request) throws Exception {
+	public ModelAndView selectEmailHisList(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		mv.addObject("map", boService.selectEmailHisList(commandMap.getMap()));
 		return mv;

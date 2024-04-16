@@ -75,4 +75,56 @@
             playNo = #{playNo}
     </delete>
 
+    <select id="selectGameNoList" parameterType="hashmap" resultType="hashmap">
+        SELECT
+        g.gameNo,
+        g.gameNm,
+        g.minPlyrCnt,
+        g.maxPlyrCnt
+        FROM
+        game g
+        WHERE
+        1=1
+        <if test="gameNm != null and gameNm != ''">
+            AND
+            g.gameNm LIKE CONCAT('%',#{gameNm},'%')
+        </if>
+        ORDER BY
+        g.gameNm
+    </select>
+
+    <select id="selectGameSttngList" parameterType="hashmap" resultType="hashmap">
+        SELECT
+        gs.nm,
+        gs.cd,
+        IFNULL(gs.rmrk, '') AS rmrk
+        FROM
+        game g,
+        gameSttng gs
+        WHERE
+        g.gameNo = gs.gameNo
+        AND
+        g.gameNo = #{gameNo}
+        <if test="grpCd == '1'.toString()">
+            AND
+            g.sttng1GrpCd = gs.grpCd
+            AND
+            g.sttng1GrpCd = #{grpCd}
+        </if>
+        <if test="grpCd == '2'.toString()">
+            AND
+            g.sttng2GrpCd = gs.grpCd
+            AND
+            g.sttng2GrpCd = #{grpCd}
+        </if>
+        <if test="grpCd == '3'.toString()">
+            AND
+            g.sttng3GrpCd = gs.grpCd
+            AND
+            g.sttng3GrpCd = #{grpCd}
+        </if>
+        ORDER BY
+        gs.ordr
+    </select>
+
 </mapper>

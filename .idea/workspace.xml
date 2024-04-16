@@ -9,25 +9,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="투표 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/ReadPlayMemberListResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="구조 정리">
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/dao/BoardDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/presentation/BoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/service/BoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/service/BoardServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/guide/presentation/GuideController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/join/presentation/JoinController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/login/presentation/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/main/presentation/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/dao/MemberDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/mypage/dao/MypageDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/mypage/presentation/MypageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/mypage/service/MypageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/mypage/service/MypageServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dao/PlayDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Board_SQL.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Member_SQL.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Mypage_SQL.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/bo/controller/BoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/bo/controller/BoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/bo/service/BoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/bo/service/BoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/bo/service/BoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/bo/service/BoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/controller/ComController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/controller/ComController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/ComDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/ComDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/resolver/CustomMapArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/resolver/CustomMapArgumentResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/util/ComUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/ComUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/util/MailUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/MailUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/controller/FoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/presentation/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/dao/FoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/dao/ClubDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dao/GameDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dao/GameDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/service/FoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/service/FoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Fo_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Fo_SQL.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/playList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/playList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/join.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/join.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -64,50 +102,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.kotlinCompiler&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/resources/mapper/fo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.kotlinCompiler",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing" />
-      <recent name="D:\dev\bogopa\src\main\java\boardgame\com\aop" />
-      <recent name="D:\dev\bogopa\src\main\java\boardgame\com\util" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\modal" />
+      <recent name="D:\dev\bogopa\src\main\resources\mapper\fo" />
+      <recent name="D:\dev\bogopa\src\main\java\boardgame\fo" />
+      <recent name="D:\dev\bogopa\src\main\java\boardgame\fo\board\service" />
+      <recent name="D:\dev\bogopa\src\main\java\boardgame\fo\mypage\service" />
+      <recent name="D:\dev\bogopa\src\main\java\boardgame\fo\join\service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\resources\mapper\fo" />
+      <recent name="D:\dev\bogopa\src\main\resources\mapper\game" />
+      <recent name="D:\dev\bogopa\src\main\resources\mapper\member" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\boc\troubleBrewing" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\js" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing" />
-      <recent name="D:\dev\bogopa\src\main\webapp\js\com" />
-      <recent name="D:\dev\bogopa\src\main\resources\mapper\game" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="boardgame.fo.game.dto" />
-      <recent name="boardgame.com.service" />
-      <recent name="boardgame.fo.game.dao" />
-      <recent name="boardgame.fo.controller" />
+      <recent name="boardgame.fo.mypage.dao" />
+      <recent name="boardgame.fo.main.presentation" />
+      <recent name="boardgame.fo.board.dao" />
+      <recent name="boardgame.fo.board.presentation" />
+      <recent name="boardgame.fo.guide.presentation" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.64">
@@ -329,7 +368,8 @@
       <workItem from="1712968969639" duration="4259000" />
       <workItem from="1713006568865" duration="30312000" />
       <workItem from="1713056161704" duration="4733000" />
-      <workItem from="1713195475851" duration="4008000" />
+      <workItem from="1713195475851" duration="4429000" />
+      <workItem from="1713286187310" duration="7939000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -555,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713060283622</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="노트 추가">
+      <created>1713204396656</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1713204396656</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,8 +623,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="game 추가" />
-    <MESSAGE value="Baron 세팅 추가" />
     <MESSAGE value="첫날 밤 진행중" />
     <MESSAGE value="주정뱅이까지" />
     <MESSAGE value="주정뱅이까지 추가" />
@@ -601,7 +646,9 @@
     <MESSAGE value="imp 진행중" />
     <MESSAGE value="1차 완료" />
     <MESSAGE value="투표 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="투표 수정" />
+    <MESSAGE value="노트 추가" />
+    <MESSAGE value="구조 정리" />
+    <option name="LAST_COMMIT_MESSAGE" value="구조 정리" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
