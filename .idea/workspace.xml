@@ -9,28 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="구조 정리">
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/CustomPageImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/CustomPageRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/CustomPageResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/dto/ReadPageRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/presentation/BoardRestController.java" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="guide 수정중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/AbstractDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/AbstractDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/dao/BoardDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/dao/BoardDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/service/BoardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/board/service/BoardServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/DeletePlayLogAllRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/DeletePlayLogAllRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/SavePlayRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dto/SavePlayRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/context-aspect.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/context-aspect.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/context-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/context-mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/context-transaction.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/context-transaction.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/com/Com_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/com/Com_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Board_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Board_SQL.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/guide.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/guide.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/common.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,7 +324,7 @@
       <workItem from="1713056161704" duration="4733000" />
       <workItem from="1713195475851" duration="4429000" />
       <workItem from="1713286187310" duration="8394000" />
-      <workItem from="1713452049232" duration="5233000" />
+      <workItem from="1713452049232" duration="5491000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -590,7 +571,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713294296356</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="guide 수정중">
+      <created>1713460946811</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1713460946811</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -611,7 +599,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="첫날 밤 진행중" />
     <MESSAGE value="주정뱅이까지" />
     <MESSAGE value="주정뱅이까지 추가" />
     <MESSAGE value="세탁부 진행중" />
@@ -636,7 +623,8 @@
     <MESSAGE value="투표 수정" />
     <MESSAGE value="노트 추가" />
     <MESSAGE value="구조 정리" />
-    <option name="LAST_COMMIT_MESSAGE" value="구조 정리" />
+    <MESSAGE value="guide 수정중" />
+    <option name="LAST_COMMIT_MESSAGE" value="guide 수정중" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

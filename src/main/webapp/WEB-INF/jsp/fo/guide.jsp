@@ -206,26 +206,26 @@
                     <div class="nav-wrapper">
                         <ul class="nav nav-pills nav-fill flex-column flex-md-row mx-3" role="tablist" id="tabList">
                             <li class="nav-item px-1">
-                                <a class="nav-link active" id="guideTab1A" data-toggle="tab" href="#guideTab1"
-                                   role="tab" aria-controls="guideTab1" aria-selected="true">
+                                <a class="nav-link active" id="aboutTabA" data-toggle="tab" href="#aboutTab"
+                                   role="tab" aria-controls="aboutTab" aria-selected="true">
                                     서비스 소개
                                 </a>
                             </li>
                             <li class="nav-item px-1">
-                                <a class="nav-link" id="guideTab2A" data-toggle="tab" href="#guideTab2" role="tab"
-                                   aria-controls="guideTab2" aria-selected="true">
+                                <a class="nav-link" id="noticeTabA" data-toggle="tab" href="#noticeTab" role="tab"
+                                   aria-controls="noticeTab" aria-selected="true">
                                     공지사항
                                 </a>
                             </li>
                             <li class="nav-item px-1">
-                                <a class="nav-link" id="guideTab3A" data-toggle="tab" href="#guideTab3" role="tab"
-                                   aria-controls="guideTab3" aria-selected="false">
+                                <a class="nav-link" id="faqTabA" data-toggle="tab" href="#faqTab" role="tab"
+                                   aria-controls="faqTab" aria-selected="false">
                                     자주 묻는 질문
                                 </a>
                             </li>
                             <li class="nav-item px-1">
-                                <a class="nav-link" id="guideTab4A" data-toggle="tab" href="#guideTab4" role="tab"
-                                   aria-controls="guideTab4" aria-selected="false">
+                                <a class="nav-link" id="inquiryTabA" data-toggle="tab" href="#inquiryTab" role="tab"
+                                   aria-controls="inquiryTab" aria-selected="false">
                                     각종 문의
                                 </a>
                             </li>
@@ -234,8 +234,8 @@
                     <!-- 전체 탭 컨텐츠 -->
                     <div class="tab-content">
                         <!-- 소개 탭 컨텐츠 -->
-                        <div id="guideTab1" class="tab-pane fade show active" role="tabpanel"
-                             aria-labelledby="guideTab1A">
+                        <div id="aboutTab" class="tab-pane fade show active" role="tabpanel"
+                             aria-labelledby="aboutTabA">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
@@ -263,14 +263,14 @@
                             </div>
                         </div>
                         <!-- 공지사항 탭 컨텐츠 -->
-                        <div id="guideTab2" class="tab-pane fade" role="tabpanel" aria-labelledby="guideTab2A">
+                        <div id="noticeTab" class="tab-pane fade" role="tabpanel" aria-labelledby="noticeTabA">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="noticeBoardDiv">
                                 <form id="noticeBoardForm" onsubmit="return false;">
                                     <div class="row clearfix">
                                         <div class="col-lg-6">
@@ -296,7 +296,6 @@
                                         <tbody></tbody>
                                     </table>
                                 </div>
-
                             </div>
                             <div class="card-footer py-4">
                                 <nav aria-label="">
@@ -306,7 +305,7 @@
                             </div>
                         </div>
                         <!-- 자주 묻는 질문 탭 컨텐츠 -->
-                        <div id="guideTab3" class="tab-pane fade" role="tabpanel" aria-labelledby="guideTab3A">
+                        <div id="faqTab" class="tab-pane fade" role="tabpanel" aria-labelledby="faqTabA">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
@@ -348,7 +347,7 @@
                             </div>
                         </div>
                         <!-- 문의 탭 컨텐츠 -->
-                        <div id="guideTab4" class="tab-pane fade" role="tabpanel" aria-labelledby="guideTab4A">
+                        <div id="inquiryTab" class="tab-pane fade" role="tabpanel" aria-labelledby="inquiryTabA">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
