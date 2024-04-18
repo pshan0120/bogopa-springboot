@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import static boardgame.com.util.SessionUtils.isAdminMemberLogin;
 
 @ResponseStatus(HttpStatus.OK)
-@RequestMapping("/game")
 @Controller
 @RequiredArgsConstructor
 public class GameController {
@@ -57,13 +56,13 @@ public class GameController {
         return mv;
     }
 
-    @GetMapping("/trouble-brewing/play")
+    @GetMapping("/game/trouble-brewing/play")
     // @GetMapping({"", "/"})
     public String openPlayList() {
         return "/game/boc/troubleBrewing/playList";
     }
 
-    @GetMapping("/trouble-brewing/play/{playNo}")
+    @GetMapping("/game/trouble-brewing/play/{playNo}")
     public ModelAndView openPlayByPlayNo(@PathVariable("playNo") long playNo) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("playNo", playNo);
@@ -80,21 +79,21 @@ public class GameController {
         return mv;
     }
 
-    @GetMapping("/trouble-brewing/play/host/{playNo}")
+    @GetMapping("/game/trouble-brewing/play/host/{playNo}")
     public ModelAndView openHostPlayByPlayNo(@PathVariable("playNo") long playNo) {
         ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/hostPlay");
         mv.addObject("playNo", playNo);
         return mv;
     }
 
-    @GetMapping("/trouble-brewing/play/client/{playNo}")
+    @GetMapping("/game/trouble-brewing/play/client/{playNo}")
     public ModelAndView openClientPlayByPlayNo(@PathVariable("playNo") long playNo) {
         ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/clientPlay");
         mv.addObject("playNo", playNo);
         return mv;
     }
 
-    @GetMapping("/trouble-brewing/town/{playNo}")
+    @GetMapping("/game/trouble-brewing/town/{playNo}")
     public ModelAndView openTown(@PathVariable("playNo") long playNo) {
         ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/town");
         mv.addObject("playNo", playNo);

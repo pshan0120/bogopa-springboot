@@ -1,16 +1,16 @@
 package boardgame.com.dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import boardgame.com.aop.PrintQueryId;
+import boardgame.com.service.CustomPageRequest;
+import boardgame.com.service.CustomPageResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static boardgame.com.service.KeywordValidator.isBannedKeywordFound;
 import static boardgame.com.service.KeywordValidator.isBlackKeywordFound;
@@ -142,6 +142,19 @@ public class AbstractDao {
         params.put("end", nPageRow);
 
         return sqlSession.selectList(queryId, params);
+    }
+
+    @PrintQueryId
+    public <T, V extends CustomPageRequest> CustomPageResponse<T> selectPage(String listQueryId, String countQueryId, V pageRequest) {
+        pageRequest.initialize();
+
+        printQueryId(listQueryId);
+        List<T> list = sqlSession.selectList(listQueryId, pageRequest);
+
+        printQueryId(countQueryId);
+        Long count = sqlSession.selectOne(countQueryId, pageRequest);
+
+        return new CustomPageResponse<T>(list, pageRequest, count);
     }
 
 }

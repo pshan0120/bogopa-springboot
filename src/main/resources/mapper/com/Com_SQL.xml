@@ -18,6 +18,30 @@
 			LIMIT #{start}, #{end}
 		]]>
 	</sql>
+
+	<sql id="pagePrefix">
+        <![CDATA[
+		SELECT
+			PAGING.*
+		FROM(
+		]]>
+    </sql>
+
+	<sql id="pagePostfix">
+		<![CDATA[
+            ) PAGING
+        ]]>
+		<if test="sortBy != null and sortBy != ''">
+			<![CDATA[
+        ORDER BY
+            ${sortBy} ${direction}
+        ]]>
+		</if>
+		<![CDATA[
+        LIMIT
+            #{offset}, #{size}
+        ]]>
+	</sql>
 	
 	<select id="selectCdList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[

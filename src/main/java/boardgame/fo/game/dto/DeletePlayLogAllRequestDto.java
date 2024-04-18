@@ -8,7 +8,6 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DeletePlayLogAllRequestDto {
 
-    @NonNull
     private long playNo;
 
 }

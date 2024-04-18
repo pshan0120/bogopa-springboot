@@ -2,6 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 
+	<select id="selectBoardList" parameterType="boardgame.fo.board.dto.ReadPageRequestDto"
+			resultType="hashmap">
+		<include refid="com.pagePrefix"/>
+		SELECT
+			b.seq,
+			b.brdTypeCd,
+			b.title,
+			cdNm('C009', b.brdTypeCd) AS brdTypeNm,
+			IFNULL(DATE_FORMAT(b.insDt, "%Y.%m.%d %H:%i"), '') AS insDt
+		FROM
+			brd b
+		WHERE
+			b.brdTypeCd = #{brdTypeCd}
+		AND
+			b.useYn = 'Y'
+		<if test="searchText != null and searchText != ''">
+			AND
+				(b.title LIKE CONCAT('%',#{searchText},'%')
+			OR
+				b.cntnts LIKE CONCAT('%',#{searchText},'%'))
+		</if>
+		<include refid="com.pagePostfix"/>
+	</select>
+
+	<select id="selectBoardCount" parameterType="boardgame.fo.board.dto.ReadPageRequestDto" resultType="long">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			brd b
+		WHERE
+			b.brdTypeCd = #{brdTypeCd}
+		AND
+			b.useYn = 'Y'
+		<if test="searchText != null and searchText != ''">
+			AND
+				(b.title LIKE CONCAT('%',#{searchText},'%')
+			OR
+				b.cntnts LIKE CONCAT('%',#{searchText},'%'))
+		</if>
+	</select>
+
+
+
+
 	<select id="selectBrdList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
