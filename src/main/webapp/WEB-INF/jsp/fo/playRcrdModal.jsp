@@ -110,7 +110,7 @@
         $("#playMmbrFdbck .alert").removeClass("alert-default");
         $("#playMmbrFdbck .alert").addClass("alert-default");
         $("#playMmbrFdbckImg").empty();
-        var str = "<img src=\"http://203.245.28.115/img/play/" + seq + "/" + fdbckImgFileNm + "\" class=\"img-responsive img-thumbnail m-auto\">";
+        var str = "<img src=\"https://bogopayo.cafe24.com/img/play/" + seq + "/" + fdbckImgFileNm + "\" class=\"img-responsive img-thumbnail m-auto\">";
         $("#playMmbrFdbckImg").append(str);
         $("#fdbckDiv" + seq).removeClass("alert-default");
         $("#fdbckDiv" + seq).addClass("alert-success");

@@ -13,9 +13,9 @@
 		gfn_setDataVal(data.map, "mmbrPrflForm");
 		
 		if(data.map.prflImgFileNm != "") {
-			$("#mmbrPrflImg").attr("src", "http://203.245.28.115/img/mmbr/" + data.map.mmbrNo + "/" + data.map.prflImgFileNm);
+			$("#mmbrPrflImg").attr("src", "https://bogopayo.cafe24.com/img/mmbr/" + data.map.mmbrNo + "/" + data.map.prflImgFileNm);
 		} else {
-			$("#mmbrPrflImg").attr("src", "http://203.245.28.115/img/mmbr/default.png");
+			$("#mmbrPrflImg").attr("src", "https://bogopayo.cafe24.com/img/mmbr/default.png");
 		}
 		
 		$("#mmbrPrflModal").modal("show");

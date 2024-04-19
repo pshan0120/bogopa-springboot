@@ -66,9 +66,9 @@
                     str += "		<div class=\"media align-items-center\">";
                     str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openClubPrflModal('" + value.clubNo + "')\">";
                     if (value.clubPrflImgFileNm != "") {
-                        str += "			<img src=\"http://203.245.28.115/img/club/" + value.clubNo + "/" + value.clubPrflImgFileNm + "\">";
+                        str += "			<img src=\"https://bogopayo.cafe24.com/img/club/" + value.clubNo + "/" + value.clubPrflImgFileNm + "\">";
                     } else {
-                        str += "			<img src=\"http://203.245.28.115/img/club/default.png\">";
+                        str += "			<img src=\"https://bogopayo.cafe24.com/img/club/default.png\">";
                     }
                     str += "			</a>";
                     str += "			<div class=\"media-body\">";

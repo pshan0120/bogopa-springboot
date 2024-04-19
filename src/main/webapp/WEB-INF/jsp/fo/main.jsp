@@ -34,9 +34,9 @@
 				str += "		<div class=\"media align-items-center\">";
 				str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openClubPrflModal('" + value.clubNo + "')\">";
 				if(value.clubPrflImgFileNm != "") {
-					str += "			<img src=\"http://203.245.28.115/img/club/" + value.clubNo + "/" + value.clubPrflImgFileNm + "\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/club/" + value.clubNo + "/" + value.clubPrflImgFileNm + "\">";
 				} else {
-					str += "			<img src=\"http://203.245.28.115/img/club/default.png\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/club/default.png\">";
 				}
 				str += "			</a>";
 				str += "			<div class=\"media-body\">";
@@ -61,9 +61,9 @@
 				for(var i in playNickNms) {
 					str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm\" onclick=\"fn_openMmbrPrflModal('" + playMmbrNos[i] + "')\" data-toggle=\"tooltip\" data-original-title=\"" + playNickNms[i] + "\">";
 					if(playMmbrPrflImgFileNms[i] == "default") {
-						str += "			<img src=\"http://203.245.28.115/img/mmbr/default.png\" class=\"rounded-circle\">";
+						str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\" class=\"rounded-circle\">";
 					} else {
-						str += "			<img src=\"http://203.245.28.115/img/mmbr/" + playMmbrNos[i] + "/" + playMmbrPrflImgFileNms[i]  + "\" class=\"rounded-circle\">";
+						str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + playMmbrNos[i] + "/" + playMmbrPrflImgFileNms[i]  + "\" class=\"rounded-circle\">";
 					}
 					str += "			</a>";
 				}
@@ -95,9 +95,9 @@
 				str += "		<div class=\"media align-items-center\">";
 				str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openMmbrPrflModal('" + value.mmbrNo + "')\">";
 				if(value.prflImgFileNm != "") {
-					str += "			<img src=\"http://203.245.28.115/img/mmbr/" + value.mmbrNo + "/" + value.prflImgFileNm + "\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.prflImgFileNm + "\">";
 				} else {
-					str += "			<img src=\"http://203.245.28.115/img/mmbr/default.png\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\">";
 				}
 				str += "			</a>";
 				str += "			<div class=\"media-body\">";

@@ -51,9 +51,9 @@
 				str += "		<div class=\"media align-items-center\">";
 				str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openClubPrflModal('" + value.clubNo + "')\">";
 				if(value.prflImgFileNm != "") {
-					str += "			<img src=\"http://203.245.28.115/img/club/" + value.clubNo + "/" + value.prflImgFileNm + "\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/club/" + value.clubNo + "/" + value.prflImgFileNm + "\">";
 				} else {
-					str += "			<img src=\"http://203.245.28.115/img/club/default.png\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/club/default.png\">";
 				}
 				str += "			</a>";
 				str += "			<div class=\"media-body\">";
@@ -73,9 +73,9 @@
 				str += "		<div class=\"media align-items-center\">";
 				str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openMmbrPrflModal('" + value.mstrMmbrNo + "')\">";
 				if(value.mstrPrflImgFileNm != "") {
-					str += "			<img src=\"http://203.245.28.115/img/mmbr/" + value.mstrMmbrNo + "/" + value.mstrPrflImgFileNm + "\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mstrMmbrNo + "/" + value.mstrPrflImgFileNm + "\">";
 				} else {
-					str += "			<img src=\"http://203.245.28.115/img/mmbr/default.png\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\">";
 				}
 				str += "			</a>";
 				str += "			<div class=\"media-body\">";
@@ -98,9 +98,9 @@
 					var clubDsctn = "<div class=\"mapInfo\">";
 					clubDsctn += "	<div class=\"infoImg mt-2\">";
 					if(value.prflImgFileNm != "") {
-						clubDsctn += "	<img class=\"img-responsive img-thumbnail m-auto\" src=\"http://203.245.28.115/img/club/" + value.clubNo + "/" + value.prflImgFileNm + "\">";
+						clubDsctn += "	<img class=\"img-responsive img-thumbnail m-auto\" src=\"https://bogopayo.cafe24.com/img/club/" + value.clubNo + "/" + value.prflImgFileNm + "\">";
 					} else {
-						clubDsctn += "	<img class=\"img-responsive img-thumbnail m-auto\" src=\"http://203.245.28.115/img/club/default.png\">";
+						clubDsctn += "	<img class=\"img-responsive img-thumbnail m-auto\" src=\"https://bogopayo.cafe24.com/img/club/default.png\">";
 					}
 					clubDsctn += "	</div>";
 					clubDsctn += "	<div class=\"infoTitle\">" + value.clubNm + "</div>";
@@ -229,9 +229,9 @@
 				str += "		<div class=\"media align-items-center\">";
 				str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openMmbrPrflModal('" + value.mmbrNo + "')\">";
 				if(value.prflImgFileNm != "") {
-					str += "			<img src=\"http://203.245.28.115/img/mmbr/" + value.mmbrNo + "/" + value.prflImgFileNm + "\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.prflImgFileNm + "\">";
 				} else {
-					str += "			<img src=\"http://203.245.28.115/img/mmbr/default.png\">";
+					str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\">";
 				}
 				str += "			</a>";
 				str += "			<div class=\"media-body\">";
