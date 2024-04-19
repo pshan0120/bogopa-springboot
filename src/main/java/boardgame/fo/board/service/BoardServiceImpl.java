@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,20 +22,14 @@ public class BoardServiceImpl implements BoardService {
         return boardDao.selectBoardPage(dto);
     }
 
-
     @Override
-    public Map<String, Object> selectBrdList(Map<String, Object> map) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", boardDao.selectBrdList(map));
-        resultMap.put("cnt", boardDao.selectBrdListCnt(map).get("cnt"));
-        return resultMap;
+    @Transactional(readOnly = true)
+    public Map<String, Object> readById(long id) {
+        return boardDao.selectBoard(id);
     }
 
     @Override
-    public Map<String, Object> selectBrd(Map<String, Object> map) {
-        return boardDao.selectBrd(map);
-    }
-
+    @Transactional(readOnly = true)
     public List<Map<String, Object>> selectMainClubBrdList(Map<String, Object> map) {
         return boardDao.selectMainClubBrdList(map);
     }

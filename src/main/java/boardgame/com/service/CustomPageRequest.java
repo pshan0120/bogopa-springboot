@@ -9,8 +9,8 @@ import org.springframework.data.domain.Sort;
 @Setter
 public abstract class CustomPageRequest extends PageRequest {
 
-    private final Boolean descending;
-    private final String sortBy;
+    private Boolean descending;
+    private String sortBy;
     private int offset;
     private Sort.Direction direction;
 

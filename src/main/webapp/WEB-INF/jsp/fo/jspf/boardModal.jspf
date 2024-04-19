@@ -1,0 +1,78 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const boardModal = {
+        open: id => {
+            boardModal.readById(id);
+
+            $("#boardModal").modal("show");
+        },
+        readById: id => {
+            gfn_callGetApi("/api/board", {id})
+                .then(data => boardModal.readByIdCallback(data))
+                .catch(response => console.error('error', response));
+        },
+        readByIdCallback: data => {
+            const $boardModal = $("#boardModal");
+            const $form = $boardModal.find("form");
+
+            $form.find("input[name='boardTypeName']").val(BoardType.ofCode(data.boardTypeCode).title);
+            $form.find("input[name='insDt']").val(gfn_timestampToDate(data.insDt));
+            $form.find("input[name='title']").val(data.title);
+            $form.find("textarea[name='contents']").val(data.contents);
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<!-- 게시물 모달 -->
+<div class="modal fade" id="boardModal" role="dialog" aria-labelledby="boardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="boardModalLabel">게시물</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row clearfix">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label">게시물유형</label>
+                                <input type="text" name="boardTypeName" class="form-control form-control-alternative"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label">작성일시</label>
+                                <input type="text" name="insDt" class="form-control form-control-alternative" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label">제목</label>
+                                <input type="text" name="title" class="form-control form-control-alternative" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label">내용</label>
+                                <textarea rows="16" name="contents" class="form-control form-control-alternative"
+                                          readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

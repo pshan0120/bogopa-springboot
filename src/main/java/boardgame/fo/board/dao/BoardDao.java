@@ -15,17 +15,8 @@ public class BoardDao extends AbstractDao {
         return selectPage("board.selectBoardList", "board.selectBoardCount", dto);
     }
 
-
-    public List<Map<String, Object>> selectBrdList(Map<String, Object> map) {
-        return selectPagingListAjax("board.selectBrdList", map);
-    }
-
-    public Map<String, Object> selectBrdListCnt(Map<String, Object> map) {
-        return selectOne("board.selectBrdListCnt", map);
-    }
-
-    public Map<String, Object> selectBrd(Map<String, Object> map) {
-        return selectOne("board.selectBrd", map);
+    public Map<String, Object> selectBoard(long id) {
+        return selectOne("board.selectBoard", id);
     }
 
     public List<Map<String, Object>> selectMainClubBrdList(Map<String, Object> map) {

@@ -4,171 +4,123 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
     <script>
-        const PAGE_ROW = 5;
+        const PAGE_SIZE = 5;
 
         $(() => {
             readNoticePage(1);
-            fn_selectFaqBrdList(1);
-        });
+            readFaqPage(1);
+        })
 
-        const readNoticePage = pageNo => {
-            const $form = $("#noticeBoardForm");
+        const readNoticePage = page => {
+            const $div = $("#noticeDiv");
+            const $form = $div.find("form");
+
             const request = {
-                page: pageNo,
-                size: PAGE_ROW,
+                boardTypeCode: BoardType.NOTICE.code,
+                searchText: $form.find("input[name='searchText']").val(),
+                page: page,
+                size: PAGE_SIZE,
                 descending: true,
-                sortBy: "seq",
-                brdTypeCd: "1",
-                searchText: $form.find("input[name='srchText']").val(),
+                sortBy: "id",
             }
 
             gfn_callGetApi("/api/board/page", request)
                 .then(data => readNoticePageCallback(data))
                 .catch(response => console.error('error', response));
-        };
+        }
 
         const readNoticePageCallback = data => {
-            const $body = $("#noticeBoardListTbl>tbody");
+            const $div = $("#noticeDiv");
+            const $tbody = $div.find("tbody");
+
+            const list = data.content;
+            if (list.length == 0) {
+                const htmlString = "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
+                gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+                return;
+            }
+
+            const htmlString = createBoardTableBodyHtmlString(list);
+            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+
+            const params = {
+                pagingObject: $div.find("ul.pagination"),
+                pageIndex: "pageIndex",
+                totalCount: data.totalElements,
+                eventName: "readNoticePage",
+                recordCount: PAGE_SIZE,
+            };
+
+            gfn_renderPaging(params);
+        }
+
+        const readFaqPage = page => {
+            const $div = $("#faqDiv");
+            const $form = $div.find("form");
+
+            const request = {
+                boardTypeCode: BoardType.FAQ.code,
+                searchText: $form.find("input[name='searchText']").val(),
+                page: page,
+                size: PAGE_SIZE,
+                descending: true,
+                sortBy: "id",
+            }
+
+            gfn_callGetApi("/api/board/page", request)
+                .then(data => readFaqPageCallback(data))
+                .catch(response => console.error('error', response));
+        }
+
+        const readFaqPageCallback = data => {
+            const $div = $("#faqDiv");
+            const $tbody = $div.find("tbody");
 
             const count = data.totalElements;
             const list = data.content;
 
             if (list.length == 0) {
                 const htmlString = "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
-                gfn_removeElementChildrenAndAppendHtmlString($body, htmlString);
+                gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
                 return;
             }
 
-            const htmlString = createNoticeTableBodyHtmlString(list);
-            gfn_removeElementChildrenAndAppendHtmlString($body, htmlString);
+            const htmlString = createBoardTableBodyHtmlString(list);
+            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
 
             const params = {
-                divId: "pageNav",
+                pagingObject: $div.find("ul.pagination"),
                 pageIndex: "pageIndex",
-                totalCount: count,
-                eventName: "readNoticePage",
-                recordCount: PAGE_ROW
+                totalCount: data.totalElements,
+                eventName: "readFaqPage",
+                recordCount: PAGE_SIZE,
             };
-            gfn_renderPaging(params);
-        };
 
-        const createNoticeTableBodyHtmlString = list => {
+            gfn_renderPaging(params);
+        }
+
+        const createBoardTableBodyHtmlString = list => {
             let htmlString = "";
             $.each(list, (index, value) => {
                 htmlString += "<tr>";
                 htmlString += "	<td>";
-                htmlString += "		" + value.seq;
+                htmlString += "		" + value.id;
                 htmlString += "	</td>";
                 htmlString += "	<td>";
-                htmlString += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openBrdModal('" + value.seq + "')\" >";
+                htmlString += "		<a href=\"javascript:(void(0));\" onclick=\"openBoardModal('" + value.id + "')\" >";
                 htmlString += "			" + value.title;
                 htmlString += "		</a>";
                 htmlString += "	</td>";
                 htmlString += "	<td>";
-                htmlString += "		" + value.insDt;
+                htmlString += "		" + gfn_timestampToDate(value.insDt);
                 htmlString += "	</td>";
                 htmlString += "</tr>";
             });
             return htmlString;
         }
 
-        const openDetail = id => {
-            location.href = "/bo/banner/" + id;
-        }
-
-        /*function readNoticePageCallback(data) {
-            var cnt = data.map.cnt;
-            var body = $("#noticeBoardListTbl>tbody");
-            body.empty();
-            var str = "";
-            if(cnt == 0) {
-                str += "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
-            } else {
-                var params = {
-                    divId : "noticeBoardListPageNav",
-                    pageIndex : "pageIndex",
-                    totalCount : cnt,
-                    eventName : "fn_selectNtcBrdList",
-                    recordCount : 5
-                };
-                gfn_renderPaging(params);
-
-                $.each(data.map.list, function(key, value) {
-                    str += "<tr>";
-                    str += "	<td>";
-                    str += "		" + value.seq;
-                    str += "	</td>";
-                    str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openBrdModal('" + value.seq + "')\" >";
-                    str += "			" + value.title;
-                    str += "		</a>";
-                    str += "	</td>";
-                    str += "	<td>";
-                    str += "		" + value.insDt;
-                    str += "	</td>";
-                    str += "</tr>";
-                });
-            }
-            body.append(str);
-        }*/
-
-        function fn_selectFaqBrdList(pageNo) {
-            var comAjax = new ComAjax("faqBrdForm");
-            comAjax.setUrl("<c:url value='/selectBrdList' />");
-            comAjax.setCallback("fn_selectFaqBrdListCallback");
-            comAjax.addParam("pageIndex", pageNo);
-            comAjax.addParam("pageRow", 5);
-            comAjax.addParam("brdTypeCd", "2");
-            comAjax.ajax();
-        }
-
-        function fn_selectFaqBrdListCallback(data) {
-            var cnt = data.map.cnt;
-            var body = $("#faqBrdListTbl>tbody");
-            body.empty();
-            var str = "";
-            if (cnt == 0) {
-                str += "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
-            } else {
-                var params = {
-                    divId: "faqBrdListPageNav",
-                    pageIndex: "pageIndex",
-                    totalCount: cnt,
-                    eventName: "fn_selectFaqBrdList",
-                    recordCount: 5
-                };
-                gfn_renderPaging(params);
-
-                $.each(data.map.list, function (key, value) {
-                    str += "<tr>";
-                    str += "	<td>";
-                    str += "		" + value.seq;
-                    str += "	</td>";
-                    str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openBrdModal('" + value.seq + "')\" >";
-                    str += "			" + value.title;
-                    str += "		</a>";
-                    str += "	</td>";
-                    str += "	<td>";
-                    str += "		" + value.insDt;
-                    str += "	</td>";
-                    str += "</tr>";
-                });
-            }
-            body.append(str);
-        }
-
-        function fn_openBrdModal(seq) {
-            var comAjax = new ComAjax();
-            comAjax.setUrl("<c:url value='/selectBrd' />");
-            comAjax.setCallback("fn_openBrdModalCallback");
-            comAjax.addParam("seq", seq);
-            comAjax.ajax();
-        }
-
-        function fn_openBrdModalCallback(data) {
-            gfn_setDataVal(data.map, "brdForm");
-            $("#brdModal").modal("show");
+        const openBoardModal = id => {
+            boardModal.open(id);
         }
 
     </script>
@@ -270,13 +222,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body" id="noticeBoardDiv">
-                                <form id="noticeBoardForm" onsubmit="return false;">
+                            <div class="card-body" id="noticeDiv">
+                                <form onsubmit="return false;">
                                     <div class="row clearfix">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">게시물찾기</label>
-                                                <input type="text" name="srchText"
+                                                <input type="text" name="searchText"
                                                        class="form-control form-control-alternative"
                                                        onKeypress="gfn_hitEnter(event, 'readNoticePage(1)');"
                                                        placeholder="제목, 내용">
@@ -285,7 +237,7 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table class="table align-items-center table-flush" id="noticeBoardListTbl">
+                                    <table class="table align-items-center table-flush">
                                         <thead class="thead-light">
                                         <tr>
                                             <th scope="col">순번</th>
@@ -299,8 +251,7 @@
                             </div>
                             <div class="card-footer py-4">
                                 <nav aria-label="">
-                                    <ul class="pagination pagination-sm justify-content-end mb-0"
-                                        id="noticeBoardListPageNav"></ul>
+                                    <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
                                 </nav>
                             </div>
                         </div>
@@ -312,22 +263,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <form id="faqBrdForm" onsubmit="return false;">
+                            <div class="card-body" id="faqDiv">
+                                <form onsubmit="return false;">
                                     <div class="row clearfix">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">게시물찾기</label>
-                                                <input type="text" name="srchText"
+                                                <input type="text" name="searchText"
                                                        class="form-control form-control-alternative"
-                                                       onKeypress="gfn_hitEnter(event, 'fn_selectFaqBrdList(1)');"
+                                                       onKeypress="gfn_hitEnter(event, 'readFaqPage(1)');"
                                                        placeholder="제목, 내용">
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table class="table align-items-center table-flush" id="faqBrdListTbl">
+                                    <table class="table align-items-center table-flush">
                                         <thead class="thead-light">
                                         <tr>
                                             <th scope="col">순번</th>
@@ -373,57 +324,7 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<!-- 게시물 모달 -->
-<div class="modal fade" id="brdModal" role="dialog" aria-labelledby="brdModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="brdModalLabel">게시물</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="brdForm">
-                    <input type="hidden" name="seq">
-                    <div class="row clearfix">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label">게시물유형</label>
-                                <input type="text" name="brdTypeNm" class="form-control form-control-alternative"
-                                       readonly>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label">작성일시</label>
-                                <input type="text" name="insDt" class="form-control form-control-alternative" readonly>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label">제목</label>
-                                <input type="text" name="title" class="form-control form-control-alternative" readonly>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label">내용</label>
-                                <textarea rows="16" name="cntnts" class="form-control form-control-alternative"
-                                          readonly></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+<%@ include file="/WEB-INF/jsp/fo/jspf/boardModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

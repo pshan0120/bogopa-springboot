@@ -6,15 +6,14 @@
 			resultType="hashmap">
 		<include refid="com.pagePrefix"/>
 		SELECT
-			b.seq,
-			b.brdTypeCd,
+			b.seq AS id,
+			b.brdTypeCd AS boardTypeCode,
 			b.title,
-			cdNm('C009', b.brdTypeCd) AS brdTypeNm,
-			IFNULL(DATE_FORMAT(b.insDt, "%Y.%m.%d %H:%i"), '') AS insDt
+			b.insDt
 		FROM
 			brd b
 		WHERE
-			b.brdTypeCd = #{brdTypeCd}
+			b.brdTypeCd = #{boardTypeCode}
 		AND
 			b.useYn = 'Y'
 		<if test="searchText != null and searchText != ''">
@@ -32,7 +31,7 @@
 		FROM
 			brd b
 		WHERE
-			b.brdTypeCd = #{brdTypeCd}
+			b.brdTypeCd = #{boardTypeCode}
 		AND
 			b.useYn = 'Y'
 		<if test="searchText != null and searchText != ''">
@@ -43,64 +42,18 @@
 		</if>
 	</select>
 
-
-
-
-	<select id="selectBrdList" parameterType="hashmap" resultType="hashmap">
-		<include refid="com.pagingPre"/>
-			SELECT
-				b.seq,
-				b.brdTypeCd,
-				b.title,
-				cdNm('C009', b.brdTypeCd) AS brdTypeNm,
-				IFNULL(DATE_FORMAT(b.insDt, "%Y.%m.%d %H:%i"), '') AS insDt
-			FROM
-				brd b
-			WHERE
-				b.brdTypeCd = #{brdTypeCd}
-			AND
-				b.useYn = 'Y'
-			<if test="srchText != null and srchText != ''">
-			AND
-				(b.title LIKE CONCAT('%',#{srchText},'%')
-				OR
-				b.cntnts LIKE CONCAT('%',#{srchText},'%'))
-			</if>
-			ORDER BY
-				b.seq DESC
-		<include refid="com.pagingPost"/>
-	</select>
-	
-	<select id="selectBrdListCnt" parameterType="hashmap" resultType="hashmap">
-			SELECT
-				COUNT(*) AS cnt
-			FROM
-				brd b
-			WHERE
-				b.brdTypeCd = #{brdTypeCd}
-			AND
-				b.useYn = 'Y'
-			<if test="srchText != null and srchText != ''">
-			AND
-				(b.title LIKE CONCAT('%',#{srchText},'%')
-				OR
-				b.cntnts LIKE CONCAT('%',#{srchText},'%'))
-			</if>
-	</select>
-	
-	<select id="selectBrd" parameterType="hashmap" resultType="hashmap">
+	<select id="selectBoard" parameterType="long" resultType="hashmap">
 		<![CDATA[
 			SELECT
-				b.seq,
-				b.brdTypeCd,
-				TRIM(b.title) AS title,
-				TRIM(b.cntnts) AS cntnts,
-				cdNm('C009', b.brdTypeCd) AS brdTypeNm,
-				IFNULL(DATE_FORMAT(b.insDt, "%Y.%m.%d %H:%i"), '') AS insDt
+				b.seq AS id,
+				b.brdTypeCd AS boardTypeCode,
+				b.title,
+				b.cntnts AS contents,
+				b.insDt
 			FROM
 				brd b
 			WHERE
-				b.seq = #{seq}
+				b.seq = #{id}
 		]]>
 	</select>
 

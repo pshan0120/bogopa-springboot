@@ -63,3 +63,8 @@
 <script src="<c:url value='/vendors/argon/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js'/>"></script>
 
 <script src="<c:url value='/js/com/ajax.js'/>"></script>
+<script src="<c:url value='/js/com/paging.js'/>"></script>
+<script src="<c:url value='/js/com/dateTime.js'/>"></script>
+<script src="<c:url value='/js/com/cookie.js'/>"></script>
+
+<script src="<c:url value='/js/com/boardType.js'/>"></script>

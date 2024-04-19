@@ -11,11 +11,8 @@ public interface BoardService {
 
     CustomPageResponse<Map<String, Object>> readPage(ReadPageRequestDto dto);
 
-    Map<String, Object> selectBrdList(Map<String, Object> map);
-
-    Map<String, Object> selectBrd(Map<String, Object> map);
+    Map<String, Object> readById(long id);
 
     List<Map<String, Object>> selectMainClubBrdList(Map<String, Object> map);
-
 
 }

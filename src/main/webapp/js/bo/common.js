@@ -315,88 +315,6 @@ function gfn_replaceChar(str) {
 	return str;
 }
 
-// 날짜를 한글 날짜로
-function gfn_replaceKorDate(date) {
-	if(date == null) return false;
-	var year = parseInt(date.substr(0,4));
-	var month = parseInt(date.substr(4,2));
-	var day = parseInt(date.substr(6,2));
-	return year+"년 "+month+"월 "+day+"일";
-}
-
-
-/* 쿠키 */
-// 해당이름의 쿠키를 가져온다.
-/*function gfn_getCookie(cookie_name) {
-	var isCookie = false;
-	var start, end;
-	var i = 0;
-
-	// cookie 문자열 전체를 검색
-	while(i <= document.cookie.length) {
-		 start = i;
-		 end = start + cookie_name.length;
-		 // cookie_name과 동일한 문자가 있다면
-		 if(document.cookie.substring(start, end) == cookie_name) {
-			 isCookie = true;
-			 break;
-		 }
-		 i++;
-	}
-
-	// cookie_name 문자열을 cookie에서 찾았다면
-	if(isCookie) {
-		start = end + 1;
-		end = document.cookie.indexOf(";", start);
-		// 마지막 부분이라는 것을 의미(마지막에는 ";"가 없다)
-		if(end < start)
-			end = document.cookie.length;
-		// cookie_name에 해당하는 value값을 추출하여 리턴한다.
-		return document.cookie.substring(start, end);
-	}
-	// 찾지 못했다면
-	return "";
-}*/
-
-/* 쿠키 처리 */
-//쿠키 값 가져오기
-function gfn_getCookie(cookie_name) {
-	var isCookie = false;
-	var start, end;
-	var i = 0;
-
-	// cookie 문자열 전체를 검색
-	while(i <= document.cookie.length) {
-		start = i;
-		end = start + cookie_name.length;
-		// cookie_name과 동일한 문자가 있다면
-		if(document.cookie.substring(start, end) == cookie_name) {
-			isCookie = true;
-			break;
-		}
-		i++;
-	}
-
-	// cookie_name 문자열을 cookie에서 찾았다면
-	if(isCookie) {
-		start = end + 1;
-		end = document.cookie.indexOf(";", start);
-		// 마지막 부분이라는 것을 의미(마지막에는 ";"가 없다)
-		if(end < start)
-			end = document.cookie.length;
-		// cookie_name에 해당하는 value값을 추출하여 리턴한다.
-		return document.cookie.substring(start, end);
-	}
-	// 찾지 못했다면
-	return "";
-}
-
-//쿠키 등록
-function gfn_setCookie( name, value, expiredays ) {
-	var todayDate = new Date();
-	todayDate.setDate( todayDate.getDate() + expiredays );
-	document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";";
-}
 
 /* 접속정보 */
 // 브라우저 유형
@@ -592,107 +510,10 @@ function gfn_isKoreanOnly(koreanChar) {
 	return true;
 }
 
-// 6자리 텍스트가 날짜가 맞는지 체크
-function gfn_isDateSize6(date) {
-	var yyyyMM = String(date);
-	var year = yyyyMM.substring(0, 4);
-	var month = yyyyMM.substring(4, 6);
-
-	if(!gfn_isNumber(date) || date.length != 6)
-		return false;
-
-	if(Number(month) > 12 || Number(month) < 1)
-		return false;
-
-	return true;
-}
-
-// 6자리 텍스트가 날짜가 맞는지 체크
-function gfn_isDateSize8(date) {
-	var yyyyMMdd = String(date);
-	var year = yyyyMMdd.substring(0, 4);
-	var month = yyyyMMdd.substring(4, 6);
-	var day = yyyyMMdd.substring(6, 8);
-
-	if(!gfn_isNumber(date) || date.length != 8)
-		return false;
-
-	if(Number(month) > 12 || Number(month) < 1)
-		return false;
-
-	if(Number(gfn_lastDay(date)) < day)
-		return false;
-
-	return true;
-}
-
-function gfn_lastDay(date_str) {
-	var yyyyMMdd = String(date_str);
-	var days = "31";
-	var year = yyyyMMdd.substring(0, 4);
-	var month = yyyyMMdd.substring(4, 6);
-
-	if (Number(month) == 2) {
-		if (gfn_isLeapYear(year + month + "01"))
-			days = "29";
-		else
-			days = "28";
-	} else if (Number(month) == 4 || Number(month) == 6 || Number(month) == 9
-			|| Number(month) == 11)
-		days = "30";
-
-	return days;
-}
-
-function gfn_isLeapYear(date_str) {
-	var year = date_str.substring(0, 4);
-	if (year % 4 == 0) {
-		if (year % 100 == 0)
-			return (year % 400 == 0);
-		else
-			return true;
-	} else
-		return false;
-}
-
 // 숫자 체크
 function gfn_isNumber(num) {
 	var reg = /^\d+$/;
 	return reg.test(num);
-}
-
-// 특정 날짜의 마지막 날 가져오기
-function gfn_getMonthLastDay(date) {
-	var yyyyMMdd = String(date);
-	var days = "31";
-	var year = yyyyMMdd.substring(0, 4);
-	var month = yyyyMMdd.substring(4, 6);
-
-	if(Number(month) == 2) {
-		if(gfn_isLeapYear(year + month + "01")) {
-			days = "29";
-		} else {
-			days = "28";
-		}
-	} else if(Number(month) == 4 || Number(month) == 6 || Number(month) == 9 || Number(month) == 11) {
-		days = "30";
-	}
-	
-	return days;
-}
-
-// 윤달이 있는 년도인지 체크
-function gfn_isLeapYear(date_str) {
-	var year = date_str.substring(0, 4);
-	if(year % 4 == 0) {
-		if(year % 100 == 0) {
-			return (year % 400 == 0);
-		} else {
-			return true;
-		}
-	} else {
-		return false;
-	}
 }
 
 // 옵션에 따른 숫자 체크
@@ -1074,46 +895,6 @@ function gfn_validate(divId) {
 
 
 
-/* form과 테이블 */
-//페이징 처리
-var gfv_pageIndex = null;
-function gfn_renderPaging(params) {
-	var divId = params.divId;	// div ID
-	var totalCount = params.totalCount;	// 전체 건수
-	var recordCount = params.recordCount;	// 페이지당 표시할 건수
-	var currentPage = 0;	// 현재 페이지
-	if(gfv_pageIndex == null) {
-		currentPage = $("#" + divId).twbsPagination('getCurrentPage');	// js에서 가져온 페이지
-	} else {
-		currentPage = gfv_pageIndex;	// 화면에서 지정한 페이지
-		gfv_pageIndex = null;
-	}
-	var visiblePages = 5;
-	var eventName = params.eventName;
-	$("#"+divId).twbsPagination('destroy');
-	$("#"+divId).twbsPagination({
-		startPage: currentPage,
-		totalPages: Math.ceil(totalCount/recordCount),
-		initiateStartPageClick: false,
-		first: "&laquo;",
-		prev: "&#60;",
-		next: "&#62;",
-		last: "&raquo;",
-		visiblePages: visiblePages,
-		onPageClick: function (event, page) {
-			_movePage(eventName, page);
-		}
-	});
-}
-
-function _movePage(eventName, value) {
-	if(typeof(eventName) == "function") {
-		eventName(value);
-	} else {
-		eval(eventName + "(value);");
-	}
-}
-
 // 테이블 Th클릭 정렬 세팅
 function gfn_setSortTh(sortId, funcNm) {
 	$("th[name=" + sortId + "SortTh]").click(function() {
@@ -1230,57 +1011,6 @@ function gfn_insertExprtHisCallback(data) {
 	alert(data.resultMsg);
 	return false;
 }*/
-
-/* 날짜, 시간 */
-//현재 년월일시분초
-function gfn_getCurrentDts() {
-	var d = new Date();
-	var yyyy = d.getFullYear();
-	var mm = d.getMonth() + 1;
-	var dd = d.getDate();
-	var h = d.getHours();
-	var m = d.getMinutes();
-	var s = d.getSeconds();
-	return yyyy + this.gfn_2digits(mm) + this.gfn_2digits(dd) + this.gfn_2digits(h) + this.gfn_2digits(m) + this.gfn_2digits(s);
-}
-
-//현재 년월일
-function gfn_getCurrentDate() {
-	var d = new Date();
-	var yyyy = d.getFullYear();
-	var mm = d.getMonth() + 1;
-	var dd = d.getDate();
-	return yyyy + this.gfn_2digits(mm) + this.gfn_2digits(dd);
-}
-
-function gfn_getCurrentDateDash() {
-	var d = new Date();
-	var yyyy = d.getFullYear();
-	var mm = d.getMonth() + 1;
-	var dd = d.getDate();
-	return yyyy + "-" + this.gfn_2digits(mm) + "-" + this.gfn_2digits(dd);
-}
-
-// 전후 년월일
-function gfn_getDate(day) {
-	var d = new Date();
-	var dayOfMonth = d.getDate();
-	d.setDate(dayOfMonth + day);
-	var yyyy = d.getFullYear();
-	var mm = d.getMonth() + 1;
-	var dd = d.getDate();
-	return yyyy + this.gfn_2digits(mm) + this.gfn_2digits(dd);
-}
-
-function gfn_getDateDash(day) {
-	var d = new Date();
-	var dayOfMonth = d.getDate();
-	d.setDate(dayOfMonth + day);
-	var yyyy = d.getFullYear();
-	var mm = d.getMonth() + 1;
-	var dd = d.getDate();
-	return yyyy + "-" + this.gfn_2digits(mm) + "-" + this.gfn_2digits(dd);
-}
 
 /* 기타 */
 //난수 생성
