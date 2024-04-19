@@ -261,6 +261,7 @@
 		body.empty();
 		var str = "";
 		if(cnt == 0) {
+			$("#clubPlayImgListPageNav").hide();
 			$("#clubPlayImgListDiv").hide();
 		} else {
 			var params = {
@@ -288,6 +289,7 @@
 			});
 			str += "</div>";
 			$("#clubPlayImgListDiv").show();
+			$("#clubPlayImgListPageNav").show();
 		}
 		body.append(str);
 	}

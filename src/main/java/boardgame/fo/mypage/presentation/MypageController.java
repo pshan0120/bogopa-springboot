@@ -4,7 +4,7 @@ import boardgame.com.mapping.CommandMap;
 import boardgame.com.util.ComUtils;
 import boardgame.com.util.SessionUtils;
 import boardgame.fo.club.service.ClubService;
-import boardgame.fo.login.presentation.LoginController;
+import boardgame.fo.login.service.LoginService;
 import boardgame.fo.member.service.MemberService;
 import boardgame.fo.mypage.service.MypageService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class MypageController {
 
     private final ComUtils comUtils;
 
-    private final LoginController loginController;
+    private final LoginService loginService;
 
     /* 마이페이지 */
     @RequestMapping(value = "/myPage")
@@ -45,8 +45,9 @@ public class MypageController {
     public ModelAndView openMyPageId(@PathVariable("id") String id, CommandMap commandMap, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("/fo/myPage");
         commandMap.put("mmbrScrtKey", id);
-        if (MapUtils.isNotEmpty(memberService.selectMmbr(commandMap.getMap()))) {
-            loginController.setLogin(commandMap.getMap(), request);
+        Map<String, Object> memberMap = memberService.selectMmbr(commandMap.getMap());
+        if (MapUtils.isNotEmpty(memberMap)) {
+            loginService.setLogin((Long) memberMap.get("mmbrNo"), request);
         }
         return mv;
     }

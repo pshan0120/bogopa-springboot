@@ -76,7 +76,6 @@
             const $div = $("#faqDiv");
             const $tbody = $div.find("tbody");
 
-            const count = data.totalElements;
             const list = data.content;
 
             if (list.length == 0) {

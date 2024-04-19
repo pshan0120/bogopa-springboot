@@ -6,7 +6,7 @@ import boardgame.com.util.ComUtils;
 import boardgame.com.util.FileUtils;
 import boardgame.com.util.SessionUtils;
 import boardgame.fo.club.service.ClubService;
-import boardgame.fo.login.presentation.LoginController;
+import boardgame.fo.login.service.LoginService;
 import boardgame.fo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections.MapUtils;
@@ -43,7 +43,7 @@ public class ClubController {
 
     private final FileUtils fileUtils;
     
-    private final LoginController loginController;
+    private final LoginService loginService;
 
     /* 모임 */
     @RequestMapping(value = "/club")
@@ -58,8 +58,10 @@ public class ClubController {
     public ModelAndView openClubId(@PathVariable("id") String id, CommandMap commandMap, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView("/fo/club");
         commandMap.put("mmbrScrtKey", id);
-        if (MapUtils.isNotEmpty(memberService.selectMmbr(commandMap.getMap()))) {
-            loginController.setLogin(commandMap.getMap(), request);
+
+        Map<String, Object> memberMap = memberService.selectMmbr(commandMap.getMap());
+        if (MapUtils.isNotEmpty(memberMap)) {
+            loginService.setLogin((Long) memberMap.get("mmbrNo"), request);
         }
         // 은행코드
         mv.addObject("bankCdList", comUtils.getCdList("C006"));

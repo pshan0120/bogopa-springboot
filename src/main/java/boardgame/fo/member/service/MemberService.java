@@ -4,6 +4,14 @@ import java.util.Map;
 
 public interface MemberService {
 
+    Map<String, Object> readById(long memberId);
+
+    void insert(Map<String, Object> map);
+
+
+
+
+
     /* 회원 */
     Map<String, Object> selectMmbrPswrdYn(Map<String, Object> map);
 
@@ -13,7 +21,7 @@ public interface MemberService {
 
     void insertMmbrLog(Map<String, Object> map);
 
-    void insertMmbr(Map<String, Object> map);
+
 
     void updateMmbr(Map<String, Object> map);
 

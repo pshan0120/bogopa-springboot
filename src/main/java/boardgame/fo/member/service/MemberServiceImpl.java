@@ -4,6 +4,7 @@ import boardgame.fo.member.dao.MemberDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -11,6 +12,19 @@ import java.util.Map;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberDao memberDao;
+
+    @Override
+    public Map<String, Object> readById(long memberId) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("mmbrNo", memberId);
+        return this.selectMmbr(requestMap);
+    }
+
+    @Override
+    public void insert(Map<String, Object> map) {
+        memberDao.insertMember(map);
+    }
+
 
     /* 회원 */
     @Override
@@ -33,10 +47,6 @@ public class MemberServiceImpl implements MemberService {
         memberDao.insertMmbrLog(map);
     }
 
-    @Override
-    public void insertMmbr(Map<String, Object> map) {
-        memberDao.insertMmbr(map);
-    }
 
     @Override
     public void updateMmbr(Map<String, Object> map) {

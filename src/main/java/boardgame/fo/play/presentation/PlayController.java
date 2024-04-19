@@ -4,7 +4,7 @@ import boardgame.com.mapping.CommandMap;
 import boardgame.com.service.ComService;
 import boardgame.com.util.FileUtils;
 import boardgame.com.util.SessionUtils;
-import boardgame.fo.login.presentation.LoginController;
+import boardgame.fo.login.service.LoginService;
 import boardgame.fo.member.service.MemberService;
 import boardgame.fo.play.service.PlayService;
 import lombok.RequiredArgsConstructor;
@@ -35,27 +35,28 @@ public class PlayController {
 
     private final FileUtils fileUtils;
 
-    private final LoginController loginController;
+    private final LoginService loginService;
 
     /* 플레이 */
     @RequestMapping(value = "/play")
-    public ModelAndView openPlay(CommandMap commandMap) throws Exception {
+    public ModelAndView openPlay() {
         ModelAndView mv = new ModelAndView("/fo/play");
         return mv;
     }
 
     @RequestMapping(value = "/play/{id}")
-    public ModelAndView openPlayId(@PathVariable("id") String id, CommandMap commandMap, HttpServletRequest request) throws Exception {
+    public ModelAndView openPlayId(@PathVariable("id") String id, CommandMap commandMap, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("/fo/play");
         commandMap.put("mmbrScrtKey", id);
-        if (MapUtils.isNotEmpty(memberService.selectMmbr(commandMap.getMap()))) {
-            loginController.setLogin(commandMap.getMap(), request);
+        Map<String, Object> memberMap = memberService.selectMmbr(commandMap.getMap());
+        if (MapUtils.isNotEmpty(memberMap)) {
+            loginService.setLogin((Long) memberMap.get("mmbrNo"), request);
         }
         return mv;
     }
 
     @RequestMapping(value = "/selectPlayRcrdByAllList")
-    public ModelAndView selectPlayRcrdByAllList(CommandMap commandMap) throws Exception {
+    public ModelAndView selectPlayRcrdByAllList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
@@ -69,7 +70,7 @@ public class PlayController {
     }
 
     @RequestMapping(value = "/selecPlayRcrdByClubList")
-    public ModelAndView selecPlayRcrdByClubList(CommandMap commandMap) throws Exception {
+    public ModelAndView selecPlayRcrdByClubList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
@@ -83,7 +84,7 @@ public class PlayController {
     }
 
     @RequestMapping(value = "/selecPlayRcrdByMmbrList")
-    public ModelAndView selecPlayRcrdByMmbrList(CommandMap commandMap) throws Exception {
+    public ModelAndView selecPlayRcrdByMmbrList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
@@ -97,7 +98,7 @@ public class PlayController {
     }
 
     @RequestMapping(value = "/selecPlayRcrdByGameList")
-    public ModelAndView selecPlayRcrdByGameList(CommandMap commandMap) throws Exception {
+    public ModelAndView selecPlayRcrdByGameList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
@@ -112,7 +113,7 @@ public class PlayController {
 
 
     @RequestMapping(value = "/selectPlayRcrd")
-    public ModelAndView selectPlayRcrd(CommandMap commandMap) throws Exception {
+    public ModelAndView selectPlayRcrd(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
@@ -127,7 +128,7 @@ public class PlayController {
     }
 
     @RequestMapping(value = "/updatePlayRcrd")
-    public ModelAndView updatePlayRcrd(CommandMap commandMap) throws Exception {
+    public ModelAndView updatePlayRcrd(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         String resultMsg = "";
         Boolean result = false;
@@ -244,7 +245,7 @@ public class PlayController {
     }
 
     @RequestMapping(value = "/selectPlayJoinMmbrList")
-    public ModelAndView selectPlayJoinMmbrList(CommandMap commandMap) throws Exception {
+    public ModelAndView selectPlayJoinMmbrList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
@@ -258,7 +259,7 @@ public class PlayController {
     }
 
     @RequestMapping(value = "/insertPlay")
-    public ModelAndView insertPlay(CommandMap commandMap) throws Exception {
+    public ModelAndView insertPlay(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
@@ -301,7 +302,7 @@ public class PlayController {
     }
 
     @RequestMapping(value = "/selectBocPlayRcrdList")
-    public ModelAndView selectBocPlayRcrdList(CommandMap commandMap) throws Exception {
+    public ModelAndView selectBocPlayRcrdList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";

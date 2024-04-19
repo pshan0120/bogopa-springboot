@@ -1,12 +1,14 @@
+<%@ page import="boardgame.com.util.SessionUtils" %>
 <%@ page pageEncoding="utf-8"%>
 <%	
 	//request.setCharacterEncoding("euc-kr");
-	String mmbrNo = (String) session.getAttribute("mmbrNo");
+	Long mmbrNo = (Long) session.getAttribute("mmbrNo");
 	String nickNm = (String) session.getAttribute("nickNm");
 	String clubNo = (String) session.getAttribute("clubNo");
 	String mmbrTypeCd = (String) session.getAttribute("mmbrTypeCd");
 	
-	boolean isLogin = mmbrNo == null ? false : true;
+	// boolean loggedIn = mmbrNo == null ? false : true;
+	boolean loggedIn = SessionUtils.isMemberLogin();
 %>
 
 <c:set var="mmbrNo" value="<%= mmbrNo %>"/>
@@ -74,7 +76,7 @@
 						<span class="nav-link-inner--text">B.O.C.</span>
 					</a>
 				</li>
-			<% if(isLogin) { %>
+			<% if(loggedIn) { %>
 				<li class="nav-item">
 					<a class="nav-link nav-link-icon" href="/myPage">
 						<i class="ni ni-single-02"></i>

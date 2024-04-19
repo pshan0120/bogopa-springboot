@@ -4,6 +4,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 public class SessionUtils {
 
@@ -24,11 +25,15 @@ public class SessionUtils {
 
     public static String getCurrentMemberId() {
         try {
-            String loginMemberId = String.valueOf(getSessionAttribute("mmbrNo"));
+            return Optional.of(getSessionAttribute("mmbrNo"))
+                    .map(String::valueOf)
+                    .orElseThrow(() -> new RuntimeException());
+
+            /*String loginMemberId = String.valueOf(getSessionAttribute("mmbrNo"));
             if (loginMemberId == null || loginMemberId.isEmpty()) {
                 throw new RuntimeException();
             }
-            return loginMemberId;
+            return loginMemberId;*/
         } catch (Exception e) {
             throw new RuntimeException();
         }

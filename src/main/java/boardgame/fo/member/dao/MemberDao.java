@@ -8,6 +8,13 @@ import java.util.Map;
 @Repository
 public class MemberDao extends AbstractDao {
 
+    public void insertMember(Map<String, Object> map) {
+        insert("member.insertMmbr", map);
+    }
+
+
+
+
     /* 회원 */
     public Map<String, Object> selectMmbrPswrdYn(Map<String, Object> map) {
         return selectOne("member.selectMmbrPswrdYn", map);
@@ -25,9 +32,7 @@ public class MemberDao extends AbstractDao {
         insert("member.insertMmbrLog", map);
     }
 
-    public void insertMmbr(Map<String, Object> map) {
-        insert("member.insertMmbr", map);
-    }
+
 
     public void updateMmbr(Map<String, Object> map) {
         update("member.updateMmbr", map);

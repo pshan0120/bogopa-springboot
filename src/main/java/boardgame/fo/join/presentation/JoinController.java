@@ -3,7 +3,7 @@ package boardgame.fo.join.presentation;
 import boardgame.com.mapping.CommandMap;
 import boardgame.com.service.ComService;
 import boardgame.fo.club.service.ClubService;
-import boardgame.fo.login.presentation.LoginController;
+import boardgame.fo.login.service.LoginService;
 import boardgame.fo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections.MapUtils;
@@ -26,7 +26,7 @@ public class JoinController {
 
     private final ClubService clubService;
 
-    private final LoginController loginController;
+    private final LoginService loginService;
 
     /* 회원가입 */
     @RequestMapping(value = "/join")
@@ -62,15 +62,14 @@ public class JoinController {
             if (StringUtils.equals("Y", String.valueOf(memberService.selectNickNmExistYn(commandMap.getMap()).get("existYn")))) {
                 resultMsg = "이미 존재하는 닉네임입니다.";
             } else {
-                commandMap.put("param1", "mmbrNo");
-                Map<String, Object> idMap = comService.selectGetId(commandMap.getMap());
-                String mmbrNo = idMap.get("id").toString();
-                commandMap.put("mmbrNo", mmbrNo);
-                memberService.insertMmbr(commandMap.getMap());
-                loginController.setLogin(commandMap.getMap(), request);
+                Map<String, Object> requestMap = commandMap.getMap();
+                memberService.insert(requestMap);
 
-                if (commandMap.containsKey("invtMmbrNo")) {
-                    clubService.insertClubJoin(commandMap.getMap());
+                Long memberId = (Long) requestMap.get("mmbrNo");
+                loginService.setLogin(memberId, request);
+
+                if (requestMap.containsKey("invtMmbrNo")) {
+                    clubService.insertClubJoin(requestMap);
                 }
 
                 result = true;
