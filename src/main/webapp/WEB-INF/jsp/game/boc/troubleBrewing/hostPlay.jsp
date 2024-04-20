@@ -262,6 +262,10 @@
             townModal.open();
         }
 
+        const openQrImage = () => {
+            window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
+        }
+
         const createInitializationHtml = () => {
             if (!townsFolkPlayerList.some(player => player.name === FortuneTeller.name)
                 && !outsiderPlayerList.some(player => player.name === Drunk.name)) {
@@ -759,6 +763,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
@@ -793,6 +800,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
@@ -826,6 +836,9 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
+                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
                                 노트

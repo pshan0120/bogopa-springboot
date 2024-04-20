@@ -92,8 +92,8 @@
             townModal.open();
         }
 
-        const openQrModal = () => {
-            qrModal.open();
+        const openQrImage = () => {
+            window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
         }
 
         const openNoteModal = () => {
@@ -154,7 +154,7 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openQrModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
@@ -171,7 +171,6 @@
 
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/qrModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>

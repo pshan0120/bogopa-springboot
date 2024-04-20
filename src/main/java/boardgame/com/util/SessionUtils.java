@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class SessionUtils {
 
-    private static String ADMIN_MEMBER_ID = "1000000004";
+    private static Long ADMIN_MEMBER_ID = 4L;
 
     public static String getCurrentUserId() {
         try {
@@ -23,10 +23,9 @@ public class SessionUtils {
         }
     }
 
-    public static String getCurrentMemberId() {
+    public static Long getCurrentMemberId() {
         try {
-            return Optional.of(getSessionAttribute("mmbrNo"))
-                    .map(String::valueOf)
+            return Optional.of((Long) getSessionAttribute("mmbrNo"))
                     .orElseThrow(() -> new RuntimeException());
 
             /*String loginMemberId = String.valueOf(getSessionAttribute("mmbrNo"));

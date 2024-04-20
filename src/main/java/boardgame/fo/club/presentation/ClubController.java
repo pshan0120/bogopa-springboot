@@ -91,8 +91,8 @@ public class ClubController {
         String resultMsg = "";
 
         if (SessionUtils.isMemberLogin()) {
-            String mmbrNo = SessionUtils.getCurrentMemberId();
-            commandMap.put("mmbrNo", mmbrNo);
+            Long memberId = SessionUtils.getCurrentMemberId();
+            commandMap.put("mmbrNo", memberId);
 
             // 모임번호 채번
             commandMap.put("param1", "clubNo");
@@ -176,7 +176,7 @@ public class ClubController {
                 clubService.insertClubMmbr(commandMap.getMap());
 
                 Map<String, Object> mmbrMap = new HashMap<>();
-                mmbrMap.put("mmbrNo", mmbrNo);
+                mmbrMap.put("mmbrNo", memberId);
                 mmbrMap.put("mmbrTypeCd", "2");    // 회원등급 : 모임장
                 memberService.updateMmbr(mmbrMap);
 
@@ -198,13 +198,11 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        String mmbrNo = "";
         Boolean isLogin = false;
         if (SessionUtils.isMemberLogin()) {
-            mmbrNo = SessionUtils.getCurrentMemberId();
+            commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
             isLogin = true;
         }
-        commandMap.put("mmbrNo", mmbrNo);
 
         mv.addObject("map", clubService.selectClubPrfl(commandMap.getMap()));
         result = true;
