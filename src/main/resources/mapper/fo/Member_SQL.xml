@@ -69,6 +69,7 @@
 		mmbr m
 		LEFT JOIN clubMmbr cm
 		ON m.mmbrNo = cm.mmbrNo
+		AND cm.activated IS TRUE
 		WHERE
 		1=1
 		<if test="mmbrNo != null and mmbrNo != ''">
@@ -116,6 +117,8 @@
 					clubMmbr cm1
 				WHERE
 					c1.clubNo = cm1.clubNo
+				AND
+					cm.activated IS TRUE
 			) cm2 ON m.mmbrNo = cm2.mmbrNo,
 			cd cd
 		WHERE

@@ -26,6 +26,8 @@
 				WHERE
 					c.clubNo = cm1.clubNo
 				AND
+					cm1.activated IS TRUE
+				AND
 					cm1.mmbrNo = #{mmbrNo}
 				) AS myClubYn,
 				(SELECT
@@ -41,6 +43,8 @@
 					clubMmbr cm2
 				WHERE
 					c.clubNo = cm2.clubNo
+				AND
+					cm2.activated IS TRUE
 				) AS clubMmbrCnt,
 				IFNULL((SELECT
 					MAX(DATE(p1.endDt))
@@ -417,6 +421,7 @@
 				mmbrNo,
 				clubMmbrGrdCd,
 				fromDate,
+				activated,
 				insId,
 				insDt,
 				updId,
@@ -428,6 +433,7 @@
 				#{mmbrNo},
 				#{clubMmbrGrdCd},
 				CURDATE(),
+				FALSE,
 				'system',
 				CURRENT_TIMESTAMP,
 				'system',
@@ -444,6 +450,9 @@
 			</if>
 			<if test="fromDate != null and fromDate != ''">
 				fromDate = #{fromDate},
+			</if>
+			<if test="activated != null and activated != ''">
+				activated = #{activated},
 			</if>
 				updId = 'system',
 				updDt = CURRENT_TIMESTAMP
@@ -542,6 +551,8 @@
 					clubMmbr cm1
 				WHERE
 					cm1.mmbrNo = #{mmbrNo}
+				AND
+					cm1.activated IS TRUE
 				) AS clubJoinYn,
 				(SELECT
 					IF(COUNT(*) > 0, 'Y', 'N')
@@ -549,6 +560,8 @@
 					clubMmbr cm1
 				WHERE
 					c.clubNo = cm1.clubNo
+				AND
+					cm1.activated IS TRUE
 				AND
 					cm1.mmbrNo = #{mmbrNo}
 				) AS quitClubYn,
@@ -615,6 +628,8 @@
 			AND
 				m.useYn = 'Y'
 			AND
+				cm.activated IS TRUE
+			AND
 				c.clubNo = #{clubNo}
 			ORDER BY
 				cm.fromDate
@@ -637,6 +652,8 @@
 				c.useYn = 'Y'
 			AND
 				m.useYn = 'Y'
+			AND
+				cm.activated IS TRUE
 			AND
 				c.clubNo = #{clubNo}
 		]]>
@@ -725,6 +742,8 @@
 					clubMmbr cm2
 				WHERE
 					c.clubNo = cm2.clubNo
+				AND
+					cm2.activated IS TRUE
 				) AS clubMmbrCnt,
 				IFNULL((SELECT
 					MAX(DATE(p1.endDt))
@@ -1411,6 +1430,8 @@
 			cm.mmbrNo = m.mmbrNo
 		  AND
 			m.useYn = 'Y'
+		AND
+			cm.activated IS TRUE
 		  AND
 			cm.clubNo = #{clubNo}
 	</insert>

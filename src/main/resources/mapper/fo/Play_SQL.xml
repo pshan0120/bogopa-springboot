@@ -111,6 +111,8 @@
 				WHERE
 					c.clubNo = cm1.clubNo
 				AND
+					cm1.activated IS TRUE
+				AND
 					cm1.mmbrNo = #{mmbrNo}
 				) AS myClubYn,
 				(SELECT
@@ -126,6 +128,8 @@
 					clubMmbr cm2
 				WHERE
 					c.clubNo = cm2.clubNo
+				AND
+					cm2.activated IS TRUE
 				) AS clubMmbrCnt,
 				IFNULL((SELECT
 					MAX(DATE(p1.endDt))
@@ -502,6 +506,7 @@
 				mmbrNo,
 				clubMmbrGrdCd,
 				fromDate,
+				activated,
 				insId,
 				insDt,
 				updId,
@@ -513,6 +518,7 @@
 				#{mmbrNo},
 				#{clubMmbrGrdCd},
 				CURDATE(),
+				FALSE,
 				'system',
 				CURRENT_TIMESTAMP,
 				'system',
@@ -529,6 +535,9 @@
 			</if>
 			<if test="fromDate != null and fromDate != ''">
 				fromDate = #{fromDate},
+			</if>
+			<if test="activated != null and activated != ''">
+				activated = #{activated},
 			</if>
 				updId = 'system',
 				updDt = CURRENT_TIMESTAMP
@@ -626,6 +635,8 @@
 				FROM
 					clubMmbr cm1
 				WHERE
+					cm1.activated IS TRUE
+				AND
 					cm1.mmbrNo = #{mmbrNo}
 				) AS clubJoinYn,
 				(SELECT
@@ -634,6 +645,8 @@
 					clubMmbr cm1
 				WHERE
 					c.clubNo = cm1.clubNo
+				AND
+					cm1.activated IS TRUE
 				AND
 					cm1.mmbrNo = #{mmbrNo}
 				) AS quitClubYn,
@@ -700,6 +713,8 @@
 			AND
 				m.useYn = 'Y'
 			AND
+				cm.activated IS TRUE
+			AND
 				c.clubNo = #{clubNo}
 			ORDER BY
 				cm.fromDate
@@ -722,6 +737,8 @@
 				c.useYn = 'Y'
 			AND
 				m.useYn = 'Y'
+			AND
+				cm.activated IS TRUE
 			AND
 				c.clubNo = #{clubNo}
 		]]>
@@ -810,6 +827,8 @@
 					clubMmbr cm2
 				WHERE
 					c.clubNo = cm2.clubNo
+				AND
+					cm2.activated IS TRUE
 				) AS clubMmbrCnt,
 				IFNULL((SELECT
 					MAX(DATE(p1.endDt))
@@ -1282,6 +1301,8 @@
 						clubMmbr
 					WHERE
 						clubNo = c1.clubNo
+					AND
+						activated IS TRUE
 					) AS clubMmbrCnt
 				FROM
 					(SELECT
@@ -1358,6 +1379,8 @@
 						clubMmbr
 					WHERE
 						clubNo = c1.clubNo
+					AND
+						activated IS TRUE
 					) AS clubMmbrCnt
 				FROM
 					(SELECT
@@ -1811,6 +1834,8 @@
 					clubMmbr
 				WHERE
 					mmbrNo = m.mmbrNo
+				AND
+					activated IS TRUE
 				AND
 					clubNo = #{clubNo}
 				)

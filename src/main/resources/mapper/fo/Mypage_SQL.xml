@@ -65,6 +65,8 @@
 						clubMmbr cm1
 					WHERE
 						c1.clubNo = cm1.clubNo
+					AND
+						cm1.activated IS TRUE
 				) cm2 ON m.mmbrNo = cm2.mmbrNo,
 				cd cd
 			WHERE
@@ -227,6 +229,8 @@
 			AND
 				cm.mmbrNo = m.mmbrNo
 			AND
+				cm.activated IS TRUE
+			AND
 				EXISTS
 				(SELECT
 					*
@@ -236,6 +240,8 @@
 					mmbrNo = #{mmbrNo}
 				AND
 					clubNo = c.clubNo
+				AND
+					activated IS TRUE
 				)
 			ORDER BY
 				cm.fromDate
@@ -255,6 +261,8 @@
 			AND
 				cm.mmbrNo = m.mmbrNo
 			AND
+				cm.activated IS TRUE
+			AND
 				EXISTS
 				(SELECT
 					*
@@ -264,6 +272,8 @@
 					mmbrNo = #{mmbrNo}
 				AND
 					clubNo = c.clubNo
+				AND
+					activated IS TRUE
 				)
 		]]>
 	</select>
