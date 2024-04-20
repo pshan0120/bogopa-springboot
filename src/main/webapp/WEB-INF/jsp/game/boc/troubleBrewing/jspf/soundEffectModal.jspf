@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const soundEffectModal = {
+        open: () => {
+            const $soundEffectModal = $("#soundEffectModal");
+            $soundEffectModal.modal("show");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="soundEffectModal" role="dialog"
+     aria-labelledby="soundEffectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">소리 효과</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>
+                    닭 소리
+                </h3>
+                <audio name="chicken" src="/sounds/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
+                <%--<audio id="one" src="<c:url value='/sounds/cock-rooster-cockerel-scream-sound-100787.mp3'/>" controls></audio>--%>
+
+                <h3>
+                    부엉이 소리
+                </h3>
+                <audio name="owl" src="/sounds/scops-owl-57475.mp3" controls></audio>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

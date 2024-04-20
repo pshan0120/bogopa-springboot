@@ -266,6 +266,10 @@
             window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
         }
 
+        const openSoundEffectModal = () => {
+            soundEffectModal.open();
+        }
+
         const createInitializationHtml = () => {
             if (!townsFolkPlayerList.some(player => player.name === FortuneTeller.name)
                 && !outsiderPlayerList.some(player => player.name === Drunk.name)) {
@@ -478,6 +482,10 @@
             saveGameStatus();
             $("#firstNightDiv").hide();
             $("#otherNightDiv").hide();
+
+            $("audio[name='backgroundMusic']").each((index, audio) => {
+                audio.pause();
+            });
 
             createAssignedPlayerList().forEach(player => {
                 player.diedToday = false;
@@ -747,6 +755,7 @@
                         <h2>
                             첫번째 밤
                         </h2>
+                        <audio name="backgroundMusic" src="/sounds/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" loop controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -763,14 +772,17 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
-                                QR 이미지로 공유
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
-                                노트
-                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
                                 첫 라운드 낮 순서 진행
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
+                                노트
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
+                                QR 이미지로 공유
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
+                                소리 효과
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -784,6 +796,7 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 낮
                         </h2>
+                        <audio name="backgroundMusic" src="/sounds/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -800,14 +813,17 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
-                                QR 이미지로 공유
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
-                                노트
-                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextNight()">
                                 이번 라운드 밤 순서 진행
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
+                                노트
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
+                                QR 이미지로 공유
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
+                                소리 효과
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -821,6 +837,7 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 밤
                         </h2>
+                        <audio name="backgroundMusic" src="/sounds/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" loop controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -837,14 +854,17 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
-                                QR 이미지로 공유
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
-                                노트
-                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
                                 다음 라운드 낮 순서 진행
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
+                                노트
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
+                                QR 이미지로 공유
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
+                                소리 효과
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -927,6 +947,7 @@
 
 
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
