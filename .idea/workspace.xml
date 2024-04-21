@@ -9,13 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="코드개선">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="backgroundMusic 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Fo_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Fo_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Member_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Member_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Mypage_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Mypage_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/login/presentation/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/login/presentation/LoginController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +64,7 @@
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/js/com&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -86,25 +82,25 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\com" />
       <recent name="D:\dev\bogopa\src\main\java\boardgame\com\exception" />
       <recent name="D:\dev\bogopa\src\main\java\boardgame\fo\login\service" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo\jspf" />
-      <recent name="D:\dev\bogopa\src\main\java\boardgame\com\service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\sounds" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo\guide" />
       <recent name="D:\dev\bogopa\src\main\resources\mapper\fo" />
       <recent name="D:\dev\bogopa\src\main\resources\mapper\game" />
-      <recent name="D:\dev\bogopa\src\main\resources\mapper\member" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="boardgame.com.controller" />
       <recent name="boardgame.com.util" />
       <recent name="boardgame.fo.login.dto" />
       <recent name="boardgame.fo.login.presentation" />
       <recent name="boardgame.fo.board.dto" />
-      <recent name="boardgame.fo.board.presentation" />
     </key>
   </component>
   <component name="RunManager">
@@ -233,7 +229,8 @@
       <workItem from="1713286187310" duration="8394000" />
       <workItem from="1713452049232" duration="5519000" />
       <workItem from="1713527897628" duration="19851000" />
-      <workItem from="1713628242122" duration="2748000" />
+      <workItem from="1713628242122" duration="7807000" />
+      <workItem from="1713659328194" duration="227000" />
     </task>
     <task id="LOCAL-00001" summary="game 추가">
       <created>1711978001453</created>
@@ -515,7 +512,28 @@
       <option name="project" value="LOCAL" />
       <updated>1713552442465</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="clubMmbr . activated 추가">
+      <created>1713631036440</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1713631036440</updated>
+    </task>
+    <task id="LOCAL-00042" summary="clubMmbr . activated 추가">
+      <created>1713633232131</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1713633232131</updated>
+    </task>
+    <task id="LOCAL-00043" summary="backgroundMusic 추가">
+      <created>1713636053102</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1713636053102</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,8 +554,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="addPoisonedPlayer 오류 수정" />
-    <MESSAGE value="jspf 분리" />
     <MESSAGE value="사서 추가" />
     <MESSAGE value="요리사 추가" />
     <MESSAGE value="empath 추가" />
@@ -561,7 +577,9 @@
     <MESSAGE value="이미지 경로 조정" />
     <MESSAGE value="게시판 정비" />
     <MESSAGE value="코드개선" />
-    <option name="LAST_COMMIT_MESSAGE" value="코드개선" />
+    <MESSAGE value="clubMmbr . activated 추가" />
+    <MESSAGE value="backgroundMusic 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="backgroundMusic 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

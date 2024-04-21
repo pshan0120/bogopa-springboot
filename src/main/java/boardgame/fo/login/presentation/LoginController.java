@@ -74,7 +74,7 @@ public class LoginController {
 
                     String fromUri = String.valueOf(request.getHeader("REFERER"))
                             .replace(request.getRequestURI(), "")
-                            .replaceAll("[^a-zA-Z0-9/:.-?=&]", "")
+                            // .replaceAll("[^a-zA-Z0-9/:.-?=&]", "")
                             .replace("/login", "/");
 
                     SessionUtils.setSessionAttribute("fromUri", fromUri);
