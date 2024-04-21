@@ -5,7 +5,19 @@
         open: async () => {
             await townModal.loadGameStatus();
 
+            console.log('playStatus', playStatus);
             const $townModal = $("#townModal");
+            const $settingDiv = $townModal.find("div[name='settingDiv']");
+            const playerSetting = initializationSetting.player
+                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+            const roleInitializationHtml = `
+                스토리텔러 \${playStatus.hostMemberName}<br/>
+                마을주민 \${playerSetting.townsFolk}명,
+                이방인 \${playerSetting.outsider}명,
+                하수인 \${playerSetting.minion}명,
+                악마 \${playerSetting.demon}명`
+            $settingDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
+
             const $townDiv = $townModal.find("div[name='townDiv']");
             $townDiv.empty();
 
@@ -14,8 +26,6 @@
                 $townDiv.append(htmlString);
                 return;
             }
-
-            console.log('playStatus', playStatus);
 
             playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
 
@@ -93,6 +103,10 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="settingDiv">
+                    <h4><span name="roleInitialization"></span></h4>
+                </div>
+                <hr>
                 <div name="townDiv"></div>
             </div>
             <div class="modal-footer">

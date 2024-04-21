@@ -66,11 +66,6 @@
         const initializeGame = async () => {
             console.log('initializationSetting', initializationSetting);
 
-            playStatus = {
-                round: 0,
-                night: true,
-            }
-
             $("#settingDiv").show();
             $("#firstNightDiv").hide();
             $("#otherDayDiv").hide();
@@ -103,6 +98,14 @@
 
             const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
+            const hostPlayMember = originalPlayMemberList.hostPlayMember;
+
+            playStatus = {
+                round: 0,
+                night: true,
+                hostMemberId: hostPlayMember.mmbrNo,
+                hostMemberName: hostPlayMember.nickNm,
+            }
 
             playerList = clientPlayMemberList
                 .sort(() => Math.random() - 0.5)

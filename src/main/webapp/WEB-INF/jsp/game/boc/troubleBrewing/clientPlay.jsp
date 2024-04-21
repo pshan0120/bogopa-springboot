@@ -6,6 +6,7 @@
 
     <script src="<c:url value='/js/game/boc/troubleBrewing/constants.js'/>"></script>
     <script src="<c:url value='/js/game/boc/troubleBrewing/roles.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/troubleBrewing/initializationSetting.js'/>"></script>
 
     <script>
         const PLAY_NO = ${playNo};
@@ -134,11 +135,26 @@
                 <div class="card shadow mt-5">
                     <div class="card-header bg-white border-0">
                         <h2>
-                            개인 참조
+                            <span name="playNm"></span>(<span name="playNo"></span>)
                         </h2>
                     </div>
                     <div class="card-body">
-                        게임 진행을 돕기 위한 참조 페이지입니다.
+                        <div name="hostDiv">
+                            <h3>
+                                호스트
+                            </h3>
+                            <p>
+                                <span name="hostMemberName"></span>
+                            </p>
+                        </div>
+                        <div name="clientDiv">
+                            <h3>
+                                플레이어
+                            </h3>
+                            <p>
+                                <span name="clientMemberName"></span>
+                            </p>
+                        </div>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
