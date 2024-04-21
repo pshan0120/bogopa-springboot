@@ -46,6 +46,7 @@ public class FileUtils {
         File file = new File(filePath);
         if (!file.exists()) {
             file.setReadable(true);
+            file.setExecutable(true);
             file.mkdirs();
         } else {
             if (file.isDirectory()) { //파일이 디렉토리인지 확인
@@ -86,6 +87,7 @@ public class FileUtils {
 
                     file = new File(filePath + strdFileNm);
                     file.setReadable(true);
+                    file.setExecutable(true);
                     multipartFile.transferTo(file);
                 }
             }
