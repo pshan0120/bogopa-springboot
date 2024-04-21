@@ -44,9 +44,9 @@ public class FileUtils {
         }
 
         File file = new File(filePath);
-        if (file.exists() == false) {
+        if (!file.exists()) {
+            file.setReadable(true);
             file.mkdirs();
-            file.setReadable(true, false);
         } else {
             if (file.isDirectory()) { //파일이 디렉토리인지 확인
                 File[] files = file.listFiles();
@@ -85,7 +85,7 @@ public class FileUtils {
                     map.put("strdFileNm", strdFileNm);
 
                     file = new File(filePath + strdFileNm);
-                    file.setReadable(true, false);
+                    file.setReadable(true);
                     multipartFile.transferTo(file);
                 }
             }
