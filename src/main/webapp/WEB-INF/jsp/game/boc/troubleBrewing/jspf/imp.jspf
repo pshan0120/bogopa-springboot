@@ -119,6 +119,9 @@
             const impPlayerHtml = impPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
+            // TODO: 새로운 임프가 생겼을 때 처리
+
+
             const minionPlayerListHtml = minionPlayerList.reduce((prev, next) => {
                 return prev + next.playerName + " ";
             }, "");

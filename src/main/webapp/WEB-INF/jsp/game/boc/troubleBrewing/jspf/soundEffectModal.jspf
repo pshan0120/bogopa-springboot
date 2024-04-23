@@ -32,6 +32,16 @@
                     부엉이 소리
                 </h3>
                 <audio name="owl" src="/sounds/scops-owl-57475.mp3" controls></audio>
+
+                <h3>
+                    선한 팀 승리
+                </h3>
+                <audio name="victoryOfGood" src="/sounds/Samba de Janeiro- Bellini.mp3" loop controls></audio>
+
+                <h3>
+                    악한 팀 승리
+                </h3>
+                <audio name="victoryOfEvil" src="/sounds/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" loop controls></audio>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

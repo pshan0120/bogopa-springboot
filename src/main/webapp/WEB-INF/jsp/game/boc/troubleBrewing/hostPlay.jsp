@@ -231,11 +231,11 @@
         }
 
         const winByGood = () => {
-            messageModal.open("선한 편이 승리했습니다.");
+            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/Samba de Janeiro- Bellini.mp3" loop controls></audio>`);
         }
 
         const winByEvil = () => {
-            messageModal.open("악한 편이 승리했습니다.");
+            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" loop controls></audio>`);
         }
 
         const openMessageModal = messageHtml => {
@@ -756,7 +756,7 @@
                         <h2>
                             첫번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="/sounds/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" loop controls></audio>
+                        <audio name="backgroundMusic" src="/sounds/scops-owl-57475.mp3" loop controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -838,7 +838,7 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="/sounds/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" loop controls></audio>
+                        <audio name="backgroundMusic" src="/sounds/scops-owl-57475.mp3" loop controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">

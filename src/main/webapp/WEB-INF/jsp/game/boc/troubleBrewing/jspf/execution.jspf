@@ -302,7 +302,7 @@
 
             if (numberOfVoteSuccess <= numberOfVote) {
                 execution.candidatePlayerListOfToday.push({
-                    player: execution.nominatingPlayer,
+                    player: execution.nominatedPlayer,
                     numberOfVote,
                 });
             }
