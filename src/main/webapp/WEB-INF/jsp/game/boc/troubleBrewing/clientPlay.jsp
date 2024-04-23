@@ -107,7 +107,8 @@
 <body class="bg-default">
 <%@ include file="/WEB-INF/include/fo/includeBody.jspf" %>
 <div class="main-content">
-    <%@ include file="/WEB-INF/jsp/fo/navbarOnLogin.jsp" %>
+    <%@ include file="/WEB-INF/jsp/fo/navbar.jsp" %>
+    <%--<%@ include file="/WEB-INF/jsp/fo/navbarOnLogin.jsp" %>--%>
 
     <!-- Header -->
     <div class="header bg-gradient-primary pb-5 pt-7 pt-md-8">

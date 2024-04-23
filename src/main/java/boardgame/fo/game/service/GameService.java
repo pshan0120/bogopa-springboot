@@ -15,7 +15,7 @@ public interface GameService {
 
     Map<String, Object> readLastPlayLog(long playNo);
 
-    void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto playNo);
+    void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto dto);
 
     List<Map<String, Object>> selectGameNoList(Map<String, Object> map);
 

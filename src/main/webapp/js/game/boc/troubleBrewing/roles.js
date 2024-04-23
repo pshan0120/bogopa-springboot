@@ -5,8 +5,8 @@ class Role {
         this.alignment = alignment;
         this.position = position;
         this.order = order;
-        this.nominating = false;
-        this.nominated = false;
+        // this.nominating = false;
+        // this.nominated = false;
         this.nominatable = true;
         this.votable = true;
         this.executed = false;
@@ -283,7 +283,6 @@ class Virgin extends TownsFolkRole {
 
     constructor() {
         super(Virgin.name, Virgin.title, Virgin.order);
-        this.nominatedBy = null;
     }
 }
 

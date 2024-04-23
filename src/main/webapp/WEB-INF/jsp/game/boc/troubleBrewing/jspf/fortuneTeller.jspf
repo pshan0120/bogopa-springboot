@@ -23,9 +23,9 @@
                     * 정상인 상태라면 정확한 정보를 제공해야 합니다.<br/>
                     * 취했거나 중독된 상태라면 잘못된 정보도 제공할 수 있습니다.<br/>
                     2. 다음 플레이어를(들을) 깨우세요.<br/>
-                    \${fortuneTellerPlayerHtml}<br/>
+                    <strong>\${fortuneTellerPlayerHtml}</strong><br/>
                     3. 점쟁이에게 아래 임프 플레이어와 레드 헤링(플레이 상태 모달 참조)은 악마로 느껴집니다.<br/>
-                    \${impPlayerHtml}<br/>
+                    <strong>\${impPlayerHtml}</strong><br/>
                     4. 선택 안내 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     5. 그가 지목한 플레이어를 선택합니다.<br/>
                     6. 메세지 모달을 띄운 뒤 보여주세요.<br/>

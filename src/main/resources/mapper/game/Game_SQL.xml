@@ -68,7 +68,7 @@
             1
     </select>
 
-    <delete id="deletePlayLogByPlayNo" parameterType="boardgame.fo.game.dto.DeletePlayLogAllRequestDto">
+    <delete id="deletePlayLogByPlayNo" parameterType="long">
         DELETE FROM
             playLog
         WHERE

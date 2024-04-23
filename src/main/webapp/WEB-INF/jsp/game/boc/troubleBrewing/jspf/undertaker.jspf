@@ -21,7 +21,7 @@
                     * 취했거나 중독된 상태라면 아무렇게나 고를 수 있습니다.<br/>
                     2. 장의사에게 제공할 처형당한 플레이어의 역할을 선택하세요.<br/>
                     3. 다음 플레이어를(들을) 깨우세요.<br/>
-                    \${undertakerPlayerHtml}<br/>
+                    <strong>\${undertakerPlayerHtml}</strong><br/>
                     4. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     5. 눈을 감게 하세요.
                 </p>

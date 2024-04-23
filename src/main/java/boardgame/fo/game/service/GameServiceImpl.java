@@ -38,8 +38,8 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto playNo) {
-        gameDao.deletePlayLogByPlayNo(playNo);
+    public void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto dto) {
+        gameDao.deletePlayLogByPlayNo(dto.getPlayNo());
     }
 
     public List<Map<String, Object>> selectGameNoList(Map<String, Object> map) {

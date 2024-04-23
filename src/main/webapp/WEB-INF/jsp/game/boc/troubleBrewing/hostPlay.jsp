@@ -494,8 +494,6 @@
                 player.diedToday = false;
                 player.diedTonight = false;
                 player.safeByMonk = false;
-                player.nominating = false;
-                player.nominated = false;
             });
 
             renderOtherDay();

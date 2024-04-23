@@ -19,7 +19,7 @@
                 <h3>하수인 정보</h3>
                 <p>
                     1. 다음 플레이어를(들을) 깨우세요.<br/>
-                    \${minionPlayerListHtml}<br/>
+                    <strong>\${minionPlayerListHtml}</strong><br/>
                     2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     3. 눈을 감게 하세요.
                 </p>

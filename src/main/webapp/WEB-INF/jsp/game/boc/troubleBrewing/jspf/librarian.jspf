@@ -20,7 +20,7 @@
                     * 정상인 상태라면 둘 중 하나 이상은 이방인이어야 합니다.<br/>
                     * 취했거나 중독된 상태라면 아무렇게나 고를 수 있습니다.<br/>
                     2. 다음 플레이어를(들을) 깨우세요.<br/>
-                    \${librarianPlayerHtml}<br/>
+                    <strong>\${librarianPlayerHtml}</strong><br/>
                     3. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     4. 눈을 감게 하세요.
                 </p>
