@@ -10,6 +10,10 @@ import java.util.Map;
 @Repository
 public class GameDao extends AbstractDao {
 
+    public Map<String, Object> selectGamePlayById(long playNo) {
+        return selectOne("game.selectGamePlayById", playNo);
+    }
+
     public List<Map<String, Object>> selectClientPlayMemberList(long playNo) {
         return selectList("game.selectClientPlayMemberList", playNo);
     }

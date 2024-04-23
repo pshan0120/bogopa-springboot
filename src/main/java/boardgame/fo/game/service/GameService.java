@@ -9,6 +9,8 @@ import java.util.Map;
 
 public interface GameService {
 
+    Map<String, Object> readGamePlayById(long playNo);
+
     ReadPlayMemberListResponseDto readPlayMemberList(long playNo);
 
     void savePlay(SavePlayRequestDto dto);

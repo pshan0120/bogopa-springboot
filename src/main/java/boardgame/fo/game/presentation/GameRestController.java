@@ -19,6 +19,11 @@ public class GameRestController {
 
     private final GameService gameService;
 
+    @GetMapping("/play")
+    public Map<String, Object> readGamePlayById(@RequestParam long playNo) {
+        return gameService.readGamePlayById(playNo);
+    }
+
     @GetMapping("/play/member/list")
     public ReadPlayMemberListResponseDto readPlayMemberList(@RequestParam long playNo) {
         return gameService.readPlayMemberList(playNo);
@@ -38,6 +43,7 @@ public class GameRestController {
     public void deletePlayLogAll(@Validated @RequestBody DeletePlayLogAllRequestDto dto) {
         gameService.deletePlayLogByPlayNo(dto);
     }
+
 
 
 }

@@ -18,64 +18,17 @@
         let outsiderPlayerList = [];
         let playStatus = {};
 
-        $(async () => {
-            /*await loadGameStatus();
-
-            const $townDiv = $("#townDiv");
-            const $playersDiv = $townDiv.find("div[name='playersDiv']");
-            if (Object.keys(playStatus).length === 0) {
-                const htmlString = `게임이 시작되지 않았습니다.`;
-                $playersDiv.append(htmlString);
-                return;
-            }
-
-            console.log('playStatus', playStatus);*/
-            /*if (0 < playStatus.round) {
-                if (playStatus.night) {
-                    renderOtherNight();
-                    return;
-                }
-
-                renderOtherDay();
-                return;
-            }*/
-
-            /*playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
-
-            const htmlString = playerList.reduce((prev, next) => {
-                const found = [
-                    ...demonPlayerList,
-                    ...minionPlayerList,
-                    ...townsFolkPlayerList,
-                    ...outsiderPlayerList,
-                ].find(player => player.playerId === next.mmbrNo);
-
-                if (found) {
-                    console.log('found', found);
-                    const shroudHtml = found.died ? `<i class="ni ni-tie-bow"></i>` : "";
-                    const nominatableHtml = found.nominatable ? "투표가능" : "투표불가";
-
-                    return prev +
-                        `<div class="row">
-                            <div class="col-8">
-                                \${found.playerName} \${shroudHtml}
-                            </div>
-                            <div class="col-4">
-                                \${nominatableHtml}
-                            </div>
-                        </div>
-                        <hr>`;
-                }
-
-                return "";
-            }, "");
-
-            $playersDiv.append(htmlString);
-
-            $("#townDiv").show();*/
+        $(() => {
+            readGamePlayById(PLAY_NO);
         });
 
-
+        const readGamePlayById = playNo => {
+            gfn_callGetApi("/api/game/play", {playNo})
+                .then(data => {
+                    $("#titleDiv").find("span[name='playNm']").text(data.playNm);
+                })
+                .catch(response => console.error('error', response));
+        }
 
         const openGuideModal = () => {
             guideModal.openRuleGuideModal();
@@ -90,7 +43,7 @@
         }
 
         const openTownModal = () => {
-            townModal.open();
+            townModal.open(PLAY_NO);
         }
 
         const openQrImage = () => {
@@ -135,27 +88,12 @@
             <div class="col-xl-12 mb-5 mb-xl-0">
                 <div class="card shadow mt-5">
                     <div class="card-header bg-white border-0">
-                        <h2>
-                            <span name="playNm"></span>(<span name="playNo"></span>)
-                        </h2>
+                        플레이어용 참조표
                     </div>
-                    <div class="card-body">
-                        <div name="hostDiv">
-                            <h3>
-                                호스트
-                            </h3>
-                            <p>
-                                <span name="hostMemberName"></span>
-                            </p>
-                        </div>
-                        <div name="clientDiv">
-                            <h3>
-                                플레이어
-                            </h3>
-                            <p>
-                                <span name="clientMemberName"></span>
-                            </p>
-                        </div>
+                    <div class="card-body" id="titleDiv">
+                        <h2>
+                            <span name="playNm"></span>
+                        </h2>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">

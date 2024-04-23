@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="game">
 
+    <select id="selectGamePlayById" parameterType="long" resultType="hashmap">
+        SELECT
+            p.playNo,
+            p.playNm,
+            p.sttsCd
+        FROM
+            play p
+        WHERE
+            p.sttsCd = '1'
+          AND
+            p.playNo = #{playNo}
+    </select>
+
     <select id="selectClientPlayMemberList" parameterType="hashmap" resultType="hashmap">
         SELECT
             pm.mmbrNo,

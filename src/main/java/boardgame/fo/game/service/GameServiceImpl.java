@@ -18,6 +18,11 @@ public class GameServiceImpl implements GameService {
     private final GameDao gameDao;
 
     @Override
+    public Map<String, Object> readGamePlayById(long playNo) {
+        return gameDao.selectGamePlayById(playNo);
+    }
+
+    @Override
     public ReadPlayMemberListResponseDto readPlayMemberList(long playNo)  {
         List<Map<String, Object>> clientPlayMemberList = gameDao.selectClientPlayMemberList(playNo);
         Map<String, Object> hostPlayMember = gameDao.selectHostPlayMember(playNo);
