@@ -63,7 +63,7 @@ public class JoinController {
                 resultMsg = "이미 존재하는 닉네임입니다.";
             } else {
                 Map<String, Object> requestMap = commandMap.getMap();
-                memberService.insert(requestMap);
+                memberService.create(requestMap);
 
                 Long memberId = (Long) requestMap.get("mmbrNo");
                 loginService.setLogin(memberId, request);

@@ -9,45 +9,45 @@
 
     <script>
         const GAME_NO = 1951;
-        var sttng1Str = "";
-        var sttng2Str = "";
-        var sttng3Str = "";
-        var minPlyrCnt = 0;
-        var maxPlyrCnt = 0;
-        var joinPlyrCnt = 0;
+        let sttng1Str = "";
+        let sttng2Str = "";
+        let sttng3Str = "";
+        let minPlyrCnt = 0;
+        let maxPlyrCnt = 0;
+        let joinPlyrCnt = 0;
 
-        $(function () {
-            gfn_setSortTh("bocPlayRcrdList", "fn_selectBocPlayRcrdList(1)");
+        $(() => {
+            gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
 
             $("[data-toggle='tooltip']").tooltip();
 
-            fn_selectBocPlayRcrdList(1);
+            selectBocPlayRcrdList(1);
         });
 
 
-        function fn_selectBocPlayRcrdList(pageNo) {
-            var comAjax = new ComAjax("bocPlayRcrdForm");
+        const selectBocPlayRcrdList = pageNo => {
+            let comAjax = new ComAjax("bocPlayRcrdForm");
             comAjax.setUrl("<c:url value='/selectBocPlayRcrdList' />");
-            comAjax.setCallback("fn_selectBocPlayRcrdListCallback");
+            comAjax.setCallback("selectBocPlayRcrdListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
             comAjax.addParam("orderBy", $('#bocPlayRcrdListCurOrderBy').val());
             comAjax.ajax();
-        }
+        };
 
-        function fn_selectBocPlayRcrdListCallback(data) {
-            var cnt = data.map.cnt;
-            var body = $("#bocPlayRcrdListTbl>tbody");
+        const selectBocPlayRcrdListCallback = data => {
+            let cnt = data.map.cnt;
+            let body = $("#bocPlayRcrdListTbl>tbody");
             body.empty();
-            var str = "";
+            let str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
-                var params = {
+                let params = {
                     divId: "bocPlayRcrdListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "fn_selectBocPlayRcrdList",
+                    eventName: "selectBocPlayRcrdList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -86,9 +86,9 @@
                 });
             }
             body.append(str);
-        }
+        };
 
-        function fn_openInsertPlayModal() {
+        const openInsertPlayModal = () => {
             $("#playMmbrListTbl>tbody").empty();
             $("#playJoinMmbrNListDiv").empty();
             $("#insertPlayForm input[name='hostMmbrNo']").val("<c:out value="${mmbrNo}" />");
@@ -101,20 +101,21 @@
             maxPlyrCnt = 20;
             joinPlyrCnt = 0;
 
-            fn_selectPlayJoinMmbrList(1);
-            fn_setPlayNm("블러드 온 더 클락타워 - 트러블 브루잉");
+            selectPlayJoinMmbrList(1);
+            setPlayNm("블러드 온 더 클락타워 - 트러블 브루잉");
 
             $("#insertPlayModal").modal("show");
-        }
-
-        function fn_setPlayNm(gameNm) {
-            $("#insertPlayForm input[name='playNm']").val("'" + "<c:out value="${nickNm}" />" + "'의 " + gameNm);
         };
 
-        function fn_addPlayMmbr(mmbrNo, nickNm) {
+        const setPlayNm = gameNm => {
+            $("#insertPlayForm input[name='playNm']").val("'" + "<c:out value="${nickNm}" />" + "'의 " + gameNm);
+        };
+        ;
+
+        const addPlayMmbr = (mmbrNo, nickNm) => {
             if (joinPlyrCnt < maxPlyrCnt) {
-                var body = $("#playMmbrListTbl>tbody");
-                var str = "";
+                let body = $("#playMmbrListTbl>tbody");
+                let str = "";
                 str += "<tr name=\"addPlayMmbrTr\" id=\"addPlayMmbrTr" + mmbrNo + "\">";
                 str += "	<td>";
                 str += "		" + nickNm;
@@ -140,14 +141,14 @@
                 if (mmbrNo == "<c:out value="${mmbrNo}" />") {
                     str += "	호스트";
                 } else {
-                    str += "	<a class=\"btn btn-sm btn-outline-warning\" href=\"javascript:(void(0));\" onclick=\"fn_removePlayMmbr('" + mmbrNo + "','" + nickNm + "')\">제외</a>";
+                    str += "	<a class=\"btn btn-sm btn-outline-warning\" href=\"javascript:(void(0));\" onclick=\"removePlayMmbr('" + mmbrNo + "','" + nickNm + "')\">제외</a>";
                 }
                 str += "	</td>";
                 str += "</tr>";
                 body.append(str);
 
                 $("#playJoinMmbrNListDiv a").each(function () {
-                    var playJoinNickNm = $(this).text().trim();
+                    let playJoinNickNm = $(this).text().trim();
                     if (playJoinNickNm == nickNm) {
                         $(this).remove();
                     }
@@ -158,48 +159,48 @@
                 alert("최대 플레이 가능인원은 " + maxPlyrCnt + "명까지입니다.");
                 return false;
             }
-        }
+        };
 
-        function fn_removePlayMmbr(mmbrNo, nickNm) {
-            var body = $("#playJoinMmbrNListDiv");
-            var str = "";
-            str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"fn_addPlayMmbr('" + mmbrNo + "', '" + nickNm + "')\" >";
+        const removePlayMmbr = (mmbrNo, nickNm) => {
+            let body = $("#playJoinMmbrNListDiv");
+            let str = "";
+            str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"addPlayMmbr('" + mmbrNo + "', '" + nickNm + "')\" >";
             str += "	" + nickNm;
             str += "</a>";
             body.append(str);
 
             $("#playMmbrListTbl td:nth-child(1)").each(function () {
-                var playJoinNickNm = $(this).text().trim();
+                let playJoinNickNm = $(this).text().trim();
                 if (playJoinNickNm == nickNm.trim()) {
                     $("#addPlayMmbrTr" + mmbrNo).remove();
                     joinPlyrCnt--;
                 }
             });
-        }
+        };
 
-        function fn_selectPlayJoinMmbrList(pageNo) {
-            var comAjax = new ComAjax("insertPlayForm");
+        const selectPlayJoinMmbrList = pageNo => {
+            let comAjax = new ComAjax("insertPlayForm");
             comAjax.setUrl("<c:url value='/selectPlayJoinMmbrList' />");
-            comAjax.setCallback("fn_selectPlayJoinMmbrListCallback");
+            comAjax.setCallback("selectPlayJoinMmbrListCallback");
             comAjax.ajax();
-        }
+        };
 
-        function fn_selectPlayJoinMmbrListCallback(data) {
-            var cnt = data.list.length;
-            var body = $("#playJoinMmbrNListDiv");
+        const selectPlayJoinMmbrListCallback = data => {
+            let cnt = data.list.length;
+            let body = $("#playJoinMmbrNListDiv");
             body.empty();
-            var str = "";
+            let str = "";
             if (cnt > 0) {
                 $.each(data.list, function (key, value) {
-                    var isRun = true;
+                    let isRun = true;
                     $("#playMmbrListTbl td:nth-child(1)").each(function () {
-                        var playJoinNickNm = $(this).text().trim();
+                        let playJoinNickNm = $(this).text().trim();
                         if (playJoinNickNm != $("#hostMmbrNo").val() && playJoinNickNm == value.nickNm) {
                             isRun = false;
                         }
                     });
                     if (isRun) {
-                        str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"fn_addPlayMmbr('" + value.mmbrNo + "', '" + value.nickNm + "')\" >";
+                        str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"addPlayMmbr('" + value.mmbrNo + "', '" + value.nickNm + "')\" >";
                         str += "	" + value.nickNm;
                         str += "</a>";
                     }
@@ -208,7 +209,7 @@
             body.append(str);
         }
 
-        function fn_insertPlay() {
+        const insertPlay = () => {
             if (joinPlyrCnt < minPlyrCnt) {
                 alert("선택된 플레이어가 최소 플레이어수보다 적습니다.");
                 return false;
@@ -219,10 +220,10 @@
                 return false;
             }
 
-            var joinMmbrNoArr = new Array();
-            var sttngCd1Arr = new Array();
-            var sttngCd2Arr = new Array();
-            var sttngCd3Arr = new Array();
+            let joinMmbrNoArr = new Array();
+            let sttngCd1Arr = new Array();
+            let sttngCd2Arr = new Array();
+            let sttngCd3Arr = new Array();
 
             $("#playMmbrListTbl > tbody > tr").each(function () {
                 joinMmbrNoArr.push(this.id.replace("addPlayMmbrTr", ""));
@@ -239,9 +240,9 @@
 
             if (gfn_validate("insertPlayForm")) {
                 if (confirm("바로 플레이를 시작됩니다. 진행하시겠습니까?")) {
-                    var comAjax = new ComAjax("insertPlayForm");
+                    let comAjax = new ComAjax("insertPlayForm");
                     comAjax.setUrl("<c:url value='/insertPlay' />");
-                    comAjax.setCallback("fn_insertPlayCallback");
+                    comAjax.setCallback("insertPlayCallback");
                     comAjax.addParam("gameNo", GAME_NO);
                     comAjax.addParam("joinMmbrNoArr", joinMmbrNoArr);
                     comAjax.addParam("sttngCd1Arr", sttngCd1Arr);
@@ -252,10 +253,24 @@
                     return;
                 }
             }
+        };
+
+        const insertPlayCallback = data => {
+            location.href = "/game/trouble-brewing/play/" + data.playNo;
         }
 
-        function fn_insertPlayCallback(data) {
-            location.href = "/game/trouble-brewing/play/" + data.playNo;
+        const createBocMember = () => {
+            const nickname = prompt("회원명 입력");
+            if (!confirm("[" + nickname + "] 닉네임으로 BOC 모임에 가입된 회원을 등록합니다.")) {
+                return;
+            }
+
+            gfn_callPostApi("/api/member/boc", {nickname})
+                .then(data => {
+                    console.log('game status saved !!', data);
+                    alert("회원이 생성되었습니다.");
+                })
+                .catch(response => console.error('error', response));
         }
 
     </script>
@@ -311,8 +326,15 @@
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <c:if test="${clubNo ne ''}">
-                                        <button type="button" class="btn btn-sm btn-primary float-right"
-                                                onclick="fn_openInsertPlayModal();">새로운 플레이
+                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
+                                                onclick="openInsertPlayModal();">
+                                            새로운 플레이
+                                        </button>
+                                    </c:if>
+                                    <c:if test="${clubNo ne ''}">
+                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
+                                                onclick="createBocMember();">
+                                            B.O.C 회원 등록
                                         </button>
                                     </c:if>
                                 </div>
@@ -323,10 +345,12 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th name="bocPlayRcrdListSortTh" id="sortTh_playNm">
-                                        플레이이름 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_playNm" class="fa"></span>
+                                        플레이이름 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_playNm"
+                                                    class="fa"></span>
                                     </th>
                                     <th name="bocPlayRcrdListSortTh" id="sortTh_gameNm">
-                                        게임 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_gameNm" class="fa"></span>
+                                        게임 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_gameNm"
+                                                 class="fa"></span>
                                     </th>
                                     <th scope="col">모임</th>
                                     <th scope="col">플레이시간</th>
@@ -342,8 +366,6 @@
                                 id="bocPlayRcrdListPageNav"></ul>
                         </nav>
                     </div>
-
-
 
 
                 </div>
@@ -395,7 +417,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="fn_insertPlay();">등록</button>
+                <button type="button" class="btn btn-primary" onclick="insertPlay();">등록</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
             </div>
         </div>

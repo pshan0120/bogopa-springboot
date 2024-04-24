@@ -8,6 +8,10 @@
                 return "";
             }
 
+            $.each(createAssignedPlayerList(), (index, player) => {
+                player.safeByMonk = false;
+            });
+
             const playerStatusListHtml = Role.createPlayerStatusListHtml(monkPlayer);
 
             const monkPlayerHtml = monkPlayer.playerName
@@ -99,6 +103,9 @@
                 playerName,
                 title,
             });
+
+            Role.getPlayerByTitle(createAssignedPlayerList(), title).safeByMonk = true;
+
             $("#addChoiceOfMonkModal").modal("hide");
         },
         openMonkMessageModal: () => {
@@ -121,6 +128,8 @@
             if (!chosen) {
                 return;
             }
+
+            chosen.safeByMonk = false;
 
             const filteredList = monkPlayer.safePlayerByRound.filter(choice => choice.round !== playStatus.round);
             monkPlayer.safePlayerByRound = [...filteredList];

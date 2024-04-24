@@ -4,7 +4,8 @@
     const butler = {
         createHtml: () => {
             const butlerPlayer = Role.getPlayerByRole(outsiderPlayerList, Butler);
-            if (!butlerPlayer) {
+            if (!butlerPlayer
+                || butlerPlayer.died) {
                 return "";
             }
 

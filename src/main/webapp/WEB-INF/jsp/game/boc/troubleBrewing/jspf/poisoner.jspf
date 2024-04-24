@@ -4,9 +4,14 @@
     const poisoner = {
         createHtml: () => {
             const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
-            if (!poisonerPlayer) {
+            if (!poisonerPlayer
+                || poisonerPlayer.died) {
                 return "";
             }
+
+            $.each(createAssignedPlayerList(), (index, player) => {
+                player.poisoned = false;
+            });
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(poisonerPlayer);
 
@@ -24,15 +29,19 @@
                 <p>
                     1. 다음 플레이어를(들을) 깨우세요.<br/>
                     <strong>\${poisonerPlayerHtml}</strong><br/>
-                    2. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    2. 선택 안내 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     3. 그가 지목한 플레이어를 선택합니다.<br/>
-                    4. 눈을 감게 하세요.
+                    4. 메세지 모달을 띄운 뒤 보여주세요.<br/>
+                    5. 눈을 감게 하세요.
                 </p>
                 <button type="button" class="btn btn-success btn-block" onclick="openMessageModal('\${messageHtml}')">
-                    메세지 모달 표시
+                    선택 안내 메세지 모달 표시
                 </button>
                 <button type="button" class="btn btn-info btn-block" onclick="poisoner.openSetPoisonedPlayerModal()">
                     선택 모달 표시
+                </button>
+                <button type="button" class="btn btn-success btn-block" onclick="poisoner.openPoisonerMessageModal()">
+                    메세지 모달 표시
                 </button>
                 <button type="button" class="btn btn-warning btn-block" onclick="poisoner.resetPoisonedPlayer()">
                     선택 재설정
@@ -97,6 +106,19 @@
             poisonedPlayer.poisoned = true;
 
             $("#setPoisonedPlayerModal").modal("hide");
+        },
+        openPoisonerMessageModal: () => {
+            const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
+
+            const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (!chosen) {
+                alert("독살범이 중독시킬 플레이어가 먼저 선택되어야 합니다.");
+                return;
+            }
+
+            let messageHtml = `중독시킬 플레이어는 \${chosen.playerName} 입니다.</br>`;
+
+            openMessageModal(messageHtml);
         },
         resetPoisonedPlayer: () => {
             const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);

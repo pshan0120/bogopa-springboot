@@ -515,6 +515,7 @@
         const proceedToNextNight = () => {
             const mayorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Mayor);
             if (mayorPlayer
+                && !mayorPlayer.died
                 && !mayorPlayer.poisoned
                 && !mayorPlayer.drunken) {
 
@@ -644,6 +645,7 @@
         const diePlayer = diedPlayer => {
             diedPlayer.died = true;
             diedPlayer.diedRound = playStatus.round;
+            diedPlayer.nominatable = false;
 
             if (playStatus.night) {
                 diedPlayer.diedTonight = true;
@@ -672,13 +674,12 @@
             }
 
             const minionPlayer = minionPlayerList.find(minionPlayer => minionPlayer.name === diedPlayer.name);
-            if (minionPlayer) {
-                if (minionPlayer.changedToImp) {
-                    alert("임프가 된 하수인이 사망하여 선한 팀이 승리했습니다.");
-                    winByGood();
-                    saveGameStatus();
-                    return;
-                }
+            if (minionPlayer
+                && minionPlayer.changedToImp) {
+                alert("임프가 된 하수인이 사망하여 선한 팀이 승리했습니다.");
+                winByGood();
+                saveGameStatus();
+                return;
             }
 
             const aliveImpPlayer = Role.getPlayerByRole(alivePlayerList, Imp);

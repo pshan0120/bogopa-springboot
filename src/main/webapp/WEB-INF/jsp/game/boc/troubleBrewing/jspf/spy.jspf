@@ -4,7 +4,8 @@
     const spy = {
         createHtml: () => {
             const spyPlayer = Role.getPlayerByRole(minionPlayerList, Spy);
-            if (!spyPlayer) {
+            if (!spyPlayer
+                || spyPlayer.died) {
                 return "";
             }
 

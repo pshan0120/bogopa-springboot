@@ -102,6 +102,7 @@
         },
         openNominationModal: () => {
             const nominatingPlayerList = createAssignedPlayerList()
+                .filter(player => !player.died)
                 .filter(player => player.nominatable)
                 .filter(player => !execution.nominatingPlayerListOfToday
                     .some(nominatingPlayer => nominatingPlayer.playerName === player.playerName)

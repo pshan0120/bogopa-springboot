@@ -4,7 +4,8 @@
     const ravenKeeper = {
         createHtml: () => {
             const ravenKeeperPlayer = Role.getPlayerByRole(townsFolkPlayerList, RavenKeeper);
-            if (!ravenKeeperPlayer) {
+            if (!ravenKeeperPlayer
+                || !ravenKeeperPlayer.diedTonight) {
                 return "";
             }
 

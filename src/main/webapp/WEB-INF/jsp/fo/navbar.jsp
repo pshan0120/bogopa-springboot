@@ -7,14 +7,15 @@
 	String clubNo = (String) session.getAttribute("clubNo");
 	String mmbrTypeCd = (String) session.getAttribute("mmbrTypeCd");
 	
-	// boolean loggedIn = mmbrNo == null ? false : true;
 	boolean loggedIn = SessionUtils.isMemberLogin();
+	boolean adminMemberLoggedIn = SessionUtils.isAdminMemberLogin();
 %>
 
 <c:set var="mmbrNo" value="<%= mmbrNo %>"/>
 <c:set var="nickNm" value="<%= nickNm %>"/>
 <c:set var="clubNo" value="<%= clubNo %>"/>
 <c:set var="mmbrTypeCd" value="<%= mmbrTypeCd %>"/>
+<c:set var="adminMemberLoggedIn" value="<%= adminMemberLoggedIn %>"/>
 
 <script>
 </script>

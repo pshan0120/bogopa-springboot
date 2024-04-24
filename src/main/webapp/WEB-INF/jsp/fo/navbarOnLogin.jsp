@@ -8,6 +8,7 @@
     String mmbrTypeCd = (String) session.getAttribute("mmbrTypeCd");
 
     boolean loggedIn = SessionUtils.isMemberLogin();
+    boolean adminMemberLoggedIn = SessionUtils.isAdminMemberLogin();
     if (!loggedIn) {
 %>
 <script>
@@ -21,6 +22,7 @@
 <c:set var="nickNm" value="<%= nickNm %>"/>
 <c:set var="clubNo" value="<%= clubNo %>"/>
 <c:set var="mmbrTypeCd" value="<%= mmbrTypeCd %>"/>
+<c:set var="adminMemberLoggedIn" value="<%= adminMemberLoggedIn %>"/>
 
 <script>
 </script>

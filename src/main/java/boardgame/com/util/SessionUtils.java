@@ -4,11 +4,13 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class SessionUtils {
 
-    private static Long ADMIN_MEMBER_ID = 4L;
+    // private static Long ADMIN_MEMBER_ID = 25L;
+    private static Long[] ADMIN_MEMBER_IDS = new Long[]{4L, 25L};
 
     public static String getCurrentUserId() {
         try {
@@ -58,7 +60,9 @@ public class SessionUtils {
 
     public static Boolean isAdminMemberLogin() {
         try {
-            return ADMIN_MEMBER_ID.equals(getCurrentMemberId());
+            return Arrays.stream(ADMIN_MEMBER_IDS)
+                    .anyMatch(id -> id.equals(getCurrentMemberId()));
+            // return ADMIN_MEMBER_ID.equals(getCurrentMemberId());
         } catch (Exception e) {
             return false;
         }

@@ -88,7 +88,7 @@
             body.append(str);
         }
 
-        function fn_openInsertPlayModal() {
+        const openInsertPlayModal = () => {
             $("#playMmbrListTbl>tbody").empty();
             $("#playJoinMmbrNListDiv").empty();
             $("#insertPlayForm input[name='hostMmbrNo']").val("<c:out value="${mmbrNo}" />");
@@ -101,17 +101,17 @@
             maxPlyrCnt = 20;
             joinPlyrCnt = 0;
 
-            fn_selectPlayJoinMmbrList(1);
-            fn_setPlayNm("블러드 온 더 클락타워 - 트러블 브루잉");
+            selectPlayJoinMmbrList(1);
+            setPlayNm("블러드 온 더 클락타워 - 트러블 브루잉");
 
             $("#insertPlayModal").modal("show");
-        }
-
-        function fn_setPlayNm(gameNm) {
-            $("#insertPlayForm input[name='playNm']").val("'" + "<c:out value="${nickNm}" />" + "'의 " + gameNm);
         };
 
-        function fn_addPlayMmbr(mmbrNo, nickNm) {
+        const setPlayNm = gameNm => {
+            $("#insertPlayForm input[name='playNm']").val("'" + "<c:out value="${nickNm}" />" + "'의 " + gameNm);
+        };;
+
+        const addPlayMmbr = function (mmbrNo, nickNm) {
             if (joinPlyrCnt < maxPlyrCnt) {
                 var body = $("#playMmbrListTbl>tbody");
                 var str = "";
@@ -158,12 +158,12 @@
                 alert("최대 플레이 가능인원은 " + maxPlyrCnt + "명까지입니다.");
                 return false;
             }
-        }
+        };
 
         function fn_removePlayMmbr(mmbrNo, nickNm) {
             var body = $("#playJoinMmbrNListDiv");
             var str = "";
-            str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"fn_addPlayMmbr('" + mmbrNo + "', '" + nickNm + "')\" >";
+            str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"addPlayMmbr('" + mmbrNo + "', '" + nickNm + "')\" >";
             str += "	" + nickNm;
             str += "</a>";
             body.append(str);
@@ -177,14 +177,14 @@
             });
         }
 
-        function fn_selectPlayJoinMmbrList(pageNo) {
+        function selectPlayJoinMmbrList(pageNo) {
             var comAjax = new ComAjax("insertPlayForm");
             comAjax.setUrl("<c:url value='/selectPlayJoinMmbrList' />");
-            comAjax.setCallback("fn_selectPlayJoinMmbrListCallback");
+            comAjax.setCallback("selectPlayJoinMmbrListCallback");
             comAjax.ajax();
         }
 
-        function fn_selectPlayJoinMmbrListCallback(data) {
+        function selectPlayJoinMmbrListCallback(data) {
             var cnt = data.list.length;
             var body = $("#playJoinMmbrNListDiv");
             body.empty();
@@ -199,7 +199,7 @@
                         }
                     });
                     if (isRun) {
-                        str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"fn_addPlayMmbr('" + value.mmbrNo + "', '" + value.nickNm + "')\" >";
+                        str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"addPlayMmbr('" + value.mmbrNo + "', '" + value.nickNm + "')\" >";
                         str += "	" + value.nickNm;
                         str += "</a>";
                     }
@@ -312,7 +312,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <c:if test="${clubNo ne ''}">
                                         <button type="button" class="btn btn-sm btn-primary float-right"
-                                                onclick="fn_openInsertPlayModal();">새로운 플레이
+                                                onclick="openInsertPlayModal();">새로운 플레이
                                         </button>
                                     </c:if>
                                 </div>

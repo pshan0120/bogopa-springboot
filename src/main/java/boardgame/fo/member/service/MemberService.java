@@ -1,12 +1,16 @@
 package boardgame.fo.member.service;
 
+import boardgame.fo.member.dto.CreateBocMemberRequestDto;
+
 import java.util.Map;
 
 public interface MemberService {
 
     Map<String, Object> readById(long memberId);
 
-    void insert(Map<String, Object> map);
+    void create(Map<String, Object> map);
+
+    void createBocMember(CreateBocMemberRequestDto dto);
 
 
 
@@ -28,5 +32,6 @@ public interface MemberService {
     Map<String, Object> selectEmailExistYn(Map<String, Object> map);
 
     Map<String, Object> selectNickNmExistYn(Map<String, Object> map);
+
 
 }

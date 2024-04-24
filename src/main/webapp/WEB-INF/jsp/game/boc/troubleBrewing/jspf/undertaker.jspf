@@ -4,7 +4,8 @@
     const undertaker = {
         createHtml: () => {
             const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
-            if (!undertakerPlayer) {
+            if (!undertakerPlayer
+                || undertakerPlayer.died) {
                 return "";
             }
 

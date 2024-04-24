@@ -433,7 +433,7 @@
 				#{mmbrNo},
 				#{clubMmbrGrdCd},
 				CURDATE(),
-				FALSE,
+				TRUE,
 				'system',
 				CURRENT_TIMESTAMP,
 				'system',
@@ -474,7 +474,7 @@
 	</delete>
 	
 	
-	<insert id="insertClubJoin" parameterType="hashmap">
+	<insert id="insertClubJoin" parameterType="hashmap" useGeneratedKeys="true"  keyProperty="seq">
 			INSERT INTO clubJoin
 			(
 				clubNo,

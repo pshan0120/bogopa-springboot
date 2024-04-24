@@ -4,7 +4,8 @@
     const fortuneTeller = {
         createHtml: () => {
             const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
-            if (!fortuneTellerPlayer) {
+            if (!fortuneTellerPlayer
+                || fortuneTellerPlayer.died) {
                 return "";
             }
 

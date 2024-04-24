@@ -13,7 +13,7 @@
             const messageHtml = `하수인<br/> - \${minionPlayerListHtml}`;
 
             return `<div name="impDiv">
-                <h3>악마 정보</h3>
+                <h3>임프 정보</h3>
                 <p>
                     1. 다음 플레이어를(들을) 깨우세요.<br/>
                     <strong>\${impPlayerHtml}</strong><br/>
@@ -109,35 +109,20 @@
             impPlayer.offeredGoodRoleList = [];
             alert("초기화 되었습니다.");
         },
-
         createHtml: () => {
-            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
-            impPlayer.attackingPlayerByRound = [];
-
-            const playerStatusListHtml = Role.createPlayerStatusListHtml(impPlayer);
-
-            const impPlayerHtml = impPlayer.playerName
-                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
-
-            // TODO: 새로운 임프가 생겼을 때 처리
-
-
-            const minionPlayerListHtml = minionPlayerList.reduce((prev, next) => {
-                return prev + next.playerName + " ";
-            }, "");
-
-            const messageHtml = `하수인<br/> - \${minionPlayerListHtml}`;
+            const impPlayerHtml = imp.createImpPlayerHtml();
 
             return `<div name="impDiv">
-                <h3>악마</h3>
+                <h3>임프</h3>
                 <p>
-                    1. 악마는 아무 플레이어(본인이나 죽은 플레이어까지도) 공격할 수 있습니다.<br/>
+                    1. 임프는 아무 플레이어(본인이나 죽은 플레이어까지도) 공격할 수 있습니다.<br/>
                     * 만약 시장을 공격했다면 스토리텔러의 판단에 따라 다른 플레이어로 대상을 바꿀 수 있습니다.
                     그 대상이 군인이거나 수도승으로부터 보호받는다면 아무도 죽지 않습니다.<br/>
                     2. 다음 플레이어를(들을) 깨우세요.<br/>
                     <strong>\${impPlayerHtml}</strong><br/>
                     3. 선택 안내 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     4. 그가 지목한 플레이어를 선택합니다.<br/>
+                    * 만약 임프 스스로를 지목했다면 하수인 중 한 명을 새로운 임프로 지정합니다.<br/>
                     5. 메세지 모달을 띄운 뒤 보여주세요.<br/>
                     6. 눈을 감게 하세요.
                 </p>
@@ -165,8 +150,31 @@
             </div>
             <hr/>`;
         },
+        createImpPlayerHtml: () => {
+            const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);
+            if (impPlayer.died) {
+                const changedToImpMinionPlayer = minionPlayerList.find(minionPlayer => {
+                    return !minionPlayer.died && minionPlayer.changedToImp
+                });
+
+                if (!changedToImpMinionPlayer) {
+                    alert("더 이상 남은 임프가 없습니다. 선한 편의 승리입니다.");
+                    return "";
+                }
+
+                const playerStatusListHtml = Role.createPlayerStatusListHtml(changedToImpMinionPlayer);
+                return changedToImpMinionPlayer.playerName
+                    + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            }
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(impPlayer);
+            return impPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+        },
         openImpAttackChoiceMessageModal: () => {
-            let messageHtml = `공격할 플레이어를 지목하세요. 당신은 아무 플레이어(본인이나 죽은 플레이어까지도) 공격할 수 있습니다.`;
+            let messageHtml = `공격할 플레이어를 지목하세요.
+                당신은 아무 플레이어(본인이나 죽은 플레이어까지도) 공격할 수 있습니다.
+                만약 본인을 지목한다면 남은 하수인 중 한 명이 새로운 임프가 됩니다.`;
 
             openMessageModal(messageHtml);
         },
@@ -185,7 +193,7 @@
 
                     return prev
                         + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
-                        + " onclick=\"imp.addAttackingPlayer('" + next.playerName + "', '" + drunk.title + "')\" >"
+                        + " onclick=\"imp.addAttackingPlayer('" + next.playerName + "', '" + next.title + "')\" >"
                         + " " + next.playerName + "(" + drunk.title + ")"
                         + "</button>";
                 }
@@ -217,7 +225,7 @@
 
             if (impPlayer.poisoned
                 || impPlayer.drunken) {
-                alert("중독되거나 만취된 상태라서 아무 일도 일어나지 않습니다.");
+                alert("중독되거나 만취된 상태입니다. 판단에 따라 사망 플레이어 직접 선택을 진행하세요.");
                 $("#addChoiceOfImpAttackModal").modal("hide");
                 return;
             }
@@ -228,6 +236,12 @@
                 playerName,
                 title,
             });
+
+            if (attackedPlayer.died) {
+                alert("공격당한 플레이어가 이미 죽은 상태라서 아무 일도 일어나지 않습니다.");
+                $("#addChoiceOfImpAttackModal").modal("hide");
+                return;
+            }
 
             if (attackedPlayer.name === Soldier.name) {
                 const soldierPlayer = Role.getPlayerByRole(townsFolkPlayerList, Soldier);
@@ -260,10 +274,11 @@
             }
 
             if (attackedPlayer.name === Imp.name) {
-                alert("악마 플레이어가 스스로를 죽였습니다. 이어서 악마가 될 하수인을 선택하세요.");
+                alert("임프 플레이어가 스스로를 죽였습니다. 이어서 임프가 될 하수인을 선택하세요.");
                 attackedPlayer.died = true;
                 attackedPlayer.diedTonight = true;
                 attackedPlayer.diedRound = playStatus.round;
+                attackedPlayer.nominatable = false;
                 $("#addChoiceOfImpAttackModal").modal("hide");
                 return;
             }
@@ -294,6 +309,7 @@
 
             const filteredList = impPlayer.attackingPlayerByRound.filter(choice => choice.round !== playStatus.round);
             impPlayer.attackingPlayerByRound = [...filteredList];
+
             alert("초기화 되었습니다.");
         },
         openSetAttackedPlayerModal: () => {
@@ -320,7 +336,8 @@
             $("#setAttackedPlayerModal").modal("hide");
         },
         openSetNewImpModal: () => {
-            const changedToImpMinionPlayerList = minionPlayerList.filter(minionPlayer => !minionPlayer.died && !minionPlayer.changedToImp);
+            const changedToImpMinionPlayerList = minionPlayerList
+                .filter(minionPlayer => !minionPlayer.died && !minionPlayer.changedToImp);
 
             let setNewImpHtml = changedToImpMinionPlayerList.reduce((prev, next) => {
                 return prev

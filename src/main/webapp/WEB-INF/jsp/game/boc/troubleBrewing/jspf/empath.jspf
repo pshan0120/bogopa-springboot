@@ -4,7 +4,8 @@
     const empath = {
         createHtml: () => {
             const empathPlayer = Role.getPlayerByRole(townsFolkPlayerList, Empath);
-            if (!empathPlayer) {
+            if (!empathPlayer
+                || empathPlayer.died) {
                 return "";
             }
 

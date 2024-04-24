@@ -4,7 +4,8 @@
     const scarletWomen = {
         createHtml: () => {
             const scarletWomenPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWomen);
-            if (!scarletWomenPlayer) {
+            if (!scarletWomenPlayer
+                || scarletWomenPlayer.died) {
                 return "";
             }
 
