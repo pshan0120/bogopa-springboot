@@ -14,6 +14,7 @@
 			invtMmbrNo,
 		</if>
 		useYn,
+		temporarilyJoined,
 		insId,
 		insDt,
 		updId,
@@ -30,6 +31,7 @@
 			#{invtMmbrNo},
 		</if>
 		'Y',
+		#{temporarilyJoined},
 		'system',
 		CURRENT_TIMESTAMP,
 		'system',
@@ -64,6 +66,7 @@
 		m.pswrdErrCnt,
 		m.useYn,
 		m.mmbrTypeCd,
+		m.temporarilyJoined,
 		IFNULL(cm.clubNo, '') AS clubNo
 		FROM
 		mmbr m
@@ -94,6 +97,7 @@
 		SELECT
 			m.mmbrNo,
 			IFNULL(m.nickNm, '') AS nickNm,
+			m.temporarilyJoined,
 			m.mmbrTypeCd,
 			cd.nm AS mmbrTypeNm,
 			IFNULL(m.intrdctn, '') AS intrdctn,

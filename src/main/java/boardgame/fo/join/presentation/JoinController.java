@@ -55,6 +55,7 @@ public class JoinController {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
+        // TODO: 이하 JoinService 로 옮길 것
 
         if (StringUtils.equals("Y", String.valueOf(memberService.selectEmailExistYn(commandMap.getMap()).get("existYn")))) {
             resultMsg = "이미 존재하는 이메일입니다.";
@@ -63,6 +64,7 @@ public class JoinController {
                 resultMsg = "이미 존재하는 닉네임입니다.";
             } else {
                 Map<String, Object> requestMap = commandMap.getMap();
+                requestMap.put("temporarilyJoined", false);
                 memberService.create(requestMap);
 
                 Long memberId = (Long) requestMap.get("mmbrNo");

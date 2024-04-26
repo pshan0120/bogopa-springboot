@@ -46,8 +46,9 @@ public class MemberServiceImpl implements MemberService {
         if (SessionUtils.isAdminMemberLogin()) {
             memberRequestMap.put("invtMmbrNo", SessionUtils.getCurrentMemberId());
         }
+        memberRequestMap.put("temporarilyJoined", true);
 
-        memberDao.insertMember(memberRequestMap);
+        this.create(memberRequestMap);
         Long memberId = (Long) memberRequestMap.get("mmbrNo");
 
         Map<String, Object> clubJoinRequestMap = new HashMap<>();
