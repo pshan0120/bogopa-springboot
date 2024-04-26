@@ -109,8 +109,7 @@
                 )
                 .sort((prev, next) => prev.seatNumber - next.seatNumber);
 
-            let setNominatingPlayerHtml = "";
-            setNominatingPlayerHtml = nominatingPlayerList.reduce((prev, next) => {
+            let setNominatingPlayerHtml = nominatingPlayerList.reduce((prev, next) => {
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
                     + " onclick=\"execution.setNominatingPlayer('" + next.playerName + "')\" >"

@@ -231,11 +231,11 @@
         }
 
         const winByGood = () => {
-            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/Samba de Janeiro- Bellini.mp3" loop controls></audio>`);
+            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/level-win-6416.mp3" loop controls></audio>`);
         }
 
         const winByEvil = () => {
-            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" loop controls></audio>`);
+            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/evil-laugh-21137.mp3" loop controls></audio>`);
         }
 
         const openMessageModal = messageHtml => {
