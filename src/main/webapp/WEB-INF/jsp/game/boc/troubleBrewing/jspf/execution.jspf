@@ -111,7 +111,7 @@
 
             let setNominatingPlayerHtml = nominatingPlayerList.reduce((prev, next) => {
                 return prev
-                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\""
                     + " onclick=\"execution.setNominatingPlayer('" + next.playerName + "')\" >"
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
@@ -157,8 +157,11 @@
             const $modal = $("#setNominationModal");
 
             $modal.find("[name='nominatingPlayerListDiv']").empty().html(setNominatingPlayerHtml);
+            $modal.find("[name='nominatingPlayerName']").empty();
             $modal.find("[name='nominatedPlayerListDiv']").empty().html(setNominatedPlayerHtml);
+            $modal.find("[name='nominatedPlayerName']").empty();
             $modal.find("[name='votingPlayerListDiv']").empty().html(setVotingPlayerHtml);
+            $modal.find("[name='votedPlayerListDiv']").empty();
             $modal.find("[name='candidatePlayerListDiv']").empty().html(candidatePlayerListHtml);
 
             $("#setNominationModal").modal("show");
@@ -179,11 +182,38 @@
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
             execution.nominatingPlayerListOfToday.push(player);
             execution.nominatingPlayer = player;
+
+            const $modal = $("#setNominationModal");
+            $modal.find("[name='nominatingPlayerName']").text(playerName);
+            $modal.find("[name='nominatingPlayerListDiv']").find("button").hide();
         },
         setNominatedPlayer: playerName => {
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
             execution.nominatedPlayerListOfToday.push(player);
             execution.nominatedPlayer = player;
+
+            if (player.name === Virgin.name
+                && !player.poisoned
+                && !player.drunken) {
+
+                if (execution.nominatingPlayer.position.name === POSITION.TOWNS_FOLK.name
+                    && !execution.nominatingPlayer.drunken) {
+
+                    const virginPlayer = Role.getPlayerByRole(townsFolkPlayerList, Virgin);
+                    virginPlayer.skillAvailable = false;
+                    alert("처녀 능력이 사용되었습니다.");
+
+                    execution.nominatingPlayer.executed = true;
+                    diePlayer(execution.nominatingPlayer);
+
+                    alert("처녀 플레이어를 지목한 사람이 마을 사람이었기에 즉시 처형당했습니다. 이제 이번 라운드 밤 순서를 진행하세요.");
+                    $("#setNominationModal").modal("hide");
+                }
+            }
+
+            const $modal = $("#setNominationModal");
+            $modal.find("[name='nominatedPlayerName']").text(playerName);
+            $modal.find("[name='nominatedPlayerListDiv']").find("button").hide();
         },
         setVotingPlayer: playerName => {
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
@@ -191,6 +221,9 @@
                 player.votable = false;
             }
             execution.votingPlayerList.push(player);
+
+            const $modal = $("#setNominationModal");
+            $modal.find("[name='votedPlayerListDiv']").append(playerName + ", ");
         },
         setExecutionPlayer: playerName => {
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
@@ -281,20 +314,20 @@
             $("#setDiedPlayerByExecutionModal").modal("hide");
         },
         saveVote: () => {
-            alert("지명한 플레이어는 " + execution.nominatingPlayer.playerName + "입니다.");
-            alert("지명당한 플레이어는 " + execution.nominatedPlayer.playerName + "입니다.");
-
             const numberOfVote = execution.votingPlayerList.length;
-            alert("투표한 플레이어는 " + numberOfVote + "명 입니다.");
+            let voteResultText = "지명한 플레이어는 " + execution.nominatingPlayer.playerName + "입니다.\n"
+                + "지명당한 플레이어는 " + execution.nominatedPlayer.playerName + "입니다.\n"
+                + "투표한 플레이어는 " + numberOfVote + "명 입니다.\n\n";
 
             const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
             const numberOfVoteSuccess = Math.ceil(alivePlayerList.length / 2);
 
             if (numberOfVoteSuccess <= numberOfVote) {
-                alert("필요한 득표 수(" + numberOfVoteSuccess + ") 이상의 투표 수를 받아 처형 후보로 등록됩니다.");
+                voteResultText += "필요한 득표 수(" + numberOfVoteSuccess + ") 이상의 투표 수를 받아 처형 후보로 등록됩니다.";
             } else {
-                alert("필요한 득표 수(" + numberOfVoteSuccess + ")보다 적은 투표 수를 받아 처형 후보로 등록되지 않습니다.");
+                voteResultText += "필요한 득표 수(" + numberOfVoteSuccess + ")보다 적은 투표 수를 받아 처형 후보로 등록되지 않습니다.";
             }
+            alert(voteResultText);
 
             if (!confirm("이 상황으로 저장할까요?")) {
                 return;
@@ -330,14 +363,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h3>지명한 플레이어</h3>
+                <h3>지명한 플레이어 : <span name="nominatingPlayerName"></span></h3>
                 <div name="nominatingPlayerListDiv"></div>
                 <hr>
-                <h3>지명당한 플레이어</h3>
+                <h3>지명당한 플레이어 : <span name="nominatedPlayerName"></span></h3>
                 <div name="nominatedPlayerListDiv"></div>
                 <hr>
                 <h3>투표한 플레이어(사망한 플레이어라면 투표권 사라짐)</h3>
                 <div name="votingPlayerListDiv"></div>
+                <div name="votedPlayerListDiv"></div>
                 <hr>
                 <h3>처형 후보 플레이어</h3>
                 <div name="candidatePlayerListDiv"></div>
