@@ -31,8 +31,8 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">게임하기</h1>
-                        <p class="text-lead text-light">내가 편하게 하려고 제작함</p>
+                        <h1 class="text-white">과일가게</h1>
+                        <p class="text-lead text-light">평화로운 과일시장</p>
                     </div>
                 </div>
             </div>

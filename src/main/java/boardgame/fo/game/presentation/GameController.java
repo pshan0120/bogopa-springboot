@@ -66,4 +66,18 @@ public class GameController {
         return mv;
     }
 
+
+
+    @GetMapping("/game/fruit-shop/play")
+    public String openFruitShop() {
+        return "/game/fruitShop/play";
+    }
+
+    @GetMapping("/game/food-chain-magnate/calculator")
+    public String openFoodChainMagnateCalculator() {
+        return "/game/footChainMagnate/calculator";
+    }
+
+
+
 }

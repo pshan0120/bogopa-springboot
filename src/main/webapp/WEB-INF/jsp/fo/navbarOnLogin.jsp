@@ -83,7 +83,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="/game">
-                        <i class="ni ni-watch-time"></i>
+                        <i class="ni ni-controller"></i>
                         <span class="nav-link-inner--text">게임하기</span>
                     </a>
                 </li>
