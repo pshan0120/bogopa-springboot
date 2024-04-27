@@ -231,11 +231,11 @@
         }
 
         const winByGood = () => {
-            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/level-win-6416.mp3" loop controls></audio>`);
+            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/level-win-6416.mp3" loop controls></audio>`);
         }
 
         const winByEvil = () => {
-            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="/sounds/evil-laugh-21137.mp3" loop controls></audio>`);
+            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" loop controls></audio>`);
         }
 
         const openMessageModal = messageHtml => {
@@ -757,7 +757,7 @@
                         <h2>
                             첫번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="/sounds/scops-owl-57475.mp3" loop controls></audio>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" loop controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -798,7 +798,7 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 낮
                         </h2>
-                        <audio name="backgroundMusic" src="/sounds/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -839,7 +839,7 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="/sounds/scops-owl-57475.mp3" loop controls></audio>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" loop controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">

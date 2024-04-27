@@ -9,15 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="comAjax 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/footChainMagnate/calculator.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/play.jsp" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="푸드체인거물 수익계산기 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/com/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/game.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/game.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +27,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -242,14 +239,7 @@
       <workItem from="1713881088651" duration="13456000" />
       <workItem from="1713972423957" duration="10866000" />
       <workItem from="1714099143412" duration="6863000" />
-      <workItem from="1714187633677" duration="18350000" />
-    </task>
-    <task id="LOCAL-00009" summary="addPoisonedPlayer 오류 수정">
-      <created>1712253452657</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1712253452657</updated>
+      <workItem from="1714187633677" duration="19925000" />
     </task>
     <task id="LOCAL-00010" summary="addPoisonedPlayer 오류 수정">
       <created>1712253509170</created>
@@ -587,7 +577,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714222866214</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="푸드체인거물 수익계산기 추가">
+      <created>1714229255676</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1714229255676</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +605,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="1차 완료" />
     <MESSAGE value="투표 수정" />
     <MESSAGE value="노트 추가" />
     <MESSAGE value="구조 정리" />
@@ -633,7 +629,8 @@
     <MESSAGE value="처녀 지목기능 추가" />
     <MESSAGE value="투표 개선" />
     <MESSAGE value="comAjax 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="comAjax 수정" />
+    <MESSAGE value="푸드체인거물 수익계산기 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="푸드체인거물 수익계산기 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

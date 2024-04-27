@@ -25,27 +25,27 @@
                 <h3>
                     닭 소리
                 </h3>
-                <audio name="chicken" src="/sounds/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
+                <audio name="chicken" src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
 
                 <h3>
                     부엉이 소리
                 </h3>
-                <audio name="owl" src="/sounds/scops-owl-57475.mp3" controls></audio>
+                <audio name="owl" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" controls></audio>
 
                 <h3>
                     남자 비명
                 </h3>
-                <audio name="owl" src="/sounds/male-scream-in-fear-123079.mp3" controls></audio>
+                <audio name="owl" src="https://bogopayo.cafe24.com/sound/male-scream-in-fear-123079.mp3" controls></audio>
 
                 <h3>
                     승리 축하
                 </h3>
-                <audio name="owl" src="/sounds/level-win-6416.mp3" controls></audio>
+                <audio name="owl" src="https://bogopayo.cafe24.com/sound/level-win-6416.mp3" controls></audio>
 
                 <h3>
                     악마의 웃음
                 </h3>
-                <audio name="owl" src="/sounds/evil-laugh-21137.mp3" controls></audio>
+                <audio name="owl" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" controls></audio>
 
             </div>
             <div class="modal-footer">
