@@ -9,11 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="푸드체인거물 수익계산기 추가">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/com/constants.js" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="사운드 삭제">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/bo/includeFooter.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/bo/includeFooter.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/vendors/google-code-prettify/CHANGES.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/vendors/google-code-prettify/CHANGES.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,14 +238,7 @@
       <workItem from="1713881088651" duration="13456000" />
       <workItem from="1713972423957" duration="10866000" />
       <workItem from="1714099143412" duration="6863000" />
-      <workItem from="1714187633677" duration="19925000" />
-    </task>
-    <task id="LOCAL-00010" summary="addPoisonedPlayer 오류 수정">
-      <created>1712253509170</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1712253509170</updated>
+      <workItem from="1714187633677" duration="20107000" />
     </task>
     <task id="LOCAL-00011" summary="addPoisonedPlayer 오류 수정">
       <created>1712253910098</created>
@@ -584,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714229255676</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="사운드 삭제">
+      <created>1714231072283</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1714231072283</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,7 +604,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="투표 수정" />
     <MESSAGE value="노트 추가" />
     <MESSAGE value="구조 정리" />
     <MESSAGE value="guide 수정중" />
@@ -630,7 +628,8 @@
     <MESSAGE value="투표 개선" />
     <MESSAGE value="comAjax 수정" />
     <MESSAGE value="푸드체인거물 수익계산기 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="푸드체인거물 수익계산기 추가" />
+    <MESSAGE value="사운드 삭제" />
+    <option name="LAST_COMMIT_MESSAGE" value="사운드 삭제" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
