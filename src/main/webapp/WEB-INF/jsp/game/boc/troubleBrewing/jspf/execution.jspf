@@ -6,6 +6,7 @@
         nominatedPlayerListOfToday: [],
         nominatedPlayer: null,
         votingPlayerList: [],
+        diedAndVotedPlayerList: [],
         candidatePlayerListOfToday: [],
         executionPlayerOfToday: null,
         createHtml: () => {
@@ -101,6 +102,8 @@
             alert("처녀 능력이 초기화 되었습니다.");
         },
         openNominationModal: () => {
+            const $modal = $("#setNominationModal");
+
             const nominatingPlayerList = createAssignedPlayerList()
                 .filter(player => !player.died)
                 .filter(player => player.nominatable)
@@ -109,42 +112,48 @@
                 )
                 .sort((prev, next) => prev.seatNumber - next.seatNumber);
 
-            let setNominatingPlayerHtml = nominatingPlayerList.reduce((prev, next) => {
+            const setNominatingPlayerHtml = nominatingPlayerList.reduce((prev, next) => {
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\""
                     + " onclick=\"execution.setNominatingPlayer('" + next.playerName + "')\" >"
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
+            $modal.find("[name='nominatingPlayerListDiv']").empty().html(setNominatingPlayerHtml);
+            $modal.find("[name='nominatingPlayerName']").empty();
 
             const nominatedPlayerList = createAssignedPlayerList()
-                .filter(player => !player.died)
                 .filter(player => !execution.nominatedPlayerListOfToday
                     .some(nominatedPlayer => nominatedPlayer.playerName === player.playerName)
                 )
                 .sort((prev, next) => prev.seatNumber - next.seatNumber);
 
-            let setNominatedPlayerHtml = nominatedPlayerList.reduce((prev, next) => {
+            const setNominatedPlayerHtml = nominatedPlayerList.reduce((prev, next) => {
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
                     + " onclick=\"execution.setNominatedPlayer('" + next.playerName + "')\" >"
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
+            $modal.find("[name='nominatedPlayerListDiv']").empty().html(setNominatedPlayerHtml);
+            $modal.find("[name='nominatedPlayerName']").empty();
 
             const votingPlayerList = createAssignedPlayerList()
                 .filter(player => player.votable)
                 .sort((prev, next) => prev.seatNumber - next.seatNumber);
 
-            let setVotingPlayerHtml = votingPlayerList.reduce((prev, next) => {
+            const setVotingPlayerHtml = votingPlayerList.reduce((prev, next) => {
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
                     + " onclick=\"execution.setVotingPlayer('" + next.playerName + "')\" >"
-                    + " " + next.playerName + "(" + next.title + ")"
+                    + " " + next.playerName + "(" + next.title + (next.died ? "-사망" : "") + ")"
                     + "</button>";
             }, "");
+            $modal.find("[name='votingPlayerListDiv']").empty().html(setVotingPlayerHtml);
 
-            let candidatePlayerListHtml = execution.candidatePlayerListOfToday
+            $modal.find("[name='votedPlayerListDiv']").empty();
+
+            const candidatePlayerListHtml = execution.candidatePlayerListOfToday
                 .sort((prev, next) => next.numberOfVote - prev.numberOfVote)
                 .reduce((prev, next) => {
                     return prev
@@ -153,18 +162,7 @@
                         + " " + next.player.playerName + "(" + next.numberOfVote + ")"
                         + "</button>";
                 }, "");
-
-            const $modal = $("#setNominationModal");
-
-            $modal.find("[name='nominatingPlayerListDiv']").empty().html(setNominatingPlayerHtml);
-            $modal.find("[name='nominatingPlayerName']").empty();
-            $modal.find("[name='nominatedPlayerListDiv']").empty().html(setNominatedPlayerHtml);
-            $modal.find("[name='nominatedPlayerName']").empty();
-            $modal.find("[name='votingPlayerListDiv']").empty().html(setVotingPlayerHtml);
-            $modal.find("[name='votedPlayerListDiv']").empty();
             $modal.find("[name='candidatePlayerListDiv']").empty().html(candidatePlayerListHtml);
-
-            $("#setNominationModal").modal("show");
 
             $modal.find("[name='nominatingPlayerListDiv']").find("button").on("click", event => {
                 $(event.currentTarget).hide();
@@ -177,6 +175,8 @@
             $modal.find("[name='votingPlayerListDiv']").find("button").on("click", event => {
                 $(event.currentTarget).hide();
             });
+
+            $modal.modal("show");
         },
         setNominatingPlayer: playerName => {
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
@@ -219,11 +219,12 @@
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
             if (player.died) {
                 player.votable = false;
+                execution.diedAndVotedPlayerList.push(player);
             }
             execution.votingPlayerList.push(player);
 
             const $modal = $("#setNominationModal");
-            $modal.find("[name='votedPlayerListDiv']").append(playerName + ", ");
+            $modal.find("[name='votedPlayerListDiv']").append(playerName + (player.died ? "-사망" : "") + ", ");
         },
         setExecutionPlayer: playerName => {
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
@@ -240,12 +241,15 @@
             execution.nominatedPlayerListOfToday = [];
             execution.nominatedPlayer = null;
             execution.votingPlayerList = [];
+            $.each(execution.diedAndVotedPlayerList, (index, player) => {
+                player.votable = true;
+            });
+            execution.diedAndVotedPlayerList = [];
             execution.candidatePlayerListOfToday = [];
             execution.executionPlayerOfToday = null;
 
             alert("오늘의 투표가 초기화 되었습니다.");
         },
-
         openSetDiedPlayerNotNominatableModal: () => {
             const diedAndNominatablePlayerList = createAssignedPlayerList()
                 .filter(player => player.died && player.nominatable);
@@ -314,6 +318,16 @@
             $("#setDiedPlayerByExecutionModal").modal("hide");
         },
         saveVote: () => {
+            if (!execution.nominatingPlayer) {
+                alert("지명한 플레이어를 선택해 주세요.");
+                return;
+            }
+
+            if (!execution.nominatedPlayer) {
+                alert("지명당한 플레이어를 선택해 주세요.");
+                return;
+            }
+
             const numberOfVote = execution.votingPlayerList.length;
             let voteResultText = "지명한 플레이어는 " + execution.nominatingPlayer.playerName + "입니다.\n"
                 + "지명당한 플레이어는 " + execution.nominatedPlayer.playerName + "입니다.\n"
@@ -369,7 +383,7 @@
                 <h3>지명당한 플레이어 : <span name="nominatedPlayerName"></span></h3>
                 <div name="nominatedPlayerListDiv"></div>
                 <hr>
-                <h3>투표한 플레이어(사망한 플레이어라면 투표권 사라짐)</h3>
+                <h3>투표한 플레이어(사망한 플레이어였다면 투표권 사라짐)</h3>
                 <div name="votingPlayerListDiv"></div>
                 <div name="votedPlayerListDiv"></div>
                 <hr>

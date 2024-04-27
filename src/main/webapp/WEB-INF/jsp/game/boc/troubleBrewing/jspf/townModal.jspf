@@ -38,14 +38,16 @@
                 ].find(player => player.playerId === next.mmbrNo);
 
                 if (found) {
-                    console.log('found', found);
-                    const shroudHtml = found.died ? `<i class="ni ni-tie-bow"></i>` : "";
-                    const votableHtml = found.votable ? "투표가능" : "투표불가";
+                    const playerNameHtml = found.died
+                        ? `\${found.playerName} <i class="ni ni-tie-bow"></i>`
+                        : `<strong>\${found.playerName}</strong>`;
+                        // ? `<i class="ni ni-tie-bow"></i>` : "";
+                    const votableHtml = found.votable ? `<strong>투표 ○</strong>` : `투표 ×`;
 
                     return prev +
                         `<div class="row">
                             <div class="col-8">
-                                \${found.playerName} \${shroudHtml}
+                                \${playerNameHtml}
                             </div>
                             <div class="col-4">
                                 \${votableHtml}

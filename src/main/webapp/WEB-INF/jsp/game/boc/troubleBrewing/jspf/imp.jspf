@@ -304,6 +304,7 @@
 
             const chosen = impPlayer.attackingPlayerByRound.find(choice => choice.round === playStatus.round);
             if (!chosen) {
+                alert("공격할 플레이어가 먼저 선택되어야 합니다.");
                 return;
             }
 

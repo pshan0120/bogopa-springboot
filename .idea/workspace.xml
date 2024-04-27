@@ -9,9 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="브금 변경">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="처녀 지목기능 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,14 +238,8 @@
       <workItem from="1713707031753" duration="6795000" />
       <workItem from="1713881088651" duration="13456000" />
       <workItem from="1713972423957" duration="10866000" />
-      <workItem from="1714099143412" duration="6536000" />
-    </task>
-    <task id="LOCAL-00006" summary="주정뱅이까지 추가">
-      <created>1712162660262</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1712162660262</updated>
+      <workItem from="1714099143412" duration="6863000" />
+      <workItem from="1714187633677" duration="3303000" />
     </task>
     <task id="LOCAL-00007" summary="세탁부 진행중">
       <created>1712250580754</created>
@@ -580,7 +577,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714150285891</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="처녀 지목기능 추가">
+      <created>1714152505579</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1714152505579</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +605,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="town 분리" />
     <MESSAGE value="가이드 추가" />
     <MESSAGE value="imp 진행중" />
     <MESSAGE value="1차 완료" />
@@ -626,7 +629,8 @@
     <MESSAGE value="1. 역할 개선&#10;2. BOC 회원 등록 추가" />
     <MESSAGE value="temporarilyJoined 추가" />
     <MESSAGE value="브금 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="브금 변경" />
+    <MESSAGE value="처녀 지목기능 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="처녀 지목기능 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

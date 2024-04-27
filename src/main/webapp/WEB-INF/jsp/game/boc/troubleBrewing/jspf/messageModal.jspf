@@ -4,7 +4,7 @@
     const messageModal = {
         open: messageHtml => {
             const $modal = $("#messageModal");
-            $modal.find(".modal-body").css("min-height", window.innerHeight * 0.8);
+            $modal.find(".modal-body").css("min-height", window.innerHeight * 0.7);
             $modal.find("[name='message']").empty().html(messageHtml);
             $("#messageModal").modal("show");
         },
