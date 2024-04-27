@@ -30,7 +30,7 @@
 
         /*function fn_doLogin() {
             if (gfn_validateForm("form")) {
-                var comAjax = new ComAjax("form");
+                const comAjax = new ComAjax("form");
                 // comAjax.setUrl("<c:url value='/doLogin' />");
                 comAjax.setUrl("<c:url value='/fo/api/login' />");
                 comAjax.setCallback("fn_doLoginCallback");

@@ -21,7 +21,7 @@
         });
 
         function fn_selectClubList(pageNo) {
-            var comAjax = new ComAjax("clubForm");
+            const comAjax = new ComAjax("clubForm");
             comAjax.setUrl("<c:url value='/selectClubList' />");
             comAjax.setCallback("fn_selectClubListCallback");
             comAjax.addParam("pageIndex", pageNo);
@@ -203,7 +203,7 @@
         }
 
         function fn_selectClubBrdList(pageNo) {
-            var comAjax = new ComAjax();
+            const comAjax = new ComAjax();
             comAjax.setUrl("<c:url value='/selectClubBrdList' />");
             comAjax.setCallback("fn_selectClubBrdListCallback");
             comAjax.addParam("pageIndex", pageNo);

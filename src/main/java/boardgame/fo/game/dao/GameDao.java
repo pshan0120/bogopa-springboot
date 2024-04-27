@@ -35,12 +35,12 @@ public class GameDao extends AbstractDao {
     }
 
     /* 게임 */
-    public List<Map<String, Object>> selectGameNoList(Map<String, Object> map) {
-        return selectList("game.selectGameNoList", map);
+    public List<Map<String, Object>> selectGameList(Map<String, Object> map) {
+        return selectList("game.selectGameList", map);
     }
 
-    public List<Map<String, Object>> selectGameSttngList(Map<String, Object> map) {
-        return selectList("game.selectGameSttngList", map);
+    public List<Map<String, Object>> selectGameSettingList(Map<String, Object> map) {
+        return selectList("game.selectGameSettingList", map);
     }
 
 }

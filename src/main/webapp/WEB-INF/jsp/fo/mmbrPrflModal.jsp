@@ -2,7 +2,7 @@
 
 <script>
 	function fn_openMmbrPrflModal(mmbrNo) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectMmbrPrfl' />");
 		comAjax.setCallback("fn_openMmbrPrflModalCallback");
 		comAjax.addParam("mmbrNo", mmbrNo);

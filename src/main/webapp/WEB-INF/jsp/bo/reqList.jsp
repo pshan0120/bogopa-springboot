@@ -27,7 +27,7 @@
 	});
 
 	function fn_selectReqList(pageNo) {
-		var comAjax = new ComAjax("form");
+		const comAjax = new ComAjax("form");
 		comAjax.setUrl("<c:url value='/bo/selectReqList' />");
 		comAjax.setCallback("fn_selectReqListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -80,7 +80,7 @@
 	}
 	
 	function fn_selectReqDetail(reqNo) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/bo/selectReq' />");
 		comAjax.addParam("reqNo", reqNo);
 		comAjax.setCallback("fn_selectReqDetailCallback");
@@ -116,7 +116,7 @@
 	function fn_updateReq() {
 		var validate = gfn_validateForm("updateForm");
 		if(validate && confirm("신청정보를 수정하시겠습니까?")) {
-			var comAjax = new ComAjax("updateForm");
+			const comAjax = new ComAjax("updateForm");
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -127,7 +127,7 @@
 	
 	function fn_deleteReq() {
 		if(confirm("신청정보를 삭제하시겠습니까? 삭제하면 다시 복구되지 않습니다.")) {
-			var comAjax = new ComAjax("updateForm");
+			const comAjax = new ComAjax("updateForm");
 			comAjax.setUrl("<c:url value='/bo/deleteReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -137,7 +137,7 @@
 	}
 
 	function fn_scrapCmmrc() {
-		var comAjax = new ComAjax("updateForm");
+		const comAjax = new ComAjax("updateForm");
 		comAjax.setUrl("<c:url value='/bo/scrapCmmrc' />");
 		comAjax.setCallback("fn_scrapCmmrcCallback");
 		comAjax.ajax();
@@ -149,7 +149,7 @@
 
 	function fn_evltnAccpt() {
 		if(confirm("해당 신청을 심사접수하시겠습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#updateForm input[name='reqNo']").val());
@@ -285,7 +285,7 @@
 
 		var validate = gfn_validateForm("evltnForm");
 		if(validate && confirm("해당 신청건을 심사 승인하시겠습니까?")) {
-			var comAjax = new ComAjax("evltnForm");
+			const comAjax = new ComAjax("evltnForm");
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("mode", "evltnApprvl");
@@ -297,7 +297,7 @@
 	
 	function fn_evltnRjct() {
 		if(confirm("해당 신청건을 심사 거부하시겠습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#evltnForm input[name='reqNo']").val());
@@ -310,7 +310,7 @@
 
 	function fn_srvcCntrctSend() {
 		if(confirm("서비스계약서를 송부하셨습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#updateForm input[name='reqNo']").val());
@@ -323,7 +323,7 @@
 
 	function fn_srvcCntrct() {
 		if(confirm("서비스계약이 완료되었습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#updateForm input[name='reqNo']").val());
@@ -336,7 +336,7 @@
 
 	function fn_srvcCntrctFail() {
 		if(confirm("서비스계약을 실패 처리하시겠습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#updateForm input[name='reqNo']").val());
@@ -349,7 +349,7 @@
 
 	function fn_trnsfrCntrctReq() {
 		if(confirm("채권양도계약을 신청하셨습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#updateForm input[name='reqNo']").val());
@@ -362,7 +362,7 @@
 
 	function fn_trnsfrCntrct() {
 		if(confirm("채권양도계약이 완료되었습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#updateForm input[name='reqNo']").val());
@@ -375,7 +375,7 @@
 
 	function fn_trnsfrCntrctFail() {
 		if(confirm("채권양도계약을 실패 처리하시겠습니까?")) {
-			var comAjax = new ComAjax();
+			const comAjax = new ComAjax();
 			comAjax.setUrl("<c:url value='/bo/updateReq' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("reqNo", $("#updateForm input[name='reqNo']").val());
@@ -425,7 +425,7 @@
 		}
 		
 		if(confirm("선정산금액을 회원에게 지급하셨습니까? 처리 후 상환일정이 생성됩니다.")) {
-			var comAjax = new ComAjax("prepayForm");
+			const comAjax = new ComAjax("prepayForm");
 			comAjax.setUrl("<c:url value='/bo/prepay' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("mode", "prepay");

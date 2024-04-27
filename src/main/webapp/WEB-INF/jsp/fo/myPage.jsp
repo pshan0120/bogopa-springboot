@@ -28,7 +28,7 @@
 	});
 
 	function fn_selectMyPage() {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectMyPage' />");
 		comAjax.setCallback("fn_selectMyPageCallback");
 		comAjax.ajax();
@@ -61,7 +61,7 @@
 	}
 
 	function fn_selectMyPlayRcrdList(pageNo) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectMyPlayRcrdList' />");
 		comAjax.setCallback("fn_selectMyPlayRcrdListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -144,7 +144,7 @@
 	}
 
 	function fn_selectMyClubMmbrList(pageNo) {
-		var comAjax = new ComAjax("myInfoForm");
+		const comAjax = new ComAjax("myInfoForm");
 		comAjax.setUrl("<c:url value='/selectMyClubMmbrList' />");
 		comAjax.setCallback("fn_selectMyClubMmbrListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -204,7 +204,7 @@
 
 	function fn_updateMmbr() {
 		if(gfn_validate("myInfoForm")) {
-			var comAjax = new ComAjax("myInfoForm");
+			const comAjax = new ComAjax("myInfoForm");
 			comAjax.setUrl("<c:url value='/updateMmbr' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -212,7 +212,7 @@
 	}
 
 	function fn_selectMyClubBrdList(pageNo) {
-		var comAjax = new ComAjax("myInfoForm");
+		const comAjax = new ComAjax("myInfoForm");
 		comAjax.setUrl("<c:url value='/selectMyClubBrdList' />");
 		comAjax.setCallback("fn_selectMyClubBrdListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -275,7 +275,7 @@
 	}
 	
 	function fn_selectMyClubPlayImgList(pageNo) {
-		var comAjax = new ComAjax("myInfoForm");
+		const comAjax = new ComAjax("myInfoForm");
 		comAjax.setUrl("<c:url value='/selectMyClubPlayImgList' />");
 		comAjax.setCallback("fn_selectMyClubPlayImgListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -319,7 +319,7 @@
 	}
 
 	function fn_selectMyClubAttndNotCnfrmList() {
-		var comAjax = new ComAjax("myInfoForm");
+		const comAjax = new ComAjax("myInfoForm");
 		comAjax.setUrl("<c:url value='/selectMyClubAttndNotCnfrmList' />");
 		comAjax.setCallback("fn_selectMyClubAttndNotCnfrmListCallback");
 		comAjax.ajax();
@@ -372,7 +372,7 @@
 	}
 
 	function fn_updateClubAttnd(attndYn, seq) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/updateClubAttnd' />");
 		comAjax.setCallback("fn_selectMyClubAttndNotCnfrmList");
 		comAjax.addParam("attndYn", attndYn);
@@ -381,7 +381,7 @@
 	}
 	
 	function fn_selectMyClubFeePayList(pageNo) {
-		var comAjax = new ComAjax("myClubFeePayForm");
+		const comAjax = new ComAjax("myClubFeePayForm");
 		comAjax.setUrl("<c:url value='/selectMyClubFeePayList' />");
 		comAjax.setCallback("fn_selectMyClubFeePayListCallback");
 		comAjax.addParam("mmbrNo", $("#mmbrNo").val());
@@ -458,7 +458,7 @@
 	}
 	
 	function fn_updateClubFeePay(seq) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/updateClubFeePay' />");
 		comAjax.setCallback("fn_selectMyClubFeePayList");
 		comAjax.addParam("seq", seq);
@@ -493,7 +493,7 @@
 	
 	function fn_insertMyClubFee2() {
 		if(confirm("소속된 모임의 기간회비 납입을 확인 요청하시겠습니까?")) {
-			var comAjax = new ComAjax("insertMyClubFee2Form");
+			const comAjax = new ComAjax("insertMyClubFee2Form");
 			comAjax.setUrl("<c:url value='/insertMyClubFee2' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("clubNo", $("#clubNo").val());
@@ -509,7 +509,7 @@
 	}
 	
 	function fn_openUpdatePlayRcrdModal(playNo) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectPlayRcrd' />");
 		comAjax.setCallback("fn_openUpdatePlayRcrdModalCallback");
 		comAjax.addParam("playNo", playNo);
@@ -606,7 +606,7 @@
 		});
 		
 		if(isRun && confirm("입력된 내용으로 결과 등록하시겠습니까?")) {
-			var comAjax = new ComAjax("updatePlayRcrdForm");
+			const comAjax = new ComAjax("updatePlayRcrdForm");
 			comAjax.setUrl("<c:url value='/updatePlayRcrd' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.addParam("seqArr", seqArr);

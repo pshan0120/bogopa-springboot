@@ -22,7 +22,7 @@
 	});
 	
 	function fn_selectUserList(pageNo) {
-		var comAjax = new ComAjax("form");
+		const comAjax = new ComAjax("form");
 		comAjax.setUrl("<c:url value='/bo/selectUserList' />");
 		comAjax.setCallback("fn_selectUserListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -90,7 +90,7 @@
 		}
 		
 		if(validate && confirm("사용자를 등록하시겠습니까?")) {
-			var comAjax = new ComAjax("insertForm");
+			const comAjax = new ComAjax("insertForm");
 			comAjax.setUrl("<c:url value='/bo/insertUser' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -104,7 +104,7 @@
 	}
 	
 	function fn_selectUserDetail(userId) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/bo/selectUser' />");
 		comAjax.addParam("userId", userId);
 		comAjax.setCallback("fn_selectUserDetailCallback");

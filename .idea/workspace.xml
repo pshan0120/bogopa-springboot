@@ -9,12 +9,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="처녀 지목기능 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="투표 개선">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/game.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dao/GameDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/dao/GameDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/service/GameServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/cdList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/cdList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/cryptoApiTest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/cryptoApiTest.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/cryptoBackTest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/cryptoBackTest.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/mmbrList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/mmbrList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/mmbrModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/mmbrModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/repayList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/repayList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/reqList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/reqList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/testScrap.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/testScrap.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/userList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/userList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/userModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/bo/userModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/club.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/club.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/clubBrdModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/clubBrdModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/clubGameModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/clubGameModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/clubPrflModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/clubPrflModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/findPswrd.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/findPswrd.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/join.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/join.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/main.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/main.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/mmbrPrflModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/mmbrPrflModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myClub.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myClub.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myHistory.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myHistory.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myPage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myPage.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/playRcrdModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/playRcrdModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,37 +91,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\com" />
       <recent name="D:\dev\bogopa\src\main\java\boardgame\com\exception" />
       <recent name="D:\dev\bogopa\src\main\java\boardgame\fo\login\service" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo\jspf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\sounds" />
@@ -239,14 +271,7 @@
       <workItem from="1713881088651" duration="13456000" />
       <workItem from="1713972423957" duration="10866000" />
       <workItem from="1714099143412" duration="6863000" />
-      <workItem from="1714187633677" duration="3303000" />
-    </task>
-    <task id="LOCAL-00007" summary="세탁부 진행중">
-      <created>1712250580754</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1712250580754</updated>
+      <workItem from="1714187633677" duration="11917000" />
     </task>
     <task id="LOCAL-00008" summary="모달로 변경">
       <created>1712252723443</created>
@@ -584,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714152505579</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="투표 개선">
+      <created>1714190999279</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1714190999310</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,7 +637,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="가이드 추가" />
     <MESSAGE value="imp 진행중" />
     <MESSAGE value="1차 완료" />
     <MESSAGE value="투표 수정" />
@@ -630,7 +661,8 @@
     <MESSAGE value="temporarilyJoined 추가" />
     <MESSAGE value="브금 변경" />
     <MESSAGE value="처녀 지목기능 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="처녀 지목기능 추가" />
+    <MESSAGE value="투표 개선" />
+    <option name="LAST_COMMIT_MESSAGE" value="투표 개선" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

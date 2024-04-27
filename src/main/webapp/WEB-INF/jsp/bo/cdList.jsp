@@ -22,7 +22,7 @@
 	});
 
 	function fn_selectCdList(pageNo) {
-		var comAjax = new ComAjax("form");
+		const comAjax = new ComAjax("form");
 		comAjax.setUrl("<c:url value='/bo/selectCdList' />");
 		comAjax.setCallback("fn_selectCdListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -74,7 +74,7 @@
 		var validate = gfn_validateForm("insertForm");
 		
 		if(validate && confirm("코드를 등록하시겠습니까?")) {
-			var comAjax = new ComAjax("insertForm");
+			const comAjax = new ComAjax("insertForm");
 			comAjax.setUrl("<c:url value='/bo/insertCd' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -88,7 +88,7 @@
 	}
 	
 	function fn_selectCdDetail(grpCd, cd) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/bo/selectCd' />");
 		comAjax.addParam("grpCd", grpCd);
 		comAjax.addParam("cd", cd);

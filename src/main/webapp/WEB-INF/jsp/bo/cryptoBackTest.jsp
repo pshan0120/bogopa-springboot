@@ -25,7 +25,7 @@
 	
 	function fn_test(apiId) {
 		if(gfn_validateForm(apiId + "Form")) {
-			var comAjax = new ComAjax(apiId + "Form");
+			const comAjax = new ComAjax(apiId + "Form");
 			comAjax.setUrl("<c:url value='/bo/doCryptoBackTest' />");
 			comAjax.setCallback("fn_testCallback");
 			comAjax.addParam("apiId", apiId);

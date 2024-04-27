@@ -1919,13 +1919,13 @@
 			(
 				playNo,
 				mmbrNo,
-			<if test="sttng1Cd != null and sttng1Cd != ''">
+			<if test="setting1Cd != null and setting1Cd != ''">
 				sttng1Cd,
 			</if>
-			<if test="sttng2Cd != null and sttng2Cd != ''">
+			<if test="setting2Cd != null and setting2Cd != ''">
 				sttng2Cd,
 			</if>
-			<if test="sttng3Cd != null and sttng3Cd != ''">
+			<if test="setting3Cd != null and setting3Cd != ''">
 				sttng3Cd,
 			</if>
 				insId,

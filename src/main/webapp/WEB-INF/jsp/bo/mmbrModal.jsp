@@ -23,7 +23,7 @@
 	}
 	
 	function fn_selectMmbrDetail() {
-		var comAjax = new ComAjax("updateMmbrForm");
+		const comAjax = new ComAjax("updateMmbrForm");
 		comAjax.setUrl("<c:url value='/bo/selectMmbr' />");
 		comAjax.setCallback("fn_selectMmbrDetailCallback");
 		comAjax.ajax();
@@ -38,7 +38,7 @@
 	function fn_updateMmbr() {
 		var validate = gfn_validateForm("updateMmbrForm");
 		if(validate && confirm("회원정보를 수정하시겠습니까?")) {
-			var comAjax = new ComAjax("updateMmbrForm");
+			const comAjax = new ComAjax("updateMmbrForm");
 			comAjax.setUrl("<c:url value='/bo/updateMmbr' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -49,7 +49,7 @@
 	
 	function fn_deleteMmbr() {
 		if(confirm("회원정보를 삭제하시겠습니까? 삭제하면 다시 복구되지 않습니다.")) {
-			var comAjax = new ComAjax("updateMmbrForm");
+			const comAjax = new ComAjax("updateMmbrForm");
 			comAjax.setUrl("<c:url value='/bo/deleteMmbr' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -59,7 +59,7 @@
 	}
 
 	function fn_selectMmbrCmmrcList(pageNo) {
-		var comAjax = new ComAjax("updateMmbrForm");
+		const comAjax = new ComAjax("updateMmbrForm");
 		comAjax.setUrl("<c:url value='/bo/selectMmbrCmmrcList' />");
 		comAjax.setCallback("fn_selectMmbrCmmrcListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -100,7 +100,7 @@
 	}
 	
 	function fn_selectMmbrRepayList(pageNo) {
-		var comAjax = new ComAjax("repayForm");
+		const comAjax = new ComAjax("repayForm");
 		comAjax.setUrl("<c:url value='/bo/selectMmbrRepayList' />");
 		comAjax.setCallback("fn_selectMmbrRepayListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -156,7 +156,7 @@
 	}
 	
 	function fn_selectMmbrLogList(pageNo) {
-		var comAjax = new ComAjax("updateMmbrForm");
+		const comAjax = new ComAjax("updateMmbrForm");
 		comAjax.setUrl("<c:url value='/bo/selectMmbrLogList' />");
 		comAjax.setCallback("fn_selectMmbrLogListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -193,7 +193,7 @@
 	}
 
 	function fn_selectEmailHisList(pageNo) {
-		var comAjax = new ComAjax("updateMmbrForm");
+		const comAjax = new ComAjax("updateMmbrForm");
 		comAjax.setUrl("<c:url value='/bo/selectEmailHisList' />");
 		comAjax.setCallback("fn_selectEmailHisListCallback");
 		comAjax.addParam("pageIndex", pageNo);

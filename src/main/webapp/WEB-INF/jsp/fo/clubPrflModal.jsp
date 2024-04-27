@@ -11,7 +11,7 @@
 	}
 
 	function fn_selectClubPrfl(clubNo) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectClubPrfl' />");
 		comAjax.setCallback("fn_selectClubPrflCallback");
 		comAjax.addParam("clubNo", clubNo);
@@ -53,7 +53,7 @@
 	}
 
 	function fn_selectClubMmbrList(pageNo) {
-		var comAjax = new ComAjax("clubPrflForm");
+		const comAjax = new ComAjax("clubPrflForm");
 		comAjax.setUrl("<c:url value='/selectClubMmbrList' />");
 		comAjax.setCallback("fn_selectClubMmbrListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -112,7 +112,7 @@
 	}
 
 	function fn_selectClubGameList(pageNo) {
-		var comAjax = new ComAjax("clubPrflForm");
+		const comAjax = new ComAjax("clubPrflForm");
 		comAjax.setUrl("<c:url value='/selectClubGameList' />");
 		comAjax.setCallback("fn_selectClubGameListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -165,7 +165,7 @@
 	function fn_clubJoin() {
 		if(gfn_validate("clubJoinForm")) {
 			if(confirm("모임에 가입 신청하시겠습니까?")) {
-				var comAjax = new ComAjax("clubJoinForm");
+				const comAjax = new ComAjax("clubJoinForm");
 				comAjax.setUrl("<c:url value='/clubJoin' />");
 				comAjax.setCallback("gfn_defaultCallback");
 				comAjax.ajax();
@@ -177,7 +177,7 @@
 
 	function fn_cancelClubJoin() {
 		if(confirm("가입 신청을 취소하시겠습니까?")) {
-			var comAjax = new ComAjax("clubPrflForm");
+			const comAjax = new ComAjax("clubPrflForm");
 			comAjax.setUrl("<c:url value='/cancelClubJoin' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -188,7 +188,7 @@
 	
 	function fn_quitClub() {
 		if(confirm("모임에서 탈퇴하시겠습니까?")) {
-			var comAjax = new ComAjax("clubPrflForm");
+			const comAjax = new ComAjax("clubPrflForm");
 			comAjax.setUrl("<c:url value='/quitClub' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -203,7 +203,7 @@
 	}
 
 	function fn_selectClubPlayRcrdList(pageNo) {
-		var comAjax = new ComAjax("clubPrflForm");
+		const comAjax = new ComAjax("clubPrflForm");
 		comAjax.setUrl("<c:url value='/selectMyClubPlayRcrdList' />");
 		comAjax.setCallback("fn_selectClubPlayRcrdListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -247,7 +247,7 @@
 	}
 
 	function fn_selectClubPlayImgList(pageNo) {
-		var comAjax = new ComAjax("clubPrflForm");
+		const comAjax = new ComAjax("clubPrflForm");
 		comAjax.setUrl("<c:url value='/selectMyClubPlayImgList' />");
 		comAjax.setCallback("fn_selectClubPlayImgListCallback");
 		comAjax.addParam("pageIndex", pageNo);

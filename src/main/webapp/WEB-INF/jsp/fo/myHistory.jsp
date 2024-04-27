@@ -47,7 +47,7 @@
 	});
 	
 	function fn_selectMyHistory(pageNo) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectMyHistory' />");
 		comAjax.setCallback("fn_selectMyHistoryCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -172,7 +172,7 @@
 			}
 		}
 		
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/updateDpstReq' />");
 		comAjax.setCallback("fn_evdncIssReqCallback");
 		comAjax.addParam("seq", seq);

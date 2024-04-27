@@ -12,7 +12,7 @@
 
 <script>
 	function fn_openUserInfoModal() {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/bo/selectUser' />");
 		comAjax.addParam("userId", "<c:out value='${userId}'/>");
 		comAjax.setCallback("fn_openUserInfoModalCallback");

@@ -7,6 +7,7 @@ import boardgame.fo.game.dto.SavePlayRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,12 +48,17 @@ public class GameServiceImpl implements GameService {
         gameDao.deletePlayLogByPlayNo(dto.getPlayNo());
     }
 
-    public List<Map<String, Object>> selectGameNoList(Map<String, Object> map) {
-        return gameDao.selectGameNoList(map);
+    public List<Map<String, Object>> readGameList(String gameName) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("gameName", gameName);
+        return gameDao.selectGameList(requestMap);
     }
 
-    public List<Map<String, Object>> selectGameSttngList(Map<String, Object> map) {
-        return gameDao.selectGameSttngList(map);
+    public List<Map<String, Object>> readGameSettingList(String groupCode, long gameNo) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("groupCode", groupCode);
+        requestMap.put("gameNo", gameNo);
+        return gameDao.selectGameSettingList(requestMap);
     }
     
 }

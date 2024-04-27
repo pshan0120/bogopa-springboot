@@ -22,7 +22,7 @@
 	});
 
 	function fn_selectMmbrList(pageNo) {
-		var comAjax = new ComAjax("form");
+		const comAjax = new ComAjax("form");
 		comAjax.setUrl("<c:url value='/bo/selectMmbrList' />");
 		comAjax.setCallback("fn_selectMmbrListCallback");
 		comAjax.addParam("pageIndex", pageNo);

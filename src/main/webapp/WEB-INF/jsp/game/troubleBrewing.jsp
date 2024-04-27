@@ -26,7 +26,7 @@
 
 
         function fn_selectBocPlayRcrdList(pageNo) {
-            var comAjax = new ComAjax("bocPlayRcrdForm");
+            const comAjax = new ComAjax("bocPlayRcrdForm");
             comAjax.setUrl("<c:url value='/selectBocPlayRcrdList' />");
             comAjax.setCallback("fn_selectBocPlayRcrdListCallback");
             comAjax.addParam("pageIndex", pageNo);
@@ -178,7 +178,7 @@
         }
 
         function selectPlayJoinMmbrList(pageNo) {
-            var comAjax = new ComAjax("insertPlayForm");
+            const comAjax = new ComAjax("insertPlayForm");
             comAjax.setUrl("<c:url value='/selectPlayJoinMmbrList' />");
             comAjax.setCallback("selectPlayJoinMmbrListCallback");
             comAjax.ajax();
@@ -239,7 +239,7 @@
 
             if (gfn_validate("insertPlayForm")) {
                 if (confirm("바로 플레이를 시작됩니다. 진행하시겠습니까?")) {
-                    var comAjax = new ComAjax("insertPlayForm");
+                    const comAjax = new ComAjax("insertPlayForm");
                     comAjax.setUrl("<c:url value='/insertPlay' />");
                     comAjax.setCallback("fn_insertPlayCallback");
                     comAjax.addParam("gameNo", GAME_NO);

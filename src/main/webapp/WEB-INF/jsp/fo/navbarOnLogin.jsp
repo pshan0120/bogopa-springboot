@@ -78,13 +78,13 @@
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="/play">
                         <i class="ni ni-watch-time"></i>
-                        <span class="nav-link-inner--text">플레이</span>
+                        <span class="nav-link-inner--text">플레이기록</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="/game/trouble-brewing/play">
+                    <a class="nav-link nav-link-icon" href="/game">
                         <i class="ni ni-watch-time"></i>
-                        <span class="nav-link-inner--text">B.O.C.</span>
+                        <span class="nav-link-inner--text">게임하기</span>
                     </a>
                 </li>
                 <% if (loggedIn) { %>

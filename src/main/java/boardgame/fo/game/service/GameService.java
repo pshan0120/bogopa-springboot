@@ -19,8 +19,8 @@ public interface GameService {
 
     void deletePlayLogByPlayNo(DeletePlayLogAllRequestDto dto);
 
-    List<Map<String, Object>> selectGameNoList(Map<String, Object> map);
+    List<Map<String, Object>> readGameList(String map);
 
-    List<Map<String, Object>> selectGameSttngList(Map<String, Object> map);
+    List<Map<String, Object>> readGameSettingList(String groupCode, long gameNo);
 
 }

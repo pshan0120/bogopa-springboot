@@ -22,7 +22,7 @@
 	});
 
 	function fn_selectRepayList(pageNo) {
-		var comAjax = new ComAjax("form");
+		const comAjax = new ComAjax("form");
 		comAjax.setUrl("<c:url value='/bo/selectRepayList' />");
 		comAjax.setCallback("fn_selectRepayListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -76,7 +76,7 @@
 	}
 	
 	function fn_selectRepayDetail(reqNo, rnd) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/bo/selectRepay' />");
 		comAjax.addParam("reqNo", reqNo);
 		comAjax.addParam("rnd", rnd);
@@ -92,7 +92,7 @@
 	function fn_updateRepay() {
 		var validate = gfn_validateForm("updateForm");
 		if(validate && confirm("상환정보를 수정하시겠습니까?")) {
-			var comAjax = new ComAjax("updateForm");
+			const comAjax = new ComAjax("updateForm");
 			comAjax.setUrl("<c:url value='/bo/updateRepay' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -103,7 +103,7 @@
 	
 	function fn_deleteRepay() {
 		if(confirm("상환정보를 삭제하시겠습니까? 삭제하면 다시 복구되지 않습니다.")) {
-			var comAjax = new ComAjax("updateForm");
+			const comAjax = new ComAjax("updateForm");
 			comAjax.setUrl("<c:url value='/bo/deleteRepay' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();

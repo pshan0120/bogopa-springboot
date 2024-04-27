@@ -2,7 +2,7 @@
 
 <script>
     function fn_openPlayRcrdModal(playNo) {
-        var comAjax = new ComAjax();
+        const comAjax = new ComAjax();
         comAjax.setUrl("<c:url value='/selectPlayRcrd' />");
         comAjax.setCallback("fn_openPlayRcrdModalCallback");
         comAjax.addParam("playNo", playNo);

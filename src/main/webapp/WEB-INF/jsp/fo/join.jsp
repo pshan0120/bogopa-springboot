@@ -21,7 +21,7 @@
                     return;
                 }
 
-                var comAjax = new ComAjax("form");
+                const comAjax = new ComAjax("form");
                 comAjax.setUrl("<c:url value='/doJoin' />");
                 comAjax.setCallback("fn_doJoinCallback");
                 if (invtMmbrNo != "") {

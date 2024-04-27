@@ -72,7 +72,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link nav-link-icon" href="/game/trouble-brewing/play">
+					<a class="nav-link nav-link-icon" href="/game">
 						<i class="ni ni-watch-time"></i>
 						<span class="nav-link-inner--text">B.O.C.</span>
 					</a>

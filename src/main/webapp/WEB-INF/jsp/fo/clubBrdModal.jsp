@@ -2,7 +2,7 @@
 
 <script>
 	function fn_openClubBrdModal(seq) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectClubBrd' />");
 		comAjax.setCallback("fn_openClubBrdModalCallback");
 		comAjax.addParam("seq", seq);
@@ -22,7 +22,7 @@
 	
 	function fn_insertClubBrd() {
 		if(gfn_validate("insertClubBrdForm")) {
-			var comAjax = new ComAjax("insertClubBrdForm");
+			const comAjax = new ComAjax("insertClubBrdForm");
 			comAjax.setUrl("<c:url value='/insertClubBrd' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();
@@ -30,7 +30,7 @@
 	}
 	
 	function fn_openUpdateClubBrdModal(seq) {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectClubBrd' />");
 		comAjax.setCallback("openUpdateClubBrdModalCallback");
 		comAjax.addParam("seq", seq);
@@ -44,7 +44,7 @@
 	
 	function fn_updateClubBrd() {
 		if(gfn_validate("updateClubBrdForm")) {
-			var comAjax = new ComAjax("updateClubBrdForm");
+			const comAjax = new ComAjax("updateClubBrdForm");
 			comAjax.setUrl("<c:url value='/updateClubBrd' />");
 			comAjax.setCallback("gfn_defaultCallback");
 			comAjax.ajax();

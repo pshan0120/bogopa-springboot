@@ -21,7 +21,7 @@
 
 	function fn_resetPswrd() {
 		if(gfn_validateForm("form")) {
-			var comAjax = new ComAjax("form");
+			const comAjax = new ComAjax("form");
 			comAjax.setUrl("<c:url value='/resetPswrd' />");
 			comAjax.setCallback("fn_resetPswrdCallback");
 			comAjax.ajax();

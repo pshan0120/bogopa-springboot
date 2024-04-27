@@ -18,7 +18,7 @@
 	}
 	
 	function fn_selectClubGameHasNList(pageNo) {
-		var comAjax = new ComAjax("clubGameForm");
+		const comAjax = new ComAjax("clubGameForm");
 		comAjax.setUrl("<c:url value='/selectClubGameHasList' />");
 		comAjax.setCallback("fn_selectClubGameHasNListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -52,7 +52,7 @@
 	}
 
 	function fn_selectClubGameHasYList(pageNo) {
-		var comAjax = new ComAjax("clubGameForm");
+		const comAjax = new ComAjax("clubGameForm");
 		comAjax.setUrl("<c:url value='/selectClubGameHasList' />");
 		comAjax.setCallback("fn_selectClubGameHasYListCallback");
 		comAjax.addParam("pageIndex", pageNo);
@@ -86,7 +86,7 @@
 	}
 	
 	function fn_insertClubGame(gameNo) {
-		var comAjax = new ComAjax("myClubInfoForm");
+		const comAjax = new ComAjax("myClubInfoForm");
 		comAjax.setUrl("<c:url value='/insertClubGame' />");
 		comAjax.setCallback("fn_reloadClubGame");
 		comAjax.addParam("gameNo", gameNo);
@@ -94,7 +94,7 @@
 	}
 	
 	function fn_deleteClubGame(gameNo) {
-		var comAjax = new ComAjax("myClubInfoForm");
+		const comAjax = new ComAjax("myClubInfoForm");
 		comAjax.setUrl("<c:url value='/deleteClubGame' />");
 		comAjax.setCallback("fn_reloadClubGame");
 		comAjax.addParam("gameNo", gameNo);

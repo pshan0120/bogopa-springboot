@@ -9,7 +9,7 @@
 	});
 
 	function fn_selectMain() {
-		var comAjax = new ComAjax();
+		const comAjax = new ComAjax();
 		comAjax.setUrl("<c:url value='/selectMain' />");
 		comAjax.setCallback("fn_selectMainCallback");
 		comAjax.ajax();

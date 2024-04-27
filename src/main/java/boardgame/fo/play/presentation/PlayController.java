@@ -270,21 +270,21 @@ public class PlayController {
             String playNo = String.valueOf(commandMap.get("playNo"));
 
             String[] joinMmbrNoArr = (String.valueOf(commandMap.get("joinMmbrNoArr"))).split(",");
-            String[] sttngCd1Arr = (String.valueOf(commandMap.get("sttngCd1Arr"))).split(",");
-            String[] sttngCd2Arr = (String.valueOf(commandMap.get("sttngCd2Arr"))).split(",");
-            String[] sttngCd3Arr = (String.valueOf(commandMap.get("sttngCd3Arr"))).split(",");
+            String[] settingCd1Arr = (String.valueOf(commandMap.get("settingCd1Arr"))).split(",");
+            String[] settingCd2Arr = (String.valueOf(commandMap.get("settingCd2Arr"))).split(",");
+            String[] settingCd3Arr = (String.valueOf(commandMap.get("settingCd3Arr"))).split(",");
             for (int i = 0, size = joinMmbrNoArr.length; i < size; i++) {
                 Map<String, Object> tempMap = new HashMap<>();
                 tempMap.put("playNo", playNo);
                 tempMap.put("mmbrNo", joinMmbrNoArr[i]);
-                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("sttngCd1Arr")))) {
-                    tempMap.put("sttng1Cd", sttngCd1Arr[i]);
+                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd1Arr")))) {
+                    tempMap.put("setting1Cd", settingCd1Arr[i]);
                 }
-                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("sttngCd2Arr")))) {
-                    tempMap.put("sttng2Cd", sttngCd2Arr[i]);
+                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd2Arr")))) {
+                    tempMap.put("setting2Cd", settingCd2Arr[i]);
                 }
-                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("sttngCd3Arr")))) {
-                    tempMap.put("sttng3Cd", sttngCd3Arr[i]);
+                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd3Arr")))) {
+                    tempMap.put("setting3Cd", settingCd3Arr[i]);
                 }
                 playService.insertPlayMmbr(tempMap);
             }
