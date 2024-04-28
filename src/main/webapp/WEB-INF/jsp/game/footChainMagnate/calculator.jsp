@@ -57,7 +57,6 @@
         const openQrImage = () => {
             window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
         }
-
     </script>
 </head>
 

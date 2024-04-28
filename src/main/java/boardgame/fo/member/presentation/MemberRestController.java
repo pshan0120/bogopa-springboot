@@ -1,7 +1,6 @@
 package boardgame.fo.member.presentation;
 
-import boardgame.fo.game.service.GameService;
-import boardgame.fo.member.dto.CreateBocMemberRequestDto;
+import boardgame.fo.member.dto.CreateTemporaryMemberRequestDto;
 import boardgame.fo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,8 +16,13 @@ public class MemberRestController {
     private final MemberService memberService;
 
     @PostMapping("/boc")
-    public void createBocMember(@Validated @RequestBody CreateBocMemberRequestDto dto) {
+    public void createBocMember(@Validated @RequestBody CreateTemporaryMemberRequestDto dto) {
         memberService.createBocMember(dto);
+    }
+
+    @PostMapping("/fruit-shop")
+    public void createFruitShopMember(@Validated @RequestBody CreateTemporaryMemberRequestDto dto) {
+        memberService.createFruitShopMember(dto);
     }
 
     /*@RequestMapping(value = "/insertBocMember")

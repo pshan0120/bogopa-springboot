@@ -1937,13 +1937,13 @@
 			(
 				#{playNo},
 				#{mmbrNo},
-			<if test="sttng1Cd != null and sttng1Cd != ''">
+			<if test="setting1Cd != null and setting1Cd != ''">
 				#{sttng1Cd},
 			</if>
-			<if test="sttng2Cd != null and sttng2Cd != ''">
+			<if test="setting2Cd != null and setting2Cd != ''">
 				#{sttng2Cd},
 			</if>
-			<if test="sttng3Cd != null and sttng3Cd != ''">
+			<if test="setting3Cd != null and setting3Cd != ''">
 				#{sttng3Cd},
 			</if>
 				'system',
@@ -1987,7 +1987,7 @@
 				seq = #{seq}
 	</update>
 
-	<select id="selectBocPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectGamePlayRcrdList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 		SELECT
 		*
@@ -2015,7 +2015,7 @@
 		AND
 		c.useYn = 'Y'
 		AND
-		p.gameNo = 1951
+		p.gameNo = #{gameNo}
 		) p1
 		WHERE
 		1=1
@@ -2036,7 +2036,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 
-	<select id="selectBocPlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectGamePlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
 		SELECT
 		COUNT(*) AS cnt
 		FROM
@@ -2059,7 +2059,7 @@
 		AND
 		c.useYn = 'Y'
 		AND
-		p.gameNo = 1951
+		p.gameNo = #{gameNo}
 		) p1
 		WHERE
 		1=1

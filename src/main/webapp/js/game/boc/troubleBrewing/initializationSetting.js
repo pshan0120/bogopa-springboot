@@ -12,4 +12,4 @@ const initializationSetting = {
         {townsFolk: 9, outsider: 1, minion: 3, demon: 1},
         {townsFolk: 9, outsider: 2, minion: 3, demon: 1},
     ],
-}
+};

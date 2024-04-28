@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CreateBocMemberRequestDto {
+public class CreateTemporaryMemberRequestDto {
 
     @NonNull
     private String nickname;

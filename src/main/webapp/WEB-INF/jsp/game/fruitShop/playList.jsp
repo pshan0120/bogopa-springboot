@@ -8,43 +8,43 @@
     <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 
     <script>
-        const GAME_NO = 1951;
+        const GAME_NO = 1952;
         let minPlyrCnt = 0;
         let maxPlyrCnt = 0;
         let joinPlyrCnt = 0;
 
         $(() => {
-            gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
+            gfn_setSortTh("fruitShopPlayRcrdList", "selectFruitShopPlayRcrdList(1)");
 
             $("[data-toggle='tooltip']").tooltip();
 
-            selectBocPlayRcrdList(1);
+            selectFruitShopPlayRcrdList(1);
         });
 
 
-        const selectBocPlayRcrdList = pageNo => {
-            let comAjax = new ComAjax("bocPlayRcrdForm");
-            comAjax.setUrl("<c:url value='/selectBocPlayRcrdList' />");
-            comAjax.setCallback("selectBocPlayRcrdListCallback");
+        const selectFruitShopPlayRcrdList = pageNo => {
+            let comAjax = new ComAjax("fruitShopPlayRcrdForm");
+            comAjax.setUrl("<c:url value='/selectFruitShopPlayRcrdList' />");
+            comAjax.setCallback("selectFruitShopPlayRcrdListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#bocPlayRcrdListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#fruitShopPlayRcrdListCurOrderBy').val());
             comAjax.ajax();
         };
 
-        const selectBocPlayRcrdListCallback = data => {
+        const selectFruitShopPlayRcrdListCallback = data => {
             let cnt = data.map.cnt;
-            let body = $("#bocPlayRcrdListTbl>tbody");
+            let body = $("#fruitShopPlayRcrdListTbl>tbody");
             body.empty();
             let str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 let params = {
-                    divId: "bocPlayRcrdListPageNav",
+                    divId: "fruitShopPlayRcrdListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "selectBocPlayRcrdList",
+                    eventName: "selectFruitShopPlayRcrdList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -93,12 +93,12 @@
             $("#insertPlayForm input[name='clubNo']").val("<c:out value="${clubNo}" />");
             $("#insertPlayForm input[name='playNm']").val("");
 
-            minPlyrCnt = 5;
-            maxPlyrCnt = 20;
+            minPlyrCnt = 8;
+            maxPlyrCnt = 12;
             joinPlyrCnt = 0;
 
             selectPlayJoinMmbrList(1);
-            setPlayNm("블러드 온 더 클락타워 - 트러블 브루잉");
+            setPlayNm("과일가게");
 
             $("#insertPlayModal").modal("show");
         };
@@ -114,6 +114,8 @@
                 str += "<tr name=\"addPlayMmbrTr\" id=\"addPlayMmbrTr" + mmbrNo + "\">";
                 str += "	<td>";
                 str += "		" + nickNm;
+                str += "	</td>";
+                str += "	<td>";
                 str += "	</td>";
                 str += "	<td>";
                 if (mmbrNo == "<c:out value="${mmbrNo}" />") {
@@ -219,20 +221,20 @@
         };
 
         const insertPlayCallback = data => {
-            location.href = "/game/trouble-brewing/play/" + data.playNo;
+            location.href = "/game/fruit-shop/play/" + data.playNo;
         }
 
-        const createBocMember = () => {
+        const createFruitShopMember = () => {
             const nickname = prompt("회원명 입력");
             if (!nickname) {
                 return;
             }
 
-            if (!confirm("[" + nickname + "] 닉네임으로 BOC 모임에 가입된 회원을 등록합니다.")) {
+            if (!confirm("[" + nickname + "] 닉네임으로 과일가게 모임에 가입된 회원을 등록합니다.")) {
                 return;
             }
 
-            gfn_callPostApi("/api/member/boc", {nickname})
+            gfn_callPostApi("/api/member/fruit-shop", {nickname})
                 .then(data => {
                     console.log('game status saved !!', data);
                     alert("회원이 생성되었습니다.");
@@ -279,8 +281,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="bocPlayRcrdForm" onsubmit="return false;">
-                            <input type="hidden" id="bocPlayRcrdListCurOrderBy">
+                        <form id="fruitShopPlayRcrdForm" onsubmit="return false;">
+                            <input type="hidden" id="fruitShopPlayRcrdListCurOrderBy">
                             <div class="row clearfix">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -300,23 +302,24 @@
                                     </c:if>
                                     <c:if test="${clubNo ne ''}">
                                         <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="createBocMember();">
-                                            B.O.C 회원 등록
+                                                onclick="createFruitShopMember();">
+                                            과일가게 회원 등록
                                         </button>
                                     </c:if>
                                 </div>
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="bocPlayRcrdListTbl">
+                            <table class="table align-items-center table-flush" id="fruitShopPlayRcrdListTbl">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_playNm">
-                                        플레이이름 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_playNm"
+                                    <th name="fruitShopPlayRcrdListSortTh" id="sortTh_playNm">
+                                        플레이이름 <span name="fruitShopPlayRcrdListSort"
+                                                    id="fruitShopPlayRcrdListSort_playNm"
                                                     class="fa"></span>
                                     </th>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_gameNm">
-                                        게임 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_gameNm"
+                                    <th name="fruitShopPlayRcrdListSortTh" id="sortTh_gameNm">
+                                        게임 <span name="fruitShopPlayRcrdListSort" id="fruitShopPlayRcrdListSort_gameNm"
                                                  class="fa"></span>
                                     </th>
                                     <th scope="col">모임</th>
@@ -330,7 +333,7 @@
                     <div class="card-footer py-4">
                         <nav aria-label="">
                             <ul class="pagination pagination-sm justify-content-end mb-0"
-                                id="bocPlayRcrdListPageNav"></ul>
+                                id="fruitShopPlayRcrdListPageNav"></ul>
                         </nav>
                     </div>
 

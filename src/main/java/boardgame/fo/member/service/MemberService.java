@@ -1,6 +1,6 @@
 package boardgame.fo.member.service;
 
-import boardgame.fo.member.dto.CreateBocMemberRequestDto;
+import boardgame.fo.member.dto.CreateTemporaryMemberRequestDto;
 
 import java.util.Map;
 
@@ -10,9 +10,9 @@ public interface MemberService {
 
     void create(Map<String, Object> map);
 
-    void createBocMember(CreateBocMemberRequestDto dto);
+    void createBocMember(CreateTemporaryMemberRequestDto dto);
 
-
+    void createFruitShopMember(CreateTemporaryMemberRequestDto dto);
 
 
 

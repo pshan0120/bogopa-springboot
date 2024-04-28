@@ -270,6 +270,7 @@ public class PlayController {
             String playNo = String.valueOf(commandMap.get("playNo"));
 
             String[] joinMmbrNoArr = (String.valueOf(commandMap.get("joinMmbrNoArr"))).split(",");
+
             String[] settingCd1Arr = (String.valueOf(commandMap.get("settingCd1Arr"))).split(",");
             String[] settingCd2Arr = (String.valueOf(commandMap.get("settingCd2Arr"))).split(",");
             String[] settingCd3Arr = (String.valueOf(commandMap.get("settingCd3Arr"))).split(",");
@@ -277,13 +278,16 @@ public class PlayController {
                 Map<String, Object> tempMap = new HashMap<>();
                 tempMap.put("playNo", playNo);
                 tempMap.put("mmbrNo", joinMmbrNoArr[i]);
-                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd1Arr")))) {
+                if (commandMap.containsKey("settingCd1Arr")
+                        && StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd1Arr")))) {
                     tempMap.put("setting1Cd", settingCd1Arr[i]);
                 }
-                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd2Arr")))) {
+                if (commandMap.containsKey("settingCd2Arr")
+                        && StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd2Arr")))) {
                     tempMap.put("setting2Cd", settingCd2Arr[i]);
                 }
-                if (StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd3Arr")))) {
+                if (commandMap.containsKey("settingCd3Arr")
+                        && StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd3Arr")))) {
                     tempMap.put("setting3Cd", settingCd3Arr[i]);
                 }
                 playService.insertPlayMmbr(tempMap);
@@ -308,6 +312,20 @@ public class PlayController {
         String resultMsg = "";
 
         mv.addObject("map", playService.selectBocPlayRcrdList(commandMap.getMap()));
+        result = true;
+
+        mv.addObject("result", result);
+        mv.addObject("resultMsg", resultMsg);
+        return mv;
+    }
+
+    @RequestMapping(value = "/selectFruitShopPlayRcrdList")
+    public ModelAndView selectFruitShopPlayRcrdList(CommandMap commandMap) {
+        ModelAndView mv = new ModelAndView("jsonView");
+        Boolean result = false;
+        String resultMsg = "";
+
+        mv.addObject("map", playService.selectFruitShopPlayRcrdList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);

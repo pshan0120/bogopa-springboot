@@ -74,12 +74,12 @@ public class PlayDao extends AbstractDao {
         update("play.updatePlayMmbr", map);
     }
 
-    public List<Map<String, Object>> selectBocPlayRcrdList(Map<String, Object> map) {
-        return selectPagingListAjax("play.selectBocPlayRcrdList", map);
+    public List<Map<String, Object>> selectGamePlayRcrdList(Map<String, Object> map) {
+        return selectPagingListAjax("play.selectGamePlayRcrdList", map);
     }
 
-    public Map<String, Object> selectBocPlayRcrdListCnt(Map<String, Object> map) {
-        return selectOne("play.selectBocPlayRcrdListCnt", map);
+    public Map<String, Object> selectGamePlayRcrdListCnt(Map<String, Object> map) {
+        return selectOne("play.selectGamePlayRcrdListCnt", map);
     }
 
     public List<Map<String, Object>> selectMainPlayRcrdList(Map<String, Object> map) {

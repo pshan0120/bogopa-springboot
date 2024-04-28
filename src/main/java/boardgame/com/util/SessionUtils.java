@@ -10,7 +10,7 @@ import java.util.Optional;
 public class SessionUtils {
 
     // private static Long ADMIN_MEMBER_ID = 25L;
-    private static Long[] ADMIN_MEMBER_IDS = new Long[]{4L, 25L};
+    private static Long[] ADMIN_MEMBER_IDS = new Long[]{4L, 25L, 41L};
 
     public static String getCurrentUserId() {
         try {

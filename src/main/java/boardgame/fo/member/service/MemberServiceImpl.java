@@ -3,7 +3,7 @@ package boardgame.fo.member.service;
 import boardgame.com.util.SessionUtils;
 import boardgame.fo.club.service.ClubService;
 import boardgame.fo.member.dao.MemberDao;
-import boardgame.fo.member.dto.CreateBocMemberRequestDto;
+import boardgame.fo.member.dto.CreateTemporaryMemberRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,8 @@ public class MemberServiceImpl implements MemberService {
 
     private static final int BOC_CLUB_ID = 4;
 
+    private static final int FRUIT_SHOP_CLUB_ID = 5;
+
     @Override
     public Map<String, Object> readById(long memberId) {
         Map<String, Object> requestMap = new HashMap<>();
@@ -37,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void createBocMember(CreateBocMemberRequestDto dto) {
+    public void createBocMember(CreateTemporaryMemberRequestDto dto) {
         // 회원 생성
         Map<String, Object> memberRequestMap = new HashMap<>();
         memberRequestMap.put("email", LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + "@bogopa.com");
@@ -66,6 +68,38 @@ public class MemberServiceImpl implements MemberService {
         clubMemberRequestMap.put("clubMmbrGrdCd", "1");
         clubService.insertClubMmbr(clubMemberRequestMap);
     }
+
+    @Override
+    public void createFruitShopMember(CreateTemporaryMemberRequestDto dto) {
+        // 회원 생성
+        Map<String, Object> memberRequestMap = new HashMap<>();
+        memberRequestMap.put("email", LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + "@bogopa.com");
+        memberRequestMap.put("nickNm", dto.getNickname());
+        memberRequestMap.put("pswrd", DEFAULT_PASSWORD);
+        if (SessionUtils.isAdminMemberLogin()) {
+            memberRequestMap.put("invtMmbrNo", SessionUtils.getCurrentMemberId());
+        }
+        memberRequestMap.put("temporarilyJoined", true);
+
+        this.create(memberRequestMap);
+        Long memberId = (Long) memberRequestMap.get("mmbrNo");
+
+        Map<String, Object> clubJoinRequestMap = new HashMap<>();
+        clubJoinRequestMap.put("clubNo", FRUIT_SHOP_CLUB_ID);
+        clubJoinRequestMap.put("mmbrNo", memberId);
+        clubJoinRequestMap.put("joinAnswr", "과일가게 회원 자동 가입");
+        clubService.insertClubJoin(clubJoinRequestMap);
+
+        clubJoinRequestMap.put("mode", "cnfrm");
+        clubService.updateClubJoin(clubJoinRequestMap);
+
+        Map<String, Object> clubMemberRequestMap = new HashMap<>();
+        clubMemberRequestMap.put("clubNo", FRUIT_SHOP_CLUB_ID);
+        clubMemberRequestMap.put("mmbrNo", memberId);
+        clubMemberRequestMap.put("clubMmbrGrdCd", "1");
+        clubService.insertClubMmbr(clubMemberRequestMap);
+    }
+
 
 
 

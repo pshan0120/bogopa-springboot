@@ -68,10 +68,36 @@ public class GameController {
 
 
 
+
+
     @GetMapping("/game/fruit-shop/play")
-    public String openFruitShop() {
-        return "/game/fruitShop/play";
+    public String openFruitShopPlayList() {
+        return "/game/fruitShop/playList";
     }
+
+    @GetMapping("/game/fruit-shop/play/{playNo}")
+    public ModelAndView openFruitPlayByPlayNo(@PathVariable("playNo") long playNo) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("playNo", playNo);
+
+        if (isAdminMemberLogin()) {
+            mv.setViewName("/game/fruitShop/hostPlay");
+        } else {
+            mv.setViewName("/game/fruitShop/clientPlay");
+        }
+        return mv;
+    }
+
+    @GetMapping("/game/fruit-shop/play/host/{playNo}")
+    public ModelAndView openFruitShopHostPlayByPlayNo(@PathVariable("playNo") long playNo) {
+        ModelAndView mv = new ModelAndView("/game/fruitShop/hostPlay");
+        mv.addObject("playNo", playNo);
+        return mv;
+    }
+
+
+
+
 
     @GetMapping("/game/food-chain-magnate/calculator")
     public String openFoodChainMagnateCalculator() {
