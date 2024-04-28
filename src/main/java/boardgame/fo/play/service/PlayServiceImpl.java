@@ -87,8 +87,9 @@ public class PlayServiceImpl implements PlayService {
 
     @Override
     public Map<String, Object> selectBocPlayRcrdList(Map<String, Object> map) {
+        map.put("gameNo", 1951);
+
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("gameNo", 1951);
         resultMap.put("list", playDao.selectGamePlayRcrdList(map));
         resultMap.put("cnt", playDao.selectGamePlayRcrdListCnt(map).get("cnt"));
         return resultMap;
@@ -96,8 +97,9 @@ public class PlayServiceImpl implements PlayService {
 
     @Override
     public Map<String, Object> selectFruitShopPlayRcrdList(Map<String, Object> map) {
+        map.put("gameNo", 1952);
+
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("gameNo", 1952);
         resultMap.put("list", playDao.selectGamePlayRcrdList(map));
         resultMap.put("cnt", playDao.selectGamePlayRcrdListCnt(map).get("cnt"));
         return resultMap;
