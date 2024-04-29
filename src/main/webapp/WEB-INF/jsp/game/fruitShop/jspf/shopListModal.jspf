@@ -1,0 +1,108 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const shopListModal = {
+        open: async playNo => {
+            await shopListModal.loadGameStatus(playNo);
+
+            console.log('playStatus', playStatus);
+            const $shopListModal = $("#shopListModal");
+            const $settingDiv = $shopListModal.find("div[name='settingDiv']");
+            const playSetting = initializationSetting.item
+                .find(item => playerList.length === item.numberOfPlayer);
+
+            const fruitInitializationHtml = `
+                \${APPLE.title} \${playSetting.apple}개,
+                \${GRAPE.title} \${playSetting.grape}개,
+                \${STRAWBERRY.title} \${playSetting.strawberry}개,
+                \${WATERMELON.title} \${playSetting.watermelon}개,
+                \${BANANA.title} \${playSetting.banana}개,
+                \${MANGO.title} \${playSetting.mango}개`
+            $settingDiv.find("span[name='fruitInitialization']").html(fruitInitializationHtml);
+
+            const $shopDiv = $shopListModal.find("div[name='shopDiv']");
+            $shopDiv.empty();
+
+            if (Object.keys(playStatus).length === 0) {
+                const htmlString = `게임이 시작되지 않았습니다.`;
+                $shopDiv.append(htmlString);
+                return;
+            }
+
+            const htmlString = playerList.reduce((prev, next) => {
+                const item1 = Fruit.getFruitByName(fruitList, next.item1);
+                const item2 = Fruit.getFruitByName(fruitList, next.item2);
+
+                return prev +
+                    `<div class="row">
+                        <div class="col-4">
+                            \${next.playerName}
+                        </div>
+                        <div class="col-4">
+                            \${item1.title}
+                        </div>
+                        <div class="col-4">
+                            \${item2.title}
+                        </div>
+                    </div>
+                    <hr>`;
+            }, "");
+
+            $shopDiv.append(htmlString);
+
+            $shopListModal.modal("show");
+        },
+        loadGameStatus: async playNo => {
+            const lastPlayLog = await shopListModal.readLastPlayLog(playNo);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+
+            playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            fruitList = JSON.parse(lastPlayLogJson.fruitList);
+            playerList = JSON.parse(lastPlayLogJson.playerList);
+            auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playNo => {
+            return gfn_callGetApi("/api/game/play/log/last", {playNo})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="shopListModal" role="dialog"
+     aria-labelledby="shopListModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">플레이어 과일 가게</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="settingDiv">
+                    <h4><span name="fruitInitialization"></span></h4>
+                </div>
+                <hr>
+                <div name="shopDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

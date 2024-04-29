@@ -327,15 +327,11 @@
         }
 
         const openShowPlayStatusModal = () => {
-            showPlayStatusModal.open(createAssignedPlayerList());
+            showPlayStatusModal.open(auctionByRound);
         }
 
-        const openTownModal = () => {
-            townModal.open();
-        }
-
-        const openNoteModal = () => {
-            noteModal.open();
+        const openFruitShopModal = () => {
+            shopListModal.open(PLAY_NO);
         }
 
         const openQrImage = () => {
@@ -411,14 +407,11 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
-                                마을 광장 보기
+                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
+                                플레이어 과일가게 보기
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
                                 다음 라운드 진행
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
-                                노트
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
@@ -483,33 +476,9 @@
     <!-- /.modal-dialog -->
 </div>
 
-<%--<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/showPlayStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/minion.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/poisoner.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/spy.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/washerWoman.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/librarian.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/investigator.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/empath.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/fortuneTeller.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/butler.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/slayer.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/monk.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWomen.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/undertaker.jspf" %>
-
-
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" %>--%>
-
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auction.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/showPlayStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
