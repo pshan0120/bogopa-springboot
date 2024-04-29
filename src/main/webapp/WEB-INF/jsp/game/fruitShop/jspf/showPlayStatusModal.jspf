@@ -11,6 +11,9 @@
                                 \${playerStatusListHtml}
                             </div>
                             <hr>`*/
+
+                    // TODO: 여기부터
+                    // TODO: 능력 사용까지 하면 마무리
                     return "";
                 }, "");
 
