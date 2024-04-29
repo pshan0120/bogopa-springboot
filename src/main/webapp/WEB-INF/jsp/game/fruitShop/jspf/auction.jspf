@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const auction = {
+        BIDDING_UNITS: [1000, 2000, 3000, 4000, 5000],
+        biddingList: [],
+        createHtml: () => {
+            return playerList.reduce((prev, next) => {
+                const item1 = Fruit.getFruitByName(fruitList, next.item1);
+                const item2 = Fruit.getFruitByName(fruitList, next.item2);
+
+                return prev
+                    + "<button class=\"btn btn-success btn-block\" name=\"playerBiddingButton\" data-player-name=" + next.playerName
+                    + " onclick=\"auction.openBidFruitModal('" + next.playerName + "', '" + item1.name + "', '" + item2.name + "')\" >"
+                    + " " + next.playerName + "(" + item1.title + ", " + item2.title + ")"
+                    + "</button>";
+            }, "");
+        },
+        openBidFruitModal: (playerName, itemName1, itemName2) => {
+            const chosenList = auction.biddingList.filter(choice => choice.playerName === playerName);
+            if (chosenList.length === 2) {
+                alert("해당 플레이어는 선택 완료된 상태입니다.");
+                return;
+            }
+
+            const $modal = $("#bidFruitModal");
+            $modal.find("[name='playerDiv']").empty().html("<h3>" + playerName + "</h3>");
+            $modal.find("[name='item1Div']").empty().html(auction.createBidHtml(playerName, itemName1));
+            $modal.find("[name='item2Div']").empty().html(auction.createBidHtml(playerName, itemName2));
+
+            $modal.modal("show");
+
+            $modal.find("div[name='item1Div'], div[name='item2Div']").find("button").on("click", event => {
+                $(event.currentTarget).parent().find("button").hide();
+            });
+        },
+        createBidHtml: (playerName, itemName) => {
+            const item = Fruit.getFruitByName(fruitList, itemName);
+            return auction.BIDDING_UNITS.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
+                        + " onclick=\"auction.bidFruit('" + playerName + "', '" + item.name + "', " + next + ")\" >"
+                        + " " + next
+                        + "</button>";
+                }, "<h3>" + item.title + "</h3>")
+                + "<div name=\"messageText\" data-item-name=\"" + itemName + "\"></div>"
+                + "<hr>";
+        },
+        bidFruit: (playerName, itemName, bidding) => {
+            auction.biddingList.push({playerName, itemName, bidding});
+
+            const $modal = $("#bidFruitModal");
+            const found = $modal.find("div[name='messageText']").toArray()
+                .filter(object => itemName == $(object).data("itemName"));
+            $(found).text(bidding + "원");
+
+            if (auction.biddingList.filter(bidding => bidding.playerName === playerName).length === 2) {
+                $modal.modal("hide");
+
+                const playerBiddingButton = $.find("button[name='playerBiddingButton']")
+                    .filter(object => playerName == $(object).data("playerName"));
+
+                $(playerBiddingButton).removeClass();
+                $(playerBiddingButton).addClass("btn btn-default btn-block");
+            }
+        },
+        resetBiddingList: () => {
+            auction.biddingList = [];
+        },
+        resetChoiceOfButler: () => {
+            const biddingPlayer = Role.getPlayerByRole(outsiderPlayerList, Butler);
+
+            const chosen = biddingPlayer.masterPlayerByRound.find(choice => choice.round === playStatus.round);
+            if (!chosen) {
+                return;
+            }
+
+            const filteredList = biddingPlayer.masterPlayerByRound.filter(choice => choice.round !== playStatus.round);
+            biddingPlayer.masterPlayerByRound = [...filteredList];
+            alert("초기화 되었습니다.");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="bidFruitModal" role="dialog"
+     aria-labelledby="bidFruitModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">판매 희망가를 제시합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerDiv"></div>
+                <div name="item1Div"></div>
+                <div name="item2Div"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -90,7 +90,8 @@
         }
 
         const gameNo = $("#playRcrdForm").find("input[name='gameNo']").val();
-        if (gameNo == "1951") {
+        if (gameNo == "1951"
+            || gameNo == "1952") {
             $("#openPlayingGameBtn").show();
         }
 
@@ -146,6 +147,11 @@
         if (gameNo == "1951") {
             const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
             location.href = "/game/trouble-brewing/play/" + playNo;
+        }
+
+        if (gameNo == "1952") {
+            const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
+            location.href = "/game/fruit-shop/play/" + playNo;
         }
     };
 

@@ -10,8 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="과일가게 개발중">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/auction.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/game/fruitShop/fruits.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/playRcrdModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/playRcrdModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +68,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "false",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/fruitShop",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,11 +86,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\fruitShop" />
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\fruitShop\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\fruitShop" />
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\fruitShop" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\footChainMagnate" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\foodChainMagnate" />
@@ -238,14 +241,8 @@
       <workItem from="1713972423957" duration="10866000" />
       <workItem from="1714099143412" duration="6863000" />
       <workItem from="1714187633677" duration="21127000" />
-      <workItem from="1714265926901" duration="11140000" />
-    </task>
-    <task id="LOCAL-00013" summary="사서 추가">
-      <created>1712339526097</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1712339526097</updated>
+      <workItem from="1714265926901" duration="12192000" />
+      <workItem from="1714397301376" duration="15023000" />
     </task>
     <task id="LOCAL-00014" summary="요리사 추가">
       <created>1712766834769</created>
@@ -583,7 +580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714326039267</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="과일가게 개발중">
+      <created>1714326136030</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1714326136030</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
