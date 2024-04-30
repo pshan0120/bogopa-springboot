@@ -21,7 +21,7 @@
                 <h3>수도승</h3>
                 <p>
                     1. 수도승은 악마로부터 다른 플레이어를 보호합니다.<br/>
-                    * 취했거나 중독된 상태라면 능력이 실패할 수 있으며, 이 때도 능력은 사용한 것으로 간주합니다.<br/>
+                    * 취했거나 중독된 상태라면 능력은 반드시 실패하며, 이 때도 능력은 사용한 것으로 간주합니다.<br/>
                     2. 다음 플레이어를(들을) 깨우세요.<br/>
                     <strong>\${monkPlayerHtml}</strong><br/>
                     3. 선택 안내 메세지 모달을 띄운 뒤 보여주세요.<br/>
@@ -32,7 +32,7 @@
                 <button type="button" class="btn btn-success btn-block" onclick="monk.openMonkChoiceMessageModal()">
                     선택 안내 메세지 모달 표시
                 </button>
-                <button type="button" class="btn btn-info btn-block" onclick="monk.openAddMasterPlayerModal()">
+                <button type="button" class="btn btn-info btn-block" onclick="monk.openAddSafePlayerModal()">
                     선택 모달 표시
                 </button>
                 <button type="button" class="btn btn-success btn-block" onclick="monk.openMonkMessageModal()">
@@ -49,8 +49,17 @@
 
             openMessageModal(messageHtml);
         },
-        openAddMasterPlayerModal: () => {
+        openAddSafePlayerModal: () => {
             const monkPlayer = Role.getPlayerByRole(townsFolkPlayerList, Monk);
+            if (monkPlayer.drunken) {
+                alert("만취한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
+
+            if (monkPlayer.poisoned) {
+                alert("중독된 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
 
             const chosen = monkPlayer.safePlayerByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
@@ -79,7 +88,7 @@
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
-            
+
             const $modal = $("#addChoiceOfMonkModal");
             $modal.find("[name='playerListDiv']").empty().html(addSafePlayerHtml);
 

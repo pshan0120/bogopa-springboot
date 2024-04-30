@@ -442,6 +442,25 @@
         const openDuskStepMessageModal = playerName => {
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
 
+            if (player.name === Drunk.name) {
+                alert("주정뱅이 마을 주민 역할이 부여되지 않았습니다.");
+                return;
+            }
+
+            if (player.name === FortuneTeller.name) {
+                const redHerringPlayerList = [
+                    ...townsFolkPlayerList,
+                    ...outsiderPlayerList,
+                    ...minionPlayerList,
+                ];
+
+                const chosen = redHerringPlayerList.find(player => player.redHerring);
+                if (!chosen) {
+                    alert("레드 헤링이 선택되지 않았습니다.");
+                    return;
+                }
+            }
+
             const nameClass = Role.calculateRoleNameClass(player.position.name);
             const message = `당신의 역할입니다.<br/><span class=\${nameClass}>\${player.title}</span>`;
 
@@ -757,7 +776,8 @@
                         <h2>
                             첫번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" controls></audio>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3"
+                               controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -798,7 +818,9 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 낮
                         </h2>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
+                        <audio name="backgroundMusic"
+                               src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
+                               controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
@@ -839,7 +861,8 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" controls></audio>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3"
+                               controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">

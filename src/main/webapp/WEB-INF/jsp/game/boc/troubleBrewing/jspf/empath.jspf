@@ -30,6 +30,9 @@
                 <button type="button" class="btn btn-info btn-block" onclick="empath.openAddNumberOfNearEvilModal()">
                     선택 모달 표시
                 </button>
+                <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
+                    플레이 상태 모달 표시
+                </button>
                 <button type="button" class="btn btn-success btn-block" onclick="empath.openEmpathMessageModal()">
                     메세지 모달 표시
                 </button>
