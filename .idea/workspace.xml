@@ -2,26 +2,17 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="bogopa:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="과일가게 개발중">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/auctionResultModal.jspf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/playStatusModal.jspf" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="과일가게 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/showPlayStatusModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/playStatusModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/spy.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/spy.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/auction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/auction.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/showPlayStatusModal.jspf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/fruitShop/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/fruitShop/initializationSetting.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,14 +241,7 @@
       <workItem from="1714187633677" duration="21127000" />
       <workItem from="1714265926901" duration="12192000" />
       <workItem from="1714397301376" duration="16548000" />
-      <workItem from="1714476497459" duration="14559000" />
-    </task>
-    <task id="LOCAL-00017" summary="점쟁이 추가">
-      <created>1712854498606</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1712854498606</updated>
+      <workItem from="1714476497459" duration="15473000" />
     </task>
     <task id="LOCAL-00018" summary="집사 추가">
       <created>1712856396389</created>
@@ -595,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714416882914</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="과일가게 완료">
+      <created>1714491219596</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1714491219596</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -616,7 +607,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="guide 수정중" />
     <MESSAGE value="noticeBoardListTbl 구조 조정중" />
     <MESSAGE value="이미지 경로 조정" />
     <MESSAGE value="게시판 정비" />
@@ -641,7 +631,8 @@
     <MESSAGE value="사운드 삭제" />
     <MESSAGE value="주석제거" />
     <MESSAGE value="과일가게 개발중" />
-    <option name="LAST_COMMIT_MESSAGE" value="과일가게 개발중" />
+    <MESSAGE value="과일가게 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="과일가게 완료" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

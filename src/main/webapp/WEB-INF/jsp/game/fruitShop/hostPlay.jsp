@@ -36,6 +36,12 @@
         });
 
         const initializeGame = async () => {
+            playSetting = {};
+            playStatus = {};
+            fruitList = [];
+            playerList = [];
+            auctionByRound = [];
+
             console.log('initializationSetting', initializationSetting);
 
             $("#settingDiv").show();
@@ -50,6 +56,7 @@
                 night: true,
                 hostMemberId: hostPlayMember.mmbrNo,
                 hostMemberName: hostPlayMember.nickNm,
+                noticeHtml: "",
             }
 
             playerList = clientPlayMemberList;
@@ -63,8 +70,8 @@
 
         const renderPlayMemberList = playerList => {
             const $settingDiv = $("#settingDiv");
-            const $playersDiv = $settingDiv.find("div[name='playersDiv']");
-            $playersDiv.empty();
+            const $playerDiv = $settingDiv.find("div[name='playerDiv']");
+            $playerDiv.empty();
 
             const htmlString = playerList.reduce((prev, next) => {
                 return prev +
@@ -75,7 +82,7 @@
                     "</div>";
             }, "");
 
-            $playersDiv.append(htmlString);
+            $playerDiv.append(htmlString);
         }
 
         const readPlayMemberList = playNo => {
@@ -90,12 +97,12 @@
         const setFruitOfPlayer = () => {
             fruitList = [];
 
-            fruitList.push({...APPLE, quantity: playSetting.apple, money: 0});
-            fruitList.push({...BANANA, quantity: playSetting.banana, money: 0});
-            fruitList.push({...GRAPE, quantity: playSetting.grape, money: 0});
-            fruitList.push({...MANGO, quantity: playSetting.mango, money: 0});
-            fruitList.push({...STRAWBERRY, quantity: playSetting.strawberry, money: 0});
-            fruitList.push({...WATERMELON, quantity: playSetting.watermelon, money: 0});
+            fruitList.push({...APPLE, quantity: playSetting.apple});
+            fruitList.push({...BANANA, quantity: playSetting.banana});
+            fruitList.push({...GRAPE, quantity: playSetting.grape});
+            fruitList.push({...MANGO, quantity: playSetting.mango});
+            fruitList.push({...STRAWBERRY, quantity: playSetting.strawberry});
+            fruitList.push({...WATERMELON, quantity: playSetting.watermelon});
 
             playerList = createPlayerList(playerList);
             console.log('playerList', playerList);
@@ -118,16 +125,19 @@
                         playerName: player.nickNm,
                         playerId: player.mmbrNo,
                         item1: assignableFruit1.name,
-                        item2: assignableFruit2.name
+                        item2: assignableFruit2.name,
+                        blindSkillUsed: false,
+                        swapSkillUsed: false,
+                        money: 0,
                     };
                 });
         }
 
         const showPlayerItemList = playerList => {
             const $settingDiv = $("#settingDiv");
-            const $playersDiv = $settingDiv.find("div[name='playersDiv']");
+            const $playerDiv = $settingDiv.find("div[name='playerDiv']");
             playerList.forEach(player => {
-                const found = $playersDiv.find("input[name='items']").toArray()
+                const found = $playerDiv.find("input[name='items']").toArray()
                     .filter(itemsObject => player.playerId == $(itemsObject).data("memberId"));
 
                 $(found).val(
@@ -235,7 +245,6 @@
             auction.resetBiddingList();
 
             playStatus.round = playStatus.round + 1;
-
             saveGameStatus();
             renderRound();
         }
@@ -250,6 +259,7 @@
                     minimumBidding: 0,
                     revenue: 0,
                     successfulBiddingList: [],
+                    blind: false,
                 }
             }
 
@@ -264,6 +274,9 @@
                 player.money = player.money + revenue;
             });
 
+            // auction.blindBiddingResultList.push({playerName, itemName});
+
+            const blind = auction.blindBiddingResultList.some(blind => blind.itemName === item.name);
             return {
                 itemName: item.name,
                 biddingList,
@@ -271,10 +284,16 @@
                 minimumBidding,
                 revenue,
                 successfulBiddingList,
+                blind
             }
         }
 
         const renderRound = () => {
+            if (playSetting.round < playStatus.round) {
+                endGame();
+                return;
+            }
+
             const $roundDiv = $("#roundDiv");
             $roundDiv.show();
 
@@ -284,8 +303,6 @@
             $auctionDiv.empty();
 
             $auctionDiv.append(auction.createHtml());
-
-            saveGameStatus();
         }
 
         const resetGame = () => {
@@ -306,28 +323,43 @@
             initializeGame();
         }
 
-        const proceedToNextDay = () => {
-            playStatus.round = playStatus.round + 1;
-            playStatus.night = false;
-            saveGameStatus();
-            $("#firstNightDiv").hide();
-            $("#otherNightDiv").hide();
+        const endGame = () => {
+            $("#roundDiv").hide();
+            $("#resultDiv").show();
 
-            $("audio[name='backgroundMusic']").each((index, audio) => {
-                audio.pause();
-            });
-
-            createAssignedPlayerList().forEach(player => {
-                player.diedToday = false;
-                player.diedTonight = false;
-                player.safeByMonk = false;
-            });
-
-            renderOtherDay();
+            renderResult();
         }
 
-        const openShowPlayStatusModal = () => {
-            showPlayStatusModal.open(auctionByRound);
+        const renderResult = () => {
+            const $resultDiv = $("#resultDiv");
+            const $playerDiv = $resultDiv.find("div[name='playerDiv']");
+            $playerDiv.empty();
+
+            let rank = 0;
+            const htmlString = playerList
+                .sort((prev, next) => next.money - prev.money)
+                .reduce((prev, next) => {
+                    rank++;
+                    return prev +
+                        `<div class="row">
+                            <div class="col-2">
+                                \${rank}위
+                            </div>
+                            <div class="col-6">
+                                \${next.playerName}
+                            </div>
+                            <div class="col-4">
+                                \${next.money}
+                            </div>
+                        </div>
+                        <br>`;
+                }, "");
+
+            $playerDiv.append(htmlString);
+        }
+
+        const openPlayStatusModal = () => {
+            playStatusModal.open(auctionByRound);
         }
 
         const openFruitShopModal = () => {
@@ -337,11 +369,6 @@
         const openQrImage = () => {
             window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
         }
-
-        const openSoundEffectModal = () => {
-            soundEffectModal.open();
-        }
-
 
     </script>
 </head>
@@ -357,8 +384,8 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">Blood on the Clocktower</h1>
-                        <p class="text-lead text-light">trouble brewing</p>
+                        <h1 class="text-white">평화로운 과일가게</h1>
+                        <p class="text-lead text-light">호스트 참조</p>
                     </div>
                 </div>
             </div>
@@ -381,7 +408,7 @@
                         </h2>
                     </div>
                     <div class="card-body">
-                        <div name="playersDiv"></div>
+                        <div name="playerDiv"></div>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
@@ -404,7 +431,7 @@
                     <div class="card-body" name="auctionDiv"></div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
@@ -416,8 +443,32 @@
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
-                                소리 효과
+                            <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
+                                게임 재설정
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mt-5 display-none" id="resultDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            게임 종료
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div name="playerDiv"></div>
+                    </div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
+                                플레이 상태 모달 표시
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
+                                플레이어 과일가게 보기
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
+                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -432,52 +483,8 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<div class="modal fade" id="setRedHerringPlayerModal" role="dialog"
-     aria-labelledby="setRedHerringPlayerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">스토리텔러가 점쟁이에게 악으로 보일 플레이어를 선택합니다.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div name="playerListDiv"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="setDrunkPlayerModal" role="dialog"
-     aria-labelledby="setDrunkPlayerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">주정뱅이와 교체될 마을 주민 역할을 선택합니다.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div name="roleListDiv"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auction.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/showPlayStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
 
 <!-- 회원프로필 -->

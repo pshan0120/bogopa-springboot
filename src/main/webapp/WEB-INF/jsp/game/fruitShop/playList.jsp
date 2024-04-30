@@ -94,7 +94,7 @@
             $("#insertPlayForm input[name='playNm']").val("");
 
             minPlyrCnt = 8;
-            maxPlyrCnt = 12;
+            maxPlyrCnt = 16;
             joinPlyrCnt = 0;
 
             selectPlayJoinMmbrList(1);
