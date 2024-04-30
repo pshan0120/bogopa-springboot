@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="과일가게 완료">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="플레이인원 조정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/fruitShop/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/fruitShop/initializationSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/util/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/FileUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,14 +240,7 @@
       <workItem from="1714187633677" duration="21127000" />
       <workItem from="1714265926901" duration="12192000" />
       <workItem from="1714397301376" duration="16548000" />
-      <workItem from="1714476497459" duration="15473000" />
-    </task>
-    <task id="LOCAL-00018" summary="집사 추가">
-      <created>1712856396389</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1712856396389</updated>
+      <workItem from="1714476497459" duration="16004000" />
     </task>
     <task id="LOCAL-00019" summary="proceedToFirstDay 추가">
       <created>1712857135388</created>
@@ -586,7 +578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714491219596</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="플레이인원 조정">
+      <created>1714492129557</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1714492129557</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +606,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="noticeBoardListTbl 구조 조정중" />
     <MESSAGE value="이미지 경로 조정" />
     <MESSAGE value="게시판 정비" />
     <MESSAGE value="코드개선" />
@@ -632,7 +630,8 @@
     <MESSAGE value="주석제거" />
     <MESSAGE value="과일가게 개발중" />
     <MESSAGE value="과일가게 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="과일가게 완료" />
+    <MESSAGE value="플레이인원 조정" />
+    <option name="LAST_COMMIT_MESSAGE" value="플레이인원 조정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
