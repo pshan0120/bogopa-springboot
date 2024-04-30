@@ -4,7 +4,8 @@
     const monk = {
         createHtml: () => {
             const monkPlayer = Role.getPlayerByRole(townsFolkPlayerList, Monk);
-            if (!monkPlayer) {
+            if (!monkPlayer
+                | monkPlayer.died) {
                 return "";
             }
 
