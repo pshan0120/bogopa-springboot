@@ -4,34 +4,49 @@
     const auction = {
         BIDDING_UNITS: [1000, 2000, 3000, 4000, 5000],
         biddingList: [],
+        blindBiddingResultList: [],
         createHtml: () => {
             return playerList.reduce((prev, next) => {
-                const item1 = Fruit.getFruitByName(fruitList, next.item1);
-                const item2 = Fruit.getFruitByName(fruitList, next.item2);
-
                 return prev
-                    + "<button class=\"btn btn-success btn-block\" name=\"playerBiddingButton\" data-player-name=" + next.playerName
-                    + " onclick=\"auction.openBidFruitModal('" + next.playerName + "', '" + item1.name + "', '" + item2.name + "')\" >"
-                    + " " + next.playerName + "(" + item1.title + ", " + item2.title + ")"
-                    + "</button>";
+                    + "<div name=\"playerBiddingDiv\" data-player-name=" + next.playerName + ">"
+                    + " <button class=\"btn btn-success btn-block\" name=\"playerBiddingButton\""
+                    + "     onclick=\"auction.openBidFruitModal('" + next.playerName + "')\" >"
+                    + "     " + next.playerName
+                    + " </button>"
+                    + "</div>"
+                    + "<br/>";
             }, "");
         },
-        openBidFruitModal: (playerName, itemName1, itemName2) => {
-            const chosenList = auction.biddingList.filter(choice => choice.playerName === playerName);
+        openBidFruitModal: playerName => {
+            const player = playerList.find(player => player.playerName === playerName);
+            const item1 = Fruit.getFruitByName(fruitList, player.item1);
+            const item2 = Fruit.getFruitByName(fruitList, player.item2);
+
+            const chosenList = auction.biddingList.filter(choice => choice.playerName === player.playerName);
             if (chosenList.length === 2) {
                 alert("해당 플레이어는 선택 완료된 상태입니다.");
                 return;
             }
 
             const $modal = $("#bidFruitModal");
-            $modal.find("[name='playerDiv']").empty().html("<h3>" + playerName + "</h3>");
-            $modal.find("[name='item1Div']").empty().html(auction.createBidHtml(playerName, itemName1));
-            $modal.find("[name='item2Div']").empty().html(auction.createBidHtml(playerName, itemName2));
+            $modal.find("[name='title']").empty().html(player.playerName);
+            $modal.find("[name='swapFruitDiv']").empty().html(auction.createSwapFruitHtml(player.playerName));
+            $modal.find("[name='blindBiddingResultDiv']").empty().html(auction.createBlindBiddingResultHtml(player.playerName));
+            $modal.find("[name='item1Div']").empty().html(auction.createBidHtml(playerName, item1.name));
+            $modal.find("[name='item2Div']").empty().html(auction.createBidHtml(playerName, item2.name));
 
             $modal.modal("show");
 
             $modal.find("div[name='item1Div'], div[name='item2Div']").find("button").on("click", event => {
                 $(event.currentTarget).parent().find("button").hide();
+            });
+
+            $modal.find("button[name='setSwapFromButton']").on("click", event => {
+                $(event.currentTarget).parent().find("button[name='setSwapFromButton']").hide();
+            });
+
+            $modal.find("button[name='setSwapToButton']").on("click", event => {
+                $(event.currentTarget).parent().find("button[name='setSwapToButton']").hide();
             });
         },
         createBidHtml: (playerName, itemName) => {
@@ -43,26 +58,134 @@
                         + " " + next
                         + "</button>";
                 }, "<h3>" + item.title + "</h3>")
-                + "<div name=\"messageText\" data-item-name=\"" + itemName + "\"></div>"
+                + "<div name=\"biddingMessageText\" data-item-name=\"" + itemName + "\"></div>"
                 + "<hr>";
         },
         bidFruit: (playerName, itemName, bidding) => {
             auction.biddingList.push({playerName, itemName, bidding});
 
             const $modal = $("#bidFruitModal");
-            const found = $modal.find("div[name='messageText']").toArray()
+            const found = $modal.find("div[name='biddingMessageText']").toArray()
                 .filter(object => itemName == $(object).data("itemName"));
             $(found).text(bidding + "원");
 
             if (auction.biddingList.filter(bidding => bidding.playerName === playerName).length === 2) {
                 $modal.modal("hide");
 
-                const playerBiddingButton = $.find("button[name='playerBiddingButton']")
+                const playerBiddingDiv = $("div[name='playerBiddingDiv']").toArray()
                     .filter(object => playerName == $(object).data("playerName"));
 
-                $(playerBiddingButton).removeClass();
-                $(playerBiddingButton).addClass("btn btn-default btn-block");
+                const $playerBiddingButton = $(playerBiddingDiv).find("button[name='playerBiddingButton']");
+                $playerBiddingButton.removeClass();
+                $playerBiddingButton.addClass("btn btn-default btn-block");
             }
+        },
+        createBlindBiddingResultHtml: playerName => {
+            const player = playerList.find(player => player.playerName === playerName);
+            if (player.blindSkillUsed) {
+                return "";
+            }
+
+            return fruitList.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
+                        + " onclick=\"auction.blindBiddingResult('" + player.playerName + "', '" + next.name + "')\" >"
+                        + " " + Fruit.getFruitByName(fruitList, next.name).title
+                        + "</button>";
+                }, "<h3>판매가 숨기기 사용</h3>")
+                + "<hr>";
+        },
+        blindBiddingResult: (playerName, itemName) => {
+            const player = playerList.find(player => player.playerName === playerName);
+            player.blindSkillUsed = true;
+
+            auction.blindBiddingResultList.push({playerName, itemName});
+
+            $("div[name='blindBiddingResultDiv']").empty();
+        },
+        createSwapFruitHtml: playerName => {
+            const player = playerList.find(player => player.playerName === playerName);
+            if (player.swapSkillUsed) {
+                return "";
+            }
+
+            const swapFromList = [
+                Fruit.getFruitByName(fruitList, player.item1),
+                Fruit.getFruitByName(fruitList, player.item2)
+            ];
+
+            const swapFromHtml = swapFromList.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" name=\"setSwapFromButton\""
+                        + " onclick=\"auction.setSwapFrom('" + next.name + "')\" >"
+                        + " " + next.title
+                        + "</button>";
+                }, "<h3>버릴 과일 선택</h3>")
+                + "<div name=\"swapFromMessageText\" data-swap-from=\"\"></div>"
+                + "</br>";
+
+            const swapToList = fruitList.filter(fruit => fruit.quantity > 0);
+            const swapToHtml = swapToList.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" name=\"setSwapToButton\""
+                        + " onclick=\"auction.setSwapTo('" + next.name + "')\" >"
+                        + " " + next.title + "(" + next.quantity + "개 남음)"
+                        + "</button>";
+                }, "<h3>가져갈 과일 선택</h3>")
+                + "<div name=\"swapToMessageText\" data-swap-to=\"\"></div>"
+                + "</br>";
+
+            const swapHtml =
+                "<button class=\"btn btn-sm btn-primary mr-1 my-1\" "
+                + " onclick=\"auction.swap('" + player.playerName + "')\" >"
+                + "  교체 확정"
+                + "</button>"
+                + "<hr>";
+
+            return swapFromHtml + swapToHtml + swapHtml;
+        },
+        setSwapFrom: itemName => {
+            const $modal = $("#bidFruitModal");
+            const $swapFromMessageText = $modal.find("div[name='swapFromMessageText']");
+            const item = Fruit.getFruitByName(fruitList, itemName);
+            $swapFromMessageText.text(item.title);
+            $swapFromMessageText.data("swapFrom", itemName);
+        },
+        setSwapTo: itemName => {
+            const $modal = $("#bidFruitModal");
+            const $swapToMessageText = $modal.find("div[name='swapToMessageText']");
+            const item = Fruit.getFruitByName(fruitList, itemName);
+            $swapToMessageText.text(item.title);
+            $swapToMessageText.data("swapTo", itemName);
+        },
+        swap: playerName => {
+            const player = playerList.find(player => player.playerName === playerName);
+            player.swapSkillUsed = true;
+
+            const $modal = $("#bidFruitModal");
+            const $swapFromMessageText = $modal.find("div[name='swapFromMessageText']");
+            const swapFrom = Fruit.getFruitByName(fruitList, $swapFromMessageText.data("swapFrom"));
+            const $swapToMessageText = $modal.find("div[name='swapToMessageText']");
+            const swapTo = Fruit.getFruitByName(fruitList, $swapToMessageText.data("swapTo"));
+
+            const added = fruitList.find(fruit => fruit.name === swapFrom.name);
+            added.quantity = added.quantity + 1;
+
+            const subtracted = fruitList.find(fruit => fruit.name === swapTo.name);
+            subtracted.quantity = subtracted.quantity - 1;
+
+            playStatus.noticeHtml = playStatus.noticeHtml
+                + player.playerName + "님이 과일을 교체했습니다.(" + swapFrom.title + "->" + swapTo.title + ")\n";
+
+            if (player.item1 === swapFrom.name) {
+                player.item1 = swapTo.name;
+            } else {
+                player.item2 = swapTo.name;
+            }
+
+            $modal.modal("hide");
+            saveGameStatus();
+            return;
         },
         resetBiddingList: () => {
             auction.biddingList = [];
@@ -89,13 +212,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">판매 희망가를 제시합니다.</h4>
+                <h4 class="" name="title"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div name="playerDiv"></div>
+                <div name="swapFruitDiv"></div>
+                <div name="blindBiddingResultDiv"></div>
                 <div name="item1Div"></div>
                 <div name="item2Div"></div>
             </div>

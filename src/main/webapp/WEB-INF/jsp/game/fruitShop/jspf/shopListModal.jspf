@@ -2,14 +2,30 @@
 
 <script>
     const shopListModal = {
+        playSetting: {},
+        playStatus: {},
+        fruitList: [],
+        playerList: [],
+        auctionByRound: [],
         open: async playNo => {
+            shopListModal.playSetting = {};
+            shopListModal.playStatus = {};
+            shopListModal.fruitList = [];
+            shopListModal.playerList = [];
+            shopListModal.auctionByRound = [];
+
             await shopListModal.loadGameStatus(playNo);
 
-            console.log('playStatus', playStatus);
+            if (Object.keys(shopListModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
+            console.log('playStatus', shopListModal.playStatus);
             const $shopListModal = $("#shopListModal");
             const $settingDiv = $shopListModal.find("div[name='settingDiv']");
             const playSetting = initializationSetting.item
-                .find(item => playerList.length === item.numberOfPlayer);
+                .find(item => shopListModal.playerList.length === item.numberOfPlayer);
 
             const fruitInitializationHtml = `
                 \${APPLE.title} \${playSetting.apple}개,
@@ -23,15 +39,15 @@
             const $shopDiv = $shopListModal.find("div[name='shopDiv']");
             $shopDiv.empty();
 
-            if (Object.keys(playStatus).length === 0) {
+            if (Object.keys(shopListModal.playStatus).length === 0) {
                 const htmlString = `게임이 시작되지 않았습니다.`;
                 $shopDiv.append(htmlString);
                 return;
             }
 
-            const htmlString = playerList.reduce((prev, next) => {
-                const item1 = Fruit.getFruitByName(fruitList, next.item1);
-                const item2 = Fruit.getFruitByName(fruitList, next.item2);
+            const shopHtml = shopListModal.playerList.reduce((prev, next) => {
+                const item1 = Fruit.getFruitByName(shopListModal.fruitList, next.item1);
+                const item2 = Fruit.getFruitByName(shopListModal.fruitList, next.item2);
 
                 return prev +
                     `<div class="row">
@@ -48,7 +64,10 @@
                     <hr>`;
             }, "");
 
-            $shopDiv.append(htmlString);
+            $shopDiv.append(shopHtml);
+
+            const $noticeDiv = $shopListModal.find("div[name='noticeDiv']");
+            $noticeDiv.find("textarea").val(shopListModal.playStatus.noticeHtml);
 
             $shopListModal.modal("show");
         },
@@ -60,11 +79,11 @@
 
             const lastPlayLogJson = JSON.parse(lastPlayLog);
 
-            playSetting = JSON.parse(lastPlayLogJson.playSetting);
-            playStatus = JSON.parse(lastPlayLogJson.playStatus);
-            fruitList = JSON.parse(lastPlayLogJson.fruitList);
-            playerList = JSON.parse(lastPlayLogJson.playerList);
-            auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+            shopListModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            shopListModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            shopListModal.fruitList = JSON.parse(lastPlayLogJson.fruitList);
+            shopListModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            shopListModal.auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
 
             console.log('game status loaded !!');
         },
@@ -93,10 +112,14 @@
             </div>
             <div class="modal-body">
                 <div name="settingDiv">
+                    <h3>전체 과일(초기 세팅)</h3>
                     <h4><span name="fruitInitialization"></span></h4>
                 </div>
                 <hr>
                 <div name="shopDiv"></div>
+                <div name="noticeDiv">
+                    <textarea rows="4" class="form-control form-control-alternative"></textarea>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

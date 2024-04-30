@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script>
-    const showPlayStatusModal = {
+    const playStatusModal = {
         open: playerList => {
             const playerListHtml = playerList
                 .sort((prev, next) => prev.seatNumber - next.seatNumber)
@@ -14,17 +14,17 @@
                             <hr>`
                 }, "");
 
-            const $modal = $("#showPlayStatusModal");
+            const $modal = $("#playStatusModal");
             $modal.find("[name='playerListDiv']").empty().html(playerListHtml);
-            $("#showPlayStatusModal").modal("show");
+            $("#playStatusModal").modal("show");
         },
         close: () => {
         },
     }
 </script>
 
-<div class="modal fade" id="showPlayStatusModal" role="dialog"
-     aria-labelledby="showPlayStatusModalLabel" aria-hidden="true">
+<div class="modal fade" id="playStatusModal" role="dialog"
+     aria-labelledby="playStatusModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

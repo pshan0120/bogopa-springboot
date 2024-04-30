@@ -47,6 +47,15 @@
                 </h3>
                 <audio name="owl" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" controls></audio>
 
+                <h3>
+                    할로윈 8bit
+                </h3>
+                <audio name="owl" src="https://bogopayo.cafe24.com/sound/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" controls></audio>
+
+                <h3>
+                    Samba de Janeiro
+                </h3>
+                <audio name="owl" src="https://bogopayo.cafe24.com/sound/Samba de Janeiro- Bellini.mp3" controls></audio>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

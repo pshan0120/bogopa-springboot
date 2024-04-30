@@ -231,11 +231,11 @@
         }
 
         const winByGood = () => {
-            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/level-win-6416.mp3" loop controls></audio>`);
+            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/level-win-6416.mp3" controls></audio>`);
         }
 
         const winByEvil = () => {
-            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" loop controls></audio>`);
+            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" controls></audio>`);
         }
 
         const openMessageModal = messageHtml => {
@@ -249,8 +249,8 @@
             ...demonPlayerList,
         ];
 
-        const openShowPlayStatusModal = () => {
-            showPlayStatusModal.open(createAssignedPlayerList());
+        const openPlayStatusModal = () => {
+            playStatusModal.open(createAssignedPlayerList());
         }
 
         const openRoleGuideModal = () => {
@@ -757,12 +757,12 @@
                         <h2>
                             첫번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" loop controls></audio>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
@@ -803,7 +803,7 @@
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
@@ -839,12 +839,12 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" loop controls></audio>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" controls></audio>
                     </div>
                     <div class="card-body" name="flowDiv"></div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="openShowPlayStatusModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
@@ -927,7 +927,7 @@
 
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/showPlayStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/minion.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" %>

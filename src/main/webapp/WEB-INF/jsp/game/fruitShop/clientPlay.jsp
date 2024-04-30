@@ -32,6 +32,10 @@
             shopListModal.open(PLAY_NO);
         }
 
+        const openAuctionResultModal = () => {
+            auctionResultModal.open(PLAY_NO);
+        }
+
         const openQrImage = () => {
             window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
         }
@@ -51,8 +55,8 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">Blood on the Clocktower</h1>
-                        <p class="text-lead text-light">trouble brewing</p>
+                        <h1 class="text-white">평화로운 과일가게</h1>
+                        <p class="text-lead text-light">플레이어 참조</p>
                     </div>
                 </div>
             </div>
@@ -82,6 +86,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
                                 플레이어 과일가게 보기
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
+                                경매 결과 모달 표시
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
@@ -95,6 +102,7 @@
 </div>
 
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auctionResultModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 
