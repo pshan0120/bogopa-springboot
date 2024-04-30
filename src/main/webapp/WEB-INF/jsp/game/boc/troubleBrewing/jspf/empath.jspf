@@ -44,6 +44,10 @@
         },
         openAddNumberOfNearEvilModal: () => {
             const empathPlayer = Role.getPlayerByRole(townsFolkPlayerList, Empath);
+            if (empathPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
 
             const chosen = empathPlayer.numberOfNearEvilByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
@@ -93,6 +97,10 @@
         },
         openEmpathMessageModal: () => {
             const empathPlayer = Role.getPlayerByRole(townsFolkPlayerList, Empath);
+            if (empathPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
 
             const chosen = empathPlayer.numberOfNearEvilByRound.find(choice => choice.round === playStatus.round);
             if (!chosen) {

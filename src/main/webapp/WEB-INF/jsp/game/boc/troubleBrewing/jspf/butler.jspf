@@ -41,6 +41,12 @@
             <hr/>`;
         },
         openButlerChoiceMessageModal: () => {
+            const butlerPlayer = Role.getPlayerByRole(outsiderPlayerList, Butler);
+            if (butlerPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
+
             let messageHtml = `주인 플레이어를 지목하세요. 당신은 낮에 주인이 투표할 때만 투표할 수 있습니다.</br>
                                 다만 주인이 투표했다고 해서 반드시 따라서 투표해야 하는 것은 아닙니다.`;
 
@@ -48,6 +54,10 @@
         },
         openAddMasterPlayerModal: () => {
             const butlerPlayer = Role.getPlayerByRole(outsiderPlayerList, Butler);
+            if (butlerPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
 
             const chosen = butlerPlayer.masterPlayerByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {

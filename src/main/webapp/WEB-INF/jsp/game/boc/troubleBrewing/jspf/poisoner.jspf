@@ -51,6 +51,10 @@
         },
         openSetPoisonedPlayerModal: () => {
             const poisonerPlayer = Role.getPlayerByRole(minionPlayerList, Poisoner);
+            if (poisonerPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
 
             const chosen = poisonerPlayer.poisoningPlayerByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {

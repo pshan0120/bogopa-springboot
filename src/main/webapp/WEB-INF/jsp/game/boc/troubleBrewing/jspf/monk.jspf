@@ -5,7 +5,7 @@
         createHtml: () => {
             const monkPlayer = Role.getPlayerByRole(townsFolkPlayerList, Monk);
             if (!monkPlayer
-                | monkPlayer.died) {
+                || monkPlayer.died) {
                 return "";
             }
 
@@ -52,6 +52,11 @@
         },
         openAddSafePlayerModal: () => {
             const monkPlayer = Role.getPlayerByRole(townsFolkPlayerList, Monk);
+            if (monkPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
+
             if (monkPlayer.drunken) {
                 alert("만취한 상태입니다. 아무 일도 일어나지 않습니다.");
                 return;

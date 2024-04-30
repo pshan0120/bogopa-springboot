@@ -51,6 +51,10 @@
         },
         openAddIdentifyPlayerModal: () => {
             const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
+            if (undertakerPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
 
             const chosen = undertakerPlayer.roleOfDiedPlayerByRound.find(choice => choice.round === playStatus.round);
             if (chosen) {
@@ -107,6 +111,10 @@
         },
         openUndertakerMessageModal: () => {
             const undertakerPlayer = Role.getPlayerByRole(townsFolkPlayerList, Undertaker);
+            if (undertakerPlayer.died) {
+                alert("사망한 상태입니다. 아무 일도 일어나지 않습니다.");
+                return;
+            }
 
             const chosen = undertakerPlayer.roleOfDiedPlayerByRound.find(choice => choice.round === playStatus.round);
             if (!chosen) {
