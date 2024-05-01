@@ -9,7 +9,6 @@
             }
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(washerWomanPlayer);
-
             const washerWomanPlayerHtml = washerWomanPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -42,6 +41,13 @@
                 return;
             }
 
+            const $modal = $("#setIdentifyWasherWomanModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(washerWomanPlayer);
+            const washerWomanPlayerHtml = washerWomanPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(washerWomanPlayer.title + " : " + washerWomanPlayerHtml);
+
             let identifyingPlayerListHtml = "";
             if (washerWomanPlayer.identifyingPlayerList.length == 2) {
                 alert(
@@ -68,6 +74,7 @@
                         + "</button>";
                 }, "");
             }
+            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
 
             let identifyingRoleListHtml = "";
             if (washerWomanPlayer.identifyingTownsFolkRole) {
@@ -76,7 +83,7 @@
                     + washerWomanPlayer.identifyingTownsFolkRole.title
                 );
             } else {
-                identifyingRoleListHtml = townsFolkPlayerList.reduce((prev, next) => {
+                identifyingRoleListHtml = townsFolkRoleList.reduce((prev, next) => {
                     if (next.name === WasherWoman.name) {
                         return prev;
                     }
@@ -88,9 +95,6 @@
                         + "</button>";
                 }, "");
             }
-
-            const $modal = $("#setIdentifyWasherWomanModal");
-            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
             $modal.find("[name='roleListDiv']").empty().html(identifyingRoleListHtml);
 
             $("#setIdentifyWasherWomanModal").modal("show");
@@ -186,6 +190,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
                 <hr>
                 <div name="roleListDiv"></div>

@@ -9,7 +9,6 @@
             }
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(chefPlayer);
-
             const chefPlayerHtml = chefPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -51,6 +50,13 @@
                 return;
             }
 
+            const $modal = $("#setIdentifyChefModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(chefPlayer);
+            const chefPlayerHtml = chefPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(chefPlayer.title + " : " + chefPlayerHtml);
+
             const evilPlayer = [
                 ...minionPlayerList,
                 ...demonPlayerList,
@@ -65,8 +71,6 @@
                     + " " + index
                     + "</button>";
             }
-
-            const $modal = $("#setIdentifyChefModal");
             $modal.find("[name='numberListDiv']").empty().html(setNumberOfConcatenateEvilHtml);
 
             $("#setIdentifyChefModal").modal("show");
@@ -123,6 +127,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="numberListDiv"></div>
             </div>
             <div class="modal-footer">

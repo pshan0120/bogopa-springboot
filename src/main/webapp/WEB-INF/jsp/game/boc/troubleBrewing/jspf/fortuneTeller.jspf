@@ -10,7 +10,6 @@
             }
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(fortuneTellerPlayer);
-
             const fortuneTellerPlayerHtml = fortuneTellerPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -98,6 +97,13 @@
                 return;
             }
 
+            const $modal = $("#addChoiceOfFortuneTellerModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(fortuneTellerPlayer);
+            const fortuneTellerPlayerHtml = fortuneTellerPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(fortuneTellerPlayer.title + " : " + fortuneTellerPlayerHtml);
+
             let addExistenceEvilAmongTwoPlayersHtml =
                 "<button class=\"" + Role.createChoiceButtonClass() + "\" "
                 + " onclick=\"fortuneTeller.addExistenceEvilAmongTwoPlayers(true)\" >"
@@ -107,11 +113,9 @@
                 + " onclick=\"fortuneTeller.addExistenceEvilAmongTwoPlayers(false)\" >"
                 + " 없음"
                 + "</button>";
-
-            const $modal = $("#addChoiceOfFortuneTellerModal");
             $modal.find("[name='existenceDiv']").empty().html(addExistenceEvilAmongTwoPlayersHtml);
 
-            $("#addChoiceOfFortuneTellerModal").modal("show");
+            $modal.modal("show");
 
             $modal.find("[name='existenceDiv']").find("button").on("click", event => {
                 $(event.currentTarget).hide();
@@ -181,6 +185,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="existenceDiv"></div>
             </div>
             <div class="modal-footer">

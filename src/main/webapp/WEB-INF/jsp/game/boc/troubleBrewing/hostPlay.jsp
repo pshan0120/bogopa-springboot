@@ -11,7 +11,10 @@
     <script>
         const PLAY_NO = ${playNo};
         let playerList = [];
-        let roleList = [];
+        let townsFolkRoleList = [];
+        let outsiderRoleList = [];
+        let minionRoleList = [];
+        let demonRoleList = [];
         let demonPlayerList = [];
         let minionPlayerList = [];
         let townsFolkPlayerList = [];
@@ -71,7 +74,7 @@
             $("#otherDayDiv").hide();
             $("#otherNightDiv").hide();
 
-            roleList = [
+            townsFolkRoleList = [
                 new WasherWoman(),
                 new Librarian(),
                 new Investigator(),
@@ -85,15 +88,31 @@
                 new Slayer(),
                 new Soldier(),
                 new Mayor(),
+            ];
+
+            outsiderRoleList = [
                 new Butler(),
                 new Drunk(),
                 new Recluse(),
                 new Saint(),
+            ];
+
+            minionRoleList = [
                 new Poisoner(),
                 new Spy(),
                 new Baron(),
                 new ScarletWomen(),
+            ];
+
+            demonRoleList = [
                 new Imp(),
+            ];
+
+            roleList = [
+                ...townsFolkRoleList,
+                ...outsiderRoleList,
+                ...minionRoleList,
+                ...demonRoleList,
             ];
 
             const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
@@ -621,6 +640,10 @@
         const saveGameStatus = () => {
             const log = {
                 playerList: JSON.stringify(playerList),
+                townsFolkRoleList: JSON.stringify(townsFolkRoleList),
+                outsiderRoleList: JSON.stringify(outsiderRoleList),
+                minionRoleList: JSON.stringify(minionRoleList),
+                demonRoleList: JSON.stringify(demonRoleList),
                 roleList: JSON.stringify(roleList),
                 townsFolkPlayerList: JSON.stringify(townsFolkPlayerList),
                 outsiderPlayerList: JSON.stringify(outsiderPlayerList),

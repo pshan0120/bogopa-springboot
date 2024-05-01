@@ -187,6 +187,13 @@
                 return;
             }
 
+            const $modal = $("#addChoiceOfImpAttackModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(impPlayer);
+            const impPlayerHtml = impPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(impPlayer.title + " : " + impPlayerHtml);
+
             let addAttackingPlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
                 if (next.drunken) {
                     const drunk = new Drunk();
@@ -204,8 +211,6 @@
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
-
-            const $modal = $("#addChoiceOfImpAttackModal");
             $modal.find("[name='playerListDiv']").empty().html(addAttackingPlayerHtml);
 
             $("#addChoiceOfImpAttackModal").modal("show");
@@ -273,7 +278,8 @@
                 }
             }
 
-            if (attackedPlayer.name === Imp.name) {
+            if (attackedPlayer.name === Imp.name
+                || attackedPlayer.changedToImp) {
                 alert("임프 플레이어가 스스로를 죽였습니다. 이어서 임프가 될 하수인을 선택하세요.");
                 attackedPlayer.died = true;
                 attackedPlayer.diedTonight = true;
@@ -333,6 +339,8 @@
         },
         setAttackedPlayer: roleName => {
             const attackedPlayer = Role.getPlayerByRoleName(createAssignedPlayerList(), roleName);
+
+
             diePlayer(attackedPlayer);
             $("#setAttackedPlayerModal").modal("hide");
         },
@@ -406,6 +414,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
             </div>
             <div class="modal-footer">

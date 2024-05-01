@@ -70,6 +70,13 @@
                 return;
             }
 
+            const $modal = $("#setDiedPlayerBySlayerModal");
+
+            const slayerPlayerStatusListHtml = Role.createPlayerStatusListHtml(slayerPlayer);
+            const slayerPlayerHtml = (slayerPlayer ? slayerPlayer.playerName : "")
+                + (slayerPlayerStatusListHtml === "" ? "" : "(" + slayerPlayerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(slayerPlayer.title + " : " + slayerPlayerHtml);
+
             let setDiedPlayerBySlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
                 if (next.name === Slayer.name) {
                     return prev;
@@ -85,8 +92,6 @@
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
-
-            const $modal = $("#setDiedPlayerBySlayerModal");
             $modal.find("[name='playerListDiv']").empty().html(setDiedPlayerBySlayerHtml);
 
             $("#setDiedPlayerBySlayerModal").modal("show");
@@ -140,6 +145,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
             </div>
             <div class="modal-footer">

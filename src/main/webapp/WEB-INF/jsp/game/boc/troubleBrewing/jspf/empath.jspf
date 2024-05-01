@@ -10,7 +10,6 @@
             }
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(empathPlayer);
-
             const empathPlayerHtml = empathPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -58,6 +57,12 @@
                 return;
             }
 
+            const $modal = $("#addIdentifyEmpathModal");
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(empathPlayer);
+            const empathPlayerHtml = empathPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(empathPlayer.title + " : " + empathPlayerHtml);
+
             const maxCount = 2;
             let addNumberOfNearEvilHtml = "";
             for (let index = 0; index <= maxCount; index++) {
@@ -67,11 +72,9 @@
                     + " " + index
                     + "</button>";
             }
-
-            const $modal = $("#addIdentifyEmpathModal");
             $modal.find("[name='numberListDiv']").empty().html(addNumberOfNearEvilHtml);
 
-            $("#addIdentifyEmpathModal").modal("show");
+            $modal.modal("show");
 
             $modal.find("[name='numberListDiv']").find("button").on("click", event => {
                 $(event.currentTarget).hide();
@@ -140,6 +143,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="numberListDiv"></div>
             </div>
             <div class="modal-footer">

@@ -8,7 +8,7 @@
             }
 
             const minionPlayerListHtml = minionPlayerList.reduce((prev, next) => {
-                return prev + next.playerName + "(" + next.title + ") ";
+                return prev + next.playerName + "(" + next.title + "), ";
             }, "");
 
             const impPlayer = Role.getPlayerByRole(demonPlayerList, Imp);

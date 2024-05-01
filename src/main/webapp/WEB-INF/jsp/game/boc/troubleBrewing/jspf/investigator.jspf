@@ -9,7 +9,6 @@
             }
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(investigatorPlayer);
-
             const investigatorPlayerHtml = investigatorPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -41,6 +40,13 @@
             if (!investigatorPlayer.skillAvailable) {
                 return;
             }
+
+            const $modal = $("#setIdentifyInvestigatorModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(investigatorPlayer);
+            const investigatorPlayerHtml = investigatorPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(investigatorPlayer.title + " : " + investigatorPlayerHtml);
 
             let identifyingPlayerListHtml = "";
             if (investigatorPlayer.identifyingPlayerList.length == 2) {
@@ -78,6 +84,7 @@
                         + "</button>";
                 }, "");
             }
+            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
 
             let identifyingRoleListHtml = "";
             if (investigatorPlayer.identifyingMinionRole) {
@@ -86,11 +93,7 @@
                     + investigatorPlayer.identifyingMinionRole.title
                 );
             } else {
-                const originalMinionPlayerList = [
-                    ...minionPlayerList,
-                    townsFolkPlayerList.find(player => player.drunken)
-                ];
-                identifyingRoleListHtml = originalMinionPlayerList.reduce((prev, next) => {
+                identifyingRoleListHtml = minionRoleList.reduce((prev, next) => {
                     if (!next) {
                         return prev;
                     }
@@ -99,15 +102,6 @@
                         return prev;
                     }
 
-                    /*if (next.drunken) {
-                        const drunk = new Drunk();
-                        return prev
-                            + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
-                            + " onclick=\"investigator.addIdentifiedRoleForInvestigator('" + drunk.name + "', '" + drunk.title + "')\" >"
-                            + " " + drunk.title
-                            + "</button>";
-                    }*/
-
                     return prev
                         + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
                         + " onclick=\"investigator.addIdentifiedRoleForInvestigator('" + next.name + "', '" + next.title + "')\" >"
@@ -115,9 +109,6 @@
                         + "</button>";
                 }, "");
             }
-
-            const $modal = $("#setIdentifyInvestigatorModal");
-            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
             $modal.find("[name='roleListDiv']").empty().html(identifyingRoleListHtml);
 
             $("#setIdentifyInvestigatorModal").modal("show");
@@ -213,6 +204,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
                 <hr>
                 <div name="roleListDiv"></div>

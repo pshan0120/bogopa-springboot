@@ -9,7 +9,6 @@
             }
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(librarianPlayer);
-
             const librarianPlayerHtml = librarianPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -30,6 +29,9 @@
                 <button type="button" class="btn btn-success btn-block" onclick="librarian.openLibrarianMessageModal()">
                     메세지 모달 표시
                 </button>
+                <button type="button" class="btn btn-success btn-block" onclick="librarian.openNoOutsiderMessageModal()">
+                    이방인 없음 메세지 모달 표시
+                </button>
                 <button type="button" class="btn btn-warning btn-block" onclick="librarian.resetIdentifyLibrarian()">
                     선택 재설정
                 </button>
@@ -41,6 +43,13 @@
             if (!librarianPlayer.skillAvailable) {
                 return;
             }
+
+            const $modal = $("#setIdentifyLibrarianModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(librarianPlayer);
+            const librarianPlayerHtml = librarianPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(librarianPlayer.title + " : " + librarianPlayerHtml);
 
             let identifyingPlayerListHtml = "";
             if (librarianPlayer.identifyingPlayerList.length == 2) {
@@ -78,6 +87,7 @@
                         + "</button>";
                 }, "");
             }
+            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
 
             let identifyingRoleListHtml = "";
             if (librarianPlayer.identifyingOutsiderRole) {
@@ -86,11 +96,7 @@
                     + librarianPlayer.identifyingOutsiderRole.title
                 );
             } else {
-                const originalOutsiderPlayerList = [
-                    ...outsiderPlayerList,
-                    townsFolkPlayerList.find(player => player.drunken)
-                ];
-                identifyingRoleListHtml = originalOutsiderPlayerList.reduce((prev, next) => {
+                identifyingRoleListHtml = outsiderRoleList.reduce((prev, next) => {
                     if (!next) {
                         return prev;
                     }
@@ -115,9 +121,6 @@
                         + "</button>";
                 }, "");
             }
-
-            const $modal = $("#setIdentifyLibrarianModal");
-            $modal.find("[name='playerListDiv']").empty().html(identifyingPlayerListHtml);
             $modal.find("[name='roleListDiv']").empty().html(identifyingRoleListHtml);
 
             $("#setIdentifyLibrarianModal").modal("show");
@@ -190,6 +193,10 @@
 
             openMessageModal(messageHtml);
         },
+        openNoOutsiderMessageModal: () => {
+            let messageHtml = `플레이어 중 이방인은 없습니다.`;
+            openMessageModal(messageHtml);
+        },
         resetIdentifyLibrarian: () => {
             const librarianPlayer = Role.getPlayerByRole(townsFolkPlayerList, Librarian);
             librarianPlayer.identifyingPlayerList = [];
@@ -213,6 +220,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
                 <hr>
                 <div name="roleListDiv"></div>

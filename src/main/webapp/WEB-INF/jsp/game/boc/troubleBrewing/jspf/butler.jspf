@@ -10,7 +10,6 @@
             }
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(butlerPlayer);
-
             const butlerPlayerHtml = butlerPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -65,6 +64,13 @@
                 return;
             }
 
+            const $modal = $("#addChoiceOfButlerModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(butlerPlayer);
+            const butlerPlayerHtml = butlerPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(butlerPlayer.title + " : " + butlerPlayerHtml);
+
             let addMasterPlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
                 if (next.name === Butler.name) {
                     return prev;
@@ -86,8 +92,6 @@
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
-            
-            const $modal = $("#addChoiceOfButlerModal");
             $modal.find("[name='playerListDiv']").empty().html(addMasterPlayerHtml);
 
             $("#addChoiceOfButlerModal").modal("show");
@@ -153,6 +157,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
             </div>
             <div class="modal-footer">

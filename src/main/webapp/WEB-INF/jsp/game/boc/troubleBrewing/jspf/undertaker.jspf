@@ -11,10 +11,12 @@
 
             const executedTodayPlayer = createAssignedPlayerList()
                 .find(player => player.diedToday && player.executed);
+            if (!executedTodayPlayer) {
+                return "";
+            }
             const executedTodayPlayerHtml = executedTodayPlayer.playerName + "(" + executedTodayPlayer.title + ")";
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(undertakerPlayer);
-
             const undertakerPlayerHtml = undertakerPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -62,7 +64,22 @@
                 return;
             }
 
-            let addIdentifyPlayerHtml = createAssignedPlayerList().reduce((prev, next) => {
+            const $modal = $("#addChoiceOfUndertakerModal");
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(undertakerPlayer);
+            const undertakerPlayerHtml = undertakerPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(undertakerPlayer.title + " : " + undertakerPlayerHtml);
+
+
+            const executedTodayPlayer = createAssignedPlayerList()
+                .find(player => player.diedToday && player.executed);
+            if (!executedTodayPlayer) {
+                return "";
+            }
+            const executedTodayPlayerHtml = executedTodayPlayer.playerName + "(" + executedTodayPlayer.title + ")";
+            $modal.find("[name='executedTodayPlayerDiv']").empty().html("이번 낮에 처형당한 플레이어 : " + executedTodayPlayerHtml);
+
+            let addIdentifyPlayerHtml = roleList.reduce((prev, next) => {
                 if (next.name === Undertaker.name) {
                     return prev;
                 }
@@ -72,19 +89,17 @@
 
                     return prev
                         + "<button class=\"" + Role.createChoiceButtonClass(drunk) + "\" "
-                        + " onclick=\"undertaker.addIdentifyPlayer('" + next.playerName + "', '" + drunk.title + "')\" >"
-                        + " " + next.playerName + "(" + drunk.title + ")"
+                        + " onclick=\"undertaker.addIdentifyPlayer('" + executedTodayPlayer.playerName + "', '" + drunk.title + "')\" >"
+                        + " " + drunk.title
                         + "</button>";
                 }
 
                 return prev
                     + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                    + " onclick=\"undertaker.addIdentifyPlayer('" + next.playerName + "', '" + next.title + "')\" >"
-                    + " " + next.playerName + "(" + next.title + ")"
+                    + " onclick=\"undertaker.addIdentifyPlayer('" + executedTodayPlayer.playerName + "', '" + next.title + "')\" >"
+                    + " " + next.title
                     + "</button>";
             }, "");
-
-            const $modal = $("#addChoiceOfUndertakerModal");
             $modal.find("[name='playerListDiv']").empty().html(addIdentifyPlayerHtml);
 
             $("#addChoiceOfUndertakerModal").modal("show");
@@ -154,6 +169,10 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
+                <div name="executedTodayPlayerDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
             </div>
             <div class="modal-footer">

@@ -14,7 +14,6 @@
             });
 
             const playerStatusListHtml = Role.createPlayerStatusListHtml(poisonerPlayer);
-
             const poisonerPlayerHtml = poisonerPlayer.playerName
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
 
@@ -62,6 +61,13 @@
                 return;
             }
 
+            const $modal = $("#setPoisonedPlayerModal");
+
+            const playerStatusListHtml = Role.createPlayerStatusListHtml(poisonerPlayer);
+            const poisonerPlayerHtml = poisonerPlayer.playerName
+                + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
+            $modal.find("[name='playerStatusDiv']").empty().html(poisonerPlayer.title + " : " + poisonerPlayerHtml);
+
             const poisoningPlayerListHtml = createAssignedPlayerList().reduce((prev, next) => {
                 if (next.name === Poisoner.name) {
                     return prev;
@@ -83,9 +89,8 @@
                     + " " + next.playerName + "(" + next.title + ")"
                     + "</button>";
             }, "");
-
-            const $modal = $("#setPoisonedPlayerModal");
             $modal.find("[name='playerListDiv']").empty().html(poisoningPlayerListHtml);
+
             $("#setPoisonedPlayerModal").modal("show");
 
             $modal.find("[name='playerListDiv']").find("button").on("click", event => {
@@ -152,6 +157,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div name="playerStatusDiv"></div>
+                <hr>
                 <div name="playerListDiv"></div>
             </div>
             <div class="modal-footer">
