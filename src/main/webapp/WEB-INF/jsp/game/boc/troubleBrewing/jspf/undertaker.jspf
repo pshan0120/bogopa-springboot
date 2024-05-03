@@ -70,7 +70,6 @@
                 + (playerStatusListHtml === "" ? "" : "(" + playerStatusListHtml + ")");
             $modal.find("[name='playerStatusDiv']").empty().html(undertakerPlayer.title + " : " + undertakerPlayerHtml);
 
-
             const executedTodayPlayer = createAssignedPlayerList()
                 .find(player => player.diedToday && player.executed);
             if (!executedTodayPlayer) {

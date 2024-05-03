@@ -82,7 +82,8 @@
         },
         createBlindBiddingResultHtml: playerName => {
             const player = playerList.find(player => player.playerName === playerName);
-            if (player.blindSkillUsed) {
+            if (player.blindSkillUsed
+                || player.swapSkillUsed) {
                 return "";
             }
 
@@ -105,7 +106,8 @@
         },
         createSwapFruitHtml: playerName => {
             const player = playerList.find(player => player.playerName === playerName);
-            if (player.swapSkillUsed) {
+            if (player.blindSkillUsed
+                || player.swapSkillUsed) {
                 return "";
             }
 
