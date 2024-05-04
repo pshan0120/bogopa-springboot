@@ -14,6 +14,8 @@ public interface MemberService {
 
     void createFruitShopMember(CreateTemporaryMemberRequestDto dto);
 
+    void createCatchAThiefMember(CreateTemporaryMemberRequestDto dto);
+
 
 
     /* 회원 */

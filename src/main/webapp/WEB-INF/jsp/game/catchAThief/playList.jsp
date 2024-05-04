@@ -13,37 +13,37 @@
         let joinPlyrCnt = 0;
 
         $(() => {
-            gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
+            gfn_setSortTh("catchAThiefPlayRcrdList", "selectCatchAThiefPlayRcrdList(1)");
 
             $("[data-toggle='tooltip']").tooltip();
 
-            selectBocPlayRcrdList(1);
+            selectCatchAThiefPlayRcrdList(1);
         });
 
 
-        const selectBocPlayRcrdList = pageNo => {
-            let comAjax = new ComAjax("bocPlayRcrdForm");
-            comAjax.setUrl("<c:url value='/selectBocPlayRcrdList' />");
-            comAjax.setCallback("selectBocPlayRcrdListCallback");
+        const selectCatchAThiefPlayRcrdList = pageNo => {
+            let comAjax = new ComAjax("catchAThiefPlayRcrdForm");
+            comAjax.setUrl("<c:url value='/selectCatchAThiefPlayRcrdList' />");
+            comAjax.setCallback("selectCatchAThiefPlayRcrdListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#bocPlayRcrdListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#catchAThiefPlayRcrdListCurOrderBy').val());
             comAjax.ajax();
         };
 
-        const selectBocPlayRcrdListCallback = data => {
+        const selectCatchAThiefPlayRcrdListCallback = data => {
             let cnt = data.map.cnt;
-            let body = $("#bocPlayRcrdListTbl>tbody");
+            let body = $("#catchAThiefPlayRcrdListTbl>tbody");
             body.empty();
             let str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 let params = {
-                    divId: "bocPlayRcrdListPageNav",
+                    divId: "catchAThiefPlayRcrdListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "selectBocPlayRcrdList",
+                    eventName: "selectCatchAThiefPlayRcrdList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -92,12 +92,12 @@
             $("#insertPlayForm input[name='clubNo']").val("<c:out value="${clubNo}" />");
             $("#insertPlayForm input[name='playNm']").val("");
 
-            minPlyrCnt = 5;
-            maxPlyrCnt = 20;
+            minPlyrCnt = 8;
+            maxPlyrCnt = 16;
             joinPlyrCnt = 0;
 
             selectPlayJoinMmbrList(1);
-            setPlayNm("블러드 온 더 클락타워 - 트러블 브루잉");
+            setPlayNm("도둑잡기");
 
             $("#insertPlayModal").modal("show");
         };
@@ -113,6 +113,8 @@
                 str += "<tr name=\"addPlayMmbrTr\" id=\"addPlayMmbrTr" + mmbrNo + "\">";
                 str += "	<td>";
                 str += "		" + nickNm;
+                str += "	</td>";
+                str += "	<td>";
                 str += "	</td>";
                 str += "	<td>";
                 if (mmbrNo == "<c:out value="${mmbrNo}" />") {
@@ -208,7 +210,7 @@
                     let comAjax = new ComAjax("insertPlayForm");
                     comAjax.setUrl("<c:url value='/insertPlay' />");
                     comAjax.setCallback("insertPlayCallback");
-                    comAjax.addParam("gameNo", GAME.BOC_TROUBLE_BREWING);
+                    comAjax.addParam("gameNo", GAME.CATCH_A_THIEF);
                     comAjax.addParam("joinMmbrNoArr", joinMmbrNoArr);
                     comAjax.ajax();
                 } else {
@@ -218,20 +220,20 @@
         };
 
         const insertPlayCallback = data => {
-            location.href = "/game/trouble-brewing/play/" + data.playNo;
+            location.href = "/game/fruit-shop/play/" + data.playNo;
         }
 
-        const createBocMember = () => {
+        const createCatchAThiefMember = () => {
             const nickname = prompt("회원명 입력");
             if (!nickname) {
                 return;
             }
 
-            if (!confirm("[" + nickname + "] 닉네임으로 BOC 모임에 가입된 회원을 등록합니다.")) {
+            if (!confirm("[" + nickname + "] 닉네임으로 도둑잡기 모임에 가입된 회원을 등록합니다.")) {
                 return;
             }
 
-            gfn_callPostApi("/api/member/boc", {nickname})
+            gfn_callPostApi("/api/member/catch-a-thief", {nickname})
                 .then(data => {
                     console.log('game status saved !!', data);
                     alert("회원이 생성되었습니다.");
@@ -253,8 +255,8 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">Blood on the Clocktower</h1>
-                        <p class="text-lead text-light">trouble brewing</p>
+                        <h1 class="text-white">도둑잡기</h1>
+                        <p class="text-lead text-light"></p>
                     </div>
                 </div>
             </div>
@@ -278,8 +280,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="bocPlayRcrdForm" onsubmit="return false;">
-                            <input type="hidden" id="bocPlayRcrdListCurOrderBy">
+                        <form id="catchAThiefPlayRcrdForm" onsubmit="return false;">
+                            <input type="hidden" id="catchAThiefPlayRcrdListCurOrderBy">
                             <div class="row clearfix">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -299,23 +301,24 @@
                                     </c:if>
                                     <c:if test="${clubNo ne ''}">
                                         <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="createBocMember();">
-                                            B.O.C 회원 등록
+                                                onclick="createCatchAThiefMember();">
+                                            도둑잡기 회원 등록
                                         </button>
                                     </c:if>
                                 </div>
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="bocPlayRcrdListTbl">
+                            <table class="table align-items-center table-flush" id="catchAThiefPlayRcrdListTbl">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_playNm">
-                                        플레이이름 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_playNm"
+                                    <th name="catchAThiefPlayRcrdListSortTh" id="sortTh_playNm">
+                                        플레이이름 <span name="catchAThiefPlayRcrdListSort"
+                                                    id="catchAThiefPlayRcrdListSort_playNm"
                                                     class="fa"></span>
                                     </th>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_gameNm">
-                                        게임 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_gameNm"
+                                    <th name="catchAThiefPlayRcrdListSortTh" id="sortTh_gameNm">
+                                        게임 <span name="catchAThiefPlayRcrdListSort" id="catchAThiefPlayRcrdListSort_gameNm"
                                                  class="fa"></span>
                                     </th>
                                     <th scope="col">모임</th>
@@ -329,7 +332,7 @@
                     <div class="card-footer py-4">
                         <nav aria-label="">
                             <ul class="pagination pagination-sm justify-content-end mb-0"
-                                id="bocPlayRcrdListPageNav"></ul>
+                                id="catchAThiefPlayRcrdListPageNav"></ul>
                         </nav>
                     </div>
 

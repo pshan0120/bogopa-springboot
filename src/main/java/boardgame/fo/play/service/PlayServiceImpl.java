@@ -1,5 +1,6 @@
 package boardgame.fo.play.service;
 
+import boardgame.com.constant.Game;
 import boardgame.fo.play.dao.PlayDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -87,7 +88,7 @@ public class PlayServiceImpl implements PlayService {
 
     @Override
     public Map<String, Object> selectBocPlayRcrdList(Map<String, Object> map) {
-        map.put("gameNo", 1951);
+        map.put("gameNo", Game.BOC_TROUBLE_BREWING.getGameId());
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", playDao.selectGamePlayRcrdList(map));
@@ -97,7 +98,17 @@ public class PlayServiceImpl implements PlayService {
 
     @Override
     public Map<String, Object> selectFruitShopPlayRcrdList(Map<String, Object> map) {
-        map.put("gameNo", 1952);
+        map.put("gameNo", Game.FRUIT_SHOP.getGameId());
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("list", playDao.selectGamePlayRcrdList(map));
+        resultMap.put("cnt", playDao.selectGamePlayRcrdListCnt(map).get("cnt"));
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> selectCatchAThiefPlayRcrdList(Map<String, Object> map) {
+        map.put("gameNo", Game.CATCH_A_THIEF.getGameId());
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", playDao.selectGamePlayRcrdList(map));

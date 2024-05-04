@@ -8,7 +8,6 @@
     <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 
     <script>
-        const GAME_NO = 1951;
         var sttng1Str = "";
         var sttng2Str = "";
         var sttng3Str = "";
@@ -242,7 +241,7 @@
                     const comAjax = new ComAjax("insertPlayForm");
                     comAjax.setUrl("<c:url value='/insertPlay' />");
                     comAjax.setCallback("fn_insertPlayCallback");
-                    comAjax.addParam("gameNo", GAME_NO);
+                    comAjax.addParam("gameNo", GAME.BOC_TROUBLE_BREWING);
                     comAjax.addParam("joinMmbrNoArr", joinMmbrNoArr);
                     comAjax.addParam("sttngCd1Arr", sttngCd1Arr);
                     comAjax.addParam("sttngCd2Arr", sttngCd2Arr);

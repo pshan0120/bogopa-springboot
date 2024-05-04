@@ -68,3 +68,4 @@
 <script src="<c:url value='/js/com/cookie.js'/>"></script>
 
 <script src="<c:url value='/js/com/boardType.js'/>"></script>
+<script src="<c:url value='/js/game/constants.js'/>"></script>

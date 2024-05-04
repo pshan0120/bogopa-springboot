@@ -76,7 +76,7 @@ public class GameController {
     }
 
     @GetMapping("/game/fruit-shop/play/{playNo}")
-    public ModelAndView openFruitPlayByPlayNo(@PathVariable("playNo") long playNo) {
+    public ModelAndView openFruitShopPlayByPlayNo(@PathVariable("playNo") long playNo) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("playNo", playNo);
 
@@ -96,7 +96,30 @@ public class GameController {
     }
 
 
+    @GetMapping("/game/catch-a-thief/play")
+    public String openCatchAThiefPlayList() {
+        return "/game/catchAThief/playList";
+    }
 
+    @GetMapping("/game/catch-a-thief/play/{playNo}")
+    public ModelAndView openCatchAThiefPlayByPlayNo(@PathVariable("playNo") long playNo) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("playNo", playNo);
+
+        if (isAdminMemberLogin()) {
+            mv.setViewName("/game/catchAThief/hostPlay");
+        } else {
+            mv.setViewName("/game/catchAThief/clientPlay");
+        }
+        return mv;
+    }
+
+    @GetMapping("/game/catch-a-thief/play/host/{playNo}")
+    public ModelAndView openCatchAThiefHostPlayByPlayNo(@PathVariable("playNo") long playNo) {
+        ModelAndView mv = new ModelAndView("/game/catchAThief/hostPlay");
+        mv.addObject("playNo", playNo);
+        return mv;
+    }
 
 
     @GetMapping("/game/food-chain-magnate/calculator")

@@ -34,6 +34,8 @@ public interface PlayService {
 
     Object selectFruitShopPlayRcrdList(Map<String, Object> map);
 
+    Object selectCatchAThiefPlayRcrdList(Map<String, Object> map);
+
     List<Map<String, Object>> selectMainPlayRcrdList(Map<String, Object> map);
 
 }

@@ -25,6 +25,11 @@ public class MemberRestController {
         memberService.createFruitShopMember(dto);
     }
 
+    @PostMapping("/catch-a-thief")
+    public void createCatchAThiefMember(@Validated @RequestBody CreateTemporaryMemberRequestDto dto) {
+        memberService.createCatchAThiefMember(dto);
+    }
+
     /*@RequestMapping(value = "/insertBocMember")
     public ModelAndView insertBocMember(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");

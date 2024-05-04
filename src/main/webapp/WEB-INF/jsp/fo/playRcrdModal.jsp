@@ -90,8 +90,7 @@
         }
 
         const gameNo = $("#playRcrdForm").find("input[name='gameNo']").val();
-        if (gameNo == "1951"
-            || gameNo == "1952") {
+        if (GAME.isPlayableGame(gameNo)) {
             $("#openPlayingGameBtn").show();
         }
 
@@ -144,14 +143,20 @@
 
     const openPlayingGame = () => {
         const gameNo = $("#playRcrdForm").find("input[name='gameNo']").val();
-        if (gameNo == "1951") {
+
+        if (GAME.BOC_TROUBLE_BREWING == gameNo) {
             const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
             location.href = "/game/trouble-brewing/play/" + playNo;
         }
 
-        if (gameNo == "1952") {
+        if (GAME.FRUIT_SHOP == gameNo) {
             const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
             location.href = "/game/fruit-shop/play/" + playNo;
+        }
+
+        if (GAME.CATCH_A_THIEF == gameNo) {
+            const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
+            location.href = "/game/catch-a-thief/play/" + playNo;
         }
     };
 

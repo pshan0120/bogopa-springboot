@@ -13,6 +13,10 @@
             window.location.href = "/game/fruit-shop/play";
         }
 
+        const openCatchAThief = () => {
+            window.location.href = "/game/catch-a-thief/play";
+        }
+
         const openFoodChainMagnateCalculator = () => {
             window.location.href = "/game/food-chain-magnate/calculator";
         }
@@ -62,6 +66,9 @@
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="openFruitShop()">
                                 과일가게
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="openCatchAThief()">
+                                도둑잡기
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFoodChainMagnateCalculator()">
                                 푸드체인거물 계산기

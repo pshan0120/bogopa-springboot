@@ -8,7 +8,6 @@
     <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 
     <script>
-        const GAME_NO = 1952;
         let minPlyrCnt = 0;
         let maxPlyrCnt = 0;
         let joinPlyrCnt = 0;
@@ -211,7 +210,7 @@
                     let comAjax = new ComAjax("insertPlayForm");
                     comAjax.setUrl("<c:url value='/insertPlay' />");
                     comAjax.setCallback("insertPlayCallback");
-                    comAjax.addParam("gameNo", GAME_NO);
+                    comAjax.addParam("gameNo", GAME.FRUIT_SHOP);
                     comAjax.addParam("joinMmbrNoArr", joinMmbrNoArr);
                     comAjax.ajax();
                 } else {
@@ -256,8 +255,8 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">Blood on the Clocktower</h1>
-                        <p class="text-lead text-light">trouble brewing</p>
+                        <h1 class="text-white">평화로운 과일가게</h1>
+                        <p class="text-lead text-light"></p>
                     </div>
                 </div>
             </div>
