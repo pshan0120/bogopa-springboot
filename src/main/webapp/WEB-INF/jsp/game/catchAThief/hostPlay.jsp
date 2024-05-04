@@ -92,11 +92,10 @@
         }
 
         const setTownOfPlayer = () => {
-
             playerList = createPlayerList(playerList);
             console.log('playerList', playerList);
 
-            showPlayerItemList(playerList);
+            showPlayerTownList(playerList);
         }
 
         const createPlayerList = playerList => {
@@ -145,7 +144,7 @@
                 });
         }
 
-        const showPlayerItemList = playerList => {
+        const showPlayerTownList = playerList => {
             const $settingDiv = $("#settingDiv");
             const $playerDiv = $settingDiv.find("div[name='playerDiv']");
             playerList.forEach(player => {
@@ -306,10 +305,11 @@
 
             $roundDiv.find("span[name='roundTitle']").text(playStatus.round + " / " + playSetting.round);
 
-            const $auctionDiv = $roundDiv.find("div[name='auctionDiv']").empty();
-            $auctionDiv.empty();
+            const $townDiv = $roundDiv.find("div[name='townDiv']").empty();
+            $townDiv.empty();
 
-            $auctionDiv.append(auction.createHtml());
+            $townDiv.append(town.createHtml(UPTOWN));
+            $townDiv.append(town.createHtml(DOWNTOWN));
         }
 
         const resetGame = () => {
@@ -435,7 +435,7 @@
                             [<span name="roundTitle"></span>] 번째 라운드
                         </h2>
                     </div>
-                    <div class="card-body" name="auctionDiv"></div>
+                    <div class="card-body" name="townDiv"></div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
@@ -490,7 +490,7 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auction.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/town.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
 
