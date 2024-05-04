@@ -8,6 +8,7 @@
             return playerList
                 .filter(player => player.town.name === town.name)
                 .reduce((prev, next) => {
+                    // TODO: 여기부터
                     return prev
                         + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
                         + " onclick=\"town.bidFruit('" + next.playerName + ")\" >"
