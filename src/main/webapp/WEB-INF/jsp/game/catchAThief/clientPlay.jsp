@@ -5,18 +5,48 @@
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
     <script src="<c:url value='/js/game/catchAThief/initializationSetting.js'/>"></script>
+    <script src="<c:url value='/js/game/catchAThief/constants.js'/>"></script>
 
     <script>
         const PLAY_NO = ${playNo};
         let playSetting = {};
         let playStatus = {};
-        let fruitList = [];
         let playerList = [];
-        let auctionByRound = [];
+        let uptownOutcastList = [];
+        let downtownOutcastList = [];
 
-        $(() => {
+        $(async () => {
+            await loadGameStatus();
+
             readGamePlayById(PLAY_NO);
         });
+
+        const loadGameStatus = async () => {
+            const lastPlayLog = await readLastPlayLog(PLAY_NO);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+            console.log('lastPlayLogJson', lastPlayLogJson);
+
+            playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            playerList = JSON.parse(lastPlayLogJson.playerList);
+            uptownOutcastList = JSON.parse(lastPlayLogJson.uptownOutcastList);
+            downtownOutcastList = JSON.parse(lastPlayLogJson.downtownOutcastList);
+
+            console.log('game status loaded !!');
+        }
+
+        const readLastPlayLog = playNo => {
+            return gfn_callGetApi("/api/game/play/log/last", {playNo})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        }
 
         const readGamePlayById = playNo => {
             gfn_callGetApi("/api/game/play", {playNo})
@@ -26,12 +56,12 @@
                 .catch(response => console.error('error', response));
         }
 
-        const openFruitShopModal = () => {
-            shopListModal.open(PLAY_NO);
+        const openTownStatusModal = () => {
+            townStatusModal.open();
         }
 
-        const openAuctionResultModal = () => {
-            auctionResultModal.open(PLAY_NO);
+        const openMoneyStatusModal = () => {
+            moneyStatusModal.open(PLAY_NO);
         }
 
         const openQrImage = () => {
@@ -81,13 +111,13 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
-                                플레이어 과일가게 보기
+                            <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
+                                주민 보기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
-                                경매 결과 모달 표시
+                            <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
+                                재산 보기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
                         </div>
@@ -99,8 +129,8 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auctionResultModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

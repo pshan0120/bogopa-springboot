@@ -12,7 +12,8 @@
         let playSetting = {};
         let playStatus = {};
         let playerList = [];
-        let auctionByRound = [];
+        let uptownOutcastList = [];
+        let downtownOutcastList = [];
 
         $(async () => {
             await loadGameStatus();
@@ -37,12 +38,14 @@
             playSetting = {};
             playStatus = {};
             playerList = [];
-            auctionByRound = [];
+            uptownOutcastList = [];
+            downtownOutcastList = [];
 
             console.log('initializationSetting', initializationSetting);
 
             $("#settingDiv").show();
             $("#roundDiv").hide();
+            $("#resultDiv").hide();
 
             const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
@@ -50,10 +53,8 @@
 
             playStatus = {
                 round: 0,
-                night: true,
                 hostMemberId: hostPlayMember.mmbrNo,
                 hostMemberName: hostPlayMember.nickNm,
-                noticeHtml: "",
             }
 
             playerList = clientPlayMemberList;
@@ -93,36 +94,39 @@
 
         const setTownOfPlayer = () => {
             playerList = createPlayerList(playerList);
-            console.log('playerList', playerList);
 
             showPlayerTownList(playerList);
         }
 
         const createPlayerList = playerList => {
             let playerNumber = 0;
+
             const playerListOfTown = playerList
                 .sort(() => Math.random() - 0.5)
                 .map(player => {
+                    const fakePlayerName = FAKE_PLAYER_NAME_LIST[playerNumber];
+
                     playerNumber++;
                     if (playerNumber <= playSetting.uptown) {
                         return {
                             playerName: player.nickNm,
+                            fakePlayerName,
                             playerId: player.mmbrNo,
                             playerNumber,
                             town: UPTOWN,
+                            outcast: false,
                         };
                     }
 
                     return {
                         playerName: player.nickNm,
+                        fakePlayerName,
                         playerId: player.mmbrNo,
                         playerNumber,
                         town: DOWNTOWN,
-                        /*money: 1000,
-                        thief: false,*/
+                        outcast: false,
                     };
                 });
-            //playerList1[0].thief = true;
 
             let thiefChosen = false;
             return playerListOfTown
@@ -141,7 +145,8 @@
                         money: 1000,
                         thief: false,
                     };
-                });
+                })
+                .sort(() => Math.random() - 0.5);
         }
 
         const showPlayerTownList = playerList => {
@@ -163,7 +168,8 @@
                 playSetting: JSON.stringify(playSetting),
                 playStatus: JSON.stringify(playStatus),
                 playerList: JSON.stringify(playerList),
-                auctionByRound: JSON.stringify(auctionByRound),
+                uptownOutcastList: JSON.stringify(uptownOutcastList),
+                downtownOutcastList: JSON.stringify(downtownOutcastList),
             }
 
             const request = {
@@ -190,7 +196,8 @@
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+            uptownOutcastList = JSON.parse(lastPlayLogJson.uptownOutcastList);
+            downtownOutcastList = JSON.parse(lastPlayLogJson.downtownOutcastList);
 
             console.log('game status loaded !!');
         }
@@ -217,81 +224,64 @@
                 return;
             }
 
-            playerList.forEach(player => {
-                const bidding = auction.biddingList
-                    .filter(bidding => player.playerName === bidding.playerName);
-                if (bidding.length != 2) {
-                    alert(player.playerName + " 플레이어의 판매 희망가가 선택되지 않았습니다.");
-                    throw new Error("판매 희망가 미선택");
-                }
-            });
+            if (uptownOutcastList.length === 0
+                || downtownOutcastList.length === 0) {
+                alert("이번 라운드의 추방자가 선택되지 않았습니다.");
+                throw new Error("추방자 미선택 미선택");
+            }
 
-            if (!confirm("경매 결과를 계산한 뒤 저장하시겠습니까?")) {
+            if (!confirm("결과를 계산한 뒤 저장하시겠습니까?")) {
                 return;
             }
 
-            if (auctionByRound.length > 0) {
-                auctionByRound = [...auctionByRound.filter(auction => auction.round !== playStatus.round)];
-            }
+            steal();
+            move();
 
-            auctionByRound.push(
-                {
-                    round: playStatus.round,
-                    resultList: [
-                        createAuctionResultByFruit(APPLE),
-                        createAuctionResultByFruit(GRAPE),
-                        createAuctionResultByFruit(STRAWBERRY),
-                        createAuctionResultByFruit(WATERMELON),
-                        createAuctionResultByFruit(BANANA),
-                        createAuctionResultByFruit(MANGO),
-                    ]
-                }
-            )
-
-            auction.resetBiddingList();
+            uptownOutcastList = [];
+            downtownOutcastList = [];
+            playerList.forEach(player => player.outcast = false);
 
             playStatus.round = playStatus.round + 1;
             saveGameStatus();
             renderRound();
         }
 
-        const createAuctionResultByFruit = item => {
-            const biddingList = auction.biddingList.filter(bidding => bidding.itemName === item.name);
-            if (biddingList.length === 0) {
-                return {
-                    itemName: item.name,
-                    biddingList,
-                    totalBidding: 0,
-                    minimumBidding: 0,
-                    revenue: 0,
-                    successfulBiddingList: [],
-                    blind: false,
-                }
+        const steal = () => {
+            const thiefPlayer = playerList.find(player => player.thief);
+            if (thiefPlayer.outcast) {
+                return;
             }
 
-            const totalBidding = biddingList.map(bidding => bidding.bidding).reduce((prev, next) => prev + next, 0);
-            const minimumBidding = Math.min(...biddingList.map(bidding => bidding.bidding));
-            const successfulBiddingList = biddingList.filter(bidding => bidding.bidding === minimumBidding);
-            const revenue = Math.floor(totalBidding / successfulBiddingList.length);
+            if (thiefPlayer.town.name === UPTOWN.name) {
+                const uptownPlayerList = playerList.filter(player => {
+                    return player.town.name === UPTOWN.name
+                        && !uptownOutcastList.some(outcast => outcast.playerName === player.playerName)
+                });
 
-            successfulBiddingList.forEach(successfulBidding => {
-                const player = playerList
-                    .find(player => player.playerName === successfulBidding.playerName);
-                player.money = player.money + revenue;
+                uptownPlayerList.forEach(player => {
+                    player.money = player.money - playSetting.stolenMoney;
+                    thiefPlayer.money = thiefPlayer.money + playSetting.stolenMoney;
+                });
+                return;
+            }
+
+            const downtownPlayerList = playerList.filter(player => {
+                return player.town.name === DOWNTOWN.name
+                    && !downtownOutcastList.some(outcast => outcast.playerName === player.playerName)
             });
 
-            // auction.blindBiddingResultList.push({playerName, itemName});
+            downtownPlayerList.forEach(player => {
+                player.money = player.money - playSetting.stolenMoney;
+                thiefPlayer.money = thiefPlayer.money + playSetting.stolenMoney;
+            });
+        }
 
-            const blind = auction.blindBiddingResultList.some(blind => blind.itemName === item.name);
-            return {
-                itemName: item.name,
-                biddingList,
-                totalBidding,
-                minimumBidding,
-                revenue,
-                successfulBiddingList,
-                blind
-            }
+        const move = () => {
+            const uptownOutcast = uptownOutcastList.pop();
+            playerList.find(player => player.playerName === uptownOutcast.playerName).town = DOWNTOWN;
+
+            const downtownOutcast = downtownOutcastList.pop();
+            playerList.find(player => player.playerName === downtownOutcast.playerName).town = UPTOWN;
         }
 
         const renderRound = () => {
@@ -305,11 +295,54 @@
 
             $roundDiv.find("span[name='roundTitle']").text(playStatus.round + " / " + playSetting.round);
 
-            const $townDiv = $roundDiv.find("div[name='townDiv']").empty();
-            $townDiv.empty();
+            renderTown($roundDiv.find("div[name='uptownDiv']"), UPTOWN);
+            renderTown($roundDiv.find("div[name='downtownDiv']"), DOWNTOWN);
 
-            $townDiv.append(town.createHtml(UPTOWN));
-            $townDiv.append(town.createHtml(DOWNTOWN));
+            console.log('playerList', playerList);
+        }
+
+        const renderTown = ($townDiv, town) => {
+            const $townTitle = $townDiv.find("span[name='townTitle']");
+            $townTitle.empty().append(town.title);
+
+            const $playerDiv = $townDiv.find("div[name='playerDiv']");
+            $playerDiv.empty().append(createPlayerHtml(town));
+
+            const $outcastDiv = $townDiv.find("div[name='outcastDiv']");
+            $outcastDiv.empty();
+        }
+
+        const createPlayerHtml = town => {
+            return playerList
+                .filter(player => player.town.name === town.name)
+                .reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
+                        + " onclick=\"setOutcast('" + next.playerName + "')\" >"
+                        + " " + next.playerName
+                        + "</button>";
+                    // }, `<h3>\${town.title} 추방자</h3>`) + "<hr>";
+                }, "");
+        }
+
+        const setOutcast = playerName => {
+            const player = playerList.find(player => player.playerName === playerName);
+            player.outcast = true;
+
+            if (player.town.name === UPTOWN.name) {
+                uptownOutcastList.push(player);
+                const $roundDiv = $("#roundDiv");
+                const $uptownDiv = $roundDiv.find("div[name='uptownDiv']");
+                $uptownDiv.find("div[name='playerDiv']").empty();
+                $uptownDiv.find("div[name='outcastDiv']").empty().html(player.playerName);
+                return;
+            }
+
+            downtownOutcastList.push(player);
+            const $roundDiv = $("#roundDiv");
+            const $downtownDiv = $roundDiv.find("div[name='downtownDiv']");
+            $downtownDiv.find("div[name='playerDiv']").empty();
+            $downtownDiv.find("div[name='outcastDiv']").empty().html(player.playerName);
         }
 
         const resetGame = () => {
@@ -365,12 +398,12 @@
             $playerDiv.append(htmlString);
         }
 
-        const openPlayStatusModal = () => {
-            playStatusModal.open(auctionByRound);
+        const openTownStatusModal = () => {
+            townStatusModal.open();
         }
 
-        const openFruitShopModal = () => {
-            shopListModal.open(PLAY_NO);
+        const openMoneyStatusModal = () => {
+            moneyStatusModal.open(PLAY_NO);
         }
 
         const openQrImage = () => {
@@ -435,14 +468,26 @@
                             [<span name="roundTitle"></span>] 번째 라운드
                         </h2>
                     </div>
-                    <div class="card-body" name="townDiv"></div>
+                    <div class="card-body" name="townDiv">
+                        <div name="uptownDiv">
+                            <h4><span name="townTitle"></span> 추방자</h4>
+                            <div name="playerDiv"></div>
+                            <div name="outcastDiv"></div>
+                        </div>
+                        <hr>
+                        <div name="downtownDiv">
+                            <h4><span name="townTitle"></span> 추방자</h4>
+                            <div name="playerDiv"></div>
+                            <div name="outcastDiv"></div>
+                        </div>
+                    </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
-                                플레이어 과일가게 보기
+                            <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
+                                재산 보기
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
                                 다음 라운드 진행
@@ -468,11 +513,11 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
-                                플레이 상태 모달 표시
+                            <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
+                                주민 보기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
-                                플레이어 과일가게 보기
+                            <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
+                                재산 보기
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
@@ -490,9 +535,8 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/town.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/playStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
 
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>

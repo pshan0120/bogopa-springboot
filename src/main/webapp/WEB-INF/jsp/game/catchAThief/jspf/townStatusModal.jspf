@@ -1,0 +1,83 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const townStatusModal = {
+        open: () => {
+            const $modal = $("#townStatusModal");
+
+            const $uptownDiv = $modal.find("div[name='uptownDiv']")
+            const $uptownTitle = $uptownDiv.find("span[name='townTitle']");
+            $uptownTitle.empty().append(UPTOWN.title);
+
+            const uptownPlayerList = playerList.filter(player => {
+                return player.town.name === UPTOWN.name
+                    && !uptownOutcastList.some(outcast => outcast.playerName === player.playerName)
+            });
+
+            const uptownPlayerHtml = uptownPlayerList
+                .reduce((prev, next) => {
+                    return prev +
+                        `<div class="row">
+                            <div class="col-12">
+                                \${next.playerName}
+                            </div>
+                        </div>`;
+                }, "");
+            $uptownDiv.find("[name='playerDiv']").empty().html(uptownPlayerHtml);
+
+            const $downtownDiv = $modal.find("div[name='downtownDiv']")
+            const $downtownTitle = $downtownDiv.find("span[name='townTitle']");
+            $downtownTitle.empty().append(DOWNTOWN.title);
+
+            const downtownPlayerList = playerList.filter(player => {
+                return player.town.name === DOWNTOWN.name
+                    && !downtownOutcastList.some(outcast => outcast.playerName === player.playerName)
+            });
+
+            const downtownPlayerHtml = downtownPlayerList
+                .reduce((prev, next) => {
+                    return prev +
+                        `<div class="row">
+                            <div class="col-12">
+                                \${next.playerName}
+                            </div>
+                        </div>`;
+                }, "");
+            $downtownDiv.find("[name='playerDiv']").empty().html(downtownPlayerHtml);
+
+            $modal.modal("show");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="townStatusModal" role="dialog"
+     aria-labelledby="townStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">현재 마을 상태입니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="uptownDiv">
+                    <h4><span name="townTitle"></span></h4>
+                    <div name="playerDiv"></div>
+                </div>
+                <hr>
+                <div name="downtownDiv">
+                    <h4><span name="townTitle"></span></h4>
+                    <div name="playerDiv"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -2,68 +2,28 @@
 
 <script>
     const town = {
-        uptownList: [],
-        downtownList: [],
         createHtml: town => {
             return playerList
                 .filter(player => player.town.name === town.name)
                 .reduce((prev, next) => {
-                    // TODO: 여기부터
                     return prev
                         + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
-                        + " onclick=\"town.bidFruit('" + next.playerName + ")\" >"
+                        + " onclick=\"town.setOutcast('" + next.playerName + ")\" >"
                         + " " + next.playerName
                         + "</button>";
                 }, `<h3>\${town.title} 추방자</h3>`) + "<hr>";
         },
-        openBidFruitModal: playerName => {
+        setOutcast: playerName => {
             const player = playerList.find(player => player.playerName === playerName);
-            const item1 = Fruit.getFruitByName(fruitList, player.item1);
-            const item2 = Fruit.getFruitByName(fruitList, player.item2);
-
-            const chosenList = town.biddingList.filter(choice => choice.playerName === player.playerName);
-            if (chosenList.length === 2) {
-                alert("해당 플레이어는 선택 완료된 상태입니다.");
-                return;
+            if (player.town.name === UPTOWN.name) {
+                uptownOutcastList.push(player);
+            } else {
+                downtownOutcastList.push(player);
             }
 
-            const $modal = $("#bidFruitModal");
-            $modal.find("[name='title']").empty().html(player.playerName);
-            $modal.find("[name='swapFruitDiv']").empty().html(town.createSwapFruitHtml(player.playerName));
-            $modal.find("[name='blindBiddingResultDiv']").empty().html(town.createBlindBiddingResultHtml(player.playerName));
-            $modal.find("[name='item1Div']").empty().html(town.createBidHtml(playerName, item1.name));
-            $modal.find("[name='item2Div']").empty().html(town.createBidHtml(playerName, item2.name));
-
-            $modal.modal("show");
-
-            $modal.find("div[name='item1Div'], div[name='item2Div']").find("button").on("click", event => {
-                $(event.currentTarget).parent().find("button").hide();
-            });
-
-            $modal.find("button[name='setSwapFromButton']").on("click", event => {
-                $(event.currentTarget).parent().find("button[name='setSwapFromButton']").hide();
-            });
-
-            $modal.find("button[name='setSwapToButton']").on("click", event => {
-                $(event.currentTarget).parent().find("button[name='setSwapToButton']").hide();
-            });
-        },
-        createBidHtml: (playerName, itemName) => {
-            const item = Fruit.getFruitByName(fruitList, itemName);
-            return town.BIDDING_UNITS.reduce((prev, next) => {
-                    return prev
-                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
-                        + " onclick=\"town.bidFruit('" + playerName + "', '" + item.name + "', " + next + ")\" >"
-                        + " " + next
-                        + "</button>";
-                }, "<h3>" + item.title + "</h3>")
-                + "<div name=\"biddingMessageText\" data-item-name=\"" + itemName + "\"></div>"
-                + "<hr>";
-        },
-        bidFruit: (playerName, itemName, bidding) => {
             town.biddingList.push({playerName, itemName, bidding});
 
-            const $modal = $("#bidFruitModal");
+            const $modal = $("#setOutcastModal");
             const found = $modal.find("div[name='biddingMessageText']").toArray()
                 .filter(object => itemName == $(object).data("itemName"));
             $(found).text(bidding + "원");
@@ -146,14 +106,14 @@
             return swapFromHtml + swapToHtml + swapHtml;
         },
         setSwapFrom: itemName => {
-            const $modal = $("#bidFruitModal");
+            const $modal = $("#setOutcastModal");
             const $swapFromMessageText = $modal.find("div[name='swapFromMessageText']");
             const item = Fruit.getFruitByName(fruitList, itemName);
             $swapFromMessageText.text(item.title);
             $swapFromMessageText.data("swapFrom", itemName);
         },
         setSwapTo: itemName => {
-            const $modal = $("#bidFruitModal");
+            const $modal = $("#setOutcastModal");
             const $swapToMessageText = $modal.find("div[name='swapToMessageText']");
             const item = Fruit.getFruitByName(fruitList, itemName);
             $swapToMessageText.text(item.title);
@@ -163,7 +123,7 @@
             const player = playerList.find(player => player.playerName === playerName);
             player.swapSkillUsed = true;
 
-            const $modal = $("#bidFruitModal");
+            const $modal = $("#setOutcastModal");
             const $swapFromMessageText = $modal.find("div[name='swapFromMessageText']");
             const swapFrom = Fruit.getFruitByName(fruitList, $swapFromMessageText.data("swapFrom"));
             const $swapToMessageText = $modal.find("div[name='swapToMessageText']");
@@ -208,8 +168,8 @@
     }
 </script>
 
-<div class="modal fade" id="bidFruitModal" role="dialog"
-     aria-labelledby="bidFruitModalLabel" aria-hidden="true">
+<div class="modal fade" id="setOutcastModal" role="dialog"
+     aria-labelledby="setOutcastModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
