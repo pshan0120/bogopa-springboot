@@ -66,14 +66,7 @@
             $("#settingDiv").show();
         });
 
-        const initializeGame = async () => {
-            console.log('initializationSetting', initializationSetting);
-
-            $("#settingDiv").show();
-            $("#firstNightDiv").hide();
-            $("#otherDayDiv").hide();
-            $("#otherNightDiv").hide();
-
+        const setRoleList = () => {
             townsFolkRoleList = [
                 new WasherWoman(),
                 new Librarian(),
@@ -114,6 +107,17 @@
                 ...minionRoleList,
                 ...demonRoleList,
             ];
+        };
+
+        const initializeGame = async () => {
+            console.log('initializationSetting', initializationSetting);
+
+            $("#settingDiv").show();
+            $("#firstNightDiv").hide();
+            $("#otherDayDiv").hide();
+            $("#otherNightDiv").hide();
+
+             setRoleList();
 
             const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
@@ -518,6 +522,10 @@
         }
 
         const proceedToNextDay = () => {
+            if (!confirm("다음 순서로 진행합니다.")) {
+                return;
+            }
+
             playStatus.round = playStatus.round + 1;
             playStatus.night = false;
             saveGameStatus();
@@ -551,6 +559,10 @@
         }
 
         const proceedToNextNight = () => {
+            if (!confirm("다음 순서로 진행합니다.")) {
+                return;
+            }
+
             const mayorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Mayor);
             if (mayorPlayer
                 && !mayorPlayer.died
@@ -640,11 +652,10 @@
         const saveGameStatus = () => {
             const log = {
                 playerList: JSON.stringify(playerList),
-                townsFolkRoleList: JSON.stringify(townsFolkRoleList),
+                /*townsFolkRoleList: JSON.stringify(townsFolkRoleList),
                 outsiderRoleList: JSON.stringify(outsiderRoleList),
                 minionRoleList: JSON.stringify(minionRoleList),
-                demonRoleList: JSON.stringify(demonRoleList),
-                roleList: JSON.stringify(roleList),
+                demonRoleList: JSON.stringify(demonRoleList),*/
                 townsFolkPlayerList: JSON.stringify(townsFolkPlayerList),
                 outsiderPlayerList: JSON.stringify(outsiderPlayerList),
                 minionPlayerList: JSON.stringify(minionPlayerList),
@@ -674,13 +685,18 @@
             console.log('lastPlayLogJson', lastPlayLogJson);
 
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            roleList = JSON.parse(lastPlayLogJson.roleList);
+            /*townsFolkRoleList = JSON.parse(lastPlayLogJson.townsFolkRoleList);
+            outsiderRoleList = JSON.parse(lastPlayLogJson.outsiderRoleList);
+            minionRoleList = JSON.parse(lastPlayLogJson.minionRoleList);
+            demonRoleList = JSON.parse(lastPlayLogJson.demonRoleList);*/
+
             townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
             outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
             minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
             demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
+            setRoleList();
             console.log('game status loaded !!');
         }
 

@@ -137,20 +137,6 @@
             }, "");
             $modal.find("[name='nominatedPlayerListDiv']").empty().html(setNominatedPlayerHtml);
             $modal.find("[name='nominatedPlayerName']").empty();
-
-            const votingPlayerList = createAssignedPlayerList()
-                .filter(player => player.votable)
-                .sort((prev, next) => prev.seatNumber - next.seatNumber);
-
-            const setVotingPlayerHtml = votingPlayerList.reduce((prev, next) => {
-                return prev
-                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                    + " onclick=\"execution.setVotingPlayer('" + next.playerName + "')\" >"
-                    + " " + next.playerName + "(" + next.title + (next.died ? "-사망" : "") + ")"
-                    + "</button>";
-            }, "");
-            $modal.find("[name='votingPlayerListDiv']").empty().html(setVotingPlayerHtml);
-
             $modal.find("[name='votedPlayerListDiv']").empty();
 
             const candidatePlayerListHtml = execution.candidatePlayerListOfToday
@@ -169,10 +155,6 @@
             });
 
             $modal.find("[name='nominatedPlayerListDiv']").find("button").on("click", event => {
-                $(event.currentTarget).hide();
-            });
-
-            $modal.find("[name='votingPlayerListDiv']").find("button").on("click", event => {
                 $(event.currentTarget).hide();
             });
 
@@ -214,6 +196,30 @@
             const $modal = $("#setNominationModal");
             $modal.find("[name='nominatedPlayerName']").text(playerName);
             $modal.find("[name='nominatedPlayerListDiv']").find("button").hide();
+
+            const votingPlayerList = [...createAssignedPlayerList()]
+                .filter(votingPlayer => votingPlayer.votable)
+                .map(votingPlayer => {
+                    if(votingPlayer.seatNumber < player.seatNumber) {
+                        votingPlayer.seatNumber = votingPlayer.seatNumber + playerList.length;
+                        return votingPlayer;
+                    }
+                    return votingPlayer;
+                })
+                .sort((prev, next) => prev.seatNumber - next.seatNumber);
+
+            const setVotingPlayerHtml = votingPlayerList.reduce((prev, next) => {
+                return prev
+                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + " onclick=\"execution.setVotingPlayer('" + next.playerName + "')\" >"
+                    + " " + next.playerName + "(" + next.title + (next.died ? "-사망" : "") + ")"
+                    + "</button>";
+            }, "");
+            $modal.find("[name='votingPlayerListDiv']").empty().html(setVotingPlayerHtml);
+
+            $modal.find("[name='votingPlayerListDiv']").find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
         },
         setVotingPlayer: playerName => {
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
