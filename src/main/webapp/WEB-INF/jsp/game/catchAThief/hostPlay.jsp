@@ -14,6 +14,7 @@
         let playerList = [];
         let uptownOutcastList = [];
         let downtownOutcastList = [];
+        let beforeOutcastList = [];
 
         $(async () => {
             await loadGameStatus();
@@ -40,6 +41,7 @@
             playerList = [];
             uptownOutcastList = [];
             downtownOutcastList = [];
+            beforeOutcastList = [];
 
             console.log('initializationSetting', initializationSetting);
 
@@ -177,6 +179,7 @@
                 playerList: JSON.stringify(playerList),
                 uptownOutcastList: JSON.stringify(uptownOutcastList),
                 downtownOutcastList: JSON.stringify(downtownOutcastList),
+                beforeOutcastList: JSON.stringify(beforeOutcastList),
             }
 
             const request = {
@@ -205,6 +208,7 @@
             playerList = JSON.parse(lastPlayLogJson.playerList);
             uptownOutcastList = JSON.parse(lastPlayLogJson.uptownOutcastList);
             downtownOutcastList = JSON.parse(lastPlayLogJson.downtownOutcastList);
+            beforeOutcastList = JSON.parse(lastPlayLogJson.beforeOutcastList);
 
             console.log('game status loaded !!');
         }
@@ -290,9 +294,11 @@
         const move = () => {
             const uptownOutcast = uptownOutcastList.pop();
             playerList.find(player => player.playerName === uptownOutcast.playerName).town = DOWNTOWN;
+            beforeOutcastList.push(uptownOutcast);
 
             const downtownOutcast = downtownOutcastList.pop();
             playerList.find(player => player.playerName === downtownOutcast.playerName).town = UPTOWN;
+            beforeOutcastList.push(downtownOutcast);
         }
 
         const renderRound = () => {
@@ -337,10 +343,18 @@
         }
 
         const setOutcast = playerName => {
+            if (beforeOutcastList.some(outcast => outcast.playerName === playerName)) {
+                alert("직전 추방된 사람은 다음 라운드가 지나서 추방될 수 있습니다.");
+                return;
+            }
+
             const player = playerList.find(player => player.playerName === playerName);
             player.outcast = true;
 
             if (player.town.name === UPTOWN.name) {
+                const beforeOutcastIndex = beforeOutcastList.findIndex(beforeOutcast => beforeOutcast.town.name === UPTOWN.name);
+                beforeOutcastList.splice(beforeOutcastIndex, 1);
+
                 uptownOutcastList.push(player);
                 const $roundDiv = $("#roundDiv");
                 const $uptownDiv = $roundDiv.find("div[name='uptownDiv']");
@@ -348,6 +362,9 @@
                 $uptownDiv.find("div[name='outcastDiv']").empty().html(player.playerName);
                 return;
             }
+
+            const beforeOutcastIndex = beforeOutcastList.findIndex(beforeOutcast => beforeOutcast.town.name === DOWNTOWN.name);
+            beforeOutcastList.splice(beforeOutcastIndex, 1);
 
             downtownOutcastList.push(player);
             const $roundDiv = $("#roundDiv");
