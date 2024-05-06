@@ -19,7 +19,7 @@
             $modal.modal("show");
         },
         openQrImage: hashKey => {
-            window.open("/qr?url=" + encodeURIComponent(document.URL + "&hashKey=" + hashKey), "_blank");
+            window.open("/qr?url=" + encodeURIComponent(document.URL + "?hashKey=" + hashKey), "_blank");
         },
         close: () => {
         },

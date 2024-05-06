@@ -9,31 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="비공개 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/aop/LoggerAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/aop/LoggerInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/aop/LoginAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/aop/LoginByHashKey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/myRoleModal.jspf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/qrLoginModal.jspf" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="자동로그인 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/ComDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/dao/ComDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/logger/LoggerAspect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/logger/LoggerInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/service/ComServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/context-aspect.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/context-aspect.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/com/Com_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/com/Com_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/game/Game_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/config/action-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/config/action-servlet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/qrLoginModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/qrLoginModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,14 +247,8 @@
       <workItem from="1714782861372" duration="10978000" />
       <workItem from="1714867699156" duration="9319000" />
       <workItem from="1714958804183" duration="7148000" />
-      <workItem from="1714990955701" duration="13886000" />
-    </task>
-    <task id="LOCAL-00034" summary="구조 정리">
-      <created>1713294274718</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1713294274718</updated>
+      <workItem from="1714990955701" duration="14230000" />
+      <workItem from="1715005659835" duration="846000" />
     </task>
     <task id="LOCAL-00035" summary="구조 정리">
       <created>1713294296356</created>
@@ -614,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714996490603</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="자동로그인 추가">
+      <created>1715005355518</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1715005355518</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +614,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="새로운 임프가 생겼을 때 처리" />
     <MESSAGE value="1. 역할 개선&#10;2. BOC 회원 등록 추가" />
     <MESSAGE value="temporarilyJoined 추가" />
     <MESSAGE value="브금 변경" />
@@ -660,7 +638,8 @@
     <MESSAGE value="도둑 2명" />
     <MESSAGE value="도둑잡기 개선" />
     <MESSAGE value="비공개 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="비공개 수정" />
+    <MESSAGE value="자동로그인 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="자동로그인 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
