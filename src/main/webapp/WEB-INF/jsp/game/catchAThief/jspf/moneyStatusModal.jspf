@@ -36,12 +36,6 @@
             const $moneyDiv = $moneyStatusModal.find("div[name='moneyDiv']");
             $moneyDiv.empty();
 
-            if (Object.keys(moneyStatusModal.playStatus).length === 0) {
-                const htmlString = `게임이 시작되지 않았습니다.`;
-                $moneyDiv.append(htmlString);
-                return;
-            }
-
             if (moneyStatusModal.playStatus.round < moneyStatusModal.playSetting.round
                 && moneyStatusModal.playStatus.round % 2 === 1) {
                 const moneyHtml = moneyStatusModal.playerList

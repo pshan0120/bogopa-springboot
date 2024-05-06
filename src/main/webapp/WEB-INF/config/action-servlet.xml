@@ -23,12 +23,12 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean id="loggerInterceptor" class="boardgame.com.logger.LoggerInterceptor"></bean>
+			<bean id="loggerInterceptor" class="boardgame.com.aop.LoggerInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<aop:aspectj-autoproxy/>
-	<bean id="loggerAspect" class="boardgame.com.logger.LoggerAspect" />
+	<bean id="loggerAspect" class="boardgame.com.aop.LoggerAspect" />
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 	

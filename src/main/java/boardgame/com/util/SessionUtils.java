@@ -40,6 +40,14 @@ public class SessionUtils {
         }
     }
 
+    public static Long getCurrentMemberIdOrNull() {
+        try {
+            return getCurrentMemberId();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static Boolean isUserLogin() {
         try {
             getCurrentUserId();

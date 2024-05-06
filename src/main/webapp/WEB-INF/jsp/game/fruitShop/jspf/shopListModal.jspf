@@ -39,12 +39,6 @@
             const $shopDiv = $shopListModal.find("div[name='shopDiv']");
             $shopDiv.empty();
 
-            if (Object.keys(shopListModal.playStatus).length === 0) {
-                const htmlString = `게임이 시작되지 않았습니다.`;
-                $shopDiv.append(htmlString);
-                return;
-            }
-
             const shopHtml = shopListModal.playerList.reduce((prev, next) => {
                 const item1 = Fruit.getFruitByName(shopListModal.fruitList, next.item1);
                 const item2 = Fruit.getFruitByName(shopListModal.fruitList, next.item2);

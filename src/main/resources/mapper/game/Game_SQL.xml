@@ -18,6 +18,7 @@
     <select id="selectClientPlayMemberList" parameterType="hashmap" resultType="hashmap">
         SELECT
             pm.mmbrNo,
+            encVal(pm.mmbrNo) AS hashKey,
             m.nickNm
         FROM
             play p,

@@ -63,7 +63,7 @@
 
             playSetting = initializationSetting.player
                 .find(item => playerList.length === item.numberOfPlayer);
-            playSetting = {...playSetting, round: initializationSetting.round};
+            playSetting = {...playSetting, round: initializationSetting.round, money: initializationSetting.money};
 
             renderPlayMemberList(playerList);
         };
@@ -136,6 +136,7 @@
                             playerName: player.nickNm,
                             fakePlayerName,
                             playerId: player.mmbrNo,
+                            hashKey: player.hashKey,
                             playerNumber,
                             town: UPTOWN,
                             outcast: false,
@@ -146,6 +147,7 @@
                         playerName: player.nickNm,
                         fakePlayerName,
                         playerId: player.mmbrNo,
+                        hashKey: player.hashKey,
                         playerNumber,
                         town: DOWNTOWN,
                         outcast: false,
@@ -498,7 +500,11 @@
         }
 
         const openGuideModal = () => {
-            guideModal.openRuleGuideModal();
+            guideModal.open();
+        }
+
+        const openQrLoginModal = () => {
+            qrLoginModal.open();
         }
 
         const openQrImage = () => {
@@ -590,6 +596,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
                             </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
@@ -630,6 +639,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
                             </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
@@ -649,6 +661,7 @@
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/qrLoginModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

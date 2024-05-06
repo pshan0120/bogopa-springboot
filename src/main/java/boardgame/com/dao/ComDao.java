@@ -1,12 +1,16 @@
 package boardgame.com.dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
 @Repository
 public class ComDao extends AbstractDao {
+
+    public String selectDecrypted(Map<String, Object> map) {
+        return selectOne("com.selectDecrypted", map);
+    }
 
     @SuppressWarnings("unchecked")
     public List<Map<String, Object>> selectCdList(Map<String, Object> map) {

@@ -42,7 +42,13 @@
             #{offset}, #{size}
         ]]>
 	</sql>
-	
+
+	<select id="selectDecrypted" parameterType="hashmap" resultType="String">
+		<![CDATA[
+			SELECT decVal(#{encrypted})
+		]]>
+	</select>
+
 	<select id="selectCdList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT

@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const qrLoginModal = {
+        open: () => {
+            const $modal = $("#qrLoginModal");
+
+            const $playerDiv = $modal.find("div[name='playerDiv']")
+            const playerHtml = playerList
+                .reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-info btn-block\""
+                        + " onclick=\"qrLoginModal.openQrImage('" + next.hashKey + "')\" >"
+                        + " " + next.playerName
+                        + "</button>";
+                }, "");
+            $playerDiv.empty().html(playerHtml);
+
+            $modal.modal("show");
+        },
+        openQrImage: hashKey => {
+            window.open("/qr?url=" + encodeURIComponent(document.URL + "&hashKey=" + hashKey), "_blank");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="qrLoginModal" role="dialog"
+     aria-labelledby="qrLoginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">QR 로그인입니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface ComService {
+
+    String decrypted(String encrypted);
+
+
     /* 코드 */
     List<Map<String, Object>> selectCdList(Map<String, Object> map);
 

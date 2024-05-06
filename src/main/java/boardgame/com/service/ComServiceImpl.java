@@ -14,6 +14,13 @@ import java.util.Map;
 public class ComServiceImpl implements ComService {
 
     private final ComDao comDAO;
+
+    @Override
+    public String decrypted(String encrypted) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("encrypted", encrypted);
+        return comDAO.selectDecrypted(map);
+    }
    
     @Override
     public List<Map<String, Object>> selectCdList(Map<String, Object> map) {

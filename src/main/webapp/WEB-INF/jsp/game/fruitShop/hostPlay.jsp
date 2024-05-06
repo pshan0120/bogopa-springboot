@@ -275,8 +275,6 @@
                 player.money = player.money + revenue;
             });
 
-            // auction.blindBiddingResultList.push({playerName, itemName});
-
             const blind = auction.blindBiddingResultList.some(blind => blind.itemName === item.name);
             return {
                 itemName: item.name,
