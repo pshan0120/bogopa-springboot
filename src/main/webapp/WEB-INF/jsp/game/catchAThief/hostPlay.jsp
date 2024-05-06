@@ -98,6 +98,28 @@
             showPlayerTownList(playerList);
         }
 
+        const createThiefOfTown = playerListOfTown => {
+            let thiefChosen = false;
+            return playerListOfTown
+                .sort(() => Math.random() - 0.5)
+                .map(player => {
+                    if (!thiefChosen) {
+                        thiefChosen = true;
+                        return {
+                            ...player,
+                            money: 0,
+                            thief: true,
+                        };
+                    }
+                    return {
+                        ...player,
+                        money: 1000,
+                        thief: false,
+                    };
+                })
+                .sort(() => Math.random() - 0.5);
+        };
+
         const createPlayerList = playerList => {
             let playerNumber = 0;
 
@@ -128,25 +150,10 @@
                     };
                 });
 
-            let thiefChosen = false;
-            return playerListOfTown
-                .sort(() => Math.random() - 0.5)
-                .map(player => {
-                    if (!thiefChosen) {
-                        thiefChosen = true;
-                        return {
-                            ...player,
-                            money: 0,
-                            thief: true,
-                        };
-                    }
-                    return {
-                        ...player,
-                        money: 1000,
-                        thief: false,
-                    };
-                })
-                .sort(() => Math.random() - 0.5);
+            return [
+                ...createThiefOfTown(playerListOfTown.filter(player => player.town.name === UPTOWN.name)),
+                ...createThiefOfTown(playerListOfTown.filter(player => player.town.name === DOWNTOWN.name)),
+            ]
         }
 
         const showPlayerTownList = playerList => {
@@ -247,33 +254,37 @@
         }
 
         const steal = () => {
-            const thiefPlayer = playerList.find(player => player.thief);
-            if (thiefPlayer.outcast) {
-                return;
-            }
+            const thiefPlayerList = playerList.filter(player => player.thief);
 
-            if (thiefPlayer.town.name === UPTOWN.name) {
-                const uptownPlayerList = playerList.filter(player => {
-                    return player.town.name === UPTOWN.name
-                        && !uptownOutcastList.some(outcast => outcast.playerName === player.playerName)
+            thiefPlayerList.forEach(thiefPlayer => {
+                if (thiefPlayer.outcast) {
+                    return;
+                }
+
+                if (thiefPlayer.town.name === UPTOWN.name) {
+                    const uptownPlayerList = playerList.filter(player => {
+                        return player.town.name === UPTOWN.name
+                            && !uptownOutcastList.some(outcast => outcast.playerName === player.playerName)
+                    });
+
+                    uptownPlayerList.forEach(player => {
+                        player.money = player.money - playSetting.stolenMoney;
+                        thiefPlayer.money = thiefPlayer.money + playSetting.stolenMoney;
+                    });
+                    return;
+                }
+
+                const downtownPlayerList = playerList.filter(player => {
+                    return player.town.name === DOWNTOWN.name
+                        && !downtownOutcastList.some(outcast => outcast.playerName === player.playerName)
                 });
 
-                uptownPlayerList.forEach(player => {
+                downtownPlayerList.forEach(player => {
                     player.money = player.money - playSetting.stolenMoney;
                     thiefPlayer.money = thiefPlayer.money + playSetting.stolenMoney;
                 });
-                return;
-            }
+            })
 
-            const downtownPlayerList = playerList.filter(player => {
-                return player.town.name === DOWNTOWN.name
-                    && !downtownOutcastList.some(outcast => outcast.playerName === player.playerName)
-            });
-
-            downtownPlayerList.forEach(player => {
-                player.money = player.money - playSetting.stolenMoney;
-                thiefPlayer.money = thiefPlayer.money + playSetting.stolenMoney;
-            });
         }
 
         const move = () => {
