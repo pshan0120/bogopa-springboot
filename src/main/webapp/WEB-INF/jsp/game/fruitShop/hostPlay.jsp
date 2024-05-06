@@ -46,6 +46,7 @@
 
             $("#settingDiv").show();
             $("#roundDiv").hide();
+            $("#resultDiv").hide();
 
             const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;

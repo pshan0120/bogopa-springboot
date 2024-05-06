@@ -9,13 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="도둑 2명">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="도둑잡기 개선">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/catchAThief/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/catchAThief/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/catchAThief/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/catchAThief/initializationSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/auctionResultModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/jspf/auctionResultModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,14 +248,7 @@
       <workItem from="1714782861372" duration="10978000" />
       <workItem from="1714867699156" duration="9319000" />
       <workItem from="1714958804183" duration="7148000" />
-      <workItem from="1714990955701" duration="4820000" />
-    </task>
-    <task id="LOCAL-00032" summary="투표 수정">
-      <created>1713060283622</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1713060283622</updated>
+      <workItem from="1714990955701" duration="5408000" />
     </task>
     <task id="LOCAL-00033" summary="노트 추가">
       <created>1713204396656</created>
@@ -596,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714966173615</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="도둑잡기 개선">
+      <created>1714995944349</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1714995944349</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,7 +614,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="처형 투표 개선" />
     <MESSAGE value="readGamePlayById 추가" />
     <MESSAGE value="새로운 임프가 생겼을 때 처리" />
     <MESSAGE value="1. 역할 개선&#10;2. BOC 회원 등록 추가" />
@@ -642,7 +638,8 @@
     <MESSAGE value="도둑잡기 완성" />
     <MESSAGE value="오류 수정" />
     <MESSAGE value="도둑 2명" />
-    <option name="LAST_COMMIT_MESSAGE" value="도둑 2명" />
+    <MESSAGE value="도둑잡기 개선" />
+    <option name="LAST_COMMIT_MESSAGE" value="도둑잡기 개선" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

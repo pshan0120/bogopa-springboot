@@ -28,6 +28,7 @@
                     const resultHtml = next.resultList.reduce((prev, next) => {
                         const fruit = Fruit.getFruitByName(auctionResultModal.fruitList, next.itemName);
                         const biddingList = next.biddingList;
+                        const totalBiddingHtml = next.blind ? "비공개" : next.totalBidding;
                         const minimumBiddingHtml = next.blind ? "비공개" : next.minimumBidding;
 
                         return prev + `
@@ -42,7 +43,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">\${next.totalBidding}</td>
+                                                <td class="text-center">\${totalBiddingHtml}</td>
                                                 <td class="text-center">\${minimumBiddingHtml}</td>
                                             </tr>
                                         </tbody>
