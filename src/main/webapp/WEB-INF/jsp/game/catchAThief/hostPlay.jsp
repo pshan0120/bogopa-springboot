@@ -115,7 +115,7 @@
                     }
                     return {
                         ...player,
-                        money: 1000,
+                        money: playSetting.money,
                         thief: false,
                     };
                 })
@@ -400,30 +400,93 @@
 
         const renderResult = () => {
             const $resultDiv = $("#resultDiv");
-            const $playerDiv = $resultDiv.find("div[name='playerDiv']");
-            $playerDiv.empty();
 
-            let rank = 0;
-            const htmlString = playerList
+            const $winnerDiv = $resultDiv.find("div[name='winnerDiv']");
+            $winnerDiv.empty().append(createWinnerHtml());
+
+            let uptownPlayerRank = 0;
+            const uptownPlayerHtmlString = playerList
+                .filter(player => !player.thief)
+                .filter(player => player.town.name === UPTOWN.name)
                 .sort((prev, next) => next.money - prev.money)
                 .reduce((prev, next) => {
-                    rank++;
+                    uptownPlayerRank++;
                     return prev +
                         `<div class="row">
                             <div class="col-2">
-                                \${rank}위
+                                \${uptownPlayerRank}위
                             </div>
                             <div class="col-6">
                                 \${next.playerName}
                             </div>
-                            <div class="col-4">
+                            <div class="col-4 text-right">
                                 \${next.money}
                             </div>
-                        </div>
-                        <br>`;
+                        </div>`;
                 }, "");
+            const $uptownPlayerDiv = $resultDiv.find("div[name='uptownPlayerDiv']");
+            $uptownPlayerDiv.empty().append(uptownPlayerHtmlString);
 
-            $playerDiv.append(htmlString);
+            let downtownPlayerRank = 0;
+            const downtownPlayerHtmlString = playerList
+                .filter(player => !player.thief)
+                .filter(player => player.town.name === DOWNTOWN.name)
+                .sort((prev, next) => next.money - prev.money)
+                .reduce((prev, next) => {
+                    downtownPlayerRank++;
+                    return prev +
+                        `<div class="row">
+                            <div class="col-2">
+                                \${downtownPlayerRank}위
+                            </div>
+                            <div class="col-6">
+                                \${next.playerName}
+                            </div>
+                            <div class="col-4 text-right">
+                                \${next.money}
+                            </div>
+                        </div>`;
+                }, "");
+            const $downtownPlayerDiv = $resultDiv.find("div[name='downtownPlayerDiv']");
+            $downtownPlayerDiv.empty().append(downtownPlayerHtmlString);
+
+            let thiefRank = 0;
+            const thiefPlayerHtmlString = playerList
+                .filter(player => player.thief)
+                .sort((prev, next) => next.money - prev.money)
+                .reduce((prev, next) => {
+                    thiefRank++;
+                    return prev +
+                        `<div class="row">
+                            <div class="col-2">
+                                \${thiefRank}위
+                            </div>
+                            <div class="col-6">
+                                \${next.playerName}
+                            </div>
+                            <div class="col-4 text-right">
+                                \${next.money}
+                            </div>
+                        </div>`;
+                }, "");
+            const $thiefPlayerDiv = $resultDiv.find("div[name='thiefPlayerDiv']");
+            $thiefPlayerDiv.empty().append(thiefPlayerHtmlString);
+        }
+
+        const createWinnerHtml = () => {
+            const thiefList = playerList.filter(player => player.thief);
+            const uptownThiefList = thiefList.filter(player => player.town.name === UPTOWN.name);
+            const downtownThiefList = thiefList.filter(player => player.town.name === DOWNTOWN.name);
+
+            if (uptownThiefList.length === 0) {
+                return "큰 마을 승리!";
+            }
+
+            if (downtownThiefList.length === 0) {
+                return "작으 마을 승리!";
+            }
+
+            return "도둑 승리!";
         }
 
         const openTownStatusModal = () => {
@@ -432,6 +495,10 @@
 
         const openMoneyStatusModal = () => {
             moneyStatusModal.open(PLAY_NO);
+        }
+
+        const openGuideModal = () => {
+            guideModal.openRuleGuideModal();
         }
 
         const openQrImage = () => {
@@ -520,6 +587,9 @@
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
                                 다음 라운드 진행
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
@@ -537,7 +607,17 @@
                         </h2>
                     </div>
                     <div class="card-body">
-                        <div name="playerDiv"></div>
+                        <h4>우승자</h4>
+                        <div name="winnerDiv"></div>
+                        <hr>
+                        <h4>큰 마을</h4>
+                        <div name="uptownPlayerDiv"></div>
+                        <hr>
+                        <h4>작은 마을</h4>
+                        <div name="downtownPlayerDiv"></div>
+                        <hr>
+                        <h4>도둑</h4>
+                        <div name="thiefPlayerDiv"></div>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
@@ -546,6 +626,9 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
                                 재산 보기
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
@@ -565,9 +648,7 @@
 
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
-
-<!-- 회원프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

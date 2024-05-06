@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const guideModal = {
+        openRuleGuideModal: () => {
+            const $guideModal = $("#guideModal");
+            $guideModal.modal("show");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="guideModal" role="dialog"
+     aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">게임 가이드</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h2>
+                        도둑잡기란?
+                    </h2>
+                    <p>
+                        주민들은 숨어있는 도둑을 찾아내어 가장 많은 돈을 확보하세요!
+                    </p>
+                </div>
+                <hr>
+                <div>
+                    <h2>
+                        규칙
+                    </h2>
+                    <ul class="">
+                        <li class="">
+                            큰 마을과 작은 마을이 있고 큰 마을에 더 많은 사람이 살고 있습니다.
+                        </li>
+                        <li class="">
+                            각 마을에는 도둑이 한 명씩 숨어 있으며, 그 정체는 본인만 알고 있습니다.
+                        </li>
+                        <li class="">
+                            게임 시작 시 주민들의 재산은 1000원, 도둑은 재산이 없습니다.
+                        </li>
+                        <li class="">
+                            게임은 낮과 밤이 한 라운드로, 총 10라운드입니다.
+                        </li>
+                        <li class="">
+                            낮에 각 마을의 주민들은 유배지로 보낼 추방자 한 명을 결정합니다. 시간이 다 될 때까지 추방자를 결정하지 못했을 경우, 다수결로 추방자를 결정합니다.
+                        </li>
+                        <li class="">
+                            추방자가 유배지로 보내지고 밤이 되면, 도둑은 자신이 속한 마을주민의 돈을 일정 금액만큼 훔치지만 유배지에 있다면 훔칠 수 없습니다.
+                        </li>
+                        <li class="">
+                            추방자들은 밤 동안 유배지에 머무르다가, 아침이 되면 반대 마을로 이동합니다.
+                        </li>
+                        <li class="">
+                            두 라운드마다 플레이어들의 재산이 공개됩니다. 단, 이름은 공개되지 않습니다.
+                        </li>
+                        <li class="">
+                            게임 종료시 도둑이 없는 마을이 있다면 그 마을주민 중 가장 재산이 많은 사람이 우승합니다.
+                        </li>
+                        <li class="">
+                            만약 양쪽 마을에 모두 도둑이 있다면, 도둑 중 가장 재산이 많은 사람이 우승합니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

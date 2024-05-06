@@ -56,6 +56,10 @@
                 .catch(response => console.error('error', response));
         }
 
+        const openGuideModal = () => {
+            guideModal.openRuleGuideModal();
+        }
+
         const openTownStatusModal = () => {
             townStatusModal.open();
         }
@@ -111,6 +115,9 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
                                 주민 보기
                             </button>
@@ -131,6 +138,7 @@
 
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 
