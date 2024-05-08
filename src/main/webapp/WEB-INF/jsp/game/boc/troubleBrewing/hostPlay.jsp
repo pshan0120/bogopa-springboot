@@ -15,10 +15,11 @@
         let outsiderRoleList = [];
         let minionRoleList = [];
         let demonRoleList = [];
-        let demonPlayerList = [];
-        let minionPlayerList = [];
+        let roleList = [];
         let townsFolkPlayerList = [];
         let outsiderPlayerList = [];
+        let minionPlayerList = [];
+        let demonPlayerList = [];
         let playStatus = {};
         /*
         1. 참가자 자리 배치
@@ -330,13 +331,13 @@
                 <hr/>`;
             }
 
-            // NOTE: 만약 outsiderPlayerList 중에 drunk 가 있다면 미참여 마을 주민 역할과 교환
+            // NOTE: 만약 outsiderPlayerList 중에 drunk 가 있다면 미참여 마을주민 역할과 교환
             const drunkPlayer = Role.getPlayerByRole(outsiderPlayerList, Drunk);
             if (drunkPlayer) {
                 initializationHtml += `<div name="drunkDiv">
-                    <h4>주정뱅이 마을 주민 역할 부여</h4>
+                    <h4>주정뱅이 마을주민 역할 부여</h4>
                     <p>
-                        1. 미참여 마을 주민 역할 중 하나를 선택합니다.<br/>
+                        1. 미참여 마을주민 역할 중 하나를 선택합니다.<br/>
                         2. 주정뱅이 플레이어는 해당 역할로 변경되면서 만취 상태가 됩니다.
                     </p>
                     <button type="button" class="btn btn-info btn-block" onclick="openSetDrunkModal()">
@@ -478,7 +479,7 @@
             const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
 
             if (player.name === Drunk.name) {
-                alert("주정뱅이 마을 주민 역할이 부여되지 않았습니다.");
+                alert("주정뱅이 마을주민 역할이 부여되지 않았습니다.");
                 return;
             }
 
@@ -991,7 +992,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">주정뱅이와 교체될 마을 주민 역할을 선택합니다.</h4>
+                <h4 class="">주정뱅이와 교체될 마을주민 역할을 선택합니다.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
