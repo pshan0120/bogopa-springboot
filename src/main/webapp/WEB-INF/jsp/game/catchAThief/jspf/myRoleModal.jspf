@@ -4,11 +4,11 @@
     const myRoleModal = {
         playStatus: {},
         playerList: [],
-        open: async (playStatus, playerList) => {
-            myRoleModal.playStatus = {...playStatus};
-            myRoleModal.playerList = [...playerList];
+        open: async playNo => {
+            myRoleModal.playStatus = {};
+            myRoleModal.playerList = [];
 
-            // await myRoleModal.loadGameStatus(playNo);
+            await myRoleModal.loadGameStatus(playNo);
 
             if (Object.keys(myRoleModal.playStatus).length === 0) {
                 alert("게임이 시작되지 않았습니다.");
@@ -37,7 +37,7 @@
 
             $modal.modal("show");
         },
-        /*loadGameStatus: async playNo => {
+        loadGameStatus: async playNo => {
             const lastPlayLog = await myRoleModal.readLastPlayLog(playNo);
             if (!lastPlayLog) {
                 return;
@@ -57,7 +57,7 @@
                     return data?.log;
                 })
                 .catch(response => console.error('error', response));
-        },*/
+        },
         close: () => {
         },
     }
