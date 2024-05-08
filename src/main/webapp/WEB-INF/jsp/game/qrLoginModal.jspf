@@ -2,7 +2,7 @@
 
 <script>
     const qrLoginModal = {
-        open: () => {
+        open: playerList => {
             const $modal = $("#qrLoginModal");
 
             const $playerDiv = $modal.find("div[name='playerDiv']")
@@ -38,6 +38,10 @@
             </div>
             <div class="modal-body">
                 <div name="playerDiv"></div>
+                <hr>
+                <p>
+                    QR로 인식된 브라우저에서 '내 활동' 메뉴에 들어가면 개인정보를 수정할 수 있습니다.
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

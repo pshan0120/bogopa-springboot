@@ -203,7 +203,13 @@
                 .slice(0, playerNumber)
                 .map(role => {
                     const player = playerList.pop();
-                    return {...role, playerName: player.nickNm, playerId: player.mmbrNo, seatNumber: player.seatNumber};
+                    return {
+                        playerName: player.nickNm,
+                        playerId: player.mmbrNo,
+                        hashKey: player.hashKey,
+                        seatNumber: player.seatNumber,
+                        ...role
+                    };
                 });
         }
 
@@ -286,6 +292,10 @@
 
         const openTownModal = () => {
             townModal.open();
+        }
+
+        const openQrLoginModal = () => {
+            qrLoginModal.open(createAssignedPlayerList());
         }
 
         const openQrImage = () => {
@@ -434,6 +444,8 @@
             if (drunkPlayerIndex > -1) {
                 outsiderPlayerList.splice(drunkPlayerIndex, 1);
             }
+
+            saveGameStatus();
 
             $("#setDrunkPlayerModal").modal("hide");
         }
@@ -839,6 +851,9 @@
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
@@ -882,6 +897,9 @@
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
@@ -923,6 +941,9 @@
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
@@ -1009,12 +1030,10 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/undertaker.jspf" %>
 
+<%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/soundEffectModal.jspf" %>
 
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/soundEffectModal.jspf" %>
-
-<!-- 회원프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/game/qrLoginModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

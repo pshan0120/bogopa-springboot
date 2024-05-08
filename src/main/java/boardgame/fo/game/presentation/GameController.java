@@ -34,7 +34,7 @@ public class GameController {
     }
 
     @GetMapping("/game/trouble-brewing/play/{playNo}")
-    public ModelAndView openTroubleBrewingPlayByPlayNo(@PathVariable("playNo") long playNo) {
+    public ModelAndView openTroubleBrewingPlayByPlayNo(@PathVariable("playNo") long playNo, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("playNo", playNo);
 
@@ -45,6 +45,16 @@ public class GameController {
         if (isAdminMemberLogin()) {
             mv.setViewName("/game/boc/troubleBrewing/hostPlay");
         } else {
+            if (request.getParameterMap().containsKey("hashKey")) {
+                String hashKey = String.valueOf(request.getParameter("hashKey"));
+                System.out.println("hashKey : " + hashKey);
+
+                String memberId = comService.decrypted(hashKey);
+                System.out.println("memberId : " + memberId);
+
+                loginService.setLogin(Long.parseLong(memberId), request);
+            }
+
             mv.setViewName("/game/boc/troubleBrewing/clientPlay");
         }
         return mv;
@@ -70,8 +80,7 @@ public class GameController {
         mv.addObject("playNo", playNo);
         return mv;
     }
-
-
+    
     @GetMapping("/game/fruit-shop/play")
     public String openFruitShopPlayList() {
         return "/game/fruitShop/playList";

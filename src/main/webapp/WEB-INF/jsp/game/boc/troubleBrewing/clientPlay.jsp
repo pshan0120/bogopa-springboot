@@ -46,6 +46,10 @@
             townModal.open(PLAY_NO);
         }
 
+        const openMyRoleModal = () => {
+            myRoleModal.open(PLAY_NO);
+        }
+
         const openQrImage = () => {
             window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
         }
@@ -109,6 +113,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openMyRoleModal()">
+                                내 역할 보기
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
                                 QR 이미지로 공유
                             </button>
@@ -126,7 +133,8 @@
 
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/noteModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

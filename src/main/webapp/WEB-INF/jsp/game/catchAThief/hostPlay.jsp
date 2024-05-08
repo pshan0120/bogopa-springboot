@@ -504,7 +504,7 @@
         }
 
         const openQrLoginModal = () => {
-            qrLoginModal.open();
+            qrLoginModal.open(playerList);
         }
 
         const openQrImage = () => {
@@ -661,7 +661,8 @@
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/qrLoginModal.jspf" %>
+
+<%@ include file="/WEB-INF/jsp/game/qrLoginModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 
