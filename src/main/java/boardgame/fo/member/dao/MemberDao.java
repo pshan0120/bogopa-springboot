@@ -9,9 +9,16 @@ import java.util.Map;
 public class MemberDao extends AbstractDao {
 
     public void insertMember(Map<String, Object> map) {
-        insert("member.insertMmbr", map);
+        insert("member.insertMember", map);
     }
 
+    public Map<String, Object> selectMember(Map<String, Object> map) {
+        return selectOne("member.selectMember", map);
+    }
+
+    public Map<String, Object> selectMemberProfile(Map<String, Object> map) {
+        return selectOne("member.selectMemberProfile", map);
+    }
 
 
 
@@ -20,13 +27,9 @@ public class MemberDao extends AbstractDao {
         return selectOne("member.selectMmbrPswrdYn", map);
     }
 
-    public Map<String, Object> selectMmbr(Map<String, Object> map) {
-        return selectOne("member.selectMmbr", map);
-    }
 
-    public Map<String, Object> selectMmbrPrfl(Map<String, Object> map) {
-        return selectOne("member.selectMmbrPrfl", map);
-    }
+
+
 
     public void insertMmbrLog(Map<String, Object> map) {
         insert("member.insertMmbrLog", map);

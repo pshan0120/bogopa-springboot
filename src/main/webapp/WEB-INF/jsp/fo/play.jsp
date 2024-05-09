@@ -218,7 +218,7 @@
                     str += "<tr>";
                     str += "	<td scope=\"row\">";
                     str += "		<div class=\"media align-items-center\">";
-                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openMmbrPrflModal('" + value.mmbrNo + "')\">";
+                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"openMemberProfileModal('" + value.mmbrNo + "')\">";
                     if (value.prflImgFileNm != "") {
                         str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.prflImgFileNm + "\">";
                     } else {
@@ -289,7 +289,7 @@
                     var mostPlay3MmbrNos = value.mostPlay3MmbrNos.split(",");
                     var mostPlay3MmbrPrflImgFileNms = value.mostPlay3MmbrPrflImgFileNms.split(",");
                     for (var i in mostPlay3NickNms) {
-                        str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm\" onclick=\"fn_openMmbrPrflModal('" + mostPlay3MmbrNos[i] + "')\" data-toggle=\"tooltip\" data-original-title=\"" + mostPlay3NickNms[i] + "\">";
+                        str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm\" onclick=\"openMemberProfileModal('" + mostPlay3MmbrNos[i] + "')\" data-toggle=\"tooltip\" data-original-title=\"" + mostPlay3NickNms[i] + "\">";
                         if (mostPlay3MmbrPrflImgFileNms[i] == "default") {
                             str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\" class=\"rounded-circle\">";
                         } else {
@@ -574,6 +574,10 @@
                     return;
                 }
             }
+        }
+
+        const openMemberProfileModal = memberId => {
+            memberProfileModal.open(memberId);
         }
 
     </script>
@@ -975,7 +979,7 @@
 </div>
 
 <!-- 회원프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/jspf/memberProfileModal.jspf" %>
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/clubPrflModal.jsp" %>
 <!-- 플레이기록 -->

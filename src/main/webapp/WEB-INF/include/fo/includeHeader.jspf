@@ -67,5 +67,10 @@
 <script src="<c:url value='/js/com/dateTime.js'/>"></script>
 <script src="<c:url value='/js/com/cookie.js'/>"></script>
 
+<script src="<c:url value='/js/com/constants.js'/>"></script>
+<script src="<c:url value='/js/com/imageUrl.js'/>"></script>
 <script src="<c:url value='/js/com/boardType.js'/>"></script>
+<script src="<c:url value='/js/com/memberType.js'/>"></script>
+<script src="<c:url value='/js/com/clubGrade.js'/>"></script>
+
 <script src="<c:url value='/js/game/constants.js'/>"></script>

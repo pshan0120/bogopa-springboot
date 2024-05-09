@@ -1,9 +1,20 @@
 package boardgame.fo.club.service;
 
+import boardgame.com.service.CustomPageResponse;
+import boardgame.fo.club.dto.ReadPageRequestDto;
+
 import java.util.List;
 import java.util.Map;
 
 public interface ClubService {
+
+    Map<String, Object> readProfileById(long clubId, Long memberId);
+
+    CustomPageResponse<Map<String, Object>> readClubMemberPageById(ReadPageRequestDto requestDto);
+
+    Map<String, Object> selectClubMmbrList(Map<String, Object> map);
+
+
 
     /* 모임 */
     Map<String, Object> selectClubList(Map<String, Object> map);
@@ -26,9 +37,9 @@ public interface ClubService {
 
     void deleteClubJoin(Map<String, Object> map);
 
-    Map<String, Object> selectClubPrfl(Map<String, Object> map);
 
-    Map<String, Object> selectClubMmbrList(Map<String, Object> map);
+
+
 
     Map<String, Object> selectClubGameList(Map<String, Object> map);
 

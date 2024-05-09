@@ -2,7 +2,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-	<insert id="insertMmbr" parameterType="hashmap" useGeneratedKeys="true"  keyProperty="mmbrNo">
+	<select id="selectMember" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			m.mmbrNo,
+			IFNULL(decVal(m.email), '') AS email,
+			m.nickNm,
+			m.pswrdErrCnt,
+			m.useYn,
+			m.mmbrTypeCd,
+			m.temporarilyJoined,
+			cm.clubNo
+		FROM
+		mmbr m
+		LEFT JOIN clubMmbr cm
+			ON m.mmbrNo = cm.mmbrNo
+			AND cm.activated IS TRUE
+		WHERE
+		1=1
+		<if test="memberId != null and memberId != ''">
+		AND
+			m.mmbrNo = #{memberId}
+		</if>
+		<if test="email != null and email != ''">
+		AND
+			m.email = encVal(#{email})
+		</if>
+		<if test="mmbrScrtKey != null and mmbrScrtKey != ''">
+		AND
+			encVal(m.mmbrNo) = #{mmbrScrtKey}
+		</if>
+		<if test="useYn != null and useYn != ''">
+		AND
+			m.useYn = #{useYn}
+		</if>
+	</select>
+
+	<select id="selectMemberProfile" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			m.mmbrNo AS memberId,
+			IFNULL(m.nickNm, '') AS nickName,
+			m.temporarilyJoined,
+			m.mmbrTypeCd AS memberTypeCode,
+			IFNULL(m.intrdctn, '') AS introduction,
+			IFNULL(m.prflImgFileNm, '') AS profileImageFileName,
+			(SELECT
+				 COUNT(*)
+			 FROM
+				 playMmbr pm1
+			 WHERE
+				 pm1.mmbrNo = m.mmbrNo
+			) AS playCount
+		FROM
+			mmbr m
+		WHERE
+			m.useYn = 'Y'
+		  AND
+			m.mmbrNo = #{memberId}
+	</select>
+
+	<insert id="insertMember" parameterType="hashmap" useGeneratedKeys="true"  keyProperty="mmbrNo">
 		INSERT INTO mmbr
 		(
 		email,
@@ -58,82 +116,7 @@
 		]]>
 	</select>
 
-	<select id="selectMmbr" parameterType="hashmap" resultType="hashmap">
-		SELECT
-		m.mmbrNo,
-		IFNULL(decVal(m.email), '') AS email,
-		m.nickNm,
-		m.pswrdErrCnt,
-		m.useYn,
-		m.mmbrTypeCd,
-		m.temporarilyJoined,
-		IFNULL(cm.clubNo, '') AS clubNo
-		FROM
-		mmbr m
-		LEFT JOIN clubMmbr cm
-		ON m.mmbrNo = cm.mmbrNo
-		AND cm.activated IS TRUE
-		WHERE
-		1=1
-		<if test="mmbrNo != null and mmbrNo != ''">
-			AND
-			m.mmbrNo = #{mmbrNo}
-		</if>
-		<if test="email != null and email != ''">
-			AND
-			m.email = encVal(#{email})
-		</if>
-		<if test="mmbrScrtKey != null and mmbrScrtKey != ''">
-			AND
-			encVal(m.mmbrNo) = #{mmbrScrtKey}
-		</if>
-		<if test="useYn != null and useYn != ''">
-			AND
-			m.useYn = #{useYn}
-		</if>
-	</select>
 
-	<select id="selectMmbrPrfl" parameterType="hashmap" resultType="hashmap">
-		SELECT
-			m.mmbrNo,
-			IFNULL(m.nickNm, '') AS nickNm,
-			m.temporarilyJoined,
-			m.mmbrTypeCd,
-			cd.nm AS mmbrTypeNm,
-			IFNULL(m.intrdctn, '') AS intrdctn,
-			IFNULL(m.prflImgFileNm, '') AS prflImgFileNm,
-			IFNULL(cm2.clubNm, '무소속') AS mmbrClubNm,
-			(SELECT
-				 COUNT(*)
-			 FROM
-				 playMmbr pm1
-			 WHERE
-				 pm1.mmbrNo = m.mmbrNo
-			) AS playCnt
-		FROM
-			mmbr m
-				LEFT JOIN (
-				SELECT
-					cm1.mmbrNo,
-					c1.clubNm
-				FROM
-					club c1,
-					clubMmbr cm1
-				WHERE
-					c1.clubNo = cm1.clubNo
-				AND
-					cm.activated IS TRUE
-			) cm2 ON m.mmbrNo = cm2.mmbrNo,
-			cd cd
-		WHERE
-			m.mmbrTypeCd = cd.cd
-		  AND
-			cd.grpCd = 'C001'
-		  AND
-			m.useYn = 'Y'
-		  AND
-			m.mmbrNo = #{mmbrNo}
-	</select>
 
 	<insert id="insertMmbrLog" parameterType="hashmap">
 		<![CDATA[

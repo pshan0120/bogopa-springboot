@@ -1,6 +1,8 @@
 package boardgame.fo.club.service;
 
+import boardgame.com.service.CustomPageResponse;
 import boardgame.fo.club.dao.ClubDao;
+import boardgame.fo.club.dto.ReadPageRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,28 @@ import java.util.Map;
 public class ClubServiceImpl implements ClubService {
 
     private final ClubDao clubDao;
+
+    @Override
+    public Map<String, Object> readProfileById(long clubId, Long memberId) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("clubId", clubId);
+        requestMap.put("memberId", memberId);
+        return clubDao.selectClubProfile(requestMap);
+    }
+
+    @Override
+    public CustomPageResponse<Map<String, Object>> readClubMemberPageById(ReadPageRequestDto requestDto) {
+        return clubDao.selectClubMemberPage(requestDto);
+    }
+
+    @Override
+    public Map<String, Object> selectClubMmbrList(Map<String, Object> map) {
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("list", clubDao.selectClubMmbrList(map));
+        resultMap.put("cnt", clubDao.selectClubMmbrListCnt(map).get("cnt"));
+        return resultMap;
+    }
+
 
     /* 모임 */
     @Override
@@ -71,18 +95,9 @@ public class ClubServiceImpl implements ClubService {
     }
 
 
-    @Override
-    public Map<String, Object> selectClubPrfl(Map<String, Object> map) {
-        return clubDao.selectClubPrfl(map);
-    }
 
-    @Override
-    public Map<String, Object> selectClubMmbrList(Map<String, Object> map) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", clubDao.selectClubMmbrList(map));
-        resultMap.put("cnt", clubDao.selectClubMmbrListCnt(map).get("cnt"));
-        return resultMap;
-    }
+
+
 
     @Override
     public Map<String, Object> selectClubGameList(Map<String, Object> map) {

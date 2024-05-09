@@ -12,6 +12,7 @@ const initializationSetting = {
         {numberOfPlayer:15, uptown: 9, downtown: 6, stolenMoney: 26},
         {numberOfPlayer:16, uptown: 10, downtown: 6, stolenMoney: 24},*/
 
+        {numberOfPlayer:7, uptown: 4, downtown: 3, stolenMoney: 50},
         {numberOfPlayer:8, uptown: 5, downtown: 3, stolenMoney: 50},
         {numberOfPlayer:9, uptown: 6, downtown: 3, stolenMoney: 50},
         {numberOfPlayer:10, uptown: 6, downtown: 4, stolenMoney: 50},

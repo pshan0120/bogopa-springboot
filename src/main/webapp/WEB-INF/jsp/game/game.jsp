@@ -135,13 +135,6 @@
     <!-- /.modal-dialog -->
 </div>
 
-<!-- 회원프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
-<!-- 모임프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/clubPrflModal.jsp" %>
-<!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
-
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 
 </body>

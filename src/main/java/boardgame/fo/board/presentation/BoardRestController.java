@@ -5,26 +5,24 @@ import boardgame.fo.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @ResponseStatus(HttpStatus.OK)
+@RequestMapping("/api/board")
 @RestController
 @RequiredArgsConstructor
 public class BoardRestController {
 
     private final BoardService boardService;
 
-    @GetMapping("/api/board/page")
+    @GetMapping("/page")
     public Page<Map<String, Object>> readPage(ReadPageRequestDto dto) {
         return boardService.readPage(dto);
     }
 
-    @GetMapping("/api/board")
+    @GetMapping("")
     public Map<String, Object> readById(@RequestParam long id) {
         return boardService.readById(id);
     }

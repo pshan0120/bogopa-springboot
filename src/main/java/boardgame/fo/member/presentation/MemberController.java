@@ -52,7 +52,7 @@ public class MemberController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", memberService.selectMmbrPrfl(commandMap.getMap()));
+        mv.addObject("map", memberService.selectMemberProfile(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);

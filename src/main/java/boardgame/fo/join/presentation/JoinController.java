@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,12 +41,16 @@ public class JoinController {
     public ModelAndView openJoinId(@PathVariable("id") String id, CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("/fo/join");
         commandMap.put("mmbrScrtKey", id);
-        Map<String, Object> mmbrMap = memberService.selectMmbr(commandMap.getMap());
-        if (MapUtils.isNotEmpty(mmbrMap)) {
-            if (!StringUtils.isEmpty(String.valueOf(mmbrMap.get("clubNo")))) {
-                mv.addObject("invtMap", memberService.selectMmbr(commandMap.getMap()));
-                mv.addObject("clubMap", clubService.selectClubPrfl(mmbrMap));
-            }
+        Map<String, Object> memberMap = memberService.selectMember(commandMap.getMap());
+        if (MapUtils.isEmpty(memberMap)) {
+            return mv;
+        }
+
+        Long memberId = (Long) memberMap.get("mmbrNo");
+        Long clubId = (Long) memberMap.get("clubNo");
+        if (Optional.ofNullable(clubId).isPresent()) {
+            mv.addObject("invtMap", memberService.selectMember(commandMap.getMap()));
+            mv.addObject("clubMap", clubService.readProfileById(clubId, memberId));
         }
         return mv;
     }

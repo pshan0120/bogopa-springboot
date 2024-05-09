@@ -2,7 +2,195 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="club">
 
-	<select id="selectClubList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectClubProfile" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				c.clubNo AS clubId,
+				c.clubNm AS clubName,
+				c.mstrMmbrNo AS masterMemberId,
+				m.nickNm AS masterMemberName,
+				c.clubTypeCd AS clubTypeCode,
+				c.clubGrdCd AS clubGradeCode,
+				IFNULL(c.telNo, '') AS contactTo,
+				CONCAT(IFNULL(c.addrs1, ''), ' ', IFNULL(c.addrs2, '')) AS address,
+				IFNULL(c.prflImgFileNm, '') AS profileImageFileName,
+				IFNULL(c.intrdctn, '') AS introduction,
+				IFNULL(c.joinQstn, '') AS joinQuestion,
+				(SELECT
+					COUNT(*) > 0
+				FROM
+					clubMmbr cm
+				WHERE
+					cm.mmbrNo = #{memberId}
+				AND
+					cm.activated IS TRUE
+				) AS clubJoined,
+				(SELECT
+					COUNT(*) > 0
+				FROM
+					clubMmbr cm
+				WHERE
+					c.clubNo = cm.clubNo
+				AND
+					cm.activated IS TRUE
+				AND
+					cm.mmbrNo = #{memberId}
+				) AS clubQuitted,
+				(SELECT
+					COUNT(*) > 0
+				FROM
+					clubJoin cj1
+				WHERE
+					cj1.cnfrmYn IS NULL
+				AND
+					cj1.mmbrNo = #{memberId}
+				) AS memberClubJoinRequested,
+				(SELECT
+					COUNT(*) > 0
+				FROM
+					clubJoin cj2
+				WHERE
+					c.clubNo = cj2.clubNo
+				AND
+					cj2.cnfrmYn IS NULL
+				AND
+					cj2.mmbrNo = #{memberId}
+				) AS clubJoinRequested
+			FROM
+				club c,
+				mmbr m
+			WHERE
+				c.mstrMmbrNo = m.mmbrNo
+			AND
+				c.clubNo = #{clubId}
+		]]>
+	</select>
+
+	<select id="selectClubList" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="hashmap">
+		<include refid="com.pagePrefix"/>
+		SELECT
+			cm.mmbrNo AS memberId,
+			m.nickNm AS nickName,
+			cm.clubMmbrGrdCd AS clubMemberGradeCode,
+			cm.fromDate AS joinedAt,
+			IFNULL(m.prflImgFileNm, 'default') AS profileImageFileName,
+			(SELECT
+				COUNT(*)
+			FROM
+				playMmbr pm
+			WHERE
+				pm.mmbrNo = m.mmbrNo
+			) AS playCount
+		FROM
+			club c,
+			clubMmbr cm,
+			mmbr m
+		WHERE
+			c.clubNo = cm.clubNo
+		AND
+			cm.mmbrNo = m.mmbrNo
+		AND
+			c.useYn = 'Y'
+		AND
+			m.useYn = 'Y'
+		AND
+			cm.activated IS TRUE
+		AND
+			c.clubNo = #{clubId}
+		ORDER BY
+			cm.fromDate
+		<include refid="com.pagePostfix"/>
+	</select>
+
+	<select id="selectClubCount" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="long">
+		SELECT
+			COUNT(*)
+		FROM
+			club c,
+			clubMmbr cm,
+			mmbr m
+		WHERE
+			c.clubNo = cm.clubNo
+		AND
+			cm.mmbrNo = m.mmbrNo
+		AND
+			c.useYn = 'Y'
+		AND
+			m.useYn = 'Y'
+		AND
+			cm.activated IS TRUE
+		AND
+			c.clubNo = #{clubNo}
+	</select>
+
+
+
+	<select id="selectClubMmbrList" parameterType="hashmap" resultType="hashmap">
+		<include refid="com.pagingPre"/>
+		SELECT
+		cm.mmbrNo,
+		m.nickNm,
+		cm.clubMmbrGrdCd,
+		cdNm('C003', cm.clubMmbrGrdCd) AS clubMmbrGrdNm,
+		cm.fromDate,
+		IFNULL(m.prflImgFileNm, 'default') AS prflImgFileNm,
+		(SELECT
+		COUNT(*)
+		FROM
+		playMmbr pm1
+		WHERE
+		pm1.mmbrNo = m.mmbrNo
+		) AS playCnt
+		FROM
+		club c,
+		clubMmbr cm,
+		mmbr m
+		WHERE
+		c.clubNo = cm.clubNo
+		AND
+		cm.mmbrNo = m.mmbrNo
+		AND
+		c.useYn = 'Y'
+		AND
+		m.useYn = 'Y'
+		AND
+		cm.activated IS TRUE
+		AND
+		c.clubNo = #{clubNo}
+		ORDER BY
+		cm.fromDate
+		<include refid="com.pagingPost"/>
+	</select>
+
+	<select id="selectClubMmbrListCnt" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS cnt
+			FROM
+				club c,
+				clubMmbr cm,
+				mmbr m
+			WHERE
+				c.clubNo = cm.clubNo
+			AND
+				cm.mmbrNo = m.mmbrNo
+			AND
+				c.useYn = 'Y'
+			AND
+				m.useYn = 'Y'
+			AND
+				cm.activated IS TRUE
+			AND
+				c.clubNo = #{clubNo}
+		]]>
+	</select>
+
+
+
+
+
+
+	<select id="selectClubPagingList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				c.clubNo,
@@ -22,13 +210,13 @@
 				(SELECT
 					IF(COUNT(*) > 0, 'Y', 'N')
 				FROM
-					clubMmbr cm1
+					clubMmbr cm
 				WHERE
-					c.clubNo = cm1.clubNo
+					c.clubNo = cm.clubNo
 				AND
-					cm1.activated IS TRUE
+					cm.activated IS TRUE
 				AND
-					cm1.mmbrNo = #{mmbrNo}
+					cm.mmbrNo = #{mmbrNo}
 				) AS myClubYn,
 				(SELECT
 					COUNT(*)
@@ -529,135 +717,9 @@
 	</delete>
 	
 	
-	<select id="selectClubPrfl" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
-			SELECT
-				c.clubNo,
-				c.clubNm,
-				c.mstrMmbrNo,
-				m.nickNm AS mstrMmbrNm,
-				c.clubTypeCd,
-				cdNm('C004', c.clubTypeCd) AS clubTypeNm,
-				c.clubGrdCd,
-				cdNm('C005', c.clubGrdCd) AS clubGrdNm,
-				IFNULL(c.telNo, '') AS telNo,
-				CONCAT(IFNULL(c.addrs1, ''), ' ', IFNULL(c.addrs2, '')) AS addrs,
-				IFNULL(c.prflImgFileNm, '') AS prflImgFileNm,
-				IFNULL(c.intrdctn, '') AS intrdctn,
-				IFNULL(c.joinQstn, '') AS joinQstn,
-				(SELECT
-					IF(COUNT(*) > 0, 'Y', 'N')
-				FROM
-					clubMmbr cm1
-				WHERE
-					cm1.mmbrNo = #{mmbrNo}
-				AND
-					cm1.activated IS TRUE
-				) AS clubJoinYn,
-				(SELECT
-					IF(COUNT(*) > 0, 'Y', 'N')
-				FROM
-					clubMmbr cm1
-				WHERE
-					c.clubNo = cm1.clubNo
-				AND
-					cm1.activated IS TRUE
-				AND
-					cm1.mmbrNo = #{mmbrNo}
-				) AS quitClubYn,
-				(SELECT
-					IF(COUNT(*) > 0, 'Y', 'N')
-				FROM
-					clubJoin cj1
-				WHERE
-					cj1.cnfrmYn IS NULL
-				AND
-					cj1.mmbrNo = #{mmbrNo}
-				) AS mmbrClubJoinIngYn,
-				(SELECT
-					IF(COUNT(*) > 0, 'Y', 'N')
-				FROM
-					clubJoin cj2
-				WHERE
-					c.clubNo = cj2.clubNo
-				AND
-					cj2.cnfrmYn IS NULL
-				AND
-					cj2.mmbrNo = #{mmbrNo}
-				) AS joinClubIngYn,
-				IF(c.mstrMmbrNo = #{mmbrNo},
-					'Y',
-					'N'
-				) AS mstrMmbrYn
-			FROM
-				club c,
-				mmbr m
-			WHERE
-				c.mstrMmbrNo = m.mmbrNo
-			AND
-				c.clubNo = #{clubNo}
-		]]>
-	</select>
+
 	
-	<select id="selectClubMmbrList" parameterType="hashmap" resultType="hashmap">
-		<include refid="com.pagingPre"/>
-			SELECT
-				cm.mmbrNo,
-				m.nickNm,
-				cm.clubMmbrGrdCd,
-				cdNm('C003', cm.clubMmbrGrdCd) AS clubMmbrGrdNm,
-				cm.fromDate,
-				IFNULL(m.prflImgFileNm, 'default') AS prflImgFileNm,
-				(SELECT
-					COUNT(*)
-				FROM
-					playMmbr pm1
-				WHERE
-					pm1.mmbrNo = m.mmbrNo
-				) AS playCnt
-			FROM
-				club c,
-				clubMmbr cm,
-				mmbr m
-			WHERE
-				c.clubNo = cm.clubNo
-			AND
-				cm.mmbrNo = m.mmbrNo
-			AND
-				c.useYn = 'Y'
-			AND
-				m.useYn = 'Y'
-			AND
-				cm.activated IS TRUE
-			AND
-				c.clubNo = #{clubNo}
-			ORDER BY
-				cm.fromDate
-		<include refid="com.pagingPost"/>
-	</select>
-	
-	<select id="selectClubMmbrListCnt" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS cnt
-			FROM
-				club c,
-				clubMmbr cm,
-				mmbr m
-			WHERE
-				c.clubNo = cm.clubNo
-			AND
-				cm.mmbrNo = m.mmbrNo
-			AND
-				c.useYn = 'Y'
-			AND
-				m.useYn = 'Y'
-			AND
-				cm.activated IS TRUE
-			AND
-				c.clubNo = #{clubNo}
-		]]>
-	</select>
+
 	
 	
 	<select id="selectClubGameList" parameterType="hashmap" resultType="hashmap">

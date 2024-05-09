@@ -26,8 +26,15 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Map<String, Object> readById(long memberId) {
         Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("mmbrNo", memberId);
-        return this.selectMmbr(requestMap);
+        requestMap.put("memberId", memberId);
+        return this.selectMember(requestMap);
+    }
+
+    @Override
+    public Map<String, Object> readProfileById(long memberId) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("memberId", memberId);
+        return this.selectMemberProfile(requestMap);
     }
 
     @Override
@@ -93,13 +100,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Map<String, Object> selectMmbr(Map<String, Object> map) {
-        return memberDao.selectMmbr(map);
+    public Map<String, Object> selectMember(Map<String, Object> map) {
+        return memberDao.selectMember(map);
     }
 
     @Override
-    public Map<String, Object> selectMmbrPrfl(Map<String, Object> map) {
-        return memberDao.selectMmbrPrfl(map);
+    public Map<String, Object> selectMemberProfile(Map<String, Object> map) {
+        return memberDao.selectMemberProfile(map);
     }
 
     @Override

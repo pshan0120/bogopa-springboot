@@ -8,6 +8,8 @@ public interface MemberService {
 
     Map<String, Object> readById(long memberId);
 
+    Map<String, Object> readProfileById(long memberId);
+
     void create(Map<String, Object> map);
 
     void createBocMember(CreateTemporaryMemberRequestDto dto);
@@ -21,9 +23,9 @@ public interface MemberService {
     /* 회원 */
     Map<String, Object> selectMmbrPswrdYn(Map<String, Object> map);
 
-    Map<String, Object> selectMmbr(Map<String, Object> map);
+    Map<String, Object> selectMember(Map<String, Object> map);
 
-    Map<String, Object> selectMmbrPrfl(Map<String, Object> map);
+    Map<String, Object> selectMemberProfile(Map<String, Object> map);
 
     void insertMmbrLog(Map<String, Object> map);
 

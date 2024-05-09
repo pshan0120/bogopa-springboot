@@ -42,7 +42,7 @@ public class ClubController {
     private final ComUtils comUtils;
 
     private final FileUtils fileUtils;
-    
+
     private final LoginService loginService;
 
     /* 모임 */
@@ -59,7 +59,7 @@ public class ClubController {
         ModelAndView mv = new ModelAndView("/fo/club");
         commandMap.put("mmbrScrtKey", id);
 
-        Map<String, Object> memberMap = memberService.selectMmbr(commandMap.getMap());
+        Map<String, Object> memberMap = memberService.selectMember(commandMap.getMap());
         if (MapUtils.isNotEmpty(memberMap)) {
             loginService.setLogin((Long) memberMap.get("mmbrNo"), request);
         }
@@ -199,12 +199,14 @@ public class ClubController {
         String resultMsg = "";
 
         Boolean isLogin = false;
+        Long memberId = SessionUtils.getCurrentMemberId();
         if (SessionUtils.isMemberLogin()) {
             commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
             isLogin = true;
         }
 
-        mv.addObject("map", clubService.selectClubPrfl(commandMap.getMap()));
+        long clubId = (long) commandMap.get("clubNo");
+        mv.addObject("map", clubService.readProfileById(clubId, memberId));
         result = true;
 
         mv.addObject("isLogin", isLogin);

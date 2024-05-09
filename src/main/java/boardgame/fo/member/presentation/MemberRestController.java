@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @ResponseStatus(HttpStatus.OK)
 @RequestMapping("/api/member")
 @RestController
@@ -14,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class MemberRestController {
 
     private final MemberService memberService;
+
+    @GetMapping("/profile")
+    public Map<String, Object> readProfileById(@RequestParam long memberId) {
+        return memberService.readProfileById(memberId);
+    }
 
     @PostMapping("/boc")
     public void createBocMember(@Validated @RequestBody CreateTemporaryMemberRequestDto dto) {

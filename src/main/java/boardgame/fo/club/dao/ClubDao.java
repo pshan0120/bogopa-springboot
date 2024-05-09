@@ -1,6 +1,8 @@
 package boardgame.fo.club.dao;
 
 import boardgame.com.dao.AbstractDao;
+import boardgame.com.service.CustomPageResponse;
+import boardgame.fo.club.dto.ReadPageRequestDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,9 +11,28 @@ import java.util.Map;
 @Repository
 public class ClubDao extends AbstractDao {
 
+    public Map<String, Object> selectClubProfile(Map<String, Object> map) {
+        return selectOne("club.selectClubProfile", map);
+    }
+
+    public CustomPageResponse<Map<String, Object>> selectClubMemberPage(ReadPageRequestDto dto) {
+        return selectPage("board.selectClubList", "board.selectClubCount", dto);
+    }
+
+    public List<Map<String, Object>> selectClubMmbrList(Map<String, Object> map) {
+        return selectPagingListAjax("club.selectClubMmbrList", map);
+    }
+
+    public Map<String, Object> selectClubMmbrListCnt(Map<String, Object> map) {
+        return selectOne("club.selectClubMmbrListCnt", map);
+    }
+
+
+
+
     /* 모임 */
     public List<Map<String, Object>> selectClubList(Map<String, Object> map) {
-        return selectPagingListAjax("club.selectClubList", map);
+        return selectPagingListAjax("club.selectClubPagingList", map);
     }
 
     public Map<String, Object> selectClubListCnt(Map<String, Object> map) {
@@ -54,17 +75,7 @@ public class ClubDao extends AbstractDao {
         delete("club.deleteClubJoin", map);
     }
 
-    public Map<String, Object> selectClubPrfl(Map<String, Object> map) {
-        return selectOne("club.selectClubPrfl", map);
-    }
 
-    public List<Map<String, Object>> selectClubMmbrList(Map<String, Object> map) {
-        return selectPagingListAjax("club.selectClubMmbrList", map);
-    }
-
-    public Map<String, Object> selectClubMmbrListCnt(Map<String, Object> map) {
-        return selectOne("club.selectClubMmbrListCnt", map);
-    }
 
     public List<Map<String, Object>> selectClubGameList(Map<String, Object> map) {
         return selectPagingListAjax("club.selectClubGameList", map);

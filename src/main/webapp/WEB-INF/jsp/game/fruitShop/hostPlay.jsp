@@ -486,9 +486,6 @@
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
 
-<!-- 회원프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
-
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 
 </body>

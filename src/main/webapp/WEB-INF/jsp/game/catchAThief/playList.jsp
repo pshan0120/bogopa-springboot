@@ -92,7 +92,7 @@
             $("#insertPlayForm input[name='clubNo']").val("<c:out value="${clubNo}" />");
             $("#insertPlayForm input[name='playNm']").val("");
 
-            minPlyrCnt = 8;
+            minPlyrCnt = 7;
             maxPlyrCnt = 16;
             joinPlyrCnt = 0;
 
@@ -220,7 +220,7 @@
         };
 
         const insertPlayCallback = data => {
-            location.href = "/game/fruit-shop/play/" + data.playNo;
+            location.href = "/game/catch-a-thief/play/" + data.playNo;
         }
 
         const createCatchAThiefMember = () => {
@@ -395,8 +395,6 @@
     <!-- /.modal-dialog -->
 </div>
 
-<!-- 회원프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/clubPrflModal.jsp" %>
 <!-- 플레이기록 -->

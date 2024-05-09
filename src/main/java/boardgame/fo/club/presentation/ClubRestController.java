@@ -1,0 +1,31 @@
+package boardgame.fo.club.presentation;
+
+import boardgame.com.util.SessionUtils;
+import boardgame.fo.club.dto.ReadPageRequestDto;
+import boardgame.fo.club.service.ClubService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+@ResponseStatus(HttpStatus.OK)
+@RequestMapping("/api/club")
+@RestController
+@RequiredArgsConstructor
+public class ClubRestController {
+
+    private final ClubService clubService;
+
+    @GetMapping("/profile")
+    public Map<String, Object> readProfileById(@RequestParam long clubId) {
+        return clubService.readProfileById(clubId, SessionUtils.getCurrentMemberIdOrNull());
+    }
+
+    @GetMapping("/member/page")
+    public Page<Map<String, Object>> readClubMemberPageById(ReadPageRequestDto requestDto) {
+        return clubService.readClubMemberPageById(requestDto);
+    }
+
+}

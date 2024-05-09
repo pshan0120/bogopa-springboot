@@ -45,7 +45,7 @@ public class MypageController {
     public ModelAndView openMyPageId(@PathVariable("id") String id, CommandMap commandMap, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("/fo/myPage");
         commandMap.put("mmbrScrtKey", id);
-        Map<String, Object> memberMap = memberService.selectMmbr(commandMap.getMap());
+        Map<String, Object> memberMap = memberService.selectMember(commandMap.getMap());
         if (MapUtils.isNotEmpty(memberMap)) {
             loginService.setLogin((Long) memberMap.get("mmbrNo"), request);
         }

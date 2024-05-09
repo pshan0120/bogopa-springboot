@@ -72,7 +72,7 @@
                     str += "	</td>";
                     str += "	<td scope=\"row\">";
                     str += "		<div class=\"media align-items-center\">";
-                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openMmbrPrflModal('" + value.mstrMmbrNo + "')\">";
+                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"openMemberProfileModal('" + value.mstrMmbrNo + "')\">";
                     if (value.mstrPrflImgFileNm != "") {
                         str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mstrMmbrNo + "/" + value.mstrPrflImgFileNm + "\">";
                     } else {
@@ -232,7 +232,7 @@
                     str += "<tr>";
                     str += "	<td scope=\"row\">";
                     str += "		<div class=\"media align-items-center\">";
-                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openMmbrPrflModal('" + value.mmbrNo + "')\">";
+                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"openMemberProfileModal('" + value.mmbrNo + "')\">";
                     if (value.prflImgFileNm != "") {
                         str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.prflImgFileNm + "\">";
                     } else {
@@ -280,6 +280,10 @@
                 // submit 필수
                 $("#insertClubForm").submit();
             }
+        }
+
+        const openMemberProfileModal = memberId => {
+            memberProfileModal.open(memberId);
         }
 
     </script>
@@ -534,7 +538,7 @@
 </div>
 
 <!-- 회원프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/mmbrPrflModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/jspf/memberProfileModal.jspf" %>
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/clubPrflModal.jsp" %>
 <!-- 플레이기록 -->
