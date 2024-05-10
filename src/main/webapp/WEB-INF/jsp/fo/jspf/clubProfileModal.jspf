@@ -12,6 +12,7 @@
                 .catch(response => console.error('error', response));
         },
         readProfileByIdCallback: data => {
+            // TODO: 여기부터
             /*
             $("#showClubJoinBtn").hide();
             $("#quitClubBtn").hide();

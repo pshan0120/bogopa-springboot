@@ -77,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
         String nickNm = (String) mmbrMap.get("nickNm");
         String email = (String) mmbrMap.get("email");
         String mmbrTypeCd = (String) mmbrMap.get("mmbrTypeCd");
-        String clubNo = (String) mmbrMap.get("clubNo");
+        Integer clubNo = (Integer) mmbrMap.get("clubNo");
 
         // 세션 사용자 정보 세팅
         session.setAttribute("mmbrNo", mmbrNo);

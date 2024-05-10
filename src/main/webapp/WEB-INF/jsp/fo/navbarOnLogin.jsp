@@ -4,7 +4,7 @@
     //request.setCharacterEncoding("euc-kr");
     Long mmbrNo = (Long) session.getAttribute("mmbrNo");
     String nickNm = (String) session.getAttribute("nickNm");
-    String clubNo = (String) session.getAttribute("clubNo");
+    Integer clubNo = (Integer) session.getAttribute("clubNo");
     String mmbrTypeCd = (String) session.getAttribute("mmbrTypeCd");
 
     boolean loggedIn = SessionUtils.isMemberLogin();
