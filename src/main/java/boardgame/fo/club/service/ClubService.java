@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface ClubService {
 
-    Map<String, Object> readProfileById(long clubId, Long memberId);
+    Map<String, Object> readInfoById(long clubId, Long memberId);
 
     CustomPageResponse<Map<String, Object>> readClubMemberPageById(ReadPageRequestDto requestDto);
 

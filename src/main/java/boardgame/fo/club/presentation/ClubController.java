@@ -206,7 +206,7 @@ public class ClubController {
         }
 
         long clubId = (long) commandMap.get("clubNo");
-        mv.addObject("map", clubService.readProfileById(clubId, memberId));
+        mv.addObject("map", clubService.readInfoById(clubId, memberId));
         result = true;
 
         mv.addObject("isLogin", isLogin);

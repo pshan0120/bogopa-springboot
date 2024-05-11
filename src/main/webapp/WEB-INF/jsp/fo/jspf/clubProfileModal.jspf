@@ -1,42 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script>
-    const clubProfileModal = {
-        open: clubId => {
-            clubProfileModal.readProfileById(clubId);
+    $(() => {
+        const $modal = $("#clubProfileModal");
+        const $tablistUl = $modal.find("ul[name='tablistUl']");
 
-            $("#clubProfileModal").modal("show");
+        $tablistUl.find("a").click((e) => {
+            const $this = $(e.currentTarget);
+            const tabId = $this.data("tabId");
+            console.log('tabId', tabId);
+
+            if (tabId === "info") {
+                clubProfileModal.readInfoById(clubProfileModal.clubId);
+            }
+
+            if (tabId === "member") {
+                clubProfileModal.readClubMemberPageById(1);
+            }
+
+            if (tabId === "game") {
+
+            }
+
+            if (tabId === "activity") {
+
+            }
+        });
+    });
+
+    const clubProfileModal = {
+        clubId: null,
+        PAGE_SIZE: 5,
+        open: clubId => {
+            clubProfileModal.clubId = clubId;
+
+            const $modal = $("#clubProfileModal");
+            $modal.modal("show");
+
+            const $tablistUl = $modal.find("ul[name='tablistUl']");
+            $tablistUl.find("a:first").click();
         },
-        readProfileById: clubId => {
-            gfn_callGetApi("/api/club/profile", {clubId})
-                .then(data => clubProfileModal.readProfileByIdCallback(data))
+        readInfoById: clubId => {
+            gfn_callGetApi("/api/club/info", {clubId})
+                .then(data => clubProfileModal.readInfoByIdCallback(data))
                 .catch(response => console.error('error', response));
         },
-        readProfileByIdCallback: data => {
-            // TODO: 여기부터
-            /*
-            $("#showClubJoinBtn").hide();
-            $("#quitClubBtn").hide();
-            $("#cancelClubJoinBtn").hide();
-            $("#dsprsClubBtn").hide();
-            if(data.isLogin == true) {
-                if(data.map.mstrMmbrYn == "N") {
-                    if(data.map.mmbrClubJoinIngYn == "N") { // memberClubJoinRequested
-                        if(data.map.clubJoinYn != "Y") {    // clubJoined
-                            $("#showClubJoinBtn").show();
-                        }
-                        if(data.map.mstrMmbrYn == "N" && data.map.quitClubYn == "Y") {  // clubQuitted
-                            $("#quitClubBtn").show();
-                        }
-                    } else {
-                        if(data.map.joinClubIngYn == "Y") { // clubJoinRequested
-                            $("#cancelClubJoinBtn").show();
-                        }
-                    }
-                } else {
-                    $("#dsprsClubBtn").show();
-                }
-            }*/
-
+        readInfoByIdCallback: data => {
             const $form = $("#clubInfoDiv").find("form");
             $form.find("img[name='clubProfileImage']").attr("src", createClubImageUrl(data.clubId, data.profileImageFileName));
             $form.find("input[name='clubName']").val(data.clubName);
@@ -45,116 +53,202 @@
             $form.find("input[name='contactTo']").val(data.contactTo);
             $form.find("input[name='address']").val(data.address);
             $form.find("textarea[name='introduction']").val(data.introduction);
+            $form.find("textarea[name='joinQuestion']").val(data.joinQuestion);
+
+            $("#showClubJoinButton").hide();
+            $("#clubJoinButton").hide();
+            $("#cancelClubJoinButton").hide();
+            $("#quitClubButton").hide();
+            $("#disbandClubButton").hide();
+
+            const loggedIn = JSON.parse("<%= SessionUtils.isMemberLogin() %>");
+            if (!loggedIn) {
+                return;
+            }
+
+            const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
+            if (data.masterMemberId === memberId) {
+                $("#disbandClubButton").show();
+                return;
+            }
+
+            if (data.memberClubJoinRequested) {
+                $("#cancelClubJoinButton").show();
+                return;
+            }
+
+            if (data.clubJoined) {
+                $("#quitClubButton").show();
+                return;
+            }
+
+            $("#showClubJoinButton").show();
         },
-        readClubMemberPageById: clubId => {
-            gfn_callGetApi("/api/club/member/page", {clubId})
+        showClubJoin: () => {
+            $("#showClubJoinButton").hide();
+
+            const $clubInfoDiv = $("#clubInfoDiv");
+            $clubInfoDiv.find("div[name='showClubJoinDiv']").show();
+            $("#clubJoinButton").show();
+        },
+        readClubMemberPageById: page => {
+            const request = {
+                clubId: clubProfileModal.clubId,
+                page,
+                size: clubProfileModal.PAGE_SIZE,
+                descending: true,
+                sortBy: "clubMemberGradeCode",
+            }
+
+            gfn_callGetApi("/api/club/member/page", request)
                 .then(data => clubProfileModal.readClubMemberPageByIdCallback(data))
                 .catch(response => console.error('error', response));
         },
         readClubMemberPageByIdCallback: data => {
-            const $form = $("#clubMemberDiv").find("form");
+            const $div = $("#clubMemberDiv");
+            const $tbody = $div.find("tbody");
 
+            const list = data.content;
+            if (list.length === 0) {
+                const htmlString = "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
+                gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+                return;
+            }
 
+            let htmlString = "";
+            $.each(list, (index, value) => {
+                htmlString += "<tr>";
+                htmlString += "	<td scope=\"row\">";
+                htmlString += "		<div class=\"media align-items-center\">";
+                htmlString += "			<span class=\"avatar avatar-sm rounded-circle mr-3\" >";
+                htmlString += "			<img src=\"" + createMemberImageUrl(data.memberId, data.profileImageFileName) + "\" class=\"rounded-circle\">";
+                /*if (value.profileImageFileName == "default") {
+                    htmlString += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\" class=\"rounded-circle\">";
+                } else {
+                    htmlString += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.profileImageFileName + "\">";
+                }*/
+                htmlString += "			</span>";
+                htmlString += "			<div class=\"media-body\">";
+                htmlString += "				<span class=\"mb-0 text-sm\">" + value.nickName + "</span>";
+                htmlString += "			</div>";
+                htmlString += "		</div>";
+                htmlString += "	</td>";
+                htmlString += "	<td>";
+                htmlString += "		" + ClubMemberGrade.ofCode(value.clubMemberGradeCode).title;
+                htmlString += "	</td>";
+                htmlString += "	<td>";
+                htmlString += "		" + value.joinedAt;
+                htmlString += "	</td>";
+                htmlString += "	<td>";
+                htmlString += "		" + gfn_comma(value.playCount);
+                htmlString += "	</td>";
+                htmlString += "</tr>";
+            });
 
-            /*$form.find("img[name='clubProfileImage']").attr("src", createClubImageUrl(data.clubId, data.profileImageFileName));
-            $form.find("input[name='clubName']").val(data.clubName);
-            $form.find("input[name='masterMemberName']").val(data.masterMemberName);
-            $form.find("input[name='clubGradeName']").val(ClubGrade.ofCode(data.clubGradeCode).title);
-            $form.find("input[name='contactTo']").val(data.contactTo);
-            $form.find("input[name='address']").val(data.address);
-            $form.find("textarea[name='introduction']").val(data.introduction);*/
+            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+
+            const params = {
+                pagingObject: $div.find("ul.pagination"),
+                pageIndex: "pageIndex",
+                totalCount: data.totalElements,
+                eventName: "clubProfileModal.readClubMemberPageById",
+                recordCount: clubProfileModal.PAGE_SIZE,
+            };
+
+            gfn_renderPaging(params);
         },
         close: () => {
         },
     }
 
 
-    /*function fn_openClubProfileModal(clubNo) {
-        fn_selectClubProfile(clubNo);
-        fn_selectClubMmbrList(1);
-        fn_selectClubGameList(1);
+    /*function openClubProfileModal(clubNo) {
+        selectClubProfile(clubNo);
+        selectClubMmbrList(1);
+        selectClubGameList(1);
 
-        fn_selectClubPlayRcrdList(1);
-        fn_selectClubPlayImgList(1);
+        selectClubPlayRcrdList(1);
+        selectClubPlayImgList(1);
     }*/
 
-    function fn_selectClubProfile(clubNo) {
+    /*function selectClubProfile(clubNo) {
         const comAjax = new ComAjax();
         comAjax.setUrl("<c:url value='/selectClubPrfl' />");
-        comAjax.setCallback("fn_selectClubProfileCallback");
+        comAjax.setCallback("selectClubProfileCallback");
         comAjax.addParam("clubNo", clubNo);
         comAjax.ajax();
-    }
+    }*/
 
-    function fn_selectClubProfileCallback(data) {
+    /*function selectClubProfileCallback(data) {
         gfn_setDataVal(data.map, "clubProfileForm");
         gfn_setDataVal(data.map, "clubJoinForm");
 
-        if(data.map.prflImgFileNm != "") {
-            $("#clubProfileImg").attr("src", "https://bogopayo.cafe24.com/img/club/" + data.map.clubNo + "/" + data.map.prflImgFileNm);
+        if (data.map.profileImageFileName != "") {
+            $("#clubProfileImg").attr("src", "https://bogopayo.cafe24.com/img/club/" + data.map.clubNo + "/" + data.map.profileImageFileName);
         } else {
             $("#clubProfileImg").attr("src", "https://bogopayo.cafe24.com/img/club/default.png");
         }
 
-        $("#showClubJoinBtn").hide();
-        $("#quitClubBtn").hide();
-        $("#cancelClubJoinBtn").hide();
-        $("#dsprsClubBtn").hide();
-        if(data.isLogin == true) {
-            if(data.map.mstrMmbrYn == "N") {
-                if(data.map.mmbrClubJoinIngYn == "N") {
-                    if(data.map.clubJoinYn != "Y") {
-                        $("#showClubJoinBtn").show();
+        $("#showClubJoinButton").hide();
+        $("#clubJoinButton").hide();
+        $("#cancelClubJoinButton").hide();
+        $("#quitClubButton").hide();
+        $("#disbandClubButton").hide();
+        if (data.isLogin == true) {
+            if (data.map.mstrMmbrYn == "N") {
+                if (data.map.mmbrClubJoinIngYn == "N") {
+                    if (data.map.clubJoinYn != "Y") {
+                        $("#showClubJoinButton").show();
                     }
-                    if(data.map.mstrMmbrYn == "N" && data.map.quitClubYn == "Y") {
-                        $("#quitClubBtn").show();
+                    if (data.map.mstrMmbrYn == "N" && data.map.quitClubYn == "Y") {
+                        $("#quitClubButton").show();
                     }
                 } else {
-                    if(data.map.joinClubIngYn == "Y") {
-                        $("#cancelClubJoinBtn").show();
+                    if (data.map.joinClubIngYn == "Y") {
+                        $("#cancelClubJoinButton").show();
                     }
                 }
             } else {
-                $("#dsprsClubBtn").show();
+                $("#disbandClubButton").show();
             }
         }
-    }
+    }*/
 
-    function fn_selectClubMmbrList(pageNo) {
+    /*function selectClubMmbrList(pageNo) {
         const comAjax = new ComAjax("clubProfileForm");
         comAjax.setUrl("<c:url value='/selectClubMmbrList' />");
-        comAjax.setCallback("fn_selectClubMmbrListCallback");
+        comAjax.setCallback("selectClubMmbrListCallback");
         comAjax.addParam("pageIndex", pageNo);
         comAjax.addParam("pageRow", 5);
         comAjax.ajax();
     }
 
-    function fn_selectClubMmbrListCallback(data) {
+    function selectClubMmbrListCallback(data) {
         var cnt = data.map.cnt;
         var body = $("#clubMmbrListTbl>tbody");
         body.empty();
         var str = "";
-        if(cnt == 0) {
+        if (cnt == 0) {
             str += "<tr><td colspan=\"4\" class=\"text-center\">조회결과가 없습니다.</td></tr>";
         } else {
             var params = {
-                divId : "clubMmbrListPageNav",
-                pageIndex : "pageIndex",
-                totalCount : cnt,
-                eventName : "fn_selectClubMmbrList",
-                recordCount : 5
+                divId: "clubMmbrListPageNav",
+                pageIndex: "pageIndex",
+                totalCount: cnt,
+                eventName: "selectClubMmbrList",
+                recordCount: 5
             };
             gfn_renderPaging(params);
 
-            $.each(data.map.list, function(key, value) {
+            $.each(data.map.list, function (key, value) {
                 str += "<tr>";
                 str += "	<td scope=\"row\">";
                 str += "		<div class=\"media align-items-center\">";
                 str += "			<span class=\"avatar avatar-sm rounded-circle mr-3\" >";
-                if(value.prflImgFileNm == "default") {
+                if (value.profileImageFileName == "default") {
                     str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\" class=\"rounded-circle\">";
                 } else {
-                    str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.prflImgFileNm + "\">";
+                    str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.profileImageFileName + "\">";
                 }
                 str += "			</span>";
                 str += "			<div class=\"media-body\">";
@@ -166,10 +260,10 @@
                 str += "		" + value.clubMmbrGrdNm;
                 str += "	</td>";
                 str += "	<td>";
-                str += "		" + value.fromDate;
+                str += "		" + value.joinedAt;
                 str += "	</td>";
                 str += "	<td>";
-                str += "		" + gfn_comma(value.playCnt);
+                str += "		" + gfn_comma(value.playCount);
                 str += "	</td>";
                 str += "</tr>";
             });
@@ -177,35 +271,35 @@
         body.append(str);
 
         $("#clubProfileModal").modal("show");
-    }
+    }*/
 
-    function fn_selectClubGameList(pageNo) {
+    function selectClubGameList(pageNo) {
         const comAjax = new ComAjax("clubProfileForm");
         comAjax.setUrl("<c:url value='/selectClubGameList' />");
-        comAjax.setCallback("fn_selectClubGameListCallback");
+        comAjax.setCallback("selectClubGameListCallback");
         comAjax.addParam("pageIndex", pageNo);
         comAjax.addParam("pageRow", 5);
         comAjax.ajax();
     }
 
-    function fn_selectClubGameListCallback(data) {
+    function selectClubGameListCallback(data) {
         var cnt = data.map.cnt;
         var body = $("#clubGameListTbl>tbody");
         body.empty();
         var str = "";
-        if(cnt == 0) {
+        if (cnt == 0) {
             str += "<tr><td colspan=\"3\" class=\"text-center\">조회결과가 없습니다.</td></tr>";
         } else {
             var params = {
-                divId : "clubGameListPageNav",
-                pageIndex : "pageIndex",
-                totalCount : cnt,
-                eventName : "fn_selectClubGameList",
-                recordCount : 5
+                divId: "clubGameListPageNav",
+                pageIndex: "pageIndex",
+                totalCount: cnt,
+                eventName: "selectClubGameList",
+                recordCount: 5
             };
             gfn_renderPaging(params);
 
-            $.each(data.map.list, function(key, value) {
+            $.each(data.map.list, function (key, value) {
                 str += "<tr>";
                 str += "	<td>";
                 str += "		" + value.gameNm;
@@ -214,7 +308,7 @@
                 str += "		" + value.minPlyrCnt + " ~ " + value.maxPlyrCnt;
                 str += "	</td>";
                 str += "	<td>";
-                str += "		" + gfn_comma(value.playCnt);
+                str += "		" + gfn_comma(value.playCount);
                 str += "	</td>";
                 str += "</tr>";
             });
@@ -224,15 +318,11 @@
         $("#clubProfileModal").modal("show");
     }
 
-    function fn_showClubJoin() {
-        $("#clubJoinBtn").show();
-        $("#showClubJoinDiv").show();
-        $("#showClubJoinBtn").hide();
-    }
 
-    function fn_clubJoin() {
-        if(gfn_validate("clubJoinForm")) {
-            if(confirm("모임에 가입 신청하시겠습니까?")) {
+
+    function clubJoin() {
+        if (gfn_validate("clubJoinForm")) {
+            if (confirm("모임에 가입 신청하시겠습니까?")) {
                 const comAjax = new ComAjax("clubJoinForm");
                 comAjax.setUrl("<c:url value='/clubJoin' />");
                 comAjax.setCallback("gfn_defaultCallback");
@@ -243,8 +333,8 @@
         }
     }
 
-    function fn_cancelClubJoin() {
-        if(confirm("가입 신청을 취소하시겠습니까?")) {
+    function cancelClubJoin() {
+        if (confirm("가입 신청을 취소하시겠습니까?")) {
             const comAjax = new ComAjax("clubProfileForm");
             comAjax.setUrl("<c:url value='/cancelClubJoin' />");
             comAjax.setCallback("gfn_defaultCallback");
@@ -254,8 +344,8 @@
         }
     }
 
-    function fn_quitClub() {
-        if(confirm("모임에서 탈퇴하시겠습니까?")) {
+    function quitClub() {
+        if (confirm("모임에서 탈퇴하시겠습니까?")) {
             const comAjax = new ComAjax("clubProfileForm");
             comAjax.setUrl("<c:url value='/quitClub' />");
             comAjax.setCallback("gfn_defaultCallback");
@@ -265,39 +355,39 @@
         }
     }
 
-    function fn_dsprsClub() {
+    function disbandClub() {
         alert("개발 예정입니다.");
         return;
     }
 
-    function fn_selectClubPlayRcrdList(pageNo) {
+    function selectClubPlayRcrdList(pageNo) {
         const comAjax = new ComAjax("clubProfileForm");
         comAjax.setUrl("<c:url value='/selectMyClubPlayRcrdList' />");
-        comAjax.setCallback("fn_selectClubPlayRcrdListCallback");
+        comAjax.setCallback("selectClubPlayRcrdListCallback");
         comAjax.addParam("pageIndex", pageNo);
         comAjax.addParam("pageRow", 5);
         comAjax.ajax();
     }
 
-    function fn_selectClubPlayRcrdListCallback(data) {
+    function selectClubPlayRcrdListCallback(data) {
         var cnt = data.map.cnt;
         var body = $("#clubPlayListTbl>tbody");
         body.empty();
 
         var str = "";
-        if(cnt == 0) {
+        if (cnt == 0) {
             str += "<tr><td colspan=\"3\" class=\"text-center\">조회결과가 없습니다.</td></tr>";
         } else {
             var params = {
-                divId : "clubPlayListPageNav",
-                pageIndex : "pageIndex",
-                totalCount : cnt,
-                eventName : "fn_selectClubPlayRcrdList",
-                recordCount : 5
+                divId: "clubPlayListPageNav",
+                pageIndex: "pageIndex",
+                totalCount: cnt,
+                eventName: "selectClubPlayRcrdList",
+                recordCount: 5
             };
             gfn_renderPaging(params);
 
-            $.each(data.map.list, function(key, value) {
+            $.each(data.map.list, function (key, value) {
                 str += "<tr>";
                 str += "	<td>";
                 str += "		" + value.playNm;
@@ -306,7 +396,7 @@
                 str += "		" + value.gameNm;
                 str += "	</td>";
                 str += "	<td>";
-                str += "		"+ value.endDt;
+                str += "		" + value.endDt;
                 str += "	</td>";
                 str += "</tr>";
             });
@@ -314,43 +404,43 @@
         body.append(str);
     }
 
-    function fn_selectClubPlayImgList(pageNo) {
+    function selectClubPlayImgList(pageNo) {
         const comAjax = new ComAjax("clubProfileForm");
         comAjax.setUrl("<c:url value='/selectMyClubPlayImgList' />");
-        comAjax.setCallback("fn_selectClubPlayImgListCallback");
+        comAjax.setCallback("selectClubPlayImgListCallback");
         comAjax.addParam("pageIndex", pageNo);
         comAjax.addParam("pageRow", 1);
         comAjax.ajax();
     }
 
-    function fn_selectClubPlayImgListCallback(data) {
+    function selectClubPlayImgListCallback(data) {
         var cnt = data.map.cnt;
         var body = $("#clubPlayImgListDiv");
         body.empty();
         var str = "";
-        if(cnt == 0) {
+        if (cnt == 0) {
             $("#clubPlayImgListPageNav").hide();
             $("#clubPlayImgListDiv").hide();
         } else {
             var params = {
-                divId : "clubPlayImgListPageNav",
-                pageIndex : "pageIndex",
-                totalCount : cnt,
-                eventName : "fn_selectClubPlayImgList",
-                recordCount : 1
+                divId: "clubPlayImgListPageNav",
+                pageIndex: "pageIndex",
+                totalCount: cnt,
+                eventName: "selectClubPlayImgList",
+                recordCount: 1
             };
             gfn_renderPaging(params);
 
             str += "<hr class=\"my-4\" />";
             str += "<h5>플레이소감</h5>";
             str += "<div class=\"row clearfix\">";
-            $.each(data.map.list, function(key, value) {
+            $.each(data.map.list, function (key, value) {
                 str += "<div class=\"col-lg-12 mb-4\">";
                 str += "	<div class=\"card\">";
                 str += "		<img src=\"https://bogopayo.cafe24.com/img/play/" + value.seq + "/" + value.fdbckImgFileNm + "\" class=\"card-img-top\">";
                 str += "		<div class=\"card-body\">";
                 str += "			<p class=\"card-text\">\"" + value.fdbck + "\"</p>";
-                str += "			<div class=\"card-text-footer\">" + value.nickNm + ", <cite>" + value.endDt + " " + value.gameNm + " " + value.rsltRnk + "등</cite></div>";
+                str += "			<div class=\"card-text-footer\">" + value.nickName + ", <cite>" + value.endDt + " " + value.gameNm + " " + value.rsltRnk + "등</cite></div>";
                 str += "		</div>";
                 str += "	</div>";
                 str += "</div>";
@@ -374,31 +464,36 @@
             </div>
             <div class="modal-body">
                 <div class="nav-wrapper">
-                    <ul class="nav nav-pills nav-fill flex-column flex-md-row" role="tablist">
+                    <ul class="nav nav-pills nav-fill flex-column flex-md-row" role="tablist" name="tablistUl">
                         <li class="nav-item">
-                            <a class="nav-link active" id="clubInfoTabA" data-toggle="tab" href="#clubInfoDiv" role="tab" aria-controls="clubInfoTab" aria-selected="true">
+                            <a class="nav-link active" id="clubInfoTabA" data-toggle="tab" href="#clubInfoDiv"
+                               data-tab-id="info" role="tab" aria-controls="clubInfoTab" aria-selected="true">
                                 모임정보
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="clubMemberTabA" data-toggle="tab" href="#clubMemberDiv" role="tab" aria-controls="clubMemberTab" aria-selected="false">
+                            <a class="nav-link" id="clubMemberTabA" data-toggle="tab" href="#clubMemberDiv"
+                               data-tab-id="member" role="tab" aria-controls="clubMemberTab" aria-selected="false">
                                 모임회원
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="clubGameTabA" data-toggle="tab" href="#clubGameDiv" role="tab" aria-controls="clubGameTab" aria-selected="false">
+                            <a class="nav-link" id="clubGameTabA" data-toggle="tab" href="#clubGameDiv"
+                               data-tab-id="game" role="tab" aria-controls="clubGameTab" aria-selected="false">
                                 보유게임
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="clubActivityTabA" data-toggle="tab" href="#clubActivityDiv" role="tab" aria-controls="clubActivityTab" aria-selected="false">
+                            <a class="nav-link" id="clubActivityTabA" data-toggle="tab" href="#clubActivityDiv"
+                               data-tab-id="activity" role="tab" aria-controls="clubActivityTab" aria-selected="false">
                                 최근 활동
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="tab-content">
-                    <div id="clubInfoDiv" class="tab-pane fade show active" role="tabpanel" aria-labelledby="clubInfoTabA">
+                    <div id="clubInfoDiv" class="tab-pane fade show active" role="tabpanel"
+                         aria-labelledby="clubInfoTabA">
                         <form>
                             <div class="row clearfix">
                                 <div class="col-lg-12">
@@ -409,55 +504,63 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label">모임</label>
-                                        <input type="text" name="clubName" class="form-control form-control-alternative" readonly>
+                                        <input type="text" name="clubName" class="form-control form-control-alternative"
+                                               readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">모임장</label>
-                                        <input type="text" name="masterMemberName" class="form-control form-control-alternative" readonly>
+                                        <input type="text" name="masterMemberName"
+                                               class="form-control form-control-alternative" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">등급</label>
-                                        <input type="text" name="clubGradeName" class="form-control form-control-alternative" readonly>
+                                        <input type="text" name="clubGradeName"
+                                               class="form-control form-control-alternative" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label">연락처</label>
-                                        <input type="text" name="contactTo" class="form-control form-control-alternative" readonly>
+                                        <input type="text" name="contactTo"
+                                               class="form-control form-control-alternative" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label">주소</label>
-                                        <input type="text" name="address" class="form-control form-control-alternative" readonly>
+                                        <input type="text" name="address" class="form-control form-control-alternative"
+                                               readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label">소개</label>
-                                        <textarea rows="4" name="introduction" class="form-control form-control-alternative" readonly></textarea>
+                                        <textarea rows="4" name="introduction"
+                                                  class="form-control form-control-alternative" readonly></textarea>
                                     </div>
                                 </div>
                             </div>
                         </form>
                         <div name="showClubJoinDiv" class="display-none">
-                            <hr class="my-4" />
+                            <hr class="my-4"/>
                             <form>
                                 <div class="row clearfix">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label">가입질문</label>
-                                            <textarea rows="4" name="joinQuestion" class="form-control form-control-alternative" readonly></textarea>
+                                            <textarea rows="4" name="joinQuestion"
+                                                      class="form-control form-control-alternative" readonly></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label">답변작성</label>
-                                            <textarea rows="4" name="joinAnswer" class="form-control form-control-alternative hasValue"></textarea>
+                                            <textarea rows="4" name="joinAnswer"
+                                                      class="form-control form-control-alternative hasValue"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -480,7 +583,7 @@
                             </table>
                         </div>
                         <nav aria-label="">
-                            <ul class="pagination pagination-sm justify-content-end mb-0" id="clubMmbrListPageNav"></ul>
+                            <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
                         </nav>
                     </div>
 
@@ -522,17 +625,28 @@
 
                         <div id="clubPlayImgListDiv"></div>
                         <nav aria-label="">
-                            <ul class="pagination pagination-sm justify-content-end mb-0" id="clubPlayImgListPageNav"></ul>
+                            <ul class="pagination pagination-sm justify-content-end mb-0"
+                                id="clubPlayImgListPageNav"></ul>
                         </nav>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info display-none" id="showClubJoinBtn" onclick="fn_showClubJoin();">모임가입</button>
-                <button type="button" class="btn btn-primary display-none" id="clubJoinBtn" onclick="fn_clubJoin();">가입요청</button>
-                <button type="button" class="btn btn-warning display-none" id="cancelClubJoinBtn" onclick="fn_cancelClubJoin();">가입요청취소</button>
-                <button type="button" class="btn btn-danger display-none" id="quitClubBtn" onclick="fn_quitClub();">모임탈퇴</button>
-                <button type="button" class="btn btn-danger display-none" id="dsprsClubBtn" onclick="fn_dsprsClub();">모임해체</button>
+                <button type="button" class="btn btn-info display-none" id="showClubJoinButton"
+                        onclick="clubProfileModal.showClubJoin();">모임가입
+                </button>
+                <button type="button" class="btn btn-primary display-none" id="clubJoinButton" onclick="clubJoin();">
+                    가입요청
+                </button>
+                <button type="button" class="btn btn-warning display-none" id="cancelClubJoinButton"
+                        onclick="cancelClubJoin();">가입요청취소
+                </button>
+                <button type="button" class="btn btn-danger display-none" id="quitClubButton" onclick="quitClub();">
+                    모임탈퇴
+                </button>
+                <button type="button" class="btn btn-danger display-none" id="disbandClubButton" onclick="disbandClub();">
+                    모임해체
+                </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
             </div>
         </div>

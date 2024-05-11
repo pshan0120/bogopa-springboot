@@ -18,11 +18,11 @@ public class ClubServiceImpl implements ClubService {
     private final ClubDao clubDao;
 
     @Override
-    public Map<String, Object> readProfileById(long clubId, Long memberId) {
+    public Map<String, Object> readInfoById(long clubId, Long memberId) {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put("clubId", clubId);
         requestMap.put("memberId", memberId);
-        return clubDao.selectClubProfile(requestMap);
+        return clubDao.selectClubInfo(requestMap);
     }
 
     @Override

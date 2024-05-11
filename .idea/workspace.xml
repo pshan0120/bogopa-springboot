@@ -9,12 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="모달 이동중">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="페이징 수정중">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/com/clubMemberGrade.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/login/service/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/login/service/LoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/dao/ClubDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/dao/ClubDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/join/presentation/JoinController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/join/presentation/JoinController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/guide.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/guide.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/navbarOnLogin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/imageUrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/imageUrl.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,14 +262,8 @@
       <workItem from="1715005659835" duration="1113000" />
       <workItem from="1715173170069" duration="9705000" />
       <workItem from="1715261897052" duration="15436000" />
-      <workItem from="1715304809960" duration="1542000" />
-    </task>
-    <task id="LOCAL-00040" summary="코드개선">
-      <created>1713552442465</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1713552442465</updated>
+      <workItem from="1715304809960" duration="1773000" />
+      <workItem from="1715391827328" duration="6261000" />
     </task>
     <task id="LOCAL-00041" summary="clubMmbr . activated 추가">
       <created>1713631036440</created>
@@ -599,7 +601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715281267719</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="clubNo 파싱 오류 수정">
+      <created>1715312231172</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1715312231173</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -620,8 +629,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="투표 개선" />
-    <MESSAGE value="comAjax 수정" />
     <MESSAGE value="푸드체인거물 수익계산기 추가" />
     <MESSAGE value="사운드 삭제" />
     <MESSAGE value="주석제거" />
@@ -645,7 +652,9 @@
     <MESSAGE value="가이드 변경" />
     <MESSAGE value="myRoleModal 수정" />
     <MESSAGE value="모달 이동중" />
-    <option name="LAST_COMMIT_MESSAGE" value="모달 이동중" />
+    <MESSAGE value="clubNo 파싱 오류 수정" />
+    <MESSAGE value="페이징 수정중" />
+    <option name="LAST_COMMIT_MESSAGE" value="페이징 수정중" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

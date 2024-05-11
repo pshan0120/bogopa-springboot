@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="club">
 
-	<select id="selectClubProfile" parameterType="hashmap" resultType="hashmap">
+	<select id="selectClubInfo" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
 				c.clubNo AS clubId,
@@ -21,21 +21,12 @@
 				FROM
 					clubMmbr cm
 				WHERE
-					cm.mmbrNo = #{memberId}
-				AND
-					cm.activated IS TRUE
-				) AS clubJoined,
-				(SELECT
-					COUNT(*) > 0
-				FROM
-					clubMmbr cm
-				WHERE
 					c.clubNo = cm.clubNo
 				AND
 					cm.activated IS TRUE
 				AND
 					cm.mmbrNo = #{memberId}
-				) AS clubQuitted,
+				) AS clubJoined,
 				(SELECT
 					COUNT(*) > 0
 				FROM
@@ -66,14 +57,14 @@
 		]]>
 	</select>
 
-	<select id="selectClubList" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="hashmap">
+	<select id="selectClubMemberList" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="hashmap">
 		<include refid="com.pagePrefix"/>
 		SELECT
 			cm.mmbrNo AS memberId,
 			m.nickNm AS nickName,
 			cm.clubMmbrGrdCd AS clubMemberGradeCode,
 			cm.fromDate AS joinedAt,
-			IFNULL(m.prflImgFileNm, 'default') AS profileImageFileName,
+			m.prflImgFileNm AS profileImageFileName,
 			(SELECT
 				COUNT(*)
 			FROM
@@ -102,7 +93,7 @@
 		<include refid="com.pagePostfix"/>
 	</select>
 
-	<select id="selectClubCount" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="long">
+	<select id="selectClubMemberCount" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="long">
 		SELECT
 			COUNT(*)
 		FROM
@@ -120,7 +111,7 @@
 		AND
 			cm.activated IS TRUE
 		AND
-			c.clubNo = #{clubNo}
+			c.clubNo = #{clubId}
 	</select>
 
 

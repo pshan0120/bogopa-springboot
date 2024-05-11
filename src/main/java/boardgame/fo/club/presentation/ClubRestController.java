@@ -18,9 +18,9 @@ public class ClubRestController {
 
     private final ClubService clubService;
 
-    @GetMapping("/profile")
-    public Map<String, Object> readProfileById(@RequestParam long clubId) {
-        return clubService.readProfileById(clubId, SessionUtils.getCurrentMemberIdOrNull());
+    @GetMapping("/info")
+    public Map<String, Object> readInfoById(@RequestParam long clubId) {
+        return clubService.readInfoById(clubId, SessionUtils.getCurrentMemberIdOrNull());
     }
 
     @GetMapping("/member/page")

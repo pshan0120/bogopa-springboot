@@ -34,7 +34,7 @@
             const $tbody = $div.find("tbody");
 
             const list = data.content;
-            if (list.length == 0) {
+            if (list.length === 0) {
                 const htmlString = "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
                 gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
                 return;
@@ -78,7 +78,7 @@
 
             const list = data.content;
 
-            if (list.length == 0) {
+            if (list.length === 0) {
                 const htmlString = "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
                 gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
                 return;

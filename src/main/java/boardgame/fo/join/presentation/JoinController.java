@@ -50,7 +50,7 @@ public class JoinController {
         Long clubId = (Long) memberMap.get("clubNo");
         if (Optional.ofNullable(clubId).isPresent()) {
             mv.addObject("invtMap", memberService.selectMember(commandMap.getMap()));
-            mv.addObject("clubMap", clubService.readProfileById(clubId, memberId));
+            mv.addObject("clubMap", clubService.readInfoById(clubId, memberId));
         }
         return mv;
     }

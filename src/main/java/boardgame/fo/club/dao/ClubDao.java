@@ -11,12 +11,12 @@ import java.util.Map;
 @Repository
 public class ClubDao extends AbstractDao {
 
-    public Map<String, Object> selectClubProfile(Map<String, Object> map) {
-        return selectOne("club.selectClubProfile", map);
+    public Map<String, Object> selectClubInfo(Map<String, Object> map) {
+        return selectOne("club.selectClubInfo", map);
     }
 
     public CustomPageResponse<Map<String, Object>> selectClubMemberPage(ReadPageRequestDto dto) {
-        return selectPage("board.selectClubList", "board.selectClubCount", dto);
+        return selectPage("club.selectClubMemberList", "club.selectClubMemberCount", dto);
     }
 
     public List<Map<String, Object>> selectClubMmbrList(Map<String, Object> map) {
