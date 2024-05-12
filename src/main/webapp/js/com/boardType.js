@@ -13,8 +13,8 @@ class BoardType {
     };
 
     static ofCode = code => {
-        if (this.NOTICE.code === code) return this.NOTICE;
-        if (this.FAQ.code === code) return this.FAQ;
+        if (this.NOTICE.code == code) return this.NOTICE;
+        if (this.FAQ.code == code) return this.FAQ;
     }
 
 }

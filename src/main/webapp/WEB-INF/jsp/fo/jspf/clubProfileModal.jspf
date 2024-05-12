@@ -254,7 +254,96 @@
 
             gfn_renderPaging(params);
         },
+        readClubPlayImagePageById: page => {
+            const request = {
+                clubId: clubProfileModal.clubId,
+                page,
+                size: clubProfileModal.PAGE_SIZE,
+                descending: true,
+                sortBy: "endDateTime",
+            }
 
+            gfn_callGetApi("/api/club/play/image/page", request)
+                .then(data => clubProfileModal.readClubPlayImagePageByIdCallback(data))
+                .catch(response => console.error('error', response));
+        },
+        readClubPlayImagePageByIdCallback: data => {
+            const $div = $("#clubPlayImageDiv");
+            const $tbody = $div.find("tbody");
+
+            const list = data.content;
+            if (list.length === 0) {
+                $("#clubPlayImageDiv").hide();
+                return;
+            }
+
+            let htmlString = "";
+            htmlString += "<hr class=\"my-4\" />";
+            htmlString += "<h5>플레이소감</h5>";
+            htmlString += "<div class=\"row clearfix\">";
+            $.each(list, (index, value) => {
+                htmlString += "<div class=\"col-lg-12 mb-4\">";
+                htmlString += "	<div class=\"card\">";
+                htmlString += "		<img src=\"https://bogopayo.cafe24.com/img/play/" + value.seq + "/" + value.fdbckImgFileNm + "\" class=\"card-img-top\">";
+                htmlString += "		<div class=\"card-body\">";
+                htmlString += "			<p class=\"card-text\">\"" + value.fdbck + "\"</p>";
+                htmlString += "			<div class=\"card-text-footer\">" + value.nickName + ", <cite>" + value.endDt + " " + value.gameNm + " " + value.rsltRnk + "등</cite></div>";
+                htmlString += "		</div>";
+                htmlString += "	</div>";
+                htmlString += "</div>";
+            });
+            htmlString += "</div>";
+
+            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+
+            const params = {
+                pagingObject: $div.find("ul.pagination"),
+                pageIndex: "pageIndex",
+                totalCount: data.totalElements,
+                eventName: "clubProfileModal.readClubPlayImagePageById",
+                recordCount: clubProfileModal.PAGE_SIZE,
+            };
+
+            gfn_renderPaging(params);
+
+            $("#clubPlayImageDiv").show();
+        },
+
+        
+
+
+        /*if (cnt == 0) {
+        $("#clubPlayImgListPageNav").hide();
+        $("#clubPlayImageDiv").hide();
+    } else {
+        var params = {
+            divId: "clubPlayImgListPageNav",
+            pageIndex: "pageIndex",
+            totalCount: cnt,
+            eventName: "selectClubPlayImgList",
+            recordCount: 1
+        };
+        gfn_renderPaging(params);
+
+        str += "<hr class=\"my-4\" />";
+        str += "<h5>플레이소감</h5>";
+        str += "<div class=\"row clearfix\">";
+        $.each(data.map.list, function (key, value) {
+            str += "<div class=\"col-lg-12 mb-4\">";
+            str += "	<div class=\"card\">";
+            str += "		<img src=\"https://bogopayo.cafe24.com/img/play/" + value.seq + "/" + value.fdbckImgFileNm + "\" class=\"card-img-top\">";
+            str += "		<div class=\"card-body\">";
+            str += "			<p class=\"card-text\">\"" + value.fdbck + "\"</p>";
+            str += "			<div class=\"card-text-footer\">" + value.nickName + ", <cite>" + value.endDt + " " + value.gameNm + " " + value.rsltRnk + "등</cite></div>";
+            str += "		</div>";
+            str += "	</div>";
+            str += "</div>";
+        });
+        str += "</div>";
+        $("#clubPlayImageDiv").show();
+        $("#clubPlayImgListPageNav").show();
+    }
+    body.append(str);*/
 
         close: () => {
         },
@@ -514,12 +603,12 @@
 
     function selectClubPlayImgListCallback(data) {
         var cnt = data.map.cnt;
-        var body = $("#clubPlayImgListDiv");
+        var body = $("#clubPlayImageDiv");
         body.empty();
         var str = "";
         if (cnt == 0) {
             $("#clubPlayImgListPageNav").hide();
-            $("#clubPlayImgListDiv").hide();
+            $("#clubPlayImageDiv").hide();
         } else {
             var params = {
                 divId: "clubPlayImgListPageNav",
@@ -545,7 +634,7 @@
                 str += "</div>";
             });
             str += "</div>";
-            $("#clubPlayImgListDiv").show();
+            $("#clubPlayImageDiv").show();
             $("#clubPlayImgListPageNav").show();
         }
         body.append(str);
@@ -717,16 +806,24 @@
                                 </thead>
                                 <tbody></tbody>
                             </table>
+                            <nav aria-label="">
+                                <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
+                            </nav>
                         </div>
-                        <nav aria-label="">
-                            <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
-                        </nav>
 
-                        <div id="clubPlayImgListDiv"></div>
-                        <nav aria-label="">
+
+                        <div id="clubPlayImageDiv">
+                            <table class="table align-items-center table-flush">
+                                <tbody></tbody>
+                            </table>
+                            <nav aria-label="">
+                                <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
+                            </nav>
+                        </div>
+                        <%--<nav aria-label="">
                             <ul class="pagination pagination-sm justify-content-end mb-0"
                                 id="clubPlayImgListPageNav"></ul>
-                        </nav>
+                        </nav>--%>
                     </div>
                 </div>
             </div>

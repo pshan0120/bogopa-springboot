@@ -10,17 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="페이징 수정중">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config/mybatis-config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/dao/ClubDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/dao/ClubDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/dto/ReadPageRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/dto/ReadPageRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/service/ClubServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/spring/context-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/spring/context-mapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myClub.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myClub.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/boardType.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/boardType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/clubGrade.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/clubGrade.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/clubMemberGrade.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/clubMemberGrade.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/memberType.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/memberType.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,14 +263,7 @@
       <workItem from="1715261897052" duration="15436000" />
       <workItem from="1715304809960" duration="1773000" />
       <workItem from="1715391827328" duration="6299000" />
-      <workItem from="1715527112396" duration="4182000" />
-    </task>
-    <task id="LOCAL-00042" summary="clubMmbr . activated 추가">
-      <created>1713633232131</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1713633232131</updated>
+      <workItem from="1715527112396" duration="5976000" />
     </task>
     <task id="LOCAL-00043" summary="backgroundMusic 추가">
       <created>1713636053102</created>
@@ -607,7 +601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715399012909</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="페이징 수정중">
+      <created>1715533392303</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1715533392304</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

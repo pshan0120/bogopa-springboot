@@ -19,9 +19,9 @@ class ClubGrade {
     };
 
     static ofCode = code => {
-        if (this.BRONZE.code === code) return this.BRONZE;
-        if (this.SILVER.code === code) return this.SILVER;
-        if (this.GOLD.code === code) return this.GOLD;
+        if (this.BRONZE.code == code) return this.BRONZE;
+        if (this.SILVER.code == code) return this.SILVER;
+        if (this.GOLD.code == code) return this.GOLD;
     };
 
 }

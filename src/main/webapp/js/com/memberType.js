@@ -13,8 +13,8 @@ class MemberType {
     };
 
     static ofCode = code => {
-        if (this.CLUB_MEMBER.code === code) return this.CLUB_MEMBER;
-        if (this.CLUB_MASTER.code === code) return this.CLUB_MASTER;
+        if (this.CLUB_MEMBER.code == code) return this.CLUB_MEMBER;
+        if (this.CLUB_MASTER.code == code) return this.CLUB_MASTER;
     }
 
 }

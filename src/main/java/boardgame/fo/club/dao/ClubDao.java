@@ -27,6 +27,9 @@ public class ClubDao extends AbstractDao {
         return selectPage("club.selectClubActivityList", "club.selectClubActivityCount", dto);
     }
 
+    public CustomPageResponse<Map<String, Object>> selectPlayImagePageById(ReadPageRequestDto dto) {
+        return selectPage("club.selectPlayImageList", "club.selectPlayImageCount", dto);
+    }
 
 
 

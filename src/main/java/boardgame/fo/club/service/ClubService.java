@@ -16,6 +16,9 @@ public interface ClubService {
 
     CustomPageResponse<Map<String, Object>> readClubActivityPageById(ReadPageRequestDto requestDto);
 
+    CustomPageResponse<Map<String, Object>> readPlayImagePageById(ReadPageRequestDto requestDto);
+
+
     Map<String, Object> selectClubMmbrList(Map<String, Object> map);
 
 

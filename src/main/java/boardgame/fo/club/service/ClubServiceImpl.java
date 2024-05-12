@@ -40,6 +40,11 @@ public class ClubServiceImpl implements ClubService {
         return clubDao.selectClubActivityPageById(requestDto);
     }
 
+    @Override
+    public CustomPageResponse<Map<String, Object>> readPlayImagePageById(ReadPageRequestDto requestDto) {
+        return clubDao.selectPlayImagePageById(requestDto);
+    }
+
 
     @Override
     public Map<String, Object> selectClubMmbrList(Map<String, Object> map) {

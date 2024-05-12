@@ -204,6 +204,59 @@
 			p.clubNo = #{clubId}
 	</select>
 
+	<select id="selectPlayImageList" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="hashmap">
+		<include refid="com.pagePrefix"/>
+		SELECT
+			p.playNo,
+			pm.seq,
+			pm.rsltRnk,
+			DATE(p.endDt) AS endDate,
+			IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,
+			g.gameNm,
+			IFNULL(pm.fdbck, '') AS fdbck,
+			pm.fdbckImgFileNm,
+			pm.mmbrNo,
+			m.nickNm,
+			IFNULL(m.prflImgFileNm, '') AS prflImgFileNm
+		FROM
+			club c,
+			play p,
+			playMmbr pm,
+			mmbr m,
+			game g
+		WHERE
+			c.clubNo = p.clubNo
+		AND
+			p.playNo = pm.playNo
+		AND
+			pm.mmbrNo = m.mmbrNo
+		AND
+			p.gameNo = g.gameNo
+		AND
+			IFNULL(pm.fdbckImgFileNm, '') != ''
+		AND
+			c.clubNo = #{clubId}
+		ORDER BY
+			pm.seq DESC
+		<include refid="com.pagePostfix"/>
+	</select>
+
+	<select id="selectPlayImageCount" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="long">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			play p,
+			game g,
+			club c
+		WHERE
+			p.gameNo = g.gameNo
+		AND
+			p.clubNo = c.clubNo
+		AND
+			p.clubNo = #{clubId}
+	</select>
+
+
 
 
 

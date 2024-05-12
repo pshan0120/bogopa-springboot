@@ -38,4 +38,9 @@ public class ClubRestController {
         return clubService.readClubActivityPageById(requestDto);
     }
 
+    @GetMapping("/play/image/page")
+    public Page<Map<String, Object>> readPlayImagePageById(ReadPageRequestDto requestDto) {
+        return clubService.readPlayImagePageById(requestDto);
+    }
+
 }
