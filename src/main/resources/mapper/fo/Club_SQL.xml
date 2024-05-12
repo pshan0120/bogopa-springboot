@@ -114,6 +114,98 @@
 			c.clubNo = #{clubId}
 	</select>
 
+	<select id="selectClubGameList" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="hashmap">
+		<include refid="com.pagePrefix"/>
+		SELECT
+			cg.gameNo AS gameId,
+			g.gameNm AS gameName,
+			g.minPlyrCnt AS numberOfMinPlayer,
+			g.maxPlyrCnt AS numberOfMaxPlayer,
+			(SELECT
+				COUNT(*)
+			FROM
+				play p1
+			WHERE
+				p1.clubNo = cg.clubNo
+			AND
+				p1.gameNo = cg.gameNo
+			) AS numberOfPlayed
+		FROM
+			club c,
+			clubGame cg,
+			game g
+		WHERE
+			c.clubNo = cg.clubNo
+		AND
+			cg.gameNo = g.gameNo
+		AND
+			c.useYn = 'Y'
+		AND
+			c.clubNo = #{clubId}
+		ORDER BY
+			cg.gameNo
+		<include refid="com.pagePostfix"/>
+	</select>
+
+	<select id="selectClubGameCount" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="long">
+		SELECT
+			COUNT(*)
+		FROM
+			club c,
+			clubGame cg,
+			game g
+		WHERE
+			c.clubNo = cg.clubNo
+		AND
+			cg.gameNo = g.gameNo
+		AND
+			c.useYn = 'Y'
+		AND
+			c.clubNo = #{clubId}
+		ORDER BY
+			cg.gameNo
+	</select>
+
+	<select id="selectClubActivityList" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="hashmap">
+		<include refid="com.pagePrefix"/>
+		SELECT
+			p.playNo AS playId,
+			p.playNm AS playName,
+			g.gameNo AS gameId,
+			g.gameNm AS gameName,
+			p.endDt AS endDateTime
+		FROM
+			play p,
+			game g,
+			club c
+		WHERE
+			p.gameNo = g.gameNo
+		AND
+			p.clubNo = c.clubNo
+		AND
+			p.clubNo = #{clubId}
+		ORDER BY
+			p.playNo DESC
+		<include refid="com.pagePostfix"/>
+	</select>
+
+	<select id="selectClubActivityCount" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="long">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			play p,
+			game g,
+			club c
+		WHERE
+			p.gameNo = g.gameNo
+		AND
+			p.clubNo = c.clubNo
+		AND
+			p.clubNo = #{clubId}
+	</select>
+
+
+
 
 
 	<select id="selectClubMmbrList" parameterType="hashmap" resultType="hashmap">
@@ -713,7 +805,7 @@
 
 	
 	
-	<select id="selectClubGameList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectClubGamePagingList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				cg.gameNo,

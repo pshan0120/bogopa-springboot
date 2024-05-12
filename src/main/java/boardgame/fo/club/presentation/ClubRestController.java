@@ -28,4 +28,14 @@ public class ClubRestController {
         return clubService.readClubMemberPageById(requestDto);
     }
 
+    @GetMapping("/game/page")
+    public Page<Map<String, Object>> readClubGamePageById(ReadPageRequestDto requestDto) {
+        return clubService.readClubGamePageById(requestDto);
+    }
+
+    @GetMapping("/activity/page")
+    public Page<Map<String, Object>> readClubActivityPageById(ReadPageRequestDto requestDto) {
+        return clubService.readClubActivityPageById(requestDto);
+    }
+
 }

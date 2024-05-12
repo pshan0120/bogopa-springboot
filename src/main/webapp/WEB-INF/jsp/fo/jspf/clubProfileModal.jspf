@@ -18,11 +18,11 @@
             }
 
             if (tabId === "game") {
-
+                clubProfileModal.readClubGamePageById(1);
             }
 
             if (tabId === "activity") {
-
+                clubProfileModal.readClubActivityPageById(1);
             }
         });
     });
@@ -122,11 +122,6 @@
                 htmlString += "		<div class=\"media align-items-center\">";
                 htmlString += "			<span class=\"avatar avatar-sm rounded-circle mr-3\" >";
                 htmlString += "			<img src=\"" + createMemberImageUrl(data.memberId, data.profileImageFileName) + "\" class=\"rounded-circle\">";
-                /*if (value.profileImageFileName == "default") {
-                    htmlString += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\" class=\"rounded-circle\">";
-                } else {
-                    htmlString += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.profileImageFileName + "\">";
-                }*/
                 htmlString += "			</span>";
                 htmlString += "			<div class=\"media-body\">";
                 htmlString += "				<span class=\"mb-0 text-sm\">" + value.nickName + "</span>";
@@ -157,6 +152,110 @@
 
             gfn_renderPaging(params);
         },
+        readClubGamePageById: page => {
+            const request = {
+                clubId: clubProfileModal.clubId,
+                page,
+                size: clubProfileModal.PAGE_SIZE,
+                descending: true,
+                sortBy: "numberOfPlayed",
+            }
+
+            gfn_callGetApi("/api/club/game/page", request)
+                .then(data => clubProfileModal.readClubGamePageByIdCallback(data))
+                .catch(response => console.error('error', response));
+        },
+        readClubGamePageByIdCallback: data => {
+            const $div = $("#clubGameDiv");
+            const $tbody = $div.find("tbody");
+
+            const list = data.content;
+            if (list.length === 0) {
+                const htmlString = "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
+                gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+                return;
+            }
+
+            let htmlString = "";
+            $.each(list, (index, value) => {
+                htmlString += "<tr>";
+                htmlString += "	<td>";
+                htmlString += "		" + value.gameName;
+                htmlString += "	</td>";
+                htmlString += "	<td>";
+                htmlString += "		" + value.numberOfMinPlayer + " ~ " + value.numberOfMaxPlayer;
+                htmlString += "	</td>";
+                htmlString += "	<td>";
+                htmlString += "		" + gfn_comma(value.numberOfPlayed);
+                htmlString += "	</td>";
+                htmlString += "</tr>";
+            });
+
+            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+
+            const params = {
+                pagingObject: $div.find("ul.pagination"),
+                pageIndex: "pageIndex",
+                totalCount: data.totalElements,
+                eventName: "clubProfileModal.readClubGamePageById",
+                recordCount: clubProfileModal.PAGE_SIZE,
+            };
+
+            gfn_renderPaging(params);
+        },
+        readClubActivityPageById: page => {
+            const request = {
+                clubId: clubProfileModal.clubId,
+                page,
+                size: clubProfileModal.PAGE_SIZE,
+                descending: true,
+                sortBy: "endDateTime",
+            }
+
+            gfn_callGetApi("/api/club/activity/page", request)
+                .then(data => clubProfileModal.readClubActivityPageByIdCallback(data))
+                .catch(response => console.error('error', response));
+        },
+        readClubActivityPageByIdCallback: data => {
+            const $div = $("#clubActivityDiv");
+            const $tbody = $div.find("tbody");
+
+            const list = data.content;
+            if (list.length === 0) {
+                const htmlString = "<tr><td colspan='3' class=\"text-center\">조회결과가 없습니다.</td></tr>";
+                gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+                return;
+            }
+
+            let htmlString = "";
+            $.each(list, (index, value) => {
+                htmlString += "<tr>";
+                htmlString += "	<td>";
+                htmlString += "		" + value.playName;
+                htmlString += "	</td>";
+                htmlString += "	<td>";
+                htmlString += "		" + value.gameName;
+                htmlString += "	</td>";
+                htmlString += "	<td>";
+                htmlString += "		" + value.endDateTime ? gfn_timestampToDate(value.endDateTime) : "-";
+                htmlString += "	</td>";
+                htmlString += "</tr>";
+            });
+
+            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+
+            const params = {
+                pagingObject: $div.find("ul.pagination"),
+                pageIndex: "pageIndex",
+                totalCount: data.totalElements,
+                eventName: "clubProfileModal.readClubActivityPageById",
+                recordCount: clubProfileModal.PAGE_SIZE,
+            };
+
+            gfn_renderPaging(params);
+        },
+
+
         close: () => {
         },
     }
@@ -273,7 +372,7 @@
         $("#clubProfileModal").modal("show");
     }*/
 
-    function selectClubGameList(pageNo) {
+    /*function selectClubGameList(pageNo) {
         const comAjax = new ComAjax("clubProfileForm");
         comAjax.setUrl("<c:url value='/selectClubGameList' />");
         comAjax.setCallback("selectClubGameListCallback");
@@ -316,7 +415,7 @@
         body.append(str);
 
         $("#clubProfileModal").modal("show");
-    }
+    }*/
 
 
 
@@ -570,7 +669,7 @@
 
                     <div id="clubMemberDiv" class="tab-pane fade" role="tabpanel" aria-labelledby="clubMemberTabA">
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="clubMmbrListTbl">
+                            <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col">닉네임</th>
@@ -589,7 +688,7 @@
 
                     <div id="clubGameDiv" class="tab-pane fade" role="tabpanel" aria-labelledby="clubGameTabA">
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="clubGameListTbl">
+                            <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col">게임</th>
@@ -601,14 +700,14 @@
                             </table>
                         </div>
                         <nav aria-label="">
-                            <ul class="pagination pagination-sm justify-content-end mb-0" id="clubGameListPageNav"></ul>
+                            <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
                         </nav>
                     </div>
 
                     <div id="clubActivityDiv" class="tab-pane fade" role="tabpanel" aria-labelledby="clubActivityTabA">
                         <h5>플레이기록</h5>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="clubPlayListTbl">
+                            <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col">플레이이름</th>
@@ -620,7 +719,7 @@
                             </table>
                         </div>
                         <nav aria-label="">
-                            <ul class="pagination pagination-sm justify-content-end mb-0" id="clubPlayListPageNav"></ul>
+                            <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
                         </nav>
 
                         <div id="clubPlayImgListDiv"></div>

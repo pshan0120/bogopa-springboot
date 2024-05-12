@@ -19,6 +19,17 @@ public class ClubDao extends AbstractDao {
         return selectPage("club.selectClubMemberList", "club.selectClubMemberCount", dto);
     }
 
+    public CustomPageResponse<Map<String, Object>> selectClubGamePageById(ReadPageRequestDto dto) {
+        return selectPage("club.selectClubGameList", "club.selectClubGameCount", dto);
+    }
+
+    public CustomPageResponse<Map<String, Object>> selectClubActivityPageById(ReadPageRequestDto dto) {
+        return selectPage("club.selectClubActivityList", "club.selectClubActivityCount", dto);
+    }
+
+
+
+
     public List<Map<String, Object>> selectClubMmbrList(Map<String, Object> map) {
         return selectPagingListAjax("club.selectClubMmbrList", map);
     }
@@ -76,9 +87,10 @@ public class ClubDao extends AbstractDao {
     }
 
 
-
+    
+    // TODO: page 로 바꿀 것
     public List<Map<String, Object>> selectClubGameList(Map<String, Object> map) {
-        return selectPagingListAjax("club.selectClubGameList", map);
+        return selectPagingListAjax("club.selectClubGamePagingList", map);
     }
 
     public Map<String, Object> selectClubGameListCnt(Map<String, Object> map) {

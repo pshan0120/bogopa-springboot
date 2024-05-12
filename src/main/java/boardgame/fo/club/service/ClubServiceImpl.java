@@ -31,6 +31,17 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
+    public CustomPageResponse<Map<String, Object>> readClubGamePageById(ReadPageRequestDto requestDto) {
+        return clubDao.selectClubGamePageById(requestDto);
+    }
+
+    @Override
+    public CustomPageResponse<Map<String, Object>> readClubActivityPageById(ReadPageRequestDto requestDto) {
+        return clubDao.selectClubActivityPageById(requestDto);
+    }
+
+
+    @Override
     public Map<String, Object> selectClubMmbrList(Map<String, Object> map) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", clubDao.selectClubMmbrList(map));

@@ -192,7 +192,7 @@ public class ClubController {
         return mv;
     }
 
-    @RequestMapping(value = "/selectClubPrfl")
+    /*@RequestMapping(value = "/selectClubPrfl")
     public ModelAndView selectClubPrfl(CommandMap commandMap) throws Exception {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
@@ -213,9 +213,9 @@ public class ClubController {
         mv.addObject("result", result);
         mv.addObject("resultMsg", resultMsg);
         return mv;
-    }
+    }*/
 
-    @RequestMapping(value = "/selectClubMmbrList")
+    /*@RequestMapping(value = "/selectClubMmbrList")
     public ModelAndView selectClubMmbrList(CommandMap commandMap) throws Exception {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
@@ -227,7 +227,7 @@ public class ClubController {
         mv.addObject("result", result);
         mv.addObject("resultMsg", resultMsg);
         return mv;
-    }
+    }*/
 
     @RequestMapping(value = "/selectClubGameList")
     public ModelAndView selectClubGameList(CommandMap commandMap) throws Exception {

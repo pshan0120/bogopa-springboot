@@ -47,6 +47,8 @@
             $("#myClubAttndForm input[name='attndDate']").val(data.map.attndDateMin);
         }
 
+
+        // TODO: page API 로 바꿀 것
         function fn_selectMyClubPlayRcrdList(pageNo) {
             const comAjax = new ComAjax("myClubInfoForm");
             comAjax.setUrl("<c:url value='/selectMyClubPlayRcrdList' />");
@@ -330,6 +332,8 @@
             body.append(str);
         }
 
+
+        // TODO: page API 로 바꿀 것
         function fn_selectMyClubGameList(pageNo) {
             const comAjax = new ComAjax("myClubInfoForm");
             comAjax.setUrl("<c:url value='/selectClubGameList' />");

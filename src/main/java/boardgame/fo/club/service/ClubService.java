@@ -12,6 +12,10 @@ public interface ClubService {
 
     CustomPageResponse<Map<String, Object>> readClubMemberPageById(ReadPageRequestDto requestDto);
 
+    CustomPageResponse<Map<String, Object>> readClubGamePageById(ReadPageRequestDto requestDto);
+
+    CustomPageResponse<Map<String, Object>> readClubActivityPageById(ReadPageRequestDto requestDto);
+
     Map<String, Object> selectClubMmbrList(Map<String, Object> map);
 
 
