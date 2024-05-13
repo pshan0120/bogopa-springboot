@@ -40,7 +40,7 @@
 	<select id="selectMemberProfile" parameterType="hashmap" resultType="hashmap">
 		SELECT
 			m.mmbrNo AS memberId,
-			IFNULL(m.nickNm, '') AS nickName,
+			IFNULL(m.nickNm, '') AS nickname,
 			m.temporarilyJoined,
 			m.mmbrTypeCd AS memberTypeCode,
 			IFNULL(m.intrdctn, '') AS introduction,

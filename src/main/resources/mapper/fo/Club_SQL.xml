@@ -8,7 +8,7 @@
 				c.clubNo AS clubId,
 				c.clubNm AS clubName,
 				c.mstrMmbrNo AS masterMemberId,
-				m.nickNm AS masterMemberName,
+				m.nickNm AS masterNickname,
 				c.clubTypeCd AS clubTypeCode,
 				c.clubGrdCd AS clubGradeCode,
 				IFNULL(c.telNo, '') AS contactTo,
@@ -61,7 +61,7 @@
 		<include refid="com.pagePrefix"/>
 		SELECT
 			cm.mmbrNo AS memberId,
-			m.nickNm AS nickName,
+			m.nickNm AS nickname,
 			cm.clubMmbrGrdCd AS clubMemberGradeCode,
 			cm.fromDate AS joinedAt,
 			m.prflImgFileNm AS profileImageFileName,
@@ -207,17 +207,16 @@
 	<select id="selectPlayImageList" parameterType="boardgame.fo.club.dto.ReadPageRequestDto" resultType="hashmap">
 		<include refid="com.pagePrefix"/>
 		SELECT
-			p.playNo,
-			pm.seq,
-			pm.rsltRnk,
-			DATE(p.endDt) AS endDate,
-			IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,
-			g.gameNm,
-			IFNULL(pm.fdbck, '') AS fdbck,
-			pm.fdbckImgFileNm,
-			pm.mmbrNo,
-			m.nickNm,
-			IFNULL(m.prflImgFileNm, '') AS prflImgFileNm
+			p.playNo AS playId,
+			pm.seq AS playMemberId,
+			pm.rsltRnk AS rank,
+			p.endDt AS endDateTime,
+			g.gameNm AS gameName,
+			IFNULL(pm.fdbck, '') AS feedback,
+			pm.fdbckImgFileNm AS feedbackImageFileName,
+			pm.mmbrNo AS memberId,
+			m.nickNm AS nickname,
+			IFNULL(m.prflImgFileNm, '') AS profileImageFileName
 		FROM
 			club c,
 			play p,

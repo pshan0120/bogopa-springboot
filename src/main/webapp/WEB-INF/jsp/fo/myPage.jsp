@@ -1129,7 +1129,7 @@
 </div>
 
 <!-- 모임프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/clubPrflModal.jsp" %>
+<%--<%@ include file="/WEB-INF/jsp/fo/clubPrflModal.jsp" %>--%>
 <!-- 모임게시물 -->
 <%@ include file="/WEB-INF/jsp/fo/clubBrdModal.jsp" %>
 <!-- 플레이기록 -->

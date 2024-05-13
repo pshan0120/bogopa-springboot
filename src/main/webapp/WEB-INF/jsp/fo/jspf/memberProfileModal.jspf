@@ -16,7 +16,7 @@
             $form.find("img[name='memberProfileImage']").attr("src", createMemberImageUrl(data.memberId, data.profileImageFileName));
             $form.find("input[name='memberTypeName']").val(MemberType.ofCode(data.memberTypeCode).title);
             $form.find("input[name='playCount']").val(data.playCount);
-            $form.find("input[name='nickName']").val(data.nickName);
+            $form.find("input[name='nickname']").val(data.nickname);
             $form.find("textarea[name='introduction']").val(data.introduction);
         },
         close: () => {
@@ -58,7 +58,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label">닉네임</label>
-                                <input type="text" name="nickName" class="form-control form-control-alternative" readonly>
+                                <input type="text" name="nickname" class="form-control form-control-alternative" readonly>
                             </div>
                         </div>
                         <div class="col-lg-12">

@@ -60,7 +60,7 @@
                     str += "	</td>";
                     str += "	<td scope=\"row\">";
                     str += "		<div class=\"media align-items-center\">";
-                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"fn_openClubPrflModal('" + value.clubNo + "')\">";
+                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"openClubProfileModal('" + value.clubNo + "')\">";
                     if (value.clubPrflImgFileNm != "") {
                         str += "			<img src=\"https://bogopayo.cafe24.com/img/club/" + value.clubNo + "/" + value.clubPrflImgFileNm + "\">";
                     } else {
@@ -241,6 +241,10 @@
                 .catch(response => console.error('error', response));
         }
 
+        const openClubProfileModal = clubId => {
+            clubProfileModal.open(clubId);
+        }
+
     </script>
 </head>
 
@@ -396,7 +400,7 @@
 </div>
 
 <!-- 모임프로필 -->
-<%@ include file="/WEB-INF/jsp/fo/clubPrflModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->
 <%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
 

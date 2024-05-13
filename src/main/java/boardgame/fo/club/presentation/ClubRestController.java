@@ -25,6 +25,9 @@ public class ClubRestController {
 
     @GetMapping("/member/page")
     public Page<Map<String, Object>> readClubMemberPageById(ReadPageRequestDto requestDto) {
+        System.out.println("requestDto : " + requestDto.getClubId());
+        System.out.println("requestDto : " + requestDto.getOffset());
+        System.out.println("requestDto : " + requestDto.getPageSize());
         return clubService.readClubMemberPageById(requestDto);
     }
 

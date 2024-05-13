@@ -23,6 +23,7 @@
 
             if (tabId === "activity") {
                 clubProfileModal.readClubActivityPageById(1);
+                clubProfileModal.readClubPlayImagePageById(1);
             }
         });
     });
@@ -124,7 +125,7 @@
                 htmlString += "			<img src=\"" + createMemberImageUrl(data.memberId, data.profileImageFileName) + "\" class=\"rounded-circle\">";
                 htmlString += "			</span>";
                 htmlString += "			<div class=\"media-body\">";
-                htmlString += "				<span class=\"mb-0 text-sm\">" + value.nickName + "</span>";
+                htmlString += "				<span class=\"mb-0 text-sm\">" + value.nickname + "</span>";
                 htmlString += "			</div>";
                 htmlString += "		</div>";
                 htmlString += "	</td>";
@@ -269,9 +270,10 @@
         },
         readClubPlayImagePageByIdCallback: data => {
             const $div = $("#clubPlayImageDiv");
-            const $tbody = $div.find("tbody");
+            const $bodyDiv = $div.find("div[name='body']");
 
             const list = data.content;
+            console.log('list', list);
             if (list.length === 0) {
                 $("#clubPlayImageDiv").hide();
                 return;
@@ -284,18 +286,25 @@
             $.each(list, (index, value) => {
                 htmlString += "<div class=\"col-lg-12 mb-4\">";
                 htmlString += "	<div class=\"card\">";
-                htmlString += "		<img src=\"https://bogopayo.cafe24.com/img/play/" + value.seq + "/" + value.fdbckImgFileNm + "\" class=\"card-img-top\">";
+                /*htmlString += "		<img src=\"https://bogopayo.cafe24.com/img/play/" + value.seq + "/" + value.fdbckImgFileNm + "\" class=\"card-img-top\">";*/
+                htmlString += "		<img src=\"" + createPlayImageUrl(value.playMemberId, value.feedbackImageFileName) + "\" class=\"card-img-top\">";
                 htmlString += "		<div class=\"card-body\">";
-                htmlString += "			<p class=\"card-text\">\"" + value.fdbck + "\"</p>";
-                htmlString += "			<div class=\"card-text-footer\">" + value.nickName + ", <cite>" + value.endDt + " " + value.gameNm + " " + value.rsltRnk + "등</cite></div>";
+                htmlString += "			<p class=\"card-text\">\"" + value.feedback + "\"</p>";
+                htmlString += "			<div class=\"card-text-footer\">";
+                htmlString += "			    " + value.nickname + ", " +
+                    "<cite>" +
+                        (value.endDateTime ? gfn_timestampToDate(value.endDateTime) : "-") + " " + value.gameName + " " + value.rank + "등" +
+                    "</cite>";
+                htmlString += "			</div>";
                 htmlString += "		</div>";
                 htmlString += "	</div>";
                 htmlString += "</div>";
             });
             htmlString += "</div>";
 
-            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+            gfn_removeElementChildrenAndAppendHtmlString($bodyDiv, htmlString);
 
+            console.log('htmlString', htmlString);
             const params = {
                 pagingObject: $div.find("ul.pagination"),
                 pageIndex: "pageIndex",
@@ -308,207 +317,11 @@
 
             $("#clubPlayImageDiv").show();
         },
-
-        
-
-
-        /*if (cnt == 0) {
-        $("#clubPlayImgListPageNav").hide();
-        $("#clubPlayImageDiv").hide();
-    } else {
-        var params = {
-            divId: "clubPlayImgListPageNav",
-            pageIndex: "pageIndex",
-            totalCount: cnt,
-            eventName: "selectClubPlayImgList",
-            recordCount: 1
-        };
-        gfn_renderPaging(params);
-
-        str += "<hr class=\"my-4\" />";
-        str += "<h5>플레이소감</h5>";
-        str += "<div class=\"row clearfix\">";
-        $.each(data.map.list, function (key, value) {
-            str += "<div class=\"col-lg-12 mb-4\">";
-            str += "	<div class=\"card\">";
-            str += "		<img src=\"https://bogopayo.cafe24.com/img/play/" + value.seq + "/" + value.fdbckImgFileNm + "\" class=\"card-img-top\">";
-            str += "		<div class=\"card-body\">";
-            str += "			<p class=\"card-text\">\"" + value.fdbck + "\"</p>";
-            str += "			<div class=\"card-text-footer\">" + value.nickName + ", <cite>" + value.endDt + " " + value.gameNm + " " + value.rsltRnk + "등</cite></div>";
-            str += "		</div>";
-            str += "	</div>";
-            str += "</div>";
-        });
-        str += "</div>";
-        $("#clubPlayImageDiv").show();
-        $("#clubPlayImgListPageNav").show();
-    }
-    body.append(str);*/
-
         close: () => {
         },
     }
 
-
-    /*function openClubProfileModal(clubNo) {
-        selectClubProfile(clubNo);
-        selectClubMmbrList(1);
-        selectClubGameList(1);
-
-        selectClubPlayRcrdList(1);
-        selectClubPlayImgList(1);
-    }*/
-
-    /*function selectClubProfile(clubNo) {
-        const comAjax = new ComAjax();
-        comAjax.setUrl("<c:url value='/selectClubPrfl' />");
-        comAjax.setCallback("selectClubProfileCallback");
-        comAjax.addParam("clubNo", clubNo);
-        comAjax.ajax();
-    }*/
-
-    /*function selectClubProfileCallback(data) {
-        gfn_setDataVal(data.map, "clubProfileForm");
-        gfn_setDataVal(data.map, "clubJoinForm");
-
-        if (data.map.profileImageFileName != "") {
-            $("#clubProfileImg").attr("src", "https://bogopayo.cafe24.com/img/club/" + data.map.clubNo + "/" + data.map.profileImageFileName);
-        } else {
-            $("#clubProfileImg").attr("src", "https://bogopayo.cafe24.com/img/club/default.png");
-        }
-
-        $("#showClubJoinButton").hide();
-        $("#clubJoinButton").hide();
-        $("#cancelClubJoinButton").hide();
-        $("#quitClubButton").hide();
-        $("#disbandClubButton").hide();
-        if (data.isLogin == true) {
-            if (data.map.mstrMmbrYn == "N") {
-                if (data.map.mmbrClubJoinIngYn == "N") {
-                    if (data.map.clubJoinYn != "Y") {
-                        $("#showClubJoinButton").show();
-                    }
-                    if (data.map.mstrMmbrYn == "N" && data.map.quitClubYn == "Y") {
-                        $("#quitClubButton").show();
-                    }
-                } else {
-                    if (data.map.joinClubIngYn == "Y") {
-                        $("#cancelClubJoinButton").show();
-                    }
-                }
-            } else {
-                $("#disbandClubButton").show();
-            }
-        }
-    }*/
-
-    /*function selectClubMmbrList(pageNo) {
-        const comAjax = new ComAjax("clubProfileForm");
-        comAjax.setUrl("<c:url value='/selectClubMmbrList' />");
-        comAjax.setCallback("selectClubMmbrListCallback");
-        comAjax.addParam("pageIndex", pageNo);
-        comAjax.addParam("pageRow", 5);
-        comAjax.ajax();
-    }
-
-    function selectClubMmbrListCallback(data) {
-        var cnt = data.map.cnt;
-        var body = $("#clubMmbrListTbl>tbody");
-        body.empty();
-        var str = "";
-        if (cnt == 0) {
-            str += "<tr><td colspan=\"4\" class=\"text-center\">조회결과가 없습니다.</td></tr>";
-        } else {
-            var params = {
-                divId: "clubMmbrListPageNav",
-                pageIndex: "pageIndex",
-                totalCount: cnt,
-                eventName: "selectClubMmbrList",
-                recordCount: 5
-            };
-            gfn_renderPaging(params);
-
-            $.each(data.map.list, function (key, value) {
-                str += "<tr>";
-                str += "	<td scope=\"row\">";
-                str += "		<div class=\"media align-items-center\">";
-                str += "			<span class=\"avatar avatar-sm rounded-circle mr-3\" >";
-                if (value.profileImageFileName == "default") {
-                    str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/default.png\" class=\"rounded-circle\">";
-                } else {
-                    str += "			<img src=\"https://bogopayo.cafe24.com/img/mmbr/" + value.mmbrNo + "/" + value.profileImageFileName + "\">";
-                }
-                str += "			</span>";
-                str += "			<div class=\"media-body\">";
-                str += "				<span class=\"mb-0 text-sm\">" + value.nickNm + "</span>";
-                str += "			</div>";
-                str += "		</div>";
-                str += "	</td>";
-                str += "	<td>";
-                str += "		" + value.clubMmbrGrdNm;
-                str += "	</td>";
-                str += "	<td>";
-                str += "		" + value.joinedAt;
-                str += "	</td>";
-                str += "	<td>";
-                str += "		" + gfn_comma(value.playCount);
-                str += "	</td>";
-                str += "</tr>";
-            });
-        }
-        body.append(str);
-
-        $("#clubProfileModal").modal("show");
-    }*/
-
-    /*function selectClubGameList(pageNo) {
-        const comAjax = new ComAjax("clubProfileForm");
-        comAjax.setUrl("<c:url value='/selectClubGameList' />");
-        comAjax.setCallback("selectClubGameListCallback");
-        comAjax.addParam("pageIndex", pageNo);
-        comAjax.addParam("pageRow", 5);
-        comAjax.ajax();
-    }
-
-    function selectClubGameListCallback(data) {
-        var cnt = data.map.cnt;
-        var body = $("#clubGameListTbl>tbody");
-        body.empty();
-        var str = "";
-        if (cnt == 0) {
-            str += "<tr><td colspan=\"3\" class=\"text-center\">조회결과가 없습니다.</td></tr>";
-        } else {
-            var params = {
-                divId: "clubGameListPageNav",
-                pageIndex: "pageIndex",
-                totalCount: cnt,
-                eventName: "selectClubGameList",
-                recordCount: 5
-            };
-            gfn_renderPaging(params);
-
-            $.each(data.map.list, function (key, value) {
-                str += "<tr>";
-                str += "	<td>";
-                str += "		" + value.gameNm;
-                str += "	</td>";
-                str += "	<td>";
-                str += "		" + value.minPlyrCnt + " ~ " + value.maxPlyrCnt;
-                str += "	</td>";
-                str += "	<td>";
-                str += "		" + gfn_comma(value.playCount);
-                str += "	</td>";
-                str += "</tr>";
-            });
-        }
-        body.append(str);
-
-        $("#clubProfileModal").modal("show");
-    }*/
-
-
-
-    function clubJoin() {
+    const clubJoin = () => {
         if (gfn_validate("clubJoinForm")) {
             if (confirm("모임에 가입 신청하시겠습니까?")) {
                 const comAjax = new ComAjax("clubJoinForm");
@@ -519,9 +332,9 @@
                 return;
             }
         }
-    }
+    };
 
-    function cancelClubJoin() {
+    const cancelClubJoin = () => {
         if (confirm("가입 신청을 취소하시겠습니까?")) {
             const comAjax = new ComAjax("clubProfileForm");
             comAjax.setUrl("<c:url value='/cancelClubJoin' />");
@@ -530,9 +343,9 @@
         } else {
             return;
         }
-    }
+    };
 
-    function quitClub() {
+    const quitClub = () => {
         if (confirm("모임에서 탈퇴하시겠습니까?")) {
             const comAjax = new ComAjax("clubProfileForm");
             comAjax.setUrl("<c:url value='/quitClub' />");
@@ -541,104 +354,13 @@
         } else {
             return;
         }
-    }
+    };
 
-    function disbandClub() {
+    const disbandClub = () => {
         alert("개발 예정입니다.");
         return;
-    }
+    };
 
-    function selectClubPlayRcrdList(pageNo) {
-        const comAjax = new ComAjax("clubProfileForm");
-        comAjax.setUrl("<c:url value='/selectMyClubPlayRcrdList' />");
-        comAjax.setCallback("selectClubPlayRcrdListCallback");
-        comAjax.addParam("pageIndex", pageNo);
-        comAjax.addParam("pageRow", 5);
-        comAjax.ajax();
-    }
-
-    function selectClubPlayRcrdListCallback(data) {
-        var cnt = data.map.cnt;
-        var body = $("#clubPlayListTbl>tbody");
-        body.empty();
-
-        var str = "";
-        if (cnt == 0) {
-            str += "<tr><td colspan=\"3\" class=\"text-center\">조회결과가 없습니다.</td></tr>";
-        } else {
-            var params = {
-                divId: "clubPlayListPageNav",
-                pageIndex: "pageIndex",
-                totalCount: cnt,
-                eventName: "selectClubPlayRcrdList",
-                recordCount: 5
-            };
-            gfn_renderPaging(params);
-
-            $.each(data.map.list, function (key, value) {
-                str += "<tr>";
-                str += "	<td>";
-                str += "		" + value.playNm;
-                str += "	</td>";
-                str += "	<td>";
-                str += "		" + value.gameNm;
-                str += "	</td>";
-                str += "	<td>";
-                str += "		" + value.endDt;
-                str += "	</td>";
-                str += "</tr>";
-            });
-        }
-        body.append(str);
-    }
-
-    function selectClubPlayImgList(pageNo) {
-        const comAjax = new ComAjax("clubProfileForm");
-        comAjax.setUrl("<c:url value='/selectMyClubPlayImgList' />");
-        comAjax.setCallback("selectClubPlayImgListCallback");
-        comAjax.addParam("pageIndex", pageNo);
-        comAjax.addParam("pageRow", 1);
-        comAjax.ajax();
-    }
-
-    function selectClubPlayImgListCallback(data) {
-        var cnt = data.map.cnt;
-        var body = $("#clubPlayImageDiv");
-        body.empty();
-        var str = "";
-        if (cnt == 0) {
-            $("#clubPlayImgListPageNav").hide();
-            $("#clubPlayImageDiv").hide();
-        } else {
-            var params = {
-                divId: "clubPlayImgListPageNav",
-                pageIndex: "pageIndex",
-                totalCount: cnt,
-                eventName: "selectClubPlayImgList",
-                recordCount: 1
-            };
-            gfn_renderPaging(params);
-
-            str += "<hr class=\"my-4\" />";
-            str += "<h5>플레이소감</h5>";
-            str += "<div class=\"row clearfix\">";
-            $.each(data.map.list, function (key, value) {
-                str += "<div class=\"col-lg-12 mb-4\">";
-                str += "	<div class=\"card\">";
-                str += "		<img src=\"https://bogopayo.cafe24.com/img/play/" + value.seq + "/" + value.fdbckImgFileNm + "\" class=\"card-img-top\">";
-                str += "		<div class=\"card-body\">";
-                str += "			<p class=\"card-text\">\"" + value.fdbck + "\"</p>";
-                str += "			<div class=\"card-text-footer\">" + value.nickName + ", <cite>" + value.endDt + " " + value.gameNm + " " + value.rsltRnk + "등</cite></div>";
-                str += "		</div>";
-                str += "	</div>";
-                str += "</div>";
-            });
-            str += "</div>";
-            $("#clubPlayImageDiv").show();
-            $("#clubPlayImgListPageNav").show();
-        }
-        body.append(str);
-    }
 </script>
 
 <div class="modal fade" id="clubProfileModal" role="dialog" aria-labelledby="clubProfileModalLabel" aria-hidden="true">
@@ -699,7 +421,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">모임장</label>
-                                        <input type="text" name="masterMemberName"
+                                        <input type="text" name="masterNickname"
                                                class="form-control form-control-alternative" readonly>
                                     </div>
                                 </div>
@@ -813,9 +535,7 @@
 
 
                         <div id="clubPlayImageDiv">
-                            <table class="table align-items-center table-flush">
-                                <tbody></tbody>
-                            </table>
+                            <div name="body"></div>
                             <nav aria-label="">
                                 <ul class="pagination pagination-sm justify-content-end mb-0"></ul>
                             </nav>
