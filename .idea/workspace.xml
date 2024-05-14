@@ -10,21 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="readClubPlayImagePageById 진행중">
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/controller/ComControllerAdvice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/club/presentation/ClubRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Club_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Member_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Member_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/club.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/club.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/memberProfileModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/jspf/memberProfileModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myPage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/myPage.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/playList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/playList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/playList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/playList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/playList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/playList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/imageUrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/imageUrl.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,14 +253,8 @@
       <workItem from="1715304809960" duration="1773000" />
       <workItem from="1715391827328" duration="6299000" />
       <workItem from="1715527112396" duration="6031000" />
-      <workItem from="1715612557875" duration="6453000" />
-    </task>
-    <task id="LOCAL-00044" summary="openLoginId 수정">
-      <created>1713659695255</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1713659695255</updated>
+      <workItem from="1715612557875" duration="6592000" />
+      <workItem from="1715714480607" duration="347000" />
     </task>
     <task id="LOCAL-00045" summary="file.setReadable 변경">
       <created>1713709992005</created>
@@ -612,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715535190225</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="readClubPlayImagePageById 진행중">
+      <created>1715625147375</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1715625147376</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

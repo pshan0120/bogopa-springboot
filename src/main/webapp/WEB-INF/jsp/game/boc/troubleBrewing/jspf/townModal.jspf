@@ -72,7 +72,7 @@
             const lastPlayLogJson = JSON.parse(lastPlayLog);
 
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            roleList = JSON.parse(lastPlayLogJson.roleList);
+            // roleList = JSON.parse(lastPlayLogJson.roleList);
             townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
             outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
             minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
