@@ -2,6 +2,150 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="play">
 
+	<insert id="insertPlay" parameterType="hashmap" useGeneratedKeys="true"  keyProperty="playNo">
+			INSERT INTO play
+			(
+				playNm,
+				gameNo,
+				clubNo,
+				hostMmbrNo,
+				sttsCd,
+				strtDt,
+				insId,
+				insDt,
+				updId,
+				updDt
+			)
+			VALUES
+			(
+				#{playNm},
+				#{gameNo},
+				#{clubNo},
+				#{hostMmbrNo},
+				#{sttsCd},
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP,
+				'system',
+				CURRENT_TIMESTAMP
+			)
+	</insert>
+
+	<update id="updatePlay" parameterType="hashmap">
+		UPDATE
+		play
+		SET
+		<if test="playNm != null and playNm != ''">
+			playNm = TRIM(#{playNm}),
+		</if>
+		<if test="mode == 'end'.toString()">
+			sttsCd = '2',
+			endDt = CURRENT_TIMESTAMP,
+		</if>
+		updId = 'system',
+		updDt = CURRENT_TIMESTAMP
+		WHERE
+		playNo = #{playNo}
+	</update>
+
+	<delete id="deletePlay" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				play
+			WHERE
+				playNo = #{playNo}
+		]]>
+	</delete>
+
+	<select id="selectPlayById" parameterType="long" resultType="hashmap">
+        SELECT
+            p.playNo,
+            p.playNm,
+            p.sttsCd
+        FROM
+            play p
+        WHERE
+            p.sttsCd = '1'
+          AND
+            p.playNo = #{playId}
+    </select>
+
+	<select id="selectClientPlayMemberList" parameterType="hashmap" resultType="hashmap">
+        SELECT
+            pm.mmbrNo,
+            encVal(pm.mmbrNo) AS hashKey,
+            m.nickNm
+        FROM
+            play p,
+            playMmbr pm,
+            mmbr m
+        WHERE
+            p.playNo = pm.playNo
+          AND
+            pm.mmbrNo = m.mmbrNo
+          AND
+            p.sttsCd = '1'
+          AND
+            p.playNo = #{playId}
+        ORDER BY
+            m.nickNm
+    </select>
+
+	<select id="selectHostPlayMember" parameterType="hashmap" resultType="hashmap">
+        SELECT
+            m.mmbrNo,
+            m.nickNm
+        FROM
+            play p,
+            mmbr m
+        WHERE
+            p.hostMmbrNo = m.mmbrNo
+          AND
+            p.sttsCd = '1'
+          AND
+            p.playNo = #{playId}
+    </select>
+
+	<insert id="insertPlayLog" parameterType="boardgame.fo.play.dto.SavePlayRequestDto">
+        INSERT INTO playLog
+        (
+            playNo,
+            log
+        )
+        VALUES
+        (
+            #{playId},
+            #{log}
+        )
+    </insert>
+
+	<select id="selectLastPlayLog" parameterType="long" resultType="hashmap">
+        SELECT
+            pl.log
+        FROM
+            play p,
+            playLog pl
+        WHERE
+            p.playNo = pl.playNo
+          AND
+            p.sttsCd = '1'
+          AND
+            pl.playNo = #{playId}
+        ORDER BY
+            pl.dateTime DESC
+        LIMIT
+            1
+    </select>
+
+	<delete id="deletePlayLogByPlayNo" parameterType="long">
+        DELETE FROM
+            playLog
+        WHERE
+            playNo = #{playId}
+    </delete>
+
+
+
 	<select id="selectPlayRcrd" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
@@ -1788,60 +1932,7 @@
 	</select>
 
 
-	<insert id="insertPlay" parameterType="hashmap" useGeneratedKeys="true"  keyProperty="playNo">
-			INSERT INTO play
-			(
-				playNm,
-				gameNo,
-				clubNo,
-				hostMmbrNo,
-				sttsCd,
-				strtDt,
-				insId,
-				insDt,
-				updId,
-				updDt
-			)
-			VALUES
-			(
-				#{playNm},
-				#{gameNo},
-				#{clubNo},
-				#{hostMmbrNo},
-				#{sttsCd},
-				CURRENT_TIMESTAMP,
-				'system',
-				CURRENT_TIMESTAMP,
-				'system',
-				CURRENT_TIMESTAMP
-			)
-	</insert>
 
-	<update id="updatePlay" parameterType="hashmap">
-			UPDATE
-				play
-			SET
-			<if test="playNm != null and playNm != ''">
-				playNm = TRIM(#{playNm}),
-			</if>
-			<if test="mode == 'end'.toString()">
-				sttsCd = '2',
-				endDt = CURRENT_TIMESTAMP,
-			</if>
-				updId = 'system',
-				updDt = CURRENT_TIMESTAMP
-			WHERE
-				playNo = #{playNo}
-	</update>
-
-	<delete id="deletePlay" parameterType="hashmap">
-		<![CDATA[
-			DELETE FROM
-				play
-			WHERE
-				playNo = #{playNo}
-		]]>
-	</delete>
 
 
 	<insert id="insertPlayMmbr" parameterType="hashmap">

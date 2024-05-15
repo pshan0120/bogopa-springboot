@@ -2,13 +2,13 @@
 
 <script>
     const boardModal = {
-        open: id => {
-            boardModal.readById(id);
+        open: boardId => {
+            boardModal.readById(boardId);
 
             $("#boardModal").modal("show");
         },
-        readById: id => {
-            gfn_callGetApi("/api/board", {id})
+        readById: boardId => {
+            gfn_callGetApi("/api/board", {boardId})
                 .then(data => boardModal.readByIdCallback(data))
                 .catch(response => console.error('error', response));
         },

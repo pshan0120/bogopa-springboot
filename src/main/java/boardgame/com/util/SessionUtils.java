@@ -29,12 +29,6 @@ public class SessionUtils {
         try {
             return Optional.of((Long) getSessionAttribute("mmbrNo"))
                     .orElseThrow(() -> new RuntimeException());
-
-            /*String loginMemberId = String.valueOf(getSessionAttribute("mmbrNo"));
-            if (loginMemberId == null || loginMemberId.isEmpty()) {
-                throw new RuntimeException();
-            }
-            return loginMemberId;*/
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -47,6 +41,25 @@ public class SessionUtils {
             return null;
         }
     }
+
+    public static Integer getCurrentMemberClubId() {
+        try {
+            return Optional.of((Integer) getSessionAttribute("clubNo"))
+                    .orElseThrow(() -> new RuntimeException());
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public static Integer getCurrentMemberClubIdOrNull() {
+        try {
+            return getCurrentMemberClubId();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
 
     public static Boolean isUserLogin() {
         try {

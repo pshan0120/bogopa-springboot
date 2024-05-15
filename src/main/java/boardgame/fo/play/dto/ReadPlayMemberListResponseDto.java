@@ -1,4 +1,4 @@
-package boardgame.fo.game.dto;
+package boardgame.fo.play.dto;
 
 import lombok.*;
 

@@ -157,8 +157,8 @@
             $playersDiv.append(htmlString);
         }
 
-        const readPlayMemberList = playNo => {
-            return gfn_callGetApi("/api/game/play/member/list", {playNo})
+        const readPlayMemberList = playId => {
+            return gfn_callGetApi("/api/play/member/list", {playId})
                 .then(data => {
                     // console.log('data', data);
                     return data;
@@ -525,8 +525,8 @@
             <hr/>`;
         }
 
-        const readLastPlayLog = playNo => {
-            return gfn_callGetApi("/api/game/play/log/last", {playNo})
+        const readLastPlayLog = playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
                 .then(data => {
                     // console.log('data', data);
                     return data?.log;
@@ -650,10 +650,10 @@
             }
 
             const request = {
-                playNo: PLAY_NO
+                playId: PLAY_NO
             }
 
-            gfn_callDeleteApi("/api/game/play/log/all", request)
+            gfn_callDeleteApi("/api/play/log/all", request)
                 .then(data => {
                     console.log('data', data);
                 })
@@ -677,11 +677,11 @@
             }
 
             const request = {
-                playNo: PLAY_NO,
+                playId: PLAY_NO,
                 log: JSON.stringify(log)
             }
 
-            gfn_callPostApi("/api/game/play/save", request)
+            gfn_callPostApi("/api/play/save", request)
                 .then(data => {
                     console.log('game status saved !!', data);
                 })

@@ -1,6 +1,7 @@
 package boardgame.fo.play.dao;
 
 import boardgame.com.dao.AbstractDao;
+import boardgame.fo.play.dto.SavePlayRequestDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,6 +9,44 @@ import java.util.Map;
 
 @Repository
 public class PlayDao extends AbstractDao {
+
+    public void insertPlay(Map<String, Object> map) {
+        insert("play.insertPlay", map);
+    }
+
+    public void updatePlay(Map<String, Object> map) {
+        update("play.updatePlay", map);
+    }
+
+    public void deletePlay(Map<String, Object> map) {
+        delete("play.deletePlay", map);
+    }
+
+    public Map<String, Object> selectPlayById(long playId) {
+        return selectOne("play.selectPlayById", playId);
+    }
+
+
+    public List<Map<String, Object>> selectClientPlayMemberList(long playId) {
+        return selectList("play.selectClientPlayMemberList", playId);
+    }
+
+    public Map<String, Object> selectHostPlayMember(long playId) {
+        return selectOne("play.selectHostPlayMember", playId);
+    }
+
+    public void insertPlayLog(SavePlayRequestDto dto) {
+        insert("play.insertPlayLog", dto);
+    }
+
+    public Map<String, Object> selectLastPlayLog(long playId) {
+        return selectOne("play.selectLastPlayLog", playId);
+    }
+
+    public void deletePlayLogByPlayNo(long playId) {
+        delete("play.deletePlayLogByPlayNo", playId);
+    }
+
 
     /* 플레이 */
     public Map<String, Object> selectPlayRcrd(Map<String, Object> map) {
@@ -54,17 +93,6 @@ public class PlayDao extends AbstractDao {
         return selectList("play.selectPlayJoinMmbrList", map);
     }
 
-    public void insertPlay(Map<String, Object> map) {
-        insert("play.insertPlay", map);
-    }
-
-    public void updatePlay(Map<String, Object> map) {
-        update("play.updatePlay", map);
-    }
-
-    public void deletePlay(Map<String, Object> map) {
-        delete("play.deletePlay", map);
-    }
 
     public void insertPlayMmbr(Map<String, Object> map) {
         insert("play.insertPlayMmbr", map);

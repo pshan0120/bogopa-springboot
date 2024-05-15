@@ -1,4 +1,4 @@
-package boardgame.fo.game.dto;
+package boardgame.fo.play.dto;
 
 
 import lombok.*;
@@ -6,11 +6,10 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SavePlayRequestDto {
+public class CreatePlayRequestDto {
 
-    private long playNo;
+    private long gameId;
 
-    @NonNull
-    private String log;
+    private String playName;
 
 }

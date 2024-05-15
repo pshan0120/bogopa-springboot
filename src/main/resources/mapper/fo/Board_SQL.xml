@@ -53,7 +53,7 @@
 			FROM
 				brd b
 			WHERE
-				b.seq = #{id}
+				b.seq = #{boardId}
 		]]>
 	</select>
 

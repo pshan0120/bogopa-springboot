@@ -20,8 +20,8 @@
             readGamePlayById(PLAY_NO);
         });
 
-        const readGamePlayById = playNo => {
-            gfn_callGetApi("/api/game/play", {playNo})
+        const readGamePlayById = playId => {
+            gfn_callGetApi("/api/play", {playId})
                 .then(data => {
                     $("#titleDiv").find("span[name='playNm']").text(data.playNm);
                 })

@@ -23,8 +23,8 @@ public class BoardRestController {
     }
 
     @GetMapping("")
-    public Map<String, Object> readById(@RequestParam long id) {
-        return boardService.readById(id);
+    public Map<String, Object> readById(@RequestParam long boardId) {
+        return boardService.readById(boardId);
     }
 
 }

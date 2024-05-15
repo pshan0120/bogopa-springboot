@@ -120,7 +120,7 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">Blood on the Clocktower</h1>
+                        <h1 class="text-white">대기실</h1>
                         <p class="text-lead text-light">trouble brewing</p>
                     </div>
                 </div>

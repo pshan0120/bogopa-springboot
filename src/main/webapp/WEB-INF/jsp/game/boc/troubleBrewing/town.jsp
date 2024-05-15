@@ -93,8 +93,8 @@
             console.log('game status loaded !!');
         }
 
-        const readLastPlayLog = playNo => {
-            return gfn_callGetApi("/api/game/play/log/last", {playNo})
+        const readLastPlayLog = playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
                 .then(data => {
                     // console.log('data', data);
                     return data?.log;

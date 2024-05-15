@@ -6,14 +6,19 @@ import boardgame.com.util.FileUtils;
 import boardgame.com.util.SessionUtils;
 import boardgame.fo.login.service.LoginService;
 import boardgame.fo.member.service.MemberService;
+import boardgame.fo.play.service.PlayMemberService;
+import boardgame.fo.play.service.PlayRecordService;
 import boardgame.fo.play.service.PlayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,11 +28,16 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Slf4j
+@ResponseStatus(HttpStatus.OK)
 @Controller
 @RequiredArgsConstructor
 public class PlayController {
 
     private final PlayService playService;
+
+    private final PlayRecordService playRecordService;
+
+    private final PlayMemberService playMemberService;
 
     private final MemberService memberService;
 
@@ -38,10 +48,15 @@ public class PlayController {
     private final LoginService loginService;
 
     /* 플레이 */
-    @RequestMapping(value = "/play")
+    /*@RequestMapping(value = "/play")
     public ModelAndView openPlay() {
         ModelAndView mv = new ModelAndView("/fo/play");
         return mv;
+    }*/
+
+    @GetMapping("/play")
+    public String openGame() {
+        return "/fo/play";
     }
 
     @RequestMapping(value = "/play/{id}")
@@ -55,13 +70,24 @@ public class PlayController {
         return mv;
     }
 
+    @GetMapping("/play/waiting-room/{playId}")
+    public ModelAndView openWaitingRoomByPlayId(@PathVariable("playId") long playId) {
+        ModelAndView mv = new ModelAndView("/fo/waitingRoom");
+        mv.addObject("playId", playId);
+        return mv;
+    }
+
+
+
+
+
     @RequestMapping(value = "/selectPlayRcrdByAllList")
     public ModelAndView selectPlayRcrdByAllList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectPlayRcrdByAllList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRcrdByAllList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -75,7 +101,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectPlayRcrdByClubList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRcrdByClubList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -89,7 +115,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectPlayRcrdByMmbrList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRcrdByMmbrList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -103,7 +129,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectPlayRcrdByGameList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRcrdByGameList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -118,8 +144,8 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectPlayRcrd(commandMap.getMap()));
-        mv.addObject("list", playService.selectPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRcrd(commandMap.getMap()));
+        mv.addObject("list", playRecordService.selectPlayRcrdList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -189,7 +215,7 @@ public class PlayController {
                 tempMap.put("rsltRnk", rsltRnkArr[k]);
                 tempMap.put("rsltScr", rsltScrArr[k]);
                 tempMap.put("rsltPnt", pntArrInt[k]);
-                playService.updatePlayMmbr(tempMap);
+                playMemberService.updatePlayMmbr(tempMap);
             }
 
             result = true;
@@ -222,7 +248,7 @@ public class PlayController {
                     comService.insertFile(fileMap);
 
                     commandMap.put("fdbckImgFileNm", fileMap.get("strdFileNm"));
-                    playService.updatePlayMmbr(commandMap.getMap());
+                    playMemberService.updatePlayMmbr(commandMap.getMap());
 
                     resultMsg = "저장되었습니다.";
                     result = true;
@@ -230,7 +256,7 @@ public class PlayController {
                     resultMsg = String.valueOf(fileMap.get("resultMsg"));
                 }
             } else {
-                playService.updatePlayMmbr(commandMap.getMap());
+                playMemberService.updatePlayMmbr(commandMap.getMap());
 
                 resultMsg = "저장되었습니다.";
                 result = true;
@@ -250,7 +276,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("list", playService.selectPlayJoinMmbrList(commandMap.getMap()));
+        mv.addObject("list", playMemberService.selectPlayJoinMmbrList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -290,7 +316,7 @@ public class PlayController {
                         && StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd3Arr")))) {
                     tempMap.put("setting3Cd", settingCd3Arr[i]);
                 }
-                playService.insertPlayMmbr(tempMap);
+                playMemberService.insertPlayMmbr(tempMap);
             }
 
             mv.addObject("playNo", playNo);
@@ -311,7 +337,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectBocPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectBocPlayRcrdList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -325,7 +351,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectFruitShopPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectFruitShopPlayRcrdList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -339,7 +365,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playService.selectCatchAThiefPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectCatchAThiefPlayRcrdList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);

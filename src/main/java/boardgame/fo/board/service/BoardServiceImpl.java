@@ -24,8 +24,8 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional(readOnly = true)
-    public Map<String, Object> readById(long id) {
-        return boardDao.selectBoard(id);
+    public Map<String, Object> readById(long boardId) {
+        return boardDao.selectBoard(boardId);
     }
 
     @Override

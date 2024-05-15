@@ -3,7 +3,7 @@ package boardgame.fo.main.presentation;
 import boardgame.com.mapping.CommandMap;
 import boardgame.com.util.ComUtils;
 import boardgame.fo.board.service.BoardService;
-import boardgame.fo.play.service.PlayService;
+import boardgame.fo.play.service.PlayRecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public class MainController {
 
     public String mvPrefix = "/fo";
 
-    private final PlayService playService;
+    private final PlayRecordService playRecordService;
 
     private final BoardService boardService;
 
@@ -39,7 +39,7 @@ public class MainController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("playRcrdList", playService.selectMainPlayRcrdList(commandMap.getMap()));
+        mv.addObject("playRcrdList", playRecordService.selectMainPlayRcrdList(commandMap.getMap()));
         mv.addObject("clubBrdList", boardService.selectMainClubBrdList(commandMap.getMap()));
         result = true;
 

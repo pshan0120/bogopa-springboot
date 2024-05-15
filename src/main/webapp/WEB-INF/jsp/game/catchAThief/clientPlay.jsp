@@ -39,8 +39,8 @@
             console.log('game status loaded !!');
         }
 
-        const readLastPlayLog = playNo => {
-            return gfn_callGetApi("/api/game/play/log/last", {playNo})
+        const readLastPlayLog = playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
                 .then(data => {
                     // console.log('data', data);
                     return data?.log;
@@ -48,8 +48,8 @@
                 .catch(response => console.error('error', response));
         }
 
-        const readGamePlayById = playNo => {
-            gfn_callGetApi("/api/game/play", {playNo})
+        const readGamePlayById = playId => {
+            gfn_callGetApi("/api/play", {playId})
                 .then(data => {
                     $("#titleDiv").find("span[name='playNm']").text(data.playNm);
                 })

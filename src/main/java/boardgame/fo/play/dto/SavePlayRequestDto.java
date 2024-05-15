@@ -1,4 +1,4 @@
-package boardgame.fo.game.dto;
+package boardgame.fo.play.dto;
 
 
 import lombok.*;
@@ -6,8 +6,11 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DeletePlayLogAllRequestDto {
+public class SavePlayRequestDto {
 
-    private long playNo;
+    private long playId;
+
+    @NonNull
+    private String log;
 
 }

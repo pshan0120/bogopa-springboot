@@ -1,12 +1,14 @@
 package boardgame.fo.play.service;
 
-import boardgame.com.constant.Game;
+import boardgame.com.constant.PlayStatus;
+import boardgame.com.util.SessionUtils;
 import boardgame.fo.play.dao.PlayDao;
+import boardgame.fo.play.dto.CreatePlayRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -15,50 +17,69 @@ public class PlayServiceImpl implements PlayService {
 
     private final PlayDao playDao;
 
-    /* 플레이 */
     @Override
-    public Map<String, Object> selectPlayRcrd(Map<String, Object> map) {
-        return playDao.selectPlayRcrd(map);
-    }
-
-    public List<Map<String, Object>> selectPlayRcrdList(Map<String, Object> map) {
-        return playDao.selectPlayRcrdList(map);
+    @Transactional(readOnly = true)
+    public Map<String, Object> readById(long playId) {
+        return playDao.selectPlayById(playId);
     }
 
     @Override
-    public Map<String, Object> selectPlayRcrdByAllList(Map<String, Object> map) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", playDao.selectPlayRcrdByAllList(map));
-        resultMap.put("cnt", playDao.selectPlayRcrdByAllListCnt(map).get("cnt"));
-        return resultMap;
-    }
+    public long createPlay(CreatePlayRequestDto dto) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("gameNo", dto.getGameId());
+        requestMap.put("playNm", dto.getPlayName());
+        requestMap.put("clubNo", SessionUtils.getCurrentMemberClubId());
+        requestMap.put("hostMmbrNo", SessionUtils.getCurrentMemberId());
+        requestMap.put("sttsCd", PlayStatus.STAND_BY.getCode());
+        playDao.insertPlay(requestMap);
 
-    @Override
-    public Map<String, Object> selectPlayRcrdByClubList(Map<String, Object> map) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", playDao.selecPlayRcrdByClubList(map));
-        resultMap.put("cnt", playDao.selecPlayRcrdByClubListCnt(map).get("cnt"));
-        return resultMap;
-    }
+        return (long) requestMap.get("playNo");
 
-    @Override
-    public Map<String, Object> selectPlayRcrdByMmbrList(Map<String, Object> map) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", playDao.selecPlayRcrdByMmbrList(map));
-        resultMap.put("cnt", playDao.selecPlayRcrdByMmbrListCnt(map).get("cnt"));
-        return resultMap;
-    }
+        /*ModelAndView mv = new ModelAndView("jsonView");
+        Boolean result = false;
+        String resultMsg = "";
 
-    @Override
-    public Map<String, Object> selectPlayRcrdByGameList(Map<String, Object> map) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", playDao.selecPlayRcrdByGameList(map));
-        resultMap.put("cnt", playDao.selecPlayRcrdByGameListCnt(map).get("cnt"));
-        return resultMap;
-    }
+        if (SessionUtils.isMemberLogin()) {
+            commandMap.put("sttsCd", "1");    // 플레이상태 진행중
+            playService.insertPlay(commandMap.getMap());
+            String playNo = String.valueOf(commandMap.get("playNo"));
 
-    public List<Map<String, Object>> selectPlayJoinMmbrList(Map<String, Object> map) {
-        return playDao.selectPlayJoinMmbrList(map);
+            String[] joinMmbrNoArr = (String.valueOf(commandMap.get("joinMmbrNoArr"))).split(",");
+
+            String[] settingCd1Arr = (String.valueOf(commandMap.get("settingCd1Arr"))).split(",");
+            String[] settingCd2Arr = (String.valueOf(commandMap.get("settingCd2Arr"))).split(",");
+            String[] settingCd3Arr = (String.valueOf(commandMap.get("settingCd3Arr"))).split(",");
+            for (int i = 0, size = joinMmbrNoArr.length; i < size; i++) {
+                Map<String, Object> tempMap = new HashMap<>();
+                tempMap.put("playNo", playNo);
+                tempMap.put("mmbrNo", joinMmbrNoArr[i]);
+                if (commandMap.containsKey("settingCd1Arr")
+                        && StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd1Arr")))) {
+                    tempMap.put("setting1Cd", settingCd1Arr[i]);
+                }
+                if (commandMap.containsKey("settingCd2Arr")
+                        && StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd2Arr")))) {
+                    tempMap.put("setting2Cd", settingCd2Arr[i]);
+                }
+                if (commandMap.containsKey("settingCd3Arr")
+                        && StringUtils.isNotEmpty(String.valueOf(commandMap.get("settingCd3Arr")))) {
+                    tempMap.put("setting3Cd", settingCd3Arr[i]);
+                }
+                playMemberService.insertPlayMmbr(tempMap);
+            }
+
+            mv.addObject("playNo", playNo);
+            resultMsg = "플레이가 시작되었습니다.";
+            result = true;
+        } else {
+            resultMsg = "로그인 세션이 종료되었습니다.";
+        }
+
+        mv.addObject("result", result);
+        mv.addObject("resultMsg", resultMsg);
+        return mv;*/
+
+        // playDao.insertPlay(dto);
     }
 
     @Override
@@ -74,50 +95,6 @@ public class PlayServiceImpl implements PlayService {
     @Override
     public void deletePlay(Map<String, Object> map) {
         playDao.deletePlay(map);
-    }
-
-    @Override
-    public void insertPlayMmbr(Map<String, Object> map) {
-        playDao.insertPlayMmbr(map);
-    }
-
-    @Override
-    public void updatePlayMmbr(Map<String, Object> map) {
-        playDao.updatePlayMmbr(map);
-    }
-
-    @Override
-    public Map<String, Object> selectBocPlayRcrdList(Map<String, Object> map) {
-        map.put("gameNo", Game.BOC_TROUBLE_BREWING.getGameId());
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", playDao.selectGamePlayRcrdList(map));
-        resultMap.put("cnt", playDao.selectGamePlayRcrdListCnt(map).get("cnt"));
-        return resultMap;
-    }
-
-    @Override
-    public Map<String, Object> selectFruitShopPlayRcrdList(Map<String, Object> map) {
-        map.put("gameNo", Game.FRUIT_SHOP.getGameId());
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", playDao.selectGamePlayRcrdList(map));
-        resultMap.put("cnt", playDao.selectGamePlayRcrdListCnt(map).get("cnt"));
-        return resultMap;
-    }
-
-    @Override
-    public Map<String, Object> selectCatchAThiefPlayRcrdList(Map<String, Object> map) {
-        map.put("gameNo", Game.CATCH_A_THIEF.getGameId());
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", playDao.selectGamePlayRcrdList(map));
-        resultMap.put("cnt", playDao.selectGamePlayRcrdListCnt(map).get("cnt"));
-        return resultMap;
-    }
-
-    public List<Map<String, Object>> selectMainPlayRcrdList(Map<String, Object> map) {
-        return playDao.selectMainPlayRcrdList(map);
     }
 
 }
