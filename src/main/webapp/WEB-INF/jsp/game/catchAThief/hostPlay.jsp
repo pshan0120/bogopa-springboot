@@ -11,6 +11,7 @@
         const PLAY_NO = ${playNo};
         let playSetting = {};
         let playStatus = {};
+        let originalPlayerList = [];
         let playerList = [];
         let uptownOutcastList = [];
         let downtownOutcastList = [];
@@ -59,13 +60,13 @@
                 hostMemberName: hostPlayMember.nickNm,
             }
 
-            playerList = clientPlayMemberList;
+            originalPlayerList = clientPlayMemberList;
 
             playSetting = initializationSetting.player
-                .find(item => playerList.length === item.numberOfPlayer);
+                .find(item => originalPlayerList.length === item.numberOfPlayer);
             playSetting = {...playSetting, round: initializationSetting.round, money: initializationSetting.money};
 
-            renderPlayMemberList(playerList);
+            renderPlayMemberList(originalPlayerList);
         };
 
         const renderPlayMemberList = playerList => {
@@ -95,7 +96,7 @@
         }
 
         const setTownOfPlayer = () => {
-            playerList = createPlayerList(playerList);
+            playerList = createPlayerList(originalPlayerList);
 
             showPlayerTownList(playerList);
         }
@@ -164,6 +165,7 @@
             const $settingDiv = $("#settingDiv");
             const $playerDiv = $settingDiv.find("div[name='playerDiv']");
             playerList.forEach(player => {
+                console.log('player', player);
                 const found = $playerDiv.find("input[name='items']").toArray()
                     .filter(itemsObject => player.playerId == $(itemsObject).data("memberId"));
 
@@ -338,7 +340,7 @@
                     return prev
                         + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
                         + " onclick=\"setOutcast('" + next.playerName + "')\" >"
-                        + " " + next.playerName
+                        + " " + next.playerName + (next.thief ? "(도둑)" : "")
                         + "</button>";
                     // }, `<h3>\${town.title} 추방자</h3>`) + "<hr>";
                 }, "");
