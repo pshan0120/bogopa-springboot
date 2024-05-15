@@ -138,6 +138,7 @@
             $modal.find("[name='nominatedPlayerListDiv']").empty().html(setNominatedPlayerHtml);
             $modal.find("[name='nominatedPlayerName']").empty();
             $modal.find("[name='votedPlayerListDiv']").empty();
+            $modal.find("[name='votingPlayerListDiv']").empty();
 
             const candidatePlayerListHtml = execution.candidatePlayerListOfToday
                 .sort((prev, next) => next.numberOfVote - prev.numberOfVote)
@@ -170,13 +171,13 @@
             $modal.find("[name='nominatingPlayerListDiv']").find("button").hide();
         },
         setNominatedPlayer: playerName => {
-            const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
-            execution.nominatedPlayerListOfToday.push(player);
-            execution.nominatedPlayer = player;
+            const nominatedPlayer = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
+            execution.nominatedPlayerListOfToday.push(nominatedPlayer);
+            execution.nominatedPlayer = nominatedPlayer;
 
-            if (player.name === Virgin.name
-                && !player.poisoned
-                && !player.drunken) {
+            if (nominatedPlayer.name === Virgin.name
+                && !nominatedPlayer.poisoned
+                && !nominatedPlayer.drunken) {
 
                 if (execution.nominatingPlayer.position.name === POSITION.TOWNS_FOLK.name
                     && !execution.nominatingPlayer.drunken) {
@@ -197,10 +198,12 @@
             $modal.find("[name='nominatedPlayerName']").text(playerName);
             $modal.find("[name='nominatedPlayerListDiv']").find("button").hide();
 
+            const nominatedPlayerSeatNumber = nominatedPlayer.seatNumber;
             const votingPlayerList = [...createAssignedPlayerList()]
                 .filter(votingPlayer => votingPlayer.votable)
+                .sort((prev, next) => prev.seatNumber - next.seatNumber)
                 .map(votingPlayer => {
-                    if(votingPlayer.seatNumber < player.seatNumber) {
+                    if (votingPlayer.seatNumber <= nominatedPlayerSeatNumber) {
                         votingPlayer.seatNumber = votingPlayer.seatNumber + playerList.length;
                         return votingPlayer;
                     }
@@ -210,9 +213,9 @@
 
             const setVotingPlayerHtml = votingPlayerList.reduce((prev, next) => {
                 return prev
-                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                    + "<button class=\"btn btn-outline-default mr-1 my-1 btn-block\""
                     + " onclick=\"execution.setVotingPlayer('" + next.playerName + "')\" >"
-                    + " " + next.playerName + "(" + next.title + (next.died ? "-사망" : "") + ")"
+                    + " " + next.playerName + (next.died ? "-사망" : "")
                     + "</button>";
             }, "");
             $modal.find("[name='votingPlayerListDiv']").empty().html(setVotingPlayerHtml);

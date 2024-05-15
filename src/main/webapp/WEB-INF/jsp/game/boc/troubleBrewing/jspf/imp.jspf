@@ -369,6 +369,15 @@
             const newImpPlayer = Role.getPlayerByRoleName(minionPlayerList, roleName);
             newImpPlayer.changedToImp = true;
             newImpPlayer.attackingPlayerByRound = [];
+
+            // 독살범이 스킬 쓰고 나서 임프가 자살하고 새로운 임프가 되면 독살범이 원래 적용한 능력은 발동하지 않음
+            if (newImpPlayer.name === Poisoner.name) {
+                const drunkenPlayer = playerList.find(player => player.drunken);
+                if (drunkenPlayer) {
+                    drunkenPlayer.drunken = false;
+                }
+            }
+
             $("#setNewImpModal").modal("hide");
         },
         openNewImpMessageModal: () => {
