@@ -8,7 +8,7 @@
     <script src="<c:url value='/js/game/catchAThief/constants.js'/>"></script>
 
     <script>
-        const PLAY_NO = ${playNo};
+        const PLAY_ID = ${playId};
         let playSetting = {};
         let playStatus = {};
         let playerList = [];
@@ -18,11 +18,11 @@
         $(async () => {
             await loadGameStatus();
 
-            readGamePlayById(PLAY_NO);
+            readGamePlayById(PLAY_ID);
         });
 
         const loadGameStatus = async () => {
-            const lastPlayLog = await readLastPlayLog(PLAY_NO);
+            const lastPlayLog = await readLastPlayLog(PLAY_ID);
             if (!lastPlayLog) {
                 return;
             }
@@ -65,11 +65,11 @@
         }
 
         const openMoneyStatusModal = () => {
-            moneyStatusModal.open(PLAY_NO);
+            moneyStatusModal.open(PLAY_ID);
         }
 
         const openMyRoleModal = () => {
-            myRoleModal.open(PLAY_NO);
+            myRoleModal.open(PLAY_ID);
         }
 
         const openQrImage = () => {

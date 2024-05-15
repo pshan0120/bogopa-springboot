@@ -8,12 +8,17 @@
     <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 
     <script>
+        const PLAY_ID = ${playId};
+
+
         $(() => {
-            gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
+            // 만약 대기상태가 아니면 튕김
+
+            /*gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
 
             $("[data-toggle='tooltip']").tooltip();
 
-            selectBocPlayRcrdList(1);
+            selectBocPlayRcrdList(1);*/
         });
 
 

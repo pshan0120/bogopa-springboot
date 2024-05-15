@@ -8,7 +8,7 @@
     <script src="<c:url value='/js/game/catchAThief/constants.js'/>"></script>
 
     <script>
-        const PLAY_NO = ${playNo};
+        const PLAY_ID = ${playId};
         let playSetting = {};
         let playStatus = {};
         let originalPlayerList = [];
@@ -50,7 +50,7 @@
             $("#roundDiv").hide();
             $("#resultDiv").hide();
 
-            const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
+            const originalPlayMemberList = await readPlayMemberList(PLAY_ID);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
             const hostPlayMember = originalPlayMemberList.hostPlayMember;
 
@@ -187,7 +187,7 @@
             }
 
             const request = {
-                playId: PLAY_NO,
+                playId: PLAY_ID,
                 log: JSON.stringify(log)
             }
 
@@ -199,7 +199,7 @@
         }
 
         const loadGameStatus = async () => {
-            const lastPlayLog = await readLastPlayLog(PLAY_NO);
+            const lastPlayLog = await readLastPlayLog(PLAY_ID);
             if (!lastPlayLog) {
                 return;
             }
@@ -383,7 +383,7 @@
             }
 
             const request = {
-                playId: PLAY_NO
+                playId: PLAY_ID
             }
 
             gfn_callDeleteApi("/api/play/log/all", request)
@@ -498,7 +498,7 @@
         }
 
         const openMoneyStatusModal = () => {
-            moneyStatusModal.open(PLAY_NO);
+            moneyStatusModal.open(PLAY_ID);
         }
 
         const openGuideModal = () => {

@@ -9,7 +9,7 @@
     <script src="<c:url value='/js/game/boc/troubleBrewing/initializationSetting.js'/>"></script>
 
     <script>
-        const PLAY_NO = ${playNo};
+        const PLAY_ID = ${playId};
         let playerList = [];
         let roleList = [];
         let demonPlayerList = [];
@@ -19,7 +19,7 @@
         let playStatus = {};
 
         $(() => {
-            readGamePlayById(PLAY_NO);
+            readGamePlayById(PLAY_ID);
         });
 
         const readGamePlayById = playId => {
@@ -43,11 +43,11 @@
         }
 
         const openTownModal = () => {
-            townModal.open(PLAY_NO);
+            townModal.open(PLAY_ID);
         }
 
         const openMyRoleModal = () => {
-            myRoleModal.open(PLAY_NO);
+            myRoleModal.open(PLAY_ID);
         }
 
         const openQrImage = () => {

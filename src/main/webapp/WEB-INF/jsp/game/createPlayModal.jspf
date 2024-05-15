@@ -2,7 +2,10 @@
 
 <script>
     const createPlayModal = {
+        gameId: null,
         open: gameId => {
+            createPlayModal.gameId = gameId;
+
             createPlayModal.readGameById(gameId);
 
             const $createPlayModal = $("#createPlayModal");

@@ -9,7 +9,7 @@
     <script src="<c:url value='/js/game/fruitShop/fruits.js'/>"></script>
 
     <script>
-        const PLAY_NO = ${playNo};
+        const PLAY_ID = ${playId};
         let playSetting = {};
         let playStatus = {};
         let fruitList = [];
@@ -17,7 +17,7 @@
         let auctionByRound = [];
 
         $(() => {
-            readGamePlayById(PLAY_NO);
+            readGamePlayById(PLAY_ID);
         });
 
         const readGamePlayById = playId => {
@@ -29,11 +29,11 @@
         }
 
         const openFruitShopModal = () => {
-            shopListModal.open(PLAY_NO);
+            shopListModal.open(PLAY_ID);
         }
 
         const openAuctionResultModal = () => {
-            auctionResultModal.open(PLAY_NO);
+            auctionResultModal.open(PLAY_ID);
         }
 
         const openQrImage = () => {

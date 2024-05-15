@@ -9,7 +9,7 @@
     <script src="<c:url value='/js/game/fruitShop/fruits.js'/>"></script>
 
     <script>
-        const PLAY_NO = ${playNo};
+        const PLAY_NO = ${playId};
         let playSetting = {};
         let playStatus = {};
         let fruitList = [];

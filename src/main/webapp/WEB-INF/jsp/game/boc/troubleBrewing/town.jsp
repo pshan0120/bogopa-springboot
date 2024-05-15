@@ -8,7 +8,7 @@
     <script src="<c:url value='/js/game/boc/troubleBrewing/roles.js'/>"></script>
 
     <script>
-        const PLAY_NO = ${playNo};
+        const PLAY_ID = ${playId};
         let playerList = [];
         let roleList = [];
         let demonPlayerList = [];
@@ -75,7 +75,7 @@
         });
 
         const loadGameStatus = async () => {
-            const lastPlayLog = await readLastPlayLog(PLAY_NO);
+            const lastPlayLog = await readLastPlayLog(PLAY_ID);
             if (!lastPlayLog) {
                 return;
             }

@@ -33,13 +33,13 @@ public class GameController {
         return "/game/boc/troubleBrewing/playList";
     }
 
-    @GetMapping("/game/trouble-brewing/play/{playNo}")
-    public ModelAndView openTroubleBrewingPlayByPlayNo(@PathVariable("playNo") long playNo, HttpServletRequest request) {
+    @GetMapping("/game/trouble-brewing/play/{playId}")
+    public ModelAndView openTroubleBrewingPlayByPlayNo(@PathVariable("playId") long playId, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
 
         // TODO: 나중에 호스트 적용
-        /*ReadPlayMemberListResponseDto readPlayMemberList = gameService.readPlayMemberList(playNo);
+        /*ReadPlayMemberListResponseDto readPlayMemberList = gameService.readPlayMemberList(playId);
         readPlayMemberList.getHostPlayMember();*/
 
         if (isAdminMemberLogin()) {
@@ -60,24 +60,24 @@ public class GameController {
         return mv;
     }
 
-    @GetMapping("/game/trouble-brewing/play/host/{playNo}")
-    public ModelAndView openTroubleBrewingHostPlayByPlayNo(@PathVariable("playNo") long playNo) {
+    @GetMapping("/game/trouble-brewing/play/host/{playId}")
+    public ModelAndView openTroubleBrewingHostPlayByPlayNo(@PathVariable("playId") long playId) {
         ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/hostPlay");
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
         return mv;
     }
 
-    @GetMapping("/game/trouble-brewing/play/client/{playNo}")
-    public ModelAndView openTroubleBrewingClientPlayByPlayNo(@PathVariable("playNo") long playNo) {
+    @GetMapping("/game/trouble-brewing/play/client/{playId}")
+    public ModelAndView openTroubleBrewingClientPlayByPlayNo(@PathVariable("playId") long playId) {
         ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/clientPlay");
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
         return mv;
     }
 
-    @GetMapping("/game/trouble-brewing/town/{playNo}")
-    public ModelAndView openTroubleBrewingTown(@PathVariable("playNo") long playNo) {
+    @GetMapping("/game/trouble-brewing/town/{playId}")
+    public ModelAndView openTroubleBrewingTown(@PathVariable("playId") long playId) {
         ModelAndView mv = new ModelAndView("/game/boc/troubleBrewing/town");
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
         return mv;
     }
     
@@ -86,10 +86,10 @@ public class GameController {
         return "/game/fruitShop/playList";
     }
 
-    @GetMapping("/game/fruit-shop/play/{playNo}")
-    public ModelAndView openFruitShopPlayByPlayNo(@PathVariable("playNo") long playNo) {
+    @GetMapping("/game/fruit-shop/play/{playId}")
+    public ModelAndView openFruitShopPlayByPlayNo(@PathVariable("playId") long playId) {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
 
         if (isAdminMemberLogin()) {
             mv.setViewName("/game/fruitShop/hostPlay");
@@ -99,10 +99,10 @@ public class GameController {
         return mv;
     }
 
-    @GetMapping("/game/fruit-shop/play/host/{playNo}")
-    public ModelAndView openFruitShopHostPlayByPlayNo(@PathVariable("playNo") long playNo) {
+    @GetMapping("/game/fruit-shop/play/host/{playId}")
+    public ModelAndView openFruitShopHostPlayByPlayNo(@PathVariable("playId") long playId) {
         ModelAndView mv = new ModelAndView("/game/fruitShop/hostPlay");
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
         return mv;
     }
 
@@ -112,8 +112,8 @@ public class GameController {
         return "/game/catchAThief/playList";
     }
 
-    @GetMapping("/game/catch-a-thief/play/{playNo}")
-    public ModelAndView openCatchAThiefPlayByPlayNo(@PathVariable("playNo") long playNo, HttpServletRequest request) {
+    @GetMapping("/game/catch-a-thief/play/{playId}")
+    public ModelAndView openCatchAThiefPlayByPlayNo(@PathVariable("playId") long playId, HttpServletRequest request) {
         if (request.getParameterMap().containsKey("hashKey")) {
             String hashKey = String.valueOf(request.getParameter("hashKey"));
             System.out.println("hashKey : " + hashKey);
@@ -125,7 +125,7 @@ public class GameController {
         }
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
 
         if (isAdminMemberLogin()) {
             mv.setViewName("/game/catchAThief/hostPlay");
@@ -135,10 +135,10 @@ public class GameController {
         return mv;
     }
 
-    @GetMapping("/game/catch-a-thief/play/host/{playNo}")
-    public ModelAndView openCatchAThiefHostPlayByPlayNo(@PathVariable("playNo") long playNo) {
+    @GetMapping("/game/catch-a-thief/play/host/{playId}")
+    public ModelAndView openCatchAThiefHostPlayByPlayNo(@PathVariable("playId") long playId) {
         ModelAndView mv = new ModelAndView("/game/catchAThief/hostPlay");
-        mv.addObject("playNo", playNo);
+        mv.addObject("playId", playId);
         return mv;
     }
 
