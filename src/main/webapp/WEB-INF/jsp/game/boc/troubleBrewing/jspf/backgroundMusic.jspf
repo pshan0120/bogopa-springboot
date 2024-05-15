@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<div name="backgroundMusicDiv">
+    <h3>
+        배경음악
+    </h3>
+    <h4>piano-horror</h4>
+    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/piano-horror-soundtrack-bruno-magic-166661.mp3"
+           controls></audio>
+    <h4>dramatic-horror</h4>
+    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dramatic-horror-cinematic-epic-trailer-action-intro-opener-115496.mp3"
+           controls></audio>
+    <h4>horror-box</h4>
+    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/horror-box-149248.mp3"
+           controls></audio>
+    <h4>horror-ambience-music</h4>
+    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/horror-ambience-music-with-vocals-hard-to-trust-186979.mp3"
+           controls></audio>
+    <h4>cassio</h4>
+    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/leonell-cassio-the-blackest-bouquet-118766.mp3"
+           controls></audio>
+</div>

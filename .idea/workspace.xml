@@ -10,17 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="대기실 진행중">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/game/presentation/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/town.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/town.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/createPlayModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/createPlayModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/soundEffectModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/soundEffectModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +68,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "false",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/fo",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -92,11 +86,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\com" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo\jspf" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\resources\config" />
@@ -266,14 +260,7 @@
       <workItem from="1715612557875" duration="6592000" />
       <workItem from="1715714480607" duration="901000" />
       <workItem from="1715739607514" duration="5521000" />
-      <workItem from="1715782768033" duration="10236000" />
-    </task>
-    <task id="LOCAL-00049" summary="처형 투표 개선">
-      <created>1713887624562</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1713887624562</updated>
+      <workItem from="1715782768033" duration="12370000" />
     </task>
     <task id="LOCAL-00050" summary="readGamePlayById 추가">
       <created>1713893066777</created>
@@ -611,7 +598,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715794930741</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="대기실 진행중">
+      <created>1715795566165</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1715795566165</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

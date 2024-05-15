@@ -23,6 +23,16 @@
             </div>
             <div class="modal-body">
                 <h3>
+                    교회 종 소리
+                </h3>
+                <audio name="chicken" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3" controls></audio>
+
+                <h3>
+                    시계 종 소리
+                </h3>
+                <audio name="chicken" src="https://bogopayo.cafe24.com/sound/clock-bell-chimes-78190.mp3" controls></audio>
+
+                <h3>
                     닭 소리
                 </h3>
                 <audio name="chicken" src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>

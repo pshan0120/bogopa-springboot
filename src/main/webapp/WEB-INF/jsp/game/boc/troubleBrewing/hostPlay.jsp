@@ -118,7 +118,7 @@
             $("#otherDayDiv").hide();
             $("#otherNightDiv").hide();
 
-             setRoleList();
+            setRoleList();
 
             const originalPlayMemberList = await readPlayMemberList(PLAY_ID);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
@@ -576,6 +576,10 @@
                 return;
             }
 
+            $("audio[name='backgroundMusic']").each((index, audio) => {
+                audio.pause();
+            });
+
             const mayorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Mayor);
             if (mayorPlayer
                 && !mayorPlayer.died
@@ -828,10 +832,12 @@
                         <h2>
                             첫번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3"
-                               controls></audio>
                     </div>
-                    <div class="card-body" name="flowDiv"></div>
+                    <div class="card-body">
+                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                        <hr>
+                        <div name="flowDiv"></div>
+                    </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
@@ -873,11 +879,17 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 낮
                         </h2>
-                        <audio name="backgroundMusic"
-                               src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
-                               controls></audio>
                     </div>
-                    <div class="card-body" name="flowDiv"></div>
+                    <div class="card-body">
+                        <h3>
+                            배경음악
+                        </h3>
+                        <h4>church-bell</h4>
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3"
+                               controls></audio>
+                        <hr>
+                        <div name="flowDiv"></div>
+                    </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
@@ -919,10 +931,12 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 밤
                         </h2>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3"
-                               controls></audio>
                     </div>
-                    <div class="card-body" name="flowDiv"></div>
+                    <div class="card-body">
+                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                        <hr>
+                        <div name="flowDiv"></div>
+                    </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
