@@ -2,8 +2,8 @@
 
 <script>
     const townModal = {
-        open: async playNo => {
-            await townModal.loadGameStatus(playNo);
+        open: async playId => {
+            await townModal.loadGameStatus(playId);
 
             console.log('playStatus', playStatus);
             const $townModal = $("#townModal");
@@ -63,8 +63,8 @@
 
             $townModal.modal("show");
         },
-        loadGameStatus: async playNo => {
-            const lastPlayLog = await townModal.readLastPlayLog(playNo);
+        loadGameStatus: async playId => {
+            const lastPlayLog = await townModal.readLastPlayLog(playId);
             if (!lastPlayLog) {
                 return;
             }

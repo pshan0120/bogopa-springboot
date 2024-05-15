@@ -292,7 +292,7 @@
         }
 
         const openTownModal = () => {
-            townModal.open();
+            townModal.open(PLAY_ID);
         }
 
         const openQrLoginModal = () => {

@@ -9,12 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="대기실 진행중">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="배경음 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/soundEffectModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/soundEffectModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,14 +258,7 @@
       <workItem from="1715612557875" duration="6592000" />
       <workItem from="1715714480607" duration="901000" />
       <workItem from="1715739607514" duration="5521000" />
-      <workItem from="1715782768033" duration="12370000" />
-    </task>
-    <task id="LOCAL-00050" summary="readGamePlayById 추가">
-      <created>1713893066777</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1713893066782</updated>
+      <workItem from="1715782768033" duration="12881000" />
     </task>
     <task id="LOCAL-00051" summary="새로운 임프가 생겼을 때 처리">
       <created>1713894325535</created>
@@ -605,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715795566165</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="배경음 추가">
+      <created>1715797690792</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1715797690792</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -626,7 +624,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="플레이인원 조정" />
     <MESSAGE value="uploadFile 조정" />
     <MESSAGE value="레이븐키퍼 수정" />
     <MESSAGE value="몽크 수정" />
@@ -651,7 +648,8 @@
     <MESSAGE value="도둑잡기 밸런스 조정" />
     <MESSAGE value="투표 개선" />
     <MESSAGE value="대기실 진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="대기실 진행중" />
+    <MESSAGE value="배경음 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="배경음 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
