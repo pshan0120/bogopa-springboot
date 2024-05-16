@@ -4,112 +4,196 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
-    <!-- 다음 주소찾기 적용  -->
-    <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
-
     <script>
         const PLAY_ID = ${playId};
+        let hostPlayMember = {};
+        let clientPlayMemberList = [];
 
+        $(async () => {
+            const play = await readPlayById(PLAY_ID);
+            console.log('play', play);
 
-        $(() => {
-            // 만약 대기상태가 아니면 튕김
+            const statusCode = PlayStatus.ofCode(play.statusCode);
+            if (statusCode === PlayStatus.PLAYING) {
+                location.href = "/game/trouble-brewing/play/" + PLAY_ID;
+            }
 
-            /*gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
+            if (statusCode === PlayStatus.FINISHED
+                || statusCode === PlayStatus.ABNORMAL) {
+                location.href = "/play";
+            }
 
-            $("[data-toggle='tooltip']").tooltip();
+            renderPlaySetting(play);
 
-            selectBocPlayRcrdList(1);*/
+            const game = await readGameById(play.gameId);
+            console.log('game', game);
+            renderGameSetting(game);
+
+            const playMemberList = await readPlayMemberListByPlayId(PLAY_ID);
+            console.log('playMemberList', playMemberList);
+            hostPlayMember = playMemberList.hostPlayMember;
+            clientPlayMemberList = playMemberList.clientPlayMemberList;
+
+            renderPlayerList(clientPlayMemberList);
+
+            renderButtons();
         });
 
+        const readPlayById = async playId => {
+            return gfn_callGetApi("/api/play", {playId})
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
 
-        const selectBocPlayRcrdList = pageNo => {
-            let comAjax = new ComAjax("bocPlayRcrdForm");
-            comAjax.setUrl("<c:url value='/selectBocPlayRcrdList' />");
-            comAjax.setCallback("selectBocPlayRcrdListCallback");
-            comAjax.addParam("pageIndex", pageNo);
-            comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#bocPlayRcrdListCurOrderBy').val());
-            comAjax.ajax();
-        };
+        const renderPlaySetting = play => {
+            const $div = $("#settingDiv");
+            const $form = $div.find("form");
+            $form.find("input[name='playName']").val(play.playName);
+        }
 
-        const selectBocPlayRcrdListCallback = data => {
-            let cnt = data.map.cnt;
-            let body = $("#bocPlayRcrdListTbl>tbody");
-            body.empty();
-            let str = "";
-            if (cnt == 0) {
-                str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
-            } else {
-                let params = {
-                    divId: "bocPlayRcrdListPageNav",
-                    pageIndex: "pageIndex",
-                    totalCount: cnt,
-                    eventName: "selectBocPlayRcrdList",
-                    recordCount: 5
-                };
-                gfn_renderPaging(params);
+        const readGameById = async gameId => {
+            return gfn_callGetApi("/api/game", {gameId})
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
 
-                $.each(data.map.list, function (key, value) {
-                    str += "<tr>";
-                    str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
-                    str += "			" + value.playNm;
-                    str += "		</a>";
-                    str += "	</td>";
-                    str += "	<td>";
-                    str += "		" + value.gameNm;
-                    str += "	</td>";
-                    str += "	<td scope=\"row\">";
-                    str += "		<div class=\"media align-items-center\">";
-                    str += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\" onclick=\"openClubProfileModal('" + value.clubNo + "')\">";
-                    if (value.clubPrflImgFileNm != "") {
-                        str += "			<img src=\"https://bogopayo.cafe24.com/img/club/" + value.clubNo + "/" + value.clubPrflImgFileNm + "\">";
-                    } else {
-                        str += "			<img src=\"https://bogopayo.cafe24.com/img/club/default.png\">";
-                    }
-                    str += "			</a>";
-                    str += "			<div class=\"media-body\">";
-                    str += "				<span class=\"mb-0 text-sm\">" + value.clubNm + "</span>";
-                    str += "			</div>";
-                    str += "		</div>";
-                    str += "	</td>";
-                    str += "	<td>";
-                    str += "		" + value.strtDt + " ~ ";
-                    if (value.endDt != "") {
-                        str += value.endDt;
-                    }
-                    str += "	</td>";
-                    str += "</tr>";
-                });
+        const renderGameSetting = game => {
+            const $div = $("#settingDiv");
+            const $form = $div.find("form");
+            $form.find("input[name='gameName']").val(game.gameName);
+            $form.find("input[name='numberOfPlayer']").val(game.numberOfMinPlayer + " ~ " + game.numberOfMaxPlayer);
+        }
+
+        const readPlayMemberListByPlayId = async playId => {
+            return gfn_callGetApi("/api/play/member/list", {playId})
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const renderPlayerList = list => {
+            const $div = $("#playerListDiv");
+            const $numberOfJoined = $div.find("span[name='numberOfJoined']");
+            $numberOfJoined.text(list.length);
+
+            const $tbody = $div.find("tbody");
+            if (list.length === 0) {
+                const htmlString = "<tr><td colspan='1' class=\"text-center\">조회결과가 없습니다.</td></tr>";
+                gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+                return;
             }
-            body.append(str);
-        };
 
-        const createBocMember = () => {
-            const nickname = prompt("회원명 입력");
+            let htmlString = "";
+            $.each(list, (index, value) => {
+                htmlString += "<tr>";
+                htmlString += "	<td scope=\"row\">";
+                htmlString += "		<div class=\"media align-items-center\">";
+                htmlString += "			<a href=\"javascript:(void(0));\" class=\"avatar avatar-sm rounded-circle mr-3\"" +
+                    " onclick=\"openMemberProfileModal('" + value.memberId + "')\">";
+                htmlString += "			    <img src=\"" + createMemberImageUrl(value.memberId, value.profileImageFileName) + "\" class=\"rounded-circle\">";
+                htmlString += "			</a>";
+                htmlString += "			<div class=\"media-body\">";
+                htmlString += "				<span class=\"mb-0 text-sm\">" + value.nickname + "</span>";
+                htmlString += "			</div>";
+                htmlString += "		</div>";
+                htmlString += "	</td>";
+                htmlString += "</tr>";
+            });
+
+            gfn_removeElementChildrenAndAppendHtmlString($tbody, htmlString);
+        }
+
+        const renderButtons = () => {
+            const $div = $("#buttonDiv");
+
+            const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
+            if (hostPlayMember.memberId === memberId) {
+                $div.find("button[name='beginPlayButton']").show();
+                $div.find("button[name='cancelPlayButton']").show();
+                return;
+            }
+
+            if (!clientPlayMemberList.some(playMember => playMember.memberId === memberId)) {
+                $div.find("button[name='joinPlayButton']").show();
+                return;
+            }
+        }
+
+        const joinPlay = () => {
+            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
             if (!nickname) {
                 return;
             }
 
-            if (!confirm("[" + nickname + "] 닉네임으로 BOC 모임에 가입된 회원을 등록합니다.")) {
+            if (!confirm("[" + nickname + "] 닉네임으로 참가할까요?")) {
                 return;
             }
 
-            gfn_callPostApi("/api/member/boc", {nickname})
+            const request = {
+                playId: PLAY_ID,
+                nickname
+            }
+
+            gfn_callPostApi("/api/play/member/join", request)
                 .then(data => {
                     console.log('game status saved !!', data);
-                    alert("회원이 생성되었습니다.");
+                    document.location.reload();
                 })
                 .catch(response => console.error('error', response));
         }
 
-        const openClubProfileModal = clubId => {
-            clubProfileModal.open(clubId);
+        const beginPlay = () => {
+
+            return;
+            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
+            if (!nickname) {
+                return;
+            }
+
+            if (!confirm("[" + nickname + "] 닉네임으로 참가할까요?")) {
+                return;
+            }
+
+            const request = {
+                playId: PLAY_ID,
+                nickname
+            }
+
+            gfn_callPostApi("/api/play/member/join", request)
+                .then(data => {
+                    console.log('game status saved !!', data);
+                    document.location.reload();
+                })
+                .catch(response => console.error('error', response));
         }
 
-        const openCreatePlayModal = () => {
-            createPlayModal.open(GAME.BOC_TROUBLE_BREWING);
-        };
+        const cancelPlay = () => {
+            return;
+
+            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
+            if (!nickname) {
+                return;
+            }
+
+            if (!confirm("[" + nickname + "] 닉네임으로 참가할까요?")) {
+                return;
+            }
+
+            const request = {
+                playId: PLAY_ID,
+                nickname
+            }
+
+            gfn_callPostApi("/api/play/member/join", request)
+                .then(data => {
+                    console.log('game status saved !!', data);
+                    document.location.reload();
+                })
+                .catch(response => console.error('error', response));
+        }
+
+        const openMemberProfileModal = memberId => {
+            memberProfileModal.open(memberId);
+        }
 
     </script>
 </head>
@@ -117,7 +201,7 @@
 <body class="bg-default">
 <%@ include file="/WEB-INF/include/fo/includeBody.jspf" %>
 <div class="main-content">
-    <%@ include file="/WEB-INF/jsp/fo/navbarOnLogin.jsp" %>
+    <%@ include file="/WEB-INF/jsp/fo/navbar.jsp" %>
 
     <!-- Header -->
     <div class="header bg-gradient-primary pb-5 pt-7 pt-md-8">
@@ -126,7 +210,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
                         <h1 class="text-white">대기실</h1>
-                        <p class="text-lead text-light">trouble brewing</p>
+                        <p class="text-lead text-light">우물쭈물 하다간 혼쭐날 줄 알라구</p>
                     </div>
                 </div>
             </div>
@@ -150,74 +234,68 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="bocPlayRcrdForm" onsubmit="return false;">
-                            <input type="hidden" id="bocPlayRcrdListCurOrderBy">
-                            <div class="row clearfix">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">플레이찾기</label>
-                                        <input type="text" name="srchText"
-                                               class="form-control form-control-alternative"
-                                               onKeypress="gfn_hitEnter(event, 'fn_selectPlayRcrd4List(1)');"
-                                               placeholder="게임이름(한글, 영어)">
-                                    </div>
+                        <div id="settingDiv">
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-control-label">게임 이름</label>
+                                    <input type="text" name="gameName" class="form-control form-control-alternative"
+                                           disabled>
                                 </div>
-                                <div class="col-lg-6 mb-3">
-                                    <c:if test="${clubNo ne ''}">
-                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="openCreatePlayModal();">
-                                            새로운 플레이
-                                        </button>
-                                    </c:if>
-                                    <c:if test="${clubNo ne ''}">
-                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="createBocMember();">
-                                            B.O.C 회원 등록
-                                        </button>
-                                    </c:if>
+                                <div class="form-group">
+                                    <label class="form-control-label">플레이어 수</label>
+                                    <input type="text" name="numberOfPlayer"
+                                           class="form-control form-control-alternative"
+                                           disabled>
                                 </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">플레이 이름</label>
+                                    <input type="text" name="playName"
+                                           class="form-control form-control-alternative hasValue"
+                                           disabled>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="playerListDiv">
+                            <h5>참가 플레이어 : <span name="numberOfJoined"></span>명</h5>
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">닉네임</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
-                        </form>
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="bocPlayRcrdListTbl">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_playNm">
-                                        플레이이름 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_playNm"
-                                                    class="fa"></span>
-                                    </th>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_gameNm">
-                                        게임 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_gameNm"
-                                                 class="fa"></span>
-                                    </th>
-                                    <th scope="col">모임</th>
-                                    <th scope="col">플레이시간</th>
-                                </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
                         </div>
                     </div>
                     <div class="card-footer py-4">
-                        <nav aria-label="">
-                            <ul class="pagination pagination-sm justify-content-end mb-0"
-                                id="bocPlayRcrdListPageNav"></ul>
-                        </nav>
+                        <div id="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="joinPlay()"
+                                    name="joinPlayButton" style="display: none">
+                                플레이 참가
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="beginPlay()"
+                                    name="beginPlayButton" style="display: none">
+                                플레이 시작
+                            </button>
+                            <button type="button" class="btn btn-danger btn-block" onclick="cancelPlay()"
+                                    name="cancelPlayButton" style="display: none">
+                                플레이 취소
+                            </button>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
-
-<%@ include file="/WEB-INF/jsp/game/createPlayModal.jspf" %>
-
-<%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/jspf/memberProfileModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

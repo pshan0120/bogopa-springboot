@@ -69,9 +69,12 @@
 
 <script src="<c:url value='/js/com/constants.js'/>"></script>
 <script src="<c:url value='/js/com/imageUrl.js'/>"></script>
+<script src="<c:url value='/js/com/qr.js'/>"></script>
+
 <script src="<c:url value='/js/com/boardType.js'/>"></script>
 <script src="<c:url value='/js/com/memberType.js'/>"></script>
 <script src="<c:url value='/js/com/clubGrade.js'/>"></script>
 <script src="<c:url value='/js/com/clubMemberGrade.js'/>"></script>
+<script src="<c:url value='/js/com/playStatus.js'/>"></script>
 
 <script src="<c:url value='/js/game/constants.js'/>"></script>

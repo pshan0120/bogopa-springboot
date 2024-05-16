@@ -302,12 +302,10 @@
                                                 onclick="openInsertPlayModal();">
                                             새로운 플레이
                                         </button>
-                                    </c:if>
-                                    <c:if test="${clubNo ne ''}">
-                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
+                                        <%--<button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
                                                 onclick="createFruitShopMember();">
                                             과일가게 회원 등록
-                                        </button>
+                                        </button>--%>
                                     </c:if>
                                 </div>
                             </div>

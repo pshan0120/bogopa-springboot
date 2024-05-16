@@ -9,10 +9,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="배경음 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="townModal 오류 수정">
+      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dto/JoinPlayRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/com/playStatus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/com/qr.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/exception/ApiExceptionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/exception/ApiExceptionEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/dto/CreateTemporaryMemberRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/dto/CreateTemporaryMemberRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dao/PlayDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dao/PlayDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayMemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayMemberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Member_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Member_SQL.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/play.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/playList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/playList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/playList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/playList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/footChainMagnate/calculator.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/footChainMagnate/calculator.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/playList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/playList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/game.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/game.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +92,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "false",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/js/com",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -84,10 +110,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\js\com" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
-      <recent name="D:\dev\bogopa\src\main\webapp\js\com" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\fo\jspf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -98,9 +124,9 @@
       <recent name="D:\dev\bogopa\src\main\webapp\sounds" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="boardgame.fo.play.dto" />
       <recent name="boardgame.com.constant" />
       <recent name="boardgame.fo.play.service" />
-      <recent name="boardgame.fo.play.dto" />
       <recent name="boardgame.fo.play.presentation" />
       <recent name="boardgame.com.controller" />
     </key>
@@ -258,14 +284,9 @@
       <workItem from="1715612557875" duration="6592000" />
       <workItem from="1715714480607" duration="901000" />
       <workItem from="1715739607514" duration="5521000" />
-      <workItem from="1715782768033" duration="12881000" />
-    </task>
-    <task id="LOCAL-00051" summary="새로운 임프가 생겼을 때 처리">
-      <created>1713894325535</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1713894325535</updated>
+      <workItem from="1715782768033" duration="12926000" />
+      <workItem from="1715798278894" duration="153000" />
+      <workItem from="1715865362055" duration="9828000" />
     </task>
     <task id="LOCAL-00052" summary="1. 역할 개선&#10;2. BOC 회원 등록 추가">
       <created>1713983482853</created>
@@ -603,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715797690792</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="townModal 오류 수정">
+      <created>1715798158530</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1715798158530</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +652,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="uploadFile 조정" />
     <MESSAGE value="레이븐키퍼 수정" />
     <MESSAGE value="몽크 수정" />
     <MESSAGE value="오타 수정" />
@@ -649,7 +676,8 @@
     <MESSAGE value="투표 개선" />
     <MESSAGE value="대기실 진행중" />
     <MESSAGE value="배경음 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="배경음 추가" />
+    <MESSAGE value="townModal 오류 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="townModal 오류 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

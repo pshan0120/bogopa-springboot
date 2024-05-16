@@ -17,6 +17,7 @@ public enum ApiExceptionEnum {
 
     NOT_EXISTS_ID_OR_PASSWORD(HttpStatus.NOT_ACCEPTABLE, "NOT_EXISTS_ID_OR_PASSWORD", "아이디가 존재하지 않거나 비밀번호가 맞지 않습니다."),
     PASSWORD_ERROR_COUNT_OVER_5(HttpStatus.NOT_ACCEPTABLE, "PASSWORD_ERROR_COUNT_OVER_5", "비밀번호 5회 이상 입력 오류 상태입니다."),
+    NICKNAME_EXISTS(HttpStatus.BAD_REQUEST, "NICKNAME_EXISTS", "이미 존재하는 닉네임입니다."),
 
     ;
 

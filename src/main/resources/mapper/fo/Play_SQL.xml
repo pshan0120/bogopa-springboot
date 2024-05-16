@@ -59,22 +59,25 @@
 
 	<select id="selectPlayById" parameterType="long" resultType="hashmap">
         SELECT
-            p.playNo,
-            p.playNm,
-            p.sttsCd
+            p.playNo AS playId,
+            p.playNm AS playName,
+            p.sttsCd AS statusCode,
+            g.gameNo AS gameId
         FROM
-            play p
+            play p,
+            game g
         WHERE
-            p.sttsCd = '1'
-          AND
+        	p.gameNo = g.gameNo
+        AND
             p.playNo = #{playId}
     </select>
 
 	<select id="selectClientPlayMemberList" parameterType="hashmap" resultType="hashmap">
         SELECT
-            pm.mmbrNo,
+            pm.mmbrNo AS memberId,
             encVal(pm.mmbrNo) AS hashKey,
-            m.nickNm
+            m.nickNm AS nickname,
+            IFNULL(m.prflImgFileNm, '') AS profileImageFileName
         FROM
             play p,
             playMmbr pm,
@@ -84,24 +87,21 @@
           AND
             pm.mmbrNo = m.mmbrNo
           AND
-            p.sttsCd = '1'
-          AND
             p.playNo = #{playId}
         ORDER BY
-            m.nickNm
+            pm.insDt
     </select>
 
 	<select id="selectHostPlayMember" parameterType="hashmap" resultType="hashmap">
         SELECT
-            m.mmbrNo,
-            m.nickNm
+            m.mmbrNo AS memberId,
+            m.nickNm AS nickname,
+            IFNULL(m.prflImgFileNm, '') AS profileImageFileName
         FROM
             play p,
             mmbr m
         WHERE
             p.hostMmbrNo = m.mmbrNo
-          AND
-            p.sttsCd = '1'
           AND
             p.playNo = #{playId}
     </select>
@@ -143,6 +143,84 @@
         WHERE
             playNo = #{playId}
     </delete>
+
+	<insert id="insertPlayMember" parameterType="hashmap">
+		INSERT INTO playMmbr
+		(
+			playNo,
+			mmbrNo,
+			<if test="setting1Cd != null and setting1Cd != ''">
+				sttng1Cd,
+			</if>
+			<if test="setting2Cd != null and setting2Cd != ''">
+				sttng2Cd,
+			</if>
+			<if test="setting3Cd != null and setting3Cd != ''">
+				sttng3Cd,
+			</if>
+			insId,
+			insDt,
+			updId,
+			updDt
+		)
+		VALUES
+		(
+			#{playNo},
+			#{mmbrNo},
+			<if test="setting1Cd != null and setting1Cd != ''">
+				#{sttng1Cd},
+			</if>
+			<if test="setting2Cd != null and setting2Cd != ''">
+				#{sttng2Cd},
+			</if>
+			<if test="setting3Cd != null and setting3Cd != ''">
+				#{sttng3Cd},
+			</if>
+			'system',
+			CURRENT_TIMESTAMP,
+			'system',
+			CURRENT_TIMESTAMP
+		)
+	</insert>
+
+	<update id="updatePlayMember" parameterType="hashmap">
+		UPDATE
+		playMmbr
+		SET
+		<if test="sttng1Cd != null and sttng1Cd != ''">
+			sttng1Cd = #{sttng1Cd},
+		</if>
+		<if test="sttng2Cd != null and sttng2Cd != ''">
+			sttng2Cd = #{sttng2Cd},
+		</if>
+		<if test="sttng3Cd != null and sttng3Cd != ''">
+			sttng3Cd = #{sttng3Cd},
+		</if>
+		<if test="rsltRnk != null and rsltRnk != ''">
+			rsltRnk = #{rsltRnk},
+		</if>
+		<if test="rsltScr != null and rsltScr != ''">
+			rsltScr = #{rsltScr},
+		</if>
+		<if test="rsltPnt != null and rsltPnt != ''">
+			rsltPnt = #{rsltPnt},
+		</if>
+		<if test="fdbck != null and fdbck != ''">
+			fdbck = TRIM(#{fdbck}),
+		</if>
+		<if test="fdbckImgFileNm != null and fdbckImgFileNm != ''">
+			fdbckImgFileNm = TRIM(#{fdbckImgFileNm}),
+		</if>
+		updId = 'system',
+		updDt = CURRENT_TIMESTAMP
+		WHERE
+		seq = #{seq}
+	</update>
+
+
+
+
+
 
 
 
@@ -1295,6 +1373,8 @@
 				AND
 					p.clubNo = c.clubNo
 				AND
+					p.sttsCd != '4'
+				AND
 					c.useYn = 'Y'
 				) p1
 			WHERE
@@ -1336,6 +1416,8 @@
 					p.playNo = g.gameNo
 				AND
 					p.clubNo = c.clubNo
+				AND
+					p.sttsCd != '4'
 				AND
 					c.useYn = 'Y'
 				) p1
@@ -1935,78 +2017,7 @@
 
 
 
-	<insert id="insertPlayMmbr" parameterType="hashmap">
-			INSERT INTO playMmbr
-			(
-				playNo,
-				mmbrNo,
-			<if test="setting1Cd != null and setting1Cd != ''">
-				sttng1Cd,
-			</if>
-			<if test="setting2Cd != null and setting2Cd != ''">
-				sttng2Cd,
-			</if>
-			<if test="setting3Cd != null and setting3Cd != ''">
-				sttng3Cd,
-			</if>
-				insId,
-				insDt,
-				updId,
-				updDt
-			)
-			VALUES
-			(
-				#{playNo},
-				#{mmbrNo},
-			<if test="setting1Cd != null and setting1Cd != ''">
-				#{sttng1Cd},
-			</if>
-			<if test="setting2Cd != null and setting2Cd != ''">
-				#{sttng2Cd},
-			</if>
-			<if test="setting3Cd != null and setting3Cd != ''">
-				#{sttng3Cd},
-			</if>
-				'system',
-				CURRENT_TIMESTAMP,
-				'system',
-				CURRENT_TIMESTAMP
-			)
-	</insert>
 
-	<update id="updatePlayMmbr" parameterType="hashmap">
-			UPDATE
-				playMmbr
-			SET
-			<if test="sttng1Cd != null and sttng1Cd != ''">
-				sttng1Cd = #{sttng1Cd},
-			</if>
-			<if test="sttng2Cd != null and sttng2Cd != ''">
-				sttng2Cd = #{sttng2Cd},
-			</if>
-			<if test="sttng3Cd != null and sttng3Cd != ''">
-				sttng3Cd = #{sttng3Cd},
-			</if>
-			<if test="rsltRnk != null and rsltRnk != ''">
-				rsltRnk = #{rsltRnk},
-			</if>
-			<if test="rsltScr != null and rsltScr != ''">
-				rsltScr = #{rsltScr},
-			</if>
-			<if test="rsltPnt != null and rsltPnt != ''">
-				rsltPnt = #{rsltPnt},
-			</if>
-			<if test="fdbck != null and fdbck != ''">
-				fdbck = TRIM(#{fdbck}),
-			</if>
-			<if test="fdbckImgFileNm != null and fdbckImgFileNm != ''">
-				fdbckImgFileNm = TRIM(#{fdbckImgFileNm}),
-			</if>
-				updId = 'system',
-				updDt = CURRENT_TIMESTAMP
-			WHERE
-				seq = #{seq}
-	</update>
 
 	<select id="selectGamePlayRcrdList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
@@ -2151,6 +2162,8 @@
 			p.gameNo = g.gameNo
 		  AND
 			p.clubNo = c.clubNo
+		  AND
+			p.sttsCd != '4'
 		  AND
 			c.useYn = 'Y'
 		ORDER BY

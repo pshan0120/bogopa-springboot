@@ -1,6 +1,8 @@
 package boardgame.fo.member.service;
 
 import boardgame.com.constant.Game;
+import boardgame.com.exception.ApiException;
+import boardgame.com.exception.ApiExceptionEnum;
 import boardgame.com.util.SessionUtils;
 import boardgame.fo.club.service.ClubService;
 import boardgame.fo.member.dao.MemberDao;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -31,6 +34,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Map<String, Object> readByNickname(String nickname) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("nickname", nickname);
+        return this.selectMember(requestMap);
+    }
+
+    @Override
     public Map<String, Object> readProfileById(long memberId) {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put("memberId", memberId);
@@ -39,7 +49,25 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void create(Map<String, Object> map) {
+        Map<String, Object> member = this.readByNickname(String.valueOf(map.get("nickNm")));
+        if (Optional.ofNullable(member).isPresent()) {
+            throw new ApiException(ApiExceptionEnum.NICKNAME_EXISTS);
+        }
+
         memberDao.insertMember(map);
+    }
+
+    @Override
+    public Long createTemporaryMember(CreateTemporaryMemberRequestDto dto) {
+        // 회원 생성
+        Map<String, Object> memberRequestMap = new HashMap<>();
+        memberRequestMap.put("email", LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + "@bogopa.com");
+        memberRequestMap.put("nickNm", dto.getNickname());
+        memberRequestMap.put("pswrd", DEFAULT_PASSWORD);
+        memberRequestMap.put("temporarilyJoined", true);
+        this.create(memberRequestMap);
+
+        return (Long) memberRequestMap.get("mmbrNo");
     }
 
     @Override
@@ -86,11 +114,6 @@ public class MemberServiceImpl implements MemberService {
         clubMemberRequestMap.put("clubMmbrGrdCd", "1");
         clubService.insertClubMmbr(clubMemberRequestMap);
     }
-
-
-
-
-
 
 
     /* 회원 */

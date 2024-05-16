@@ -56,8 +56,8 @@
 
             playStatus = {
                 round: 0,
-                hostMemberId: hostPlayMember.mmbrNo,
-                hostMemberName: hostPlayMember.nickNm,
+                hostMemberId: hostPlayMember.memberId,
+                hostMemberName: hostPlayMember.nickname,
             }
 
             originalPlayerList = clientPlayMemberList;
@@ -77,9 +77,9 @@
             const htmlString = playerList.reduce((prev, next) => {
                 return prev +
                     "<div class=\"form-group form-inline\">" +
-                    "   <label class=\"form-control-label\">" + next.nickNm + "</label>" +
+                    "   <label class=\"form-control-label\">" + next.nickname + "</label>" +
                     "   <input type=\"text\" class=\"form-control form-control-alternative\" name=\"items\" readonly" +
-                    "       data-member-id=\"" + next.mmbrNo + "\">" +
+                    "       data-member-id=\"" + next.memberId + "\">" +
                     "</div>";
             }, "");
 
@@ -88,10 +88,7 @@
 
         const readPlayMemberList = playId => {
             return gfn_callGetApi("/api/play/member/list", {playId})
-                .then(data => {
-                    // console.log('data', data);
-                    return data;
-                })
+                .then(data => data)
                 .catch(response => console.error('error', response));
         }
 
@@ -134,9 +131,9 @@
                     playerNumber++;
                     if (playerNumber <= playSetting.uptown) {
                         return {
-                            playerName: player.nickNm,
+                            playerName: player.nickname,
                             fakePlayerName,
-                            playerId: player.mmbrNo,
+                            playerId: player.memberId,
                             hashKey: player.hashKey,
                             playerNumber,
                             town: UPTOWN,
@@ -145,9 +142,9 @@
                     }
 
                     return {
-                        playerName: player.nickNm,
+                        playerName: player.nickname,
                         fakePlayerName,
-                        playerId: player.mmbrNo,
+                        playerId: player.memberId,
                         hashKey: player.hashKey,
                         playerNumber,
                         town: DOWNTOWN,
@@ -509,10 +506,6 @@
             qrLoginModal.open(playerList);
         }
 
-        const openQrImage = () => {
-            window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
-        }
-
     </script>
 </head>
 
@@ -601,7 +594,7 @@
                             <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
                                 로그인 QR 공유
                             </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
@@ -644,7 +637,7 @@
                             <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
                                 로그인 QR 공유
                             </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrImage()">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">

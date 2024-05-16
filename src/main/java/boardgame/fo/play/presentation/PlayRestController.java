@@ -1,9 +1,6 @@
 package boardgame.fo.play.presentation;
 
-import boardgame.fo.play.dto.CreatePlayRequestDto;
-import boardgame.fo.play.dto.DeletePlayLogAllRequestDto;
-import boardgame.fo.play.dto.ReadPlayMemberListResponseDto;
-import boardgame.fo.play.dto.SavePlayRequestDto;
+import boardgame.fo.play.dto.*;
 import boardgame.fo.play.service.PlayLogService;
 import boardgame.fo.play.service.PlayMemberService;
 import boardgame.fo.play.service.PlayService;
@@ -40,6 +37,11 @@ public class PlayRestController {
     @PostMapping("")
     public long createPlay(@Validated @RequestBody CreatePlayRequestDto dto) {
         return playService.createPlay(dto);
+    }
+
+    @PostMapping("/member/join")
+    public void joinPlay(@Validated @RequestBody JoinPlayRequestDto dto) {
+        playService.joinPlay(dto);
     }
 
     @PostMapping("/save")

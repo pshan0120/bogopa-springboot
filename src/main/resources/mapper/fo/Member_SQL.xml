@@ -17,24 +17,28 @@
 		LEFT JOIN clubMmbr cm
 			ON m.mmbrNo = cm.mmbrNo
 			AND cm.activated IS TRUE
-		WHERE
-		1=1
-		<if test="memberId != null and memberId != ''">
-		AND
-			m.mmbrNo = #{memberId}
-		</if>
-		<if test="email != null and email != ''">
-		AND
-			m.email = encVal(#{email})
-		</if>
-		<if test="mmbrScrtKey != null and mmbrScrtKey != ''">
-		AND
-			encVal(m.mmbrNo) = #{mmbrScrtKey}
-		</if>
-		<if test="useYn != null and useYn != ''">
-		AND
-			m.useYn = #{useYn}
-		</if>
+		<where>
+			<if test="memberId != null and memberId != ''">
+			AND
+				m.mmbrNo = #{memberId}
+			</if>
+			<if test="nickname != null and nickname != ''">
+			AND
+				m.nickNm = #{nickname}
+			</if>
+			<if test="email != null and email != ''">
+			AND
+				m.email = encVal(#{email})
+			</if>
+			<if test="mmbrScrtKey != null and mmbrScrtKey != ''">
+			AND
+				encVal(m.mmbrNo) = #{mmbrScrtKey}
+			</if>
+			<if test="useYn != null and useYn != ''">
+			AND
+				m.useYn = #{useYn}
+			</if>
+		</where>
 	</select>
 
 	<select id="selectMemberProfile" parameterType="hashmap" resultType="hashmap">
@@ -63,37 +67,37 @@
 	<insert id="insertMember" parameterType="hashmap" useGeneratedKeys="true"  keyProperty="mmbrNo">
 		INSERT INTO mmbr
 		(
-		email,
-		nickNm,
-		pswrd,
-		pswrdErrCnt,
-		mmbrTypeCd,
-		<if test="invtMmbrNo != null and invtMmbrNo != ''">
-			invtMmbrNo,
-		</if>
-		useYn,
-		temporarilyJoined,
-		insId,
-		insDt,
-		updId,
-		updDt
+			email,
+			nickNm,
+			pswrd,
+			pswrdErrCnt,
+			mmbrTypeCd,
+			<if test="invtMmbrNo != null and invtMmbrNo != ''">
+				invtMmbrNo,
+			</if>
+			useYn,
+			temporarilyJoined,
+			insId,
+			insDt,
+			updId,
+			updDt
 		)
 		VALUES
 		(
-		encVal(#{email}),
-		TRIM(#{nickNm}),
-		SHA2(#{pswrd}, 256),
-		0,
-		'1',
-		<if test="invtMmbrNo != null and invtMmbrNo != ''">
-			#{invtMmbrNo},
-		</if>
-		'Y',
-		#{temporarilyJoined},
-		'system',
-		CURRENT_TIMESTAMP,
-		'system',
-		CURRENT_TIMESTAMP
+			encVal(#{email}),
+			TRIM(#{nickNm}),
+			SHA2(#{pswrd}, 256),
+			0,
+			'1',
+			<if test="invtMmbrNo != null and invtMmbrNo != ''">
+				#{invtMmbrNo},
+			</if>
+			'Y',
+			#{temporarilyJoined},
+			'system',
+			CURRENT_TIMESTAMP,
+			'system',
+			CURRENT_TIMESTAMP
 		)
 	</insert>
 

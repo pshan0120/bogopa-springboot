@@ -32,12 +32,12 @@ public class PlayMemberServiceImpl implements PlayMemberService {
 
     @Override
     public void insertPlayMmbr(Map<String, Object> map) {
-        playDao.insertPlayMmbr(map);
+        playDao.insertPlayMember(map);
     }
 
     @Override
     public void updatePlayMmbr(Map<String, Object> map) {
-        playDao.updatePlayMmbr(map);
+        playDao.updatePlayMember(map);
     }
 
 }

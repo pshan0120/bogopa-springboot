@@ -54,9 +54,6 @@
             $("#totalRevenue").val(totalRevenue);
         }
 
-        const openQrImage = () => {
-            window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
-        }
     </script>
 </head>
 
@@ -215,7 +212,7 @@
                             <button type="button" class="btn btn-primary btn-block" onclick="calculate()">
                                 계산하기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
+                            <button type="button" class="btn btn-info btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
                         </div>

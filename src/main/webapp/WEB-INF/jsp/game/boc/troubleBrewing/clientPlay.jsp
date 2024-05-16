@@ -19,13 +19,13 @@
         let playStatus = {};
 
         $(() => {
-            readGamePlayById(PLAY_ID);
+            readPlayById(PLAY_ID);
         });
 
-        const readGamePlayById = playId => {
+        const readPlayById = playId => {
             gfn_callGetApi("/api/play", {playId})
                 .then(data => {
-                    $("#titleDiv").find("span[name='playNm']").text(data.playNm);
+                    $("#titleDiv").find("span[name='playName']").text(data.playName);
                 })
                 .catch(response => console.error('error', response));
         }
@@ -48,10 +48,6 @@
 
         const openMyRoleModal = () => {
             myRoleModal.open(PLAY_ID);
-        }
-
-        const openQrImage = () => {
-            window.open("/qr?url=" + encodeURIComponent(document.URL), "_blank");
         }
 
         const openNoteModal = () => {
@@ -96,7 +92,7 @@
                     </div>
                     <div class="card-body" id="titleDiv">
                         <h2>
-                            <span name="playNm"></span>
+                            <span name="playName"></span>
                         </h2>
                     </div>
                     <div class="card-footer py-4">
@@ -116,7 +112,7 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openMyRoleModal()">
                                 내 역할 보기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openQrImage()">
+                            <button type="button" class="btn btn-info btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">

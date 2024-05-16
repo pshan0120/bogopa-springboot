@@ -47,6 +47,16 @@ public class PlayDao extends AbstractDao {
         delete("play.deletePlayLogByPlayNo", playId);
     }
 
+    public void insertPlayMember(Map<String, Object> map) {
+        insert("play.insertPlayMember", map);
+    }
+
+    public void updatePlayMember(Map<String, Object> map) {
+        update("play.updatePlayMember", map);
+    }
+
+
+
 
     /* 플레이 */
     public Map<String, Object> selectPlayRcrd(Map<String, Object> map) {
@@ -94,13 +104,9 @@ public class PlayDao extends AbstractDao {
     }
 
 
-    public void insertPlayMmbr(Map<String, Object> map) {
-        insert("play.insertPlayMmbr", map);
-    }
 
-    public void updatePlayMmbr(Map<String, Object> map) {
-        update("play.updatePlayMmbr", map);
-    }
+
+
 
     public List<Map<String, Object>> selectGamePlayRcrdList(Map<String, Object> map) {
         return selectPagingListAjax("play.selectGamePlayRcrdList", map);

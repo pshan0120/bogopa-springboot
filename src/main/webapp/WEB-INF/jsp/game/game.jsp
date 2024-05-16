@@ -84,57 +84,6 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<!-- 새로운 플레이 Modal -->
-<div class="modal fade" id="insertPlayModal" role="dialog" aria-labelledby="insertPlayModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">새로운 플레이</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="insertPlayForm">
-                    <input type="hidden" name="hostMmbrNo">
-                    <input type="hidden" name="hostNickNm">
-                    <input type="hidden" name="clubNo">
-                    <div class="row clearfix">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label">*플레이이름</label>
-                                <input type="text" data-name="플레이이름" name="playNm"
-                                       class="form-control form-control-alternative hasValue">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <label class="form-control-label">*플레이어</label>
-                <div class="mb-4" id="playJoinMmbrNListDiv"></div>
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="playMmbrListTbl">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col">닉네임</th>
-                            <th scope="col" colspan="2">세팅</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="insertPlay();">등록</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 
 </body>

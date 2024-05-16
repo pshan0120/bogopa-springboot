@@ -2,18 +2,28 @@ package boardgame.fo.play.service;
 
 import boardgame.com.constant.PlayStatus;
 import boardgame.com.util.SessionUtils;
+import boardgame.fo.login.service.LoginService;
+import boardgame.fo.member.dto.CreateTemporaryMemberRequestDto;
+import boardgame.fo.member.service.MemberService;
 import boardgame.fo.play.dao.PlayDao;
 import boardgame.fo.play.dto.CreatePlayRequestDto;
+import boardgame.fo.play.dto.JoinPlayRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PlayServiceImpl implements PlayService {
+
+    private final MemberService memberService;
+
+    private final LoginService loginService;
 
     private final PlayDao playDao;
 
@@ -34,6 +44,28 @@ public class PlayServiceImpl implements PlayService {
         playDao.insertPlay(requestMap);
 
         return (long) requestMap.get("playNo");
+    }
+
+    @Override
+    public void joinPlay(JoinPlayRequestDto dto) {
+        Long memberId = this.readOrCreateMemberByNickname(dto.getNickname());
+        loginService.setLogin(memberId, SessionUtils.getHttpServletRequest());
+
+        List<Map<String, Object>> clientPlayMemberList = playDao.selectClientPlayMemberList(dto.getPlayId());
+        boolean joined = clientPlayMemberList.stream()
+                .anyMatch(member -> memberId.equals(member.get("memberId")));
+        if (joined) {
+            return;
+        }
+
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("playNo", dto.getPlayId());
+        requestMap.put("mmbrNo", memberId);
+        playDao.insertPlayMember(requestMap);
+
+        // TODO: settingCd1 관련 작업
+
+        // playMemberService.insertPlayMmbr(tempMap);
 
         /*ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
@@ -80,6 +112,19 @@ public class PlayServiceImpl implements PlayService {
         return mv;*/
 
         // playDao.insertPlay(dto);
+    }
+
+    private Long readOrCreateMemberByNickname(String nickname) {
+        Map<String, Object> member = memberService.readByNickname(nickname);
+        if (Optional.ofNullable(member).isEmpty()) {
+            return memberService.createTemporaryMember(
+                    CreateTemporaryMemberRequestDto.builder()
+                            .nickname(nickname)
+                            .build()
+            );
+        }
+
+        return (Long) member.get("mmbrNo");
     }
 
     @Override

@@ -8,9 +8,13 @@ public interface MemberService {
 
     Map<String, Object> readById(long memberId);
 
+    Map<String, Object> readByNickname(String nickname);
+
     Map<String, Object> readProfileById(long memberId);
 
     void create(Map<String, Object> map);
+
+    Long createTemporaryMember(CreateTemporaryMemberRequestDto dto);
 
     void createBocMember(CreateTemporaryMemberRequestDto dto);
 
