@@ -10,13 +10,6 @@
 
     <script>
         const PLAY_ID = ${playId};
-        let playerList = [];
-        let roleList = [];
-        let demonPlayerList = [];
-        let minionPlayerList = [];
-        let townsFolkPlayerList = [];
-        let outsiderPlayerList = [];
-        let playStatus = {};
 
         $(() => {
             readPlayById(PLAY_ID);

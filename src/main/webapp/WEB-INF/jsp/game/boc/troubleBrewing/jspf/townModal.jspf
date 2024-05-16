@@ -2,16 +2,29 @@
 
 <script>
     const townModal = {
+        playStatus: {},
+        playerList: [],
+        townsFolkPlayerList: [],
+        outsiderPlayerList: [],
+        minionPlayerList: [],
+        demonPlayerList: [],
         open: async playId => {
+            townModal.playStatus = {};
+            townModal.playerList = [];
+            townModal.townsFolkPlayerList = [];
+            townModal.outsiderPlayerList = [];
+            townModal.minionPlayerList = [];
+            townModal.demonPlayerList = [];
+
             await townModal.loadGameStatus(playId);
 
-            console.log('playStatus', playStatus);
+            console.log('playStatus', townModal.playStatus);
             const $townModal = $("#townModal");
             const $settingDiv = $townModal.find("div[name='settingDiv']");
             const playerSetting = initializationSetting.player
-                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+                .find(player => townModal.playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
             const roleInitializationHtml = `
-                스토리텔러 \${playStatus.hostMemberName}<br/>
+                스토리텔러 \${townModal.playStatus.hostMemberName}<br/>
                 마을주민 \${playerSetting.townsFolk}명,
                 이방인 \${playerSetting.outsider}명,
                 하수인 \${playerSetting.minion}명,
@@ -21,21 +34,21 @@
             const $townDiv = $townModal.find("div[name='townDiv']");
             $townDiv.empty();
 
-            if (Object.keys(playStatus).length === 0) {
+            if (Object.keys(townModal.playStatus).length === 0) {
                 const htmlString = `게임이 시작되지 않았습니다.`;
                 $townDiv.append(htmlString);
                 return;
             }
 
-            playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
+            townModal.playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
 
-            const htmlString = playerList.reduce((prev, next) => {
+            const htmlString = townModal.playerList.reduce((prev, next) => {
                 const found = [
-                    ...demonPlayerList,
-                    ...minionPlayerList,
-                    ...townsFolkPlayerList,
-                    ...outsiderPlayerList,
-                ].find(player => player.playerId === next.mmbrNo);
+                    ...townModal.demonPlayerList,
+                    ...townModal.minionPlayerList,
+                    ...townModal.townsFolkPlayerList,
+                    ...townModal.outsiderPlayerList,
+                ].find(player => player.playerId === next.memberId);
 
                 if (found) {
                     const playerNameHtml = found.died
@@ -71,13 +84,20 @@
 
             const lastPlayLogJson = JSON.parse(lastPlayLog);
 
-            playerList = JSON.parse(lastPlayLogJson.playerList);
+            townModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            townModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            townModal.townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
+            townModal.outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
+            townModal.minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
+            townModal.demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
+
+            /*playerList = JSON.parse(lastPlayLogJson.playerList);
             // roleList = JSON.parse(lastPlayLogJson.roleList);
             townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
             outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
             minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
             demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
-            playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            playStatus = JSON.parse(lastPlayLogJson.playStatus);*/
 
             console.log('game status loaded !!');
         },

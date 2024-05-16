@@ -9,9 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="대기실 작업중">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="내 역할 보기 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,14 +260,7 @@
       <workItem from="1715739607514" duration="5521000" />
       <workItem from="1715782768033" duration="12926000" />
       <workItem from="1715798278894" duration="153000" />
-      <workItem from="1715865362055" duration="15038000" />
-    </task>
-    <task id="LOCAL-00054" summary="브금 변경">
-      <created>1714150285891</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1714150285891</updated>
+      <workItem from="1715865362055" duration="15619000" />
     </task>
     <task id="LOCAL-00055" summary="처녀 지목기능 추가">
       <created>1714152505579</created>
@@ -604,7 +598,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715884365679</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="내 역할 보기 추가">
+      <created>1715884679272</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1715884679272</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -625,7 +626,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="몽크 수정" />
     <MESSAGE value="오타 수정" />
     <MESSAGE value="구조 변경" />
     <MESSAGE value="과일가게 스킬 사용 변경" />
@@ -650,7 +650,8 @@
     <MESSAGE value="배경음 추가" />
     <MESSAGE value="townModal 오류 수정" />
     <MESSAGE value="대기실 작업중" />
-    <option name="LAST_COMMIT_MESSAGE" value="대기실 작업중" />
+    <MESSAGE value="내 역할 보기 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="내 역할 보기 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
