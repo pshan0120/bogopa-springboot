@@ -33,27 +33,30 @@
 
 	<update id="updatePlay" parameterType="hashmap">
 		UPDATE
-		play
+			play
 		SET
-		<if test="playNm != null and playNm != ''">
-			playNm = TRIM(#{playNm}),
-		</if>
-		<if test="mode == 'end'.toString()">
-			sttsCd = '2',
-			endDt = CURRENT_TIMESTAMP,
-		</if>
-		updId = 'system',
-		updDt = CURRENT_TIMESTAMP
+			<if test="playNm != null and playNm != ''">
+				playNm = TRIM(#{playNm}),
+			</if>
+			<if test="sttsCd != null and sttsCd != ''">
+				sttsCd = #{sttsCd},
+			</if>
+			<if test="mode == 'end'.toString()">
+				sttsCd = '2',
+				endDt = CURRENT_TIMESTAMP,
+			</if>
+			updId = 'system',
+			updDt = CURRENT_TIMESTAMP
 		WHERE
-		playNo = #{playNo}
+			playNo = #{playNo}
 	</update>
 
-	<delete id="deletePlay" parameterType="hashmap">
+	<delete id="deletePlay" parameterType="long">
 		<![CDATA[
 			DELETE FROM
 				play
 			WHERE
-				playNo = #{playNo}
+				playNo = #{playId}
 		]]>
 	</delete>
 
@@ -62,7 +65,11 @@
             p.playNo AS playId,
             p.playNm AS playName,
             p.sttsCd AS statusCode,
-            g.gameNo AS gameId
+            p.hostMmbrNo AS hostMemberId,
+            g.gameNo AS gameId,
+            g.playUri AS playUri,
+            g.minPlyrCnt AS numberOfMinPlayer,
+            g.maxPlyrCnt AS numberOfMaxPlayer
         FROM
             play p,
             game g
@@ -211,11 +218,18 @@
 		<if test="fdbckImgFileNm != null and fdbckImgFileNm != ''">
 			fdbckImgFileNm = TRIM(#{fdbckImgFileNm}),
 		</if>
-		updId = 'system',
-		updDt = CURRENT_TIMESTAMP
+			updId = 'system',
+			updDt = CURRENT_TIMESTAMP
 		WHERE
-		seq = #{seq}
+			seq = #{seq}
 	</update>
+
+	<delete id="deletePlayMember" parameterType="long">
+        DELETE FROM
+            playMember
+        WHERE
+            playNo = #{playId}
+    </delete>
 
 
 

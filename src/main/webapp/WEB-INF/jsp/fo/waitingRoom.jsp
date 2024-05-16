@@ -6,16 +6,22 @@
 
     <script>
         const PLAY_ID = ${playId};
+        let playUri = null;
+        let numberOfMinPlayer = null;
+        let numberOfMaxPlayer = null;
         let hostPlayMember = {};
         let clientPlayMemberList = [];
 
         $(async () => {
             const play = await readPlayById(PLAY_ID);
             console.log('play', play);
+            playUri = play.playUri;
+            numberOfMinPlayer = play.numberOfMinPlayer;
+            numberOfMaxPlayer = play.numberOfMaxPlayer;
 
             const statusCode = PlayStatus.ofCode(play.statusCode);
             if (statusCode === PlayStatus.PLAYING) {
-                location.href = "/game/trouble-brewing/play/" + PLAY_ID;
+                location.href = "/game/" + playUri + "/play/" + PLAY_ID;
             }
 
             if (statusCode === PlayStatus.FINISHED
@@ -116,9 +122,16 @@
                 $div.find("button[name='joinPlayButton']").show();
                 return;
             }
+
+
         }
 
         const joinPlay = () => {
+            if (numberOfMaxPlayer <= clientPlayMemberList.length) {
+                alert("자리가 부족하네요!");
+                return;
+            }
+
             const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
             if (!nickname) {
                 return;
@@ -135,58 +148,47 @@
 
             gfn_callPostApi("/api/play/member/join", request)
                 .then(data => {
-                    console.log('game status saved !!', data);
+                    console.log('play joined !!', data);
                     document.location.reload();
                 })
                 .catch(response => console.error('error', response));
         }
 
         const beginPlay = () => {
-
-            return;
-            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
-            if (!nickname) {
+            if (clientPlayMemberList.length < numberOfMinPlayer) {
+                alert("최소 플레이 인원(" + numberOfMinPlayer + "명)이 필요합니다.");
                 return;
             }
 
-            if (!confirm("[" + nickname + "] 닉네임으로 참가할까요?")) {
+            if (!confirm("게임을 시작할까요?")) {
                 return;
             }
 
             const request = {
                 playId: PLAY_ID,
-                nickname
             }
 
-            gfn_callPostApi("/api/play/member/join", request)
+            gfn_callPatchApi("/api/play/begin", request)
                 .then(data => {
-                    console.log('game status saved !!', data);
-                    document.location.reload();
+                    console.log('play begun !!', data);
+                    location.href = "/game/" + playUri + "/play/" + PLAY_ID;
                 })
                 .catch(response => console.error('error', response));
         }
 
         const cancelPlay = () => {
-            return;
-
-            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
-            if (!nickname) {
-                return;
-            }
-
-            if (!confirm("[" + nickname + "] 닉네임으로 참가할까요?")) {
+            if (!confirm("게임을 취소할까요?")) {
                 return;
             }
 
             const request = {
                 playId: PLAY_ID,
-                nickname
             }
 
-            gfn_callPostApi("/api/play/member/join", request)
+            gfn_callPatchApi("/api/play/cancel", request)
                 .then(data => {
-                    console.log('game status saved !!', data);
-                    document.location.reload();
+                    console.log('play canceled !!', data);
+                    location.href = "/game/" + playUri + "/play";
                 })
                 .catch(response => console.error('error', response));
         }

@@ -115,6 +115,9 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
                             </button>
@@ -126,9 +129,6 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openMyRoleModal()">
                                 내 역할 보기
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
                             </button>
                         </div>
                     </div>

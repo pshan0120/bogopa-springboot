@@ -41,6 +41,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Long readOrCreateMemberByNickname(String nickname) {
+        Map<String, Object> memberMap = this.readByNickname(nickname);
+        if (Optional.ofNullable(memberMap).isEmpty()) {
+            return this.createTemporaryMember(
+                    CreateTemporaryMemberRequestDto.builder()
+                            .nickname(nickname)
+                            .build()
+            );
+        }
+
+        return (Long) memberMap.get("mmbrNo");
+    }
+
+    @Override
     public Map<String, Object> readProfileById(long memberId) {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put("memberId", memberId);

@@ -1,11 +1,13 @@
 package boardgame.fo.play.service;
 
 import boardgame.com.constant.PlayStatus;
+import boardgame.com.exception.ApiException;
+import boardgame.com.exception.ApiExceptionEnum;
 import boardgame.com.util.SessionUtils;
 import boardgame.fo.login.service.LoginService;
-import boardgame.fo.member.dto.CreateTemporaryMemberRequestDto;
 import boardgame.fo.member.service.MemberService;
 import boardgame.fo.play.dao.PlayDao;
+import boardgame.fo.play.dto.BeginPlayRequestDto;
 import boardgame.fo.play.dto.CreatePlayRequestDto;
 import boardgame.fo.play.dto.JoinPlayRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,10 +35,10 @@ public class PlayServiceImpl implements PlayService {
     }
 
     @Override
-    public long createPlay(CreatePlayRequestDto dto) {
+    public long createPlay(CreatePlayRequestDto requestDto) {
         Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("gameNo", dto.getGameId());
-        requestMap.put("playNm", dto.getPlayName());
+        requestMap.put("gameNo", requestDto.getGameId());
+        requestMap.put("playNm", requestDto.getPlayName());
         requestMap.put("clubNo", SessionUtils.getCurrentMemberClubId());
         requestMap.put("hostMmbrNo", SessionUtils.getCurrentMemberId());
         requestMap.put("sttsCd", PlayStatus.STAND_BY.getCode());
@@ -47,11 +48,11 @@ public class PlayServiceImpl implements PlayService {
     }
 
     @Override
-    public void joinPlay(JoinPlayRequestDto dto) {
-        Long memberId = this.readOrCreateMemberByNickname(dto.getNickname());
+    public void joinPlay(JoinPlayRequestDto requestDto) {
+        Long memberId = memberService.readOrCreateMemberByNickname(requestDto.getNickname());
         loginService.setLogin(memberId, SessionUtils.getHttpServletRequest());
 
-        List<Map<String, Object>> clientPlayMemberList = playDao.selectClientPlayMemberList(dto.getPlayId());
+        List<Map<String, Object>> clientPlayMemberList = playDao.selectClientPlayMemberList(requestDto.getPlayId());
         boolean joined = clientPlayMemberList.stream()
                 .anyMatch(member -> memberId.equals(member.get("memberId")));
         if (joined) {
@@ -59,12 +60,11 @@ public class PlayServiceImpl implements PlayService {
         }
 
         Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("playNo", dto.getPlayId());
+        requestMap.put("playNo", requestDto.getPlayId());
         requestMap.put("mmbrNo", memberId);
         playDao.insertPlayMember(requestMap);
 
         // TODO: settingCd1 관련 작업
-
         // playMemberService.insertPlayMmbr(tempMap);
 
         /*ModelAndView mv = new ModelAndView("jsonView");
@@ -111,20 +111,45 @@ public class PlayServiceImpl implements PlayService {
         mv.addObject("resultMsg", resultMsg);
         return mv;*/
 
-        // playDao.insertPlay(dto);
+        // playDao.insertPlay(requestDto);
     }
 
-    private Long readOrCreateMemberByNickname(String nickname) {
-        Map<String, Object> member = memberService.readByNickname(nickname);
-        if (Optional.ofNullable(member).isEmpty()) {
-            return memberService.createTemporaryMember(
-                    CreateTemporaryMemberRequestDto.builder()
-                            .nickname(nickname)
-                            .build()
-            );
+    @Override
+    public void beginPlay(BeginPlayRequestDto requestDto) {
+        Map<String, Object> playMap = this.readById(requestDto.getPlayId());
+
+        PlayStatus playStatus = PlayStatus.ofCode(String.valueOf(playMap.get("statusCode")));
+        if (!playStatus.equals(PlayStatus.STAND_BY)) {
+            throw new ApiException(ApiExceptionEnum.PLAY_BEGUN);
         }
 
-        return (Long) member.get("mmbrNo");
+        Long hostMemberId = (Long) playMap.get("hostMemberId");
+        if (!hostMemberId.equals(SessionUtils.getCurrentMemberId())) {
+            throw new ApiException(ApiExceptionEnum.NOT_HOST_OF_PLAY);
+        }
+
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("playNo", requestDto.getPlayId());
+        requestMap.put("sttsCd", PlayStatus.PLAYING.getCode());
+        playDao.updatePlay(requestMap);
+    }
+
+    @Override
+    public void cancelPlay(JoinPlayRequestDto requestDto) {
+        Map<String, Object> playMap = this.readById(requestDto.getPlayId());
+
+        PlayStatus playStatus = PlayStatus.ofCode(String.valueOf(playMap.get("statusCode")));
+        if (!playStatus.equals(PlayStatus.STAND_BY)) {
+            throw new ApiException(ApiExceptionEnum.PLAY_BEGUN);
+        }
+
+        Long hostMemberId = (Long) playMap.get("hostMemberId");
+        if (!hostMemberId.equals(SessionUtils.getCurrentMemberId())) {
+            throw new ApiException(ApiExceptionEnum.NOT_HOST_OF_PLAY);
+        }
+
+        playDao.deletePlay(requestDto.getPlayId());
+        playDao.deletePlayMember(requestDto.getPlayId());
     }
 
     @Override
@@ -135,11 +160,6 @@ public class PlayServiceImpl implements PlayService {
     @Override
     public void updatePlay(Map<String, Object> map) {
         playDao.updatePlay(map);
-    }
-
-    @Override
-    public void deletePlay(Map<String, Object> map) {
-        playDao.deletePlay(map);
     }
 
 }

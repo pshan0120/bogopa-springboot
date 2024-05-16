@@ -423,6 +423,9 @@
                     <div class="card-body" name="auctionDiv"></div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
@@ -431,9 +434,6 @@
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
                                 다음 라운드 진행
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -453,14 +453,14 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
                                 플레이어 과일가게 보기
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정

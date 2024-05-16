@@ -10,6 +10,8 @@ public interface MemberService {
 
     Map<String, Object> readByNickname(String nickname);
 
+    Long readOrCreateMemberByNickname(String nickname);
+
     Map<String, Object> readProfileById(long memberId);
 
     void create(Map<String, Object> map);

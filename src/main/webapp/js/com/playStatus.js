@@ -13,13 +13,13 @@ class PlayStatus {
     };
 
     static FINISHED = {
-        code: "3",
+        code: "2",
         name: "FINISHED",
         title: "종료",
     };
 
     static ABNORMAL = {
-        code: "4",
+        code: "3",
         name: "ABNORMAL",
         title: "비정상",
     };

@@ -833,6 +833,12 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
@@ -850,12 +856,6 @@
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
-                                로그인 QR 공유
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
                                 소리 효과
@@ -885,6 +885,12 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
@@ -902,12 +908,6 @@
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
-                                로그인 QR 공유
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
                                 소리 효과
@@ -932,6 +932,12 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
@@ -949,12 +955,6 @@
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
-                                로그인 QR 공유
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
                                 소리 효과

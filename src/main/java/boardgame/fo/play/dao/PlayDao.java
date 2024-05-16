@@ -18,14 +18,13 @@ public class PlayDao extends AbstractDao {
         update("play.updatePlay", map);
     }
 
-    public void deletePlay(Map<String, Object> map) {
-        delete("play.deletePlay", map);
+    public void deletePlay(long playId) {
+        delete("play.deletePlay", playId);
     }
 
     public Map<String, Object> selectPlayById(long playId) {
         return selectOne("play.selectPlayById", playId);
     }
-
 
     public List<Map<String, Object>> selectClientPlayMemberList(long playId) {
         return selectList("play.selectClientPlayMemberList", playId);
@@ -53,6 +52,10 @@ public class PlayDao extends AbstractDao {
 
     public void updatePlayMember(Map<String, Object> map) {
         update("play.updatePlayMember", map);
+    }
+
+    public void deletePlayMember(long playId) {
+        delete("play.deletePlayMember", playId);
     }
 
 

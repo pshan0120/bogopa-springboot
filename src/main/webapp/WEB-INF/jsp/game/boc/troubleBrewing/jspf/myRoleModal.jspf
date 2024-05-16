@@ -30,8 +30,14 @@
             }
 
             const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
-            const player = myRoleModal.createAssignedPlayerList().find(player => player.playerId === memberId);
+            const assignedPlayerList = myRoleModal.createAssignedPlayerList();
 
+            if (assignedPlayerList.some(player => player.name === Drunk.name)) {
+                alert("플레이 세팅이 완료되지 않았습니다.");
+                return;
+            }
+
+            const player = assignedPlayerList.find(player => player.playerId === memberId);
             if (!player) {
                 alert("참가중 상태가 아닙니다.");
                 return;
@@ -39,8 +45,8 @@
 
             console.log('playStatus', myRoleModal.playStatus);
             const $modal = $("#myRoleModal");
-            const roleHtml = player.title + "(" + player.position.title + ")";
 
+            const roleHtml = player.title + "(" + player.position.title + ")";
             $modal.find("[name='roleDiv']").empty().html(roleHtml);
 
             $modal.modal("show");

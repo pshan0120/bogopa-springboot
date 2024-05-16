@@ -625,6 +625,12 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                로그인 QR 공유
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
                                 주민 보기
                             </button>
@@ -633,12 +639,6 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
-                                로그인 QR 공유
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정

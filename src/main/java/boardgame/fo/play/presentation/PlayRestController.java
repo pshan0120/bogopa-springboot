@@ -35,18 +35,28 @@ public class PlayRestController {
     }
 
     @PostMapping("")
-    public long createPlay(@Validated @RequestBody CreatePlayRequestDto dto) {
-        return playService.createPlay(dto);
+    public long createPlay(@Validated @RequestBody CreatePlayRequestDto requestDto) {
+        return playService.createPlay(requestDto);
     }
 
     @PostMapping("/member/join")
-    public void joinPlay(@Validated @RequestBody JoinPlayRequestDto dto) {
-        playService.joinPlay(dto);
+    public void joinPlay(@Validated @RequestBody JoinPlayRequestDto requestDto) {
+        playService.joinPlay(requestDto);
+    }
+
+    @PatchMapping("/begin")
+    public void beginPlay(@Validated @RequestBody BeginPlayRequestDto requestDto) {
+        playService.beginPlay(requestDto);
+    }
+
+    @PatchMapping("/cancel")
+    public void cancelPlay(@Validated @RequestBody JoinPlayRequestDto requestDto) {
+        playService.cancelPlay(requestDto);
     }
 
     @PostMapping("/save")
-    public void savePlay(@Validated @RequestBody SavePlayRequestDto dto) {
-        playLogService.savePlay(dto);
+    public void savePlay(@Validated @RequestBody SavePlayRequestDto requestDto) {
+        playLogService.savePlay(requestDto);
     }
 
     @GetMapping("/log/last")
@@ -55,8 +65,8 @@ public class PlayRestController {
     }
 
     @DeleteMapping("/log/all")
-    public void deletePlayLogAll(@Validated @RequestBody DeletePlayLogAllRequestDto dto) {
-        playLogService.deletePlayLogByPlayNo(dto);
+    public void deletePlayLogAll(@Validated @RequestBody DeletePlayLogAllRequestDto requestDto) {
+        playLogService.deletePlayLogByPlayNo(requestDto);
     }
 
 }
