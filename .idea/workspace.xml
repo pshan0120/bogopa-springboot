@@ -10,28 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="대기실 작업중">
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dto/BeginPlayRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dto/CancelPlayRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/constant/PlayStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/constant/PlayStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/exception/ApiExceptionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/exception/ApiExceptionEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/com/util/SessionUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dao/PlayDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dao/PlayDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/com/playStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/com/playStatus.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,14 +259,7 @@
       <workItem from="1715739607514" duration="5521000" />
       <workItem from="1715782768033" duration="12926000" />
       <workItem from="1715798278894" duration="153000" />
-      <workItem from="1715865362055" duration="14729000" />
-    </task>
-    <task id="LOCAL-00053" summary="temporarilyJoined 추가">
-      <created>1714100214744</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1714100214744</updated>
+      <workItem from="1715865362055" duration="15038000" />
     </task>
     <task id="LOCAL-00054" summary="브금 변경">
       <created>1714150285891</created>
@@ -624,7 +597,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715875341544</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="대기실 작업중">
+      <created>1715884365678</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1715884365679</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

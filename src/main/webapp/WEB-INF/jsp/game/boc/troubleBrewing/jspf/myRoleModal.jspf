@@ -23,6 +23,12 @@
                 return;
             }
 
+            if (myRoleModal.playStatus.round !== 0
+                || !myRoleModal.playStatus.night) {
+                alert("첫날 밤 전까지만 확인 가능합니다.");
+                return;
+            }
+
             const loggedIn = JSON.parse("<%= SessionUtils.isMemberLogin() %>");
             if (!loggedIn) {
                 alert("로그인 상태가 아닙니다.");
