@@ -22,70 +22,6 @@
             $form.find("input[name='gameName']").val(data.gameName);
             $form.find("input[name='numberOfPlayer']").val(data.numberOfMinPlayer + " ~ " + data.numberOfMaxPlayer);
             $form.find("input[name='playName']").val("'" + "<c:out value="${nickNm}" />" + "'의 " + data.gameName);
-
-
-            /*$("#playMmbrListTbl>tbody").empty();
-            $("#playJoinMmbrNListDiv").empty();
-
-            $form.find("input[name='hostMmbrNo']").val("
-            <c:out value="${mmbrNo}" />");
-            $form.find("input[name='hostNickNm']").val("
-            <c:out value="${nickNm}" />");
-            $form.find("input[name='clubNo']").val("
-            <c:out value="${clubNo}" />");
-            $form.find("input[name='playName']").val("");*/
-
-            /*minPlyrCnt = 5;
-            maxPlyrCnt = 20;
-            joinPlyrCnt = 0;*/
-
-            // selectPlayJoinMmbrList(1);
-
-
-            /*const $form = $("#clubInfoDiv").find("form");
-            $form.find("img[name='clubProfileImage']").attr("src", createClubImageUrl(data.clubId, data.profileImageFileName));
-            $form.find("input[name='clubName']").val(data.clubName);
-            $form.find("input[name='masterMemberName']").val(data.masterMemberName);
-            $form.find("input[name='clubGradeName']").val(ClubGrade.ofCode(data.clubGradeCode).title);
-            $form.find("input[name='contactTo']").val(data.contactTo);
-            $form.find("input[name='address']").val(data.address);
-            $form.find("textarea[name='introduction']").val(data.introduction);
-            $form.find("textarea[name='joinQuestion']").val(data.joinQuestion);
-
-            $("#showClubJoinButton").hide();
-            $("#clubJoinButton").hide();
-            $("#cancelClubJoinButton").hide();
-            $("#quitClubButton").hide();
-            $("#disbandClubButton").hide();
-
-            const loggedIn = JSON.parse("
-
-
-            <%= SessionUtils.isMemberLogin() %>");
-            if (!loggedIn) {
-                return;
-            }
-
-            const memberId = JSON.parse("
-
-
-            <%= SessionUtils.getCurrentMemberIdOrNull() %>");
-            if (data.masterMemberId === memberId) {
-                $("#disbandClubButton").show();
-                return;
-            }
-
-            if (data.memberClubJoinRequested) {
-                $("#cancelClubJoinButton").show();
-                return;
-            }
-
-            if (data.clubJoined) {
-                $("#quitClubButton").show();
-                return;
-            }
-
-            $("#showClubJoinButton").show();*/
         },
         createPlay: () => {
             const $createPlayModal = $("#createPlayModal");
@@ -100,138 +36,17 @@
                 .then(data => {
                     console.log('play created !!', data);
                     const playId = data;
-                    alert("생성됨, 플레이어 참여 대기실로 이동");
+                    alert("플레이가 생성되었습니다. 대기실로 이동합니다.");
                     location.href = "/play/waiting-room/" + playId;
                 })
                 .catch(response => console.error('error', response));
-
-            /*if (joinPlyrCnt < minPlyrCnt) {
-                alert("선택된 플레이어가 최소 플레이어수보다 적습니다.");
-                return false;
-            }
-
-            if (joinPlyrCnt > maxPlyrCnt) {
-                alert("선택된 플레이어가 최대 플레이어수보다 많습니다.");
-                return false;
-            }
-
-            let joinMmbrNoArr = new Array();
-
-            $("#playMmbrListTbl > tbody > tr").each(function () {
-                joinMmbrNoArr.push(this.id.replace("addPlayMmbrTr", ""));
-            });
-
-            if (gfn_validate("createPlayForm")) {
-                if (confirm("바로 플레이를 시작됩니다. 진행하시겠습니까?")) {
-                    let comAjax = new ComAjax("createPlayForm");
-                    comAjax.setUrl("<c:url value='/createPlay' />");
-                    comAjax.setCallback("createPlayCallback");
-                    comAjax.addParam("gameNo", GAME.BOC_TROUBLE_BREWING);
-                    comAjax.addParam("joinMmbrNoArr", joinMmbrNoArr);
-                    comAjax.ajax();
-                } else {
-                    return;
-                }
-            }*/
-
-
         },
-
         createPlayCallback: data => {
             location.href = "/game/trouble-brewing/play/" + data.playNo;
-        },
-
-        clearNote: () => {
-            const $noteTextarea = $("#createPlayModal").find("textarea[name='noteTextarea']");
-            $noteTextarea.val("");
-            localStorage.removeItem("note");
         },
         close: () => {
         },
     }
-
-
-    /*const selectPlayJoinMmbrList = pageNo => {
-        let comAjax = new ComAjax("createPlayForm");
-        comAjax.setUrl("<c:url value='/selectPlayJoinMmbrList' />");
-        comAjax.setCallback("selectPlayJoinMmbrListCallback");
-        comAjax.ajax();
-    };
-
-    const selectPlayJoinMmbrListCallback = data => {
-        let cnt = data.list.length;
-        let body = $("#playJoinMmbrNListDiv");
-        body.empty();
-        let str = "";
-        if (cnt > 0) {
-            $.each(data.list, function (key, value) {
-                let isRun = true;
-                $("#playMmbrListTbl td:nth-child(1)").each(function () {
-                    let playJoinNickNm = $(this).text().trim();
-                    if (playJoinNickNm != $("#hostMmbrNo").val() && playJoinNickNm == value.nickNm) {
-                        isRun = false;
-                    }
-                });
-                if (isRun) {
-                    str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"addPlayMmbr('" + value.mmbrNo + "', '" + value.nickNm + "')\" >";
-                    str += "	" + value.nickNm;
-                    str += "</a>";
-                }
-            });
-        }
-        body.append(str);
-    }
-
-    const addPlayMmbr = (mmbrNo, nickNm) => {
-        if (joinPlyrCnt < maxPlyrCnt) {
-            let body = $("#playMmbrListTbl>tbody");
-            let str = "";
-            str += "<tr name=\"addPlayMmbrTr\" id=\"addPlayMmbrTr" + mmbrNo + "\">";
-            str += "	<td>";
-            str += "		" + nickNm;
-            str += "	</td>";
-            str += "	<td>";
-            if (mmbrNo == "<c:out value="${mmbrNo}" />") {
-                str += "	호스트";
-            } else {
-                str += "	<a class=\"btn btn-sm btn-outline-warning\" href=\"javascript:(void(0));\" onclick=\"removePlayMmbr('" + mmbrNo + "','" + nickNm + "')\">제외</a>";
-            }
-            str += "	</td>";
-            str += "</tr>";
-            body.append(str);
-
-            $("#playJoinMmbrNListDiv a").each(function () {
-                let playJoinNickNm = $(this).text().trim();
-                if (playJoinNickNm == nickNm) {
-                    $(this).remove();
-                }
-            });
-
-            joinPlyrCnt++;
-        } else {
-            alert("최대 플레이 가능인원은 " + maxPlyrCnt + "명까지입니다.");
-            return false;
-        }
-    };
-
-    const removePlayMmbr = (mmbrNo, nickNm) => {
-        let body = $("#playJoinMmbrNListDiv");
-        let str = "";
-        str += "<a class=\"btn btn-sm btn-outline-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"addPlayMmbr('" + mmbrNo + "', '" + nickNm + "')\" >";
-        str += "	" + nickNm;
-        str += "</a>";
-        body.append(str);
-
-        $("#playMmbrListTbl td:nth-child(1)").each(function () {
-            let playJoinNickNm = $(this).text().trim();
-            if (playJoinNickNm == nickNm.trim()) {
-                $("#addPlayMmbrTr" + mmbrNo).remove();
-                joinPlyrCnt--;
-            }
-        });
-    };*/
-
-
 </script>
 
 <!-- 새로운 플레이 Modal -->
@@ -260,21 +75,6 @@
                                class="form-control form-control-alternative hasValue">
                     </div>
                 </form>
-
-                <%--<label class="form-control-label">*플레이어</label>
-                <div class="mb-4" id="playJoinMmbrNListDiv"></div>
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="playMmbrListTbl">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col">닉네임</th>
-                            <th scope="col" colspan="2">세팅</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>--%>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="createPlayModal.createPlay();">등록</button>

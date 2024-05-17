@@ -18,11 +18,11 @@ public interface MemberService {
 
     Long createTemporaryMember(CreateTemporaryMemberRequestDto dto);
 
-    void createBocMember(CreateTemporaryMemberRequestDto dto);
+    /*void createBocMember(CreateTemporaryMemberRequestDto dto);
 
     void createFruitShopMember(CreateTemporaryMemberRequestDto dto);
 
-    void createCatchAThiefMember(CreateTemporaryMemberRequestDto dto);
+    void createCatchAThiefMember(CreateTemporaryMemberRequestDto dto);*/
 
 
 

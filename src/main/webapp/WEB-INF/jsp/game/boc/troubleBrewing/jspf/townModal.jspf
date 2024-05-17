@@ -19,6 +19,11 @@
             await townModal.loadGameStatus(playId);
 
             console.log('playStatus', townModal.playStatus);
+            if (Object.keys(townModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
             const $townModal = $("#townModal");
             const $settingDiv = $townModal.find("div[name='settingDiv']");
             const playerSetting = initializationSetting.player

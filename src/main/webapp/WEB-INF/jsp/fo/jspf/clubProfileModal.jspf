@@ -62,7 +62,7 @@
             $("#quitClubButton").hide();
             $("#disbandClubButton").hide();
 
-            const loggedIn = JSON.parse("<%= SessionUtils.isMemberLogin() %>");
+            const loggedIn = JSON.parse("<%= SessionUtils.isMemberLoggedIn() %>");
             if (!loggedIn) {
                 return;
             }

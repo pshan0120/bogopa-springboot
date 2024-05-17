@@ -84,7 +84,7 @@ public class MemberServiceImpl implements MemberService {
         return (Long) memberRequestMap.get("mmbrNo");
     }
 
-    @Override
+    /*@Override
     public void createBocMember(CreateTemporaryMemberRequestDto dto) {
         createTemporaryMember(dto, Game.BOC_TROUBLE_BREWING);
     }
@@ -97,7 +97,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void createCatchAThiefMember(CreateTemporaryMemberRequestDto dto) {
         createTemporaryMember(dto, Game.CATCH_A_THIEF);
-    }
+    }*/
 
     private void createTemporaryMember(CreateTemporaryMemberRequestDto dto, Game game) {
         // 회원 생성
@@ -105,7 +105,7 @@ public class MemberServiceImpl implements MemberService {
         memberRequestMap.put("email", LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) + "@bogopa.com");
         memberRequestMap.put("nickNm", dto.getNickname());
         memberRequestMap.put("pswrd", DEFAULT_PASSWORD);
-        if (SessionUtils.isAdminMemberLogin()) {
+        if (SessionUtils.isAdminMemberLoggedIn()) {
             memberRequestMap.put("invtMmbrNo", SessionUtils.getCurrentMemberId());
         }
         memberRequestMap.put("temporarilyJoined", true);

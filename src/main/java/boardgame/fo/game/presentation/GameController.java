@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static boardgame.com.util.SessionUtils.isAdminMemberLogin;
+import static boardgame.com.util.SessionUtils.isAdminMemberLoggedIn;
 
 @ResponseStatus(HttpStatus.OK)
 @Controller
@@ -42,7 +42,7 @@ public class GameController {
         /*ReadPlayMemberListResponseDto readPlayMemberList = gameService.readPlayMemberList(playId);
         readPlayMemberList.getHostPlayMember();*/
 
-        if (isAdminMemberLogin()) {
+        if (isAdminMemberLoggedIn()) {
             mv.setViewName("/game/boc/troubleBrewing/hostPlay");
         } else {
             if (request.getParameterMap().containsKey("hashKey")) {
@@ -91,7 +91,7 @@ public class GameController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("playId", playId);
 
-        if (isAdminMemberLogin()) {
+        if (isAdminMemberLoggedIn()) {
             mv.setViewName("/game/fruitShop/hostPlay");
         } else {
             mv.setViewName("/game/fruitShop/clientPlay");
@@ -127,7 +127,7 @@ public class GameController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("playId", playId);
 
-        if (isAdminMemberLogin()) {
+        if (isAdminMemberLoggedIn()) {
             mv.setViewName("/game/catchAThief/hostPlay");
         } else {
             mv.setViewName("/game/catchAThief/clientPlay");

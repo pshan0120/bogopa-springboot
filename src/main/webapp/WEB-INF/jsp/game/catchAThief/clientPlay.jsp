@@ -16,9 +16,10 @@
         let downtownOutcastList = [];
 
         $(async () => {
-            await loadGameStatus();
+            const play = await gfn_readPlayablePlayById(PLAY_ID);
+            $("#titleDiv").find("span[name='playName']").text(play.playName);
 
-            readPlayById(PLAY_ID);
+            await loadGameStatus();
         });
 
         const loadGameStatus = async () => {
@@ -44,14 +45,6 @@
                 .then(data => {
                     // console.log('data', data);
                     return data?.log;
-                })
-                .catch(response => console.error('error', response));
-        }
-
-        const readPlayById = playId => {
-            gfn_callGetApi("/api/play", {playId})
-                .then(data => {
-                    $("#titleDiv").find("span[name='playName']").text(data.playName);
                 })
                 .catch(response => console.error('error', response));
         }

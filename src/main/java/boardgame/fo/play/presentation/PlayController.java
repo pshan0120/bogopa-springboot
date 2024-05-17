@@ -159,7 +159,7 @@ public class PlayController {
         String resultMsg = "";
         Boolean result = false;
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mode", "end");
             playService.updatePlay(commandMap.getMap());
 
@@ -235,7 +235,7 @@ public class PlayController {
         String resultMsg = "";
         Boolean result = false;
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             String seq = String.valueOf(commandMap.get("seq"));
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -290,7 +290,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("sttsCd", "1");    // 플레이상태 진행중
             playService.insertPlay(commandMap.getMap());
             String playNo = String.valueOf(commandMap.get("playNo"));

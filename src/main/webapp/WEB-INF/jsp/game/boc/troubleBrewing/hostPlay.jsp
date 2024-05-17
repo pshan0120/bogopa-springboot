@@ -21,21 +21,10 @@
         let minionPlayerList = [];
         let demonPlayerList = [];
         let playStatus = {};
-        /*
-        1. 참가자 자리 배치
-        2. 그리모어 준비
-        3. 에디션 선택
-        4. 마을 광장 준비
-        5. 규칙 설명
-        6. 비공개적으로 캐릭터 선택
-        7. 캐릭터 추가 및 제거
-        8. 알림 토큰 추가
-        9. 캐릭터 토큰 분배
-        10. 그리모어에 캐릭터 토큰 추가
-        11. 첫날 밤
-         */
 
         $(async () => {
+            await gfn_readPlayablePlayById(PLAY_ID);
+
             await loadGameStatus();
 
             console.log('playStatus', playStatus);
@@ -66,6 +55,8 @@
 
             $("#settingDiv").show();
         });
+
+
 
         const setRoleList = () => {
             townsFolkRoleList = [
@@ -232,6 +223,11 @@
         }
 
         const beginGame = () => {
+            if (createAssignedPlayerList().length !== playerList.length) {
+                alert("역할이 분배되지 않았습니다.");
+                return;
+            }
+
             $("#settingDiv").hide();
 
             const $firstNightDiv = $("#firstNightDiv");

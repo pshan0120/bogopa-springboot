@@ -13,21 +13,11 @@
         let clientPlayMemberList = [];
 
         $(async () => {
-            const play = await readPlayById(PLAY_ID);
-            console.log('play', play);
+            const play = await gfn_readBeginablePlayById(PLAY_ID);
+
             playUri = play.playUri;
             numberOfMinPlayer = play.numberOfMinPlayer;
             numberOfMaxPlayer = play.numberOfMaxPlayer;
-
-            const statusCode = PlayStatus.ofCode(play.statusCode);
-            if (statusCode === PlayStatus.PLAYING) {
-                location.href = "/game/" + playUri + "/play/" + PLAY_ID;
-            }
-
-            if (statusCode === PlayStatus.FINISHED
-                || statusCode === PlayStatus.ABNORMAL) {
-                location.href = "/play";
-            }
 
             renderPlaySetting(play);
 
@@ -44,12 +34,6 @@
 
             renderButtons();
         });
-
-        const readPlayById = async playId => {
-            return gfn_callGetApi("/api/play", {playId})
-                .then(data => data)
-                .catch(response => console.error('error', response));
-        }
 
         const renderPlaySetting = play => {
             const $div = $("#settingDiv");
@@ -122,8 +106,6 @@
                 $div.find("button[name='joinPlayButton']").show();
                 return;
             }
-
-
         }
 
         const joinPlay = () => {
@@ -196,7 +178,6 @@
         const openMemberProfileModal = memberId => {
             memberProfileModal.open(memberId);
         }
-
     </script>
 </head>
 

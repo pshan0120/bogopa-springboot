@@ -212,7 +212,7 @@
                             <button type="button" class="btn btn-primary btn-block" onclick="calculate()">
                                 계산하기
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="gfn_openQrImage()">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
                         </div>

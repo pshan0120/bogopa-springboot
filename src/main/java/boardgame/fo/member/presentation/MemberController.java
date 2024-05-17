@@ -32,7 +32,7 @@ public class MemberController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
             memberService.updateMmbr(commandMap.getMap());
             resultMsg = "변경되었습니다.";
@@ -66,7 +66,7 @@ public class MemberController {
         String resultMsg = "";
         Boolean result = false;
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             String mmbrNo = String.valueOf(commandMap.get("mmbrNo"));
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iterator = multipartHttpServletRequest.getFileNames();

@@ -11,17 +11,10 @@
     <script>
         const PLAY_ID = ${playId};
 
-        $(() => {
-            readPlayById(PLAY_ID);
+        $(async () => {
+            const play = await gfn_readPlayablePlayById(PLAY_ID);
+            $("#titleDiv").find("span[name='playName']").text(play.playName);
         });
-
-        const readPlayById = playId => {
-            gfn_callGetApi("/api/play", {playId})
-                .then(data => {
-                    $("#titleDiv").find("span[name='playName']").text(data.playName);
-                })
-                .catch(response => console.error('error', response));
-        }
 
         const openGuideModal = () => {
             guideModal.openRuleGuideModal();
@@ -90,7 +83,7 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="gfn_openQrImage()">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">

@@ -1,10 +1,8 @@
 package boardgame.fo.member.presentation;
 
-import boardgame.fo.member.dto.CreateTemporaryMemberRequestDto;
 import boardgame.fo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,7 +20,7 @@ public class MemberRestController {
         return memberService.readProfileById(memberId);
     }
 
-    @PostMapping("/boc")
+    /*@PostMapping("/boc")
     public void createBocMember(@Validated @RequestBody CreateTemporaryMemberRequestDto dto) {
         memberService.createBocMember(dto);
     }
@@ -35,7 +33,7 @@ public class MemberRestController {
     @PostMapping("/catch-a-thief")
     public void createCatchAThiefMember(@Validated @RequestBody CreateTemporaryMemberRequestDto dto) {
         memberService.createCatchAThiefMember(dto);
-    }
+    }*/
 
     /*@RequestMapping(value = "/insertBocMember")
     public ModelAndView insertBocMember(CommandMap commandMap) {

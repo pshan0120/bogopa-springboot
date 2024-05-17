@@ -70,7 +70,7 @@ public class SessionUtils {
         }
     }
 
-    public static Boolean isMemberLogin() {
+    public static Boolean isMemberLoggedIn() {
         try {
             getCurrentMemberId();
             return true;
@@ -79,7 +79,7 @@ public class SessionUtils {
         }
     }
 
-    public static Boolean isAdminMemberLogin() {
+    public static Boolean isAdminMemberLoggedIn() {
         try {
             return Arrays.stream(ADMIN_MEMBER_IDS)
                     .anyMatch(id -> id.equals(getCurrentMemberId()));

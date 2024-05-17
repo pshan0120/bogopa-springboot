@@ -90,7 +90,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             Long memberId = SessionUtils.getCurrentMemberId();
             commandMap.put("mmbrNo", memberId);
 
@@ -277,7 +277,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
             clubService.insertClubBrd(commandMap.getMap());
             resultMsg = "등록되었습니다.";
@@ -297,7 +297,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             clubService.updateClubBrd(commandMap.getMap());
             resultMsg = "변경되었습니다.";
             result = true;
@@ -316,7 +316,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("useYn", "N");
             clubService.updateClubBrd(commandMap.getMap());
             //clubService.deleteClubBrd(commandMap.getMap());
@@ -351,7 +351,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mode", "cancel");
             clubService.deleteClubAttnd(commandMap.getMap());
 
@@ -373,7 +373,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mode", "cancel");
             clubService.deleteClubAttnd(commandMap.getMap());
             resultMsg = "취소되었습니다.";
@@ -393,7 +393,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
             clubService.insertClubJoin(commandMap.getMap());
             resultMsg = "신청되었습니다.";
@@ -413,7 +413,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
             clubService.deleteClubJoin(commandMap.getMap());
             resultMsg = "취소되었습니다.";
@@ -433,7 +433,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
             clubService.deleteClubMmbr(commandMap.getMap());
             resultMsg = "탈퇴하였습니다.";
@@ -478,7 +478,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             clubService.updateClub(commandMap.getMap());
             resultMsg = "변경되었습니다.";
             result = true;
@@ -512,7 +512,7 @@ public class ClubController {
         String resultMsg = "";
         Boolean result = false;
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             String clubNo = String.valueOf(commandMap.get("clubNo"));
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -567,7 +567,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             clubService.insertClubGame(commandMap.getMap());
             resultMsg = "등록되었습니다.";
             result = true;
@@ -586,7 +586,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             clubService.deleteClubGame(commandMap.getMap());
             resultMsg = "삭제되었습니다.";
             result = true;
@@ -605,7 +605,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mode", "cnfrm");
             clubService.updateClubJoin(commandMap.getMap());
 
@@ -629,7 +629,7 @@ public class ClubController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mode", "rjct");
             clubService.updateClubJoin(commandMap.getMap());
             resultMsg = "거부되었습니다.";

@@ -11,7 +11,10 @@
         $(() => {
             gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
 
-            $("[data-toggle='tooltip']").tooltip();
+            const adminMemberLoggedIn = JSON.parse("<%= SessionUtils.isAdminMemberLoggedIn() %>");
+            if (adminMemberLoggedIn) {
+                $("button[name='openCreatePlayButton']").show();
+            }
 
             selectBocPlayRcrdList(1);
         });
@@ -80,7 +83,7 @@
             body.append(str);
         };
 
-        const createBocMember = () => {
+        /*const createBocMember = () => {
             const nickname = prompt("회원명 입력");
             if (!nickname) {
                 return;
@@ -96,7 +99,7 @@
                     alert("회원이 생성되었습니다.");
                 })
                 .catch(response => console.error('error', response));
-        }
+        }*/
 
         const openClubProfileModal = clubId => {
             clubProfileModal.open(clubId);
@@ -104,8 +107,7 @@
 
         const openCreatePlayModal = () => {
             createPlayModal.open(GAME.BOC_TROUBLE_BREWING);
-        };
-
+        }
     </script>
 </head>
 
@@ -158,16 +160,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <c:if test="${clubNo ne ''}">
-                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="openCreatePlayModal();">
-                                            새로운 플레이
-                                        </button>
-                                        <%--<button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="createBocMember();">
-                                            B.O.C 회원 등록
-                                        </button>--%>
-                                    </c:if>
+                                    <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
+                                            onclick="openCreatePlayModal();" name="openCreatePlayButton" style="display: none">
+                                        새로운 플레이
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -197,8 +193,6 @@
                                 id="bocPlayRcrdListPageNav"></ul>
                         </nav>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -207,7 +201,7 @@
 </div>
 
 <%@ include file="/WEB-INF/jsp/game/createPlayModal.jspf" %>
-
+<!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->
 <%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>

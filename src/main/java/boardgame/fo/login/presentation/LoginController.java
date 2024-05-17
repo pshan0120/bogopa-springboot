@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static boardgame.com.util.SessionUtils.getUserIpFromRequest;
-import static boardgame.com.util.SessionUtils.isMemberLogin;
+import static boardgame.com.util.SessionUtils.isMemberLoggedIn;
 
 @Slf4j
 @Controller
@@ -56,7 +56,7 @@ public class LoginController {
     }
 
     public final Optional<ModelAndView> redirectIfLoggedIn() {
-        if (isMemberLogin()) {
+        if (isMemberLoggedIn()) {
             return Optional.of(new ModelAndView("redirect:/main"));
         }
         return Optional.empty();

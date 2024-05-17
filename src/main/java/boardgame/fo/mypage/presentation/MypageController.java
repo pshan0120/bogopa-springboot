@@ -118,7 +118,7 @@ public class MypageController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             clubService.updateClubAttnd(commandMap.getMap());
             resultMsg = "변경되었습니다.";
             result = true;
@@ -137,7 +137,7 @@ public class MypageController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             // 만약 해당 모임원이 당일 회비지불내역이 없다면 1회 회비를 청구
             Map<String, Object> map = clubService.selectClubFeePay(commandMap.getMap());
             if (StringUtils.equals("N", String.valueOf(map.get("feePayYn")))) {
@@ -181,7 +181,7 @@ public class MypageController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("feeTypeCd", "2");
             clubService.insertClubFee(commandMap.getMap());
             resultMsg = "요청되었습니다.";
@@ -201,7 +201,7 @@ public class MypageController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mode", "pay");
             clubService.updateClubFee(commandMap.getMap());
             resultMsg = "변경되었습니다.";
@@ -235,7 +235,7 @@ public class MypageController {
         Boolean result = false;
         String resultMsg = "";
 
-        if (SessionUtils.isMemberLogin()) {
+        if (SessionUtils.isMemberLoggedIn()) {
             commandMap.put("mode", "cnfrm");
             clubService.updateClubFee(commandMap.getMap());
             resultMsg = "변경되었습니다.";

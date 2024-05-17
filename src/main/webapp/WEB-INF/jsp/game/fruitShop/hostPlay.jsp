@@ -9,7 +9,7 @@
     <script src="<c:url value='/js/game/fruitShop/fruits.js'/>"></script>
 
     <script>
-        const PLAY_NO = ${playId};
+        const PLAY_ID = ${playId};
         let playSetting = {};
         let playStatus = {};
         let fruitList = [];
@@ -17,6 +17,8 @@
         let auctionByRound = [];
 
         $(async () => {
+            await gfn_readPlayablePlayById(PLAY_ID);
+            
             await loadGameStatus();
 
             console.log('playStatus', playStatus);
@@ -48,7 +50,7 @@
             $("#roundDiv").hide();
             $("#resultDiv").hide();
 
-            const originalPlayMemberList = await readPlayMemberList(PLAY_NO);
+            const originalPlayMemberList = await readPlayMemberList(PLAY_ID);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
             const hostPlayMember = originalPlayMemberList.hostPlayMember;
 
@@ -158,7 +160,7 @@
             }
 
             const request = {
-                playId: PLAY_NO,
+                playId: PLAY_ID,
                 log: JSON.stringify(log)
             }
 
@@ -170,7 +172,7 @@
         }
 
         const loadGameStatus = async () => {
-            const lastPlayLog = await readLastPlayLog(PLAY_NO);
+            const lastPlayLog = await readLastPlayLog(PLAY_ID);
             if (!lastPlayLog) {
                 return;
             }
@@ -197,6 +199,11 @@
         }
 
         const beginGame = () => {
+            if (fruitList.length === 0) {
+                alert("과일이 분배되지 않았습니다.");
+                return;
+            }
+
             $("#settingDiv").hide();
             proceedToNextRound();
         }
@@ -307,7 +314,7 @@
             }
 
             const request = {
-                playId: PLAY_NO
+                playId: PLAY_ID
             }
 
             gfn_callDeleteApi("/api/play/log/all", request)
@@ -359,7 +366,7 @@
         }
 
         const openFruitShopModal = () => {
-            shopListModal.open(PLAY_NO);
+            shopListModal.open(PLAY_ID);
         }
 
     </script>

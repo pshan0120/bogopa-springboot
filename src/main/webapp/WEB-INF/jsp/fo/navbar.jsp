@@ -7,8 +7,8 @@
     Integer clubNo = (Integer) session.getAttribute("clubNo");
     String mmbrTypeCd = (String) session.getAttribute("mmbrTypeCd");
 
-    boolean loggedIn = SessionUtils.isMemberLogin();
-    boolean adminMemberLoggedIn = SessionUtils.isAdminMemberLogin();
+    boolean loggedIn = SessionUtils.isMemberLoggedIn();
+    boolean adminMemberLoggedIn = SessionUtils.isAdminMemberLoggedIn();
 %>
 
 <c:set var="mmbrNo" value="<%= mmbrNo %>"/>

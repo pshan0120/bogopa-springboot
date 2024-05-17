@@ -4,9 +4,6 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
-    <!-- 다음 주소찾기 적용  -->
-    <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
-
     <script>
         let minPlyrCnt = 0;
         let maxPlyrCnt = 0;
@@ -15,11 +12,13 @@
         $(() => {
             gfn_setSortTh("catchAThiefPlayRcrdList", "selectCatchAThiefPlayRcrdList(1)");
 
-            $("[data-toggle='tooltip']").tooltip();
+            const adminMemberLoggedIn = JSON.parse("<%= SessionUtils.isAdminMemberLoggedIn() %>");
+            if (adminMemberLoggedIn) {
+                $("button[name='openCreatePlayButton']").show();
+            }
 
             selectCatchAThiefPlayRcrdList(1);
         });
-
 
         const selectCatchAThiefPlayRcrdList = pageNo => {
             let comAjax = new ComAjax("catchAThiefPlayRcrdForm");
@@ -84,7 +83,7 @@
             body.append(str);
         };
 
-        const openInsertPlayModal = () => {
+        /*const openInsertPlayModal = () => {
             $("#playMmbrListTbl>tbody").empty();
             $("#playJoinMmbrNListDiv").empty();
             $("#insertPlayForm input[name='hostMmbrNo']").val("<c:out value="${mmbrNo}" />");
@@ -239,12 +238,15 @@
                     alert("회원이 생성되었습니다.");
                 })
                 .catch(response => console.error('error', response));
-        }
+        }*/
 
         const openClubProfileModal = clubId => {
             clubProfileModal.open(clubId);
         }
 
+        const openCreatePlayModal = () => {
+            createPlayModal.open(GAME.CATCH_A_THIEF);
+        }
     </script>
 </head>
 
@@ -297,16 +299,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <c:if test="${clubNo ne ''}">
-                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="openInsertPlayModal();">
-                                            새로운 플레이
-                                        </button>
-                                        <%--<button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="createCatchAThiefMember();">
-                                            도둑잡기 회원 등록
-                                        </button>--%>
-                                    </c:if>
+                                    <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
+                                            onclick="openCreatePlayModal();" name="openCreatePlayButton" style="display: none">
+                                        새로운 플레이
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -337,8 +333,6 @@
                                 id="catchAThiefPlayRcrdListPageNav"></ul>
                         </nav>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -346,57 +340,7 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<!-- 새로운 플레이 Modal -->
-<div class="modal fade" id="insertPlayModal" role="dialog" aria-labelledby="insertPlayModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">새로운 플레이</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="insertPlayForm">
-                    <input type="hidden" name="hostMmbrNo">
-                    <input type="hidden" name="hostNickNm">
-                    <input type="hidden" name="clubNo">
-                    <div class="row clearfix">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label">*플레이이름</label>
-                                <input type="text" data-name="플레이이름" name="playNm"
-                                       class="form-control form-control-alternative hasValue">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <label class="form-control-label">*플레이어</label>
-                <div class="mb-4" id="playJoinMmbrNListDiv"></div>
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="playMmbrListTbl">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col">닉네임</th>
-                            <th scope="col" colspan="2">세팅</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="insertPlay();">등록</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
+<%@ include file="/WEB-INF/jsp/game/createPlayModal.jspf" %>
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->

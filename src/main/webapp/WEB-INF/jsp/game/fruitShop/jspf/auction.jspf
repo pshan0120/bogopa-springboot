@@ -87,22 +87,61 @@
                 return "";
             }
 
-            return fruitList.reduce((prev, next) => {
+            /*return fruitList.reduce((prev, next) => {
                     return prev
                         + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
                         + " onclick=\"auction.blindBiddingResult('" + player.playerName + "', '" + next.name + "')\" >"
                         + " " + Fruit.getFruitByName(fruitList, next.name).title
                         + "</button>";
                 }, "<h3>판매가 숨기기 사용</h3>")
+                + "<hr>";*/
+
+            const fruitFromHtml = fruitList.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
+                        + " onclick=\"auction.setBlindFrom('" + next.name + "')\" >"
+                        + " " + Fruit.getFruitByName(fruitList, next.name).title
+                        + "</button>";
+                }, "<h3>판매가 숨기기 사용</h3>")
+                + "<div name=\"blindFromMessageText\" data-blind-from=\"\"></div>"
+                + "</br>";
+
+            const blindHtml =
+                "<button class=\"btn btn-sm btn-primary mr-1 my-1\" "
+                + " onclick=\"auction.blind('" + player.playerName + "')\" >"
+                + "  숨기기 확정"
+                + "</button>"
                 + "<hr>";
+
+            return fruitFromHtml + blindHtml;
         },
-        blindBiddingResult: (playerName, itemName) => {
+        setBlindFrom: itemName => {
+            const $modal = $("#bidFruitModal");
+            const $blindFromMessageText = $modal.find("div[name='blindFromMessageText']");
+            const item = Fruit.getFruitByName(fruitList, itemName);
+            $blindFromMessageText.text(item.title);
+            $blindFromMessageText.data("blindFrom", itemName);
+        },
+        blind: playerName => {
             const player = playerList.find(player => player.playerName === playerName);
+            player.blindSkillUsed = true;
+
+            const $modal = $("#bidFruitModal");
+            const $blindFromMessageText = $modal.find("div[name='blindFromMessageText']");
+            const itemName = Fruit.getFruitByName(fruitList, $blindFromMessageText.data("blindFrom"));
+
+            auction.blindBiddingResultList.push({playerName, itemName});
+
+            $modal.modal("hide");
+            saveGameStatus();
+            return;
+
+            /*const player = playerList.find(player => player.playerName === playerName);
             player.blindSkillUsed = true;
 
             auction.blindBiddingResultList.push({playerName, itemName});
 
-            $("div[name='blindBiddingResultDiv']").empty();
+            $("div[name='blindBiddingResultDiv']").empty();*/
         },
         createSwapFruitHtml: playerName => {
             const player = playerList.find(player => player.playerName === playerName);

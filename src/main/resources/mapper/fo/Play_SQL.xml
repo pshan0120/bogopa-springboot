@@ -226,7 +226,7 @@
 
 	<delete id="deletePlayMember" parameterType="long">
         DELETE FROM
-            playMember
+            playMmbr
         WHERE
             playNo = #{playId}
     </delete>

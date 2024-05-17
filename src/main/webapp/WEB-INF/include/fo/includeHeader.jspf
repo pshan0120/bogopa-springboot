@@ -78,3 +78,4 @@
 <script src="<c:url value='/js/com/playStatus.js'/>"></script>
 
 <script src="<c:url value='/js/game/constants.js'/>"></script>
+<script src="<c:url value='/js/game/apis.js'/>"></script>

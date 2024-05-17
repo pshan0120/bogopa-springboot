@@ -18,6 +18,8 @@
         let beforeOutcastList = [];
 
         $(async () => {
+            await gfn_readPlayablePlayById(PLAY_ID);
+
             await loadGameStatus();
 
             console.log('playStatus', playStatus);
@@ -224,6 +226,11 @@
         }
 
         const beginGame = () => {
+            if (playerList.length === 0) {
+                alert("역할이 분배되지 않았습니다.");
+                return;
+            }
+
             $("#settingDiv").hide();
             proceedToNextRound();
         }
