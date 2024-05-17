@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    $(() => {
+        const $modal = $("#introductionModal");
+        $modal.on('hide.bs.modal', event => {
+            introductionModal.close();
+        });
+    });
+
+    const introductionModal = {
+        open: () => {
+            const $modal = $("#introductionModal");
+            $modal.modal("show");
+        },
+        close: () => {
+            $("audio[name='backgroundMusic']").each((index, audio) => {
+                audio.pause();
+            });
+        },
+    }
+</script>
+
+<div class="modal fade" id="introductionModal" role="dialog"
+     aria-labelledby="introductionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">Introduction</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                <hr>
+                <div>
+                    <h2>
+                        #CASE 1
+                    </h2>
+                    <p>
+                        오래 전, 고요한 마을인 레이븐스우드 블러프에서 지옥 같은 천둥번개가 치는 가운데 자정이 되자... 비명 소리가 들립니다.
+                        조사를 위해 마을 광장으로 달려가던 중 당신은 놀랍게도 이야기꾼인 내 자신이 살해된 것을 발견했습니다.
+                        시계탑 시침에 찔린 시신에서 흐른 피는 아래 자갈에 뚝뚝 떨어지고 있습니다.
+                        당신은 이것이 악마의 소행이라고 생각하는데, 당신의 말이 맞습니다.
+                        악마는 밤에 죽이고 낮에는 인간의 모습을 취합니다.
+                    </p>
+                    <h2>
+                        #CASE 2
+                    </h2>
+                    <p>
+                        레이븐스우드 블러프의 조용한 마을에서 ‌악마가 여러분 사이를 걷고 있습니다...
+                        지옥 같은 뇌우가 치는 동안, 자정이 다가오고 뼈를 오싹하게 만드는 비명이 울려 퍼집니다.
+                        마을 사람들은 서둘러 조사를 하고 마을 이야기꾼이 살해된 것을 발견합니다.
+                        그의 시체는 시계탑의 시침에 찔려 있고 아래 조약돌에 피가 뚝뚝 떨어졌습니다.
+                        악마는 밤에는 살인을 하고 낮에는 인간의 모습으로 변장하고 돌아다니고 있습니다.
+                        누군가는 의미심장한 정보를 가지고 있습니다.
+                        또 어떤 사람들은 악과 싸우거나 무고한 사람을 보호하는 능력을 가지고 있습니다.
+                        그러나 악마와 그 사악한 하수인들은 혼란을 야기하고 의심을 키우기 위해 거짓말을 퍼뜨리고 있습니다.
+                        착한 마을 사람들이 시간에 맞춰 퍼즐을 맞춰 진정한 악마를 처형하고 자신들을 구할 수 있을까요?
+                        아니면 한때 평화로웠던 이 마을에 악이 휩쓸리게 될까요?
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

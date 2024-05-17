@@ -79,6 +79,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <h3>첫 라운드에서만 확인 가능합니다.</h3>
+                <hr>
                 <div name="roleDiv"></div>
             </div>
             <div class="modal-footer">

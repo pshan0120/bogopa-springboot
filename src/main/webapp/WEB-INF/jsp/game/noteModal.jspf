@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script>
+    $(() => {
+        const $noteTextarea = $("#noteModal").find("textarea[name='noteTextarea']");
+
+        if (localStorage.getItem("note")) {
+            $noteTextarea.val(localStorage.getItem("note"));
+        }
+
+        $noteTextarea.on("change", event => {
+            localStorage.setItem("note", $(event.currentTarget).val());
+        });
+    });
+
     const noteModal = {
         open: () => {
             const $noteModal = $("#noteModal");
@@ -16,18 +28,6 @@
         close: () => {
         },
     }
-
-    $(() => {
-        const $noteTextarea = $("#noteModal").find("textarea[name='noteTextarea']");
-
-        if (localStorage.getItem("note")) {
-            $noteTextarea.val(localStorage.getItem("note"));
-        }
-
-        $noteTextarea.on("change", event => {
-            localStorage.setItem("note", $(event.currentTarget).val());
-        });
-    });
 </script>
 
 <div class="modal fade" id="noteModal" role="dialog"

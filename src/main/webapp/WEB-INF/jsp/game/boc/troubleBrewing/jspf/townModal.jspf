@@ -29,7 +29,7 @@
             const playerSetting = initializationSetting.player
                 .find(player => townModal.playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
             const roleInitializationHtml = `
-                스토리텔러 \${townModal.playStatus.hostMemberName}<br/>
+                이야기꾼 \${townModal.playStatus.hostMemberName}<br/>
                 마을주민 \${playerSetting.townsFolk}명,
                 이방인 \${playerSetting.outsider}명,
                 하수인 \${playerSetting.minion}명,

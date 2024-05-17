@@ -177,7 +177,7 @@ class DemonRole extends EvilRole {
 class WasherWoman extends TownsFolkRole {
     static name = "washer woman";
     static title = "세탁부";
-    static description = "당신은 스토리텔러가 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.";
+    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.";
 
     constructor() {
         super(WasherWoman.name, WasherWoman.title, WasherWoman.description);
@@ -189,7 +189,7 @@ class WasherWoman extends TownsFolkRole {
 class Librarian extends TownsFolkRole {
     static name = "librarian";
     static title = "사서";
-    static description = "당신은 스토리텔러가 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 이방인인지 알고 시작합니다.";
+    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 이방인인지 알고 시작합니다.";
 
     constructor() {
         super(Librarian.name, Librarian.title, Librarian.description);
@@ -201,7 +201,7 @@ class Librarian extends TownsFolkRole {
 class Investigator extends TownsFolkRole {
     static name = "investigator";
     static title = "조사관";
-    static description = "당신은 스토리텔러가 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.";
+    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.";
 
     constructor() {
         super(Investigator.name, Investigator.title, Investigator.description);
@@ -376,7 +376,7 @@ class Poisoner extends MinionRole {
 class Spy extends MinionRole {
     static name = "spy";
     static title = "스파이";
-    static description = "매일 밤 당신은 스토리텔러를 통해 게임 진행상황을 볼 수 있습니다. 당신은 다른 사람들에게 마을주민이나 이방인으로 보입니다. 하지만 실제로는 악한 편입니다. 죽은 상태에서도 당신은 다른 사람들에게 마을주민이나 이방인으로 보입니다.";
+    static description = "매일 밤 당신은 이야기꾼을 통해 게임 진행상황을 볼 수 있습니다. 당신은 다른 사람들에게 마을주민이나 이방인으로 보입니다. 하지만 실제로는 악한 편입니다. 죽은 상태에서도 당신은 다른 사람들에게 마을주민이나 이방인으로 보입니다.";
 
     constructor() {
         super(Spy.name, Spy.title, Spy.description);

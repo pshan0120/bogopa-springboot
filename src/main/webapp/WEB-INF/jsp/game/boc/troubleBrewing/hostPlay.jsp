@@ -456,7 +456,9 @@
                 <p>
                     1. 모두 눈을 감았는지 확인하세요.<br/>
                     * 일부 여행자와 전설은 행동합니다.<br/>
-                    2. 첫날 밤이라면 첫번째 플레이어부터 순서대로 깨워서 역할을 보여줍니다.<br/>
+                    <!--2. 첫날 밤이라면 첫번째 플레이어부터 순서대로 깨워서 역할을 보여줍니다.<br/>-->
+                    2. 각 플레이어들의 자리 배치와 역할을 확인하세요.<br/>
+                    * 만약 자기 역할을 미처 확인하지 못한 플레이어가 있다면 깨워서 역할을 보여줍니다.<br/>
                     * 이 때 주정뱅이에게는 변경된 직업으로 보여주게 됩니다.<br/>
                     \${assignedPlayerListHtml}<br/>
                 </p>
@@ -764,6 +766,11 @@
         const openNoteModal = () => {
             noteModal.open();
         }
+
+        const openIntroductionModal = () => {
+            introductionModal.open();
+        }
+
     </script>
 </head>
 
@@ -806,10 +813,13 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-default" onclick="setPlayersRole()">
+                            <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
+                                인트로 보기
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="setPlayersRole()">
                                 역할 분배
                             </button>
-                            <button type="button" class="btn btn-primary" onclick="beginGame()">
+                            <button type="button" class="btn btn-primary btn-block" onclick="beginGame()">
                                 게임 시작
                             </button>
                         </div>
@@ -973,7 +983,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">스토리텔러가 점쟁이에게 악으로 보일 플레이어를 선택합니다.</h4>
+                <h4 class="">이야기꾼이 점쟁이에게 악으로 보일 플레이어를 선택합니다.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1012,6 +1022,7 @@
     <!-- /.modal-dialog -->
 </div>
 
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/introductionModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/playStatusModal.jspf" %>

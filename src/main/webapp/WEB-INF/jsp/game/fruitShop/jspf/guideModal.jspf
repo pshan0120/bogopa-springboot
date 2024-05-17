@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const guideModal = {
+        open: () => {
+            const $guideModal = $("#guideModal");
+            $guideModal.modal("show");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="guideModal" role="dialog"
+     aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">게임 가이드</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h2>
+                        평화로운 과일가게란?
+                    </h2>
+                    <p>
+                        가장 부유한 과일가게 판매상이 되어 보세요!
+                    </p>
+                </div>
+                <hr>
+                <div>
+                    <h2>
+                        규칙
+                    </h2>
+                    <ul class="">
+                        <li class="">
+                            사과, 포도, 딸기, 수박, 망고, 바나나 총 6가지의 과일 중 무작위로 과일 2개를 가지고 시작하며, 해당 과일에 대한 판매권을 갖습니다.
+                        </li>
+                        <li class="">
+                            각 과일의 초기 수량은 플레이 인원에 따라 달라지며 일부 과일은 1개씩 적을 수 있습니다.
+                        </li>
+                        <li class="">
+                            매 라운드마다 자신이 판매하는 과일에 대한 희망가를 1~5천 원까지 천 원 단위로 제시합니다.
+                        </li>
+                        <li class="">
+                            과일에 대한 희망가는 진행자에게 제시하며 다른 플레이어들에게는 공개되지 않습니다. 플레이어들의 희망가 제시가 끝나면 라운드가 종료되고, 각 과일의 판매가와 판매 수입이 공개됩니다. (플레이어들의 누적 수입은 공개되지 않습니다.)
+                        </li>
+                        <li class="">
+                            같은 과일을 판매하는 플레이어들이 제시한 희망가 중 최저가가 그 과일의 최종 판매가가 되며, 최저가를 제시한 플레이어는 해당 과일을 판매하는 플레이어의 수만큼 과일을 판매, 수입을 얻습니다.
+                        </li>
+                        <li class="">
+                            최저가를 제시한 플레이어가 여러 명일 경우 최저가를 제시한 플레이어들이 총 수입을 똑같이 나눠 갖습니다. (돈은 1원 단위까지만 계산하고 나눗셈의 나머지는 버립니다.)
+                        </li>
+                        <li class="">
+                            플레이어들은 전체 라운드 중 단 한 번 '비밀', '교체' 중 하나를 선택해 사용할 수 있습니다.
+                        </li>
+                        <li class="">
+                            '비밀'은 사용한 라운드에 한해 원하는 과일의 판매가와 수입을 비공개로 만듭니다. 누가 '비밀'을 사용했는지는 공개되지 않으며, 자신이 판매하는 과일이 아니어도 사용할 수 있습니다.
+                        </li>
+                        <li class="">
+                            '교체'는 자신이 판매하는 과일 중 하나를 남아 있는 다른 과일로 바꿀 수 있습니다. 바꾼 과일은 게임이 끝날 때까지 유지되며 과일을 바꾼 동시에 모두에게 공개됩니다. 단, 플레이어들의 희망가 제시가 시작되기 전에 사용해야 합니다.
+                        </li>
+                        <li class="">
+                            게임이 종료되면 플레이어들의 누적 수입이 공개되며 가장 높은 수입을 올린 플레이어가 우승자가 됩니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

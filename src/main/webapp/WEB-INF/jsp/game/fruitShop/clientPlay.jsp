@@ -21,6 +21,10 @@
             $("#titleDiv").find("span[name='playName']").text(play.playName);
         });
 
+        const openGuideModal = () => {
+            guideModal.open();
+        }
+
         const openFruitShopModal = () => {
             shopListModal.open(PLAY_ID);
         }
@@ -75,6 +79,9 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
                                 플레이어 과일가게 보기
                             </button>
@@ -92,6 +99,7 @@
 
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auctionResultModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/guideModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 
