@@ -119,13 +119,14 @@
                 return;
             }
 
-            if (!confirm("[" + nickname + "] 닉네임으로 참가할까요?")) {
+            const replacedNickname = nickname.replace(/\s+/g, "");
+            if (!confirm("[" + replacedNickname + "] 닉네임으로 참가할까요?")) {
                 return;
             }
 
             const request = {
                 playId: PLAY_ID,
-                nickname
+                nickname: replacedNickname
             }
 
             gfn_callPostApi("/api/play/member/join", request)
