@@ -15,6 +15,11 @@
                 return;
             }
 
+            if (myRoleModal.playStatus.round !== 1) {
+                alert("첫 라운드에서만 확인 가능합니다.");
+                return;
+            }
+
             const loggedIn = JSON.parse("<%= SessionUtils.isMemberLoggedIn() %>");
             if (!loggedIn) {
                 alert("로그인 상태가 아닙니다.");
