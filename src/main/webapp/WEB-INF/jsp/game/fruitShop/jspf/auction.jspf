@@ -6,6 +6,9 @@
         biddingList: [],
         blindBiddingResultList: [],
         createHtml: () => {
+            auction.biddingList = [];
+            auction.blindBiddingResultList = [];
+
             return playerList.reduce((prev, next) => {
                 return prev
                     + "<div name=\"playerBiddingDiv\" data-player-name=" + next.playerName + ">"
@@ -119,7 +122,7 @@
 
             const $modal = $("#bidFruitModal");
             const $blindFromMessageText = $modal.find("div[name='blindFromMessageText']");
-            const itemName = Fruit.getFruitByName(fruitList, $blindFromMessageText.data("blindFrom"));
+            const itemName = Fruit.getFruitByName(fruitList, $blindFromMessageText.data("blindFrom")).name;
 
             auction.blindBiddingResultList.push({playerName, itemName});
 
