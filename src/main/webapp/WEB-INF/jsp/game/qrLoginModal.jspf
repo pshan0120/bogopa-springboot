@@ -5,7 +5,7 @@
         open: playerList => {
             const $modal = $("#qrLoginModal");
 
-            const $playerDiv = $modal.find("div[name='playerDiv']")
+            const $playerDiv = $modal.find("div[name='playerDiv']");
             const playerHtml = playerList
                 .reduce((prev, next) => {
                     return prev

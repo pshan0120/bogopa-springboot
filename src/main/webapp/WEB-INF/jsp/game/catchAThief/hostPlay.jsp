@@ -246,7 +246,7 @@
             if (uptownOutcastList.length === 0
                 || downtownOutcastList.length === 0) {
                 alert("이번 라운드의 추방자가 선택되지 않았습니다.");
-                throw new Error("추방자 미선택 미선택");
+                throw new Error("추방자 미선택");
             }
 
             if (!confirm("결과를 계산한 뒤 저장하시겠습니까?")) {
@@ -513,6 +513,41 @@
             qrLoginModal.open(playerList);
         }
 
+        const openMiniGameModal = () => {
+            if (uptownOutcastList.length === 0
+                || downtownOutcastList.length === 0) {
+                alert("이번 라운드의 추방자가 선택되지 않았습니다.");
+                throw new Error("추방자 미선택");
+            }
+
+            miniGameModal.open(uptownOutcastList[0], downtownOutcastList[0]);
+        }
+
+        const setMiniGameResult = () => {
+            if (!miniGameModal.winner
+                || !miniGameModal.loser) {
+                alert("게임 결과가 선택되지 않았습니다.");
+                throw new Error("게임 결과 미선택");
+            }
+
+            const winner = playerList.find(player => player.playerName === miniGameModal.winner);
+            const loser = playerList.find(player => player.playerName === miniGameModal.loser);
+
+            if (!confirm("승리한 플레이어는 [" + winner.playerName + "]입니다. 저장하시겠습니까?")) {
+                return;
+            }
+
+            winner.money = winner.money + playSetting.stolenMoney;
+            loser.money = loser.money - playSetting.stolenMoney;
+
+            miniGameModal.winner = null;
+            miniGameModal.loser = null;
+
+            alert(winner.playerName + " +" + playSetting.stolenMoney + " / " + loser.playerName + " -" + playSetting.stolenMoney);
+
+            saveGameStatus();
+        }
+
     </script>
 </head>
 
@@ -582,6 +617,15 @@
                             <h4><span name="townTitle"></span> 추방자</h4>
                             <div name="playerDiv"></div>
                             <div name="outcastDiv"></div>
+                        </div>
+                        <hr>
+                        <div name="miniGameDiv">
+                            <button type="button" class="btn btn-success btn-block" onclick="openMiniGameModal()">
+                                미니게임
+                            </button>
+                            <button type="button" class="btn btn-warning btn-block" onclick="setMiniGameResult()">
+                                미니게임 결과 적용
+                            </button>
                         </div>
                     </div>
                     <div class="card-footer py-4">
@@ -663,6 +707,7 @@
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/miniGameModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/qrLoginModal.jspf" %>
 

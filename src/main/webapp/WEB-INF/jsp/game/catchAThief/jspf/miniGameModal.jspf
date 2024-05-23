@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const miniGameModal = {
+        playerList: [],
+        winner: null,
+        loser: null,
+        open: (player1, player2) => {
+            console.log('player1', player1);
+            console.log('player2', player2);
+            miniGameModal.playerList = [player1, player2];
+
+            const $modal = $("#miniGameModal");
+            const $result = $modal.find("span[name='result']");
+            $result.empty();
+
+            const $playerDiv = $modal.find("div[name='playerDiv']");
+            const playerHtml = miniGameModal.playerList
+                .reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\""
+                        + " onclick=\"miniGameModal.setWinner('" + next.playerName + "')\" >"
+                        + " " + next.playerName
+                        + "</button>";
+                }, "");
+            $playerDiv.empty().html(playerHtml);
+
+            $modal.modal("show");
+        },
+        setWinner: playerName => {
+            const $modal = $("#miniGameModal");
+            const $result = $modal.find("span[name='result']");
+            $result.text(playerName);
+            miniGameModal.winner = playerName;
+            miniGameModal.loser = miniGameModal.playerList.find(player => player.playerName !== playerName).playerName;
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="miniGameModal" role="dialog"
+     aria-labelledby="miniGameModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">미니게임</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Winner is... <span name="result" class="font-blue"></span></h3>
+                <hr>
+                <div name="playerDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
