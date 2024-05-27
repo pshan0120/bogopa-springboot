@@ -9,10 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="openMiniGameModal 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="gfn_deepCopyByJSON 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/fo/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/fo/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/catchAThief/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/fruitShop/hostPlay.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,14 +265,7 @@
       <workItem from="1715955508434" duration="12030000" />
       <workItem from="1716087403049" duration="1439000" />
       <workItem from="1716469625350" duration="5144000" />
-      <workItem from="1716826357995" duration="3926000" />
-    </task>
-    <task id="LOCAL-00062" summary="과일가게 개발중">
-      <created>1714326136030</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1714326136030</updated>
+      <workItem from="1716826357995" duration="4573000" />
     </task>
     <task id="LOCAL-00063" summary="과일가게 개발중">
       <created>1714415510380</created>
@@ -609,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716485518647</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="gfn_deepCopyByJSON 추가">
+      <created>1716830321909</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1716830321910</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +631,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="오류 수정" />
     <MESSAGE value="도둑 2명" />
     <MESSAGE value="도둑잡기 개선" />
     <MESSAGE value="비공개 수정" />
@@ -655,7 +655,8 @@
     <MESSAGE value="trim 추가" />
     <MESSAGE value="blindBiddingResultList 오류 수정" />
     <MESSAGE value="openMiniGameModal 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="openMiniGameModal 추가" />
+    <MESSAGE value="gfn_deepCopyByJSON 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="gfn_deepCopyByJSON 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

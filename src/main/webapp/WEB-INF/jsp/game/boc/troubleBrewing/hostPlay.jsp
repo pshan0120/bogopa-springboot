@@ -276,6 +276,10 @@
             playStatusModal.open(createAssignedPlayerList());
         }
 
+        const openGuideModal = () => {
+            guideModal.openRuleGuideModal();
+        }
+
         const openRoleGuideModal = () => {
             guideModal.openRoleGuideModal();
         }
@@ -848,6 +852,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
                                 역할 설명
                             </button>
@@ -900,6 +907,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
                                 역할 설명
                             </button>
@@ -946,6 +956,9 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
                                 역할 설명

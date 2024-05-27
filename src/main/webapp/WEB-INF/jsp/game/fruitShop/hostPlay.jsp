@@ -361,12 +361,20 @@
             $playerDiv.append(htmlString);
         }
 
+        const openGuideModal = () => {
+            guideModal.open();
+        }
+
         const openPlayStatusModal = () => {
             playStatusModal.open(auctionByRound);
         }
 
         const openFruitShopModal = () => {
             shopListModal.open(PLAY_ID);
+        }
+
+        const openAuctionResultModal = () => {
+            auctionResultModal.open(PLAY_ID);
         }
 
     </script>
@@ -433,11 +441,17 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
                                 플레이어 과일가게 보기
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
+                                경매 결과 모달 표시
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
                                 다음 라운드 진행
@@ -463,11 +477,17 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
                                 플레이어 과일가게 보기
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
+                                경매 결과 모달 표시
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -483,8 +503,10 @@
 </div>
 
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auction.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/shopListModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/fruitShop/jspf/auctionResultModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

@@ -636,6 +636,9 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                                게임 설명
+                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
@@ -644,9 +647,6 @@
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
                                 다음 라운드 진행
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
-                                게임 설명
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
