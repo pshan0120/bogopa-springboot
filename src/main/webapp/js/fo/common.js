@@ -1098,8 +1098,11 @@ function gfn_findAddr(zipCd, addr1, addr2) {
     }).open();
 }
 
-
 const gfn_removeElementChildrenAndAppendHtmlString = ($element, htmlString) => {
     $element.empty();
     $element.append(htmlString);
+}
+
+const gfn_deepCopyByJSON = object => {
+    return JSON.parse(JSON.stringify(object));
 }

@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script>
+    $(() => {
+        const $setNominationModal = $("#setNominationModal");
+        $setNominationModal.on('hide.bs.modal', event => {
+            execution.close();
+        });
+    });
+
     const execution = {
         nominatingPlayerListOfToday: [],
         nominatingPlayer: null,
@@ -7,6 +14,7 @@
         nominatedPlayer: null,
         votingPlayerList: [],
         diedAndVotedPlayerList: [],
+        candidatePlayer: null,
         candidatePlayerListOfToday: [],
         executionPlayerOfToday: null,
         createHtml: () => {
@@ -15,6 +23,7 @@
             execution.nominatedPlayerListOfToday = [];
             execution.nominatedPlayer = null;
             execution.votingPlayerList = [];
+            execution.candidatePlayer = null;
             execution.candidatePlayerListOfToday = [];
             execution.executionPlayerOfToday = null;
 
@@ -199,7 +208,7 @@
             $modal.find("[name='nominatedPlayerListDiv']").find("button").hide();
 
             const nominatedPlayerSeatNumber = nominatedPlayer.seatNumber;
-            const votingPlayerList = [...createAssignedPlayerList()]
+            const votingPlayerList = gfn_deepCopyByJSON(createAssignedPlayerList())
                 .filter(votingPlayer => votingPlayer.votable)
                 .sort((prev, next) => prev.seatNumber - next.seatNumber)
                 .map(votingPlayer => {
@@ -254,6 +263,7 @@
                 player.votable = true;
             });
             execution.diedAndVotedPlayerList = [];
+            execution.candidatePlayer = null;
             execution.candidatePlayerListOfToday = [];
             execution.executionPlayerOfToday = null;
 
@@ -357,6 +367,7 @@
             }
 
             if (numberOfVoteSuccess <= numberOfVote) {
+                execution.candidatePlayer = execution.nominatedPlayer;
                 execution.candidatePlayerListOfToday.push({
                     player: execution.nominatedPlayer,
                     numberOfVote,
@@ -365,10 +376,66 @@
 
             execution.nominatingPlayer = null;
             execution.nominatedPlayer = null;
+            execution.candidatePlayer = null;
             execution.votingPlayerList = [];
 
             saveGameStatus();
             $("#setNominationModal").modal("hide");
+        },
+        cancelVote: () => {
+            if (execution.nominatingPlayer) {
+                const nominatingPlayerIndex = execution.nominatingPlayerListOfToday
+                    .findIndex(player => player.name === execution.nominatingPlayer.name);
+                if (nominatingPlayerIndex > -1) {
+                    execution.nominatingPlayerListOfToday.splice(nominatingPlayerIndex, 1);
+                }
+                execution.nominatingPlayer = null;
+            }
+
+            if (execution.nominatedPlayer) {
+                const nominatedPlayerIndex = execution.nominatedPlayerListOfToday
+                    .findIndex(player => player.name === execution.nominatedPlayer.name);
+                if (nominatedPlayerIndex > -1) {
+                    execution.nominatedPlayerListOfToday.splice(nominatedPlayerIndex, 1);
+                }
+                execution.nominatedPlayer = null;
+            }
+
+            execution.votingPlayerList.find(votingPlayer => {
+                const diedAndVotedPlayerIndex = execution.diedAndVotedPlayerList
+                    .findIndex(diedAndVotedPlayer => diedAndVotedPlayer.name === votingPlayer.name);
+
+                if (diedAndVotedPlayerIndex > -1) {
+                    const diedAndVotedPlayer = execution.diedAndVotedPlayerList.at(diedAndVotedPlayerIndex);
+                    diedAndVotedPlayer.votable = true;
+                    execution.diedAndVotedPlayerList.splice(diedAndVotedPlayerIndex, 1);
+                }
+            });
+
+            if (execution.candidatePlayer) {
+                const candidatePlayerIndex = execution.candidatePlayerListOfToday
+                    .findIndex(player => player.name === execution.candidatePlayer.name);
+                if (candidatePlayerIndex > -1) {
+                    execution.candidatePlayerListOfToday.splice(candidatePlayerIndex, 1);
+                }
+                execution.candidatePlayer = null;
+            }
+
+            $("#setNominationModal").modal("hide");
+
+            /*const nominatedPlayer = execution.nominatedPlayer;
+
+            execution.nominatingPlayerListOfToday = [];
+            execution.nominatingPlayer = null;
+            execution.nominatedPlayerListOfToday = [];
+            execution.nominatedPlayer = null;
+            execution.votingPlayerList = [];
+            $.each(execution.diedAndVotedPlayerList, (index, player) => {
+                player.votable = true;
+            });
+            execution.diedAndVotedPlayerList = [];
+            execution.candidatePlayerListOfToday = [];
+            execution.executionPlayerOfToday = null;*/
         },
         close: () => {
         },
@@ -404,7 +471,8 @@
                 <div name="candidatePlayerListDiv"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="execution.saveVote()">투표결과 저장</button>
+                <button type="button" class="btn btn-success" onclick="execution.saveVote()">저장</button>
+                <button type="button" class="btn btn-warning" onclick="execution.cancelVote()">취소</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
             </div>
         </div>
