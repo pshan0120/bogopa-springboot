@@ -1,87 +1,120 @@
 class Role {
-    constructor(name, title, description) {
+    constructor(name, title, conditionOfWin, preferentialRoleList, description) {
         this.name = name;
         this.title = title;
-        this.description = description;
+        this.conditionOfWin = conditionOfWin;
+        this.preferentialRoleList = [];
     }
 }
 
 class Dictator extends Role {
     static name = "dictator";
     static title = "독재자";
-    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.";
+    static conditionOfWin = "득표수 단독 1위.";
+    static preferentialRoleList = [Revolutionary, Assassin, Priest];
 
     constructor() {
-        super(Dictator.name, Dictator.title, Dictator.description);
-        this.identifyingPlayerList = [];
-        this.identifyingTownsFolkRole = null;
+        super(
+            Dictator.name,
+            Dictator.title,
+            Dictator.conditionOfWin,
+            Dictator.preferentialRoleList
+        );
     }
 }
 
 class Clown extends Role {
     static name = "clown";
     static title = "광대";
-    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 이방인인지 알고 시작합니다.";
+    static conditionOfWin = "독재자가 승리하는 경우 함께 승리.";
+    static preferentialRoleList = [];
 
     constructor() {
-        super(Clown.name, Clown.title, Clown.description);
-        this.identifyingPlayerList = [];
-        this.identifyingOutsiderRole = null;
+        super(
+            Clown.name,
+            Clown.title,
+            Clown.conditionOfWin,
+            Clown.preferentialRoleList
+        );
     }
 }
 
 class Nobility extends Role {
     static name = "nobility";
     static title = "귀족";
-    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.";
+    static conditionOfWin = "'득표수 2위' 또는 '1표 이상 득표'에 해당하는 귀족이 각 1명 이상 존재.(단, 단독 1위인 귀족은 승리할 수 없음.) 또는 암살자의 승리.";
+    static preferentialRoleList = [Dictator, Revolutionary, Priest];
 
     constructor() {
-        super(Nobility.name, Nobility.title, Nobility.description);
-        this.identifyingPlayerList = [];
-        this.identifyingMinionRole = null;
+        super(
+            Nobility.name,
+            Nobility.title,
+            Nobility.conditionOfWin,
+            Nobility.preferentialRoleList
+        );
     }
 }
 
 class Revolutionary extends Role {
     static name = "revolutionary";
     static title = "혁명가";
-    static description = "당신은 악한 플레이어가 몇 쌍으로 앉아있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.";
+    static conditionOfWin = "'득표수 최하위' 또는 '최하위 바로 윗 순위'에 해당하는 혁명가가 각 1명 이상 존재.(단, 0표인 혁명가는 승리할 수 없음.)";
+    static preferentialRoleList = [Assassin, Priest];
 
     constructor() {
-        super(Revolutionary.name, Revolutionary.title, Revolutionary.description);
-        this.numberOfConcatenateEvil = null;
+        super(
+            Revolutionary.name,
+            Revolutionary.title,
+            Revolutionary.conditionOfWin,
+            Revolutionary.preferentialRoleList
+        );
     }
 }
 
 class Assassin extends Role {
     static name = "assassin";
     static title = "암살자";
-    static description = "당신은 악한 플레이어가 몇 쌍으로 앉아있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.";
+    static conditionOfWin = "독재자, 혁명가 또는 성직자가 승리조건을 만족했을 때, 자신의 득표 수가 0표인 경우 승리.";
+    static preferentialRoleList = [];
 
     constructor() {
-        super(Assassin.name, Assassin.title, Assassin.description);
-        this.numberOfConcatenateEvil = null;
+        super(
+            Assassin.name,
+            Assassin.title,
+            Assassin.conditionOfWin,
+            Assassin.preferentialRoleList
+        );
     }
 }
 
 class Populace extends Role {
     static name = "populace";
     static title = "민중";
-    static description = "당신은 악한 플레이어가 몇 쌍으로 앉아있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.";
+    static conditionOfWin = "모두가 민중이거나, 민중 이외에 승리조건을 달성한 플레이어가 없음.";
+    static preferentialRoleList = [];
 
     constructor() {
-        super(Populace.name, Populace.title, Populace.description);
-        this.numberOfConcatenateEvil = null;
+        super(
+            Populace.name,
+            Populace.title,
+            Populace.conditionOfWin,
+            Populace.preferentialRoleList
+        );
     }
 }
 
 class Priest extends Role {
     static name = "priest";
     static title = "성직자";
-    static description = "당신은 악한 플레이어가 몇 쌍으로 앉아있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.";
+    static conditionOfWin = "모든 플레이어들 중 0표를 제외하고 최대 득표와 최소 득표의 차이가 1표 이하, 또는 모두 0표";
+    static preferentialRoleList = [Assassin];
 
     constructor() {
-        super(Priest.name, Priest.title, Priest.description);
-        this.numberOfConcatenateEvil = null;
+        super(
+            Priest.name,
+            Priest.title,
+            Priest.conditionOfWin,
+            Priest.preferentialRoleList
+        );
     }
 }
