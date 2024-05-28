@@ -17,6 +17,10 @@
             window.location.href = "/game/catch-a-thief/play";
         }
 
+        const openBecomingADictator = () => {
+            window.location.href = "/game/becoming-a-dictator/play";
+        }
+
         const openFoodChainMagnateCalculator = () => {
             window.location.href = "/game/food-chain-magnate/calculator";
         }
@@ -69,6 +73,9 @@
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="openCatchAThief()">
                                 도둑잡기
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="openBecomingADictator()">
+                                이리하여 나는 독재자가 되었다
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFoodChainMagnateCalculator()">
                                 푸드체인거물 계산기

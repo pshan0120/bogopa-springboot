@@ -39,7 +39,7 @@ public class MainController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("playRcrdList", playRecordService.selectMainPlayRcrdList(commandMap.getMap()));
+        mv.addObject("playRecordList", playRecordService.selectMainPlayRecordList(commandMap.getMap()));
         mv.addObject("clubBrdList", boardService.selectMainClubBrdList(commandMap.getMap()));
         result = true;
 

@@ -57,7 +57,6 @@
         });
 
 
-
         const setRoleList = () => {
             townsFolkRoleList = [
                 new WasherWoman(),
@@ -723,6 +722,15 @@
                 diedPlayer.diedToday = true;
             }
 
+            if (diedPlayer.name === Saint.name
+                && diedPlayer.executed) {
+                alert("성자가 사망하여 악한 팀이 승리했습니다.");
+                // $("#setDiedPlayerByExecutionModal").modal("hide");
+                winByEvil();
+                saveGameStatus();
+                return true;
+            }
+
             const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
 
             if (diedPlayer.name === Imp.name) {
@@ -733,14 +741,14 @@
                     if (4 <= alivePlayerList.length) {
                         scarletWomenPlayer.changedToImp = true;
                         alert("임프는 사망하였지만 부정한 여자가 새로운 임프가 되었습니다. 게임이 계속 진행됩니다.");
-                        return;
+                        return false;
                     }
                 }
 
                 alert("모든 악마가 사망하여 선한 팀이 승리했습니다.");
                 winByGood();
                 saveGameStatus();
-                return;
+                return true;
             }
 
             const minionPlayer = minionPlayerList.find(minionPlayer => minionPlayer.name === diedPlayer.name);
@@ -749,7 +757,7 @@
                 alert("임프가 된 하수인이 사망하여 선한 팀이 승리했습니다.");
                 winByGood();
                 saveGameStatus();
-                return;
+                return true;
             }
 
             const aliveImpPlayer = Role.getPlayerByRole(alivePlayerList, Imp);
@@ -760,11 +768,12 @@
                     alert("임프가 생존한 상태에서 생존한 플레이어의 수가 2 이하가 되어 악한 팀이 승리했습니다.");
                     winByEvil();
                     saveGameStatus();
-                    return;
+                    return true;
                 }
             }
 
             alert(diedPlayer.playerName + "(" + diedPlayer.title + ") 플레이어가 사망하였습니다.");
+            return false;
         }
 
         const openNoteModal = () => {

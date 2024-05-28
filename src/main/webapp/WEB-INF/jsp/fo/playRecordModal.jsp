@@ -1,19 +1,19 @@
 <%@ page pageEncoding="utf-8" %>
 
 <script>
-    function fn_openPlayRcrdModal(playNo) {
+    function fn_openPlayRecordModal(playNo) {
         const comAjax = new ComAjax();
-        comAjax.setUrl("<c:url value='/selectPlayRcrd' />");
-        comAjax.setCallback("fn_openPlayRcrdModalCallback");
+        comAjax.setUrl("<c:url value='/selectPlayRecord' />");
+        comAjax.setCallback("fn_openPlayRecordModalCallback");
         comAjax.addParam("playNo", playNo);
         comAjax.ajax();
     }
 
-    function fn_openPlayRcrdModalCallback(data) {
-        gfn_setDataVal(data.map, "playRcrdForm");
-        $("#playRcrdModalLabel").text(data.map.playNm);
+    function fn_openPlayRecordModalCallback(data) {
+        gfn_setDataVal(data.map, "playRecordForm");
+        $("#playRecordModalLabel").text(data.map.playNm);
 
-        var body = $("#playRcrdListTbl>tbody");
+        var body = $("#playRecordListTbl>tbody");
         body.empty();
         var str = "";
 
@@ -82,14 +82,14 @@
         }
         body.append(str);
 
-        if (fdbckStr != "" && $("#playRcrdForm input[name='sttsCd']").val() == "2") {
+        if (fdbckStr != "" && $("#playRecordForm input[name='sttsCd']").val() == "2") {
             fdbckBody.append(fdbckStr);
             $("#playMmbrFdbckDiv").show();
         } else {
             $("#playMmbrFdbckDiv").hide();
         }
 
-        const gameNo = $("#playRcrdForm").find("input[name='gameNo']").val();
+        const gameNo = $("#playRecordForm").find("input[name='gameNo']").val();
         if (GAME.isPlayableGame(gameNo)) {
             $("#openPlayingGameBtn").show();
         }
@@ -97,7 +97,7 @@
         $("#updatePlayMmbrFdbckDiv").hide();
         $("#updatePlayMmbrFdbckBtn").hide();
 
-        $("#playRcrdModal").modal({
+        $("#playRecordModal").modal({
             //escapeClose: false,
             //clickClose: false,
             //showClose: false,
@@ -142,20 +142,20 @@
     }
 
     const openPlayingGame = () => {
-        const gameNo = $("#playRcrdForm").find("input[name='gameNo']").val();
+        const gameNo = $("#playRecordForm").find("input[name='gameNo']").val();
 
         if (GAME.BOC_TROUBLE_BREWING == gameNo) {
-            const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
+            const playNo = $("#playRecordForm").find("input[name='playNo']").val();
             location.href = "/game/trouble-brewing/play/" + playNo;
         }
 
         if (GAME.FRUIT_SHOP == gameNo) {
-            const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
+            const playNo = $("#playRecordForm").find("input[name='playNo']").val();
             location.href = "/game/fruit-shop/play/" + playNo;
         }
 
         if (GAME.CATCH_A_THIEF == gameNo) {
-            const playNo = $("#playRcrdForm").find("input[name='playNo']").val();
+            const playNo = $("#playRecordForm").find("input[name='playNo']").val();
             location.href = "/game/catch-a-thief/play/" + playNo;
         }
     };
@@ -163,17 +163,17 @@
 </script>
 
 <!-- 플레이기록 모달 -->
-<div class="modal fade" id="playRcrdModal" role="dialog" aria-labelledby="playRcrdModalLabel" aria-hidden="true">
+<div class="modal fade" id="playRecordModal" role="dialog" aria-labelledby="playRecordModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="playRcrdModalLabel"></h4>
+                <h4 class="modal-title" id="playRecordModalLabel"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="playRcrdForm">
+                <form id="playRecordForm">
                     <input type="hidden" name="playNo">
                     <input type="hidden" name="gameNo">
                     <input type="hidden" name="sttsCd">
@@ -215,7 +215,7 @@
                 <hr class="my-4"/>
                 <h3>플레이 결과</h3>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="playRcrdListTbl">
+                    <table class="table align-items-center table-flush" id="playRecordListTbl">
                         <thead class="thead-light">
                         <tr>
                             <th scope="col">닉네임</th>

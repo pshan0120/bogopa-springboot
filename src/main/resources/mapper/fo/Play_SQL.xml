@@ -238,7 +238,7 @@
 
 
 
-	<select id="selectPlayRcrd" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecord" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
 				p.playNo,
@@ -274,7 +274,7 @@
 		]]>
 	</select>
 
-	<select id="selectPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
 				pm.seq,
@@ -1075,7 +1075,7 @@
 	</select>
 
 
-	<select id="selectMyClubPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectMyClubPlayRecordList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				p.playNo,
@@ -1154,7 +1154,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 
-	<select id="selectMyClubPlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectMyClubPlayRecordListCnt" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS cnt
@@ -1361,7 +1361,7 @@
 	</select>
 
 
-	<select id="selectPlayRcrdByAllList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByAllList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -1410,7 +1410,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 
-	<select id="selectPlayRcrdByAllListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByAllListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -1446,7 +1446,7 @@
 	</select>
 
 
-	<select id="selectPlayRcrdByClubList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByClubList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -1525,7 +1525,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 
-	<select id="selectPlayRcrdByClubListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByClubListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -1594,7 +1594,7 @@
 			</if>
 	</select>
 
-	<select id="selectPlayRcrdByMmbrList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByMmbrList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -1692,7 +1692,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 
-	<select id="selectPlayRcrdByMmbrListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByMmbrListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -1780,7 +1780,7 @@
 			</if>
 	</select>
 
-	<select id="selectPlayRcrdByGameList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByGameList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				*
@@ -1889,7 +1889,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 
-	<select id="selectPlayRcrdByGameListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectPlayRecordByGameListCnt" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS cnt
 			FROM
@@ -2033,7 +2033,7 @@
 
 
 
-	<select id="selectGamePlayRcrdList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectGamePlayRecordList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 		SELECT
 		*
@@ -2082,7 +2082,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 
-	<select id="selectGamePlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectGamePlayRecordListCnt" parameterType="hashmap" resultType="hashmap">
 		SELECT
 		COUNT(*) AS cnt
 		FROM
@@ -2117,7 +2117,7 @@
 		</if>
 	</select>
 
-	<select id="selectMainPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectMainPlayRecordList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 		SELECT
 			c.clubNo,

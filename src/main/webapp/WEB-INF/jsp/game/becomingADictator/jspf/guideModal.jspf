@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const guideModal = {
+        open: () => {
+            const $guideModal = $("#guideModal");
+            $guideModal.modal("show");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="guideModal" role="dialog"
+     aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">게임 가이드</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h2>
+                        '이리하여 나는 독재자가 되었다'란?
+                    </h2>
+                    <p>
+                        자신만의 승리 조건을 달성해 보세요!
+                    </p>
+                </div>
+                <hr>
+                <div>
+                    <h2>
+                        규칙
+                    </h2>
+                    <ul class="">
+                        <li class="">
+                            한 게임은 5라운드를 플레이합니다.
+                        </li>
+                        <li class="">
+                            모든 플레이어는 7개의 직업을 가지고 시작합니다.
+                        </li>
+                        <li class="">
+                            라운드 당 1회, 총 5회의 투표의 누적 득표로 승패를 결정합니다.
+                        </li>
+                        <li class="">
+                            하루에 하는 일은 3가지입니다.<br/>
+                            오전 : 토론 / 오후 : 투표 또는 기각 / 밤 : 직업 버리기
+                        </li>
+                        <li class="">
+                            투표 : 자신 이외의 누군가에게 1표를 투표합니다. 투표 결과는 공개되며 동시에 진행됩니다.
+                        </li>
+                        <li class="">
+                            기각 : 자신 또는 누군가의 득표를 1표 제거합니다.  투표 결과는 공개되며 가위바위보 순서로 진행됩니다.
+                        </li>
+                        <li class="">
+                            1라운드는 투표만 진행하며, 2~4라운드는 기각 -> 투표 순서로 진행합니다. 최종 5라운드는 기각과 투표가 동시에 진행되며, 0표인 사람에게도 기각을 할 수 있습니다.
+                        </li>
+                        <li class="">
+                            직업 버리기 : 밤이 되면 가지고 있던 직업 중 1/3라운드는 2개, 2/4라운드는 1개를 버려야 합니다. 결국 마지막에는 1개의 직업만 남게 됩니다.<br/>
+                            * 버려진 직업은 비공개지만 만약 그 날 오후에 '기각'을 했었다면 그 사람이 어떤 직업을 버렸는지 공개됩니다.<br/>
+                            * 이후 1~3라운드라면 버려진 직업들이 섞인 뒤 공개됩니다. 다만 4라운드는 버려진 직업을 공개하지 않습니다.
+                        </li>
+                        <li class="">
+                            5라운드가 되었다면 남은 직업의 승리 조건을 비교하고 최종 승리자를 가립니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -18,28 +18,28 @@
         let gameList = [];
 
         $(function () {
-            gfn_setSortTh("playRcrd1List", "fn_selectPlayRcrd1List(1)");
-            gfn_setSortTh("playRcrd2List", "fn_selectPlayRcrd2List(1)");
-            gfn_setSortTh("playRcrd3List", "fn_selectPlayRcrd3List(1)");
-            gfn_setSortTh("playRcrd4List", "fn_selectPlayRcrd4List(1)");
+            gfn_setSortTh("playRecord1List", "fn_selectPlayRecord1List(1)");
+            gfn_setSortTh("playRecord2List", "fn_selectPlayRecord2List(1)");
+            gfn_setSortTh("playRecord3List", "fn_selectPlayRecord3List(1)");
+            gfn_setSortTh("playRecord4List", "fn_selectPlayRecord4List(1)");
 
             $("#tabList a").click(function (e) {
                 //e.preventDefault();
                 //$(this).tab('show');
-                $("#playRcrd1ListPageNav").val(1);
-                $("#playRcrd2ListPageNav").val(1);
-                $("#playRcrd3ListPageNav").val(1);
-                $("#playRcrd4ListPageNav").val(1);
+                $("#playRecord1ListPageNav").val(1);
+                $("#playRecord2ListPageNav").val(1);
+                $("#playRecord3ListPageNav").val(1);
+                $("#playRecord4ListPageNav").val(1);
 
                 let tabId = $(this).attr('id');
-                if (tabId == "playRcrdTab1A") {
-                    fn_selectPlayRcrd1List(1);
-                } else if (tabId == "playRcrdTab2A") {
-                    fn_selectPlayRcrd2List(1);
-                } else if (tabId == "playRcrdTab3A") {
-                    fn_selectPlayRcrd3List(1);
-                } else if (tabId == "playRcrdTab4A") {
-                    fn_selectPlayRcrd4List(1);
+                if (tabId == "playRecordTab1A") {
+                    fn_selectPlayRecord1List(1);
+                } else if (tabId == "playRecordTab2A") {
+                    fn_selectPlayRecord2List(1);
+                } else if (tabId == "playRecordTab3A") {
+                    fn_selectPlayRecord3List(1);
+                } else if (tabId == "playRecordTab4A") {
+                    fn_selectPlayRecord4List(1);
                 }
             });
 
@@ -59,33 +59,33 @@
 
             $("[data-toggle='tooltip']").tooltip();
 
-            fn_selectPlayRcrd1List(1);
+            fn_selectPlayRecord1List(1);
         });
 
 
-        function fn_selectPlayRcrd1List(pageNo) {
-            const comAjax = new ComAjax("playRcrd1Form");
-            comAjax.setUrl("<c:url value='/selectPlayRcrdByAllList' />");
-            comAjax.setCallback("fn_selectPlayRcrd1ListCallback");
+        function fn_selectPlayRecord1List(pageNo) {
+            const comAjax = new ComAjax("playRecord1Form");
+            comAjax.setUrl("<c:url value='/selectPlayRecordByAllList' />");
+            comAjax.setCallback("fn_selectPlayRecord1ListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#playRcrd1ListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#playRecord1ListCurOrderBy').val());
             comAjax.ajax();
         }
 
-        function fn_selectPlayRcrd1ListCallback(data) {
+        function fn_selectPlayRecord1ListCallback(data) {
             var cnt = data.map.cnt;
-            var body = $("#playRcrd1ListTbl>tbody");
+            var body = $("#playRecord1ListTbl>tbody");
             body.empty();
             var str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 var params = {
-                    divId: "playRcrd1ListPageNav",
+                    divId: "playRecord1ListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "fn_selectPlayRcrd1List",
+                    eventName: "fn_selectPlayRecord1List",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -93,7 +93,7 @@
                 $.each(data.map.list, function (key, value) {
                     str += "<tr>";
                     str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
+                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRecordModal('" + value.playNo + "')\" >";
                     str += "			" + value.playNm;
                     str += "		</a>";
                     str += "	</td>";
@@ -126,29 +126,29 @@
             body.append(str);
         }
 
-        function fn_selectPlayRcrd2List(pageNo) {
-            const comAjax = new ComAjax("playRcrd2Form");
-            comAjax.setUrl("<c:url value='/selecPlayRcrdByClubList' />");
-            comAjax.setCallback("fn_selectPlayRcrd2ListCallback");
+        function fn_selectPlayRecord2List(pageNo) {
+            const comAjax = new ComAjax("playRecord2Form");
+            comAjax.setUrl("<c:url value='/selectPlayRecordByClubList' />");
+            comAjax.setCallback("fn_selectPlayRecord2ListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#playRcrd2ListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#playRecord2ListCurOrderBy').val());
             comAjax.ajax();
         }
 
-        function fn_selectPlayRcrd2ListCallback(data) {
+        function fn_selectPlayRecord2ListCallback(data) {
             var cnt = data.map.cnt;
-            var body = $("#playRcrd2ListTbl>tbody");
+            var body = $("#playRecord2ListTbl>tbody");
             body.empty();
             var str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='5' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 var params = {
-                    divId: "playRcrd2ListPageNav",
+                    divId: "playRecord2ListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "fn_selectPlayRcrd2List",
+                    eventName: "fn_selectPlayRecord2List",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -187,29 +187,29 @@
             body.append(str);
         }
 
-        function fn_selectPlayRcrd3List(pageNo) {
-            const comAjax = new ComAjax("playRcrd3Form");
-            comAjax.setUrl("<c:url value='/selecPlayRcrdByMmbrList' />");
-            comAjax.setCallback("fn_selectPlayRcrd3ListCallback");
+        function fn_selectPlayRecord3List(pageNo) {
+            const comAjax = new ComAjax("playRecord3Form");
+            comAjax.setUrl("<c:url value='/selectPlayRecordByMmbrList' />");
+            comAjax.setCallback("fn_selectPlayRecord3ListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#playRcrd3ListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#playRecord3ListCurOrderBy').val());
             comAjax.ajax();
         }
 
-        function fn_selectPlayRcrd3ListCallback(data) {
+        function fn_selectPlayRecord3ListCallback(data) {
             var cnt = data.map.cnt;
-            var body = $("#playRcrd3ListTbl>tbody");
+            var body = $("#playRecord3ListTbl>tbody");
             body.empty();
             var str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 var params = {
-                    divId: "playRcrd3ListPageNav",
+                    divId: "playRecord3ListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "fn_selectPlayRcrd3List",
+                    eventName: "fn_selectPlayRecord3List",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -245,29 +245,29 @@
             body.append(str);
         }
 
-        function fn_selectPlayRcrd4List(pageNo) {
-            const comAjax = new ComAjax("playRcrd4Form");
-            comAjax.setUrl("<c:url value='/selecPlayRcrdByGameList' />");
-            comAjax.setCallback("fn_selectPlayRcrd4ListCallback");
+        function fn_selectPlayRecord4List(pageNo) {
+            const comAjax = new ComAjax("playRecord4Form");
+            comAjax.setUrl("<c:url value='/selectPlayRecordByGameList' />");
+            comAjax.setCallback("fn_selectPlayRecord4ListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#playRcrd4ListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#playRecord4ListCurOrderBy').val());
             comAjax.ajax();
         }
 
-        function fn_selectPlayRcrd4ListCallback(data) {
+        function fn_selectPlayRecord4ListCallback(data) {
             var cnt = data.map.cnt;
-            var body = $("#playRcrd4ListTbl>tbody");
+            var body = $("#playRecord4ListTbl>tbody");
             body.empty();
             var str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 var params = {
-                    divId: "playRcrd4ListPageNav",
+                    divId: "playRecord4ListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "fn_selectPlayRcrd4List",
+                    eventName: "fn_selectPlayRecord4List",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -619,26 +619,26 @@
                     <div class="nav-wrapper">
                         <ul class="nav nav-pills nav-fill flex-column flex-md-row mx-3" role="tablist" id="tabList">
                             <li class="nav-item px-1">
-                                <a class="nav-link active" id="playRcrdTab1A" data-toggle="tab" href="#playRcrdTab1"
-                                   role="tab" aria-controls="playRcrdTab1" aria-selected="true">
+                                <a class="nav-link active" id="playRecordTab1A" data-toggle="tab" href="#playRecordTab1"
+                                   role="tab" aria-controls="playRecordTab1" aria-selected="true">
                                     전체
                                 </a>
                             </li>
                             <li class="nav-item px-1">
-                                <a class="nav-link" id="playRcrdTab2A" data-toggle="tab" href="#playRcrdTab2" role="tab"
-                                   aria-controls="playRcrdTab2" aria-selected="true">
+                                <a class="nav-link" id="playRecordTab2A" data-toggle="tab" href="#playRecordTab2" role="tab"
+                                   aria-controls="playRecordTab2" aria-selected="true">
                                     모임별
                                 </a>
                             </li>
                             <li class="nav-item px-1">
-                                <a class="nav-link" id="playRcrdTab3A" data-toggle="tab" href="#playRcrdTab3" role="tab"
-                                   aria-controls="playRcrdTab3" aria-selected="false">
+                                <a class="nav-link" id="playRecordTab3A" data-toggle="tab" href="#playRecordTab3" role="tab"
+                                   aria-controls="playRecordTab3" aria-selected="false">
                                     회원별
                                 </a>
                             </li>
                             <li class="nav-item px-1">
-                                <a class="nav-link" id="playRcrdTab4A" data-toggle="tab" href="#playRcrdTab4" role="tab"
-                                   aria-controls="playRcrdTab4" aria-selected="false">
+                                <a class="nav-link" id="playRecordTab4A" data-toggle="tab" href="#playRecordTab4" role="tab"
+                                   aria-controls="playRecordTab4" aria-selected="false">
                                     게임별
                                 </a>
                             </li>
@@ -647,8 +647,8 @@
 
                     <div class="tab-content">
                         <!-- 전체 탭 컨텐츠 -->
-                        <div id="playRcrdTab1" class="tab-pane fade show active" role="tabpanel"
-                             aria-labelledby="playRcrdTab1A">
+                        <div id="playRecordTab1" class="tab-pane fade show active" role="tabpanel"
+                             aria-labelledby="playRecordTab1A">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
@@ -656,15 +656,15 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form id="playRcrd1Form" onsubmit="return false;">
-                                    <input type="hidden" id="playRcrd1ListCurOrderBy">
+                                <form id="playRecord1Form" onsubmit="return false;">
+                                    <input type="hidden" id="playRecord1ListCurOrderBy">
                                     <div class="row clearfix">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">플레이찾기</label>
                                                 <input type="text" name="srchText"
                                                        class="form-control form-control-alternative"
-                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRcrd1List(1)');"
+                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord1List(1)');"
                                                        placeholder="플레이이름">
                                             </div>
                                         </div>
@@ -678,15 +678,15 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table class="table align-items-center table-flush" id="playRcrd1ListTbl">
+                                    <table class="table align-items-center table-flush" id="playRecord1ListTbl">
                                         <thead class="thead-light">
                                         <tr>
-                                            <th name="playRcrd1ListSortTh" id="sortTh_playNm">
-                                                플레이이름 <span name="playRcrd1ListSort" id="playRcrd1ListSort_playNm"
+                                            <th name="playRecord1ListSortTh" id="sortTh_playNm">
+                                                플레이이름 <span name="playRecord1ListSort" id="playRecord1ListSort_playNm"
                                                             class="fa"></span>
                                             </th>
-                                            <th name="playRcrd1ListSortTh" id="sortTh_gameNm">
-                                                게임 <span name="playRcrd1ListSort" id="playRcrd1ListSort_gameNm"
+                                            <th name="playRecord1ListSortTh" id="sortTh_gameNm">
+                                                게임 <span name="playRecord1ListSort" id="playRecord1ListSort_gameNm"
                                                          class="fa"></span>
                                             </th>
                                             <th scope="col">모임</th>
@@ -700,12 +700,12 @@
                             <div class="card-footer py-4">
                                 <nav aria-label="">
                                     <ul class="pagination pagination-sm justify-content-end mb-0"
-                                        id="playRcrd1ListPageNav"></ul>
+                                        id="playRecord1ListPageNav"></ul>
                                 </nav>
                             </div>
                         </div>
                         <!-- 모임별 탭 컨텐츠 -->
-                        <div id="playRcrdTab2" class="tab-pane fade" role="tabpanel" aria-labelledby="playRcrdTab2A">
+                        <div id="playRecordTab2" class="tab-pane fade" role="tabpanel" aria-labelledby="playRecordTab2A">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
@@ -713,15 +713,15 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form id="playRcrd2Form" onsubmit="return false;">
-                                    <input type="hidden" id="playRcrd2ListCurOrderBy">
+                                <form id="playRecord2Form" onsubmit="return false;">
+                                    <input type="hidden" id="playRecord2ListCurOrderBy">
                                     <div class="row clearfix">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">모임찾기</label>
                                                 <input type="text" name="srchText"
                                                        class="form-control form-control-alternative"
-                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRcrd2List(1)');"
+                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord2List(1)');"
                                                        placeholder="모임이름, 가장 많이 플레이된 게임">
                                             </div>
                                         </div>
@@ -735,23 +735,23 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table class="table align-items-center table-flush" id="playRcrd2ListTbl">
+                                    <table class="table align-items-center table-flush" id="playRecord2ListTbl">
                                         <thead class="thead-light">
                                         <tr>
-                                            <th name="playRcrd2ListSortTh" id="sortTh_clubNm">
-                                                모임 <span name="playRcrd2ListSort" id="playRcrd2ListSort_clubNm"
+                                            <th name="playRecord2ListSortTh" id="sortTh_clubNm">
+                                                모임 <span name="playRecord2ListSort" id="playRecord2ListSort_clubNm"
                                                          class="fa"></span>
                                             </th>
-                                            <th name="playRcrd2ListSortTh" id="sortTh_clubGrdNm">
-                                                등급 <span name="playRcrd2ListSort" id="playRcrd2ListSort_clubGrdNm"
+                                            <th name="playRecord2ListSortTh" id="sortTh_clubGrdNm">
+                                                등급 <span name="playRecord2ListSort" id="playRecord2ListSort_clubGrdNm"
                                                          class="fa"></span>
                                             </th>
-                                            <th name="playRcrd2ListSortTh" id="sortTh_clubMmbrCnt">
-                                                모임원수 <span name="playRcrd2ListSort" id="playRcrd2ListSort_clubMmbrCnt"
+                                            <th name="playRecord2ListSortTh" id="sortTh_clubMmbrCnt">
+                                                모임원수 <span name="playRecord2ListSort" id="playRecord2ListSort_clubMmbrCnt"
                                                            class="fa"></span>
                                             </th>
-                                            <th name="playRcrd2ListSortTh" id="sortTh_clubPlayCnt">
-                                                플레이횟수 <span name="playRcrd2ListSort" id="playRcrd2ListSort_clubPlayCnt"
+                                            <th name="playRecord2ListSortTh" id="sortTh_clubPlayCnt">
+                                                플레이횟수 <span name="playRecord2ListSort" id="playRecord2ListSort_clubPlayCnt"
                                                             class="fa"></span>
                                             </th>
                                             <th scope="col">가장 많이 플레이한 게임 TOP3</th>
@@ -764,12 +764,12 @@
                             <div class="card-footer py-4">
                                 <nav aria-label="">
                                     <ul class="pagination pagination-sm justify-content-end mb-0"
-                                        id="playRcrd2ListPageNav"></ul>
+                                        id="playRecord2ListPageNav"></ul>
                                 </nav>
                             </div>
                         </div>
                         <!-- 회원별 탭 컨텐츠 -->
-                        <div id="playRcrdTab3" class="tab-pane fade" role="tabpanel" aria-labelledby="playRcrdTab3A">
+                        <div id="playRecordTab3" class="tab-pane fade" role="tabpanel" aria-labelledby="playRecordTab3A">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -777,15 +777,15 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form id="playRcrd3Form" onsubmit="return false;">
-                                    <input type="hidden" id="playRcrd3ListCurOrderBy">
+                                <form id="playRecord3Form" onsubmit="return false;">
+                                    <input type="hidden" id="playRecord3ListCurOrderBy">
                                     <div class="row clearfix">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">회원찾기</label>
                                                 <input type="text" name="srchText"
                                                        class="form-control form-control-alternative"
-                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRcrd3List(1)');"
+                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord3List(1)');"
                                                        placeholder="닉네임, 가장 많이 플레이된 게임">
                                             </div>
                                         </div>
@@ -799,19 +799,19 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table class="table align-items-center table-flush" id="playRcrd3ListTbl">
+                                    <table class="table align-items-center table-flush" id="playRecord3ListTbl">
                                         <thead class="thead-light">
                                         <tr>
-                                            <th name="playRcrd3ListSortTh" id="sortTh_nickNm">
-                                                회원 <span name="playRcrd3ListSort" id="playRcrd3ListSort_nickNm"
+                                            <th name="playRecord3ListSortTh" id="sortTh_nickNm">
+                                                회원 <span name="playRecord3ListSort" id="playRecord3ListSort_nickNm"
                                                          class="fa"></span>
                                             </th>
-                                            <th name="playRcrd3ListSortTh" id="sortTh_rsltPntAvg">
-                                                평균승점 <span name="playRcrd3ListSort" id="playRcrd3ListSort_rsltPntAvg"
+                                            <th name="playRecord3ListSortTh" id="sortTh_rsltPntAvg">
+                                                평균승점 <span name="playRecord3ListSort" id="playRecord3ListSort_rsltPntAvg"
                                                            class="fa"></span>
                                             </th>
-                                            <th name="playRcrd3ListSortTh" id="sortTh_playCnt">
-                                                플레이횟수 <span name="playRcrd3ListSort" id="playRcrd3ListSort_playCnt"
+                                            <th name="playRecord3ListSortTh" id="sortTh_playCnt">
+                                                플레이횟수 <span name="playRecord3ListSort" id="playRecord3ListSort_playCnt"
                                                             class="fa"></span>
                                             </th>
                                             <th scope="col">가장 많이 플레이한 게임 TOP3</th>
@@ -824,12 +824,12 @@
                             <div class="card-footer py-4">
                                 <nav aria-label="">
                                     <ul class="pagination pagination-sm justify-content-end mb-0"
-                                        id="playRcrd3ListPageNav"></ul>
+                                        id="playRecord3ListPageNav"></ul>
                                 </nav>
                             </div>
                         </div>
                         <!-- 게임별 탭 컨텐츠 -->
-                        <div id="playRcrdTab4" class="tab-pane fade" role="tabpanel" aria-labelledby="playRcrdTab4A">
+                        <div id="playRecordTab4" class="tab-pane fade" role="tabpanel" aria-labelledby="playRecordTab4A">
                             <div class="card-header bg-white border-0">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -837,15 +837,15 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form id="playRcrd4Form" onsubmit="return false;">
-                                    <input type="hidden" id="playRcrd4ListCurOrderBy">
+                                <form id="playRecord4Form" onsubmit="return false;">
+                                    <input type="hidden" id="playRecord4ListCurOrderBy">
                                     <div class="row clearfix">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">플레이찾기</label>
                                                 <input type="text" name="srchText"
                                                        class="form-control form-control-alternative"
-                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRcrd4List(1)');"
+                                                       onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord4List(1)');"
                                                        placeholder="게임이름(한글, 영어)">
                                             </div>
                                         </div>
@@ -859,20 +859,20 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table class="table align-items-center table-flush" id="playRcrd4ListTbl">
+                                    <table class="table align-items-center table-flush" id="playRecord4ListTbl">
                                         <thead class="thead-light">
                                         <tr>
-                                            <th name="playRcrd4ListSortTh" id="sortTh_gameNm">
-                                                게임 <span name="playRcrd4ListSort" id="playRcrd4ListSort_gameNm"
+                                            <th name="playRecord4ListSortTh" id="sortTh_gameNm">
+                                                게임 <span name="playRecord4ListSort" id="playRecord4ListSort_gameNm"
                                                          class="fa"></span>
                                             </th>
-                                            <th name="playRcrd4ListSortTh" id="sortTh_playCnt">
-                                                플레이횟수 <span name="playRcrd4ListSort" id="playRcrd4ListSort_playCnt"
+                                            <th name="playRecord4ListSortTh" id="sortTh_playCnt">
+                                                플레이횟수 <span name="playRecord4ListSort" id="playRecord4ListSort_playCnt"
                                                             class="fa"></span>
                                             </th>
-                                            <th name="playRcrd4ListSortTh" id="sortTh_mostPlayClubNm">
-                                                가장 많이 플레이한 모임 <span name="playRcrd4ListSort"
-                                                                    id="playRcrd4ListSort_mostPlayClubNm"
+                                            <th name="playRecord4ListSortTh" id="sortTh_mostPlayClubNm">
+                                                가장 많이 플레이한 모임 <span name="playRecord4ListSort"
+                                                                    id="playRecord4ListSort_mostPlayClubNm"
                                                                     class="fa"></span>
                                             </th>
                                             <th scope="col">가장 많이 플레이한 회원 TOP3</th>
@@ -885,7 +885,7 @@
                             <div class="card-footer py-4">
                                 <nav aria-label="">
                                     <ul class="pagination pagination-sm justify-content-end mb-0"
-                                        id="playRcrd4ListPageNav"></ul>
+                                        id="playRecord4ListPageNav"></ul>
                                 </nav>
                             </div>
                         </div>
@@ -987,7 +987,7 @@
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/playRecordModal.jsp" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

@@ -6,7 +6,7 @@
 		fn_selectClubMmbrList(1);
 		fn_selectClubGameList(1);
 
-		fn_selectClubPlayRcrdList(1);
+		fn_selectClubPlayRecordList(1);
 		fn_selectClubPlayImgList(1);
 	}
 
@@ -202,16 +202,16 @@
 		return;
 	}
 
-	function fn_selectClubPlayRcrdList(pageNo) {
+	function fn_selectClubPlayRecordList(pageNo) {
 		const comAjax = new ComAjax("clubPrflForm");
-		comAjax.setUrl("<c:url value='/selectMyClubPlayRcrdList' />");
-		comAjax.setCallback("fn_selectClubPlayRcrdListCallback");
+		comAjax.setUrl("<c:url value='/selectMyClubPlayRecordList' />");
+		comAjax.setCallback("fn_selectClubPlayRecordListCallback");
 		comAjax.addParam("pageIndex", pageNo);
 		comAjax.addParam("pageRow", 5);
 		comAjax.ajax();
 	}
 
-	function fn_selectClubPlayRcrdListCallback(data) {
+	function fn_selectClubPlayRecordListCallback(data) {
 		var cnt = data.map.cnt;
 		var body = $("#clubPlayListTbl>tbody");
 		body.empty();
@@ -224,7 +224,7 @@
 				divId : "clubPlayListPageNav",
 				pageIndex : "pageIndex",
 				totalCount : cnt,
-				eventName : "fn_selectClubPlayRcrdList",
+				eventName : "fn_selectClubPlayRecordList",
 				recordCount : 5
 			};
 			gfn_renderPaging(params);

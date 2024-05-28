@@ -1,0 +1,135 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const auctionResultModal = {
+        playSetting: {},
+        playStatus: {},
+        fruitList: [],
+        playerList: [],
+        auctionByRound: [],
+        open: async playNo => {
+            auctionResultModal.playSetting = {};
+            auctionResultModal.playStatus = {};
+            auctionResultModal.fruitList = [];
+            auctionResultModal.playerList = [];
+            auctionResultModal.auctionByRound = [];
+
+            await auctionResultModal.loadGameStatus(playNo);
+
+            if (Object.keys(auctionResultModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
+            const $modal = $("#auctionResultModal");
+            const auctionHtml = auctionResultModal.auctionByRound
+                .sort((prev, next) => prev.round - next.round)
+                .reduce((prev, next) => {
+                    const resultHtml = next.resultList.reduce((prev, next) => {
+                        const fruit = Fruit.getFruitByName(auctionResultModal.fruitList, next.itemName);
+                        const biddingList = next.biddingList;
+                        const totalBiddingHtml = next.blind ? "비공개" : next.totalBidding;
+                        const minimumBiddingHtml = next.blind ? "비공개" : next.minimumBidding;
+
+                        return prev + `
+                                <h4>\${fruit.title}</h4>
+                                <div class="table-responsive">
+                                    <table class="table align-items-center table-flush">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col" class="text-center">총 판매금액</th>
+                                                <th scope="col" class="text-center">최저 판매가</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">\${totalBiddingHtml}</td>
+                                                <td class="text-center">\${minimumBiddingHtml}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            `;
+                    }, "");
+
+                    return prev + `<h3>\${next.round} 라운드</h3>
+                            <div>\${resultHtml}</div>
+                            <hr>`;
+                }, "");
+            $modal.find("[name='auctionDiv']").empty().html(auctionHtml);
+
+            if (auctionResultModal.playSetting.round < auctionResultModal.playStatus.round) {
+                let rank = 0;
+                const playerHtml = auctionResultModal.playerList
+                    .sort((prev, next) => next.money - prev.money)
+                    .reduce((prev, next) => {
+                        rank++;
+                        return prev +
+                            `<div class="row">
+                            <div class="col-2">
+                                \${rank}위
+                            </div>
+                            <div class="col-6">
+                                \${next.playerName}
+                            </div>
+                            <div class="col-4">
+                                \${next.money}
+                            </div>
+                        </div>
+                        <br>`;
+                    }, "");
+                $modal.find("[name='playerDiv']").empty().html(playerHtml);
+            }
+
+            $modal.modal("show");
+        },
+        loadGameStatus: async playNo => {
+            const lastPlayLog = await auctionResultModal.readLastPlayLog(playNo);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+            auctionResultModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            auctionResultModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            auctionResultModal.fruitList = JSON.parse(lastPlayLogJson.fruitList);
+            auctionResultModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            auctionResultModal.auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="auctionResultModal" role="dialog"
+     aria-labelledby="auctionResultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">경매 결과</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="auctionDiv"></div>
+                <div name="playerDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

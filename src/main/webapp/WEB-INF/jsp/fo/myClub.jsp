@@ -13,7 +13,7 @@
             $("#myClubFeeForm select[name='cnfrmYn']").val("N");
 
             fn_selectMyClub();
-            fn_selectMyClubPlayRcrdList(1);
+            fn_selectMyClubPlayRecordList(1);
             fn_selectMyClubMmbrList(1);
             fn_selectMyClubBrdList(1);
             fn_selectMyClubPlayImgList(1);
@@ -49,16 +49,16 @@
 
 
         // TODO: page API 로 바꿀 것
-        function fn_selectMyClubPlayRcrdList(pageNo) {
+        function fn_selectMyClubPlayRecordList(pageNo) {
             const comAjax = new ComAjax("myClubInfoForm");
-            comAjax.setUrl("<c:url value='/selectMyClubPlayRcrdList' />");
-            comAjax.setCallback("fn_selectMyClubPlayRcrdListCallback");
+            comAjax.setUrl("<c:url value='/selectMyClubPlayRecordList' />");
+            comAjax.setCallback("fn_selectMyClubPlayRecordListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
             comAjax.ajax();
         }
 
-        function fn_selectMyClubPlayRcrdListCallback(data) {
+        function fn_selectMyClubPlayRecordListCallback(data) {
             var cnt = data.map.cnt;
             var body = $("#playListTbl>tbody");
             body.empty();
@@ -71,7 +71,7 @@
                     divId: "playListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "fn_selectMyClubPlayRcrdList",
+                    eventName: "fn_selectMyClubPlayRecordList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -79,7 +79,7 @@
                 $.each(data.map.list, function (key, value) {
                     str += "<tr>";
                     str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
+                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRecordModal('" + value.playNo + "')\" >";
                     str += "			" + value.gameNm;
                     str += "		</a>";
                     str += "	</td>";
@@ -1229,7 +1229,7 @@
 <!-- 회원프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/jspf/memberProfileModal.jspf" %>
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/playRecordModal.jsp" %>
 <!-- 모임게시물 -->
 <%@ include file="/WEB-INF/jsp/fo/clubBrdModal.jsp" %>
 <!-- 모임게임 -->

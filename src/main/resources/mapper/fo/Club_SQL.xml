@@ -1021,7 +1021,7 @@
 	</select>
 	
 	
-	<select id="selectMyClubPlayRcrdList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectMyClubPlayRecordList" parameterType="hashmap" resultType="hashmap">
 		<include refid="com.pagingPre"/>
 			SELECT
 				p.playNo,
@@ -1100,7 +1100,7 @@
 		<include refid="com.pagingPost"/>
 	</select>
 	
-	<select id="selectMyClubPlayRcrdListCnt" parameterType="hashmap" resultType="hashmap">
+	<select id="selectMyClubPlayRecordListCnt" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS cnt

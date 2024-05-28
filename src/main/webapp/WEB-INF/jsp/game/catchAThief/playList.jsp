@@ -10,39 +10,39 @@
         let joinPlyrCnt = 0;
 
         $(() => {
-            gfn_setSortTh("catchAThiefPlayRcrdList", "selectCatchAThiefPlayRcrdList(1)");
+            gfn_setSortTh("catchAThiefPlayRecordList", "selectCatchAThiefPlayRecordList(1)");
 
             const adminMemberLoggedIn = JSON.parse("<%= SessionUtils.isAdminMemberLoggedIn() %>");
             if (adminMemberLoggedIn) {
                 $("button[name='openCreatePlayButton']").show();
             }
 
-            selectCatchAThiefPlayRcrdList(1);
+            selectCatchAThiefPlayRecordList(1);
         });
 
-        const selectCatchAThiefPlayRcrdList = pageNo => {
-            let comAjax = new ComAjax("catchAThiefPlayRcrdForm");
-            comAjax.setUrl("<c:url value='/selectCatchAThiefPlayRcrdList' />");
-            comAjax.setCallback("selectCatchAThiefPlayRcrdListCallback");
+        const selectCatchAThiefPlayRecordList = pageNo => {
+            let comAjax = new ComAjax("catchAThiefPlayRecordForm");
+            comAjax.setUrl("<c:url value='/selectCatchAThiefPlayRecordList' />");
+            comAjax.setCallback("selectCatchAThiefPlayRecordListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#catchAThiefPlayRcrdListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#catchAThiefPlayRecordListCurOrderBy').val());
             comAjax.ajax();
         };
 
-        const selectCatchAThiefPlayRcrdListCallback = data => {
+        const selectCatchAThiefPlayRecordListCallback = data => {
             let cnt = data.map.cnt;
-            let body = $("#catchAThiefPlayRcrdListTbl>tbody");
+            let body = $("#catchAThiefPlayRecordListTbl>tbody");
             body.empty();
             let str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 let params = {
-                    divId: "catchAThiefPlayRcrdListPageNav",
+                    divId: "catchAThiefPlayRecordListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "selectCatchAThiefPlayRcrdList",
+                    eventName: "selectCatchAThiefPlayRecordList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -50,7 +50,7 @@
                 $.each(data.map.list, function (key, value) {
                     str += "<tr>";
                     str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
+                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRecordModal('" + value.playNo + "')\" >";
                     str += "			" + value.playNm;
                     str += "		</a>";
                     str += "	</td>";
@@ -286,15 +286,15 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="catchAThiefPlayRcrdForm" onsubmit="return false;">
-                            <input type="hidden" id="catchAThiefPlayRcrdListCurOrderBy">
+                        <form id="catchAThiefPlayRecordForm" onsubmit="return false;">
+                            <input type="hidden" id="catchAThiefPlayRecordListCurOrderBy">
                             <div class="row clearfix">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">플레이찾기</label>
                                         <input type="text" name="srchText"
                                                class="form-control form-control-alternative"
-                                               onKeypress="gfn_hitEnter(event, 'fn_selectPlayRcrd4List(1)');"
+                                               onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord4List(1)');"
                                                placeholder="게임이름(한글, 영어)">
                                     </div>
                                 </div>
@@ -307,16 +307,16 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="catchAThiefPlayRcrdListTbl">
+                            <table class="table align-items-center table-flush" id="catchAThiefPlayRecordListTbl">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th name="catchAThiefPlayRcrdListSortTh" id="sortTh_playNm">
-                                        플레이이름 <span name="catchAThiefPlayRcrdListSort"
-                                                    id="catchAThiefPlayRcrdListSort_playNm"
+                                    <th name="catchAThiefPlayRecordListSortTh" id="sortTh_playNm">
+                                        플레이이름 <span name="catchAThiefPlayRecordListSort"
+                                                    id="catchAThiefPlayRecordListSort_playNm"
                                                     class="fa"></span>
                                     </th>
-                                    <th name="catchAThiefPlayRcrdListSortTh" id="sortTh_gameNm">
-                                        게임 <span name="catchAThiefPlayRcrdListSort" id="catchAThiefPlayRcrdListSort_gameNm"
+                                    <th name="catchAThiefPlayRecordListSortTh" id="sortTh_gameNm">
+                                        게임 <span name="catchAThiefPlayRecordListSort" id="catchAThiefPlayRecordListSort_gameNm"
                                                  class="fa"></span>
                                     </th>
                                     <th scope="col">모임</th>
@@ -330,7 +330,7 @@
                     <div class="card-footer py-4">
                         <nav aria-label="">
                             <ul class="pagination pagination-sm justify-content-end mb-0"
-                                id="catchAThiefPlayRcrdListPageNav"></ul>
+                                id="catchAThiefPlayRecordListPageNav"></ul>
                         </nav>
                     </div>
                 </div>
@@ -344,7 +344,7 @@
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/playRecordModal.jsp" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

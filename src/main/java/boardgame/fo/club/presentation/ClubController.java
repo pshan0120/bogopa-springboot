@@ -491,14 +491,14 @@ public class ClubController {
         return mv;
     }
 
-    @RequestMapping(value = "/selectMyClubPlayRcrdList")
-    public ModelAndView selectMyClubPlayRcrdList(CommandMap commandMap) throws Exception {
+    @RequestMapping(value = "/selectMyClubPlayRecordList")
+    public ModelAndView selectMyClubPlayRecordList(CommandMap commandMap) throws Exception {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
         commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
-        mv.addObject("map", clubService.selectMyClubPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", clubService.selectMyClubPlayRecordList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);

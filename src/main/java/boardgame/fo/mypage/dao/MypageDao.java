@@ -87,12 +87,12 @@ public class MypageDao extends AbstractDao {
         return selectOne("mypage.selectMyPage", map);
     }
 
-    public List<Map<String, Object>> selectMyPlayRcrdList(Map<String, Object> map) {
-        return selectPagingListAjax("mypage.selectMyPlayRcrdList", map);
+    public List<Map<String, Object>> selectMyPlayRecordList(Map<String, Object> map) {
+        return selectPagingListAjax("mypage.selectMyPlayRecordList", map);
     }
 
-    public Map<String, Object> selectMyPlayRcrdListCnt(Map<String, Object> map) {
-        return selectOne("mypage.selectMyPlayRcrdListCnt", map);
+    public Map<String, Object> selectMyPlayRecordListCnt(Map<String, Object> map) {
+        return selectOne("mypage.selectMyPlayRecordListCnt", map);
     }
 
     public List<Map<String, Object>> selectMyClubMmbrList(Map<String, Object> map) {

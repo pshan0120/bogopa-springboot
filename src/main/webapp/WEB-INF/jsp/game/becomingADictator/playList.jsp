@@ -6,40 +6,40 @@
 
     <script>
         $(() => {
-            gfn_setSortTh("fruitShopPlayRecordList", "selectFruitShopPlayRecordList(1)");
+            gfn_setSortTh("becomingADictatorPlayRecordList", "selectBecomingADictatorPlayRecordList(1)");
 
             const adminMemberLoggedIn = JSON.parse("<%= SessionUtils.isAdminMemberLoggedIn() %>");
             if (adminMemberLoggedIn) {
                 $("button[name='openCreatePlayButton']").show();
             }
 
-            selectFruitShopPlayRecordList(1);
+            selectBecomingADictatorPlayRecordList(1);
         });
 
 
-        const selectFruitShopPlayRecordList = pageNo => {
-            let comAjax = new ComAjax("fruitShopPlayRecordForm");
-            comAjax.setUrl("<c:url value='/selectFruitShopPlayRecordList' />");
-            comAjax.setCallback("selectFruitShopPlayRecordListCallback");
+        const selectBecomingADictatorPlayRecordList = pageNo => {
+            let comAjax = new ComAjax("becomingADictatorPlayRecordForm");
+            comAjax.setUrl("<c:url value='/selectBecomingADictatorPlayRecordList' />");
+            comAjax.setCallback("selectBecomingADictatorPlayRecordListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#fruitShopPlayRecordListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#becomingADictatorPlayRecordListCurOrderBy').val());
             comAjax.ajax();
         };
 
-        const selectFruitShopPlayRecordListCallback = data => {
+        const selectBecomingADictatorPlayRecordListCallback = data => {
             let cnt = data.map.cnt;
-            let body = $("#fruitShopPlayRecordListTbl>tbody");
+            let body = $("#becomingADictatorPlayRecordListTbl>tbody");
             body.empty();
             let str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 let params = {
-                    divId: "fruitShopPlayRecordListPageNav",
+                    divId: "becomingADictatorPlayRecordListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "selectFruitShopPlayRecordList",
+                    eventName: "selectBecomingADictatorPlayRecordList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -85,7 +85,7 @@
         }
 
         const openCreatePlayModal = () => {
-            createPlayModal.open(GAME.FRUIT_SHOP);
+            createPlayModal.open(GAME.BECOMING_A_DICTATOR);
         }
     </script>
 </head>
@@ -101,7 +101,7 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">평화로운 과일가게</h1>
+                        <h1 class="text-white">이리하여 나는 독재자가 되었다</h1>
                         <p class="text-lead text-light"></p>
                     </div>
                 </div>
@@ -126,8 +126,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="fruitShopPlayRecordForm" onsubmit="return false;">
-                            <input type="hidden" id="fruitShopPlayRecordListCurOrderBy">
+                        <form id="becomingADictatorPlayRecordForm" onsubmit="return false;">
+                            <input type="hidden" id="becomingADictatorPlayRecordListCurOrderBy">
                             <div class="row clearfix">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -147,16 +147,16 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="fruitShopPlayRecordListTbl">
+                            <table class="table align-items-center table-flush" id="becomingADictatorPlayRecordListTbl">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th name="fruitShopPlayRecordListSortTh" id="sortTh_playNm">
-                                        플레이이름 <span name="fruitShopPlayRecordListSort"
-                                                    id="fruitShopPlayRecordListSort_playNm"
+                                    <th name="becomingADictatorPlayRecordListSortTh" id="sortTh_playNm">
+                                        플레이이름 <span name="becomingADictatorPlayRecordListSort"
+                                                    id="becomingADictatorPlayRecordListSort_playNm"
                                                     class="fa"></span>
                                     </th>
-                                    <th name="fruitShopPlayRecordListSortTh" id="sortTh_gameNm">
-                                        게임 <span name="fruitShopPlayRecordListSort" id="fruitShopPlayRecordListSort_gameNm"
+                                    <th name="becomingADictatorPlayRecordListSortTh" id="sortTh_gameNm">
+                                        게임 <span name="becomingADictatorPlayRecordListSort" id="becomingADictatorPlayRecordListSort_gameNm"
                                                  class="fa"></span>
                                     </th>
                                     <th scope="col">모임</th>
@@ -170,7 +170,7 @@
                     <div class="card-footer py-4">
                         <nav aria-label="">
                             <ul class="pagination pagination-sm justify-content-end mb-0"
-                                id="fruitShopPlayRecordListPageNav"></ul>
+                                id="becomingADictatorPlayRecordListPageNav"></ul>
                         </nav>
                     </div>
 

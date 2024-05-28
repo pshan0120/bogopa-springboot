@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.OK)
 @Controller
 @RequiredArgsConstructor
-public class GameController {
+public class FoodChainMagnateController {
 
-    @GetMapping("/game")
-    public String openGame() {
-        return "/game/game";
+    @GetMapping("/game/food-chain-magnate/calculator")
+    public String openFoodChainMagnateCalculator() {
+        return "/game/footChainMagnate/calculator";
     }
 
 }

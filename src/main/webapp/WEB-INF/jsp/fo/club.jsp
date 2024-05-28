@@ -546,7 +546,7 @@
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/playRecordModal.jsp" %>
 <!-- 모임게시물 -->
 <%@ include file="/WEB-INF/jsp/fo/clubBrdModal.jsp" %>
 

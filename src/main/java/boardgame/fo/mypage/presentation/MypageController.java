@@ -67,14 +67,14 @@ public class MypageController {
         return mv;
     }
 
-    @RequestMapping(value = "/selectMyPlayRcrdList")
-    public ModelAndView selectMyPlayRcrdList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectMyPlayRecordList")
+    public ModelAndView selectMyPlayRecordList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
         commandMap.put("mmbrNo", SessionUtils.getCurrentMemberId());
-        mv.addObject("map", mypageService.selectMyPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", mypageService.selectMyPlayRecordList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);

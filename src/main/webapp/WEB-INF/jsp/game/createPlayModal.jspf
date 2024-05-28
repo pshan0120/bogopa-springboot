@@ -41,9 +41,6 @@
                 })
                 .catch(response => console.error('error', response));
         },
-        createPlayCallback: data => {
-            location.href = "/game/trouble-brewing/play/" + data.playNo;
-        },
         close: () => {
         },
     }

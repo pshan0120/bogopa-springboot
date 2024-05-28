@@ -5,24 +5,26 @@ import java.util.Map;
 
 public interface PlayRecordService {
 
-    Map<String, Object> selectPlayRcrd(Map<String, Object> map);
+    Map<String, Object> selectPlayRecord(Map<String, Object> map);
 
-    List<Map<String, Object>> selectPlayRcrdList(Map<String, Object> map);
+    List<Map<String, Object>> selectPlayRecordList(Map<String, Object> map);
 
-    Map<String, Object> selectPlayRcrdByAllList(Map<String, Object> map);
+    Map<String, Object> selectPlayRecordByAllList(Map<String, Object> map);
 
-    Map<String, Object> selectPlayRcrdByClubList(Map<String, Object> map);
+    Map<String, Object> selectPlayRecordByClubList(Map<String, Object> map);
 
-    Map<String, Object> selectPlayRcrdByMmbrList(Map<String, Object> map);
+    Map<String, Object> selectPlayRecordByMmbrList(Map<String, Object> map);
 
-    Map<String, Object> selectPlayRcrdByGameList(Map<String, Object> map);
+    Map<String, Object> selectPlayRecordByGameList(Map<String, Object> map);
 
-    Map<String, Object> selectBocPlayRcrdList(Map<String, Object> map);
+    Map<String, Object> selectBocPlayRecordList(Map<String, Object> map);
 
-    Object selectFruitShopPlayRcrdList(Map<String, Object> map);
+    Map<String, Object> selectFruitShopPlayRecordList(Map<String, Object> map);
 
-    Object selectCatchAThiefPlayRcrdList(Map<String, Object> map);
+    Map<String, Object> selectCatchAThiefPlayRecordList(Map<String, Object> map);
 
-    List<Map<String, Object>> selectMainPlayRcrdList(Map<String, Object> map);
+    Map<String, Object> selectBecomingADictatorPlayRecordList(Map<String, Object> map);
+
+    List<Map<String, Object>> selectMainPlayRecordList(Map<String, Object> map);
 
 }

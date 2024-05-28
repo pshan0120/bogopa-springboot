@@ -21,10 +21,10 @@ public class MypageServiceImpl implements MypageService {
     }
 
     @Override
-    public Map<String, Object> selectMyPlayRcrdList(Map<String, Object> map) {
+    public Map<String, Object> selectMyPlayRecordList(Map<String, Object> map) {
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", mypageDao.selectMyPlayRcrdList(map));
-        resultMap.put("cnt", mypageDao.selectMyPlayRcrdListCnt(map).get("cnt"));
+        resultMap.put("list", mypageDao.selectMyPlayRecordList(map));
+        resultMap.put("cnt", mypageDao.selectMyPlayRecordListCnt(map).get("cnt"));
         return resultMap;
     }
 

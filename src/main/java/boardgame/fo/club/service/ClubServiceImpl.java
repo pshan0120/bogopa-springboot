@@ -162,10 +162,10 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Map<String, Object> selectMyClubPlayRcrdList(Map<String, Object> map) {
+    public Map<String, Object> selectMyClubPlayRecordList(Map<String, Object> map) {
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", clubDao.selectMyClubPlayRcrdList(map));
-        resultMap.put("cnt", clubDao.selectMyClubPlayRcrdListCnt(map).get("cnt"));
+        resultMap.put("list", clubDao.selectMyClubPlayRecordList(map));
+        resultMap.put("cnt", clubDao.selectMyClubPlayRecordListCnt(map).get("cnt"));
         return resultMap;
     }
 

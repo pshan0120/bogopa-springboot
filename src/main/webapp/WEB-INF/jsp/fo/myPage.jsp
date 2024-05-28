@@ -10,7 +10,7 @@
             gfn_setOnChange("myClubFeePayForm", "fn_selectMyClubFeePayList(1)");
 
             fn_selectMyPage();
-            fn_selectMyPlayRcrdList(1);
+            fn_selectMyPlayRecordList(1);
             // fn_selectMyClubMmbrList(1);
             // fn_selectMyClubBrdList(1);
             // fn_selectMyClubPlayImgList(1);
@@ -58,16 +58,16 @@
             }*/
         }
 
-        function fn_selectMyPlayRcrdList(pageNo) {
+        function fn_selectMyPlayRecordList(pageNo) {
             const comAjax = new ComAjax();
-            comAjax.setUrl("<c:url value='/selectMyPlayRcrdList' />");
-            comAjax.setCallback("fn_selectMyPlayRcrdListCallback");
+            comAjax.setUrl("<c:url value='/selectMyPlayRecordList' />");
+            comAjax.setCallback("fn_selectMyPlayRecordListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
             comAjax.ajax();
         }
 
-        function fn_selectMyPlayRcrdListCallback(data) {
+        function fn_selectMyPlayRecordListCallback(data) {
             var cnt = data.map.cnt;
             var body = $("#playListTbl>tbody");
             body.empty();
@@ -80,7 +80,7 @@
                     divId: "playListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "fn_selectMyPlayRcrdList",
+                    eventName: "fn_selectMyPlayRecordList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -88,7 +88,7 @@
                 $.each(data.map.list, function (key, value) {
                     str += "<tr>";
                     str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
+                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRecordModal('" + value.playNo + "')\" >";
                     str += "			" + value.playNm;
                     str += "		</a>";
                     str += "	</td>";
@@ -97,7 +97,7 @@
                         str += value.endDt;
                     } else {
                         if (value.sttsCd == "1") {
-                            str += "<a class=\"btn btn-sm btn-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"fn_openUpdatePlayRcrdModal('" + value.playNo + "')\" >";
+                            str += "<a class=\"btn btn-sm btn-info mr-1 my-1\" href=\"javascript:(void(0));\" onclick=\"fn_openUpdatePlayRecordModal('" + value.playNo + "')\" >";
                             str += "	결과입력";
                             str += "</a>";
                         }
@@ -114,7 +114,7 @@
                     }
                     str += "	</td>";
                     str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
+                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRecordModal('" + value.playNo + "')\" >";
                     str += "			" + value.gameNm;
                     str += "		</a>";
                     str += "	</td>";
@@ -145,19 +145,19 @@
             memberProfileModal.open(memberId);
         }
 
-        function fn_openUpdatePlayRcrdModal(playNo) {
+        function fn_openUpdatePlayRecordModal(playNo) {
             const comAjax = new ComAjax();
-            comAjax.setUrl("<c:url value='/selectPlayRcrd' />");
-            comAjax.setCallback("fn_openUpdatePlayRcrdModalCallback");
+            comAjax.setUrl("<c:url value='/selectPlayRecord' />");
+            comAjax.setCallback("fn_openUpdatePlayRecordModalCallback");
             comAjax.addParam("playNo", playNo);
             comAjax.ajax();
         }
 
-        function fn_openUpdatePlayRcrdModalCallback(data) {
-            gfn_setDataVal(data.map, "updatePlayRcrdForm");
-            $("#updatePlayRcrdModalLabel").text(data.map.playNm);
+        function fn_openUpdatePlayRecordModalCallback(data) {
+            gfn_setDataVal(data.map, "updatePlayRecordForm");
+            $("#updatePlayRecordModalLabel").text(data.map.playNm);
 
-            var body = $("#updatePlayRcrdListTbl>tbody");
+            var body = $("#updatePlayRecordListTbl>tbody");
             body.empty();
             var str = "";
 
@@ -167,7 +167,7 @@
                 var isFrstFdbckImg = false;
                 var mmbrNo = "<c:out value="${mmbrNo}" />";
                 $.each(data.list, function (key, value) {
-                    str += "<tr name=\"playRcrdTr\" id=\"playRcrdTr" + value.mmbrNo + "\" >";
+                    str += "<tr name=\"playRecordTr\" id=\"playRecordTr" + value.mmbrNo + "\" >";
                     str += "	<td>";
                     str += "		<input type=\"hidden\" name=\"seq\" value=\"" + value.seq + "\" />";
                     str += "		<input type=\"hidden\" name=\"playPnt\" value=\"" + value.playPnt + "\" />";
@@ -176,7 +176,7 @@
                     str += "	</td>";
                     str += "	<td>";
                     for (var i = 1; i <= data.map.playMmbrCnt; i++) {
-                        str += "	<a class=\"badge badge-pill badge-secondary\" href=\"javascript:(void(0));\" name=\"rsltRnk" + i + "\" onclick=\"fn_setUpdatePlayRcrdRsltRnk(" + i + ", '" + value.mmbrNo + "');\" >";
+                        str += "	<a class=\"badge badge-pill badge-secondary\" href=\"javascript:(void(0));\" name=\"rsltRnk" + i + "\" onclick=\"fn_setUpdatePlayRecordRsltRnk(" + i + ", '" + value.mmbrNo + "');\" >";
                         str += "		" + i;
                         str += "	</a>";
                     }
@@ -189,9 +189,9 @@
             }
             body.append(str);
 
-            fn_setUpdatePlayRcrdRsltRnk();
+            fn_setUpdatePlayRecordRsltRnk();
 
-            $("#updatePlayRcrdModal").modal({
+            $("#updatePlayRecordModal").modal({
                 //escapeClose: false,
                 //clickClose: false,
                 //showClose: false,
@@ -199,31 +199,31 @@
             });
         }
 
-        function fn_setUpdatePlayRcrdRsltRnk(rnk, mmbrNo) {
-            var rsltRnkAll = $("#playRcrdTr" + mmbrNo + " a");
+        function fn_setUpdatePlayRecordRsltRnk(rnk, mmbrNo) {
+            var rsltRnkAll = $("#playRecordTr" + mmbrNo + " a");
             rsltRnkAll.removeClass("badge-secondary");
             rsltRnkAll.removeClass("badge-default");
             rsltRnkAll.addClass("badge-secondary");
 
-            $("#playRcrdTr" + mmbrNo + " input[name='rsltRnk']").val(rnk);
-            $("#playRcrdTr" + mmbrNo + " a[name='rsltRnk" + rnk + "']").removeClass("badge-secondary");
-            $("#playRcrdTr" + mmbrNo + " a[name='rsltRnk" + rnk + "']").addClass("badge-default");
+            $("#playRecordTr" + mmbrNo + " input[name='rsltRnk']").val(rnk);
+            $("#playRecordTr" + mmbrNo + " a[name='rsltRnk" + rnk + "']").removeClass("badge-secondary");
+            $("#playRecordTr" + mmbrNo + " a[name='rsltRnk" + rnk + "']").addClass("badge-default");
         }
 
-        function fn_updatePlayRcrd() {
+        function fn_updatePlayRecord() {
             var isRun = true;
             var seqArr = new Array();
-            $("#updatePlayRcrdListTbl > tbody > tr input[name='seq']").each(function () {
+            $("#updatePlayRecordListTbl > tbody > tr input[name='seq']").each(function () {
                 seqArr.push(this.value);
             });
 
             var playPntArr = new Array();
-            $("#updatePlayRcrdListTbl > tbody > tr input[name='playPnt']").each(function () {
+            $("#updatePlayRecordListTbl > tbody > tr input[name='playPnt']").each(function () {
                 playPntArr.push(this.value);
             });
 
             var rsltRnkArr = new Array();
-            $("#updatePlayRcrdListTbl > tbody > tr input[name='rsltRnk']").each(function () {
+            $("#updatePlayRecordListTbl > tbody > tr input[name='rsltRnk']").each(function () {
                 if (isRun && this.value == "") {
                     alert("순위가 선택되지 않은 플레이어가 있습니다.");
                     isRun = false;
@@ -233,7 +233,7 @@
             });
 
             var rsltScrArr = new Array();
-            $("#updatePlayRcrdListTbl > tbody > tr input[name='rsltScr']").each(function () {
+            $("#updatePlayRecordListTbl > tbody > tr input[name='rsltScr']").each(function () {
                 if (isRun && this.value == "") {
                     alert("점수가 입력되지 않은 플레이어가 있습니다.");
                     isRun = false;
@@ -243,8 +243,8 @@
             });
 
             if (isRun && confirm("입력된 내용으로 결과 등록하시겠습니까?")) {
-                const comAjax = new ComAjax("updatePlayRcrdForm");
-                comAjax.setUrl("<c:url value='/updatePlayRcrd' />");
+                const comAjax = new ComAjax("updatePlayRecordForm");
+                comAjax.setUrl("<c:url value='/updatePlayRecord' />");
                 comAjax.setCallback("gfn_defaultCallback");
                 comAjax.addParam("seqArr", seqArr);
                 comAjax.addParam("playPntArr", playPntArr);
@@ -1019,18 +1019,18 @@
 </div>
 
 <!-- 플레이 결과입력 Modal -->
-<div class="modal fade" id="updatePlayRcrdModal" role="dialog" aria-labelledby="updatePlayRcrdModalLabel"
+<div class="modal fade" id="updatePlayRecordModal" role="dialog" aria-labelledby="updatePlayRecordModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="updatePlayRcrdModalLabel"></h4>
+                <h4 class="modal-title" id="updatePlayRecordModalLabel"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="updatePlayRcrdForm">
+                <form id="updatePlayRecordForm">
                     <input type="hidden" name="playNo">
                     <input type="hidden" name="sttsCd">
                     <div class="row clearfix">
@@ -1069,7 +1069,7 @@
                     </div>
                 </form>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="updatePlayRcrdListTbl">
+                    <table class="table align-items-center table-flush" id="updatePlayRecordListTbl">
                         <thead class="thead-light">
                         <tr>
                             <th scope="col">플레이어</th>
@@ -1082,7 +1082,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="fn_updatePlayRcrd();">입력</button>
+                <button type="button" class="btn btn-primary" onclick="fn_updatePlayRecord();">입력</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
             </div>
         </div>
@@ -1133,7 +1133,7 @@
 <!-- 모임게시물 -->
 <%@ include file="/WEB-INF/jsp/fo/clubBrdModal.jsp" %>
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/playRecordModal.jsp" %>
 
 
 <%@ include file="/WEB-INF/jsp/fo/jspf/memberProfileModal.jspf" %>

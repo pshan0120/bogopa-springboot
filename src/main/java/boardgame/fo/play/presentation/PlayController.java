@@ -81,13 +81,13 @@ public class PlayController {
 
 
 
-    @RequestMapping(value = "/selectPlayRcrdByAllList")
-    public ModelAndView selectPlayRcrdByAllList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectPlayRecordByAllList")
+    public ModelAndView selectPlayRecordByAllList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectPlayRcrdByAllList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRecordByAllList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -95,13 +95,13 @@ public class PlayController {
         return mv;
     }
 
-    @RequestMapping(value = "/selecPlayRcrdByClubList")
-    public ModelAndView selecPlayRcrdByClubList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectPlayRecordByClubList")
+    public ModelAndView selectPlayRecordByClubList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectPlayRcrdByClubList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRecordByClubList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -109,13 +109,13 @@ public class PlayController {
         return mv;
     }
 
-    @RequestMapping(value = "/selecPlayRcrdByMmbrList")
-    public ModelAndView selecPlayRcrdByMmbrList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectPlayRecordByMmbrList")
+    public ModelAndView selectPlayRecordByMmbrList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectPlayRcrdByMmbrList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRecordByMmbrList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -123,13 +123,13 @@ public class PlayController {
         return mv;
     }
 
-    @RequestMapping(value = "/selecPlayRcrdByGameList")
-    public ModelAndView selecPlayRcrdByGameList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectPlayRecordByGameList")
+    public ModelAndView selectPlayRecordByGameList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectPlayRcrdByGameList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRecordByGameList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -138,14 +138,14 @@ public class PlayController {
     }
 
 
-    @RequestMapping(value = "/selectPlayRcrd")
-    public ModelAndView selectPlayRcrd(CommandMap commandMap) {
+    @RequestMapping(value = "/selectPlayRecord")
+    public ModelAndView selectPlayRecord(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectPlayRcrd(commandMap.getMap()));
-        mv.addObject("list", playRecordService.selectPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectPlayRecord(commandMap.getMap()));
+        mv.addObject("list", playRecordService.selectPlayRecordList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -153,8 +153,8 @@ public class PlayController {
         return mv;
     }
 
-    @RequestMapping(value = "/updatePlayRcrd")
-    public ModelAndView updatePlayRcrd(CommandMap commandMap) {
+    @RequestMapping(value = "/updatePlayRecord")
+    public ModelAndView updatePlayRecord(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         String resultMsg = "";
         Boolean result = false;
@@ -331,13 +331,13 @@ public class PlayController {
         return mv;
     }
 
-    @RequestMapping(value = "/selectBocPlayRcrdList")
-    public ModelAndView selectBocPlayRcrdList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectBocPlayRecordList")
+    public ModelAndView selectBocPlayRecordList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectBocPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectBocPlayRecordList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -345,13 +345,13 @@ public class PlayController {
         return mv;
     }
 
-    @RequestMapping(value = "/selectFruitShopPlayRcrdList")
-    public ModelAndView selectFruitShopPlayRcrdList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectFruitShopPlayRecordList")
+    public ModelAndView selectFruitShopPlayRecordList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectFruitShopPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectFruitShopPlayRecordList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);
@@ -359,13 +359,27 @@ public class PlayController {
         return mv;
     }
 
-    @RequestMapping(value = "/selectCatchAThiefPlayRcrdList")
-    public ModelAndView selectCatchAThiefPlayRcrdList(CommandMap commandMap) {
+    @RequestMapping(value = "/selectCatchAThiefPlayRecordList")
+    public ModelAndView selectCatchAThiefPlayRecordList(CommandMap commandMap) {
         ModelAndView mv = new ModelAndView("jsonView");
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectCatchAThiefPlayRcrdList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectCatchAThiefPlayRecordList(commandMap.getMap()));
+        result = true;
+
+        mv.addObject("result", result);
+        mv.addObject("resultMsg", resultMsg);
+        return mv;
+    }
+
+    @RequestMapping(value = "/selectBecomingADictatorPlayRecordList")
+    public ModelAndView selectBecomingADictatorPlayRecordList(CommandMap commandMap) {
+        ModelAndView mv = new ModelAndView("jsonView");
+        Boolean result = false;
+        String resultMsg = "";
+
+        mv.addObject("map", playRecordService.selectBecomingADictatorPlayRecordList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);

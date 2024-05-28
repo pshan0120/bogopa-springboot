@@ -9,40 +9,40 @@
 
     <script>
         $(() => {
-            gfn_setSortTh("bocPlayRcrdList", "selectBocPlayRcrdList(1)");
+            gfn_setSortTh("bocPlayRecordList", "selectBocPlayRecordList(1)");
 
             const adminMemberLoggedIn = JSON.parse("<%= SessionUtils.isAdminMemberLoggedIn() %>");
             if (adminMemberLoggedIn) {
                 $("button[name='openCreatePlayButton']").show();
             }
 
-            selectBocPlayRcrdList(1);
+            selectBocPlayRecordList(1);
         });
 
 
-        const selectBocPlayRcrdList = pageNo => {
-            let comAjax = new ComAjax("bocPlayRcrdForm");
-            comAjax.setUrl("<c:url value='/selectBocPlayRcrdList' />");
-            comAjax.setCallback("selectBocPlayRcrdListCallback");
+        const selectBocPlayRecordList = pageNo => {
+            let comAjax = new ComAjax("bocPlayRecordForm");
+            comAjax.setUrl("<c:url value='/selectBocPlayRecordList' />");
+            comAjax.setCallback("selectBocPlayRecordListCallback");
             comAjax.addParam("pageIndex", pageNo);
             comAjax.addParam("pageRow", 5);
-            comAjax.addParam("orderBy", $('#bocPlayRcrdListCurOrderBy').val());
+            comAjax.addParam("orderBy", $('#bocPlayRecordListCurOrderBy').val());
             comAjax.ajax();
         };
 
-        const selectBocPlayRcrdListCallback = data => {
+        const selectBocPlayRecordListCallback = data => {
             let cnt = data.map.cnt;
-            let body = $("#bocPlayRcrdListTbl>tbody");
+            let body = $("#bocPlayRecordListTbl>tbody");
             body.empty();
             let str = "";
             if (cnt == 0) {
                 str += "<tr><td colspan='4' class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
                 let params = {
-                    divId: "bocPlayRcrdListPageNav",
+                    divId: "bocPlayRecordListPageNav",
                     pageIndex: "pageIndex",
                     totalCount: cnt,
-                    eventName: "selectBocPlayRcrdList",
+                    eventName: "selectBocPlayRecordList",
                     recordCount: 5
                 };
                 gfn_renderPaging(params);
@@ -50,7 +50,7 @@
                 $.each(data.map.list, function (key, value) {
                     str += "<tr>";
                     str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
+                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRecordModal('" + value.playNo + "')\" >";
                     str += "			" + value.playNm;
                     str += "		</a>";
                     str += "	</td>";
@@ -147,15 +147,15 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="bocPlayRcrdForm" onsubmit="return false;">
-                            <input type="hidden" id="bocPlayRcrdListCurOrderBy">
+                        <form id="bocPlayRecordForm" onsubmit="return false;">
+                            <input type="hidden" id="bocPlayRecordListCurOrderBy">
                             <div class="row clearfix">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">플레이찾기</label>
                                         <input type="text" name="srchText"
                                                class="form-control form-control-alternative"
-                                               onKeypress="gfn_hitEnter(event, 'fn_selectPlayRcrd4List(1)');"
+                                               onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord4List(1)');"
                                                placeholder="게임이름(한글, 영어)">
                                     </div>
                                 </div>
@@ -168,15 +168,15 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="bocPlayRcrdListTbl">
+                            <table class="table align-items-center table-flush" id="bocPlayRecordListTbl">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_playNm">
-                                        플레이이름 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_playNm"
+                                    <th name="bocPlayRecordListSortTh" id="sortTh_playNm">
+                                        플레이이름 <span name="bocPlayRecordListSort" id="bocPlayRecordListSort_playNm"
                                                     class="fa"></span>
                                     </th>
-                                    <th name="bocPlayRcrdListSortTh" id="sortTh_gameNm">
-                                        게임 <span name="bocPlayRcrdListSort" id="bocPlayRcrdListSort_gameNm"
+                                    <th name="bocPlayRecordListSortTh" id="sortTh_gameNm">
+                                        게임 <span name="bocPlayRecordListSort" id="bocPlayRecordListSort_gameNm"
                                                  class="fa"></span>
                                     </th>
                                     <th scope="col">모임</th>
@@ -190,7 +190,7 @@
                     <div class="card-footer py-4">
                         <nav aria-label="">
                             <ul class="pagination pagination-sm justify-content-end mb-0"
-                                id="bocPlayRcrdListPageNav"></ul>
+                                id="bocPlayRecordListPageNav"></ul>
                         </nav>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
 <!-- 모임프로필 -->
 <%@ include file="/WEB-INF/jsp/fo/jspf/clubProfileModal.jspf" %>
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/playRecordModal.jsp" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

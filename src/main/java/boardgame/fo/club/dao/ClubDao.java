@@ -132,12 +132,12 @@ public class ClubDao extends AbstractDao {
         return selectOne("club.selectMyClub", map);
     }
 
-    public List<Map<String, Object>> selectMyClubPlayRcrdList(Map<String, Object> map) {
-        return selectPagingListAjax("club.selectMyClubPlayRcrdList", map);
+    public List<Map<String, Object>> selectMyClubPlayRecordList(Map<String, Object> map) {
+        return selectPagingListAjax("club.selectMyClubPlayRecordList", map);
     }
 
-    public Map<String, Object> selectMyClubPlayRcrdListCnt(Map<String, Object> map) {
-        return selectOne("club.selectMyClubPlayRcrdListCnt", map);
+    public Map<String, Object> selectMyClubPlayRecordListCnt(Map<String, Object> map) {
+        return selectOne("club.selectMyClubPlayRecordListCnt", map);
     }
 
     public List<Map<String, Object>> selectMyClubJoinList(Map<String, Object> map) {

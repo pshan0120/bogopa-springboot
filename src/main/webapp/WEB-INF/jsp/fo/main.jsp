@@ -20,13 +20,13 @@
             body.empty();
 
             var str = "";
-            if (data.playRcrdList.length == 0) {
+            if (data.playRecordList.length == 0) {
                 str += "<tr><td colspan=\"5\" class=\"text-center\">조회결과가 없습니다.</td></tr>";
             } else {
-                $.each(data.playRcrdList, function (key, value) {
+                $.each(data.playRecordList, function (key, value) {
                     str += "<tr>";
                     str += "	<td>";
-                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRcrdModal('" + value.playNo + "')\" >";
+                    str += "		<a href=\"javascript:(void(0));\" onclick=\"fn_openPlayRecordModal('" + value.playNo + "')\" >";
                     str += "			" + value.playNm;
                     str += "		</a>";
                     str += "	</td>";
@@ -214,7 +214,7 @@
 </div>
 
 <!-- 플레이기록 -->
-<%@ include file="/WEB-INF/jsp/fo/playRcrdModal.jsp" %>
+<%@ include file="/WEB-INF/jsp/fo/playRecordModal.jsp" %>
 <!-- 모임게시물 -->
 <%@ include file="/WEB-INF/jsp/fo/clubBrdModal.jsp" %>
 

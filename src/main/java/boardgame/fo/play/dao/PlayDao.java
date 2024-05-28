@@ -62,44 +62,44 @@ public class PlayDao extends AbstractDao {
 
 
     /* 플레이 */
-    public Map<String, Object> selectPlayRcrd(Map<String, Object> map) {
-        return selectOne("play.selectPlayRcrd", map);
+    public Map<String, Object> selectPlayRecord(Map<String, Object> map) {
+        return selectOne("play.selectPlayRecord", map);
     }
 
-    public List<Map<String, Object>> selectPlayRcrdList(Map<String, Object> map) {
-        return selectList("play.selectPlayRcrdList", map);
+    public List<Map<String, Object>> selectPlayRecordList(Map<String, Object> map) {
+        return selectList("play.selectPlayRecordList", map);
     }
 
-    public List<Map<String, Object>> selectPlayRcrdByAllList(Map<String, Object> map) {
-        return selectPagingListAjax("play.selectPlayRcrdByAllList", map);
+    public List<Map<String, Object>> selectPlayRecordByAllList(Map<String, Object> map) {
+        return selectPagingListAjax("play.selectPlayRecordByAllList", map);
     }
 
-    public Map<String, Object> selectPlayRcrdByAllListCnt(Map<String, Object> map) {
-        return selectOne("play.selectPlayRcrdByAllListCnt", map);
+    public Map<String, Object> selectPlayRecordByAllListCnt(Map<String, Object> map) {
+        return selectOne("play.selectPlayRecordByAllListCnt", map);
     }
 
-    public List<Map<String, Object>> selecPlayRcrdByClubList(Map<String, Object> map) {
-        return selectPagingListAjax("play.selectPlayRcrdByClubList", map);
+    public List<Map<String, Object>> selectPlayRecordByClubList(Map<String, Object> map) {
+        return selectPagingListAjax("play.selectPlayRecordByClubList", map);
     }
 
-    public Map<String, Object> selecPlayRcrdByClubListCnt(Map<String, Object> map) {
-        return selectOne("play.selectPlayRcrdByClubListCnt", map);
+    public Map<String, Object> selectPlayRecordByClubListCnt(Map<String, Object> map) {
+        return selectOne("play.selectPlayRecordByClubListCnt", map);
     }
 
-    public List<Map<String, Object>> selecPlayRcrdByMmbrList(Map<String, Object> map) {
-        return selectPagingListAjax("play.selectPlayRcrdByMmbrList", map);
+    public List<Map<String, Object>> selectPlayRecordByMmbrList(Map<String, Object> map) {
+        return selectPagingListAjax("play.selectPlayRecordByMmbrList", map);
     }
 
-    public Map<String, Object> selecPlayRcrdByMmbrListCnt(Map<String, Object> map) {
-        return selectOne("play.selectPlayRcrdByMmbrListCnt", map);
+    public Map<String, Object> selectPlayRecordByMmbrListCnt(Map<String, Object> map) {
+        return selectOne("play.selectPlayRecordByMmbrListCnt", map);
     }
 
-    public List<Map<String, Object>> selecPlayRcrdByGameList(Map<String, Object> map) {
-        return selectPagingListAjax("play.selectPlayRcrdByGameList", map);
+    public List<Map<String, Object>> selectPlayRecordByGameList(Map<String, Object> map) {
+        return selectPagingListAjax("play.selectPlayRecordByGameList", map);
     }
 
-    public Map<String, Object> selecPlayRcrdByGameListCnt(Map<String, Object> map) {
-        return selectOne("play.selectPlayRcrdByGameListCnt", map);
+    public Map<String, Object> selectPlayRecordByGameListCnt(Map<String, Object> map) {
+        return selectOne("play.selectPlayRecordByGameListCnt", map);
     }
 
     public List<Map<String, Object>> selectPlayJoinMmbrList(Map<String, Object> map) {
@@ -111,16 +111,16 @@ public class PlayDao extends AbstractDao {
 
 
 
-    public List<Map<String, Object>> selectGamePlayRcrdList(Map<String, Object> map) {
-        return selectPagingListAjax("play.selectGamePlayRcrdList", map);
+    public List<Map<String, Object>> selectGamePlayRecordList(Map<String, Object> map) {
+        return selectPagingListAjax("play.selectGamePlayRecordList", map);
     }
 
-    public Map<String, Object> selectGamePlayRcrdListCnt(Map<String, Object> map) {
-        return selectOne("play.selectGamePlayRcrdListCnt", map);
+    public Map<String, Object> selectGamePlayRecordListCnt(Map<String, Object> map) {
+        return selectOne("play.selectGamePlayRecordListCnt", map);
     }
 
-    public List<Map<String, Object>> selectMainPlayRcrdList(Map<String, Object> map) {
-        return selectList("play.selectMainPlayRcrdList", map);
+    public List<Map<String, Object>> selectMainPlayRecordList(Map<String, Object> map) {
+        return selectList("play.selectMainPlayRecordList", map);
     }
 
 }

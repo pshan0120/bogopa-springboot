@@ -64,7 +64,7 @@ public interface ClubService {
 
     Map<String, Object> selectMyClub(Map<String, Object> map);
 
-    Map<String, Object> selectMyClubPlayRcrdList(Map<String, Object> map);
+    Map<String, Object> selectMyClubPlayRecordList(Map<String, Object> map);
 
     List<Map<String, Object>> selectMyClubJoinList(Map<String, Object> map);
 
