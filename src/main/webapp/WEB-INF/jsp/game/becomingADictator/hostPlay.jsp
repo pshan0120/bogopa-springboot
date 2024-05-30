@@ -12,13 +12,12 @@
         const PLAY_ID = ${playId};
         let playSetting = {};
         let playStatus = {};
-        let fruitList = [];
         let playerList = [];
         let auctionByRound = [];
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
-            
+
             await loadGameStatus();
 
             console.log('playStatus', playStatus);
@@ -40,7 +39,6 @@
         const initializeGame = async () => {
             playSetting = {};
             playStatus = {};
-            fruitList = [];
             playerList = [];
             auctionByRound = [];
 
@@ -61,15 +59,33 @@
                 hostMemberName: hostPlayMember.nickname,
                 noticeHtml: "",
             }
+            playSetting = {round: initializationSetting.round};
 
-            playerList = clientPlayMemberList;
-
-            playSetting = initializationSetting.item
-                .find(item => playerList.length === item.numberOfPlayer);
-            playSetting = {...playSetting, round: initializationSetting.round};
+            playerList = createPlayerList(clientPlayMemberList);
 
             renderPlayMemberList(playerList);
         };
+
+        const readPlayMemberList = playId => {
+            return gfn_callGetApi("/api/play/member/list", {playId})
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const createPlayerList = playerList => {
+            return playerList
+                .map(player => {
+                    const roleList = [Clown.name, Assassin.name, Populace.name, Priest.name, Revolutionary.name, Dictator.name, Nobility.name]
+                    return {
+                        playerName: player.nickname,
+                        playerId: player.memberId,
+                        numberOfVotes: 0,
+                        voted: false,
+                        dismissed: false,
+                        roleList
+                    };
+                });
+        }
 
         const renderPlayMemberList = playerList => {
             const $settingDiv = $("#settingDiv");
@@ -79,82 +95,18 @@
             const htmlString = playerList.reduce((prev, next) => {
                 return prev +
                     "<div class=\"form-group form-inline\">" +
-                    "   <label class=\"form-control-label\">" + next.nickname + "</label>" +
                     "   <input type=\"text\" class=\"form-control form-control-alternative\" name=\"items\" readonly" +
-                    "       data-member-id=\"" + next.memberId + "\">" +
+                    "       data-member-id=\"" + next.memberId + "\" value=\"" + next.playerName + "\" >" +
                     "</div>";
             }, "");
 
             $playerDiv.append(htmlString);
         }
 
-        const readPlayMemberList = playId => {
-            return gfn_callGetApi("/api/play/member/list", {playId})
-                .then(data => data)
-                .catch(response => console.error('error', response));
-        }
-
-        const setFruitOfPlayer = () => {
-            fruitList = [];
-
-            fruitList.push({...APPLE, quantity: playSetting.apple});
-            fruitList.push({...BANANA, quantity: playSetting.banana});
-            fruitList.push({...GRAPE, quantity: playSetting.grape});
-            fruitList.push({...MANGO, quantity: playSetting.mango});
-            fruitList.push({...STRAWBERRY, quantity: playSetting.strawberry});
-            fruitList.push({...WATERMELON, quantity: playSetting.watermelon});
-
-            playerList = createPlayerList(playerList);
-            console.log('playerList', playerList);
-
-            showPlayerItemList(playerList);
-        }
-
-        const createPlayerList = playerList => {
-            return playerList
-                .map(player => {
-                    fruitList.sort(() => Math.random() - 0.5);
-                    const assignableFruit1 = fruitList.find(fruit => fruit.quantity > 0);
-                    const assignableFruit2 = fruitList
-                        .find(fruit => fruit.name !== assignableFruit1.name && fruit.quantity > 0);
-
-                    assignableFruit1.quantity = assignableFruit1.quantity - 1;
-                    assignableFruit2.quantity = assignableFruit2.quantity - 1;
-
-                    return {
-                        playerName: player.nickname,
-                        playerId: player.memberId,
-                        item1: assignableFruit1.name,
-                        item2: assignableFruit2.name,
-                        blindSkillUsed: false,
-                        swapSkillUsed: false,
-                        money: 0,
-                    };
-                });
-        }
-
-        const showPlayerItemList = playerList => {
-            const $settingDiv = $("#settingDiv");
-            const $playerDiv = $settingDiv.find("div[name='playerDiv']");
-            playerList.forEach(player => {
-                const found = $playerDiv.find("input[name='items']").toArray()
-                    .filter(itemsObject => player.playerId == $(itemsObject).data("memberId"));
-
-                $(found).val(
-                    Fruit.getFruitByName(fruitList, player.item1).title
-                    + ", "
-                    + Fruit.getFruitByName(fruitList, player.item2).title
-                );
-                $(found).removeClass();
-                $(found).addClass("form-control form-control-alternative");
-            });
-        }
-
         const saveGameStatus = () => {
             const log = {
                 playSetting: JSON.stringify(playSetting),
                 playStatus: JSON.stringify(playStatus),
-                fruitList: JSON.stringify(fruitList),
                 playerList: JSON.stringify(playerList),
                 auctionByRound: JSON.stringify(auctionByRound),
             }
@@ -182,7 +134,6 @@
 
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
-            fruitList = JSON.parse(lastPlayLogJson.fruitList);
             playerList = JSON.parse(lastPlayLogJson.playerList);
             auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
 
@@ -199,11 +150,6 @@
         }
 
         const beginGame = () => {
-            if (fruitList.length === 0) {
-                alert("과일이 분배되지 않았습니다.");
-                return;
-            }
-
             $("#settingDiv").hide();
             proceedToNextRound();
         }
@@ -361,8 +307,12 @@
             $playerDiv.append(htmlString);
         }
 
-        const openGuideModal = () => {
-            guideModal.open();
+        const openRuleGuideModal = () => {
+            guideModal.openRuleGuideModal();
+        }
+
+        const openRoleGuideModal = () => {
+            guideModal.openRoleGuideModal();
         }
 
         const openPlayStatusModal = () => {
@@ -419,9 +369,6 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-default" onclick="setFruitOfPlayer()">
-                                과일 분배
-                            </button>
                             <button type="button" class="btn btn-primary" onclick="beginGame()">
                                 게임 시작
                             </button>
@@ -441,8 +388,8 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
-                                게임 설명
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
+                                규칙 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
@@ -477,9 +424,13 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
-                                게임 설명
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
+                                규칙 설명
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
+                                역할 설명
+                            </button>
+
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>

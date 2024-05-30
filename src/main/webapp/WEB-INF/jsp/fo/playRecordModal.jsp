@@ -143,20 +143,22 @@
 
     const openPlayingGame = () => {
         const gameNo = $("#playRecordForm").find("input[name='gameNo']").val();
+        const playNo = $("#playRecordForm").find("input[name='playNo']").val();
 
         if (GAME.BOC_TROUBLE_BREWING == gameNo) {
-            const playNo = $("#playRecordForm").find("input[name='playNo']").val();
             location.href = "/game/trouble-brewing/play/" + playNo;
         }
 
         if (GAME.FRUIT_SHOP == gameNo) {
-            const playNo = $("#playRecordForm").find("input[name='playNo']").val();
             location.href = "/game/fruit-shop/play/" + playNo;
         }
 
         if (GAME.CATCH_A_THIEF == gameNo) {
-            const playNo = $("#playRecordForm").find("input[name='playNo']").val();
             location.href = "/game/catch-a-thief/play/" + playNo;
+        }
+
+        if (GAME.BECOMING_A_DICTATOR == gameNo) {
+            location.href = "/game/becoming-a-dictator/play/" + playNo;
         }
     };
 

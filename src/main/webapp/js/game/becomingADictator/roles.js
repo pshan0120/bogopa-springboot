@@ -1,25 +1,9 @@
 class Role {
-    constructor(name, title, conditionOfWin, preferentialRoleList, description) {
+    constructor(name, title, conditionOfWin, preferentialRoleList) {
         this.name = name;
         this.title = title;
         this.conditionOfWin = conditionOfWin;
-        this.preferentialRoleList = [];
-    }
-}
-
-class Dictator extends Role {
-    static name = "dictator";
-    static title = "독재자";
-    static conditionOfWin = "득표수 단독 1위.";
-    static preferentialRoleList = [Revolutionary, Assassin, Priest];
-
-    constructor() {
-        super(
-            Dictator.name,
-            Dictator.title,
-            Dictator.conditionOfWin,
-            Dictator.preferentialRoleList
-        );
+        this.preferentialRoleList = preferentialRoleList;
     }
 }
 
@@ -35,38 +19,6 @@ class Clown extends Role {
             Clown.title,
             Clown.conditionOfWin,
             Clown.preferentialRoleList
-        );
-    }
-}
-
-class Nobility extends Role {
-    static name = "nobility";
-    static title = "귀족";
-    static conditionOfWin = "'득표수 2위' 또는 '1표 이상 득표'에 해당하는 귀족이 각 1명 이상 존재.(단, 단독 1위인 귀족은 승리할 수 없음.) 또는 암살자의 승리.";
-    static preferentialRoleList = [Dictator, Revolutionary, Priest];
-
-    constructor() {
-        super(
-            Nobility.name,
-            Nobility.title,
-            Nobility.conditionOfWin,
-            Nobility.preferentialRoleList
-        );
-    }
-}
-
-class Revolutionary extends Role {
-    static name = "revolutionary";
-    static title = "혁명가";
-    static conditionOfWin = "'득표수 최하위' 또는 '최하위 바로 윗 순위'에 해당하는 혁명가가 각 1명 이상 존재.(단, 0표인 혁명가는 승리할 수 없음.)";
-    static preferentialRoleList = [Assassin, Priest];
-
-    constructor() {
-        super(
-            Revolutionary.name,
-            Revolutionary.title,
-            Revolutionary.conditionOfWin,
-            Revolutionary.preferentialRoleList
         );
     }
 }
@@ -115,6 +67,54 @@ class Priest extends Role {
             Priest.title,
             Priest.conditionOfWin,
             Priest.preferentialRoleList
+        );
+    }
+}
+
+class Revolutionary extends Role {
+    static name = "revolutionary";
+    static title = "혁명가";
+    static conditionOfWin = "'득표수 최하위' 또는 '최하위 바로 윗 순위'에 해당하는 혁명가가 각 1명 이상 존재.(단, 0표인 혁명가는 승리할 수 없음.)";
+    static preferentialRoleList = [Assassin, Priest];
+
+    constructor() {
+        super(
+            Revolutionary.name,
+            Revolutionary.title,
+            Revolutionary.conditionOfWin,
+            Revolutionary.preferentialRoleList
+        );
+    }
+}
+
+class Dictator extends Role {
+    static name = "dictator";
+    static title = "독재자";
+    static conditionOfWin = "득표수 단독 1위.";
+    static preferentialRoleList = [Revolutionary, Assassin, Priest];
+
+    constructor() {
+        super(
+            Dictator.name,
+            Dictator.title,
+            Dictator.conditionOfWin,
+            Dictator.preferentialRoleList
+        );
+    }
+}
+
+class Nobility extends Role {
+    static name = "nobility";
+    static title = "귀족";
+    static conditionOfWin = "'득표수 2위' 또는 '1표 이상 득표'에 해당하는 귀족이 각 1명 이상 존재.(단, 단독 1위인 귀족은 승리할 수 없음.) 또는 암살자의 승리.";
+    static preferentialRoleList = [Dictator, Revolutionary, Priest];
+
+    constructor() {
+        super(
+            Nobility.name,
+            Nobility.title,
+            Nobility.conditionOfWin,
+            Nobility.preferentialRoleList
         );
     }
 }
