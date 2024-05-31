@@ -13,7 +13,7 @@
         let playSetting = {};
         let playStatus = {};
         let playerList = [];
-        let auctionByRound = [];
+        let thrownByRound = [];
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -40,7 +40,7 @@
             playSetting = {};
             playStatus = {};
             playerList = [];
-            auctionByRound = [];
+            thrownByRound = [];
 
             console.log('initializationSetting', initializationSetting);
 
@@ -54,7 +54,7 @@
 
             playStatus = {
                 round: 0,
-                night: true,
+                night: false,
                 hostMemberId: hostPlayMember.memberId,
                 hostMemberName: hostPlayMember.nickname,
                 noticeHtml: "",
@@ -79,7 +79,7 @@
                     return {
                         playerName: player.nickname,
                         playerId: player.memberId,
-                        numberOfVotes: 0,
+                        numberOfVote: 0,
                         voted: false,
                         dismissed: false,
                         roleList
@@ -108,7 +108,7 @@
                 playSetting: JSON.stringify(playSetting),
                 playStatus: JSON.stringify(playStatus),
                 playerList: JSON.stringify(playerList),
-                auctionByRound: JSON.stringify(auctionByRound),
+                thrownByRound: JSON.stringify(thrownByRound),
             }
 
             const request = {
@@ -135,7 +135,7 @@
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+            thrownByRound = JSON.parse(lastPlayLogJson.thrownByRound);
 
             console.log('game status loaded !!');
         }
@@ -163,7 +163,7 @@
             }
 
             playerList.forEach(player => {
-                const bidding = auction.biddingList
+                const bidding = dismiss.biddingList
                     .filter(bidding => player.playerName === bidding.playerName);
                 if (bidding.length != 2) {
                     alert(player.playerName + " 플레이어의 판매 희망가가 선택되지 않았습니다.");
@@ -175,11 +175,11 @@
                 return;
             }
 
-            if (auctionByRound.length > 0) {
-                auctionByRound = [...auctionByRound.filter(auction => auction.round !== playStatus.round)];
+            if (thrownByRound.length > 0) {
+                thrownByRound = [...thrownByRound.filter(dismiss => dismiss.round !== playStatus.round)];
             }
 
-            auctionByRound.push(
+            thrownByRound.push(
                 {
                     round: playStatus.round,
                     resultList: [
@@ -193,7 +193,7 @@
                 }
             )
 
-            auction.resetBiddingList();
+            dismiss.resetBiddingList();
 
             playStatus.round = playStatus.round + 1;
             saveGameStatus();
@@ -201,7 +201,7 @@
         }
 
         const createAuctionResultByFruit = item => {
-            const biddingList = auction.biddingList.filter(bidding => bidding.itemName === item.name);
+            const biddingList = dismiss.biddingList.filter(bidding => bidding.itemName === item.name);
             if (biddingList.length === 0) {
                 return {
                     itemName: item.name,
@@ -225,7 +225,7 @@
                 player.money = player.money + revenue;
             });
 
-            const blind = auction.blindBiddingResultList.some(blind => blind.itemName === item.name);
+            const blind = dismiss.blindBiddingResultList.some(blind => blind.itemName === item.name);
             return {
                 itemName: item.name,
                 biddingList,
@@ -248,10 +248,36 @@
 
             $roundDiv.find("span[name='roundTitle']").text(playStatus.round + " / " + playSetting.round);
 
-            const $auctionDiv = $roundDiv.find("div[name='auctionDiv']").empty();
-            $auctionDiv.empty();
+            let todoText = "";
+            if (playStatus.round === 1) {
+                if (playStatus.night) {
+                    todoText = "밤 시간입니다. 역할 버리기를 진행해 주세요.";
+                } else {
+                    todoText = "첫 라운드 낮 시간입니다. 투표를 진행해 주세요.";
+                }
+            } else if (playStatus.round === 5) {
+                if (playStatus.night) {
+                    todoText = "게임이 종료되었습니다.";
+                } else {
+                    todoText = "마지막 라운드 낮 시간입니다. 기각과 투표를 동시에 진행해 주세요.";
+                }
+            } else {
+                if (playStatus.night) {
+                    todoText = "밤 시간입니다. 역할 버리기를 진행해 주세요.";
+                } else {
+                    todoText = "낮 시간입니다. 기각 후 투표를 진행해 주세요.";
+                }
+            }
 
-            $auctionDiv.append(auction.createHtml());
+            $roundDiv.find("span[name='todoText']").text(todoText);
+
+            const $dismissDiv = $roundDiv.find("div[name='dismissDiv']").empty();
+            $dismissDiv.empty();
+            $dismissDiv.append(dismiss.createHtml(playStatus.round, playStatus.night));
+
+            const $voteDiv = $roundDiv.find("div[name='voteDiv']").empty();
+            $voteDiv.empty();
+            $voteDiv.append(vote.createHtml(playStatus.round, playStatus.night));
         }
 
         const resetGame = () => {
@@ -316,7 +342,7 @@
         }
 
         const openPlayStatusModal = () => {
-            playStatusModal.open(auctionByRound);
+            playStatusModal.open(thrownByRound);
         }
 
         const openFruitShopModal = () => {
@@ -324,7 +350,7 @@
         }
 
         const openAuctionResultModal = () => {
-            auctionResultModal.open(PLAY_ID);
+            dismissResultModal.open(PLAY_ID);
         }
 
     </script>
@@ -381,8 +407,14 @@
                         <h2>
                             [<span name="roundTitle"></span>] 번째 라운드
                         </h2>
+                        <h3>
+                            <span name="todoText"></span>
+                        </h3>
                     </div>
-                    <div class="card-body" name="auctionDiv"></div>
+                    <div class="card-body">
+                        <div name="dismissDiv"></div>
+                        <div name="voteDiv"></div>
+                    </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
@@ -453,11 +485,12 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/auction.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/dismiss.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/vote.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/shopListModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/auctionResultModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/dismissResultModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

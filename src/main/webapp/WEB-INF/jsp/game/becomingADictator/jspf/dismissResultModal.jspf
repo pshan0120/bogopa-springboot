@@ -1,32 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script>
-    const auctionResultModal = {
+    const dismissResultModal = {
         playSetting: {},
         playStatus: {},
         fruitList: [],
         playerList: [],
-        auctionByRound: [],
+        dismissByRound: [],
         open: async playNo => {
-            auctionResultModal.playSetting = {};
-            auctionResultModal.playStatus = {};
-            auctionResultModal.fruitList = [];
-            auctionResultModal.playerList = [];
-            auctionResultModal.auctionByRound = [];
+            dismissResultModal.playSetting = {};
+            dismissResultModal.playStatus = {};
+            dismissResultModal.fruitList = [];
+            dismissResultModal.playerList = [];
+            dismissResultModal.dismissByRound = [];
 
-            await auctionResultModal.loadGameStatus(playNo);
+            await dismissResultModal.loadGameStatus(playNo);
 
-            if (Object.keys(auctionResultModal.playStatus).length === 0) {
+            if (Object.keys(dismissResultModal.playStatus).length === 0) {
                 alert("게임이 시작되지 않았습니다.");
                 return;
             }
 
-            const $modal = $("#auctionResultModal");
-            const auctionHtml = auctionResultModal.auctionByRound
+            const $modal = $("#dismissResultModal");
+            const dismissHtml = dismissResultModal.dismissByRound
                 .sort((prev, next) => prev.round - next.round)
                 .reduce((prev, next) => {
                     const resultHtml = next.resultList.reduce((prev, next) => {
-                        const fruit = Fruit.getFruitByName(auctionResultModal.fruitList, next.itemName);
+                        const fruit = Fruit.getFruitByName(dismissResultModal.fruitList, next.itemName);
                         const biddingList = next.biddingList;
                         const totalBiddingHtml = next.blind ? "비공개" : next.totalBidding;
                         const minimumBiddingHtml = next.blind ? "비공개" : next.minimumBidding;
@@ -56,11 +56,11 @@
                             <div>\${resultHtml}</div>
                             <hr>`;
                 }, "");
-            $modal.find("[name='auctionDiv']").empty().html(auctionHtml);
+            $modal.find("[name='dismissDiv']").empty().html(dismissHtml);
 
-            if (auctionResultModal.playSetting.round < auctionResultModal.playStatus.round) {
+            if (dismissResultModal.playSetting.round < dismissResultModal.playStatus.round) {
                 let rank = 0;
-                const playerHtml = auctionResultModal.playerList
+                const playerHtml = dismissResultModal.playerList
                     .sort((prev, next) => next.money - prev.money)
                     .reduce((prev, next) => {
                         rank++;
@@ -84,17 +84,17 @@
             $modal.modal("show");
         },
         loadGameStatus: async playNo => {
-            const lastPlayLog = await auctionResultModal.readLastPlayLog(playNo);
+            const lastPlayLog = await dismissResultModal.readLastPlayLog(playNo);
             if (!lastPlayLog) {
                 return;
             }
 
             const lastPlayLogJson = JSON.parse(lastPlayLog);
-            auctionResultModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
-            auctionResultModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
-            auctionResultModal.fruitList = JSON.parse(lastPlayLogJson.fruitList);
-            auctionResultModal.playerList = JSON.parse(lastPlayLogJson.playerList);
-            auctionResultModal.auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+            dismissResultModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            dismissResultModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            dismissResultModal.fruitList = JSON.parse(lastPlayLogJson.fruitList);
+            dismissResultModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            dismissResultModal.dismissByRound = JSON.parse(lastPlayLogJson.dismissByRound);
 
             console.log('game status loaded !!');
         },
@@ -111,8 +111,8 @@
     }
 </script>
 
-<div class="modal fade" id="auctionResultModal" role="dialog"
-     aria-labelledby="auctionResultModalLabel" aria-hidden="true">
+<div class="modal fade" id="dismissResultModal" role="dialog"
+     aria-labelledby="dismissResultModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -122,7 +122,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div name="auctionDiv"></div>
+                <div name="dismissDiv"></div>
                 <div name="playerDiv"></div>
             </div>
             <div class="modal-footer">

@@ -98,7 +98,7 @@
 </div>
 
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/shopListModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/auctionResultModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/dismissResultModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/guideModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>

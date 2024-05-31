@@ -1,0 +1,95 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const dismiss = {
+        round: null,
+        night: null,
+        dismissingPlayerList: [],
+        createHtml: (round, night) => {
+            dismiss.round = round;
+            dismiss.night = night;
+            dismiss.dismissingPlayerList = [];
+
+            if (round === 1 || night) {
+                return "";
+            }
+
+            return playerList.reduce((prev, next) => {
+                return prev
+                    + "<div name=\"playerDismissDiv\" data-player-name=" + next.playerName + ">"
+                    + " <button class=\"btn btn-success btn-block\" name=\"playerDismissButton\""
+                    + "     onclick=\"dismiss.openDismissModal('" + next.playerName + "')\" >"
+                    + "     " + next.playerName
+                    + " </button>"
+                    + "</div>"
+                    + "<br/>";
+            }, "");
+        },
+        openDismissModal: playerName => {
+            const player = playerList.find(player => player.playerName === playerName);
+            if (player.dismissed) {
+                alert("해당 플레이어는 기각 완료된 상태입니다.");
+                return;
+            }
+
+            const $modal = $("#dismissModal");
+            $modal.find("[name='title']").empty().html(player.playerName);
+
+            const playerListHtml = playerList.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" name=\"dismissButton\" "
+                        + " onclick=\"dismiss.dismiss('" + player.playerName + "', '" + next.playerName + "')\" >"
+                        + " " + next.playerName + "(현재 " + next.numberOfVote + "표)"
+                        + "</button>";
+                }, "")
+                + "<hr>";
+
+            $modal.find("[name='playerListDiv']").empty().html(playerListHtml);
+
+            $modal.modal("show");
+
+            $modal.find("button[name='dismissButton']").on("click", event => {
+                $modal.modal("hide");
+            });
+        },
+        dismiss: (playerNameFrom, playerNameTo) => {
+            const dismissedPlayer = playerList.find(player => player.playerName === playerNameTo);
+            if (dismissedPlayer.numberOfVote <= 0
+                && dismiss.round < 5) {
+                alert("현재 득표수가 0표 이하라서 기각할 수 없습니다.(마지막 라운드 제외)");
+                return;
+            }
+            dismissedPlayer.numberOfVote--;
+
+            const dismissingPlayer = playerList.find(player => player.playerName === playerNameFrom);
+            dismiss.dismissingPlayerList.push({playerName: dismissingPlayer.playerName});
+            dismissingPlayer.dismissed = true;
+
+            saveGameStatus();
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="dismissModal" role="dialog"
+     aria-labelledby="dismissModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="" name="title"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
