@@ -13,7 +13,7 @@
         let playSetting = {};
         let playStatus = {};
         let playerList = [];
-        let thrownByRound = [];
+        let roleList = [];
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -40,7 +40,6 @@
             playSetting = {};
             playStatus = {};
             playerList = [];
-            thrownByRound = [];
 
             console.log('initializationSetting', initializationSetting);
 
@@ -76,12 +75,13 @@
             return playerList
                 .map(player => {
                     const roleList = [Clown.name, Assassin.name, Populace.name, Priest.name, Revolutionary.name, Dictator.name, Nobility.name]
+
+
                     return {
                         playerName: player.nickname,
                         playerId: player.memberId,
                         numberOfVote: 0,
-                        voted: false,
-                        dismissed: false,
+                        acted: false,
                         roleList
                     };
                 });
@@ -108,7 +108,6 @@
                 playSetting: JSON.stringify(playSetting),
                 playStatus: JSON.stringify(playStatus),
                 playerList: JSON.stringify(playerList),
-                thrownByRound: JSON.stringify(thrownByRound),
             }
 
             const request = {
@@ -135,7 +134,6 @@
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            thrownByRound = JSON.parse(lastPlayLogJson.thrownByRound);
 
             console.log('game status loaded !!');
         }
@@ -151,10 +149,10 @@
 
         const beginGame = () => {
             $("#settingDiv").hide();
-            proceedToNextRound();
+            proceedToNext();
         }
 
-        const proceedToNextRound = () => {
+        const proceedToNext = () => {
             if (playStatus.round === 0) {
                 playStatus.round = playStatus.round + 1;
                 saveGameStatus();
@@ -162,79 +160,85 @@
                 return;
             }
 
-            playerList.forEach(player => {
-                const bidding = dismiss.biddingList
-                    .filter(bidding => player.playerName === bidding.playerName);
-                if (bidding.length != 2) {
-                    alert(player.playerName + " 플레이어의 판매 희망가가 선택되지 않았습니다.");
-                    throw new Error("판매 희망가 미선택");
+            if (!playStatus.night) {
+                const notActedPlayer = playerList.find(player => !player.acted);
+                if (notActedPlayer) {
+                    alert(notActedPlayer.playerName + " 플레이어의 투표 또는 기각이 진행되지 않았습니다.");
+                    throw new Error("투표 또는 기각 미실행");
                 }
-            });
+            } else {
+                const notActedPlayer = playerList.find(player => !player.acted);
+                if (notActedPlayer) {
+                    alert(notActedPlayer.playerName + " 플레이어의 역할 버리기가 진행되지 않았습니다.");
+                    throw new Error("역할 버리기 미실행");
+                }
+            }
 
-            if (!confirm("경매 결과를 계산한 뒤 저장하시겠습니까?")) {
+            if (!confirm("결과를 계산한 뒤 저장하시겠습니까?")) {
                 return;
             }
 
-            if (thrownByRound.length > 0) {
-                thrownByRound = [...thrownByRound.filter(dismiss => dismiss.round !== playStatus.round)];
+            if (!playStatus.night) {
+                const voteActionList = dayAction.actionList.filter(action => action.action === VOTE.name)
+                const dismissActionList = dayAction.actionList.filter(action => action.action === DISMISS.name)
+
+                if (playStatus.round === 1) {
+                    createVoteResult(voteActionList);
+                } else if(playStatus.round === initializationSetting.round) {
+                    createVoteResult(voteActionList);
+                    createDismissResult(dismissActionList);
+                } else {
+                    createDismissResult(dismissActionList);
+                    createVoteResult(voteActionList);
+                }
+
+                dayAction.reset();
+                playStatus.night = true;
+            } else {
+                // TODO: 역할버리기
+
+                playStatus.night = false;
+                playStatus.round = playStatus.round + 1;
             }
 
-            thrownByRound.push(
-                {
-                    round: playStatus.round,
-                    resultList: [
-                        createAuctionResultByFruit(APPLE),
-                        createAuctionResultByFruit(GRAPE),
-                        createAuctionResultByFruit(STRAWBERRY),
-                        createAuctionResultByFruit(WATERMELON),
-                        createAuctionResultByFruit(BANANA),
-                        createAuctionResultByFruit(MANGO),
-                    ]
-                }
-            )
+            playerList.forEach(player => player.acted = false);
 
-            dismiss.resetBiddingList();
-
-            playStatus.round = playStatus.round + 1;
             saveGameStatus();
             renderRound();
         }
 
-        const createAuctionResultByFruit = item => {
-            const biddingList = dismiss.biddingList.filter(bidding => bidding.itemName === item.name);
-            if (biddingList.length === 0) {
-                return {
-                    itemName: item.name,
-                    biddingList,
-                    totalBidding: 0,
-                    minimumBidding: 0,
-                    revenue: 0,
-                    successfulBiddingList: [],
-                    blind: false,
+        const createVoteResult = dayActionList => {
+            dayActionList.forEach(dayAction => {
+                const playerTo = playerList
+                    .find(player => player.playerName === dayAction.playerNameTo);
+
+                if (dayAction.action === DISMISS.name) {
+                    alert(dayAction.playerNameFrom + " 플레이어는 기각과 투표 중 하나의 액션만 선택할 수 있습니다.");
+                    throw new Error("투표 또는 기각 중복 선택 불가");
                 }
-            }
 
-            const totalBidding = biddingList.map(bidding => bidding.bidding).reduce((prev, next) => prev + next, 0);
-            const minimumBidding = Math.min(...biddingList.map(bidding => bidding.bidding));
-            const successfulBiddingList = biddingList.filter(bidding => bidding.bidding === minimumBidding);
-            const revenue = Math.floor(totalBidding / successfulBiddingList.length);
-
-            successfulBiddingList.forEach(successfulBidding => {
-                const player = playerList
-                    .find(player => player.playerName === successfulBidding.playerName);
-                player.money = player.money + revenue;
+                playerTo.numberOfVote++;
             });
+        }
 
-            const blind = dismiss.blindBiddingResultList.some(blind => blind.itemName === item.name);
-            return {
-                itemName: item.name,
-                biddingList,
-                totalBidding,
-                minimumBidding,
-                revenue,
-                successfulBiddingList,
-                blind
-            }
+        const createDismissResult = dayActionList => {
+            dayActionList.forEach(dayAction => {
+                const playerTo = playerList
+                    .find(player => player.playerName === dayAction.playerNameTo);
+
+                if (dayAction.action === VOTE.name) {
+                    alert(dayAction.playerNameFrom + " 플레이어는 기각과 투표 중 하나의 액션만 선택할 수 있습니다.");
+                    throw new Error("투표 또는 기각 중복 선택 불가");
+                }
+
+                if (playerTo.numberOfVote <= 0
+                    && dayAction.round < initializationSetting.round) {
+                    alert(dayAction.playerNameFrom + " 플레이어가 기각하려 했으나 상대 플레이어의 현재 득표수가 0표 이하라서 실패했습니다.(마지막 라운드 제외)");
+                    throw new Error("기각 실행을 위한 득표수 부족");
+                }
+
+                playerTo.numberOfVote--;
+            });
         }
 
         const renderRound = () => {
@@ -255,7 +259,7 @@
                 } else {
                     todoText = "첫 라운드 낮 시간입니다. 투표를 진행해 주세요.";
                 }
-            } else if (playStatus.round === 5) {
+            } else if (playStatus.round === initializationSetting.round) {
                 if (playStatus.night) {
                     todoText = "게임이 종료되었습니다.";
                 } else {
@@ -271,13 +275,14 @@
 
             $roundDiv.find("span[name='todoText']").text(todoText);
 
-            const $dismissDiv = $roundDiv.find("div[name='dismissDiv']").empty();
-            $dismissDiv.empty();
-            $dismissDiv.append(dismiss.createHtml(playStatus.round, playStatus.night));
+            const $actionDiv = $roundDiv.find("div[name='actionDiv']").empty();
+            $actionDiv.empty();
 
-            const $voteDiv = $roundDiv.find("div[name='voteDiv']").empty();
-            $voteDiv.empty();
-            $voteDiv.append(vote.createHtml(playStatus.round, playStatus.night));
+            if (!playStatus.night) {
+                $actionDiv.append(dayAction.createHtml(playStatus.round, playStatus.night));
+            } else {
+                $actionDiv.append(nightAction.createHtml(playStatus.round, playStatus.night));
+            }
         }
 
         const resetGame = () => {
@@ -342,7 +347,7 @@
         }
 
         const openPlayStatusModal = () => {
-            playStatusModal.open(thrownByRound);
+            playStatusModal.open(playerList);
         }
 
         const openFruitShopModal = () => {
@@ -412,8 +417,8 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div name="dismissDiv"></div>
-                        <div name="voteDiv"></div>
+                        <div name="actionDiv"></div>
+                        <div name="nightActionDiv"></div>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
@@ -432,8 +437,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
                                 경매 결과 모달 표시
                             </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
-                                다음 라운드 진행
+                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNext()">
+                                다음 순서 진행
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -462,7 +467,6 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                 역할 설명
                             </button>
-
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
@@ -485,8 +489,8 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/dismiss.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/vote.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/shopListModal.jspf" %>

@@ -6,7 +6,7 @@
 
     <script src="<c:url value='/js/game/becomingADictator/initializationSetting.js'/>"></script>
     <script src="<c:url value='/js/game/becomingADictator/constants.js'/>"></script>
-    <script src="<c:url value='/js/game/becomingADictator/fruits.roles.js'/>"></script>
+    <script src="<c:url value='/js/game/becomingADictator/roles.js'/>"></script>
 
     <script>
         const PLAY_ID = ${playId};

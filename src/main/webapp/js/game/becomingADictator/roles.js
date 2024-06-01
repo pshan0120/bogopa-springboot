@@ -5,7 +5,32 @@ class Role {
         this.conditionOfWin = conditionOfWin;
         this.preferentialRoleList = preferentialRoleList;
     }
+
+    static getRoleByRoleName(roleName) {
+        return createRoleList().find(role => role.name === roleName);
+    }
+
+    /*static getPlayerByTitle(roleList, title) {
+        return roleList.find(player => player.title === title);
+    }
+
+    static getPlayerByPlayerName(roleList, playerName) {
+        return roleList.find(player => player.playerName === playerName);
+    }*/
 }
+
+const createRoleList = () => {
+    return [
+        new Dictator(),
+        new Clown(),
+        new Nobility(),
+        new Revolutionary(),
+        new Assassin(),
+        new Populace(),
+        new Priest(),
+    ];
+};
+
 
 class Clown extends Role {
     static name = "clown";

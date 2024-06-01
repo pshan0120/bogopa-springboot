@@ -2,9 +2,9 @@
 
 <script>
     const playStatusModal = {
-        open: auctionByRound => {
+        open: playerList => {
             const $modal = $("#playStatusModal");
-            const auctionHtml = auctionByRound
+            const playerListHtml = playerList
                 .sort((prev, next) => prev.round - next.round)
                 .reduce((prev, next) => {
                     const resultHtml = next.resultList.reduce((prev, next) => {
@@ -40,7 +40,7 @@
                             <div>\${resultHtml}</div>
                             <hr>`;
                 }, "");
-            $modal.find("[name='auctionDiv']").empty().html(auctionHtml);
+            $modal.find("[name='auctionDiv']").empty().html(playerListHtml);
 
             const playerHtml = playerList
                 .sort((prev, next) => next.money - prev.money)

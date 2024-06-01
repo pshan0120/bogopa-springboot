@@ -1,0 +1,138 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const dayAction = {
+        round: null,
+        actionList: [],
+        createHtml: (round, night) => {
+            if (night) {
+                return "";
+            }
+
+            dayAction.round = round;
+            dayAction.actionList = [];
+
+            return playerList.reduce((prev, next) => {
+                return prev
+                    + "<div name=\"playerDayActionDiv\" data-player-name=" + next.playerName + ">"
+                    + " <button class=\"btn btn-success btn-block\" name=\"playerDayActionButton\""
+                    + "     onclick=\"dayAction.openDayActionModal('" + next.playerName + "')\" >"
+                    + "     " + next.playerName
+                    + " </button>"
+                    + "</div>"
+                    + "<br/>";
+            }, "");
+        },
+        openDayActionModal: playerName => {
+            const player = playerList.find(player => player.playerName === playerName);
+            if (player.acted) {
+                alert("해당 플레이어는 선택 완료된 상태입니다.");
+                return;
+            }
+
+            const $modal = $("#dismissModal");
+            $modal.find("[name='title']").empty().html(player.playerName);
+
+            const votingListHtml = playerList.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" name=\"dayActionButton\" "
+                        + " onclick=\"dayAction.vote('" + player.playerName + "', '" + next.playerName + "')\" >"
+                        + " " + next.playerName + "(현재 " + next.numberOfVote + "표)"
+                        + "</button>";
+                }, "");
+            $modal.find("[name='voteDiv']").empty().html(votingListHtml);
+
+            if (dayAction.round > 1) {
+                // TODO: 기각 마이너스 되는 문제
+                const dismissingListHtml = playerList.reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" name=\"dayActionButton\" "
+                        + " onclick=\"dayAction.dismiss('" + player.playerName + "', '" + next.playerName + "')\" >"
+                        + " " + next.playerName + "(현재 " + next.numberOfVote + "표)"
+                        + "</button>";
+                }, "");
+                $modal.find("[name='dismissDiv']").empty().html(dismissingListHtml);
+            } else {
+                $modal.find("[name='dismissDiv']").empty().html("첫 라운드는 기각을 진행하지 않습니다.");
+            }
+
+            $modal.modal("show");
+
+            $modal.find("button[name='dayActionButton']").on("click", event => {
+                $modal.modal("hide");
+
+                const playerDayActionDiv = $("div[name='playerDayActionDiv']").toArray()
+                    .filter(object => playerName == $(object).data("playerName"));
+
+                const $playerDayActionButton = $(playerDayActionDiv).find("button[name='playerDayActionButton']");
+                $playerDayActionButton.removeClass();
+                $playerDayActionButton.addClass("btn btn-default btn-block");
+            });
+        },
+        vote: (playerNameFrom, playerNameTo) => {
+            dayAction.actionList.push(
+                {
+                    action: VOTE.name,
+                    playerNameFrom,
+                    playerNameTo,
+                }
+            );
+
+            const playerFrom = playerList.find(player => player.playerName === playerNameFrom);
+            playerFrom.acted = true;
+
+        },
+        dismiss: (playerNameFrom, playerNameTo) => {
+            const playerTo = playerList
+                .find(player => player.playerName === playerNameTo);
+
+            if (playerTo.numberOfVote <= 0
+                && dayAction.round < initializationSetting.round) {
+                alert(playerNameFrom + " 플레이어가 기각하려 했으나 상대 플레이어의 현재 득표수가 0표 이하라서 실패했습니다.(마지막 라운드 제외)");
+                throw new Error("기각 실행을 위한 득표수 부족");
+            }
+
+            dayAction.actionList.push(
+                {
+                    action: DISMISS.name,
+                    playerNameFrom,
+                    playerNameTo,
+                }
+            );
+
+            const playerFrom = playerList.find(player => player.playerName === playerNameFrom);
+            playerFrom.acted = true;
+        },
+        reset: () => {
+            dayAction.biddingList = [];
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="dismissModal" role="dialog"
+     aria-labelledby="dismissModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="" name="title"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>투표</h2>
+                <div name="voteDiv"></div>
+                <hr>
+                <h2>기각</h2>
+                <div name="dismissDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
