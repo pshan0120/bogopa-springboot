@@ -279,9 +279,9 @@
             $actionDiv.empty();
 
             if (!playStatus.night) {
-                $actionDiv.append(dayAction.createHtml(playStatus.round, playStatus.night));
+                $actionDiv.append(dayAction.createHtml(playStatus.round, playStatus.night, playerList));
             } else {
-                $actionDiv.append(nightAction.createHtml(playStatus.round, playStatus.night));
+                $actionDiv.append(nightAction.createHtml(playStatus.round, playStatus.night, playerList));
             }
         }
 

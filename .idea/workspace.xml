@@ -9,17 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="vote 진행중">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="기각 진행중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/clientPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dismiss.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/playStatusModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/playStatusModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/vote.jspf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,14 +268,7 @@
       <workItem from="1716902830276" duration="10152000" />
       <workItem from="1717089296063" duration="2876000" />
       <workItem from="1717136457532" duration="7841000" />
-      <workItem from="1717250566486" duration="8805000" />
-    </task>
-    <task id="LOCAL-00068" summary="uploadFile 조정">
-      <created>1714492646873</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1714492646873</updated>
+      <workItem from="1717250566486" duration="9681000" />
     </task>
     <task id="LOCAL-00069" summary="레이븐키퍼 수정">
       <created>1714501507083</created>
@@ -620,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717145227002</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="기각 진행중">
+      <created>1717259928663</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1717259928664</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -641,7 +634,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="가이드 변경" />
     <MESSAGE value="myRoleModal 수정" />
     <MESSAGE value="모달 이동중" />
     <MESSAGE value="clubNo 파싱 오류 수정" />
@@ -666,7 +658,8 @@
     <MESSAGE value="직업 작성" />
     <MESSAGE value="게임 세팅까지" />
     <MESSAGE value="vote 진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="vote 진행중" />
+    <MESSAGE value="기각 진행중" />
+    <option name="LAST_COMMIT_MESSAGE" value="기각 진행중" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

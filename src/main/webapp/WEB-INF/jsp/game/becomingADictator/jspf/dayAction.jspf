@@ -3,16 +3,18 @@
 <script>
     const dayAction = {
         round: null,
+        playerList: null,
         actionList: [],
-        createHtml: (round, night) => {
+        createHtml: (round, night, playerList) => {
             if (night) {
                 return "";
             }
 
             dayAction.round = round;
+            dayAction.playerList = gfn_deepCopyByJSON(playerList);
             dayAction.actionList = [];
 
-            return playerList.reduce((prev, next) => {
+            return dayAction.playerList.reduce((prev, next) => {
                 return prev
                     + "<div name=\"playerDayActionDiv\" data-player-name=" + next.playerName + ">"
                     + " <button class=\"btn btn-success btn-block\" name=\"playerDayActionButton\""
@@ -24,16 +26,16 @@
             }, "");
         },
         openDayActionModal: playerName => {
-            const player = playerList.find(player => player.playerName === playerName);
+            const player = dayAction.playerList.find(player => player.playerName === playerName);
             if (player.acted) {
                 alert("해당 플레이어는 선택 완료된 상태입니다.");
                 return;
             }
 
-            const $modal = $("#dismissModal");
+            const $modal = $("#dayActionModal");
             $modal.find("[name='title']").empty().html(player.playerName);
 
-            const votingListHtml = playerList.reduce((prev, next) => {
+            const votingListHtml = dayAction.playerList.reduce((prev, next) => {
                     return prev
                         + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" name=\"dayActionButton\" "
                         + " onclick=\"dayAction.vote('" + player.playerName + "', '" + next.playerName + "')\" >"
@@ -44,7 +46,7 @@
 
             if (dayAction.round > 1) {
                 // TODO: 기각 마이너스 되는 문제
-                const dismissingListHtml = playerList.reduce((prev, next) => {
+                const dismissingListHtml = dayAction.playerList.reduce((prev, next) => {
                     return prev
                         + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" name=\"dayActionButton\" "
                         + " onclick=\"dayAction.dismiss('" + player.playerName + "', '" + next.playerName + "')\" >"
@@ -57,17 +59,6 @@
             }
 
             $modal.modal("show");
-
-            $modal.find("button[name='dayActionButton']").on("click", event => {
-                $modal.modal("hide");
-
-                const playerDayActionDiv = $("div[name='playerDayActionDiv']").toArray()
-                    .filter(object => playerName == $(object).data("playerName"));
-
-                const $playerDayActionButton = $(playerDayActionDiv).find("button[name='playerDayActionButton']");
-                $playerDayActionButton.removeClass();
-                $playerDayActionButton.addClass("btn btn-default btn-block");
-            });
         },
         vote: (playerNameFrom, playerNameTo) => {
             dayAction.actionList.push(
@@ -78,12 +69,25 @@
                 }
             );
 
-            const playerFrom = playerList.find(player => player.playerName === playerNameFrom);
+            const playerTo = dayAction.playerList
+                .find(player => player.playerName === playerNameTo);
+            playerTo.numberOfVote++;
+
+            const playerFrom = dayAction.playerList.find(player => player.playerName === playerNameFrom);
             playerFrom.acted = true;
 
+            const $modal = $("#dayActionModal");
+            $modal.modal("hide");
+
+            const playerDayActionDiv = $("div[name='playerDayActionDiv']").toArray()
+                .filter(object => playerNameFrom == $(object).data("playerName"));
+
+            const $playerDayActionButton = $(playerDayActionDiv).find("button[name='playerDayActionButton']");
+            $playerDayActionButton.removeClass();
+            $playerDayActionButton.addClass("btn btn-default btn-block");
         },
         dismiss: (playerNameFrom, playerNameTo) => {
-            const playerTo = playerList
+            const playerTo = dayAction.playerList
                 .find(player => player.playerName === playerNameTo);
 
             if (playerTo.numberOfVote <= 0
@@ -91,6 +95,7 @@
                 alert(playerNameFrom + " 플레이어가 기각하려 했으나 상대 플레이어의 현재 득표수가 0표 이하라서 실패했습니다.(마지막 라운드 제외)");
                 throw new Error("기각 실행을 위한 득표수 부족");
             }
+            playerTo.numberOfVote--;
 
             dayAction.actionList.push(
                 {
@@ -100,10 +105,21 @@
                 }
             );
 
-            const playerFrom = playerList.find(player => player.playerName === playerNameFrom);
+            const playerFrom = dayAction.playerList.find(player => player.playerName === playerNameFrom);
             playerFrom.acted = true;
+
+            const $modal = $("#dayActionModal");
+            $modal.modal("hide");
+
+            const playerDayActionDiv = $("div[name='playerDayActionDiv']").toArray()
+                .filter(object => playerNameFrom == $(object).data("playerName"));
+
+            const $playerDayActionButton = $(playerDayActionDiv).find("button[name='playerDayActionButton']");
+            $playerDayActionButton.removeClass();
+            $playerDayActionButton.addClass("btn btn-default btn-block");
         },
         reset: () => {
+            dayAction.playerList = [];
             dayAction.biddingList = [];
         },
         close: () => {
@@ -111,8 +127,8 @@
     }
 </script>
 
-<div class="modal fade" id="dismissModal" role="dialog"
-     aria-labelledby="dismissModalLabel" aria-hidden="true">
+<div class="modal fade" id="dayActionModal" role="dialog"
+     aria-labelledby="dayActionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
