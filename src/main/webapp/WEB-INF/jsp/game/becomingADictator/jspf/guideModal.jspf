@@ -8,40 +8,39 @@
             $guideModal.modal("show");
         },
         openRoleGuideModal: () => {
-            guideModal.setRoleList();
+            guideModal.roleList = createRoleList();
 
             const $roleGuideModal = $("#roleGuideModal");
             const $roleListDiv = $roleGuideModal.find("div[name='roleListDiv']");
             const roleListHtml = `
                 <ul class="">
                     \${guideModal.createRoleHtml(guideModal.roleList)}
-                </ul>
-                <hr>`;
+                </ul>`;
 
             $roleListDiv.empty().html(roleListHtml);
 
             $roleGuideModal.modal("show");
         },
-        setRoleList: () => {
-            guideModal.roleList = [
-                new Dictator(),
-                new Clown(),
-                new Nobility(),
-                new Revolutionary(),
-                new Assassin(),
-                new Populace(),
-                new Priest(),
-            ];
+        createRoleHtml: roleList => {
+            return roleList.reduce((prev, next) => {
+                let preferentialRoleHtml = "";
+                if (next.preferentialRoleList.length > 0) {
+                    preferentialRoleHtml = next.preferentialRoleList.reduce((prev, next) => {
+                        return prev + next.title + ", ";
+                    }, "");
+                } else {
+                    preferentialRoleHtml = "없음";
+                }
+
+                return prev +
+                    `<li>
+                        <h4>\${next.title}</h4>
+                        <p>\${next.conditionOfWin}</p>
+                        <h5>우선 승리하는 역할 : \${preferentialRoleHtml}</h5>
+                    </li>
+                    <hr>`;
+            }, "");
         },
-        createRoleHtml: roleList => roleList.reduce((prev, next) => {
-            return prev +
-                `<li>
-                    <h4>\${next.title}</h4>
-                    <p>\${next.conditionOfWin}</p>
-                    <h5>우선 승리하는 역할</h5>
-                    <p>\${next.conditionOfWin}</p>
-                </li>`;
-        }, ""),
         close: () => {
         },
     }
@@ -92,7 +91,8 @@
                             기각 : 자신 또는 누군가의 득표를 1표 제거합니다. 투표 결과는 공개되며 임의의 순서로 진행됩니다.
                         </li>
                         <li class="">
-                            1라운드는 투표만 진행하며, 2~4라운드는 기각이 먼저, 투표가 나중 순서로 진행합니다. 단 마지막 라운드는 기각과 투표가 동시에 진행되며, 0표인 사람에게도 기각을 할 수 있습니다.<br/>
+                            1라운드는 투표만 진행하며, 2~4라운드는 기각이 먼저, 투표가 나중 순서로 진행합니다. 단 마지막 라운드는 기각과 투표가 동시에 진행되며, 0표인 사람에게도 기각을
+                            할 수 있습니다.<br/>
                             * 득표할 것을 예상하고 -1표를 쓴다고 생각하면 됩니다.
                         </li>
                         <li class="">

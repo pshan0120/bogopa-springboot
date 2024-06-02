@@ -21,12 +21,16 @@
             $("#titleDiv").find("span[name='playName']").text(play.playName);
         });
 
-        const openGuideModal = () => {
-            guideModal.open();
+        const openRuleGuideModal = () => {
+            guideModal.openRuleGuideModal();
         }
 
-        const openAuctionResultModal = () => {
-            auctionResultModal.open(PLAY_ID);
+        const openRoleGuideModal = () => {
+            guideModal.openRoleGuideModal();
+        }
+
+        const openRoundResultModal = () => {
+            roundResultModal.open(PLAY_ID);
         }
 
     </script>
@@ -75,11 +79,14 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
-                                게임 설명
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
+                                규칙 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
-                                경매 결과 모달 표시
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                                역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoundResultModal()">
+                                라운드 결과 모달 표시
                             </button>
                         </div>
                     </div>

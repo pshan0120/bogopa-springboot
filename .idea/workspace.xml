@@ -13,12 +13,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/clientPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dismissResultModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/roundResultModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/playStatusModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/playStatusModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/shopListModal.jspf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/guideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/guideModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,14 +270,7 @@
       <workItem from="1717089296063" duration="2876000" />
       <workItem from="1717136457532" duration="7841000" />
       <workItem from="1717250566486" duration="9793000" />
-      <workItem from="1717323595746" duration="12226000" />
-    </task>
-    <task id="LOCAL-00070" summary="몽크 수정">
-      <created>1714502578245</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1714502578245</updated>
+      <workItem from="1717323595746" duration="13427000" />
     </task>
     <task id="LOCAL-00071" summary="오타 수정">
       <created>1714503346862</created>
@@ -620,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717260678088</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="기각 진행중">
+      <created>1717337404540</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1717337404541</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
