@@ -5,64 +5,28 @@
         open: playerList => {
             const $modal = $("#playStatusModal");
             const playerListHtml = playerList
-                .sort((prev, next) => prev.round - next.round)
+                .sort((prev, next) => next.numberOfVote - prev.numberOfVote)
                 .reduce((prev, next) => {
-                    const resultHtml = next.resultList.reduce((prev, next) => {
-                        const fruit = Fruit.getFruitByName(fruitList, next.itemName);
-                        const biddingList = next.biddingList;
+                    const roleHtml = next.roleList
+                        .reduce((prev, next) => {
+                            return prev + Role.getRoleByRoleName(next).title + ", ";
+                        }, "");
 
-                        return prev + `
-                                <h4>\${fruit.title}</h4>
-                                <div class="table-responsive">
-                                    <table class="table align-items-center table-flush">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col" class="text-center">총 판매금액</th>
-                                                <th scope="col" class="text-center">판매자 수</th>
-                                                <th scope="col" class="text-center">최저 판매가</th>
-                                                <th scope="col" class="text-center">각 수익</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center">\${next.totalBidding}</td>
-                                                <td class="text-center">\${biddingList.length}</td>
-                                                <td class="text-center">\${next.minimumBidding}</td>
-                                                <td class="text-center">\${next.revenue}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            `;
-                    }, "");
-
-                    return prev + `<h3>\${next.round} 라운드</h3>
-                            <div>\${resultHtml}</div>
-                            <hr>`;
-                }, "");
-            $modal.find("[name='auctionDiv']").empty().html(playerListHtml);
-
-            const playerHtml = playerList
-                .sort((prev, next) => next.money - prev.money)
-                .reduce((prev, next) => {
-                    const item1 = Fruit.getFruitByName(fruitList, next.item1);
-                    const item2 = Fruit.getFruitByName(fruitList, next.item2);
-
-                    return prev +
-                        `<div class="row">
-                            <div class="col-5">
+                    return prev + `<div class="row">
+                            <div class="col-3">
                                 \${next.playerName}
                             </div>
-                            <div class="col-4">
-                                \${item1.title}, \${item2.title}
+                            <div class="col-2">
+                                \${next.numberOfVote}
                             </div>
-                            <div class="col-3">
-                                \${next.money}
+                            <div class="col-7">
+                                \${roleHtml}
                             </div>
                         </div>
                         <br>`;
                 }, "");
-            $modal.find("[name='playerDiv']").empty().html(playerHtml);
+
+            $modal.find("[name='playerDiv']").empty().html(playerListHtml);
 
             $modal.modal("show");
         },
@@ -82,7 +46,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div name="auctionDiv"></div>
                 <div name="playerDiv"></div>
             </div>
             <div class="modal-footer">

@@ -13,7 +13,7 @@
         let playSetting = {};
         let playStatus = {};
         let playerList = [];
-        let roleList = [];
+        let thrownAwayRoleList = [];
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -40,6 +40,7 @@
             playSetting = {};
             playStatus = {};
             playerList = [];
+            thrownAwayRoleList = [];
 
             console.log('initializationSetting', initializationSetting);
 
@@ -74,15 +75,13 @@
         const createPlayerList = playerList => {
             return playerList
                 .map(player => {
-                    const roleList = [Clown.name, Assassin.name, Populace.name, Priest.name, Revolutionary.name, Dictator.name, Nobility.name]
-
-
+                    // const roleList = [Clown.name, Assassin.name, Populace.name, Priest.name, Revolutionary.name, Dictator.name, Nobility.name]
                     return {
                         playerName: player.nickname,
                         playerId: player.memberId,
                         numberOfVote: 0,
-                        acted: false,
-                        roleList
+                        dismissed: false,
+                        roleList: createRoleList().map(role => role.name),
                     };
                 });
         }
@@ -108,6 +107,7 @@
                 playSetting: JSON.stringify(playSetting),
                 playStatus: JSON.stringify(playStatus),
                 playerList: JSON.stringify(playerList),
+                thrownAwayRoleList: JSON.stringify(thrownAwayRoleList),
             }
 
             const request = {
@@ -134,6 +134,7 @@
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
             playerList = JSON.parse(lastPlayLogJson.playerList);
+            thrownAwayRoleList = JSON.parse(lastPlayLogJson.thrownAwayRoleList);
 
             console.log('game status loaded !!');
         }
@@ -161,15 +162,14 @@
             }
 
             if (!playStatus.night) {
-                const notActedPlayer = playerList.find(player => !player.acted);
-                if (notActedPlayer) {
-                    alert(notActedPlayer.playerName + " 플레이어의 투표 또는 기각이 진행되지 않았습니다.");
+                if (dayAction.actionList.length !== playerList.length) {
+                    alert("투표 또는 기각이 진행되지 않은 플레이어가 있습니다.");
                     throw new Error("투표 또는 기각 미실행");
                 }
             } else {
-                const notActedPlayer = playerList.find(player => !player.acted);
-                if (notActedPlayer) {
-                    alert(notActedPlayer.playerName + " 플레이어의 역할 버리기가 진행되지 않았습니다.");
+                const numberOfAction = nightAction.round % 2 + 1;
+                if (nightAction.actionList.length !== playerList.length * numberOfAction) {
+                    alert("역할 버리기가 진행되지 않은 플레이어가 있습니다.");
                     throw new Error("역할 버리기 미실행");
                 }
             }
@@ -179,29 +179,31 @@
             }
 
             if (!playStatus.night) {
-                const voteActionList = dayAction.actionList.filter(action => action.action === VOTE.name)
-                const dismissActionList = dayAction.actionList.filter(action => action.action === DISMISS.name)
+                const voteActionList = dayAction.actionList.filter(action => action.action === VOTE.name);
+                const dismissActionList = dayAction.actionList.filter(action => action.action === DISMISS.name);
 
                 if (playStatus.round === 1) {
                     createVoteResult(voteActionList);
-                } else if(playStatus.round === initializationSetting.round) {
+                } else if (playStatus.round === playSetting.round) {
                     createVoteResult(voteActionList);
                     createDismissResult(dismissActionList);
+
+                    playStatus.round = playStatus.round + 1;
                 } else {
                     createDismissResult(dismissActionList);
                     createVoteResult(voteActionList);
                 }
 
+                thrownAwayRoleList = [];
                 dayAction.reset();
                 playStatus.night = true;
             } else {
-                // TODO: 역할버리기
+                createThrowAwayResult(nightAction.actionList);
 
+                nightAction.reset();
                 playStatus.night = false;
                 playStatus.round = playStatus.round + 1;
             }
-
-            playerList.forEach(player => player.acted = false);
 
             saveGameStatus();
             renderRound();
@@ -218,6 +220,7 @@
                 }
 
                 playerTo.numberOfVote++;
+                playerTo.dismissed = false;
             });
         }
 
@@ -232,12 +235,33 @@
                 }
 
                 if (playerTo.numberOfVote <= 0
-                    && dayAction.round < initializationSetting.round) {
+                    && dayAction.round < playSetting.round) {
                     alert(dayAction.playerNameFrom + " 플레이어가 기각하려 했으나 상대 플레이어의 현재 득표수가 0표 이하라서 실패했습니다.(마지막 라운드 제외)");
                     throw new Error("기각 실행을 위한 득표수 부족");
                 }
 
                 playerTo.numberOfVote--;
+                playerTo.dismissed = true;
+            });
+        }
+
+        const createThrowAwayResult = nightActionList => {
+            nightActionList.forEach(nightAction => {
+                const player = playerList
+                    .find(player => player.playerName === nightAction.playerName);
+
+                thrownAwayRoleList.push(
+                    {
+                        playerName: nightAction.playerName,
+                        roleName: nightAction.roleName,
+                        dismissed: player.dismissed,
+                    }
+                );
+
+                const thrownAwayIndex = player.roleList.findIndex(role => role === nightAction.roleName);
+                if (thrownAwayIndex > -1) {
+                    player.roleList.splice(thrownAwayIndex, 1);
+                }
             });
         }
 
@@ -259,7 +283,7 @@
                 } else {
                     todoText = "첫 라운드 낮 시간입니다. 투표를 진행해 주세요.";
                 }
-            } else if (playStatus.round === initializationSetting.round) {
+            } else if (playStatus.round === playSetting.round) {
                 if (playStatus.night) {
                     todoText = "게임이 종료되었습니다.";
                 } else {
@@ -315,6 +339,8 @@
             const $playerDiv = $resultDiv.find("div[name='playerDiv']");
             $playerDiv.empty();
 
+            // TODO: 최종 계산 수식 작성
+
             let rank = 0;
             const htmlString = playerList
                 .sort((prev, next) => next.money - prev.money)
@@ -350,12 +376,8 @@
             playStatusModal.open(playerList);
         }
 
-        const openFruitShopModal = () => {
-            shopListModal.open(PLAY_ID);
-        }
-
-        const openAuctionResultModal = () => {
-            dismissResultModal.open(PLAY_ID);
+        const openRoundResultModal = () => {
+            roundResultModal.open(PLAY_ID);
         }
 
     </script>
@@ -431,11 +453,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
-                                플레이어 과일가게 보기
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
-                                경매 결과 모달 표시
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoundResultModal()">
+                                라운드 결과 모달 표시
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNext()">
                                 다음 순서 진행
@@ -470,11 +489,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
-                                플레이어 과일가게 보기
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
-                                경매 결과 모달 표시
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoundResultModal()">
+                                라운드 결과 모달 표시
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                 게임 재설정
@@ -493,8 +509,7 @@
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/playStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/shopListModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/dismissResultModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/roundResultModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

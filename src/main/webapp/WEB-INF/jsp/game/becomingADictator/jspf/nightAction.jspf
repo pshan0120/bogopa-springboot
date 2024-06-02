@@ -6,7 +6,7 @@
         actionList: [],
         createHtml: (round, night) => {
             if (!night
-                || round === initializationSetting.round) {
+                || round === playSetting.round) {
                 return "";
             }
 
@@ -25,8 +25,14 @@
             }, "");
         },
         openNightActionModal: playerName => {
-            const player = playerList.find(player => player.playerName === playerName);
+            /*const player = playerList.find(player => player.playerName === playerName);
             if (player.acted) {
+                alert("해당 플레이어는 선택 완료된 상태입니다.");
+                return;
+            }*/
+
+            const acted = nightAction.actionList.some(player => player.playerNameFrom === playerName);
+            if (acted) {
                 alert("해당 플레이어는 선택 완료된 상태입니다.");
                 return;
             }
@@ -34,6 +40,8 @@
             /*역할 버리기 : 밤이 되면 가지고 있던 역할 중 1/3라운드는 2개, 2/4라운드는 1개를 버려야 합니다. 결국 마지막에는 1개의 역할만 남게 됩니다.
             * 버려진 역할은 비공개지만 만약 그 날 오후에 '기각'을 했었다면 그 사람이 어떤 역할을 버렸는지 공개됩니다.
             * 이후 1~3라운드라면 버려진 역할들이 섞인 뒤 공개됩니다. 다만 4라운드는 버려진 역할을 공개하지 않습니다.*/
+
+            const player = playerList.find(player => player.playerName === playerName);
 
             const $modal = $("#throwAwayModal");
             $modal.find("[name='title']").empty().html(player.playerName);
@@ -50,9 +58,7 @@
             $modal.modal("show");
         },
         throwAway: (playerName, roleName) => {
-            const player = playerList.find(player => player.playerName === playerName);
             nightAction.actionList.push({roleName, playerName});
-            player.acted = true;
 
             const $modal = $("#throwAwayModal");
             const numberOfAction = nightAction.actionList.filter(action => action.playerName === playerName).length;
@@ -81,7 +87,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="" name="title"></h4>
-                <button type="button" class="close" data-throwAway="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -90,7 +96,7 @@
                 <div name="throwAwayDiv"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-block" data-throwAway="modal">닫기</button>
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
             </div>
         </div>
         <!-- /.modal-content -->

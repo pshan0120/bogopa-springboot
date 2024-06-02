@@ -31,7 +31,6 @@ const createRoleList = () => {
     ];
 };
 
-
 class Clown extends Role {
     static name = "clown";
     static title = "광대";

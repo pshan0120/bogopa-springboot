@@ -1,0 +1,129 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const roundResultModal = {
+        playSetting: {},
+        playStatus: {},
+        playerList: [],
+        thrownAwayRoleList: [],
+        open: async playNo => {
+            roundResultModal.playSetting = {};
+            roundResultModal.playStatus = {};
+            roundResultModal.playerList = [];
+            roundResultModal.thrownAwayRoleList = [];
+
+            await roundResultModal.loadGameStatus(playNo);
+
+            if (Object.keys(roundResultModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
+            const $modal = $("#roundResultModal");
+
+            if (roundResultModal.playSetting.round < roundResultModal.playStatus.round) {
+                let rank = 0;
+                const resultHtml = roundResultModal.playerList
+                    .sort((prev, next) => next.money - prev.money)
+                    .reduce((prev, next) => {
+                        rank++;
+                        return prev +
+                            `<div class="row">
+                            <div class="col-2">
+                                \${rank}위
+                            </div>
+                            <div class="col-6">
+                                \${next.playerName}
+                            </div>
+                            <div class="col-4">
+                                \${next.money}
+                            </div>
+                        </div>
+                        <br>`;
+                    }, "");
+
+                $modal.find("[name='roundResultDiv']").empty().html(resultHtml);
+            } else {
+                const voteHtml = roundResultModal.playerList
+                    .sort((prev, next) => next.numberOfVote - prev.numberOfVote)
+                    .reduce((prev, next) => {
+                        const roleHtml = next.roleList
+                            .reduce((prev, next) => {
+                                return prev + Role.getRoleByRoleName(next).title + ", ";
+                            }, "");
+
+                        return prev + `<div class="row">
+                            <div class="col-6">
+                                \${next.playerName}
+                            </div>
+                            <div class="col-6">
+                                \${next.numberOfVote}
+                            </div>
+                        </div>
+                        <br>`;
+                    }, "<h3>누적 득표 수</h3>")
+                    + "<hr>";
+
+                const thrownAwayHtml = roundResultModal.thrownAwayRoleList
+                    .sort(() => Math.random() - 0.5)
+                    .reduce((prev, next) => {
+                        const roleTitle = Role.getRoleByRoleName(next.roleName).title;
+                        const playerName = next.dismissed ? next.playerName : "?";
+                        return prev + roleTitle + "(" + playerName + "), ";
+                    }, "<h3>이전 라운드 버려진 역할</h3>")
+                    + "<hr>";
+
+                $modal.find("[name='roundResultDiv']").empty()
+                    .html(voteHtml + (roundResultModal.playStatus.night ? "" : thrownAwayHtml));
+            }
+
+            $modal.modal("show");
+        },
+        loadGameStatus: async playNo => {
+            const lastPlayLog = await roundResultModal.readLastPlayLog(playNo);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+            roundResultModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            roundResultModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            roundResultModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            roundResultModal.thrownAwayRoleList = JSON.parse(lastPlayLogJson.thrownAwayRoleList);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="roundResultModal" role="dialog"
+     aria-labelledby="roundResultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">라운드 결과</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="roundResultDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

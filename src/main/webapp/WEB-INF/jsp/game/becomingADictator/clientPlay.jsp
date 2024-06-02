@@ -25,10 +25,6 @@
             guideModal.open();
         }
 
-        const openFruitShopModal = () => {
-            shopListModal.open(PLAY_ID);
-        }
-
         const openAuctionResultModal = () => {
             auctionResultModal.open(PLAY_ID);
         }
@@ -82,9 +78,6 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openFruitShopModal()">
-                                플레이어 과일가게 보기
-                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
                                 경매 결과 모달 표시
                             </button>
@@ -97,8 +90,7 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/shopListModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/dismissResultModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/roundResultModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/becomingADictator/jspf/guideModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
