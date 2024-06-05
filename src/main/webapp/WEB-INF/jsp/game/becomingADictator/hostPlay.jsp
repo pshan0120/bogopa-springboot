@@ -82,6 +82,9 @@
                         numberOfVote: 0,
                         dismissed: false,
                         roleList: createRoleList().map(role => role.name),
+                        lastRole: null,
+                        conditionOfWinAchieved: false,
+                        won: null,
                     };
                 });
         }
@@ -332,6 +335,7 @@
             $("#resultDiv").show();
 
             renderResult();
+            saveGameStatus();
         }
 
         const renderResult = () => {
@@ -339,29 +343,54 @@
             const $playerDiv = $resultDiv.find("div[name='playerDiv']");
             $playerDiv.empty();
 
-            // TODO: 최종 계산 수식 작성
+            playerList.forEach(player => {
+                if (player.roleList.length !== 1) {
+                    alert("남은 역할이 1개보다 많은 플레이어가 있습니다.");
+                    throw new Error("역할 버리기 오류");
+                }
 
-            let rank = 0;
-            const htmlString = playerList
-                .sort((prev, next) => next.money - prev.money)
+                player.lastRole = player.roleList.at(0);
+            });
+
+            Dictator.calculateWinAchieved(playerList);
+            Priest.calculateWinAchieved(playerList);
+            Revolutionary.calculateWinAchieved(playerList);
+            Assassin.calculateWinAchieved(playerList);
+            Nobility.calculateWinAchieved(playerList);
+            Clown.calculateWinAchieved(playerList);
+            Populace.calculateWinAchieved(playerList);
+
+            Role.calculateResult(playerList, Assassin);
+            Role.calculateResult(playerList, Priest);
+            Role.calculateResult(playerList, Revolutionary);
+            Role.calculateResult(playerList, Dictator);
+            Role.calculateResult(playerList, Nobility);
+            Role.calculateResult(playerList, Clown);
+            Role.calculateResult(playerList, Populace);
+
+            const resultHtml = playerList
                 .reduce((prev, next) => {
-                    rank++;
+                    const lastRole = Role.getRoleByRoleName(next.lastRole);
+                    const resultText = next.won ? "승리" : "패배";
                     return prev +
                         `<div class="row">
-                            <div class="col-2">
-                                \${rank}위
-                            </div>
-                            <div class="col-6">
+                            <div class="col-3">
                                 \${next.playerName}
                             </div>
-                            <div class="col-4">
-                                \${next.money}
+                            <div class="col-3">
+                                \${lastRole.title}
+                            </div>
+                            <div class="col-3">
+                                \${next.numberOfVote}표
+                            </div>
+                            <div class="col-3">
+                                \${resultText}
                             </div>
                         </div>
                         <br>`;
                 }, "");
 
-            $playerDiv.append(htmlString);
+            $playerDiv.append(resultHtml);
         }
 
         const openRuleGuideModal = () => {

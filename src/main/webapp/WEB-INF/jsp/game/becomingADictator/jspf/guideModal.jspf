@@ -26,7 +26,7 @@
                 let preferentialRoleHtml = "";
                 if (next.preferentialRoleList.length > 0) {
                     preferentialRoleHtml = next.preferentialRoleList.reduce((prev, next) => {
-                        return prev + next.title + ", ";
+                        return prev + Role.getRoleByRoleName(next).title + ", ";
                     }, "");
                 } else {
                     preferentialRoleHtml = "없음";
