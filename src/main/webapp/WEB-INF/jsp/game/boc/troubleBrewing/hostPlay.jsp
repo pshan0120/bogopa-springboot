@@ -899,6 +899,11 @@
                         <h3>
                             배경음악
                         </h3>
+                        <h4>닭 소리</h4>
+                        <audio name="backgroundMusic"
+                               src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
+                               controls></audio>
+                        <hr>
                         <h4>church-bell</h4>
                         <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3"
                                controls></audio>
