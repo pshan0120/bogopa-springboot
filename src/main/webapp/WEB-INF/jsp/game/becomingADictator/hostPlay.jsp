@@ -335,7 +335,7 @@
             $("#resultDiv").show();
 
             renderResult();
-            saveGameStatus();
+            // saveGameStatus();
         }
 
         const renderResult = () => {
@@ -351,6 +351,141 @@
 
                 player.lastRole = player.roleList.at(0);
             });
+
+            /*playerList = [
+                {
+                    "playerName": "A1",
+                    "playerId": 60,
+                    "numberOfVote": 1,
+                    "dismissed": false,
+                    "roleList": [
+                        "priest"
+                    ],
+                    "lastRole": "priest",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "B1",
+                    "playerId": 17,
+                    "numberOfVote": 3,
+                    "dismissed": false,
+                    "roleList": [
+                        "dictator"
+                    ],
+                    "lastRole": "dictator",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "B2",
+                    "playerId": 17,
+                    "numberOfVote": 2,
+                    "dismissed": false,
+                    "roleList": [
+                        "dictator"
+                    ],
+                    "lastRole": "dictator",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "C1",
+                    "playerId": 18,
+                    "numberOfVote": 0,
+                    "dismissed": false,
+                    "roleList": [
+                        "nobility"
+                    ],
+                    "lastRole": "nobility",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "C2",
+                    "playerId": 18,
+                    "numberOfVote": 1,
+                    "dismissed": false,
+                    "roleList": [
+                        "nobility"
+                    ],
+                    "lastRole": "nobility",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "D1",
+                    "playerId": 19,
+                    "numberOfVote": 1,
+                    "dismissed": false,
+                    "roleList": [
+                        "revolutionary"
+                    ],
+                    "lastRole": "revolutionary",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "E1",
+                    "playerId": 19,
+                    "numberOfVote": 1,
+                    "dismissed": false,
+                    "roleList": [
+                        "revolutionary"
+                    ],
+                    "lastRole": "revolutionary",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "F1",
+                    "playerId": 19,
+                    "numberOfVote": 0,
+                    "dismissed": false,
+                    "roleList": [
+                        "revolutionary"
+                    ],
+                    "lastRole": "revolutionary",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "G1",
+                    "playerId": 19,
+                    "numberOfVote": 1,
+                    "dismissed": false,
+                    "roleList": [
+                        "assassin"
+                    ],
+                    "lastRole": "assassin",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "H1",
+                    "playerId": 19,
+                    "numberOfVote": 0,
+                    "dismissed": false,
+                    "roleList": [
+                        "populace"
+                    ],
+                    "lastRole": "populace",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+                {
+                    "playerName": "I1",
+                    "playerId": 19,
+                    "numberOfVote": 0,
+                    "dismissed": false,
+                    "roleList": [
+                        "clown"
+                    ],
+                    "lastRole": "clown",
+                    "conditionOfWinAchieved": false,
+                    "won": null
+                },
+            ]*/
 
             Dictator.calculateWinAchieved(playerList);
             Priest.calculateWinAchieved(playerList);

@@ -28,20 +28,20 @@
                         const resultText = next.won ? "승리" : "패배";
                         return prev +
                             `<div class="row">
-                            <div class="col-3">
-                                \${next.playerName}
+                                <div class="col-3">
+                                    \${next.playerName}
+                                </div>
+                                <div class="col-3">
+                                    \${lastRole.title}
+                                </div>
+                                <div class="col-3">
+                                    \${next.numberOfVote}표
+                                </div>
+                                <div class="col-3">
+                                    \${resultText}
+                                </div>
                             </div>
-                            <div class="col-3">
-                                \${lastRole.title}
-                            </div>
-                            <div class="col-3">
-                                \${next.numberOfVote}표
-                            </div>
-                            <div class="col-3">
-                                \${resultText}
-                            </div>
-                        </div>
-                        <br>`;
+                            <br>`;
                     }, "");
 
                 $modal.find("[name='roundResultDiv']").empty().html(resultHtml);

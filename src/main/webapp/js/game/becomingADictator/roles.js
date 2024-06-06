@@ -15,11 +15,23 @@ class Role {
         if (playerList.length === 0) {
             return;
         }
+        console.log('============================');
+        console.log('role.name', role.name);
+        console.log('role.preferentialRoleList', role.preferentialRoleList);
+
+        if (role.preferentialRoleList.length === 0) {
+            playerList.forEach(player => {
+                player.won = player.conditionOfWinAchieved;
+            });
+            return;
+        }
 
         const preferentialWon = finalPlayerList
-            .some(player => role.preferentialRoleList
-                .some(role => player.lastRole === role.name && player.conditionOfWinAchieved)
+            .some(player =>
+                role.preferentialRoleList
+                    .some(preferentialRole => player.lastRole === preferentialRole && player.won)
             );
+        console.log('preferentialWon', preferentialWon);
 
         playerList.forEach(player => {
             if (preferentialWon) {
@@ -34,12 +46,12 @@ class Role {
 const createRoleList = () => {
     return [
         new Dictator(),
-        new Clown(),
         new Nobility(),
         new Revolutionary(),
-        new Assassin(),
-        new Populace(),
         new Priest(),
+        new Assassin(),
+        new Clown(),
+        new Populace(),
     ];
 };
 
@@ -179,13 +191,13 @@ class Priest extends Role {
             return;
         }
 
-        const minimumNumberOfVote = finalPlayerList
-            .filter(player => player.numberOfVote > 0)
+        const votedPlayerList = finalPlayerList.filter(player => player.numberOfVote > 0);
+
+        const minimumNumberOfVote = votedPlayerList
             .map(player => player.numberOfVote)
             .reduce((prev, next) => prev < next ? prev : next, finalPlayerList.length);
 
-        const maximumNumberOfVote = finalPlayerList
-            .filter(player => player.numberOfVote > 0)
+        const maximumNumberOfVote = votedPlayerList
             .map(player => player.numberOfVote)
             .reduce((prev, next) => prev > next ? prev : next, 1);
 
@@ -224,14 +236,16 @@ class Revolutionary extends Role {
             return;
         }
 
-        const minimumNumberOfVote = playerList
+        const votedPlayerList = finalPlayerList.filter(player => player.numberOfVote > 0);
+
+        const minimumNumberOfVote = votedPlayerList
             .map(player => player.numberOfVote)
             .reduce((prev, next) => prev < next ? prev : next, finalPlayerList.length);
 
         const minimumVotedPlayerList = playerList
             .filter(player => player.numberOfVote === minimumNumberOfVote);
 
-        const secondMinimumNumberOfVote = playerList
+        const secondMinimumNumberOfVote = votedPlayerList
             .filter(player => player.numberOfVote > minimumNumberOfVote)
             .map(player => player.numberOfVote)
             .reduce((prev, next) => prev < next ? prev : next, finalPlayerList.length);
@@ -274,11 +288,13 @@ class Dictator extends Role {
             return;
         }
 
-        const maximumNumberOfVote = playerList
+        const votedPlayerList = finalPlayerList.filter(player => player.numberOfVote > 0);
+
+        const maximumNumberOfVote = votedPlayerList
             .map(player => player.numberOfVote)
             .reduce((prev, next) => prev > next ? prev : next, 1);
 
-        const maximumVotedPlayerList = playerList.filter(player => player.numberOfVote === maximumNumberOfVote);
+        const maximumVotedPlayerList = votedPlayerList.filter(player => player.numberOfVote === maximumNumberOfVote);
         if (maximumVotedPlayerList.length !== 1) {
             playerList.forEach(player => player.conditionOfWinAchieved = false);
             return;
@@ -320,25 +336,23 @@ class Nobility extends Role {
             return;
         }
 
-        const votedPlayerList = playerList
-            .filter(player => player.numberOfVote > 0);
+        const votedPlayerList = finalPlayerList.filter(player => player.numberOfVote > 0);
 
-        const maximumNumberOfVote = playerList
+        const maximumNumberOfVote = votedPlayerList
             .map(player => player.numberOfVote)
             .reduce((prev, next) => prev > next ? prev : next, 1);
 
-        const maximumVotedPlayerList = playerList
+        const maximumVotedPlayerList = votedPlayerList
             .filter(player => player.numberOfVote === maximumNumberOfVote);
 
-        const secondMaximumNumberOfVote = playerList
+        const secondMaximumNumberOfVote = votedPlayerList
             .filter(player => player.numberOfVote > maximumNumberOfVote)
             .map(player => player.numberOfVote)
             .reduce((prev, next) => prev > next ? prev : next, 1);
 
-        const secondMaximumVotedPlayerList = playerList
-            .filter(player => player.numberOfVote === secondMaximumNumberOfVote);
-
-        if (votedPlayerList.length > 1 && secondMaximumVotedPlayerList.length > 0) {
+        const secondMaximumVoted = playerList.some(player => player.numberOfVote === secondMaximumNumberOfVote);
+        const votedOver2 = playerList.filter(player => player.numberOfVote > 0).length > 1;
+        if (secondMaximumVoted && votedOver2) {
             playerList.forEach(player => {
                 if (player.numberOfVote === maximumNumberOfVote && maximumVotedPlayerList.length === 1) {
                     player.conditionOfWinAchieved = false;
@@ -348,6 +362,11 @@ class Nobility extends Role {
             });
         } else {
             const assassin = finalPlayerList.find(player => player.lastRole === Assassin.name);
+            if (!assassin) {
+                playerList.forEach(player => player.conditionOfWinAchieved = false);
+                return;
+            }
+
             if (assassin.conditionOfWinAchieved) {
                 playerList.forEach(player => player.conditionOfWinAchieved = true);
             } else {
