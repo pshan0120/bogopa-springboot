@@ -426,9 +426,11 @@
             const unassignedTownsFolkRole = roleList.find(role => role.name === unassignedTownsFolkRoleName);
 
             townsFolkPlayerList.push({
-                ...unassignedTownsFolkRole,
                 playerName: drunkPlayer.playerName,
                 playerId: drunkPlayer.playerId,
+                hashKey: drunkPlayer.hashKey,
+                seatNumber: drunkPlayer.seatNumber,
+                ...unassignedTownsFolkRole,
                 redHerring: drunkPlayer.redHerring,
                 drunken: true,
             });

@@ -209,7 +209,6 @@
 
             const nominatedPlayerSeatNumber = nominatedPlayer.seatNumber;
             const votingPlayerList = gfn_deepCopyByJSON(createAssignedPlayerList())
-                .filter(votingPlayer => votingPlayer.votable)
                 .sort((prev, next) => prev.seatNumber - next.seatNumber)
                 .map(votingPlayer => {
                     if (votingPlayer.seatNumber <= nominatedPlayerSeatNumber) {
@@ -221,16 +220,25 @@
                 .sort((prev, next) => prev.seatNumber - next.seatNumber);
 
             const setVotingPlayerHtml = votingPlayerList.reduce((prev, next) => {
+                if (next.votable) {
+                    return prev
+                        + "<button class=\"btn btn-outline-default mr-1 my-1 btn-block\""
+                        + " onclick=\"execution.setVotingPlayer('" + next.playerName + "')\" >"
+                        + " " + next.playerName + (next.died ? "-사망" : "")
+                        + "</button>";
+                }
+
                 return prev
-                    + "<button class=\"btn btn-outline-default mr-1 my-1 btn-block\""
-                    + " onclick=\"execution.setVotingPlayer('" + next.playerName + "')\" >"
+                    + "<button class=\"btn btn-outline-default mr-1 my-1 btn-block\" disabled >"
                     + " " + next.playerName + (next.died ? "-사망" : "")
                     + "</button>";
             }, "");
             $modal.find("[name='votingPlayerListDiv']").empty().html(setVotingPlayerHtml);
 
             $modal.find("[name='votingPlayerListDiv']").find("button").on("click", event => {
-                $(event.currentTarget).hide();
+                if (!$(event.currentTarget).attr("disabled")) {
+                    $(event.currentTarget).attr("disabled", true);
+                }
             });
         },
         setVotingPlayer: playerName => {
@@ -405,6 +413,8 @@
                     execution.diedAndVotedPlayerList.splice(diedAndVotedPlayerIndex, 1);
                 }
             });
+
+            execution.votingPlayerList = [];
 
             if (execution.candidatePlayer) {
                 const candidatePlayerIndex = execution.candidatePlayerListOfToday

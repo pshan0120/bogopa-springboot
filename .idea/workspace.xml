@@ -9,8 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="결과 테스트 중">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="14인테스트">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,14 +271,9 @@
       <workItem from="1717250566486" duration="9793000" />
       <workItem from="1717323595746" duration="13480000" />
       <workItem from="1717594927842" duration="11996000" />
-      <workItem from="1717676808411" duration="5982000" />
-    </task>
-    <task id="LOCAL-00074" summary="도둑잡기 개발중">
-      <created>1714792213319</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1714792213319</updated>
+      <workItem from="1717676808411" duration="6051000" />
+      <workItem from="1717683209978" duration="431000" />
+      <workItem from="1717778162842" duration="2393000" />
     </task>
     <task id="LOCAL-00075" summary="도둑잡기 개발중">
       <created>1714796859975</created>
@@ -614,7 +611,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717681914780</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="14인테스트">
+      <created>1717683007277</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1717683007277</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +639,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="페이징 수정중" />
     <MESSAGE value="readClubPlayImagePageById 진행중" />
     <MESSAGE value="마을 모달 오류 수정" />
     <MESSAGE value="도둑잡기 밸런스 조정" />
@@ -660,7 +663,8 @@
     <MESSAGE value="openRoleGuideModal 정리" />
     <MESSAGE value="독재자 1차 완성" />
     <MESSAGE value="결과 테스트 중" />
-    <option name="LAST_COMMIT_MESSAGE" value="결과 테스트 중" />
+    <MESSAGE value="14인테스트" />
+    <option name="LAST_COMMIT_MESSAGE" value="14인테스트" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
