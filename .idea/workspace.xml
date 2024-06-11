@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="14인테스트">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="votingPlayerList 초기화 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +65,7 @@
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -84,11 +83,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\becomingADictator\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\becomingADictator" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\becomingADictator" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\catchAThief\jspf" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\resources\config" />
@@ -273,14 +272,10 @@
       <workItem from="1717594927842" duration="11996000" />
       <workItem from="1717676808411" duration="6051000" />
       <workItem from="1717683209978" duration="431000" />
-      <workItem from="1717778162842" duration="2393000" />
-    </task>
-    <task id="LOCAL-00075" summary="도둑잡기 개발중">
-      <created>1714796859975</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1714796859975</updated>
+      <workItem from="1717778162842" duration="2948000" />
+      <workItem from="1717808975009" duration="574000" />
+      <workItem from="1717944096685" duration="2469000" />
+      <workItem from="1718123485019" duration="5784000" />
     </task>
     <task id="LOCAL-00076" summary="도둑잡기 개발중">
       <created>1714796871705</created>
@@ -618,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717683007277</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="votingPlayerList 초기화 추가">
+      <created>1717780778232</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1717780778233</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -639,7 +641,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="readClubPlayImagePageById 진행중" />
     <MESSAGE value="마을 모달 오류 수정" />
     <MESSAGE value="도둑잡기 밸런스 조정" />
     <MESSAGE value="투표 개선" />
@@ -664,7 +665,8 @@
     <MESSAGE value="독재자 1차 완성" />
     <MESSAGE value="결과 테스트 중" />
     <MESSAGE value="14인테스트" />
-    <option name="LAST_COMMIT_MESSAGE" value="14인테스트" />
+    <MESSAGE value="votingPlayerList 초기화 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="votingPlayerList 초기화 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

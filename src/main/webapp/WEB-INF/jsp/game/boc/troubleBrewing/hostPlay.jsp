@@ -16,6 +16,7 @@
         let minionRoleList = [];
         let demonRoleList = [];
         let roleList = [];
+        let roleListByHost = [];
         let townsFolkPlayerList = [];
         let outsiderPlayerList = [];
         let minionPlayerList = [];
@@ -98,6 +99,7 @@
                 ...minionRoleList,
                 ...demonRoleList,
             ];
+            // createAssignedPlayerList();
         };
 
         const initializeGame = async () => {
@@ -135,7 +137,7 @@
             const $playersDiv = $settingDiv.find("div[name='playersDiv']");
             $playersDiv.empty();
 
-            const htmlString = playerList.reduce((prev, next) => {
+            const playerListHtml = playerList.reduce((prev, next) => {
                 return prev +
                     "<div class=\"form-group form-inline\">" +
                     "   <label class=\"form-control-label\">" + next.nickname + "</label>" +
@@ -144,7 +146,7 @@
                     "</div>";
             }, "");
 
-            $playersDiv.append(htmlString);
+            $playersDiv.append(playerListHtml);
         }
 
         const readPlayMemberList = playId => {
@@ -153,7 +155,147 @@
                 .catch(response => console.error('error', response));
         }
 
-        const setPlayersRole = () => {
+        const openSetPlayerRoleByHostModal = () => {
+            roleListByHost = [];
+
+            const $modal = $("#setPlayerRoleByHostModal");
+            const townsFolkRoleListHtml = roleList
+                .filter(role => role.position.name === POSITION.TOWNS_FOLK.name)
+                .reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
+                        + " " + next.title
+                        + "</button>";
+                }, "");
+            $modal.find("[name='townsFolkRoleListDiv']").empty().html(townsFolkRoleListHtml)
+                .find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+            $modal.find("[name='townsFolkRoleSetListDiv']").empty();
+
+            const outsiderRoleListHtml = roleList
+                .filter(role => role.position.name === POSITION.OUTSIDER.name)
+                .reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
+                        + " " + next.title
+                        + "</button>";
+                }, "");
+            $modal.find("[name='outsiderRoleListDiv']").empty().html(outsiderRoleListHtml)
+                .find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+            $modal.find("[name='outsiderRoleSetListDiv']").empty();
+
+            const minionRoleListHtml = roleList
+                .filter(role => role.position.name === POSITION.MINION.name)
+                .reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
+                        + " " + next.title
+                        + "</button>";
+                }, "");
+            $modal.find("[name='minionRoleListDiv']").empty().html(minionRoleListHtml)
+                .find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+            $modal.find("[name='minionRoleSetListDiv']").empty();
+
+            const demonRoleListHtml = roleList
+                .filter(role => role.position.name === POSITION.DEMON.name)
+                .reduce((prev, next) => {
+                    return prev
+                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
+                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
+                        + " " + next.title
+                        + "</button>";
+                }, "");
+            $modal.find("[name='demonRoleListDiv']").empty().html(demonRoleListHtml)
+                .find("button").on("click", event => {
+                $(event.currentTarget).hide();
+            });
+            $modal.find("[name='demonRoleSetListDiv']").empty();
+
+            $modal.modal("show");
+        }
+
+        const addRoleToPlayerRoleList = roleName => {
+            const role = roleList.find(role => role.name === roleName);
+            roleListByHost.push(role);
+
+            const playerSetting = initializationSetting.player
+                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+
+            const $modal = $("#setPlayerRoleByHostModal");
+
+            const townsFolkList = roleListByHost.filter(role => role.position.name === POSITION.TOWNS_FOLK.name);
+            if (playerSetting.townsFolk === townsFolkList.length) {
+                $modal.find("[name='townsFolkRoleListDiv']").empty();
+            }
+            const townsFolkListHtml = townsFolkList.reduce((prev, next) => {
+                return prev + next.title + ", ";
+            }, "");
+            $modal.find("[name='townsFolkRoleSetListDiv']").empty().html(townsFolkListHtml);
+
+            const outsiderList = roleListByHost.filter(role => role.position.name === POSITION.OUTSIDER.name);
+            if (playerSetting.outsider === outsiderList.length) {
+                $modal.find("[name='outsiderRoleListDiv']").empty();
+            }
+            const outsiderListHtml = outsiderList.reduce((prev, next) => {
+                return prev + next.title + ", ";
+            }, "");
+            $modal.find("[name='outsiderRoleSetListDiv']").empty().html(outsiderListHtml);
+
+            const minionList = roleListByHost.filter(role => role.position.name === POSITION.MINION.name);
+            if (playerSetting.minion === minionList.length) {
+                $modal.find("[name='minionRoleListDiv']").empty();
+            }
+            const minionListHtml = minionList.reduce((prev, next) => {
+                return prev + next.title + ", ";
+            }, "");
+            $modal.find("[name='minionRoleSetListDiv']").empty().html(minionListHtml);
+
+            const demonList = roleListByHost.filter(role => role.position.name === POSITION.DEMON.name);
+            if (playerSetting.demon === demonList.length) {
+                $modal.find("[name='demonRoleListDiv']").empty();
+            }
+            const demonListHtml = demonList.reduce((prev, next) => {
+                return prev + next.title + ", ";
+            }, "");
+            $modal.find("[name='demonRoleSetListDiv']").empty().html(demonListHtml);
+        }
+
+        const setPlayersRoleByHost = () => {
+            if (roleListByHost.length !== playerList.length) {
+                alert("아직 선택되지 않은 역할이 있습니다.");
+                return;
+            }
+
+            const minionList = roleListByHost.filter(role => role.position.name === POSITION.MINION.name);
+            const baronExists = minionList.some(minionPlayer => minionPlayer.name === Baron.name);
+            if (baronExists) {
+                const outsiderList = roleListByHost.filter(role => role.position.name === POSITION.OUTSIDER.name);
+                const unassignedOutsiderRoleList = roleList
+                    .filter(role => role.position.name === POSITION.OUTSIDER.name)
+                    .filter(role => !outsiderList.some(outsider => outsider.name === role.name))
+                    .sort(() => Math.random() - 0.5);
+                roleListByHost.push(unassignedOutsiderRoleList[0]);
+                roleListByHost.push(unassignedOutsiderRoleList[1]);
+            }
+
+            setPlayersRole(playerList, roleListByHost);
+
+            $("#setPlayerRoleByHostModal").modal("hide");
+        }
+
+        const setPlayersRoleByRandom = () => {
+            setPlayersRole(playerList, roleList);
+        }
+
+        const setPlayersRole = (playerList, roleList) => {
             const randomSortedPlayerList = [...playerList.sort(() => Math.random() - 0.5)];
 
             const playerSetting = initializationSetting.player
@@ -831,8 +973,12 @@
                             <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
                                 인트로 보기
                             </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="setPlayersRole()">
-                                역할 분배
+                            <button type="button" class="btn btn-default btn-block" onclick="setPlayersRoleByRandom()">
+                                역할 임의 분배
+                            </button>
+                            <button type="button" class="btn btn-default btn-block"
+                                    onclick="openSetPlayerRoleByHostModal()">
+                                역할 지정 분배
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="beginGame()">
                                 게임 시작
@@ -1044,6 +1190,51 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="setPlayerRoleByHostModal" role="dialog"
+     aria-labelledby="setDrunkPlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">이번 게임에서 사용될 역할을 선택합니다.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    추천 조합(8인 기준)<br/>
+                    - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
+                    - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
+                    - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
+                </p>
+                <h3>마을 주민</h3>
+                <div name="townsFolkRoleListDiv"></div>
+                <div name="townsFolkRoleSetListDiv"></div>
+                <hr>
+                <h3>이방인</h3>
+                <div name="outsiderRoleListDiv"></div>
+                <div name="outsiderRoleSetListDiv"></div>
+                <hr>
+                <h3>하수인</h3>
+                <div name="minionRoleListDiv"></div>
+                <div name="minionRoleSetListDiv"></div>
+                <hr>
+                <h3>악마</h3>
+                <div name="demonRoleListDiv"></div>
+                <div name="demonRoleSetListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="setPlayersRoleByHost()">
+                    역할 지정
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
             </div>
         </div>
         <!-- /.modal-content -->
