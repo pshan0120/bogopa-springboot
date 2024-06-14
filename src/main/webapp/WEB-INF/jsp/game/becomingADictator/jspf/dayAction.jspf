@@ -67,6 +67,10 @@
             $modal.modal("show");
         },
         vote: (playerNameFrom, playerNameTo) => {
+            if (!confirm("[" + playerNameTo + "]에게 투표하시겠습니까?")) {
+                return;
+            }
+
             dayAction.actionList.push(
                 {
                     action: VOTE.name,
@@ -94,6 +98,11 @@
                 alert(playerNameFrom + " 플레이어가 기각하려 했으나 상대 플레이어의 현재 득표수가 0표 이하라서 실패했습니다.(마지막 라운드 제외)");
                 throw new Error("기각 실행을 위한 득표수 부족");
             }
+
+            if (!confirm("[" + playerNameTo + "]의 표를 기각하시겠습니까?")) {
+                return;
+            }
+
             playerTo.numberOfVote--;
 
             dayAction.actionList.push(

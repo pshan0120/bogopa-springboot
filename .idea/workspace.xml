@@ -9,9 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="votingPlayerList 초기화 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="역할 지정 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,14 +278,9 @@
       <workItem from="1717778162842" duration="2948000" />
       <workItem from="1717808975009" duration="574000" />
       <workItem from="1717944096685" duration="2469000" />
-      <workItem from="1718123485019" duration="5784000" />
-    </task>
-    <task id="LOCAL-00076" summary="도둑잡기 개발중">
-      <created>1714796871705</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1714796871705</updated>
+      <workItem from="1718123485019" duration="6150000" />
+      <workItem from="1718207653656" duration="4926000" />
+      <workItem from="1718388406333" duration="3166000" />
     </task>
     <task id="LOCAL-00077" summary="도둑잡기 완성">
       <created>1714877952424</created>
@@ -620,7 +618,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717780778233</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="역할 지정 추가">
+      <created>1718129313518</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1718129313519</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -641,7 +646,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="마을 모달 오류 수정" />
     <MESSAGE value="도둑잡기 밸런스 조정" />
     <MESSAGE value="투표 개선" />
     <MESSAGE value="대기실 진행중" />
@@ -666,7 +670,8 @@
     <MESSAGE value="결과 테스트 중" />
     <MESSAGE value="14인테스트" />
     <MESSAGE value="votingPlayerList 초기화 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="votingPlayerList 초기화 추가" />
+    <MESSAGE value="역할 지정 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="역할 지정 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

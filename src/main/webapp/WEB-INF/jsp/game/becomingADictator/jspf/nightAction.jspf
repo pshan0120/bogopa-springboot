@@ -58,6 +58,11 @@
             $modal.modal("show");
         },
         throwAway: (playerName, roleName) => {
+            const roleTitle = Role.getRoleByRoleName(roleName).title;
+            if (!confirm("[" + roleTitle + "] 역할을 버리시겠습니까?")) {
+                return;
+            }
+
             nightAction.actionList.push({roleName, playerName});
 
             const $modal = $("#throwAwayModal");

@@ -10,8 +10,8 @@ class Role {
         return createRoleList().find(role => role.name === roleName);
     }
 
-    static calculateResult(finalPlayerList, role) {
-        const playerList = finalPlayerList.filter(player => player.lastRole === role.name);
+    static calculateWinPreferentially(finalPlayerList, resultList, role) {
+        let playerList = finalPlayerList.filter(player => player.lastRole === role.name);
         if (playerList.length === 0) {
             return;
         }
@@ -19,27 +19,31 @@ class Role {
         console.log('role.name', role.name);
         console.log('role.preferentialRoleList', role.preferentialRoleList);
 
+        const preferentialWon = Role.calculatePreferentialWon(finalPlayerList, role);
+        console.log('preferentialWon', preferentialWon);
+        playerList.forEach(player => {
+            const won = preferentialWon ? false : player.conditionOfWinAchieved;
+            console.log('won', won);
+            resultList.push({
+                ...player,
+                won,
+            });
+        });
+    }
+
+    static calculatePreferentialWon(finalPlayerList, role) {
         if (role.preferentialRoleList.length === 0) {
             playerList.forEach(player => {
                 player.won = player.conditionOfWinAchieved;
             });
-            return;
+            return false;
         }
 
-        const preferentialWon = finalPlayerList
+        return finalPlayerList
             .some(player =>
                 role.preferentialRoleList
                     .some(preferentialRole => player.lastRole === preferentialRole && player.won)
             );
-        console.log('preferentialWon', preferentialWon);
-
-        playerList.forEach(player => {
-            if (preferentialWon) {
-                player.won = false;
-            } else {
-                player.won = player.conditionOfWinAchieved;
-            }
-        });
     }
 }
 
@@ -76,7 +80,7 @@ class Clown extends Role {
             return;
         }
 
-        const dictator = finalPlayerList.find(player => player.lastRole === Dictator.name);
+        /*const dictator = finalPlayerList.find(player => player.lastRole === Dictator.name);
         if (!dictator) {
             playerList.forEach(player => player.conditionOfWinAchieved = false);
             return;
@@ -86,6 +90,25 @@ class Clown extends Role {
             playerList.forEach(player => player.conditionOfWinAchieved = true);
         } else {
             playerList.forEach(player => player.conditionOfWinAchieved = false);
+        }*/
+    }
+
+    static calculateResult(finalPlayerList, resultList) {
+        const playerList = finalPlayerList.filter(player => player.lastRole === Clown.name);
+        if (playerList.length === 0) {
+            return;
+        }
+
+        const dictator = finalPlayerList.find(player => player.lastRole === Dictator.name);
+        if (!dictator) {
+            playerList.forEach(player => player.won = false);
+            return;
+        }
+
+        if (dictator.won) {
+            playerList.forEach(player => player.won = true);
+        } else {
+            playerList.forEach(player => player.won = false);
         }
     }
 }
@@ -131,6 +154,10 @@ class Assassin extends Role {
             }
         });
     }
+
+    static calculateResult(finalPlayerList, resultList) {
+        Role.calculateWinPreferentially(finalPlayerList, resultList, Assassin);
+    }
 }
 
 class Populace extends Role {
@@ -153,20 +180,25 @@ class Populace extends Role {
         if (playerList.length === 0) {
             return;
         }
+    }
 
+    static calculateResult(finalPlayerList, resultList) {
+        Role.calculateWinPreferentially(finalPlayerList, resultList, Populace);
+
+        const playerList = finalPlayerList.filter(player => player.lastRole === Populace.name);
         if (playerList.length === finalPlayerList.length) {
-            playerList.forEach(player => player.conditionOfWinAchieved = true);
+            playerList.forEach(player => player.won = true);
             return;
         }
 
         const winAchievedList = finalPlayerList
-            .filter(player => player.lastRole !== Populace.name && player.conditionOfWinAchieved);
+            .filter(player => player.lastRole !== Populace.name && player.won);
         if (winAchievedList.length === 0) {
-            playerList.forEach(player => player.conditionOfWinAchieved = true);
+            playerList.forEach(player => player.won = true);
             return;
         }
 
-        playerList.forEach(player => player.conditionOfWinAchieved = false);
+        playerList.forEach(player => player.won = false);
     }
 }
 
@@ -207,6 +239,10 @@ class Priest extends Role {
         } else {
             playerList.forEach(player => player.conditionOfWinAchieved = false);
         }
+    }
+
+    static calculateResult(finalPlayerList, resultList) {
+        Role.calculateWinPreferentially(finalPlayerList, resultList, Priest);
     }
 }
 
@@ -265,6 +301,10 @@ class Revolutionary extends Role {
             playerList.forEach(player => player.conditionOfWinAchieved = false);
         }
     }
+
+    static calculateResult(finalPlayerList, resultList) {
+        Role.calculateWinPreferentially(finalPlayerList, resultList, Revolutionary);
+    }
 }
 
 class Dictator extends Role {
@@ -307,6 +347,30 @@ class Dictator extends Role {
                 player.conditionOfWinAchieved = false;
             }
         });
+    }
+
+    static calculateResult(finalPlayerList, resultList) {
+        Role.calculateWinPreferentially(finalPlayerList, resultList, Dictator);
+
+        /*playerList.forEach(player => {
+            const won = preferentialWon ? false : player.conditionOfWinAchieved;
+            player.won = won;
+            /!*if (player.numberOfVote > 0 && player.numberOfVote === maximumNumberOfVote) {
+                player.conditionOfWinAchieved = true;
+            } else {
+                player.conditionOfWinAchieved = false;
+            }*!/
+        });*/
+
+        /*$.each(playerList, (index, player) => {
+            const won = preferentialWon ? false : player.conditionOfWinAchieved;
+            player.won = won;
+            // return player;
+            return player = {
+                ...player,
+                won
+            };
+        });*/
     }
 }
 
@@ -361,18 +425,23 @@ class Nobility extends Role {
                 }
             });
         } else {
-            const assassin = finalPlayerList.find(player => player.lastRole === Assassin.name);
-            if (!assassin) {
-                playerList.forEach(player => player.conditionOfWinAchieved = false);
-                return;
-            }
-
-            if (assassin.conditionOfWinAchieved) {
-                playerList.forEach(player => player.conditionOfWinAchieved = true);
-            } else {
-                playerList.forEach(player => player.conditionOfWinAchieved = false);
-            }
+            playerList.forEach(player => player.conditionOfWinAchieved = false);
         }
     }
 
+    static calculateResult(finalPlayerList, resultList) {
+        Role.calculateWinPreferentially(finalPlayerList, resultList, Nobility);
+
+        const assassin = finalPlayerList.find(player => player.lastRole === Assassin.name);
+        if (!assassin) {
+            playerList.forEach(player => player.won = false);
+            return;
+        }
+
+        if (assassin.won) {
+            playerList.forEach(player => player.won = true);
+        } else {
+            playerList.forEach(player => player.won = false);
+        }
+    }
 }

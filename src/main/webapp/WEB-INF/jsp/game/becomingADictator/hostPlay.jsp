@@ -14,6 +14,7 @@
         let playStatus = {};
         let playerList = [];
         let thrownAwayRoleList = [];
+        let resultList = [];
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -495,15 +496,15 @@
             Clown.calculateWinAchieved(playerList);
             Populace.calculateWinAchieved(playerList);
 
-            Role.calculateResult(playerList, Assassin);
-            Role.calculateResult(playerList, Priest);
-            Role.calculateResult(playerList, Revolutionary);
-            Role.calculateResult(playerList, Dictator);
-            Role.calculateResult(playerList, Nobility);
-            Role.calculateResult(playerList, Clown);
-            Role.calculateResult(playerList, Populace);
+            Assassin.calculateResult(playerList, resultList);
+            Priest.calculateResult(playerList, resultList);
+            Revolutionary.calculateResult(playerList, resultList);
+            Dictator.calculateResult(playerList, resultList);
+            Nobility.calculateResult(playerList, resultList);
+            Clown.calculateResult(playerList, resultList);
+            Populace.calculateResult(playerList, resultList);
 
-            const resultHtml = playerList
+            const resultHtml = resultList
                 .reduce((prev, next) => {
                     const lastRole = Role.getRoleByRoleName(next.lastRole);
                     const resultText = next.won ? "승리" : "패배";
