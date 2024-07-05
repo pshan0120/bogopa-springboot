@@ -7,7 +7,7 @@
         minionRoleList: [],
         demonRoleList: [],
         roleList: [],
-        openExpertRoleGuideModal: () => {
+        open: () => {
             expertRoleGuideModal.setRoleList();
 
             const $expertRoleGuideModal = $("#expertRoleGuideModal");
@@ -55,10 +55,6 @@
                 new Mayor(),
                 new PoppyGrower(),
                 new Atheist(),
-                new Clockmaker(),
-                new Chambermaid(),
-                new Artist(),
-                new Sage(),
             ];
 
             expertRoleGuideModal.outsiderRoleList = [
@@ -67,7 +63,6 @@
                 new Recluse(),
                 new Saint(),
                 new Lunatic(),
-                new Klutz(),
             ];
 
             expertRoleGuideModal.minionRoleList = [
@@ -114,13 +109,96 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">(임시) 숙련자 역할 가이드</h4>
+                <h4 class="">[트러블 브루잉 - 숙련자] 역할 설명</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div name="roleListDiv"></div>
+                <div>
+                    <h4>첫날 밤</h4>
+                    <ul class="pl-4">
+                        <li class="font-orange">
+                            황혼 단계
+                        </li>
+                        <li class="font-red">
+                            하수인 정보
+                        </li>
+                        <li class="font-red">
+                            악마 정보
+                        </li>
+                        <li class="font-red">
+                            독살범
+                        </li>
+                        <li class="font-red">
+                            스파이
+                        </li>
+                        <li class="font-blue">
+                            세탁부
+                        </li>
+                        <li class="font-blue">
+                            사서
+                        </li>
+                        <li class="font-blue">
+                            조사관
+                        </li>
+                        <li class="font-blue">
+                            요리사
+                        </li>
+                        <li class="font-blue">
+                            공감능력자
+                        </li>
+                        <li class="font-blue">
+                            점쟁이
+                        </li>
+                        <li class="font-blue">
+                            집사
+                        </li>
+                        <li class="font-orange">
+                            새벽 단계
+                        </li>
+                    </ul>
+                    <h4>두번째 밤부터</h4>
+                    <ul class="pl-4">
+                        <li class="font-orange">
+                            황혼 단계
+                        </li>
+                        <li class="font-red">
+                            독살범
+                        </li>
+                        <li class="font-blue">
+                            수도승
+                        </li>
+                        <li class="font-red">
+                            스파이
+                        </li>
+                        <li class="font-red">
+                            부정한 여자
+                        </li>
+                        <li class="font-red">
+                            임프
+                        </li>
+                        <li class="font-blue">
+                            레이븐키퍼
+                        </li>
+                        <li class="font-blue">
+                            장의사
+                        </li>
+                        <li class="font-blue">
+                            공감능력자
+                        </li>
+                        <li class="font-blue">
+                            점쟁이
+                        </li>
+                        <li class="font-blue">
+                            집사
+                        </li>
+                        <li class="font-orange">
+                            새벽 단계
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

@@ -2,7 +2,7 @@
 
 <script>
     const ruleGuideModal = {
-        openRuleGuideModal: () => {
+        open: () => {
             const $ruleGuideModal = $("#ruleGuideModal");
             $ruleGuideModal.modal("show");
         },

@@ -1,83 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script>
-    const roleGuideModal = {
+    const teensyvilleRoleGuideModal = {
         townsFolkRoleList: [],
         outsiderRoleList: [],
         minionRoleList: [],
         demonRoleList: [],
         roleList: [],
         open: () => {
-            roleGuideModal.setRoleList();
+            teensyvilleRoleGuideModal.setRoleList();
 
-            const $roleGuideModal = $("#roleGuideModal");
-            const $roleListDiv = $roleGuideModal.find("div[name='roleListDiv']");
+            const $teensyvilleRoleGuideModal = $("#teensyvilleRoleGuideModal");
+            const $roleListDiv = $teensyvilleRoleGuideModal.find("div[name='roleListDiv']");
             const roleListHtml = `
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.TOWNS_FOLK.name)}">\${POSITION.TOWNS_FOLK.title}</h3>
                 <ol class="pl-4">
-                    \${roleGuideModal.createRoleHtml(roleGuideModal.townsFolkRoleList)}
+                    \${teensyvilleRoleGuideModal.createRoleHtml(teensyvilleRoleGuideModal.townsFolkRoleList)}
                 </ol>
                 <hr>
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.OUTSIDER.name)}">\${POSITION.OUTSIDER.title}</h3>
                 <ol class="pl-4">
-                    \${roleGuideModal.createRoleHtml(roleGuideModal.outsiderRoleList)}
+                    \${teensyvilleRoleGuideModal.createRoleHtml(teensyvilleRoleGuideModal.outsiderRoleList)}
                 </ol>
                 <hr>
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.MINION.name)}">\${POSITION.MINION.title}</h3>
                 <ol class="pl-4">
-                    \${roleGuideModal.createRoleHtml(roleGuideModal.minionRoleList)}
+                    \${teensyvilleRoleGuideModal.createRoleHtml(teensyvilleRoleGuideModal.minionRoleList)}
                 </ol>
                 <hr>
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.DEMON.name)}">\${POSITION.DEMON.title}</h3>
                 <ol class="pl-4">
-                    \${roleGuideModal.createRoleHtml(roleGuideModal.demonRoleList)}
+                    \${teensyvilleRoleGuideModal.createRoleHtml(teensyvilleRoleGuideModal.demonRoleList)}
                 </ol>
                 <hr>`;
 
             $roleListDiv.empty().html(roleListHtml);
 
-            $roleGuideModal.modal("show");
+            $teensyvilleRoleGuideModal.modal("show");
         },
         setRoleList: () => {
-            roleGuideModal.townsFolkRoleList = [
-                new WasherWoman(),
-                new Librarian(),
+            teensyvilleRoleGuideModal.townsFolkRoleList = [
+                new Clockmaker(),
                 new Investigator(),
-                new Chef(),
                 new Empath(),
-                new FortuneTeller(),
-                new Undertaker(),
-                new Monk(),
-                new RavenKeeper(),
-                new Virgin(),
-                new Slayer(),
-                new Soldier(),
-                new Mayor(),
+                new Chambermaid(),
+                new Artist(),
+                new Sage(),
             ];
 
-            roleGuideModal.outsiderRoleList = [
-                new Butler(),
+            teensyvilleRoleGuideModal.outsiderRoleList = [
                 new Drunk(),
-                new Recluse(),
-                new Saint(),
+                new Klutz(),
             ];
 
-            roleGuideModal.minionRoleList = [
-                new Poisoner(),
-                new Spy(),
+            teensyvilleRoleGuideModal.minionRoleList = [
                 new Baron(),
                 new ScarletWoman(),
             ];
 
-            roleGuideModal.demonRoleList = [
+            teensyvilleRoleGuideModal.demonRoleList = [
                 new Imp(),
             ];
 
-            roleGuideModal.roleList = [
-                ...roleGuideModal.townsFolkRoleList,
-                ...roleGuideModal.outsiderRoleList,
-                ...roleGuideModal.minionRoleList,
-                ...roleGuideModal.demonRoleList,
+            teensyvilleRoleGuideModal.roleList = [
+                ...teensyvilleRoleGuideModal.townsFolkRoleList,
+                ...teensyvilleRoleGuideModal.outsiderRoleList,
+                ...teensyvilleRoleGuideModal.minionRoleList,
+                ...teensyvilleRoleGuideModal.demonRoleList,
             ];
         },
         createRoleHtml: roleList => roleList.reduce((prev, next) => {
@@ -100,12 +89,12 @@
     }
 </script>
 
-<div class="modal fade" id="roleGuideModal" role="dialog"
-     aria-labelledby="roleGuideModalLabel" aria-hidden="true">
+<div class="modal fade" id="teensyvilleRoleGuideModal" role="dialog"
+     aria-labelledby="teensyvilleRoleGuideModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">[트러블 브루잉] 역할 설명</h4>
+                <h4 class="">[이보다 더 큰 기쁨은 없다] 역할 설명</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -124,32 +113,17 @@
                         <li class="font-red">
                             악마 정보
                         </li>
-                        <li class="font-red">
-                            독살범
-                        </li>
-                        <li class="font-red">
-                            스파이
-                        </li>
-                        <li class="font-blue">
-                            세탁부
-                        </li>
-                        <li class="font-blue">
-                            사서
-                        </li>
                         <li class="font-blue">
                             조사관
-                        </li>
-                        <li class="font-blue">
-                            요리사
                         </li>
                         <li class="font-blue">
                             공감능력자
                         </li>
                         <li class="font-blue">
-                            점쟁이
+                            시계공
                         </li>
                         <li class="font-blue">
-                            집사
+                            가정부
                         </li>
                         <li class="font-orange">
                             새벽 단계
@@ -161,34 +135,19 @@
                             황혼 단계
                         </li>
                         <li class="font-red">
-                            독살범
-                        </li>
-                        <li class="font-blue">
-                            수도승
-                        </li>
-                        <li class="font-red">
-                            스파이
-                        </li>
-                        <li class="font-red">
                             부정한 여자
                         </li>
                         <li class="font-red">
                             임프
                         </li>
                         <li class="font-blue">
-                            레이븐키퍼
-                        </li>
-                        <li class="font-blue">
-                            장의사
+                            현자
                         </li>
                         <li class="font-blue">
                             공감능력자
                         </li>
                         <li class="font-blue">
-                            점쟁이
-                        </li>
-                        <li class="font-blue">
-                            집사
+                            가정부
                         </li>
                         <li class="font-orange">
                             새벽 단계

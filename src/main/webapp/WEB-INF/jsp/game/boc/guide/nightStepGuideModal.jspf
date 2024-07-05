@@ -2,7 +2,7 @@
 
 <script>
     const nightStepGuideModal = {
-        openNightStepGuideModal: () => {
+        open: () => {
             const $nightStepGuideModal = $("#nightStepGuideModal");
             $nightStepGuideModal.modal("show");
         },

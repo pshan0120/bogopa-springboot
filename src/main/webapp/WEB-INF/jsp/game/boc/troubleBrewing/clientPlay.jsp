@@ -17,19 +17,23 @@
         });
 
         const openRuleGuideModal = () => {
-            ruleGuideModal.openRuleGuideModal();
+            ruleGuideModal.open();
         }
 
         const openRoleGuideModal = () => {
-            roleGuideModal.openRoleGuideModal();
+            roleGuideModal.open();
         }
 
         const openExpertRoleGuideModal = () => {
-            expertRoleGuideModal.openExpertRoleGuideModal();
+            expertRoleGuideModal.open();
+        }
+
+        const openTeensyvilleRoleGuideModal = () => {
+            teensyvilleRoleGuideModal.open();
         }
 
         const openNightStepGuideModal = () => {
-            nightStepGuideModal.openNightStepGuideModal();
+            nightStepGuideModal.open();
         }
 
         const openTownModal = () => {
@@ -97,7 +101,10 @@
                                 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
-                                (임시) 숙련자 역할 설명
+                                (임시) 숙련자 모드 역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openTeensyvilleRoleGuideModal()">
+                                (임시) 탄시빌 모드 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
                                 밤 역할 진행 순서
@@ -127,6 +134,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/teensyvilleRoleGuideModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 
