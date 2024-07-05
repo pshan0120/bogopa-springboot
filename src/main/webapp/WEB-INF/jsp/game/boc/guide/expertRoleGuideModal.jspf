@@ -55,6 +55,10 @@
                 new Mayor(),
                 new PoppyGrower(),
                 new Atheist(),
+                new Clockmaker(),
+                new Chambermaid(),
+                new Artist(),
+                new Sage(),
             ];
 
             expertRoleGuideModal.outsiderRoleList = [
@@ -63,6 +67,7 @@
                 new Recluse(),
                 new Saint(),
                 new Lunatic(),
+                new Klutz(),
             ];
 
             expertRoleGuideModal.minionRoleList = [

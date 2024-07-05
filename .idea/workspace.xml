@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="bogopa:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -11,7 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="이미지 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,14 +280,7 @@
       <workItem from="1718207653656" duration="4926000" />
       <workItem from="1718388406333" duration="3791000" />
       <workItem from="1718546465582" duration="1077000" />
-      <workItem from="1720193022772" duration="10601000" />
-    </task>
-    <task id="LOCAL-00079" summary="도둑 2명">
-      <created>1714964491779</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1714964491779</updated>
+      <workItem from="1720193022772" duration="12281000" />
     </task>
     <task id="LOCAL-00080" summary="도둑 2명">
       <created>1714966173615</created>
@@ -624,7 +618,14 @@
       <option name="project" value="LOCAL" />
       <updated>1720204416242</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="이미지 추가">
+      <created>1720204520988</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1720204520988</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

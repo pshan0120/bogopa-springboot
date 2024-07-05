@@ -180,7 +180,7 @@ class DemonRole extends EvilRole {
 class WasherWoman extends TownsFolkRole {
     static name = "washerwoman";
     static title = "세탁부";
-    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.";
+    static description = "당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.";
 
     constructor() {
         super(WasherWoman.name, WasherWoman.title, WasherWoman.description);
@@ -192,7 +192,7 @@ class WasherWoman extends TownsFolkRole {
 class Librarian extends TownsFolkRole {
     static name = "librarian";
     static title = "사서";
-    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 이방인인지 알고 시작합니다.";
+    static description = "당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 이방인인지 알고 시작합니다.";
 
     constructor() {
         super(Librarian.name, Librarian.title, Librarian.description);
@@ -204,7 +204,7 @@ class Librarian extends TownsFolkRole {
 class Investigator extends TownsFolkRole {
     static name = "investigator";
     static title = "조사관";
-    static description = "당신은 이야기꾼이 지정한 두 명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.";
+    static description = "당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.";
 
     constructor() {
         super(Investigator.name, Investigator.title, Investigator.description);
@@ -238,7 +238,7 @@ class Empath extends TownsFolkRole {
 class FortuneTeller extends TownsFolkRole {
     static name = "fortuneteller";
     static title = "점쟁이";
-    static description = "매일 밤 당신은 당신이 지정한 두 명의 플레이어 중 악마가 있는지 알게 됩니다. 다만 실제로는 선한 플레이어지만 당신에게는 악마로 보이는 사람이 한 명 있습니다.";
+    static description = "매일 밤 당신은 당신이 지정한 2명의 플레이어 중 악마가 있는지 알게 됩니다. 다만 실제로는 선한 플레이어지만 당신에게는 악마로 보이는 사람이 1명 있습니다.";
 
     constructor() {
         super(FortuneTeller.name, FortuneTeller.title, FortuneTeller.description);
@@ -342,13 +342,53 @@ class Atheist extends TownsFolkRole {
     }
 }
 
+class Clockmaker extends TownsFolkRole {
+    static name = "clockmaker";
+    static title = "시계공";
+    static description = "첫날 밤 악마로부터 가장 가까운 하수인까지 얼마나 떨어져 있는지 알게 됩니다. 가령 악마와 하수인이 붙어 있다면 1입니다.";
+
+    constructor() {
+        super(Clockmaker.name, Clockmaker.title, Clockmaker.description);
+    }
+}
+
+class Chambermaid extends TownsFolkRole {
+    static name = "chambermaid";
+    static title = "가정부";
+    static description = "매일 밤, 당신은 살아있는 다른 플레이어 2명을 선택합니다. 오늘 밤 능력을 사용하기 위해 깨어났던 플레이어의 수를 알 수 있습니다. 선택할 플레이어가 부족하다면 능력을 사용할 수 없습니다.";
+
+    constructor() {
+        super(Chambermaid.name, Chambermaid.title, Chambermaid.description);
+    }
+}
+
+class Artist extends TownsFolkRole {
+    static name = "artist";
+    static title = "예술가";
+    static description = "게임 중 단 한번, 이야기꾼에게 비밀리에 '예' 또는 '아니오'로 답변할 수 있는 질문을 할 수 있습니다. 이야기꾼은 '예', '아니오', '모르겠습니다' 중 하나로 정직하게 대답합니다.";
+
+    constructor() {
+        super(Artist.name, Artist.title, Artist.description);
+    }
+}
+
+class Sage extends TownsFolkRole {
+    static name = "sage";
+    static title = "현자";
+    static description = "당신이 악마의 공격으로 죽으면 2명의 플레이어 중 1명이 악마라는 것을 알게 됩니다. 처형당해서 죽는 것은 포함되지 않습니다.";
+
+    constructor() {
+        super(Sage.name, Sage.title, Sage.description);
+    }
+}
+
 //--------------- END of TownsFolkRole ---------------
 
 //--------------- BEGIN of OutsiderRole ---------------
 class Butler extends OutsiderRole {
     static name = "butler";
     static title = "집사";
-    static description = "매일 밤, 당신은 다른 플레이어 한 명을 지목합니다. 그리고 그 날은 당신이 지정한 플레이어가 투표할 때만 투표할 수 있습니다.";
+    static description = "매일 밤, 다른 플레이어 1명을 지목합니다. 그리고 그 날은 당신이 지정한 플레이어가 투표할 때만 투표할 수 있습니다.";
 
     constructor() {
         super(Butler.name, Butler.title, Butler.description);
@@ -397,13 +437,23 @@ class Lunatic extends OutsiderRole {
         super(Lunatic.name, Lunatic.title, Lunatic.description);
     }
 }
+
+class Klutz extends OutsiderRole {
+    static name = "klutz";
+    static title = "얼간이";
+    static description = "당신이 죽으면 공개적으로 플레이어 1명을 선택해야 합니다. 만약 악한 플레이어를 선택했다면 당신의 팀은 패배합니다.";
+
+    constructor() {
+        super(Klutz.name, Klutz.title, Klutz.description);
+    }
+}
 //--------------- END of OutsiderRole ---------------
 
 //--------------- BEGIN of MinionRole ---------------
 class Poisoner extends MinionRole {
     static name = "poisoner";
     static title = "독살범";
-    static description = "매일 밤 당신은 한 명의 플레이어를 지목합니다. 그 플레이어는 오늘 밤부터 내일 해 질 녘까지 중독 상태가 됩니다.";
+    static description = "매일 밤 당신은 1명의 플레이어를 지목합니다. 그 플레이어는 오늘 밤부터 내일 해 질 녘까지 중독 상태가 됩니다.";
 
     constructor() {
         super(Poisoner.name, Poisoner.title, Poisoner.description);
@@ -426,7 +476,7 @@ class Spy extends MinionRole {
 class Baron extends MinionRole {
     static name = "baron";
     static title = "남작";
-    static description = "게임을 시작할 때 마을주민 역할 두 명을 이방인 역할로 교체합니다.";
+    static description = "게임을 시작할 때 마을주민 역할 2명을 이방인 역할로 교체합니다.";
 
     constructor() {
         super(Baron.name, Baron.title, Baron.description);
@@ -449,7 +499,7 @@ class ScarletWoman extends MinionRole {
 class Imp extends DemonRole {
     static name = "imp";
     static title = "임프";
-    static description = "첫날 밤 미참여 역할 3개를 알고 시작합니다. 첫날 밤을 제외한 매일 밤 당신은 플레이어를 지목하고 그 참가자는 사망합니다. 만약 당신이 자신을 지목했다면 하수인들 중 한 명이 임프가 됩니다.";
+    static description = "첫날 밤 미참여 역할 3개를 알고 시작합니다. 첫날 밤을 제외한 매일 밤 당신은 플레이어를 지목하고 그 참가자는 사망합니다. 만약 당신이 자신을 지목했다면 하수인들 중 1명이 임프가 됩니다.";
 
     constructor() {
         super(Imp.name, Imp.title, Imp.description);
