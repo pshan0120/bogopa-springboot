@@ -4,9 +4,9 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
-    <script src="<c:url value='/js/game/boc/troubleBrewing/initializationSetting.js'/>"></script>
-    <script src="<c:url value='/js/game/boc/troubleBrewing/constants.js'/>"></script>
-    <script src="<c:url value='/js/game/boc/troubleBrewing/roles.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/roles.js'/>"></script>
 
     <script>
         const PLAY_ID = ${playId};
@@ -22,6 +22,7 @@
         let minionPlayerList = [];
         let demonPlayerList = [];
         let playStatus = {};
+        let edition = null;
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -58,40 +59,82 @@
         });
 
 
-        const setRoleList = () => {
-            townsFolkRoleList = [
-                new WasherWoman(),
-                new Librarian(),
-                new Investigator(),
-                new Chef(),
-                new Empath(),
-                new FortuneTeller(),
-                new Undertaker(),
-                new Monk(),
-                new RavenKeeper(),
-                new Virgin(),
-                new Slayer(),
-                new Soldier(),
-                new Mayor(),
-            ];
+        const setRoleList = edition => {
+            if (edition === EDITION.TROUBLE_BREWING.name) {
+                townsFolkRoleList = [
+                    new WasherWoman(),
+                    new Librarian(),
+                    new Investigator(),
+                    new Chef(),
+                    new Empath(),
+                    new FortuneTeller(),
+                    new Undertaker(),
+                    new Monk(),
+                    new RavenKeeper(),
+                    new Virgin(),
+                    new Slayer(),
+                    new Soldier(),
+                    new Mayor(),
+                ];
 
-            outsiderRoleList = [
-                new Butler(),
-                new Drunk(),
-                new Recluse(),
-                new Saint(),
-            ];
+                outsiderRoleList = [
+                    new Butler(),
+                    new Drunk(),
+                    new Recluse(),
+                    new Saint(),
+                ];
 
-            minionRoleList = [
-                new Poisoner(),
-                new Spy(),
-                new Baron(),
-                new ScarletWomen(),
-            ];
+                minionRoleList = [
+                    new Poisoner(),
+                    new Spy(),
+                    new Baron(),
+                    new ScarletWoman(),
+                ];
 
-            demonRoleList = [
-                new Imp(),
-            ];
+                demonRoleList = [
+                    new Imp(),
+                ];
+            }
+
+            if (edition === EDITION.TROUBLE_BREWING_EXPERT.name) {
+                townsFolkRoleList = [
+                    new WasherWoman(),
+                    new Librarian(),
+                    new Investigator(),
+                    new Chef(),
+                    new Empath(),
+                    new FortuneTeller(),
+                    new Undertaker(),
+                    new Monk(),
+                    new RavenKeeper(),
+                    new Virgin(),
+                    new Slayer(),
+                    new Soldier(),
+                    new Mayor(),
+                    new PoppyGrower(),
+                    new Atheist(),
+                ];
+
+                outsiderRoleList = [
+                    new Butler(),
+                    new Drunk(),
+                    new Recluse(),
+                    new Saint(),
+                    new Lunatic(),
+                ];
+
+                minionRoleList = [
+                    new Poisoner(),
+                    new Spy(),
+                    new Baron(),
+                    new ScarletWoman(),
+                ];
+
+                demonRoleList = [
+                    new Imp(),
+                    new Legion(),
+                ];
+            }
 
             roleList = [
                 ...townsFolkRoleList,
@@ -109,8 +152,6 @@
             $("#firstNightDiv").hide();
             $("#otherDayDiv").hide();
             $("#otherNightDiv").hide();
-
-            setRoleList();
 
             const originalPlayMemberList = await readPlayMemberList(PLAY_ID);
             const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
@@ -157,6 +198,9 @@
 
         const openSetPlayerRoleByHostModal = () => {
             roleListByHost = [];
+            // TODO: 악마 군단까지 플레이 가능하면 해제
+            //setRoleList(EDITION.TROUBLE_BREWING_EXPERT.name);
+            setRoleList(EDITION.TROUBLE_BREWING.name);
 
             const $modal = $("#setPlayerRoleByHostModal");
             const townsFolkRoleListHtml = roleList
@@ -292,6 +336,7 @@
         }
 
         const setPlayersRoleByRandom = () => {
+            setRoleList(EDITION.TROUBLE_BREWING.name);
             setPlayersRole(playerList, roleList);
         }
 
@@ -417,16 +462,20 @@
             playStatusModal.open(createAssignedPlayerList());
         }
 
-        const openGuideModal = () => {
-            guideModal.openRuleGuideModal();
+        const openRuleGuideModal = () => {
+            ruleGuideModal.openRuleGuideModal();
         }
 
         const openRoleGuideModal = () => {
-            guideModal.openRoleGuideModal();
+            roleGuideModal.openRoleGuideModal();
+        }
+
+        const openExpertRoleGuideModal = () => {
+            expertRoleGuideModal.openExpertRoleGuideModal();
         }
 
         const openNightStepGuideModal = () => {
-            guideModal.openNightStepGuideModal();
+            nightStepGuideModal.openNightStepGuideModal();
         }
 
         const openTownModal = () => {
@@ -761,7 +810,7 @@
             $flowDiv.append(poisoner.createHtml());
             $flowDiv.append(monk.createHtml());
             $flowDiv.append(spy.createHtml());
-            $flowDiv.append(scarletWomen.createHtml());
+            $flowDiv.append(scarletWoman.createHtml());
             $flowDiv.append(imp.createHtml());
             $flowDiv.append(ravenKeeper.createHtml());
             $flowDiv.append(undertaker.createHtml());
@@ -816,6 +865,7 @@
                 minionPlayerList: JSON.stringify(minionPlayerList),
                 demonPlayerList: JSON.stringify(demonPlayerList),
                 playStatus: JSON.stringify(playStatus),
+                edition,
             }
 
             const request = {
@@ -851,7 +901,7 @@
             demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
-            setRoleList();
+            setRoleList(EDITION.TROUBLE_BREWING.name);
             console.log('game status loaded !!');
         }
 
@@ -878,12 +928,12 @@
             const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
 
             if (diedPlayer.name === Imp.name) {
-                const scarletWomenPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWomen);
+                const scarletWomanPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWoman);
 
-                if (scarletWomenPlayer
-                    && !scarletWomenPlayer.died) {
+                if (scarletWomanPlayer
+                    && !scarletWomanPlayer.died) {
                     if (4 <= alivePlayerList.length) {
-                        scarletWomenPlayer.changedToImp = true;
+                        scarletWomanPlayer.changedToImp = true;
                         alert("임프는 사망하였지만 부정한 여자가 새로운 임프가 되었습니다. 게임이 계속 진행됩니다.");
                         return false;
                     }
@@ -1000,6 +1050,9 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
+                                인트로 보기
+                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
                                 로그인 QR 공유
                             </button>
@@ -1009,11 +1062,14 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                 게임 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
                                 역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
+                                (임시) 숙련자 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
                                 밤 역할 진행 순서
@@ -1069,11 +1125,14 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                 게임 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
                                 역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
+                                (임시) 숙련자 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
                                 밤 역할 진행 순서
@@ -1119,11 +1178,14 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
                                 플레이 상태 모달 표시
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                 게임 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
                                 역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
+                                (임시) 숙련자 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
                                 밤 역할 진행 순서
@@ -1243,7 +1305,6 @@
 </div>
 
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/introductionModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
@@ -1261,13 +1322,17 @@
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/slayer.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/monk.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWomen.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWoman.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/undertaker.jspf" %>
 
+<%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" %>
+
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/soundEffectModal.jspf" %>
-
 <%@ include file="/WEB-INF/jsp/game/qrLoginModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>

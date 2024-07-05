@@ -4,8 +4,8 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
-    <script src="<c:url value='/js/game/boc/troubleBrewing/constants.js'/>"></script>
-    <script src="<c:url value='/js/game/boc/troubleBrewing/roles.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/roles.js'/>"></script>
 
     <script>
         const PLAY_ID = ${playId};

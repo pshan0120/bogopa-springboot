@@ -4,9 +4,9 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
-    <script src="<c:url value='/js/game/boc/troubleBrewing/constants.js'/>"></script>
-    <script src="<c:url value='/js/game/boc/troubleBrewing/roles.js'/>"></script>
-    <script src="<c:url value='/js/game/boc/troubleBrewing/initializationSetting.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/roles.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
 
     <script>
         const PLAY_ID = ${playId};
@@ -16,16 +16,20 @@
             $("#titleDiv").find("span[name='playName']").text(play.playName);
         });
 
-        const openGuideModal = () => {
-            guideModal.openRuleGuideModal();
+        const openRuleGuideModal = () => {
+            ruleGuideModal.openRuleGuideModal();
         }
 
         const openRoleGuideModal = () => {
-            guideModal.openRoleGuideModal();
+            roleGuideModal.openRoleGuideModal();
+        }
+
+        const openExpertRoleGuideModal = () => {
+            expertRoleGuideModal.openExpertRoleGuideModal();
         }
 
         const openNightStepGuideModal = () => {
-            guideModal.openNightStepGuideModal();
+            nightStepGuideModal.openNightStepGuideModal();
         }
 
         const openTownModal = () => {
@@ -86,11 +90,14 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                 게임 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
                                 역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
+                                (임시) 숙련자 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
                                 밤 역할 진행 순서
@@ -113,9 +120,14 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" %>
+
+<%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" %>
+
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>

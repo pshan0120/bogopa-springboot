@@ -29,11 +29,10 @@
             const playerSetting = initializationSetting.player
                 .find(player => townModal.playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
             const roleInitializationHtml = `
-                이야기꾼 \${townModal.playStatus.hostMemberName}<br/>
-                마을주민 \${playerSetting.townsFolk}명,
-                이방인 \${playerSetting.outsider}명,
-                하수인 \${playerSetting.minion}명,
-                악마 \${playerSetting.demon}명`
+                <span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
+                <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
+                <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
+                <span class="text-danger">악마 \${playerSetting.demon}명</span>`;
             $settingDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
 
             const $townDiv = $townModal.find("div[name='townDiv']");
@@ -64,14 +63,17 @@
 
                     return prev +
                         `<div class="row">
-                            <div class="col-8">
+                            <div class="col-2">
+                                \${found.seatNumber + 1}
+                            </div>
+                            <div class="col-6">
                                 \${playerNameHtml}
                             </div>
                             <div class="col-4">
                                 \${votableHtml}
                             </div>
                         </div>
-                        <hr>`;
+                        <hr class="mt-2 mb-2">`;
                 }
 
                 return "";
@@ -133,7 +135,7 @@
                 <div name="settingDiv">
                     <h4><span name="roleInitialization"></span></h4>
                 </div>
-                <hr>
+                <br>
                 <div name="townDiv"></div>
             </div>
             <div class="modal-footer">

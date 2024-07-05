@@ -8,10 +8,10 @@
                 .reduce((prev, next) => {
                     const playerStatusListHtml = Role.createPlayerStatusListHtml(next);
                     return prev + `<div class=\${Role.calculateRoleNameClass(next.position.name)}>
-                                \${next.playerName} - \${next.title}(\${next.name})<br/>
+                                \${next.seatNumber + 1}. \${next.playerName} - \${next.title}(\${next.name})<br/>
                                 \${playerStatusListHtml}
                             </div>
-                            <hr>`
+                            <hr class="mt-2 mb-2">`
                 }, "");
 
             const $modal = $("#playStatusModal");

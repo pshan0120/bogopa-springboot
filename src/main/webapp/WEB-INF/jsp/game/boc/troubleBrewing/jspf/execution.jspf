@@ -37,10 +37,10 @@
             const impPlayerHtml = (impPlayer ? impPlayer.playerName : "")
                 + (impPlayerStatusListHtml === "" ? "" : "(" + impPlayerStatusListHtml + ")");
 
-            const scarletWomenPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWomen);
-            const scarletWomenPlayerStatusListHtml = Role.createPlayerStatusListHtml(scarletWomenPlayer);
-            const scarletWomenPlayerHtml = (scarletWomenPlayer ? scarletWomenPlayer.playerName : "")
-                + (scarletWomenPlayerStatusListHtml === "" ? "" : "(" + scarletWomenPlayerStatusListHtml + ")");
+            const scarletWomanPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWoman);
+            const scarletWomanPlayerStatusListHtml = Role.createPlayerStatusListHtml(scarletWomanPlayer);
+            const scarletWomanPlayerHtml = (scarletWomanPlayer ? scarletWomanPlayer.playerName : "")
+                + (scarletWomanPlayerStatusListHtml === "" ? "" : "(" + scarletWomanPlayerStatusListHtml + ")");
 
             const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
 
@@ -67,7 +67,7 @@
                      - 처형 대상자가 없었거나 두 사람 이상인데 투표 수가 같다면 아무도 처형되지 않습니다.<br/>
                      - 처형 대상자 중 가장 많은 표를 받은 플레이어는 처형됩니다. 만약 악마가 처형되었고 부정한 여자가 없다면 선한 편이 승리합니다.<br/>
                     <strong class="font-red">- 임프 : \${impPlayerHtml}</strong><br/>
-                    <strong class="font-red">- 부정한 여자 : \${scarletWomenPlayerHtml}</strong><br/>
+                    <strong class="font-red">- 부정한 여자 : \${scarletWomanPlayerHtml}</strong><br/>
                 </p>
                 <button type="button" class="btn btn-info btn-block" onclick="execution.setVirginSkillNotAvailable()">
                     처녀 능력 사용됨

@@ -86,6 +86,7 @@
 		<url-pattern>*.jpg</url-pattern>
 		<url-pattern>*.gif</url-pattern>
 		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.webp</url-pattern>
 		<url-pattern>*.ico</url-pattern>
 		<url-pattern>*.swf</url-pattern>
 		<url-pattern>*.eot</url-pattern>

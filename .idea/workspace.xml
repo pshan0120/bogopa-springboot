@@ -9,12 +9,250 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="역할 지정 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="독재자 수정">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/alhadikhia.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/dianyuzhang.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/fanggu.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/hundun.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/imp.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/jianning.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/kazali.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/legion.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/leviathan.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/lilmonsta.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/lleech.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/nodashii.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/ojo.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/po.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/pukka.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/qiongqi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/riot.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/shabaloth.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/shimengmo.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/taotie.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/taowu.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/vigormortis.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/vortox.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/yaggababble.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/zombuul.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/angel.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/bootlegger.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/buddhist.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/deusexfiasco.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/djinn.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/doomsayer.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/duchess.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/ferryman.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/fibbin.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/fiddler.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/gardener.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/hellslibrarian.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/qilin.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/revolutionary.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/sentinel.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/spiritofivory.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/stormcatcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/fabled/toymaker.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/assassin.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/baron.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/boomdandy.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/cerenovus.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/chimei.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/devilsadvocate.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/eviltwin.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/fearmonger.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/ganshiren.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/goblin.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/godfather.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/gudiao.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/harpy.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/humeiniang.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/jinweijun.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/marionette.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/mastermind.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/mephit.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/mezepheles.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/niangjiushi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/organgrinder.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/panguan.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/pithag.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/poisoner.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/psychopath.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/scarletwoman.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/spy.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/summoner.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/vizier.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/widow.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/witch.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/yangguren.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/acrobat.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/barber.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/butler.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/damsel.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/drunk.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/golem.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/goon.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/hatter.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/heretic.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/jiubao.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/klutz.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/lunatic.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/moonchild.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/mutant.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/nichen.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/ogre.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/plaguedoctor.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/politician.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/puzzlemaster.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/recluse.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/rulianshi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/saint.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/shaxing.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/shijie.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/shusheng.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/snitch.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/sweetheart.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/tinker.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/alchemist.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/alsaahir.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/amnesiac.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/artist.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/atheist.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/balloonist.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/banshee.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/banxian.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/bianlianshi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/bountyhunter.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/cannibal.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/chambermaid.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/chef.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/choirboy.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/chongfei.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/clockmaker.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/courtier.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/cultleader.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/dagengren.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/daoshi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/dianxiaoer.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/dreamer.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/empath.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/engineer.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/exorcist.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/fangshi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/farmer.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/fengshuishi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/fisherman.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/flowergirl.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/fool.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/fortuneteller.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/gambler.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/geling.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/general.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/gossip.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/grandmother.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/heshang.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/highpriestess.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/huntsman.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/innkeeper.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/investigator.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/jinyiwei.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/juggler.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/king.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/knight.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/langzhong.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/lankeren.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/librarian.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/lycanthrope.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/magician.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/mathematician.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/mayor.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/minstrel.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/monk.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/nightwatchman.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/noble.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/oracle.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/pacifist.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/philosopher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/pixie.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/poppygrower.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/preacher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/professor.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/qianke.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/qintianjian.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/ravenkeeper.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/sage.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/sailor.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/savant.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/seamstress.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/shugenja.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/slayer.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/snakecharmer.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/soldier.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/steward.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/tealady.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/tixingguan.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/towncrier.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/undertaker.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/villageidiot.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/virgin.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/washerwoman.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/wudaozhe.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/wushiren.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/xingjiaoshang.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/xionghaizi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/xizi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/yinluren.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/townsfolk/yinyangshi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/apprentice.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/barista.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/beggar.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/bishop.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/bonecollector.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/bureaucrat.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/butcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/deviant.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/gangster.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/gunslinger.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/harlot.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/hebo.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/jiaohuazi.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/judge.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/matron.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/scapegoat.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/thief.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/traveller/voudon.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/dayAction.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/becomingADictator/jspf/nightAction.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/becomingADictator/roles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fo/waitingRoom.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/clientPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/playStatusModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/playStatusModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWomen.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWoman.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/town.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/town.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/troubleBrewing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/retriever/bg.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/retriever/favi.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/retriever/labrador_illerstration.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/retriever/retriever.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/retriever/retriever_off.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/retriever/retriever_on.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/retriever/retriever_on1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/troubleBrewing/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/troubleBrewing/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/initializationSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/troubleBrewing/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/roles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,44 +298,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/guide",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\guide" />
+      <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\becomingADictator\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\becomingADictator" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\becomingADictator" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\catchAThief\jspf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
+      <recent name="D:\dev\bogopa\src\main\webapp\js\game\boc" />
       <recent name="D:\dev\bogopa\src\main\resources\config" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\catchAThief\jspf" />
-      <recent name="D:\dev\bogopa\src\main\webapp\js\game\foodChainMagnate" />
-      <recent name="D:\dev\bogopa\src\main\webapp\sounds" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="boardgame.fo.game.presentation" />
@@ -280,14 +518,9 @@
       <workItem from="1717944096685" duration="2469000" />
       <workItem from="1718123485019" duration="6150000" />
       <workItem from="1718207653656" duration="4926000" />
-      <workItem from="1718388406333" duration="3166000" />
-    </task>
-    <task id="LOCAL-00077" summary="도둑잡기 완성">
-      <created>1714877952424</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1714877952424</updated>
+      <workItem from="1718388406333" duration="3791000" />
+      <workItem from="1718546465582" duration="1077000" />
+      <workItem from="1720193022772" duration="10407000" />
     </task>
     <task id="LOCAL-00078" summary="오류 수정">
       <created>1714962773884</created>
@@ -625,7 +858,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718129313519</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="독재자 수정">
+      <created>1718391738372</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1718391738373</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,7 +886,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="도둑잡기 밸런스 조정" />
     <MESSAGE value="투표 개선" />
     <MESSAGE value="대기실 진행중" />
     <MESSAGE value="배경음 추가" />
@@ -671,7 +910,8 @@
     <MESSAGE value="14인테스트" />
     <MESSAGE value="votingPlayerList 초기화 추가" />
     <MESSAGE value="역할 지정 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="역할 지정 추가" />
+    <MESSAGE value="독재자 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="독재자 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

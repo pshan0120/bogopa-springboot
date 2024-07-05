@@ -93,17 +93,18 @@
         }
 
         const renderButtons = () => {
-            const $div = $("#buttonDiv");
+            const $buttonDiv = $("#buttonDiv");
 
             const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
             if (hostPlayMember.memberId === memberId) {
-                $div.find("button[name='beginPlayButton']").show();
-                $div.find("button[name='cancelPlayButton']").show();
+                $buttonDiv.find("button[name='beginPlayButton']").show();
+                $buttonDiv.find("button[name='cancelPlayButton']").show();
                 return;
             }
 
+            const $joinDiv = $("#joinDiv");
             if (!clientPlayMemberList.some(playMember => playMember.memberId === memberId)) {
-                $div.find("button[name='joinPlayButton']").show();
+                $joinDiv.find("button[name='joinPlayButton']").show();
                 return;
             }
         }
@@ -239,8 +240,24 @@
                                 </div>
                             </form>
                         </div>
+
+                        <div id="joinDiv">
+                            <button type="button" class="btn btn-primary btn-block" onclick="joinPlay()"
+                                    name="joinPlayButton" style="display: none">
+                                플레이 참가
+                            </button>
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
+                            <button type="button" class="btn btn-success btn-block" onclick="document.location.reload()">
+                                마을 입장
+                            </button>
+                        </div>
+
+                        <hr>
+
                         <div id="playerListDiv">
-                            <h5>참가 플레이어 : <span name="numberOfJoined"></span>명</h5>
+                            <h5>현재 참가 플레이어 : <span name="numberOfJoined"></span>명</h5>
                             <div class="table-responsive">
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
@@ -255,13 +272,6 @@
                     </div>
                     <div class="card-footer py-4">
                         <div id="buttonDiv">
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
-                            </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="joinPlay()"
-                                    name="joinPlayButton" style="display: none">
-                                플레이 참가
-                            </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="beginPlay()"
                                     name="beginPlayButton" style="display: none">
                                 플레이 시작

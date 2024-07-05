@@ -1,0 +1,123 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const roleGuideModal = {
+        townsFolkRoleList: [],
+        outsiderRoleList: [],
+        minionRoleList: [],
+        demonRoleList: [],
+        roleList: [],
+        openRoleGuideModal: () => {
+            roleGuideModal.setRoleList();
+
+            const $roleGuideModal = $("#roleGuideModal");
+            const $roleListDiv = $roleGuideModal.find("div[name='roleListDiv']");
+            const roleListHtml = `
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.TOWNS_FOLK.name)}">\${POSITION.TOWNS_FOLK.title}</h3>
+                <ol class="pl-4">
+                    \${roleGuideModal.createRoleHtml(roleGuideModal.townsFolkRoleList)}
+                </ol>
+                <hr>
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.OUTSIDER.name)}">\${POSITION.OUTSIDER.title}</h3>
+                <ol class="pl-4">
+                    \${roleGuideModal.createRoleHtml(roleGuideModal.outsiderRoleList)}
+                </ol>
+                <hr>
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.MINION.name)}">\${POSITION.MINION.title}</h3>
+                <ol class="pl-4">
+                    \${roleGuideModal.createRoleHtml(roleGuideModal.minionRoleList)}
+                </ol>
+                <hr>
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.DEMON.name)}">\${POSITION.DEMON.title}</h3>
+                <ol class="pl-4">
+                    \${roleGuideModal.createRoleHtml(roleGuideModal.demonRoleList)}
+                </ol>
+                <hr>`;
+
+            $roleListDiv.empty().html(roleListHtml);
+
+            $roleGuideModal.modal("show");
+        },
+        setRoleList: () => {
+            roleGuideModal.townsFolkRoleList = [
+                new WasherWoman(),
+                new Librarian(),
+                new Investigator(),
+                new Chef(),
+                new Empath(),
+                new FortuneTeller(),
+                new Undertaker(),
+                new Monk(),
+                new RavenKeeper(),
+                new Virgin(),
+                new Slayer(),
+                new Soldier(),
+                new Mayor(),
+            ];
+
+            roleGuideModal.outsiderRoleList = [
+                new Butler(),
+                new Drunk(),
+                new Recluse(),
+                new Saint(),
+            ];
+
+            roleGuideModal.minionRoleList = [
+                new Poisoner(),
+                new Spy(),
+                new Baron(),
+                new ScarletWoman(),
+            ];
+
+            roleGuideModal.demonRoleList = [
+                new Imp(),
+            ];
+
+            roleGuideModal.roleList = [
+                ...roleGuideModal.townsFolkRoleList,
+                ...roleGuideModal.outsiderRoleList,
+                ...roleGuideModal.minionRoleList,
+                ...roleGuideModal.demonRoleList,
+            ];
+        },
+        createRoleHtml: roleList => roleList.reduce((prev, next) => {
+            const fontClass = Role.calculateRoleNameClass(next.position.name);
+            return prev +
+                `<li class="\${fontClass} mb-4">
+                    <h4 class="\${fontClass}">\${next.title}</h4>
+                    <div class="row">
+                        <div class="col-3 pl-0 pr-0">
+                            <img src="\${next.iconImageUrl}" class="img-responsive img-thumbnail m-auto">
+                        </div>
+                        <div class="col-9">
+                            <small>\${next.description}</small>
+                        </div>
+                    </div>
+                </li>`;
+        }, ""),
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="roleGuideModal" role="dialog"
+     aria-labelledby="roleGuideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">역할 가이드</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="roleListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

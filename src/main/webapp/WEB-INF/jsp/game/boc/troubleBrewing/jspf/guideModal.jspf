@@ -20,29 +20,29 @@
 
             const $roleGuideModal = $("#roleGuideModal");
             const $roleListDiv = $roleGuideModal.find("div[name='roleListDiv']");
-            const townsfolkRoleListHtml = `
+            const roleListHtml = `
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.TOWNS_FOLK.name)}">\${POSITION.TOWNS_FOLK.title}</h3>
-                <ul class="">
+                <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.townsFolkRoleList)}
-                </ul>
+                </ol>
                 <hr>
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.OUTSIDER.name)}">\${POSITION.OUTSIDER.title}</h3>
-                <ul class="">
+                <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.outsiderRoleList)}
-                </ul>
+                </ol>
                 <hr>
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.MINION.name)}">\${POSITION.MINION.title}</h3>
-                <ul class="">
+                <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.minionRoleList)}
-                </ul>
+                </ol>
                 <hr>
                 <h3 class="\${Role.calculateRoleNameClass(POSITION.DEMON.name)}">\${POSITION.DEMON.title}</h3>
-                <ul class="">
+                <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.demonRoleList)}
-                </ul>
+                </ol>
                 <hr>`;
 
-            $roleListDiv.empty().html(townsfolkRoleListHtml);
+            $roleListDiv.empty().html(roleListHtml);
 
             $roleGuideModal.modal("show");
         },
@@ -74,7 +74,7 @@
                 new Poisoner(),
                 new Spy(),
                 new Baron(),
-                new ScarletWomen(),
+                new ScarletWoman(),
             ];
 
             guideModal.demonRoleList = [
@@ -90,11 +90,13 @@
         },
         createRoleHtml: roleList => roleList.reduce((prev, next) => {
             const fontClass = Role.calculateRoleNameClass(next.position.name);
+            // <img src="\${POSITION.TOWNS_FOLK.title}" class="img-responsive img-thumbnail m-auto">
             return prev +
                 `<li class="\${fontClass}">
-                        <h4 class="\${fontClass}">\${next.title}</h4>
-                        <p>\${next.description}</p>
-                    </li>`;
+                    <h4 class="\${fontClass}">\${next.title}</h4>
+                    <img src="\${next.iconImageUrl}" class="img-responsive img-thumbnail m-auto">
+                    <p>\${next.description}</p>
+                </li>`;
         }, ""),
         close: () => {
         },
