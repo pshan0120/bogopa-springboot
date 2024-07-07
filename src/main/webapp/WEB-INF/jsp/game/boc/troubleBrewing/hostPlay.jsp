@@ -700,8 +700,7 @@
                 <p>
                    1. 몇 초 기다린 뒤, 모두 눈을 뜨라고 선언합니다.
                 </p>
-            </div>
-            <hr/>`;
+            </div>`;
         }
 
         const createMorningHtml = () => {
