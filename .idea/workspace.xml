@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="탄시빌 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="배경음악 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" afterDir="false" />
     </list>
@@ -280,14 +280,7 @@
       <workItem from="1718388406333" duration="3791000" />
       <workItem from="1718546465582" duration="1077000" />
       <workItem from="1720193022772" duration="13616000" />
-      <workItem from="1720318961248" duration="2994000" />
-    </task>
-    <task id="LOCAL-00082" summary="비공개 수정">
-      <created>1714996490603</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1714996490603</updated>
+      <workItem from="1720318961248" duration="3791000" />
     </task>
     <task id="LOCAL-00083" summary="자동로그인 추가">
       <created>1715005355518</created>
@@ -625,7 +618,14 @@
       <option name="project" value="LOCAL" />
       <updated>1720207336774</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="배경음악 추가">
+      <created>1720328803679</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1720328803680</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,7 +646,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="townModal 오류 수정" />
     <MESSAGE value="대기실 작업중" />
     <MESSAGE value="내 역할 보기 추가" />
     <MESSAGE value="대기실 추가" />
@@ -671,7 +670,8 @@
     <MESSAGE value="이미지 추가" />
     <MESSAGE value="탄시빌 캐릭터 추가" />
     <MESSAGE value="탄시빌 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="탄시빌 추가" />
+    <MESSAGE value="배경음악 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="배경음악 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
