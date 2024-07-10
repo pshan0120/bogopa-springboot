@@ -981,6 +981,19 @@
             introductionModal.open();
         }
 
+        const getIframeLocalStorage = () => {
+            var iframe = document.getElementById('myIframe');
+            var iframeWindow = iframe.contentWindow;
+
+            // Check if iframe is from the same origin
+            try {
+                var localStorageValue = iframeWindow.localStorage.getItem('yourKey');
+                console.log('LocalStorage value from iframe:', localStorageValue);
+            } catch (e) {
+                console.error('Error accessing localStorage from iframe:', e);
+            }
+        };
+
     </script>
 </head>
 
@@ -1010,6 +1023,15 @@
     </div>
     <!-- Page content -->
     <div class="container mt--7">
+        <div class="row">
+            <div class="col-xl-12 pr-0 pl-0">
+                <div class="card bg-transparent">
+                    <div class="card-body p-0">
+                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/pocketGrimoire.jspf" %>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
                 <div class="card shadow mt-5 display-none" id="settingDiv">

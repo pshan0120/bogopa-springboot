@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<div name="pocketGrimoireDiv">
+    <h3 class="text-right">
+        Pocket Grimoire
+        <a data-toggle="collapse" href="#pocketGrimoireDiv" role="button" aria-expanded="false"
+           aria-controls="pocketGrimoireListDiv" class="font-light-black">
+            열기/닫기
+        </a>
+    </h3>
+    <div class="collapse" id="pocketGrimoireDiv">
+        <iframe id="myIframe" src="https://www.pocketgrimoire.co.uk/en_GB/" height="600" width="100%"></iframe>
+    </div>
+</div>
