@@ -75,5 +75,53 @@ public class BocController {
         mv.addObject("playId", playId);
         return mv;
     }
-    
+
+
+
+    @GetMapping("/game/boc-custom/play")
+    public String openBocCustomPlayList() {
+        return "/game/boc/custom/playList";
+    }
+
+    @GetMapping("/game/boc-custom/play/{playId}")
+    public ModelAndView openBocCustomPlayByPlayNo(@PathVariable("playId") long playId, HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("playId", playId);
+
+        // TODO: 나중에 호스트 적용
+        /*ReadPlayMemberListResponseDto readPlayMemberList = gameService.readPlayMemberList(playId);
+        readPlayMemberList.getHostPlayMember();*/
+
+        if (isAdminMemberLoggedIn()) {
+            mv.setViewName("/game/boc/custom/hostPlay");
+        } else {
+            if (request.getParameterMap().containsKey("hashKey")) {
+                String hashKey = String.valueOf(request.getParameter("hashKey"));
+                System.out.println("hashKey : " + hashKey);
+
+                String memberId = comService.decrypted(hashKey);
+                System.out.println("memberId : " + memberId);
+
+                loginService.setLogin(Long.parseLong(memberId), request);
+            }
+
+            mv.setViewName("/game/boc/custom/clientPlay");
+        }
+        return mv;
+    }
+
+    @GetMapping("/game/boc-custom/play/host/{playId}")
+    public ModelAndView openBocCustomHostPlayByPlayNo(@PathVariable("playId") long playId) {
+        ModelAndView mv = new ModelAndView("/game/boc/custom/hostPlay");
+        mv.addObject("playId", playId);
+        return mv;
+    }
+
+    @GetMapping("/game/boc-custom/play/client/{playId}")
+    public ModelAndView openBocCustomClientPlayByPlayNo(@PathVariable("playId") long playId) {
+        ModelAndView mv = new ModelAndView("/game/boc/custom/clientPlay");
+        mv.addObject("playId", playId);
+        return mv;
+    }
+
 }

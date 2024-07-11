@@ -18,7 +18,7 @@
             const request = {
                 boardTypeCode: BoardType.NOTICE.code,
                 searchText: $form.find("input[name='searchText']").val(),
-                page: page,
+                page,
                 size: PAGE_SIZE,
                 descending: true,
                 sortBy: "id",
@@ -61,7 +61,7 @@
             const request = {
                 boardTypeCode: BoardType.FAQ.code,
                 searchText: $form.find("input[name='searchText']").val(),
-                page: page,
+                page,
                 size: PAGE_SIZE,
                 descending: true,
                 sortBy: "id",

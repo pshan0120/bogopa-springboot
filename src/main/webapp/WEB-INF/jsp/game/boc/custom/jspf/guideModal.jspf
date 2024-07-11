@@ -1,0 +1,338 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const guideModal = {
+        townsFolkRoleList: [],
+        outsiderRoleList: [],
+        minionRoleList: [],
+        demonRoleList: [],
+        roleList: [],
+        openRuleGuideModal: () => {
+            const $guideModal = $("#guideModal");
+            $guideModal.modal("show");
+        },
+        openNightStepGuideModal: () => {
+            const $nightStepGuideModal = $("#nightStepGuideModal");
+            $nightStepGuideModal.modal("show");
+        },
+        openRoleGuideModal: () => {
+            guideModal.setRoleList();
+
+            const $roleGuideModal = $("#roleGuideModal");
+            const $roleListDiv = $roleGuideModal.find("div[name='roleListDiv']");
+            const roleListHtml = `
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.TOWNS_FOLK.name)}">\${POSITION.TOWNS_FOLK.title}</h3>
+                <ol class="pl-4">
+                    \${guideModal.createRoleHtml(guideModal.townsFolkRoleList)}
+                </ol>
+                <hr>
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.OUTSIDER.name)}">\${POSITION.OUTSIDER.title}</h3>
+                <ol class="pl-4">
+                    \${guideModal.createRoleHtml(guideModal.outsiderRoleList)}
+                </ol>
+                <hr>
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.MINION.name)}">\${POSITION.MINION.title}</h3>
+                <ol class="pl-4">
+                    \${guideModal.createRoleHtml(guideModal.minionRoleList)}
+                </ol>
+                <hr>
+                <h3 class="\${Role.calculateRoleNameClass(POSITION.DEMON.name)}">\${POSITION.DEMON.title}</h3>
+                <ol class="pl-4">
+                    \${guideModal.createRoleHtml(guideModal.demonRoleList)}
+                </ol>
+                <hr>`;
+
+            $roleListDiv.empty().html(roleListHtml);
+
+            $roleGuideModal.modal("show");
+        },
+        setRoleList: () => {
+            guideModal.townsFolkRoleList = [
+                new WasherWoman(),
+                new Librarian(),
+                new Investigator(),
+                new Chef(),
+                new Empath(),
+                new FortuneTeller(),
+                new Undertaker(),
+                new Monk(),
+                new RavenKeeper(),
+                new Virgin(),
+                new Slayer(),
+                new Soldier(),
+                new Mayor(),
+            ];
+
+            guideModal.outsiderRoleList = [
+                new Butler(),
+                new Drunk(),
+                new Recluse(),
+                new Saint(),
+            ];
+
+            guideModal.minionRoleList = [
+                new Poisoner(),
+                new Spy(),
+                new Baron(),
+                new ScarletWoman(),
+            ];
+
+            guideModal.demonRoleList = [
+                new Imp(),
+            ];
+
+            guideModal.roleList = [
+                ...guideModal.townsFolkRoleList,
+                ...guideModal.outsiderRoleList,
+                ...guideModal.minionRoleList,
+                ...guideModal.demonRoleList,
+            ];
+        },
+        createRoleHtml: roleList => roleList.reduce((prev, next) => {
+            const fontClass = Role.calculateRoleNameClass(next.position.name);
+            // <img src="\${POSITION.TOWNS_FOLK.title}" class="img-responsive img-thumbnail m-auto">
+            return prev +
+                `<li class="\${fontClass}">
+                    <h4 class="\${fontClass}">\${next.title}</h4>
+                    <img src="\${next.iconImageUrl}" class="img-responsive img-thumbnail m-auto">
+                    <p>\${next.description}</p>
+                </li>`;
+        }, ""),
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="guideModal" role="dialog"
+     aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">게임 설명</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h2>
+                        Blood on the Clocktower 란?
+                    </h2>
+                    <p>
+                        블러드 온 클락타워는 2022년에 출시된 보드 게임으로, 논리와 블러핑을 통해 악마를 추리하는 게임입니다.<br/>
+                        이 게임은 5~20명의 플레이어로 구성된 선과 악의 두 팀이 대립하는 게임으로, 이야기꾼이 게임 진행을 주관하고 중요한 결정을 내립니다.<br/>
+                        블러드 온 클락타워 게임의 목표는 악마를 성공적으로 추리하고 처형하는 것입니다.<br/>
+                        낮에는 플레이어가 정보를 교환하거나 거짓말을 퍼뜨리며, 밤에는 이야기꾼이 플레이어를 깨우고 정보를 수집하거나 악당이 물리치는 시간입니다.
+                    </p>
+                </div>
+                <hr>
+                <div>
+                    <h2>
+                        규칙
+                    </h2>
+                    <ul class="">
+                        <li class="">
+                            게임 시작 전에 이야기꾼은 각 플레이어에게 역할을 배정하고 해당 플레이어게만 그 역할을 알려 줍니다.
+                            각 역할은 고유한 능력을 가지고 있습니다.
+                        </li>
+                        <li class="">
+                            낮 시간에 플레이어는 자신의 역할과 관련된 정보를 공유하거나, 다른 플레이어의 정보를 듣거나, 의심하거나, 협력하거나, 거짓말하거나, 혼란을 일으키거나 할 수
+                            있습니다.</br>
+                            선한 팀은 악마를 찾아내고 처치하는 것이 목표이므로, 대부분 진실을 말할 것입니다. </br>
+                            하지만 일부 좋은 역할은 거짓말을 하는 것이 유리할 수도 있습니다.</br>
+                            악한 팀은 마을을 파괴하고 생존하는 것이 목표이므로, 거짓말을 하고 혼란을 일으켜야 합니다.</br>
+                            악한 역할은 좋은 역할로 위장해서 거짓 정보를 전파할 수 있습니다.</br>
+                        </li>
+                        <li class="">
+                            낮에는 또한, 한 명 이상의 플레이어를 처형하기 위한 투표가 진행됩니다. 처형은 다음과 같은 방식으로 이루어집니다.</br>
+                            - 이야기꾼이 처형 과정을 시작한다고 선언합니다.</br>
+                            - 어떤 플레이어든 다른 한 명의 플레이어를 처형 후보로 지목할 수 있습니다. 이를 지명이라고 합니다.</br>
+                            - 지명된 후보는 자신의 변론을 할 수 있습니다.</br>
+                            - 모든 플레이어는 자신의 손가락으로 지명된 후보 중 한 명에게 표를 줄 수 있습니다. 이를 투표라고 합니다.</br>
+                            - 가장 많은 표를 받은 후보가 처형됩니다. 만약 동점인 경우가 있다면, 동점인 후보 중에서 다시 투표를 합니다.</br>
+                            - 처형된 플레이어는 사망하지만 어떤 역할이었는지는 공개되지 않습니다.</br>
+                            - 이야기꾼이 낮 시간이 끝났다고 선언하고 밤 단계를 진행합니다.</br>
+                        </li>
+                        <li class="">
+                            밤에는, 모든 플레이어는 눈을 감고, 이야기꾼은 일부 플레이어를 깨워서 자신의 역할 능력을 사용하게 합니다.</br>
+                            좋은 역할 중에는 밤에 다른 플레이어의 정체를 알 수 있는 역할이 있고, 악한 역할 중에는 밤에 다른 플레이어를 죽일 수 있는 역할이 있습니다.</br>
+                            이야기꾼은 각 플레이어의 능력에 따라 다른 플레이어를 깨우거나, 정보를 전달하거나, 손가락 신호를 사용하거나, 거짓 정보를 주거나 할 수 있습니다.</br>
+                        </li>
+                        <li class="">
+                            아침이 되면 이야기꾼은 악마가 죽인 플레이어를 공개합니다. 역시 어떤 역할이었는지는 공개되지 않습니다.</br>
+                        </li>
+                        <li class="">
+                            사망한 플레이어는 즉시 능력이 사라지며 처형 후보 지목을 할 수 없게 됩니다. 그리고 투표는 나머지 게임 동안 단 한번만 할 수 있습니다.</br>
+                            하지만 여전히 게임에 참여중이기 때문에 낮에 활동할 수 있고 밤에는 눈을 감아야 합니다.
+                        </li>
+                        <li class="">
+                            게임은 다음과 같은 경우에 종료됩니다.<br/>
+                            <span class="font-blue">- 악마가 죽으면 선한 팀이 승리합니다.</span><br/>
+                            <span class="font-red">- 두 명의 플레이어만 살아남으면 악한 팀이 승리합니다.</span><br/>
+                            <span class="font-blue">- 만약 두 팀이 동시에 승리 조건을 달성했다면(악마가 죽고 나서 두 명이 남음) 선한 팀이 승리합니다.</span><br/>
+                            <span class="font-red">* 만약 악마가 죽더라도 부정한 여자와 같은 일부 역할이 있다면 계속 진행됩니다.</span>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+
+                <div>
+                    <h2>
+                        전략과 팁
+                    </h2>
+                    <ul class="">
+                        <li class="font-blue">
+                            선한 팀이라면, 다른 선한 플레이어와 정보를 공유하고 협력해야 합니다.
+                            당신의 역할 능력을 최대한 활용하고, 악마를 찾아내기 위해 단서를 찾아야 합니다.
+                            하지만, 너무 많은 정보를 밝히면 악한 팀에게 이점을 줄 수 있으니 조심해야 합니다.
+                            또한, 당신이 취한 능력이나 받은 정보가 정확하지 않을 수도 있으니, 다른 플레이어의 말을 잘 들어야 합니다.
+                        </li>
+                        <li class="font-red">
+                            악한 팀이라면, 거짓말과 속임수로 선한 팀을 혼란스럽게 해야 합니다.
+                            당신의 역할 능력을 잘 숨기고, 선한 역할로 위장해야 합니다.
+                            악마는 밤에 한 명씩 죽일 수 있으니, 선한 팀의 핵심 인물을 공격하는 것이 좋습니다.
+                            하수인은 악마를 보호하고, 선한 팀의 의심을 조장하는 역할을 해야 합니다.
+                        </li>
+                        <li class="">
+                            이야기꾼이라면, 게임을 재미있고 공정하게 만들어야 합니다.
+                            당신은 게임의 규칙과 역할의 능력을 잘 알고 있어야 하고, 게임의 진행 상황에 따라 적절하게 조정해야 합니다.
+                            한 진영이 너무 압도적으로 우세하다면, 다른 진영에게 도움이 되는 정보나 이벤트를 제공할 수 있습니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="nightStepGuideModal" role="dialog"
+     aria-labelledby="nightStepGuideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">밤 역할 진행 순서</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h4>첫날 밤</h4>
+                    <ul class="">
+                        <li class="font-orange">
+                            황혼 단계
+                        </li>
+                        <li class="font-red">
+                            하수인 정보
+                        </li>
+                        <li class="font-red">
+                            악마 정보
+                        </li>
+                        <li class="font-red">
+                            독살범
+                        </li>
+                        <li class="font-red">
+                            스파이
+                        </li>
+                        <li class="font-blue">
+                            세탁부
+                        </li>
+                        <li class="font-blue">
+                            사서
+                        </li>
+                        <li class="font-blue">
+                            조사관
+                        </li>
+                        <li class="font-blue">
+                            요리사
+                        </li>
+                        <li class="font-blue">
+                            공감능력자
+                        </li>
+                        <li class="font-blue">
+                            점쟁이
+                        </li>
+                        <li class="font-blue">
+                            집사
+                        </li>
+                        <li class="font-orange">
+                            새벽 단계
+                        </li>
+                    </ul>
+                    <h4>두번째 날 이후 밤</h4>
+                    <ul class="">
+                        <li class="font-orange">
+                            황혼 단계
+                        </li>
+                        <li class="font-red">
+                            독살범
+                        </li>
+                        <li class="font-blue">
+                            수도승
+                        </li>
+                        <li class="font-red">
+                            스파이
+                        </li>
+                        <li class="font-red">
+                            부정한 여자
+                        </li>
+                        <li class="font-red">
+                            임프
+                        </li>
+                        <li class="font-blue">
+                            레이븐키퍼
+                        </li>
+                        <li class="font-blue">
+                            장의사
+                        </li>
+                        <li class="font-blue">
+                            공감능력자
+                        </li>
+                        <li class="font-blue">
+                            점쟁이
+                        </li>
+                        <li class="font-blue">
+                            집사
+                        </li>
+                        <li class="font-orange">
+                            새벽 단계
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="roleGuideModal" role="dialog"
+     aria-labelledby="roleGuideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">역할 가이드</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>역할 설명</h2>
+                <div name="roleListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

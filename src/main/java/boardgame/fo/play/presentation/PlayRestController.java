@@ -1,8 +1,10 @@
 package boardgame.fo.play.presentation;
 
+import boardgame.com.mapping.CommandMap;
 import boardgame.fo.play.dto.*;
 import boardgame.fo.play.service.PlayLogService;
 import boardgame.fo.play.service.PlayMemberService;
+import boardgame.fo.play.service.PlayRecordService;
 import boardgame.fo.play.service.PlayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,8 @@ public class PlayRestController {
     private final PlayMemberService playMemberService;
 
     private final PlayLogService playLogService;
+
+    private final PlayRecordService playRecordService;
 
 
     @GetMapping("")
@@ -67,6 +71,11 @@ public class PlayRestController {
     @DeleteMapping("/log/all")
     public void deletePlayLogAll(@Validated @RequestBody DeletePlayLogAllRequestDto requestDto) {
         playLogService.deletePlayLogByPlayNo(requestDto);
+    }
+
+    @GetMapping("/record/page")
+    public Map<String, Object> readPlayRecordPage(CommandMap commandMap) {
+        return playRecordService.readPlayRecordPage(commandMap.getMap());
     }
 
 }

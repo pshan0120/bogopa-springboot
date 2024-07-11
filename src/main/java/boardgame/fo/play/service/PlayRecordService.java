@@ -17,7 +17,13 @@ public interface PlayRecordService {
 
     Map<String, Object> selectPlayRecordByGameList(Map<String, Object> map);
 
-    Map<String, Object> selectBocPlayRecordList(Map<String, Object> map);
+    Map<String, Object> readPlayRecordPage(Map<String, Object> map);
+
+    Map<String, Object> selectPlayRecordListByGameId(Map<String, Object> map, long gameId);
+
+    Map<String, Object> selectBocCustomPlayRecordList(Map<String, Object> map);
+
+    Map<String, Object> selectBocTroubleBrewingPlayRecordList(Map<String, Object> map);
 
     Map<String, Object> selectFruitShopPlayRecordList(Map<String, Object> map);
 

@@ -13,6 +13,7 @@ public enum Game {
     FRUIT_SHOP("과일가게", 1952, 5),
     CATCH_A_THIEF("도둑잡기", 1953, 6),
     BECOMING_A_DICTATOR("이리하여 나는 독재자가 되었다", 1954, 7),
+    BOC_CUSTOM("BOC CUSTOM", 1955, 4),
     ;
 
     private final String gameName;

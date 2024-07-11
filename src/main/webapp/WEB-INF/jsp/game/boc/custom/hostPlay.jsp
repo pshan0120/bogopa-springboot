@@ -10,6 +10,10 @@
 
     <script>
         const PLAY_ID = ${playId};
+        let editionList = [];
+        let jinxList = [];
+        let characterList = [];
+        let nightOrderList = [];
         let playerList = [];
         let townsFolkRoleList = [];
         let outsiderRoleList = [];
@@ -25,6 +29,12 @@
         let edition = null;
 
         $(async () => {
+            // TODO: 에디션 내 역할 [] 만들 것
+            editionList = await readEditionList();
+            jinxList = await readJinxList();
+            characterList = await readCharacterList();
+            nightOrderList = await readNightOrderList();
+
             await gfn_readPlayablePlayById(PLAY_ID);
 
             await loadGameStatus();
@@ -56,7 +66,32 @@
             showAllPlayerRoleList();
 
             $("#settingDiv").show();
+
         });
+
+        const readEditionList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/editions.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const readJinxList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/jinxes/kr_KO.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const readCharacterList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/characters/kr_KO.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const readNightOrderList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/night-order.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
 
 
         const setRoleList = edition => {
@@ -995,7 +1030,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
                         <h1 class="text-white">Blood on the Clocktower</h1>
-                        <p class="text-lead text-light">trouble brewing</p>
+                        <p class="text-lead text-light">custom</p>
                     </div>
                 </div>
             </div>
@@ -1013,7 +1048,7 @@
             <div class="col-xl-12 pr-0 pl-0">
                 <div class="card bg-transparent">
                     <div class="card-body p-0">
-                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/pocketGrimoire.jspf" %>
+                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/pocketGrimoire.jspf" %>
                     </div>
                 </div>
             </div>
@@ -1027,6 +1062,35 @@
                         </h2>
                     </div>
                     <div class="card-body">
+                        <h3>
+                            1. 에디션 결정
+                        </h3>
+                        <h3>
+                            2. 그리모어 세팅
+                        </h3>
+                        <h3>
+                            3. 플레이어 역할 지정
+                        </h3>
+                        <p>
+                            1. 목표<br/>
+                            시간 단축을 위해...<br/>
+                            - 닉네임 입력은 참여자가 직접 하도록 한다.<br/>
+                            - 참여자는 주어진 역할을 확인할 수 있다.<br/>
+                            <br/>
+                            진행 편의를 위해<br/>
+                            - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/>
+                            자동이면 좋겠지만 안되면 직접 선택이라도<br/>
+                            - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/>
+                            지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/>
+                            커스톰 스크립트라면 포켓그리모어에 붙혀넣기 할 수 있는 json 생성과 복사 기능을 추가한다.<br/>
+                            - 포켓그리모어에서 죽었을 때 호스트 화면에서도 죽음 표시를 할 수 있는 기능을 추가한다.<br/>
+                            - 투표 기능은 호스트 화면에서 진행한다.<br/>
+                            <br/>
+                            게임성을 위해...<br/>
+                            - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/>
+                            - html5 canvas를 이용하여 원형으로 세팅한다.<br/>
+                            - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/>
+                        </p>
                         <div name="playersDiv"></div>
                     </div>
                     <div class="card-footer py-4">
@@ -1055,7 +1119,7 @@
                         </h2>
                     </div>
                     <div class="card-body">
-                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" %>
                         <hr>
                         <div name="flowDiv"></div>
                     </div>
@@ -1082,7 +1146,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
                                 (임시) 숙련자 모드 역할 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTeensyvilleRoleGuideModal()">
+                            <button type="button" class="btn btn-info btn-block"
+                                    onclick="openTeensyvilleRoleGuideModal()">
                                 (임시) 탄시빌 모드 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
@@ -1148,7 +1213,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
                                 (임시) 숙련자 모드 역할 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTeensyvilleRoleGuideModal()">
+                            <button type="button" class="btn btn-info btn-block"
+                                    onclick="openTeensyvilleRoleGuideModal()">
                                 (임시) 탄시빌 모드 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
@@ -1180,7 +1246,7 @@
                         </h2>
                     </div>
                     <div class="card-body">
-                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" %>
                         <hr>
                         <div name="flowDiv"></div>
                     </div>
@@ -1204,7 +1270,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
                                 (임시) 숙련자 모드 역할 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTeensyvilleRoleGuideModal()">
+                            <button type="button" class="btn btn-info btn-block"
+                                    onclick="openTeensyvilleRoleGuideModal()">
                                 (임시) 탄시빌 모드 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
@@ -1324,10 +1391,11 @@
     <!-- /.modal-dialog -->
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/introductionModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/messageModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/playStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/introductionModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/messageModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/playStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
+
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/minion.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/poisoner.jspf" %>

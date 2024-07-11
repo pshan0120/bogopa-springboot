@@ -1,0 +1,144 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
+
+    <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/roles.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
+
+    <script>
+        const PLAY_ID = ${playId};
+
+        $(async () => {
+            const play = await gfn_readPlayablePlayById(PLAY_ID);
+            $("#titleDiv").find("span[name='playName']").text(play.playName);
+        });
+
+        const openRuleGuideModal = () => {
+            ruleGuideModal.open();
+        }
+
+        const openRoleGuideModal = () => {
+            roleGuideModal.open();
+        }
+
+        const openExpertRoleGuideModal = () => {
+            expertRoleGuideModal.open();
+        }
+
+        const openTeensyvilleRoleGuideModal = () => {
+            teensyvilleRoleGuideModal.open();
+        }
+
+        const openNightStepGuideModal = () => {
+            nightStepGuideModal.open();
+        }
+
+        const openTownModal = () => {
+            townModal.open(PLAY_ID);
+        }
+
+        const openMyRoleModal = () => {
+            myRoleModal.open(PLAY_ID);
+        }
+
+        const openNoteModal = () => {
+            noteModal.open();
+        }
+
+    </script>
+</head>
+
+<body class="bg-default">
+<%@ include file="/WEB-INF/include/fo/includeBody.jspf" %>
+<div class="main-content">
+    <%@ include file="/WEB-INF/jsp/fo/navbar.jsp" %>
+    <%--<%@ include file="/WEB-INF/jsp/fo/navbarOnLogin.jsp" %>--%>
+
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-5 pt-7 pt-md-8">
+        <div class="container">
+            <div class="header-body text-center mb-7">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-8">
+                        <h1 class="text-white">Blood on the Clocktower</h1>
+                        <p class="text-lead text-light">trouble brewing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator separator-bottom separator-skew zindex-100">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--7">
+        <div class="row">
+            <div class="col-xl-12 mb-5 mb-xl-0">
+                <div class="card shadow mt-5">
+                    <div class="card-header bg-white border-0">
+                        플레이어용 참조표
+                    </div>
+                    <div class="card-body" id="titleDiv">
+                        <h2>
+                            <span name="playName"></span>
+                        </h2>
+                    </div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                QR 이미지로 공유
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
+                                게임 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                                역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
+                                (임시) 숙련자 모드 역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openTeensyvilleRoleGuideModal()">
+                                (임시) 탄시빌 모드 역할 설명
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
+                                밤 역할 진행 순서
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
+                                마을 광장
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
+                                노트
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openMyRoleModal()">
+                                내 역할 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
+</div>
+
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" %>
+
+<%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/teensyvilleRoleGuideModal.jspf" %>
+
+<%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
+
+<%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
+
+</body>
+</html>

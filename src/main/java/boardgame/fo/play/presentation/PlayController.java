@@ -337,7 +337,7 @@ public class PlayController {
         Boolean result = false;
         String resultMsg = "";
 
-        mv.addObject("map", playRecordService.selectBocPlayRecordList(commandMap.getMap()));
+        mv.addObject("map", playRecordService.selectBocTroubleBrewingPlayRecordList(commandMap.getMap()));
         result = true;
 
         mv.addObject("result", result);

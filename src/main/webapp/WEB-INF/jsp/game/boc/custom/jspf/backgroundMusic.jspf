@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<div name="backgroundMusicDiv">
+    <h3>
+        배경음악
+        <a data-toggle="collapse" href="#backgroundMusicListDiv" role="button" aria-expanded="false"
+           aria-controls="backgroundMusicListDiv">
+            열기/닫기
+        </a>
+    </h3>
+    <div class="collapse" id="backgroundMusicListDiv">
+        <h4>80s-mystical-stranger-things</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/80s-mystical-stranger-things-133254.mp3"
+               controls></audio>
+        <h4>piano-dark-mystery-up-tempo-urgency</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/180121-piano-dark-mystery-up-tempo-urgency-96263.mp3"
+               controls></audio>
+        <h4>piano-dark-mysterious-emotional-asian</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/180216-piano-dark-mysterious-emotional-asian-96280.mp3"
+               controls></audio>
+        <h4>ghost-in-the-darkness</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/ghost-in-the-darkness-217445.mp3"
+               controls></audio>
+        <h4>gotham</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/gotham-194893.mp3"
+               controls></audio>
+        <h4>dark-thrill-theme-1</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-1-153359.mp3"
+               controls></audio>
+        <h4>dark-thrill-theme-2</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-2-153363.mp3"
+               controls></audio>
+        <h4>dark-thrill-theme-4</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-4-153364.mp3"
+               controls></audio>
+        <h4>piano-horror</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/piano-horror-soundtrack-bruno-magic-166661.mp3"
+               controls></audio>
+        <h4>dramatic-horror</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dramatic-horror-cinematic-epic-trailer-action-intro-opener-115496.mp3"
+               controls></audio>
+        <h4>horror-box</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/horror-box-149248.mp3"
+               controls></audio>
+        <h4>horror-ambience-music</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/horror-ambience-music-with-vocals-hard-to-trust-186979.mp3"
+               controls></audio>
+        <h4>cassio</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/leonell-cassio-the-blackest-bouquet-118766.mp3"
+               controls></audio>
+    </div>
+
+</div>

@@ -32,3 +32,5 @@ const EDITION = {
     SOLDIER: new Soldier(),
     MAYOR: new Mayor(),
 }*/
+
+const BOC_DATA_PATH = "/resources/assets/game/boc/data";
