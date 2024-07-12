@@ -160,6 +160,10 @@
         if (GAME.BECOMING_A_DICTATOR == gameNo) {
             location.href = "/game/becoming-a-dictator/play/" + playNo;
         }
+
+        if (GAME.BOC_CUSTOM == gameNo) {
+            location.href = "/game/boc-custom/play/" + playNo;
+        }
     };
 
 </script>

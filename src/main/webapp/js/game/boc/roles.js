@@ -216,7 +216,7 @@ class Investigator extends TownsFolkRole {
 class Chef extends TownsFolkRole {
     static name = "chef";
     static title = "요리사";
-    static description = "당신은 악한 플레이어가 몇 쌍으로 앉아있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.";
+    static description = "당신은 악한 플레이어가 몇 쌍으로 앉아 있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.";
 
     constructor() {
         super(Chef.name, Chef.title, Chef.description);

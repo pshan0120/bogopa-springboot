@@ -15,6 +15,8 @@
         let characterList = [];
         let nightOrderList = [];
         let playerList = [];
+        let scriptJson = {};
+
         let townsFolkRoleList = [];
         let outsiderRoleList = [];
         let minionRoleList = [];
@@ -29,12 +31,6 @@
         let edition = null;
 
         $(async () => {
-            // TODO: 에디션 내 역할 [] 만들 것
-            editionList = await readEditionList();
-            jinxList = await readJinxList();
-            characterList = await readCharacterList();
-            nightOrderList = await readNightOrderList();
-
             await gfn_readPlayablePlayById(PLAY_ID);
 
             await loadGameStatus();
@@ -45,7 +41,7 @@
                 return;
             }
 
-            if (0 < playStatus.round) {
+            /*if (0 < playStatus.round) {
                 if (playStatus.night) {
                     renderOtherNight();
                     return;
@@ -65,12 +61,18 @@
             renderPlayMemberList(playerList);
             showAllPlayerRoleList();
 
-            $("#settingDiv").show();
+            $("#settingDiv").show();*/
 
         });
 
         const readEditionList = async () => {
             return await gfn_callGetApi(BOC_DATA_PATH + "/editions.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const readScriptJsonOfEdition = async jsonFileName => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/scripts/" + jsonFileName)
                 .then(data => data)
                 .catch(response => console.error('error', response));
         }
@@ -183,30 +185,164 @@
         const initializeGame = async () => {
             console.log('initializationSetting', initializationSetting);
 
-            $("#settingDiv").show();
             $("#firstNightDiv").hide();
             $("#otherDayDiv").hide();
             $("#otherNightDiv").hide();
 
+            editionList = await readEditionList();
+            renderEditionSelect(editionList);
+            $("#editionDiv").show();
+
+            characterList = await readCharacterList();
+            $("#characterDiv").show();
+
+            $("#seatDiv").show();
+
+
+            jinxList = await readJinxList();
+            nightOrderList = await readNightOrderList();
+
             const originalPlayMemberList = await readPlayMemberList(PLAY_ID);
-            const clientPlayMemberList = originalPlayMemberList.clientPlayMemberList;
+            playerList = originalPlayMemberList.clientPlayMemberList;
             const hostPlayMember = originalPlayMemberList.hostPlayMember;
 
+            // renderPlayMemberList(playerList);
             playStatus = {
                 round: 0,
                 night: true,
                 hostMemberId: hostPlayMember.memberId,
                 hostMemberName: hostPlayMember.nickname,
             }
+        }
 
-            playerList = clientPlayMemberList
+        const renderEditionSelect = editionList => {
+            const $editionDiv = $("#editionDiv");
+            const optionsHtml = editionList.reduce((prev, next) => {
+                return prev + `<option value="\${next.id}">\${next.name}</option>`;
+            }, `<option value="">선택</option>`);
+            $editionDiv.find("select").append(optionsHtml);
+        }
+
+        const selectEdition = async () => {
+            const $editionDiv = $("#editionDiv");
+            const id = $editionDiv.find("select").val();
+
+            const selected = editionList.find(edition => edition.id === id);
+            if (!selected) {
+                alert("존재하지 않는 에디션입니다.");
+                return;
+            }
+
+            scriptJson = await readScriptJsonOfEdition(selected.scriptJson);
+            scriptJson.splice(0, 1);
+            $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
+
+            renderCharacterList(scriptJson, characterList);
+        }
+
+        const renderCharacterList = (scriptJson, characterList) => {
+            const $characterDiv = $("#characterDiv");
+            const $unselectedListDiv = $characterDiv.find("div[name='unselectedListDiv']");
+            $unselectedListDiv.empty();
+
+            const selectedCharacterList = characterList
+                .filter(character => scriptJson.find(item => characterIdEquals(item, character.id)))
+                .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team));
+
+            const listHtml = selectedCharacterList.reduce((prev, next) => {
+                const fontClass = Role.calculateRoleNameClass(next.team);
+                return prev +
+                    `<div class="col-4 text-center pt-2 \${fontClass}">
+                        <small class="\${fontClass}">\${next.name}</small>
+                        <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" onclick="setCharacter('\${next.id}')">
+                    </div>`;
+            }, `<div class="row">`) + '</ol>';
+
+            $unselectedListDiv.append(listHtml);
+        }
+
+        const setCharacter = characterId => {
+            console.log('characterId', characterId);
+            // TODO: 진행 예정
+            const $characterDiv = $("#characterDiv");
+            const $unselectedListDiv = $characterDiv.find("div[name='unselectedListDiv']");
+            const $selectedListDiv = $characterDiv.find("div[name='selectedListDiv']");
+        }
+
+        const characterIdEquals = (characterId1, characterId2) => {
+            return characterId1.replace(/\-/g, "") === characterId2.replace(/\-/g, "");
+        };
+
+        const copyEditionJson = () => {
+            const $editionDiv = $("#editionDiv");
+            const text = $editionDiv.find("textarea").val();
+            if (!text) {
+                alert("복사할 텍스트가 없습니다.")
+                return;
+            }
+
+            gfn_copyText(text);
+        }
+
+        const setPlayerSeatsRandomly = () => {
+            if (Object.keys(scriptJson).length === 0) {
+                alert("에디션이 선택되지 않았습니다.");
+                return;
+            }
+
+            const $seatDiv = $("#seatDiv");
+            const $playerSeatsDiv = $seatDiv.find("div[name='playerSeatsDiv']");
+            $playerSeatsDiv.empty();
+
+            const selectedCharacterList = characterList
+                .filter(character => {
+                    return scriptJson.find(item => item === character.id);
+                })
+                .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team));
+
+            const optionsHtml = selectedCharacterList.reduce((prev, next) => {
+                return prev + `<option value="\${next.id}">\${next.name}</option>`;
+            }, `<option value="">선택</option>`);
+
+            const playerListHtml = playerList
                 .sort(() => Math.random() - 0.5)
                 .map((originalPlayer, index) => {
-                    return {...originalPlayer, seatNumber: index};
-                });
+                    return {...originalPlayer, seatNumber: index + 1};
+                })
+                .reduce((prev, next) => {
+                    return prev +
+                        `<div class="row" name="\${next.memberId}">
+                            <div class="col-4">
+                                \${next.seatNumber}. \${next.nickname}
+                            </div>
+                            <div class="col-8">
+                                <select class="form-control" onchange="setPlayerCharacter(\${next.memberId})">
+                                    \${optionsHtml}
+                                </select>
+                            </div>
+                        </div>
+                        <br>`;
+                }, "");
 
-            renderPlayMemberList(playerList);
-        };
+            $playerSeatsDiv.append(playerListHtml);
+        }
+
+        const calculateTeamIndex = team => {
+            if (team === POSITION.TOWNS_FOLK.name) return 1;
+            if (team === POSITION.OUTSIDER.name) return 2;
+            if (team === POSITION.MINION.name) return 3;
+            if (team === POSITION.DEMON.name) return 4;
+            return 0;
+        }
+
+        const setPlayerCharacter = memberId => {
+            console.log('memberId', memberId);
+            // TODO: 진행 예정
+        }
+
+        const setPlayerSeatsSpecifically = () => {
+
+        }
 
         const renderPlayMemberList = playerList => {
             const $settingDiv = $("#settingDiv");
@@ -1015,6 +1151,8 @@
         const openIntroductionModal = () => {
             introductionModal.open();
         }
+
+
     </script>
 </head>
 
@@ -1045,6 +1183,34 @@
     <!-- Page content -->
     <div class="container mt--7">
         <div class="row">
+            <div class="col-xl-12 mb-5 mb-xl-0">
+                <div class="card shadow mt-5 display-none" id="editionDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            1. 에디션 선택
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <select class="form-control" onchange="selectEdition()"></select>
+                        </div>
+                        <div class="mt-1">
+                            <textarea rows="4" class="form-control" cols="20"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-info btn-block" onclick="copyEditionJson()">
+                                복사하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-xl-12 pr-0 pl-0">
                 <div class="card bg-transparent">
                     <div class="card-body p-0">
@@ -1053,24 +1219,121 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5 display-none" id="settingDiv">
+                <div class="card shadow mt-5 display-none" id="characterDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            2. 참여 역할 선택
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-4" name="unselectedListDiv"></div>
+                        <div class="mt-4" name="selectedListDiv"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 mb-5 mb-xl-0">
+                <div class="card shadow mt-5 display-none" id="seatDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            3. 플레이어 자리 배치
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-4" name="playerSeatsDiv"></div>
+                    </div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-info" onclick="setPlayerSeatsRandomly()">
+                                무작위 배치
+                            </button>
+                            <button type="button" class="btn btn-info" onclick="setPlayerSeatsSpecifically()">
+                                지정 배치
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 mb-5 mb-xl-0">
+                <div class="card shadow mt-5">
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block"
+                                    onclick="openIntroductionModal()">
+                                인트로 보기
+                            </button>
+                            <button type="button" class="btn btn-default btn-block"
+                                    onclick="setPlayersRoleByRandom()">
+                                역할 임의 분배
+                            </button>
+                            <button type="button" class="btn btn-default btn-block"
+                                    onclick="openSetPlayerRoleByHostModal()">
+                                역할 지정 분배
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="beginGame()">
+                                게임 시작
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 mb-5 mb-xl-0">
+                <%--<div class="card shadow mt-5 display-none" id="settingDiv">
                     <div class="card-header bg-white border-0">
                         <h2>
                             게임 세팅
                         </h2>
                     </div>
                     <div class="card-body">
-                        <h3>
-                            1. 에디션 결정
-                        </h3>
-                        <h3>
-                            2. 그리모어 세팅
-                        </h3>
+                        <div name="editionDiv">
+                            <h3>
+                                1. 에디션 선택
+                            </h3>
+                            <div>
+                                <select class="form-control" onchange="setEditionJson()"></select>
+                            </div>
+                            <div class="mt-1">
+                                <textarea rows="4" class="form-control" cols="20"></textarea>
+                            </div>
+                            <div class="mt-1">
+                                <button type="button" class="btn btn-info btn-block" onclick="copyEditionJson()">
+                                    복사하기
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div name="seatDiv">
+                            <h3>
+                                2. 플레이어 자리 배치
+                            </h3>
+                            <div>
+                                <button type="button" class="btn btn-info" onclick="setPlayerSeatsRandomly()">
+                                    무작위 배치
+                                </button>
+                                <button type="button" class="btn btn-info" onclick="setPlayerSeatsSpecifically()">
+                                    지정 배치
+                                </button>
+                            </div>
+                            <div class="mt-4" name="playerSeatsDiv">
+                            </div>
+                        </div>
+
+                        <hr>
                         <h3>
                             3. 플레이어 역할 지정
                         </h3>
+                        <hr>
                         <p>
                             1. 목표<br/>
                             시간 단축을 위해...<br/>
@@ -1110,7 +1373,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div>--%>
 
                 <div class="card shadow mt-5 display-none" id="firstNightDiv">
                     <div class="card-header bg-white border-0">

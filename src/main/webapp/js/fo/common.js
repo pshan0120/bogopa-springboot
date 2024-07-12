@@ -1106,3 +1106,8 @@ const gfn_removeElementChildrenAndAppendHtmlString = ($element, htmlString) => {
 const gfn_deepCopyByJSON = object => {
     return JSON.parse(JSON.stringify(object));
 }
+
+const gfn_copyText = text => {
+    window.navigator.clipboard.writeText(text)
+        .then(() => alert("복사되었습니다."));
+};

@@ -114,7 +114,7 @@
     },
     {
         "id": "artist",
-        "name": "Artist",
+        "name": "예술가",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 0,
@@ -125,7 +125,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "Once per game, during the day, privately ask the Storyteller any yes/no question.",
+        "ability": "게임 중 단 한번, 이야기꾼에게 비밀리에 '예' 또는 '아니오'로 답변할 수 있는 질문을 할 수 있습니다. 이야기꾼은 정직하게 대답합니다.",
         "image": "/images/fo/boc/icons/townsfolk/artist.webp"
     },
     {
@@ -147,7 +147,7 @@
     },
     {
         "id": "atheist",
-        "name": "Atheist",
+        "name": "무신론자",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 0,
@@ -156,7 +156,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": true,
-        "ability": "The Storyteller can break the game rules & if executed, good wins, even if you are dead. [No evil characters]",
+        "ability": "무신론자가 있으면 악마와 하수인이 없습니다. 처형 단계 때, 이야기꾼을 처형시키면 선이 승리합니다. 무신론자가 없을 때 이야기꾼을 처형시키거나 2명의 참가자만 남아 있다면 악이 승리합니다. 그리고 이야기꾼은 게임의 모든 규칙을 어길 수 있습니다. 가령 밤에 플레이어를 죽이거나 만취시킬 수 있으며, 잘못된 수의 이방인을 플레이에 참가시킬 수도 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/atheist.webp"
     },
     {
@@ -244,7 +244,7 @@
     },
     {
         "id": "baron",
-        "name": "Baron",
+        "name": "남작",
         "edition": "tb",
         "team": "minion",
         "firstNight": 0,
@@ -253,7 +253,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": true,
-        "ability": "There are extra Outsiders in play. [+2 Outsiders]",
+        "ability": "게임을 시작할 때 마을주민 역할 2명을 이방인 역할로 교체합니다.",
         "image": "/images/fo/boc/icons/minion/baron.webp"
     },
     {
@@ -407,7 +407,7 @@
     },
     {
         "id": "butler",
-        "name": "Butler",
+        "name": "집사",
         "edition": "tb",
         "team": "outsider",
         "firstNight": 38,
@@ -418,7 +418,7 @@
             "Master"
         ],
         "setup": false,
-        "ability": "Each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too.",
+        "ability": "매일 밤, 다른 플레이어 1명을 지목합니다. 그리고 그 날은 당신이 지정한 플레이어가 투표할 때만 투표할 수 있습니다.",
         "image": "/images/fo/boc/icons/outsider/butler.webp"
     },
     {
@@ -456,7 +456,7 @@
     },
     {
         "id": "chambermaid",
-        "name": "Chambermaid",
+        "name": "가정부",
         "edition": "bmr",
         "team": "townsfolk",
         "firstNight": 49,
@@ -465,12 +465,12 @@
         "otherNightReminder": "The Chambermaid points to two players. Show the number signal (0, 1, 2, …) for how many of those players wake tonight for their ability.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night, choose 2 alive players (not yourself): you learn how many woke tonight due to their ability.",
+        "ability": "매일 밤, 당신은 살아있는 다른 플레이어 2명을 선택합니다. 오늘 밤 능력을 사용하기 위해 깨어났던 플레이어의 수를 알 수 있습니다. 선택할 플레이어가 부족하다면 능력을 사용할 수 없습니다.",
         "image": "/images/fo/boc/icons/townsfolk/chambermaid.webp"
     },
     {
         "id": "chef",
-        "name": "Chef",
+        "name": "요리사",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 35,
@@ -479,7 +479,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "You start knowing how many pairs of evil players there are.",
+        "ability": "당신은 악한 플레이어가 몇 쌍으로 앉아 있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/chef.webp"
     },
     {
@@ -528,7 +528,7 @@
     },
     {
         "id": "clockmaker",
-        "name": "Clockmaker",
+        "name": "시계공",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 40,
@@ -537,7 +537,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "You start knowing how many steps from the Demon to its nearest Minion.",
+        "ability": "첫날 밤 악마로부터 가장 가까운 하수인까지 얼마나 떨어져 있는지 알게 됩니다. 가령 악마와 하수인이 붙어 있다면 1입니다.",
         "image": "/images/fo/boc/icons/townsfolk/clockmaker.webp"
     },
     {
@@ -738,7 +738,7 @@
     },
     {
         "id": "drunk",
-        "name": "Drunk",
+        "name": "주정뱅이",
         "edition": "tb",
         "team": "outsider",
         "firstNight": 0,
@@ -756,7 +756,7 @@
             }
         ],
         "setup": true,
-        "ability": "You do not know you are the Drunk. You think you are a Townsfolk character, but you are not.",
+        "ability": "당신은 취했다는 사실을 모릅니다. 당신은 자신이 마을주민 역할이라고 생각하지만, 사실은 아닙니다.",
         "image": "/images/fo/boc/icons/outsider/drunk.webp"
     },
     {
@@ -776,7 +776,7 @@
     },
     {
         "id": "empath",
-        "name": "Empath",
+        "name": "공감능력자",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 36,
@@ -785,7 +785,7 @@
         "otherNightReminder": "Show the finger signal (0, 1, 2) for the number of evil neighbours.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night, you learn how many of your 2 alive neighbours are evil.",
+        "ability": "매일 밤, 당신은 좌우에 있는 살아있는 두 이웃 중 얼마나 많은 사람이 악한지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/empath.webp"
     },
     {
@@ -1001,7 +1001,7 @@
     },
     {
         "id": "fortuneteller",
-        "name": "Fortune Teller",
+        "name": "점쟁이",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 37,
@@ -1012,7 +1012,7 @@
             "Red herring"
         ],
         "setup": false,
-        "ability": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
+        "ability": "매일 밤 당신은 당신이 지정한 2명의 플레이어 중 악마가 있는지 알게 됩니다. 다만 실제로는 선한 플레이어지만 당신에게는 악마로 보이는 사람이 1명 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/fortuneteller.webp"
     },
     {
@@ -1403,7 +1403,7 @@
     },
     {
         "id": "imp",
-        "name": "Imp",
+        "name": "임프",
         "edition": "tb",
         "team": "demon",
         "firstNight": 0,
@@ -1431,12 +1431,12 @@
             "Drunk"
         ],
         "setup": false,
-        "ability": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk.",
+        "ability": "첫날 밤 미참여 역할 3개를 알고 시작합니다. 첫날 밤을 제외한 매일 밤 당신은 플레이어를 지목하고 그 참가자는 사망합니다. 만약 당신이 자신을 지목했다면 하수인들 중 1명이 임프가 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/innkeeper.webp"
     },
     {
         "id": "investigator",
-        "name": "Investigator",
+        "name": "조사관",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 34,
@@ -1448,7 +1448,7 @@
             "Wrong"
         ],
         "setup": false,
-        "ability": "You start knowing that 1 of 2 players is a particular Minion.",
+        "ability": "당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.",
         "image": "/images/fo/boc/icons/townsfolk/investigator.webp"
     },
     {
@@ -1595,7 +1595,7 @@
     },
     {
         "id": "klutz",
-        "name": "Klutz",
+        "name": "얼간이",
         "edition": "snv",
         "team": "outsider",
         "firstNight": 0,
@@ -1604,7 +1604,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses.",
+        "ability": "당신이 죽으면 공개적으로 플레이어 1명을 선택해야 합니다. 만약 악한 플레이어를 선택했다면 당신의 팀은 패배합니다.",
         "image": "/images/fo/boc/icons/outsider/klutz.webp"
     },
     {
@@ -1656,7 +1656,7 @@
     },
     {
         "id": "legion",
-        "name": "Legion",
+        "name": "군단",
         "edition": "",
         "team": "demon",
         "firstNight": 0,
@@ -1668,7 +1668,7 @@
             "About to die"
         ],
         "setup": true,
-        "ability": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]",
+        "ability": "첫날 밤을 제외한 매일 밤 플레이어 1명이 죽을 수 있습니다. 처형 단계 때 악한 플레이어만 투표한다면 처형이 실패합니다. 군단은 악마이자 하수인입니다. 군단이 참여중이라면 선과 악 플레이어의 수가 반대가 되며, 군단이 아닌 플레이어는 마을주민이나 이방인 중 어떤 조합으로든 존재할 수 있습니다.",
         "image": "/images/fo/boc/icons/demon/legion.webp"
     },
     {
@@ -1694,7 +1694,7 @@
     },
     {
         "id": "librarian",
-        "name": "Librarian",
+        "name": "사서",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 33,
@@ -1706,7 +1706,7 @@
             "Wrong"
         ],
         "setup": false,
-        "ability": "You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)",
+        "ability": "당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 이방인인지 알고 시작합니다.",
         "image": "/images/fo/boc/icons/townsfolk/librarian.webp"
     },
     {
@@ -1752,7 +1752,7 @@
     },
     {
         "id": "lunatic",
-        "name": "Lunatic",
+        "name": "미치광이",
         "edition": "bmr",
         "team": "outsider",
         "firstNight": 7,
@@ -1765,7 +1765,7 @@
             "Attack 3"
         ],
         "setup": false,
-        "ability": "You think you are a Demon, but you are not. The Demon knows who you are & who you choose at night.",
+        "ability": "당신은 자신이 악마라고 믿고 있지만, 사실은 아닙니다. 진짜 악마는 당신의 정체가 미치광이라는 것과 매일 밤 당신이 공격하려는 플레이어가 누구인지 모두 알고 있습니다.",
         "image": "/images/fo/boc/icons/outsider/lunatic.webp"
     },
     {
@@ -1867,7 +1867,7 @@
     },
     {
         "id": "mayor",
-        "name": "Mayor",
+        "name": "시장",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
@@ -1876,7 +1876,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead.",
+        "ability": "만약 단 세명의 플레이어만 살아남았고 재판으로 아무도 죽지 않는다면 당신의 팀은 승리합니다. 만약 당신이 밤에 죽는다면 다른 플레이어가 당신 대신 희생될 수 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/mayor.webp"
     },
     {
@@ -1914,7 +1914,7 @@
     },
     {
         "id": "monk",
-        "name": "Monk",
+        "name": "수도승",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
@@ -1925,7 +1925,7 @@
             "Protected"
         ],
         "setup": false,
-        "ability": "Each night*, choose a player (not yourself): they are safe from the Demon tonight.",
+        "ability": "첫날 밤을 제외한 매일 밤 당신은 당신을 제외한 플레이어를 선택합니다. 그는 오늘 밤 악마로부터 안전합니다.",
         "image": "/images/fo/boc/icons/townsfolk/monk.webp"
     },
     {
@@ -2214,7 +2214,7 @@
     },
     {
         "id": "poisoner",
-        "name": "Poisoner",
+        "name": "독살범",
         "edition": "tb",
         "team": "minion",
         "firstNight": 17,
@@ -2225,7 +2225,7 @@
             "Poisoned"
         ],
         "setup": false,
-        "ability": "Each night, choose a player: they are poisoned tonight and tomorrow day.",
+        "ability": "매일 밤 당신은 1명의 플레이어를 지목합니다. 그 플레이어는 오늘 밤부터 내일 해 질 녘까지 중독 상태가 됩니다.",
         "image": "/images/fo/boc/icons/minion/poisoner.webp"
     },
     {
@@ -2244,7 +2244,7 @@
     },
     {
         "id": "poppygrower",
-        "name": "Poppy Grower",
+        "name": "양귀비 재배자",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 4,
@@ -2255,7 +2255,7 @@
             "Evil wakes"
         ],
         "setup": false,
-        "ability": "Minions & Demons do not know each other. If you die, they learn who each other are that night.",
+        "ability": "악한 플레이어들끼리 서로가 누구인지 알 수 없게 만듭니다. 당신이 죽으면 악한 플레이어들은 서로를 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/poppygrower.webp"
     },
     {
@@ -2387,7 +2387,7 @@
     },
     {
         "id": "ravenkeeper",
-        "name": "Ravenkeeper",
+        "name": "레이븐키퍼",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
@@ -2396,12 +2396,12 @@
         "otherNightReminder": "If the Ravenkeeper died tonight: The Ravenkeeper points to a player. Show that player's character token.",
         "reminders": [],
         "setup": false,
-        "ability": "If you die at night, you are woken to choose a player: you learn their character.",
+        "ability": "만약 당신이 밤에 죽는다면, 당신은 플레이어를 선택한 뒤 그 사람의 역할을 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/ravenkeeper.webp"
     },
     {
         "id": "recluse",
-        "name": "Recluse",
+        "name": "은둔자",
         "edition": "tb",
         "team": "outsider",
         "firstNight": 0,
@@ -2410,7 +2410,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "You might register as evil & as a Minion or Demon, even if dead.",
+        "ability": "당신은 다른 사람들에게 마치 하수인이나 악마인 것처럼 보이지만 실제로는 선한 사람입니다. 죽을 때에도 다른 사람들에게 당신은 하수인이나 악마로 보입니다.",
         "image": "/images/fo/boc/icons/outsider/recluse.webp"
     },
     {
@@ -2458,7 +2458,7 @@
     },
     {
         "id": "sage",
-        "name": "Sage",
+        "name": "현자",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 0,
@@ -2467,7 +2467,7 @@
         "otherNightReminder": "If the Sage was killed by a Demon: Point to two players, one of which is that Demon.",
         "reminders": [],
         "setup": false,
-        "ability": "If the Demon kills you, you learn that it is 1 of 2 players.",
+        "ability": "당신이 악마의 공격으로 죽으면 2명의 플레이어 중 1명이 악마라는 것을 알게 됩니다. 처형당해서 죽는 것은 포함되지 않습니다.",
         "image": "/images/fo/boc/icons/townsfolk/sage.webp"
     },
     {
@@ -2488,7 +2488,7 @@
     },
     {
         "id": "saint",
-        "name": "Saint",
+        "name": "성자",
         "edition": "tb",
         "team": "outsider",
         "firstNight": 0,
@@ -2497,7 +2497,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "If you die by execution, your team loses.",
+        "ability": "만약 당신이 재판을 통해 처형된다면 당신의 팀은 패배합니다.",
         "image": "/images/fo/boc/icons/outsider/saint.webp"
     },
     {
@@ -2530,7 +2530,7 @@
     },
     {
         "id": "scarletwoman",
-        "name": "Scarlet Woman",
+        "name": "부정한 여자",
         "edition": "tb",
         "team": "minion",
         "firstNight": 0,
@@ -2541,7 +2541,7 @@
             "Demon"
         ],
         "setup": false,
-        "ability": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don't count)",
+        "ability": "만약 여행자를 제외한 5명 이상의 플레이어가 살아있지만 악마가 죽는다면 당신은 악마가 됩니다. 예를 들어 5명이 남아있었고 악마가 처형되어 4명이 되는 순간, 부정한 여자는 악마가 됩니다.",
         "image": "/images/fo/boc/icons/minion/scarletwoman.webp"
     },
     {
@@ -2670,7 +2670,7 @@
     },
     {
         "id": "slayer",
-        "name": "Slayer",
+        "name": "슬레이어",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
@@ -2681,7 +2681,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "Once per game, during the day, publicly choose a player: if they are the Demon, they die.",
+        "ability": "게임 중 한 번, 낮에 공개적으로 플레이어를 지목합니다. 악마를 제대로 지목했다면 그 악마는 사망합니다.",
         "image": "/images/fo/boc/icons/townsfolk/slayer.webp"
     },
     {
@@ -2716,7 +2716,7 @@
     },
     {
         "id": "soldier",
-        "name": "Soldier",
+        "name": "군인",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
@@ -2725,7 +2725,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "You are safe from the Demon.",
+        "ability": "당신은 악마의 공격과 각종 부정적 효과로부터 안전합니다.",
         "image": "/images/fo/boc/icons/townsfolk/soldier.webp"
     },
     {
@@ -2743,7 +2743,7 @@
     },
     {
         "id": "spy",
-        "name": "Spy",
+        "name": "스파이",
         "edition": "tb",
         "team": "minion",
         "firstNight": 47,
@@ -2752,7 +2752,7 @@
         "otherNightReminder": "Show the Grimoire to the Spy for as long as they need.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night, you see the Grimoire. You might register as good & as a Townsfolk or Outsider, even if dead.",
+        "ability": "매일 밤 당신은 이야기꾼을 통해 게임 진행상황을 볼 수 있습니다. 당신은 악한 편이지만 살아서나 죽어서나 다른 사람들에게 마을주민이나 이방인으로 보일 수 있습니다.",
         "image": "/images/fo/boc/icons/minion/spy.webp"
     },
     {
@@ -2948,13 +2948,13 @@
     },
     {
         "id": "undertaker",
-        "name": "Undertaker",
+        "name": "장의사",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 56,
-        "otherNightReminder": "If a player was executed today: Show that player's character token.",
+        "otherNightReminder": "첫날 밤을 제외한 매일 밤 당신은 오늘 처형된 플레이어의 역할을 알게 됩니다.",
         "reminders": [
             "Executed"
         ],
@@ -2998,7 +2998,7 @@
     },
     {
         "id": "virgin",
-        "name": "Virgin",
+        "name": "처녀",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
@@ -3009,7 +3009,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately.",
+        "ability": "당신이 처음 재판에 지명받았을 때, 만약 당신을 지명한 사람이 마을주민이라면 그 플레이어는 처녀 대신 즉시 처형됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/virgin.webp"
     },
     {
@@ -3058,7 +3058,7 @@
     },
     {
         "id": "washerwoman",
-        "name": "Washerwoman",
+        "name": "세탁부",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 32,
@@ -3070,7 +3070,7 @@
             "Wrong"
         ],
         "setup": false,
-        "ability": "You start knowing that 1 of 2 players is a particular Townsfolk.",
+        "ability": "당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.",
         "image": "/images/fo/boc/icons/townsfolk/washerwoman.webp"
     },
     {
