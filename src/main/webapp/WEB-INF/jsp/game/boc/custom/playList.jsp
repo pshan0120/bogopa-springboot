@@ -56,7 +56,8 @@
             const params = {
                 pagingObject: $div.find("ul.pagination"),
                 pageIndex: "pageIndex",
-                totalCount: data.totalElements,
+                //totalCount: data.totalElements,
+                totalCount: data.cnt,
                 eventName: "readPlayRecordPage",
                 recordCount: PAGE_SIZE,
             };
@@ -139,7 +140,7 @@
     <div class="container mt--7">
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5">
+                <div class="card shadow mt-5" id="playRecordDiv">
                     <div class="card-header bg-white border-0">
                         <div class="row">
                             <div class="col-lg-12">
@@ -147,46 +148,44 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="playRecordDiv">
-                            <form id="form" onsubmit="return false;">
-                                <input type="hidden" id="playRecordListCurOrderBy">
-                                <div class="row clearfix">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label">플레이찾기</label>
-                                            <input type="text" name="searchText"
-                                                   class="form-control form-control-alternative"
-                                                   onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord4List(1)');"
-                                                   placeholder="게임이름(한글, 영어)">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
-                                                onclick="openCreatePlayModal();" name="openCreatePlayButton" style="display: none">
-                                            새로운 플레이
-                                        </button>
+                        <form id="form" onsubmit="return false;">
+                            <input type="hidden" id="playRecordListCurOrderBy">
+                            <div class="row clearfix">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">플레이찾기</label>
+                                        <input type="text" name="searchText"
+                                               class="form-control form-control-alternative"
+                                               onKeypress="gfn_hitEnter(event, 'fn_selectPlayRecord4List(1)');"
+                                               placeholder="게임이름(한글, 영어)">
                                     </div>
                                 </div>
-                            </form>
-                            <div class="table-responsive">
-                                <table class="table align-items-center table-flush" id="playRecordListTbl">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th name="playRecordListSortTh" id="sortTh_playNm">
-                                            플레이이름 <span name="playRecordListSort" id="playRecordListSort_playNm"
-                                                        class="fa"></span>
-                                        </th>
-                                        <th name="playRecordListSortTh" id="sortTh_gameNm">
-                                            게임 <span name="playRecordListSort" id="playRecordListSort_gameNm"
-                                                     class="fa"></span>
-                                        </th>
-                                        <th scope="col">모임</th>
-                                        <th scope="col">플레이시간</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                <div class="col-lg-6 mb-3">
+                                    <button type="button" class="btn btn-sm btn-primary float-right mr-1 my-1"
+                                            onclick="openCreatePlayModal();" name="openCreatePlayButton" style="display: none">
+                                        새로운 플레이
+                                    </button>
+                                </div>
                             </div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="playRecordListTbl">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th name="playRecordListSortTh" id="sortTh_playNm">
+                                        플레이이름 <span name="playRecordListSort" id="playRecordListSort_playNm"
+                                                    class="fa"></span>
+                                    </th>
+                                    <th name="playRecordListSortTh" id="sortTh_gameNm">
+                                        게임 <span name="playRecordListSort" id="playRecordListSort_gameNm"
+                                                 class="fa"></span>
+                                    </th>
+                                    <th scope="col">모임</th>
+                                    <th scope="col">플레이시간</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="card-footer py-4">

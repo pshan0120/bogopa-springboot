@@ -117,19 +117,23 @@ class Role {
     }
 
     static calculateRoleNameClass(positionName) {
-        if (positionName === "towns folk") {
+        if (positionName === POSITION.TOWNS_FOLK.name) {
             return "text-primary";
         }
 
-        if (positionName === "outsider") {
+        if (positionName === POSITION.OUTSIDER.name) {
             return "text-info";
         }
 
-        if (positionName === "minion") {
+        if (positionName === POSITION.MINION.name) {
             return "text-warning";
         }
 
-        return "text-danger";
+        if (positionName === POSITION.DEMON.name) {
+            return "text-danger";
+        }
+
+        return "";
     }
 
     isAlive() {

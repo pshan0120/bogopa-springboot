@@ -11,24 +11,16 @@
     <script>
         const PLAY_ID = ${playId};
         let editionList = [];
+        let selectedEditionId = null;
+        let edition = null;
         let jinxList = [];
         let characterList = [];
+        let selectedCharacterList = [];
+        let playedCharacterList = [];
         let nightOrderList = [];
         let playerList = [];
         let scriptJson = {};
-
-        let townsFolkRoleList = [];
-        let outsiderRoleList = [];
-        let minionRoleList = [];
-        let demonRoleList = [];
-        let roleList = [];
-        let roleListByHost = [];
-        let townsFolkPlayerList = [];
-        let outsiderPlayerList = [];
-        let minionPlayerList = [];
-        let demonPlayerList = [];
         let playStatus = {};
-        let edition = null;
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -40,6 +32,12 @@
                 await initializeGame();
                 return;
             }
+
+            hideSettingDivs();
+            showPlayingDivs();
+
+            await renderPlayerStatusList();
+
 
             /*if (0 < playStatus.round) {
                 if (playStatus.night) {
@@ -95,109 +93,16 @@
                 .catch(response => console.error('error', response));
         }
 
-
-        const setRoleList = edition => {
-            if (edition === EDITION.TROUBLE_BREWING.name) {
-                townsFolkRoleList = [
-                    new WasherWoman(),
-                    new Librarian(),
-                    new Investigator(),
-                    new Chef(),
-                    new Empath(),
-                    new FortuneTeller(),
-                    new Undertaker(),
-                    new Monk(),
-                    new RavenKeeper(),
-                    new Virgin(),
-                    new Slayer(),
-                    new Soldier(),
-                    new Mayor(),
-                ];
-
-                outsiderRoleList = [
-                    new Butler(),
-                    new Drunk(),
-                    new Recluse(),
-                    new Saint(),
-                ];
-
-                minionRoleList = [
-                    new Poisoner(),
-                    new Spy(),
-                    new Baron(),
-                    new ScarletWoman(),
-                ];
-
-                demonRoleList = [
-                    new Imp(),
-                ];
-            }
-
-            if (edition === EDITION.TROUBLE_BREWING_EXPERT.name) {
-                townsFolkRoleList = [
-                    new WasherWoman(),
-                    new Librarian(),
-                    new Investigator(),
-                    new Chef(),
-                    new Empath(),
-                    new FortuneTeller(),
-                    new Undertaker(),
-                    new Monk(),
-                    new RavenKeeper(),
-                    new Virgin(),
-                    new Slayer(),
-                    new Soldier(),
-                    new Mayor(),
-                    new PoppyGrower(),
-                    new Atheist(),
-                ];
-
-                outsiderRoleList = [
-                    new Butler(),
-                    new Drunk(),
-                    new Recluse(),
-                    new Saint(),
-                    new Lunatic(),
-                ];
-
-                minionRoleList = [
-                    new Poisoner(),
-                    new Spy(),
-                    new Baron(),
-                    new ScarletWoman(),
-                ];
-
-                demonRoleList = [
-                    new Imp(),
-                    new Legion(),
-                ];
-            }
-
-            roleList = [
-                ...townsFolkRoleList,
-                ...outsiderRoleList,
-                ...minionRoleList,
-                ...demonRoleList,
-            ];
-            // createAssignedPlayerList();
-        };
-
         const initializeGame = async () => {
             console.log('initializationSetting', initializationSetting);
 
-            $("#firstNightDiv").hide();
-            $("#otherDayDiv").hide();
-            $("#otherNightDiv").hide();
-
             editionList = await readEditionList();
             renderEditionSelect(editionList);
-            $("#editionDiv").show();
 
             characterList = await readCharacterList();
-            $("#characterDiv").show();
 
-            $("#seatDiv").show();
-
+            showSettingDivs();
+            hidePlayingDivs();
 
             jinxList = await readJinxList();
             nightOrderList = await readNightOrderList();
@@ -206,10 +111,7 @@
             playerList = originalPlayMemberList.clientPlayMemberList;
             const hostPlayMember = originalPlayMemberList.hostPlayMember;
 
-            // renderPlayMemberList(playerList);
             playStatus = {
-                round: 0,
-                night: true,
                 hostMemberId: hostPlayMember.memberId,
                 hostMemberName: hostPlayMember.nickname,
             }
@@ -233,45 +135,14 @@
                 return;
             }
 
+            selectedEditionId = id;
+
             scriptJson = await readScriptJsonOfEdition(selected.scriptJson);
             scriptJson.splice(0, 1);
             $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
 
             renderCharacterList(scriptJson, characterList);
         }
-
-        const renderCharacterList = (scriptJson, characterList) => {
-            const $characterDiv = $("#characterDiv");
-            const $unselectedListDiv = $characterDiv.find("div[name='unselectedListDiv']");
-            $unselectedListDiv.empty();
-
-            const selectedCharacterList = characterList
-                .filter(character => scriptJson.find(item => characterIdEquals(item, character.id)))
-                .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team));
-
-            const listHtml = selectedCharacterList.reduce((prev, next) => {
-                const fontClass = Role.calculateRoleNameClass(next.team);
-                return prev +
-                    `<div class="col-4 text-center pt-2 \${fontClass}">
-                        <small class="\${fontClass}">\${next.name}</small>
-                        <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" onclick="setCharacter('\${next.id}')">
-                    </div>`;
-            }, `<div class="row">`) + '</ol>';
-
-            $unselectedListDiv.append(listHtml);
-        }
-
-        const setCharacter = characterId => {
-            console.log('characterId', characterId);
-            // TODO: 진행 예정
-            const $characterDiv = $("#characterDiv");
-            const $unselectedListDiv = $characterDiv.find("div[name='unselectedListDiv']");
-            const $selectedListDiv = $characterDiv.find("div[name='selectedListDiv']");
-        }
-
-        const characterIdEquals = (characterId1, characterId2) => {
-            return characterId1.replace(/\-/g, "") === characterId2.replace(/\-/g, "");
-        };
 
         const copyEditionJson = () => {
             const $editionDiv = $("#editionDiv");
@@ -284,9 +155,86 @@
             gfn_copyText(text);
         }
 
+        const renderCharacterList = (scriptJson, characterList) => {
+            const $characterDiv = $("#characterDiv");
+            const $characterListDiv = $characterDiv.find("div[name='characterListDiv']");
+            $characterListDiv.empty();
+
+            selectedCharacterList = characterList
+                .filter(character => scriptJson.find(item => characterIdEquals(item, character.id)))
+                .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team));
+
+            const listHtml = selectedCharacterList.reduce((prev, next) => {
+                const fontClass = Role.calculateRoleNameClass(next.team);
+                return prev +
+                    `<div class="col-4 text-center pt-2 \${fontClass}">
+                        <small class="\${fontClass}">\${next.name}</small>
+                        <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" onclick="setPlayedCharacter('\${next.id}')">
+                    </div>`;
+            }, `<div class="row">`) + '</div>';
+
+            $characterListDiv.append(listHtml);
+        }
+
+        const setPlayedCharacter = characterId => {
+            if (playerList.length <= playedCharacterList.length) {
+                // alert("플레이어 수보다 많이 선택할 수 없습니다");
+                return;
+            }
+            playedCharacterList.push(characterId);
+
+            renderPlayedCharacterList();
+        }
+
+        const getCharacterInListById = (characterList, characterId) => {
+            return characterList.find(item => characterIdEquals(item.id, characterId));
+        }
+
+        const characterIdEquals = (characterId1, characterId2) => {
+            return characterId1.replace(/\-/g, "") === characterId2.replace(/\-/g, "");
+        }
+
+        const renderPlayedCharacterList = () => {
+            const $characterDiv = $("#characterDiv");
+            const $playedCharacterCountDiv = $characterDiv.find("div[name='playedCharacterCountDiv']");
+            $playedCharacterCountDiv.empty();
+
+            const spanClass = playerList.length === playedCharacterList.length ? "text-primary font-weight-bold" : "";
+            $playedCharacterCountDiv.append(`<span class="\${spanClass}">\${playedCharacterList.length} / \${playerList.length}</span>`);
+
+            const $playedCharacterListDiv = $characterDiv.find("div[name='playedCharacterListDiv']");
+            $playedCharacterListDiv.empty();
+
+            const listHtml = playedCharacterList.reduce((prev, next) => {
+                const character = getCharacterInListById(selectedCharacterList, next);
+                const fontClass = Role.calculateRoleNameClass(character.team);
+                return prev +
+                    `<div class="col-4 text-center pt-2 \${fontClass}">
+                        <small class="\${fontClass}">\${character.name}</small>
+                        <img src="\${character.image}" class="img-responsive img-thumbnail m-auto" onclick="removePlayedCharacter('\${next}')">
+                    </div>`;
+            }, `<div class="row">`) + '</div>';
+
+            $playedCharacterListDiv.append(listHtml);
+        }
+
+        const removePlayedCharacter = characterId => {
+            const thrownAwayIndex = playedCharacterList.findIndex(item => characterIdEquals(item, characterId));
+            if (thrownAwayIndex > -1) {
+                playedCharacterList.splice(thrownAwayIndex, 1);
+            }
+
+            renderPlayedCharacterList();
+        }
+
         const setPlayerSeatsRandomly = () => {
             if (Object.keys(scriptJson).length === 0) {
                 alert("에디션이 선택되지 않았습니다.");
+                return;
+            }
+
+            if (playedCharacterList.length !== playerList.length) {
+                alert("참여 역할들이 모두 선택되지 않았습니다.");
                 return;
             }
 
@@ -294,31 +242,23 @@
             const $playerSeatsDiv = $seatDiv.find("div[name='playerSeatsDiv']");
             $playerSeatsDiv.empty();
 
-            const selectedCharacterList = characterList
-                .filter(character => {
-                    return scriptJson.find(item => item === character.id);
-                })
-                .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team));
-
-            const optionsHtml = selectedCharacterList.reduce((prev, next) => {
-                return prev + `<option value="\${next.id}">\${next.name}</option>`;
-            }, `<option value="">선택</option>`);
-
-            const playerListHtml = playerList
+            playerList = playerList
                 .sort(() => Math.random() - 0.5)
                 .map((originalPlayer, index) => {
-                    return {...originalPlayer, seatNumber: index + 1};
-                })
+                    return {...originalPlayer, seatNumber: index + 1, characterId: playedCharacterList[index]};
+                });
+
+            const playerListHtml = playerList
                 .reduce((prev, next) => {
+                    const character = getCharacterInListById(selectedCharacterList, next.characterId);
+                    const fontClass = Role.calculateRoleNameClass(character.team);
                     return prev +
                         `<div class="row" name="\${next.memberId}">
-                            <div class="col-4">
+                            <div class="col-6">
                                 \${next.seatNumber}. \${next.nickname}
                             </div>
-                            <div class="col-8">
-                                <select class="form-control" onchange="setPlayerCharacter(\${next.memberId})">
-                                    \${optionsHtml}
-                                </select>
+                            <div class="col-6 text-right">
+                                <span class="\${fontClass}">\${character.name}</span>
                             </div>
                         </div>
                         <br>`;
@@ -335,13 +275,123 @@
             return 0;
         }
 
-        const setPlayerCharacter = memberId => {
-            console.log('memberId', memberId);
-            // TODO: 진행 예정
+        const setPlayerSeatsSpecifically = () => {
+            // TODO: 예정
+            return;
         }
 
-        const setPlayerSeatsSpecifically = () => {
+        const confirmPlayerSeatList = () => {
+            if (!confirm("현재 자리와 역할로 확정하시겠습니까?")) {
+                return;
+            }
 
+            playStatus = {
+                ...playStatus,
+                playerCharacterDisplayed: true,
+            }
+
+            saveGameStatus();
+
+            hideSettingDivs();
+            showPlayingDivs();
+        }
+
+        const showSettingDivs = () => {
+            $("#editionDiv").show();
+            $("#characterDiv").show();
+            $("#seatDiv").show();
+        }
+
+        const hideSettingDivs = () => {
+            $("#editionDiv").hide();
+            $("#characterDiv").hide();
+            $("#seatDiv").hide();
+        }
+
+        const showPlayingDivs = () => {
+            $("#backgroundMusicDiv").show();
+            $("#playerStatusDiv").show();
+        }
+
+        const hidePlayingDivs = () => {
+            $("#backgroundMusicDiv").hide();
+            $("#playerStatusDiv").hide();
+        }
+
+        const renderPlayerStatusList = () => {
+            const $playerStatusDiv = $("#playerStatusDiv");
+
+            if (playStatus.playerCharacterDisplayed) {
+                $playerStatusDiv.find("button[name='hideCharacterToPlayerButton']").show();
+            }
+
+            const $playerStatusListDiv = $playerStatusDiv.find("div[name='playerStatusListDiv']");
+            $playerStatusListDiv.empty();
+
+            const playerListHtml = playerList
+                .reduce((prev, next) => {
+                    const character = getCharacterInListById(selectedCharacterList, next.characterId);
+                    const fontClass = Role.calculateRoleNameClass(character.team);
+                    return prev +
+                        `<tr name="\${next.memberId}">
+                            <td class="pl-1 pr-1">
+                                \${next.seatNumber}. \${next.nickname}(<span class="\${fontClass}">\${character.name}</span>)
+                            </td>
+                            <td class="pl-1 pr-1">
+                                <input type="checkbox" name="diedCheckbox">
+                            </td>
+                            <td class="pl-1 pr-1">
+                                <input type="checkbox" name="nominatingCheckbox">
+                            </td>
+                            <td class="pl-1 pr-1">
+                                <input type="checkbox" name="nominatedCheckbox">
+                            </td>
+                        </tr>`;
+                }, `<div class="table-responsive">
+                        <table class="table align-items-center table-condensed">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="pl-1 pr-1">이름(역할)</th>
+                                    <th scope="col" class="pl-1 pr-1">생존</th>
+                                    <th scope="col" class="pl-1 pr-1">지명함</th>
+                                    <th scope="col" class="pl-1 pr-1">지명받음</th>
+                                </tr>
+                            </thead>
+                            <tbody>`)
+                + `         </tbody>
+                        </table>
+                    </div>`;
+
+            /*<div class="table-responsive">
+                <table class="table align-items-center table-flush" id="playRecordListTbl">
+                    <thead class="thead-light">
+                    <tr>
+                        <th name="playRecordListSortTh" id="sortTh_playNm">
+                            플레이이름 <span name="playRecordListSort" id="playRecordListSort_playNm"
+                                        class="fa"></span>
+                        </th>
+                        <th name="playRecordListSortTh" id="sortTh_gameNm">
+                            게임 <span name="playRecordListSort" id="playRecordListSort_gameNm"
+                                     class="fa"></span>
+                        </th>
+                        <th scope="col">모임</th>
+                        <th scope="col">플레이시간</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>*/
+
+            $playerStatusListDiv.append(playerListHtml);
+        }
+
+        const hideCharacterToPlayer = () => {
+            playStatus.playerCharacterDisplayed = false;
+
+            const $playerStatusDiv = $("#playerStatusDiv");
+            $playerStatusDiv.find("button[name='hideCharacterToPlayerButton']").hide();
+
+            saveGameStatus();
         }
 
         const renderPlayMemberList = playerList => {
@@ -367,525 +417,6 @@
                 .catch(response => console.error('error', response));
         }
 
-        const openSetPlayerRoleByHostModal = () => {
-            roleListByHost = [];
-            // TODO: 악마 군단까지 플레이 가능하면 해제
-            //setRoleList(EDITION.TROUBLE_BREWING_EXPERT.name);
-            setRoleList(EDITION.TROUBLE_BREWING.name);
-
-            const $modal = $("#setPlayerRoleByHostModal");
-            const townsFolkRoleListHtml = roleList
-                .filter(role => role.position.name === POSITION.TOWNS_FOLK.name)
-                .reduce((prev, next) => {
-                    return prev
-                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
-                        + " " + next.title
-                        + "</button>";
-                }, "");
-            $modal.find("[name='townsFolkRoleListDiv']").empty().html(townsFolkRoleListHtml)
-                .find("button").on("click", event => {
-                $(event.currentTarget).hide();
-            });
-            $modal.find("[name='townsFolkRoleSetListDiv']").empty();
-
-            const outsiderRoleListHtml = roleList
-                .filter(role => role.position.name === POSITION.OUTSIDER.name)
-                .reduce((prev, next) => {
-                    return prev
-                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
-                        + " " + next.title
-                        + "</button>";
-                }, "");
-            $modal.find("[name='outsiderRoleListDiv']").empty().html(outsiderRoleListHtml)
-                .find("button").on("click", event => {
-                $(event.currentTarget).hide();
-            });
-            $modal.find("[name='outsiderRoleSetListDiv']").empty();
-
-            const minionRoleListHtml = roleList
-                .filter(role => role.position.name === POSITION.MINION.name)
-                .reduce((prev, next) => {
-                    return prev
-                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
-                        + " " + next.title
-                        + "</button>";
-                }, "");
-            $modal.find("[name='minionRoleListDiv']").empty().html(minionRoleListHtml)
-                .find("button").on("click", event => {
-                $(event.currentTarget).hide();
-            });
-            $modal.find("[name='minionRoleSetListDiv']").empty();
-
-            const demonRoleListHtml = roleList
-                .filter(role => role.position.name === POSITION.DEMON.name)
-                .reduce((prev, next) => {
-                    return prev
-                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                        + " onclick=\"addRoleToPlayerRoleList('" + next.name + "')\" >"
-                        + " " + next.title
-                        + "</button>";
-                }, "");
-            $modal.find("[name='demonRoleListDiv']").empty().html(demonRoleListHtml)
-                .find("button").on("click", event => {
-                $(event.currentTarget).hide();
-            });
-            $modal.find("[name='demonRoleSetListDiv']").empty();
-
-            $modal.modal("show");
-        }
-
-        const addRoleToPlayerRoleList = roleName => {
-            const role = roleList.find(role => role.name === roleName);
-            roleListByHost.push(role);
-
-            const playerSetting = initializationSetting.player
-                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
-
-            const $modal = $("#setPlayerRoleByHostModal");
-
-            const townsFolkList = roleListByHost.filter(role => role.position.name === POSITION.TOWNS_FOLK.name);
-            if (playerSetting.townsFolk === townsFolkList.length) {
-                $modal.find("[name='townsFolkRoleListDiv']").empty();
-            }
-            const townsFolkListHtml = townsFolkList.reduce((prev, next) => {
-                return prev + next.title + ", ";
-            }, "");
-            $modal.find("[name='townsFolkRoleSetListDiv']").empty().html(townsFolkListHtml);
-
-            const outsiderList = roleListByHost.filter(role => role.position.name === POSITION.OUTSIDER.name);
-            if (playerSetting.outsider === outsiderList.length) {
-                $modal.find("[name='outsiderRoleListDiv']").empty();
-            }
-            const outsiderListHtml = outsiderList.reduce((prev, next) => {
-                return prev + next.title + ", ";
-            }, "");
-            $modal.find("[name='outsiderRoleSetListDiv']").empty().html(outsiderListHtml);
-
-            const minionList = roleListByHost.filter(role => role.position.name === POSITION.MINION.name);
-            if (playerSetting.minion === minionList.length) {
-                $modal.find("[name='minionRoleListDiv']").empty();
-            }
-            const minionListHtml = minionList.reduce((prev, next) => {
-                return prev + next.title + ", ";
-            }, "");
-            $modal.find("[name='minionRoleSetListDiv']").empty().html(minionListHtml);
-
-            const demonList = roleListByHost.filter(role => role.position.name === POSITION.DEMON.name);
-            if (playerSetting.demon === demonList.length) {
-                $modal.find("[name='demonRoleListDiv']").empty();
-            }
-            const demonListHtml = demonList.reduce((prev, next) => {
-                return prev + next.title + ", ";
-            }, "");
-            $modal.find("[name='demonRoleSetListDiv']").empty().html(demonListHtml);
-        }
-
-        const setPlayersRoleByHost = () => {
-            if (roleListByHost.length !== playerList.length) {
-                alert("아직 선택되지 않은 역할이 있습니다.");
-                return;
-            }
-
-            const minionList = roleListByHost.filter(role => role.position.name === POSITION.MINION.name);
-            const baronExists = minionList.some(minionPlayer => minionPlayer.name === Baron.name);
-            if (baronExists) {
-                const outsiderList = roleListByHost.filter(role => role.position.name === POSITION.OUTSIDER.name);
-                const unassignedOutsiderRoleList = roleList
-                    .filter(role => role.position.name === POSITION.OUTSIDER.name)
-                    .filter(role => !outsiderList.some(outsider => outsider.name === role.name))
-                    .sort(() => Math.random() - 0.5);
-                roleListByHost.push(unassignedOutsiderRoleList[0]);
-                roleListByHost.push(unassignedOutsiderRoleList[1]);
-            }
-
-            setPlayersRole(playerList, roleListByHost);
-
-            $("#setPlayerRoleByHostModal").modal("hide");
-        }
-
-        const setPlayersRoleByRandom = () => {
-            setRoleList(EDITION.TROUBLE_BREWING.name);
-            setPlayersRole(playerList, roleList);
-        }
-
-        const setPlayersRole = (playerList, roleList) => {
-            const randomSortedPlayerList = [...playerList.sort(() => Math.random() - 0.5)];
-
-            const playerSetting = initializationSetting.player
-                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
-
-            demonPlayerList = createPlayerList(roleList, randomSortedPlayerList, playerSetting.demon, POSITION.DEMON);
-            console.log('demonPlayerList', demonPlayerList);
-
-            minionPlayerList = createPlayerList(roleList, randomSortedPlayerList, playerSetting.minion, POSITION.MINION);
-            console.log('minionPlayerList', minionPlayerList);
-            // NOTE: 만약 minionPlayerList 중 Baron 이 있다면 townsFolkPlayerList, outsiderPlayerList 가 조정됨
-            const baronExists = minionPlayerList.some(minionPlayer => minionPlayer.name === Baron.name);
-
-            let townsFolkNumber = playerSetting.townsFolk;
-            if (baronExists) {
-                townsFolkNumber = townsFolkNumber - 2;
-            }
-            townsFolkPlayerList = createPlayerList(roleList, randomSortedPlayerList, townsFolkNumber, POSITION.TOWNS_FOLK);
-            console.log('townsFolkPlayerList', townsFolkPlayerList);
-
-            let outsiderNumber = playerSetting.outsider;
-            if (baronExists) {
-                outsiderNumber = outsiderNumber + 2;
-            }
-            outsiderPlayerList = createPlayerList(roleList, randomSortedPlayerList, outsiderNumber, POSITION.OUTSIDER);
-            console.log('outsiderPlayerList', outsiderPlayerList);
-
-            showAllPlayerRoleList();
-        }
-
-        const createPlayerList = (roleList, playerList, playerNumber, position) => {
-            return roleList
-                .filter(role => role.position.name === position.name)
-                .sort(() => Math.random() - 0.5)
-                .slice(0, playerNumber)
-                .map(role => {
-                    const player = playerList.pop();
-                    return {
-                        playerName: player.nickname,
-                        playerId: player.memberId,
-                        hashKey: player.hashKey,
-                        seatNumber: player.seatNumber,
-                        ...role
-                    };
-                });
-        }
-
-        const showAllPlayerRoleList = () => {
-            showPlayerRoleList(townsFolkPlayerList);
-            showPlayerRoleList(outsiderPlayerList);
-            showPlayerRoleList(minionPlayerList);
-            showPlayerRoleList(demonPlayerList);
-        }
-
-        const showPlayerRoleList = playerList => {
-            const $settingDiv = $("#settingDiv");
-            const $playersDiv = $settingDiv.find("div[name='playersDiv']");
-            playerList.forEach(player => {
-                const found = $playersDiv.find("input[name='roleName']").toArray()
-                    .filter(roleNameObject => player.playerId == $(roleNameObject).data("memberId"));
-                $(found).val(player.title);
-                $(found).removeClass();
-                $(found).addClass("form-control form-control-alternative");
-                $(found).addClass(Role.calculateRoleNameClass(player.position.name));
-            });
-        }
-
-        const beginGame = () => {
-            if (createAssignedPlayerList().length !== playerList.length) {
-                alert("역할이 분배되지 않았습니다.");
-                return;
-            }
-
-            $("#settingDiv").hide();
-
-            const $firstNightDiv = $("#firstNightDiv");
-            $firstNightDiv.show();
-            const $flowDiv = $firstNightDiv.find("div[name='flowDiv']").empty();
-            $flowDiv.empty();
-
-            $flowDiv.append(createInitializationHtml());
-            $flowDiv.append(createDuskHtml());
-            $flowDiv.append(minion.createHtml());
-            $flowDiv.append(imp.createInitializationHtml());
-            $flowDiv.append(poisoner.createHtml());
-            $flowDiv.append(spy.createHtml());
-            $flowDiv.append(washerWoman.createHtml());
-            $flowDiv.append(librarian.createHtml());
-            $flowDiv.append(investigator.createHtml());
-            $flowDiv.append(chef.createHtml());
-            $flowDiv.append(empath.createHtml());
-            $flowDiv.append(fortuneTeller.createHtml());
-            $flowDiv.append(butler.createHtml());
-            $flowDiv.append(createDawnHtml());
-
-            saveGameStatus();
-        }
-
-        const winByGood = () => {
-            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/level-win-6416.mp3" controls></audio>`);
-        }
-
-        const winByEvil = () => {
-            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" controls></audio>`);
-        }
-
-        const openMessageModal = messageHtml => {
-            messageModal.open(messageHtml);
-        }
-
-        const createAssignedPlayerList = () => [
-            ...townsFolkPlayerList,
-            ...outsiderPlayerList,
-            ...minionPlayerList,
-            ...demonPlayerList,
-        ];
-
-        const openPlayStatusModal = () => {
-            playStatusModal.open(createAssignedPlayerList());
-        }
-
-        const openRuleGuideModal = () => {
-            ruleGuideModal.open();
-        }
-
-        const openRoleGuideModal = () => {
-            roleGuideModal.open();
-        }
-
-        const openExpertRoleGuideModal = () => {
-            expertRoleGuideModal.open();
-        }
-
-        const openTeensyvilleRoleGuideModal = () => {
-            teensyvilleRoleGuideModal.open();
-        }
-
-        const openNightStepGuideModal = () => {
-            nightStepGuideModal.open();
-        }
-
-        const openTownModal = () => {
-            townModal.open(PLAY_ID);
-        }
-
-        const openQrLoginModal = () => {
-            qrLoginModal.open(createAssignedPlayerList());
-        }
-
-        const openSoundEffectModal = () => {
-            soundEffectModal.open();
-        }
-
-        const createInitializationHtml = () => {
-            if (!townsFolkPlayerList.some(player => player.name === FortuneTeller.name)
-                && !outsiderPlayerList.some(player => player.name === Drunk.name)) {
-                return "";
-            }
-
-            // NOTE: 만약 townsFolkPlayerList 중에 fortune teller 가 있다면 선 플레이어 중 redHerring 세팅
-            let initializationHtml = "";
-
-            const fortuneTellerPlayer = Role.getPlayerByRole(townsFolkPlayerList, FortuneTeller);
-            if (fortuneTellerPlayer) {
-                initializationHtml += `<div name="redHerringDiv">
-                    <h4>레드 헤링 선택</h4>
-                    <p>
-                        1. 레드 헤링(점쟁이에게 악으로 보일 플레이어)을 선택하세요.<br/>
-                        * 소규모 게임일 때는 점쟁의 정보가 중요하기 때문에 레드 헤링을 점쟁이 스스로 하는 것도 좋습니다.
-                    </p>
-                    <button type="button" class="btn btn-info btn-block" onclick="openSetRedHerringModal()">
-                        선택 모달 표시
-                    </button>
-                </div>
-                <hr/>`;
-            }
-
-            // NOTE: 만약 outsiderPlayerList 중에 drunk 가 있다면 미참여 마을주민 역할과 교환
-            const drunkPlayer = Role.getPlayerByRole(outsiderPlayerList, Drunk);
-            if (drunkPlayer) {
-                initializationHtml += `<div name="drunkDiv">
-                    <h4>주정뱅이 마을주민 역할 부여</h4>
-                    <p>
-                        1. 미참여 마을주민 역할 중 하나를 선택합니다.<br/>
-                        2. 주정뱅이 플레이어는 해당 역할로 변경되면서 만취 상태가 됩니다.
-                    </p>
-                    <button type="button" class="btn btn-info btn-block" onclick="openSetDrunkModal()">
-                        선택 모달 표시
-                    </button>
-                </div>
-                <hr/>`;
-            }
-
-            return `<div name="initializationDiv">
-                        <h3>초기화 단계</h3>
-                        \${initializationHtml}
-                    </div>`;
-        }
-
-        const openSetRedHerringModal = () => {
-            const redHerringPlayerList = [
-                ...townsFolkPlayerList,
-                ...outsiderPlayerList,
-                ...minionPlayerList,
-            ];
-
-            const chosen = redHerringPlayerList.find(player => player.redHerring);
-            if (chosen) {
-                alert("선택 완료된 상태입니다.\n" + chosen.playerName + "(" + chosen.title + ")");
-                return;
-            }
-
-            const goodPlayerListHtml = redHerringPlayerList.reduce((prev, next) => {
-                return prev
-                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                    + " onclick=\"addRedHerringPlayer('" + next.name + "')\" >"
-                    + " " + next.playerName + "(" + next.title + ")"
-                    + "</button>";
-            }, "");
-
-            const $modal = $("#setRedHerringPlayerModal");
-            $modal.find("[name='playerListDiv']").empty().html(goodPlayerListHtml);
-            $("#setRedHerringPlayerModal").modal("show");
-
-            $modal.find("[name='playerListDiv']").find("button").on("click", event => {
-                $(event.currentTarget).hide();
-            });
-        }
-
-        const addRedHerringPlayer = roleName => {
-            const redHerringPlayerList = [
-                ...townsFolkPlayerList,
-                ...outsiderPlayerList,
-                ...minionPlayerList,
-            ];
-
-            const chosen = redHerringPlayerList.find(player => player.redHerring);
-            if (chosen) {
-                return;
-            }
-
-            const redHerringPlayer = redHerringPlayerList.find(player => player.name === roleName);
-            redHerringPlayer.redHerring = true;
-
-            $("#setRedHerringPlayerModal").modal("hide");
-        }
-
-        const openSetDrunkModal = () => {
-            const chosen = townsFolkPlayerList.find(player => player.drunken);
-            if (chosen) {
-                alert("선택 완료된 상태입니다.\n" + chosen.playerName + "(" + chosen.title + ")");
-                return;
-            }
-
-            const unassignedTownsFolkRoleList = roleList
-                .filter(role => role.position.name === POSITION.TOWNS_FOLK.name)
-                .filter(role => !townsFolkPlayerList.some(player => role.name === player.name));
-
-            const unassignedTownsFolkPlayerListHtml = unassignedTownsFolkRoleList.reduce((prev, next) => {
-                return prev
-                    + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                    + " onclick=\"replaceDrunkPlayerToTownsFolk('" + next.name + "')\" >"
-                    + " " + next.title
-                    + "</button>";
-            }, "");
-
-            const $modal = $("#setDrunkPlayerModal");
-            $modal.find("[name='roleListDiv']").empty().html(unassignedTownsFolkPlayerListHtml);
-            $("#setDrunkPlayerModal").modal("show");
-
-            $modal.find("[name='roleListDiv']").find("button").on("click", event => {
-                $(event.currentTarget).hide();
-            });
-        }
-
-        const replaceDrunkPlayerToTownsFolk = unassignedTownsFolkRoleName => {
-            const drunkPlayer = Role.getPlayerByRole(outsiderPlayerList, Drunk);
-            const unassignedTownsFolkRole = roleList.find(role => role.name === unassignedTownsFolkRoleName);
-
-            townsFolkPlayerList.push({
-                playerName: drunkPlayer.playerName,
-                playerId: drunkPlayer.playerId,
-                hashKey: drunkPlayer.hashKey,
-                seatNumber: drunkPlayer.seatNumber,
-                ...unassignedTownsFolkRole,
-                redHerring: drunkPlayer.redHerring,
-                drunken: true,
-            });
-
-            const drunkPlayerIndex = outsiderPlayerList.findIndex(player => player.name === Drunk.name);
-            if (drunkPlayerIndex > -1) {
-                outsiderPlayerList.splice(drunkPlayerIndex, 1);
-            }
-
-            saveGameStatus();
-
-            $("#setDrunkPlayerModal").modal("hide");
-        }
-
-        const createDuskHtml = () => {
-            const assignedPlayerListHtml = createAssignedPlayerList()
-                .sort((prev, next) => prev.seatNumber - next.seatNumber)
-                .reduce((prev, next) => {
-                    return prev
-                        + "<button class=\"" + Role.createChoiceButtonClass(next) + "\" "
-                        + " onclick=\"openDuskStepMessageModal('" + next.playerName + "')\" >"
-                        + " " + next.playerName + "(" + next.title + ")"
-                        + "</button>";
-                }, "");
-
-            return `<div name="duskStepDiv">
-                <h3>황혼 단계</h3>
-                <p>
-                    1. 모두 눈을 감았는지 확인하세요.<br/>
-                    * 일부 여행자와 전설은 행동합니다.<br/>
-                    <!--2. 첫날 밤이라면 첫번째 플레이어부터 순서대로 깨워서 역할을 보여줍니다.<br/>-->
-                    2. 각 플레이어들의 자리 배치와 역할을 확인하세요.<br/>
-                    * 만약 자기 역할을 미처 확인하지 못한 플레이어가 있다면 깨워서 역할을 보여줍니다.<br/>
-                    * 이 때 주정뱅이에게는 변경된 직업으로 보여주게 됩니다.<br/>
-                    \${assignedPlayerListHtml}<br/>
-                </p>
-            </div>
-            <hr/>`;
-        }
-
-        const openDuskStepMessageModal = playerName => {
-            const player = Role.getPlayerByPlayerName(createAssignedPlayerList(), playerName);
-
-            if (player.name === Drunk.name) {
-                alert("주정뱅이 마을주민 역할이 부여되지 않았습니다.");
-                return;
-            }
-
-            if (player.name === FortuneTeller.name) {
-                const redHerringPlayerList = [
-                    ...townsFolkPlayerList,
-                    ...outsiderPlayerList,
-                    ...minionPlayerList,
-                ];
-
-                const chosen = redHerringPlayerList.find(player => player.redHerring);
-                if (!chosen) {
-                    alert("레드 헤링이 선택되지 않았습니다.");
-                    return;
-                }
-            }
-
-            const nameClass = Role.calculateRoleNameClass(player.position.name);
-            const message = `당신의 역할입니다.<br/><span class=\${nameClass}>\${player.title}</span>`;
-
-            openMessageModal(message);
-        }
-
-        const createDawnHtml = () => {
-            return `<div name="dawnStepDiv">
-                <h3>새벽 단계</h3>
-                <p>
-                   1. 몇 초 기다린 뒤, 모두 눈을 뜨라고 선언합니다.
-                </p>
-            </div>`;
-        }
-
-        const createMorningHtml = () => {
-            return `<div name="morningStepDiv">
-                <h3>아침 단계</h3>
-                <p>
-                    1. 밤 사이 사망한 플레이어를 즉시 선언합니다. 사망한 플레이어가 없다면 아무도 죽지 않았다고 말합니다.<br/>
-                    * 이 때 사망하거나 사망하지 않은 이유는 말하면 안됩니다.<br/>
-                    2. 플레이어들끼리 토론을 시작하게 합니다.
-                </p>
-            </div>
-            <hr/>`;
-        }
-
         const readLastPlayLog = playId => {
             return gfn_callGetApi("/api/play/log/last", {playId})
                 .then(data => {
@@ -893,120 +424,6 @@
                     return data?.log;
                 })
                 .catch(response => console.error('error', response));
-        }
-
-        const proceedToNextDay = () => {
-            if (!confirm("다음 순서로 진행합니다.")) {
-                return;
-            }
-
-            playStatus.round = playStatus.round + 1;
-            playStatus.night = false;
-            saveGameStatus();
-            $("#firstNightDiv").hide();
-            $("#otherNightDiv").hide();
-
-            $("audio[name='backgroundMusic']").each((index, audio) => {
-                audio.pause();
-            });
-
-            createAssignedPlayerList().forEach(player => {
-                player.diedToday = false;
-                player.diedTonight = false;
-                player.safeByMonk = false;
-            });
-
-            renderOtherDay();
-        }
-
-        const renderOtherDay = () => {
-            const $otherDayDiv = $("#otherDayDiv");
-            $otherDayDiv.show();
-
-            $otherDayDiv.find("span[name='roundTitle']").text(playStatus.round);
-
-            const $flowDiv = $otherDayDiv.find("div[name='flowDiv']").empty();
-            $flowDiv.empty();
-
-            $flowDiv.append(slayer.createHtml());
-            $flowDiv.append(execution.createHtml());
-        }
-
-        const proceedToNextNight = () => {
-            if (!confirm("다음 순서로 진행합니다.")) {
-                return;
-            }
-
-            $("audio[name='backgroundMusic']").each((index, audio) => {
-                audio.pause();
-            });
-
-            const mayorPlayer = Role.getPlayerByRole(townsFolkPlayerList, Mayor);
-            if (mayorPlayer
-                && !mayorPlayer.died
-                && !mayorPlayer.poisoned
-                && !mayorPlayer.drunken) {
-
-                const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
-                const diedTodayPlayerList = createAssignedPlayerList().filter(player => player.diedToday);
-                if (alivePlayerList.length === 3
-                    && diedTodayPlayerList.length === 0) {
-                    alert("낮 단계가 끝날 때 생존 플레이어가 3명이고 처형이 발생하지 않았기에 시장 승리조건이 달성되었습니다.");
-                    winByGood();
-                    mayorPlayer.archivedGoodVictoryCondition = true;
-                    saveGameStatus();
-                    return;
-                }
-            }
-
-            playStatus.night = true;
-            saveGameStatus();
-            $("#firstNightDiv").hide();
-            $("#otherDayDiv").hide();
-
-            createAssignedPlayerList().forEach(player => {
-                player.poisoned = false;
-            });
-
-            renderOtherNight();
-        }
-
-        const renderOtherNight = () => {
-            const $otherNightDiv = $("#otherNightDiv");
-            $otherNightDiv.show();
-
-            $otherNightDiv.find("span[name='roundTitle']").text(playStatus.round);
-
-            const $flowDiv = $otherNightDiv.find("div[name='flowDiv']").empty();
-            $flowDiv.empty();
-
-            $flowDiv.append(createDuskHtml());
-            $flowDiv.append(poisoner.createHtml());
-            $flowDiv.append(monk.createHtml());
-            $flowDiv.append(spy.createHtml());
-            $flowDiv.append(scarletWoman.createHtml());
-            $flowDiv.append(imp.createHtml());
-            $flowDiv.append(ravenKeeper.createHtml());
-            $flowDiv.append(undertaker.createHtml());
-            $flowDiv.append(empath.createHtml());
-            $flowDiv.append(fortuneTeller.createHtml());
-            $flowDiv.append(butler.createHtml());
-            $flowDiv.append(createDawnHtml());
-
-            saveGameStatus();
-
-            // 1. 황혼 단계
-            // 2. 독살범
-            // 3. 수도승
-            // 4. 스파이
-            // 5. 부정한 여자
-            // 6. 임프
-            // 7. 레이븐키퍼
-            // 8. 장의사
-            // 9. 공감능력자
-            // 10. 점쟁이
-            // 11. 집사
-            // 12. 새벽 단계
         }
 
         const resetGame = () => {
@@ -1029,17 +446,11 @@
 
         const saveGameStatus = () => {
             const log = {
+                selectedEditionId,
+                selectedCharacterList: JSON.stringify(selectedCharacterList),
+                playedCharacterList: JSON.stringify(playedCharacterList),
                 playerList: JSON.stringify(playerList),
-                /*townsFolkRoleList: JSON.stringify(townsFolkRoleList),
-                outsiderRoleList: JSON.stringify(outsiderRoleList),
-                minionRoleList: JSON.stringify(minionRoleList),
-                demonRoleList: JSON.stringify(demonRoleList),*/
-                townsFolkPlayerList: JSON.stringify(townsFolkPlayerList),
-                outsiderPlayerList: JSON.stringify(outsiderPlayerList),
-                minionPlayerList: JSON.stringify(minionPlayerList),
-                demonPlayerList: JSON.stringify(demonPlayerList),
                 playStatus: JSON.stringify(playStatus),
-                edition,
             }
 
             const request = {
@@ -1063,19 +474,12 @@
             const lastPlayLogJson = JSON.parse(lastPlayLog);
             console.log('lastPlayLogJson', lastPlayLogJson);
 
+            selectedEditionId = lastPlayLogJson.selectedEditionId;
+            selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
+            playedCharacterList = JSON.parse(lastPlayLogJson.playedCharacterList);
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            /*townsFolkRoleList = JSON.parse(lastPlayLogJson.townsFolkRoleList);
-            outsiderRoleList = JSON.parse(lastPlayLogJson.outsiderRoleList);
-            minionRoleList = JSON.parse(lastPlayLogJson.minionRoleList);
-            demonRoleList = JSON.parse(lastPlayLogJson.demonRoleList);*/
-
-            townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
-            outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
-            minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
-            demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
-            setRoleList(EDITION.TROUBLE_BREWING.name);
             console.log('game status loaded !!');
         }
 
@@ -1144,6 +548,52 @@
             return false;
         }
 
+        const turnOffBackgroundMusic = () => {
+            $("audio[name='backgroundMusic']").each((index, audio) => {
+                audio.pause();
+            });
+        }
+
+        const openMessageModal = messageHtml => {
+            messageModal.open(messageHtml);
+        }
+
+        const openPlayStatusModal = () => {
+            playStatusModal.open(createAssignedPlayerList());
+        }
+
+        const openRuleGuideModal = () => {
+            ruleGuideModal.open();
+        }
+
+        const openRoleGuideModal = () => {
+            roleGuideModal.open();
+        }
+
+        const openExpertRoleGuideModal = () => {
+            expertRoleGuideModal.open();
+        }
+
+        const openTeensyvilleRoleGuideModal = () => {
+            teensyvilleRoleGuideModal.open();
+        }
+
+        const openNightStepGuideModal = () => {
+            nightStepGuideModal.open();
+        }
+
+        const openTownModal = () => {
+            townModal.open(PLAY_ID);
+        }
+
+        const openQrLoginModal = () => {
+            qrLoginModal.open(createAssignedPlayerList());
+        }
+
+        const openSoundEffectModal = () => {
+            soundEffectModal.open();
+        }
+
         const openNoteModal = () => {
             noteModal.open();
         }
@@ -1151,8 +601,6 @@
         const openIntroductionModal = () => {
             introductionModal.open();
         }
-
-
     </script>
 </head>
 
@@ -1183,11 +631,50 @@
     <!-- Page content -->
     <div class="container mt--7">
         <div class="row">
-            <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5 display-none" id="editionDiv">
+            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                <div class="card shadow display-none" id="backgroundMusicDiv">
+                    <div class="card-header bg-white border-0">
+                    </div>
+                    <div class="card-body">
+                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                    </div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-info" onclick="turnOffBackgroundMusic()">
+                                음악 끄기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                <div class="card shadow display-none" id="editionDiv">
+                    <%--<p>
+                        1. 목표<br/>
+                        시간 단축을 위해...<br/>
+                        - 닉네임 입력은 참여자가 직접 하도록 한다.<br/>
+                        - 참여자는 주어진 역할을 확인할 수 있다.<br/>
+                        <br/>
+                        진행 편의를 위해<br/>
+                        - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/>
+                        자동이면 좋겠지만 안되면 직접 선택이라도<br/>
+                        - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/>
+                        지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/>
+                        커스톰 스크립트라면 포켓그리모어에 붙혀넣기 할 수 있는 json 생성과 복사 기능을 추가한다.<br/>
+                        - 포켓그리모어에서 죽었을 때 호스트 화면에서도 죽음 표시를 할 수 있는 기능을 추가한다.<br/>
+                        - 투표 기능은 호스트 화면에서 진행한다.<br/>
+                        <br/>
+                        게임성을 위해...<br/>
+                        - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/>
+                        - html5 canvas를 이용하여 원형으로 세팅한다.<br/>
+                        - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/>
+                    </p>--%>
                     <div class="card-header bg-white border-0">
                         <h2>
-                            1. 에디션 선택
+                            에디션 선택
                         </h2>
                     </div>
                     <div class="card-body">
@@ -1221,27 +708,35 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5 display-none" id="characterDiv">
+            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                <div class="card shadow display-none" id="characterDiv">
                     <div class="card-header bg-white border-0">
                         <h2>
-                            2. 참여 역할 선택
+                            참여 역할 선택
                         </h2>
                     </div>
                     <div class="card-body">
-                        <div class="mt-4" name="unselectedListDiv"></div>
-                        <div class="mt-4" name="selectedListDiv"></div>
+                        <p>
+                            트러블 브루잉 추천 조합(8인 기준)<br/>
+                            - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
+                            - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
+                            - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
+                        </p>
+                        <div class="" name="characterListDiv"></div>
+                        <hr>
+                        <div class="text-right" name="playedCharacterCountDiv"></div>
+                        <div class="" name="playedCharacterListDiv"></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5 display-none" id="seatDiv">
+            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                <div class="card shadow display-none" id="seatDiv">
                     <div class="card-header bg-white border-0">
                         <h2>
-                            3. 플레이어 자리 배치
+                            플레이어 배치
                         </h2>
                     </div>
                     <div class="card-body">
@@ -1252,8 +747,11 @@
                             <button type="button" class="btn btn-info" onclick="setPlayerSeatsRandomly()">
                                 무작위 배치
                             </button>
-                            <button type="button" class="btn btn-info" onclick="setPlayerSeatsSpecifically()">
+                            <%--<button type="button" class="btn btn-info" onclick="setPlayerSeatsSpecifically()" disabled>
                                 지정 배치
+                            </button>--%>
+                            <button type="button" class="btn btn-primary" onclick="confirmPlayerSeatList()">
+                                배치 확정
                             </button>
                         </div>
                     </div>
@@ -1262,24 +760,21 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5">
+            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                <div class="card shadow display-none" id="playerStatusDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            플레이어 상태
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="" name="playerStatusListDiv"></div>
+                    </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-default btn-block"
-                                    onclick="openIntroductionModal()">
-                                인트로 보기
-                            </button>
-                            <button type="button" class="btn btn-default btn-block"
-                                    onclick="setPlayersRoleByRandom()">
-                                역할 임의 분배
-                            </button>
-                            <button type="button" class="btn btn-default btn-block"
-                                    onclick="openSetPlayerRoleByHostModal()">
-                                역할 지정 분배
-                            </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="beginGame()">
-                                게임 시작
+                            <button type="button" class="btn btn-warning btn-block display-none"
+                                    name="hideCharacterToPlayerButton" onclick="hideCharacterToPlayer()">
+                                플레이어 캐릭터 숨기기
                             </button>
                         </div>
                     </div>
@@ -1288,104 +783,8 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-12 mb-5 mb-xl-0">
-                <%--<div class="card shadow mt-5 display-none" id="settingDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            게임 세팅
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <div name="editionDiv">
-                            <h3>
-                                1. 에디션 선택
-                            </h3>
-                            <div>
-                                <select class="form-control" onchange="setEditionJson()"></select>
-                            </div>
-                            <div class="mt-1">
-                                <textarea rows="4" class="form-control" cols="20"></textarea>
-                            </div>
-                            <div class="mt-1">
-                                <button type="button" class="btn btn-info btn-block" onclick="copyEditionJson()">
-                                    복사하기
-                                </button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div name="seatDiv">
-                            <h3>
-                                2. 플레이어 자리 배치
-                            </h3>
-                            <div>
-                                <button type="button" class="btn btn-info" onclick="setPlayerSeatsRandomly()">
-                                    무작위 배치
-                                </button>
-                                <button type="button" class="btn btn-info" onclick="setPlayerSeatsSpecifically()">
-                                    지정 배치
-                                </button>
-                            </div>
-                            <div class="mt-4" name="playerSeatsDiv">
-                            </div>
-                        </div>
-
-                        <hr>
-                        <h3>
-                            3. 플레이어 역할 지정
-                        </h3>
-                        <hr>
-                        <p>
-                            1. 목표<br/>
-                            시간 단축을 위해...<br/>
-                            - 닉네임 입력은 참여자가 직접 하도록 한다.<br/>
-                            - 참여자는 주어진 역할을 확인할 수 있다.<br/>
-                            <br/>
-                            진행 편의를 위해<br/>
-                            - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/>
-                            자동이면 좋겠지만 안되면 직접 선택이라도<br/>
-                            - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/>
-                            지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/>
-                            커스톰 스크립트라면 포켓그리모어에 붙혀넣기 할 수 있는 json 생성과 복사 기능을 추가한다.<br/>
-                            - 포켓그리모어에서 죽었을 때 호스트 화면에서도 죽음 표시를 할 수 있는 기능을 추가한다.<br/>
-                            - 투표 기능은 호스트 화면에서 진행한다.<br/>
-                            <br/>
-                            게임성을 위해...<br/>
-                            - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/>
-                            - html5 canvas를 이용하여 원형으로 세팅한다.<br/>
-                            - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/>
-                        </p>
-                        <div name="playersDiv"></div>
-                    </div>
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
-                                인트로 보기
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="setPlayersRoleByRandom()">
-                                역할 임의 분배
-                            </button>
-                            <button type="button" class="btn btn-default btn-block"
-                                    onclick="openSetPlayerRoleByHostModal()">
-                                역할 지정 분배
-                            </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="beginGame()">
-                                게임 시작
-                            </button>
-                        </div>
-                    </div>
-                </div>--%>
-
-                <div class="card shadow mt-5 display-none" id="firstNightDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            첫번째 밤
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" %>
-                        <hr>
-                        <div name="flowDiv"></div>
-                    </div>
+            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                <div class="card shadow">
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
@@ -1419,9 +818,6 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
-                                첫 라운드 낮 순서 진행
-                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
@@ -1434,224 +830,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="card shadow mt-5 display-none" id="otherDayDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            [<span name="roundTitle"></span>] 번째 낮
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <h3>
-                            배경음악
-                        </h3>
-                        <h4>닭 소리</h4>
-                        <audio name="backgroundMusic"
-                               src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
-                               controls></audio>
-                        <hr>
-                        <h4>church-bell</h4>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3"
-                               controls></audio>
-                        <hr>
-                        <div name="flowDiv"></div>
-                    </div>
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
-                                로그인 QR 공유
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
-                                플레이 상태 모달 표시
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
-                                게임 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
-                                역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
-                                (임시) 숙련자 모드 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block"
-                                    onclick="openTeensyvilleRoleGuideModal()">
-                                (임시) 탄시빌 모드 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
-                                밤 역할 진행 순서
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
-                                마을 광장 보기
-                            </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextNight()">
-                                이번 라운드 밤 순서 진행
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
-                                노트
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
-                                소리 효과
-                            </button>
-                            <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
-                                게임 재설정
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card shadow mt-5 display-none" id="otherNightDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            [<span name="roundTitle"></span>] 번째 밤
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" %>
-                        <hr>
-                        <div name="flowDiv"></div>
-                    </div>
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
-                                로그인 QR 공유
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
-                                플레이 상태 모달 표시
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
-                                게임 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
-                                역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
-                                (임시) 숙련자 모드 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block"
-                                    onclick="openTeensyvilleRoleGuideModal()">
-                                (임시) 탄시빌 모드 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
-                                밤 역할 진행 순서
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
-                                마을 광장 보기
-                            </button>
-                            <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextDay()">
-                                다음 라운드 낮 순서 진행
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
-                                노트
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
-                                소리 효과
-                            </button>
-                            <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
-                                게임 재설정
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
+
     </div>
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
-</div>
-
-<div class="modal fade" id="setRedHerringPlayerModal" role="dialog"
-     aria-labelledby="setRedHerringPlayerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">이야기꾼이 점쟁이에게 악으로 보일 플레이어를 선택합니다.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div name="playerListDiv"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="setDrunkPlayerModal" role="dialog"
-     aria-labelledby="setDrunkPlayerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">주정뱅이와 교체될 마을주민 역할을 선택합니다.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div name="roleListDiv"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="setPlayerRoleByHostModal" role="dialog"
-     aria-labelledby="setDrunkPlayerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="">이번 게임에서 사용될 역할을 선택합니다.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    추천 조합(8인 기준)<br/>
-                    - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
-                    - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
-                    - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
-                </p>
-                <h3>마을 주민</h3>
-                <div name="townsFolkRoleListDiv"></div>
-                <div name="townsFolkRoleSetListDiv"></div>
-                <hr>
-                <h3>이방인</h3>
-                <div name="outsiderRoleListDiv"></div>
-                <div name="outsiderRoleSetListDiv"></div>
-                <hr>
-                <h3>하수인</h3>
-                <div name="minionRoleListDiv"></div>
-                <div name="minionRoleSetListDiv"></div>
-                <hr>
-                <h3>악마</h3>
-                <div name="demonRoleListDiv"></div>
-                <div name="demonRoleSetListDiv"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="setPlayersRoleByHost()">
-                    역할 지정
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
 </div>
 
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/introductionModal.jspf" %>

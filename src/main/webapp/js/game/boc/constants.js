@@ -6,7 +6,7 @@ const ALIGNMENT = {
 const ICON_PATH = "/images/fo/boc/icons/";
 
 const POSITION = {
-    TOWNS_FOLK: {name: "towns folk", title: "마을주민", iconImagePath: ICON_PATH + "/townsfolk"},
+    TOWNS_FOLK: {name: "townsfolk", title: "마을주민", iconImagePath: ICON_PATH + "/townsfolk"},
     OUTSIDER: {name: "outsider", title: "이방인", iconImagePath: ICON_PATH + "/outsider"},
     MINION: {name: "minion", title: "하수인", iconImagePath: ICON_PATH + "/minion"},
     DEMON: {name: "demon", title: "악마", iconImagePath: ICON_PATH + "/demon"},

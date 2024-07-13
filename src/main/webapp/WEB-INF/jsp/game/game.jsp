@@ -9,6 +9,10 @@
             window.location.href = "/game/trouble-brewing/play";
         }
 
+        const openBocCustom = () => {
+            window.location.href = "/game/boc-custom/play";
+        }
+
         const openFruitShop = () => {
             window.location.href = "/game/fruit-shop/play";
         }
@@ -67,6 +71,9 @@
                         <div name="buttonDiv">
                             <button type="button" class="btn btn-primary btn-block" onclick="openBocTroubleBrewing()">
                                 블러드 온 더 클락타워 - 트러블 브루잉
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="openBocCustom()">
+                                블러드 온 더 클락타워 - 커스톰
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="openFruitShop()">
                                 과일가게
