@@ -95,14 +95,13 @@
 
         const initializeGame = async () => {
             console.log('initializationSetting', initializationSetting);
+            await showSettingDivs();
+            await hidePlayingDivs();
 
             editionList = await readEditionList();
             renderEditionSelect(editionList);
 
             characterList = await readCharacterList();
-
-            showSettingDivs();
-            hidePlayingDivs();
 
             jinxList = await readJinxList();
             nightOrderList = await readNightOrderList();
@@ -245,7 +244,15 @@
             playerList = playerList
                 .sort(() => Math.random() - 0.5)
                 .map((originalPlayer, index) => {
-                    return {...originalPlayer, seatNumber: index + 1, characterId: playedCharacterList[index]};
+                    return {
+                        ...originalPlayer,
+                        seatNumber: index + 1,
+                        characterId: playedCharacterList[index],
+                        nominating: false,
+                        nominated: false,
+                        died: false,
+                        votable: true,
+                    };
                 });
 
             const playerListHtml = playerList
@@ -280,7 +287,7 @@
             return;
         }
 
-        const confirmPlayerSeatList = () => {
+        const confirmPlayerSeatList = async () => {
             if (!confirm("현재 자리와 역할로 확정하시겠습니까?")) {
                 return;
             }
@@ -294,6 +301,8 @@
 
             hideSettingDivs();
             showPlayingDivs();
+
+            await renderPlayerStatusList();
         }
 
         const showSettingDivs = () => {
@@ -329,58 +338,44 @@
             $playerStatusListDiv.empty();
 
             const playerListHtml = playerList
-                .reduce((prev, next) => {
-                    const character = getCharacterInListById(selectedCharacterList, next.characterId);
-                    const fontClass = Role.calculateRoleNameClass(character.team);
-                    return prev +
-                        `<tr name="\${next.memberId}">
-                            <td class="pl-1 pr-1">
+                    .reduce((prev, next) => {
+                        const character = getCharacterInListById(selectedCharacterList, next.characterId);
+                        const fontClass = Role.calculateRoleNameClass(character.team);
+
+                        return prev +
+                            `<tr class="text-center" name="\${next.memberId}">
+                            <td class="pl-1 pr-1 text-left">
                                 \${next.seatNumber}. \${next.nickname}(<span class="\${fontClass}">\${character.name}</span>)
                             </td>
                             <td class="pl-1 pr-1">
-                                <input type="checkbox" name="diedCheckbox">
+                                <input type="checkbox" name="diedCheckbox" \${next.died ? "checked" : ""}>
                             </td>
                             <td class="pl-1 pr-1">
-                                <input type="checkbox" name="nominatingCheckbox">
+                                <input type="checkbox" name="nominatingCheckbox" \${next.nominating ? "checked" : ""}>
                             </td>
                             <td class="pl-1 pr-1">
-                                <input type="checkbox" name="nominatedCheckbox">
+                                <input type="checkbox" name="nominatedCheckbox" \${next.nominated ? "checked" : ""}>
+                            </td>
+                            <td class="pl-1 pr-1">
+                                <input type="checkbox" name="votableCheckbox"
+                                    \${next.votable ? "checked" : ""} \${next.died ? "" : "disabled"}>
                             </td>
                         </tr>`;
-                }, `<div class="table-responsive">
+                    }, `<div class="table-responsive">
                         <table class="table align-items-center table-condensed">
                             <thead class="thead-light">
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col" class="pl-1 pr-1">이름(역할)</th>
-                                    <th scope="col" class="pl-1 pr-1">생존</th>
+                                    <th scope="col" class="pl-1 pr-1">사망함</th>
                                     <th scope="col" class="pl-1 pr-1">지명함</th>
-                                    <th scope="col" class="pl-1 pr-1">지명받음</th>
+                                    <th scope="col" class="pl-1 pr-1">지명됨</th>
+                                    <th scope="col" class="pl-1 pr-1">투표권</th>
                                 </tr>
                             </thead>
                             <tbody>`)
                 + `         </tbody>
                         </table>
                     </div>`;
-
-            /*<div class="table-responsive">
-                <table class="table align-items-center table-flush" id="playRecordListTbl">
-                    <thead class="thead-light">
-                    <tr>
-                        <th name="playRecordListSortTh" id="sortTh_playNm">
-                            플레이이름 <span name="playRecordListSort" id="playRecordListSort_playNm"
-                                        class="fa"></span>
-                        </th>
-                        <th name="playRecordListSortTh" id="sortTh_gameNm">
-                            게임 <span name="playRecordListSort" id="playRecordListSort_gameNm"
-                                     class="fa"></span>
-                        </th>
-                        <th scope="col">모임</th>
-                        <th scope="col">플레이시간</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>*/
 
             $playerStatusListDiv.append(playerListHtml);
         }
@@ -392,6 +387,22 @@
             $playerStatusDiv.find("button[name='hideCharacterToPlayerButton']").hide();
 
             saveGameStatus();
+        }
+
+        const resetNominationStatus = () => {
+            playerList.forEach(player => {
+                player.nominating = false;
+                player.nominated = false;
+            });
+        }
+
+        const savePlayerStatus = () => {
+            // TOOD: 변경된 상태에 대한 저장
+
+            /*playerList.forEach(player => {
+                player.nominating = false;
+                player.nominated = false;
+            });*/
         }
 
         const renderPlayMemberList = playerList => {
@@ -441,7 +452,7 @@
                 })
                 .catch(response => console.error('error', response));
 
-            initializeGame();
+            document.location.reload();
         }
 
         const saveGameStatus = () => {
@@ -698,16 +709,6 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-12 pr-0 pl-0">
-                <div class="card bg-transparent">
-                    <div class="card-body p-0">
-                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/pocketGrimoire.jspf" %>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
             <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                 <div class="card shadow display-none" id="characterDiv">
                     <div class="card-header bg-white border-0">
@@ -726,6 +727,16 @@
                         <hr>
                         <div class="text-right" name="playedCharacterCountDiv"></div>
                         <div class="" name="playedCharacterListDiv"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 pr-0 pl-0">
+                <div class="card bg-transparent">
+                    <div class="card-body p-0">
+                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/pocketGrimoire.jspf" %>
                     </div>
                 </div>
             </div>
@@ -775,6 +786,14 @@
                             <button type="button" class="btn btn-warning btn-block display-none"
                                     name="hideCharacterToPlayerButton" onclick="hideCharacterToPlayer()">
                                 플레이어 캐릭터 숨기기
+                            </button>
+                            <button type="button" class="btn btn-warning btn-block"
+                                    name="resetNominationStatusButton" onclick="resetNominationStatus()">
+                                지명/지명됨 초기화
+                            </button>
+                            <button type="button" class="btn btn-warning btn-block"
+                                    name="savePlayerStatusButton" onclick="savePlayerStatus()">
+                                상태 저장
                             </button>
                         </div>
                     </div>
