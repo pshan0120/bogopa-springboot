@@ -159,6 +159,14 @@
             const $characterListDiv = $characterDiv.find("div[name='characterListDiv']");
             $characterListDiv.empty();
 
+            const $playedCharacterCountDiv = $characterDiv.find("div[name='playedCharacterCountDiv']");
+            $playedCharacterCountDiv.empty();
+
+            const $playedCharacterListDiv = $characterDiv.find("div[name='playedCharacterListDiv']");
+            $playedCharacterListDiv.empty();
+
+            playedCharacterList = [];
+
             selectedCharacterList = characterList
                 .filter(character => scriptJson.find(item => characterIdEquals(item, character.id)))
                 .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team));
@@ -166,7 +174,7 @@
             const listHtml = selectedCharacterList.reduce((prev, next) => {
                 const fontClass = Role.calculateRoleNameClass(next.team);
                 return prev +
-                    `<div class="col-4 text-center pt-2 \${fontClass}">
+                    `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
                         <small class="\${fontClass}">\${next.name}</small>
                         <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" onclick="setPlayedCharacter('\${next.id}')">
                     </div>`;
@@ -181,6 +189,12 @@
                 return;
             }
             playedCharacterList.push(characterId);
+
+            const $characterDiv = $("#characterDiv");
+            const $characterListDiv = $characterDiv.find("div[name='characterListDiv']");
+            const $selectedCharacterDiv = $characterListDiv.find("div[name='" + characterId + "']");
+            $selectedCharacterDiv.find("img").removeClass("img-thumbnail");
+            $selectedCharacterDiv.find("img").addClass("img-rounded");
 
             renderPlayedCharacterList();
         }
@@ -222,6 +236,12 @@
             if (thrownAwayIndex > -1) {
                 playedCharacterList.splice(thrownAwayIndex, 1);
             }
+
+            const $characterDiv = $("#characterDiv");
+            const $characterListDiv = $characterDiv.find("div[name='characterListDiv']");
+            const $selectedCharacterDiv = $characterListDiv.find("div[name='" + characterId + "']");
+            $selectedCharacterDiv.find("img").removeClass("img-rounded");
+            $selectedCharacterDiv.find("img").addClass("img-thumbnail");
 
             renderPlayedCharacterList();
         }
@@ -343,7 +363,7 @@
                         const fontClass = Role.calculateRoleNameClass(character.team);
 
                         return prev +
-                            `<tr class="text-center" name="\${next.memberId}">
+                            `<tr class="text-center" name="\${next.memberId}" data-member-id="\${next.memberId}">
                             <td class="pl-1 pr-1 text-left">
                                 \${next.seatNumber}. \${next.nickname}(<span class="\${fontClass}">\${character.name}</span>)
                             </td>
@@ -378,6 +398,30 @@
                     </div>`;
 
             $playerStatusListDiv.append(playerListHtml);
+
+            $playerStatusListDiv.find("input:checkbox[name='diedCheckbox']").on("click", event => {
+                const memberId = $(event.currentTarget).closest("tr").data("memberId");
+                const player = playerList.find(player => player.memberId === memberId);
+                player.died = $(event.currentTarget).is(":checked");
+            });
+
+            $playerStatusListDiv.find("input:checkbox[name='nominatingCheckbox']").on("click", event => {
+                const memberId = $(event.currentTarget).closest("tr").data("memberId");
+                const player = playerList.find(player => player.memberId === memberId);
+                player.nominating = $(event.currentTarget).is(":checked");
+            });
+
+            $playerStatusListDiv.find("input:checkbox[name='nominatedCheckbox']").on("click", event => {
+                const memberId = $(event.currentTarget).closest("tr").data("memberId");
+                const player = playerList.find(player => player.memberId === memberId);
+                player.nominated = $(event.currentTarget).is(":checked");
+            });
+
+            $playerStatusListDiv.find("input:checkbox[name='votableCheckbox']").on("click", event => {
+                const memberId = $(event.currentTarget).closest("tr").data("memberId");
+                const player = playerList.find(player => player.memberId === memberId);
+                player.votable = $(event.currentTarget).is(":checked");
+            });
         }
 
         const hideCharacterToPlayer = () => {
@@ -394,15 +438,17 @@
                 player.nominating = false;
                 player.nominated = false;
             });
+
+            renderPlayerStatusList();
         }
 
         const savePlayerStatus = () => {
-            // TOOD: 변경된 상태에 대한 저장
+            if (!confirm("현재 상태로 저장하시겠습니까?")) {
+                return;
+            }
 
-            /*playerList.forEach(player => {
-                player.nominating = false;
-                player.nominated = false;
-            });*/
+            saveGameStatus();
+            renderPlayerStatusList();
         }
 
         const renderPlayMemberList = playerList => {

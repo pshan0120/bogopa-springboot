@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="renderPlayerStatusList 진행중">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="savePlayerStatus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,14 +288,8 @@
       <workItem from="1720747323517" duration="3124000" />
       <workItem from="1720801520058" duration="12717000" />
       <workItem from="1720828883671" duration="11696000" />
-      <workItem from="1720924103685" duration="3463000" />
-    </task>
-    <task id="LOCAL-00088" summary="모달 이동중">
-      <created>1715281267718</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1715281267719</updated>
+      <workItem from="1720924103685" duration="3500000" />
+      <workItem from="1721098599910" duration="3502000" />
     </task>
     <task id="LOCAL-00089" summary="clubNo 파싱 오류 수정">
       <created>1715312231172</created>
@@ -635,7 +627,14 @@
       <option name="project" value="LOCAL" />
       <updated>1720841176627</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="savePlayerStatus">
+      <created>1720927606433</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1720927606434</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,7 +655,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="스토리텔러 -&gt; 이야기꾼" />
     <MESSAGE value="trim 추가" />
     <MESSAGE value="blindBiddingResultList 오류 수정" />
     <MESSAGE value="openMiniGameModal 추가" />
@@ -681,7 +679,8 @@
     <MESSAGE value="pocketGrimoire 추가" />
     <MESSAGE value="setCharacter" />
     <MESSAGE value="renderPlayerStatusList 진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="renderPlayerStatusList 진행중" />
+    <MESSAGE value="savePlayerStatus" />
+    <option name="LAST_COMMIT_MESSAGE" value="savePlayerStatus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
