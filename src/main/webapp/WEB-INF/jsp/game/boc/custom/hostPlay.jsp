@@ -37,30 +37,6 @@
             showPlayingDivs();
 
             await renderPlayerStatusList();
-
-
-            /*if (0 < playStatus.round) {
-                if (playStatus.night) {
-                    renderOtherNight();
-                    return;
-                }
-
-                renderOtherDay();
-                return;
-            }
-
-            if (playStatus.night) {
-                beginGame();
-                return;
-            }
-
-            playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
-
-            renderPlayMemberList(playerList);
-            showAllPlayerRoleList();
-
-            $("#settingDiv").show();*/
-
         });
 
         const readEditionList = async () => {
@@ -618,10 +594,6 @@
             characterGuideModal.open(selectedCharacterList);
         }
 
-        const openNightStepGuideModal = () => {
-            nightStepGuideModal.open();
-        }
-
         const openTownModal = () => {
             townModal.open(PLAY_ID);
         }
@@ -850,9 +822,6 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openCharacterGuideModal()">
                                 역할 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
-                                밤 역할 진행 순서
-                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
@@ -881,7 +850,6 @@
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>

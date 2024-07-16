@@ -10,30 +10,44 @@
 
     <script>
         const PLAY_ID = ${playId};
+        let selectedCharacterList = [];
 
         $(async () => {
             const play = await gfn_readPlayablePlayById(PLAY_ID);
             $("#titleDiv").find("span[name='playName']").text(play.playName);
+
+            await loadGameStatus();
         });
+
+        const loadGameStatus = async () => {
+            const lastPlayLog = await readLastPlayLog(PLAY_ID);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+            console.log('lastPlayLogJson', lastPlayLogJson);
+
+            selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
+
+            console.log('game status loaded !!');
+        }
+
+        const readLastPlayLog = playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        }
 
         const openRuleGuideModal = () => {
             ruleGuideModal.open();
         }
 
-        const openRoleGuideModal = () => {
-            roleGuideModal.open();
-        }
-
-        const openExpertRoleGuideModal = () => {
-            expertRoleGuideModal.open();
-        }
-
-        const openTeensyvilleRoleGuideModal = () => {
-            teensyvilleRoleGuideModal.open();
-        }
-
-        const openNightStepGuideModal = () => {
-            nightStepGuideModal.open();
+        const openCharacterGuideModal = () => {
+            characterGuideModal.open(selectedCharacterList);
         }
 
         const openTownModal = () => {
@@ -89,7 +103,7 @@
                             <span name="playName"></span>
                         </h4>
                         <p>
-                            ※ 카카오톡 같은 인앱 브라우저에서 '뒤로가기' 누르면 이 화면이 닫힐 수 있으니 주의하세요. 가급적 크롬이나 삼성, 사파리 브라우저에서 보시는 것을 추천합니다.
+                            ※ 카카오톡 같은 인앱 브라우저에서 <strong class="text-danger">'뒤로가기'</strong>를 누르면 이 페이지가 닫힐 수 있으니 주의하세요. 가급적 크롬이나 삼성, 사파리 브라우저에서 보시는 것을 추천합니다.
                         </p>
                     </div>
                     <div class="card-footer py-4">
@@ -100,17 +114,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                 게임 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openCharacterGuideModal()">
                                 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
-                                (임시) 숙련자 모드 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTeensyvilleRoleGuideModal()">
-                                (임시) 탄시빌 모드 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
-                                밤 역할 진행 순서
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장
@@ -134,10 +139,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/myCharacterModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/teensyvilleRoleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 
