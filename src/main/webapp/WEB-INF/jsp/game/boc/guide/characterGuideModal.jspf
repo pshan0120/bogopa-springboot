@@ -1,0 +1,106 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const characterGuideModal = {
+        characterList: [],
+        open: characterList => {
+            characterGuideModal.characterList = characterList;
+
+            const characterListHtml =
+                characterGuideModal.createPositionHtml(characterList, POSITION.TOWNS_FOLK)
+                + characterGuideModal.createPositionHtml(characterList, POSITION.OUTSIDER)
+                + characterGuideModal.createPositionHtml(characterList, POSITION.MINION)
+                + characterGuideModal.createPositionHtml(characterList, POSITION.DEMON);
+
+            const $characterGuideModal = $("#characterGuideModal");
+            const $characterListDiv = $characterGuideModal.find("div[name='characterListDiv']");
+            $characterListDiv.empty().html(characterListHtml);
+
+            const firstNightList = characterList
+                .filter(character => character.firstNight > 0)
+                .sort((prev, next) => prev.firstNight - next.firstNight);
+            const $firstNightOl = $characterGuideModal.find("ol[name='firstNightOl']");
+            $firstNightOl.empty().html(characterGuideModal.createNightActionHtml(firstNightList));
+
+            const otherNightList = characterList
+                .filter(character => character.otherNight > 0)
+                .sort((prev, next) => prev.otherNight - next.otherNight);
+            const $otherNightOl = $characterGuideModal.find("ol[name='otherNightOl']");
+            $otherNightOl.empty().html(characterGuideModal.createNightActionHtml(otherNightList));
+
+            $characterGuideModal.modal("show");
+        },
+        createPositionHtml: (characterList, position) => {
+            const list = characterList.filter(character => character.team === position.name);
+            return `
+                <h3 class="\${Character.calculateCharacterNameClass(position.name)}">\${position.title}(\${position.name})</h3>
+                <ol class="pl-4">
+                    \${characterGuideModal.createCharacterHtml(list)}
+                </ol>
+                <hr>`;
+        },
+        createCharacterHtml: characterList => characterList.reduce((prev, next) => {
+            const fontClass = Character.calculateCharacterNameClass(next.team);
+            return prev +
+                `<li class="\${fontClass} mb-4">
+                    <h4 class="\${fontClass}">\${next.name}(\${next.id})</h4>
+                    <div class="row">
+                        <div class="col-3 pl-0 pr-0">
+                            <img src="\${next.image}" class="img-responsive img-thumbnail m-auto">
+                        </div>
+                        <div class="col-9">
+                            <small>\${next.ability}</small>
+                        </div>
+                    </div>
+                </li>`;
+        }, ""),
+        createNightActionHtml: nightList => {
+            return nightList.reduce((prev, next) => {
+                    const fontClass = Character.calculateCharacterNameClass(next.team);
+                    return prev +
+                        `<li class="\${fontClass}">\${next.name}(\${next.id})</li>`;
+                }, `<li class="font-orange">
+                        황혼 단계
+                    </li>
+                    <li class="font-red">
+                        하수인 정보
+                    </li>
+                    <li class="font-red">
+                        악마 정보
+                    </li>`
+            ) + `<li class="font-orange">
+                    새벽 단계
+                </li>`;
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="characterGuideModal" character="dialog"
+     aria-labelledby="characterGuideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">역할 설명</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="characterListDiv"></div>
+                <div name="nightActionDiv">
+                    <h4>첫날 밤</h4>
+                    <ol class="pl-4" name="firstNightOl"></ol>
+                    <h4>두번째 밤부터</h4>
+                    <ol class="pl-4" name="otherNightOl"></ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

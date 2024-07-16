@@ -1414,7 +1414,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp.",
+        "ability": "첫날 밤 미참여 역할 3개를 알고 시작합니다. 첫날 밤을 제외한 매일 밤 당신은 플레이어를 지목하고 그 참가자는 사망합니다. 만약 당신이 자신을 지목했다면 하수인들 중 1명이 임프가 됩니다.",
         "image": "/images/fo/boc/icons/demon/imp.webp"
     },
     {

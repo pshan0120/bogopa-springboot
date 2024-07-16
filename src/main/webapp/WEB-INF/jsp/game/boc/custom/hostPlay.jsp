@@ -6,7 +6,7 @@
 
     <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
     <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
-    <script src="<c:url value='/js/game/boc/roles.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/character.js'/>"></script>
 
     <script>
         const PLAY_ID = ${playId};
@@ -168,11 +168,11 @@
             playedCharacterList = [];
 
             selectedCharacterList = characterList
-                .filter(character => scriptJson.find(item => characterIdEquals(item, character.id)))
+                .filter(character => scriptJson.find(item => Character.characterIdEquals(item, character.id)))
                 .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team));
 
             const listHtml = selectedCharacterList.reduce((prev, next) => {
-                const fontClass = Role.calculateRoleNameClass(next.team);
+                const fontClass = Character.calculateCharacterNameClass(next.team);
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
                         <small class="\${fontClass}">\${next.name}</small>
@@ -199,14 +199,6 @@
             renderPlayedCharacterList();
         }
 
-        const getCharacterInListById = (characterList, characterId) => {
-            return characterList.find(item => characterIdEquals(item.id, characterId));
-        }
-
-        const characterIdEquals = (characterId1, characterId2) => {
-            return characterId1.replace(/\-/g, "") === characterId2.replace(/\-/g, "");
-        }
-
         const renderPlayedCharacterList = () => {
             const $characterDiv = $("#characterDiv");
             const $playedCharacterCountDiv = $characterDiv.find("div[name='playedCharacterCountDiv']");
@@ -219,8 +211,8 @@
             $playedCharacterListDiv.empty();
 
             const listHtml = playedCharacterList.reduce((prev, next) => {
-                const character = getCharacterInListById(selectedCharacterList, next);
-                const fontClass = Role.calculateRoleNameClass(character.team);
+                const character = Character.getCharacterInListById(selectedCharacterList, next);
+                const fontClass = Character.calculateCharacterNameClass(character.team);
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}">
                         <small class="\${fontClass}">\${character.name}</small>
@@ -232,7 +224,7 @@
         }
 
         const removePlayedCharacter = characterId => {
-            const thrownAwayIndex = playedCharacterList.findIndex(item => characterIdEquals(item, characterId));
+            const thrownAwayIndex = playedCharacterList.findIndex(item => Character.characterIdEquals(item, characterId));
             if (thrownAwayIndex > -1) {
                 playedCharacterList.splice(thrownAwayIndex, 1);
             }
@@ -261,6 +253,9 @@
             const $playerSeatsDiv = $seatDiv.find("div[name='playerSeatsDiv']");
             $playerSeatsDiv.empty();
 
+            playedCharacterList = playedCharacterList
+                .sort(() => Math.random() - 0.5);
+
             playerList = playerList
                 .sort(() => Math.random() - 0.5)
                 .map((originalPlayer, index) => {
@@ -277,8 +272,8 @@
 
             const playerListHtml = playerList
                 .reduce((prev, next) => {
-                    const character = getCharacterInListById(selectedCharacterList, next.characterId);
-                    const fontClass = Role.calculateRoleNameClass(character.team);
+                    const character = Character.getCharacterInListById(selectedCharacterList, next.characterId);
+                    const fontClass = Character.calculateCharacterNameClass(character.team);
                     return prev +
                         `<div class="row" name="\${next.memberId}">
                             <div class="col-6">
@@ -359,8 +354,8 @@
 
             const playerListHtml = playerList
                     .reduce((prev, next) => {
-                        const character = getCharacterInListById(selectedCharacterList, next.characterId);
-                        const fontClass = Role.calculateRoleNameClass(character.team);
+                        const character = Character.getCharacterInListById(selectedCharacterList, next.characterId);
+                        const fontClass = Character.calculateCharacterNameClass(character.team);
 
                         return prev +
                             `<tr class="text-center" name="\${next.memberId}" data-member-id="\${next.memberId}">
@@ -615,24 +610,12 @@
             messageModal.open(messageHtml);
         }
 
-        const openPlayStatusModal = () => {
-            playStatusModal.open(createAssignedPlayerList());
-        }
-
         const openRuleGuideModal = () => {
             ruleGuideModal.open();
         }
 
-        const openRoleGuideModal = () => {
-            roleGuideModal.open();
-        }
-
-        const openExpertRoleGuideModal = () => {
-            expertRoleGuideModal.open();
-        }
-
-        const openTeensyvilleRoleGuideModal = () => {
-            teensyvilleRoleGuideModal.open();
+        const openCharacterGuideModal = () => {
+            characterGuideModal.open(selectedCharacterList);
         }
 
         const openNightStepGuideModal = () => {
@@ -861,21 +844,11 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
-                                플레이 상태 모달 표시
-                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                 게임 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openRoleGuideModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openCharacterGuideModal()">
                                 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openExpertRoleGuideModal()">
-                                (임시) 숙련자 모드 역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block"
-                                    onclick="openTeensyvilleRoleGuideModal()">
-                                (임시) 탄시빌 모드 역할 설명
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNightStepGuideModal()">
                                 밤 역할 진행 순서
@@ -907,29 +880,9 @@
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
 
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/minion.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/imp.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/poisoner.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/spy.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/washerWoman.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/librarian.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/investigator.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/chef.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/empath.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/fortuneTeller.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/butler.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/slayer.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/monk.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/scarletWoman.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/undertaker.jspf" %>
-
 <%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/guide/teensyvilleRoleGuideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/soundEffectModal.jspf" %>

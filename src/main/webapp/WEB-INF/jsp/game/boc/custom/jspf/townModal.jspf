@@ -2,19 +2,17 @@
 
 <script>
     const townModal = {
-        playStatus: {},
+        selectedEditionId: null,
+        selectedCharacterList: [],
+        playedCharacterList: [],
         playerList: [],
-        townsFolkPlayerList: [],
-        outsiderPlayerList: [],
-        minionPlayerList: [],
-        demonPlayerList: [],
+        playStatus: {},
         open: async playId => {
-            townModal.playStatus = {};
+            townModal.selectedEditionId = null;
+            townModal.selectedCharacterList = [];
+            townModal.playedCharacterList = [];
             townModal.playerList = [];
-            townModal.townsFolkPlayerList = [];
-            townModal.outsiderPlayerList = [];
-            townModal.minionPlayerList = [];
-            townModal.demonPlayerList = [];
+            townModal.playStatus = {};
 
             await townModal.loadGameStatus(playId);
 
@@ -47,24 +45,15 @@
             townModal.playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
 
             const htmlString = townModal.playerList.reduce((prev, next) => {
-                const found = [
-                    ...townModal.demonPlayerList,
-                    ...townModal.minionPlayerList,
-                    ...townModal.townsFolkPlayerList,
-                    ...townModal.outsiderPlayerList,
-                ].find(player => player.playerId === next.memberId);
+                const playerNameHtml = next.died
+                    ? `\${next.nickname} <i class="ni ni-tie-bow"></i>`
+                    : `<strong>\${next.nickname}</strong>`;
+                const votableHtml = next.votable ? `<strong>투표 ○</strong>` : `투표 ×`;
 
-                if (found) {
-                    const playerNameHtml = found.died
-                        ? `\${found.playerName} <i class="ni ni-tie-bow"></i>`
-                        : `<strong>\${found.playerName}</strong>`;
-                        // ? `<i class="ni ni-tie-bow"></i>` : "";
-                    const votableHtml = found.votable ? `<strong>투표 ○</strong>` : `투표 ×`;
-
-                    return prev +
-                        `<div class="row">
+                return prev +
+                    `<div class="row">
                             <div class="col-2">
-                                \${found.seatNumber + 1}
+                                \${next.seatNumber}
                             </div>
                             <div class="col-6">
                                 \${playerNameHtml}
@@ -74,9 +63,6 @@
                             </div>
                         </div>
                         <hr class="mt-2 mb-2">`;
-                }
-
-                return "";
             }, "");
 
             $townDiv.append(htmlString);
@@ -91,20 +77,11 @@
 
             const lastPlayLogJson = JSON.parse(lastPlayLog);
 
-            townModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            townModal.selectedEditionId = lastPlayLogJson.selectedEditionId;
+            townModal.selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
+            townModal.playedCharacterList = JSON.parse(lastPlayLogJson.playedCharacterList);
             townModal.playerList = JSON.parse(lastPlayLogJson.playerList);
-            townModal.townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
-            townModal.outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
-            townModal.minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
-            townModal.demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
-
-            /*playerList = JSON.parse(lastPlayLogJson.playerList);
-            // roleList = JSON.parse(lastPlayLogJson.roleList);
-            townsFolkPlayerList = JSON.parse(lastPlayLogJson.townsFolkPlayerList);
-            outsiderPlayerList = JSON.parse(lastPlayLogJson.outsiderPlayerList);
-            minionPlayerList = JSON.parse(lastPlayLogJson.minionPlayerList);
-            demonPlayerList = JSON.parse(lastPlayLogJson.demonPlayerList);
-            playStatus = JSON.parse(lastPlayLogJson.playStatus);*/
+            townModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
             console.log('game status loaded !!');
         },

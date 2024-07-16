@@ -21,22 +21,22 @@
             const $roleGuideModal = $("#roleGuideModal");
             const $roleListDiv = $roleGuideModal.find("div[name='roleListDiv']");
             const roleListHtml = `
-                <h3 class="\${Role.calculateRoleNameClass(POSITION.TOWNS_FOLK.name)}">\${POSITION.TOWNS_FOLK.title}</h3>
+                <h3 class="\${Character.calculateRoleNameClass(POSITION.TOWNS_FOLK.name)}">\${POSITION.TOWNS_FOLK.title}</h3>
                 <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.townsFolkRoleList)}
                 </ol>
                 <hr>
-                <h3 class="\${Role.calculateRoleNameClass(POSITION.OUTSIDER.name)}">\${POSITION.OUTSIDER.title}</h3>
+                <h3 class="\${Character.calculateRoleNameClass(POSITION.OUTSIDER.name)}">\${POSITION.OUTSIDER.title}</h3>
                 <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.outsiderRoleList)}
                 </ol>
                 <hr>
-                <h3 class="\${Role.calculateRoleNameClass(POSITION.MINION.name)}">\${POSITION.MINION.title}</h3>
+                <h3 class="\${Character.calculateRoleNameClass(POSITION.MINION.name)}">\${POSITION.MINION.title}</h3>
                 <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.minionRoleList)}
                 </ol>
                 <hr>
-                <h3 class="\${Role.calculateRoleNameClass(POSITION.DEMON.name)}">\${POSITION.DEMON.title}</h3>
+                <h3 class="\${Character.calculateRoleNameClass(POSITION.DEMON.name)}">\${POSITION.DEMON.title}</h3>
                 <ol class="pl-4">
                     \${guideModal.createRoleHtml(guideModal.demonRoleList)}
                 </ol>
@@ -89,7 +89,7 @@
             ];
         },
         createRoleHtml: roleList => roleList.reduce((prev, next) => {
-            const fontClass = Role.calculateRoleNameClass(next.position.name);
+            const fontClass = Character.calculateCharacterNameClass(next.position.name);
             // <img src="\${POSITION.TOWNS_FOLK.title}" class="img-responsive img-thumbnail m-auto">
             return prev +
                 `<li class="\${fontClass}">
@@ -122,7 +122,7 @@
                         블러드 온 클락타워는 2022년에 출시된 보드 게임으로, 논리와 블러핑을 통해 악마를 추리하는 게임입니다.<br/>
                         이 게임은 5~20명의 플레이어로 구성된 선과 악의 두 팀이 대립하는 게임으로, 이야기꾼이 게임 진행을 주관하고 중요한 결정을 내립니다.<br/>
                         블러드 온 클락타워 게임의 목표는 악마를 성공적으로 추리하고 처형하는 것입니다.<br/>
-                        낮에는 플레이어가 정보를 교환하거나 거짓말을 퍼뜨리며, 밤에는 이야기꾼이 플레이어를 깨우고 정보를 수집하거나 악당이 물리치는 시간입니다.
+                        낮에는 플레이어가 정보를 교환하거나 거짓말을 퍼뜨리며, 밤에는 이야기꾼이 플레이어를 깨우고 정보를 제공하거나 능력을 발동하는 시간입니다.
                     </p>
                 </div>
                 <hr>

@@ -7,7 +7,7 @@
                 .sort((prev, next) => prev.seatNumber - next.seatNumber)
                 .reduce((prev, next) => {
                     const playerStatusListHtml = Role.createPlayerStatusListHtml(next);
-                    return prev + `<div class=\${Role.calculateRoleNameClass(next.position.name)}>
+                    return prev + `<div class=\${Character.calculateRoleNameClass(next.position.name)}>
                                 \${next.seatNumber + 1}. \${next.playerName} - \${next.title}(\${next.name})<br/>
                                 \${playerStatusListHtml}
                             </div>

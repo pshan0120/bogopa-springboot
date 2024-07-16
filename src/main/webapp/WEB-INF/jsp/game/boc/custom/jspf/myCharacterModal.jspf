@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const myCharacterModal = {
+        selectedEditionId: null,
+        selectedCharacterList: [],
+        playedCharacterList: [],
+        playerList: [],
+        playStatus: {},
+        open: async playNo => {
+            myCharacterModal.selectedEditionId = null;
+            myCharacterModal.selectedCharacterList = [];
+            myCharacterModal.playedCharacterList = [];
+            myCharacterModal.playerList = [];
+            myCharacterModal.playStatus = {};
+
+            await myCharacterModal.loadGameStatus(playNo);
+
+            if (Object.keys(myCharacterModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
+            if (!myCharacterModal.playStatus.playerCharacterDisplayed) {
+                alert("첫날 밤 전까지만 확인 가능합니다.");
+                return;
+            }
+
+            const loggedIn = JSON.parse("<%= SessionUtils.isMemberLoggedIn() %>");
+            if (!loggedIn) {
+                alert("로그인 상태가 아닙니다.");
+                return;
+            }
+
+            const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
+
+            const player = myCharacterModal.playerList.find(player => player.memberId === memberId);
+            if (!player) {
+                alert("참가중 상태가 아닙니다.");
+                return;
+            }
+
+            console.log('playStatus', myCharacterModal.playStatus);
+            const $modal = $("#myCharacterModal");
+
+            const character = Character.getCharacterInListById(myCharacterModal.selectedCharacterList, player.characterId);
+            const fontClass = Character.calculateCharacterNameClass(character.team);
+            const characterHtml =
+                `<div class="text-center pt-2 \${fontClass}">
+                    <h1 class="\${fontClass}">\${character.name}(\${character.id})</h1>
+                    <img src="\${character.image}" class="img-responsive img-thumbnail m-auto">
+                </div>`;
+
+            $modal.find("[name='characterDiv']").empty().html(characterHtml);
+
+            $modal.modal("show");
+        },
+        loadGameStatus: async playNo => {
+            const lastPlayLog = await myCharacterModal.readLastPlayLog(playNo);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+
+            myCharacterModal.selectedEditionId = lastPlayLogJson.selectedEditionId;
+            myCharacterModal.selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
+            myCharacterModal.playedCharacterList = JSON.parse(lastPlayLogJson.playedCharacterList);
+            myCharacterModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            myCharacterModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="myCharacterModal" role="dialog"
+     aria-labelledby="myCharacterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">내 역할</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>첫날 밤 전까지만 확인 가능합니다.</h3>
+                <hr>
+                <div name="characterDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

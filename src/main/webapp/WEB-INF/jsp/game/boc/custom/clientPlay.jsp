@@ -5,7 +5,7 @@
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
     <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
-    <script src="<c:url value='/js/game/boc/roles.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/character.js'/>"></script>
     <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
 
     <script>
@@ -40,8 +40,8 @@
             townModal.open(PLAY_ID);
         }
 
-        const openMyRoleModal = () => {
-            myRoleModal.open(PLAY_ID);
+        const openMyCharacterModal = () => {
+            myCharacterModal.open(PLAY_ID);
         }
 
         const openNoteModal = () => {
@@ -64,7 +64,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
                         <h1 class="text-white">Blood on the Clocktower</h1>
-                        <p class="text-lead text-light">trouble brewing</p>
+                        <p class="text-lead text-light">custom</p>
                     </div>
                 </div>
             </div>
@@ -85,9 +85,12 @@
                         플레이어용 참조표
                     </div>
                     <div class="card-body" id="titleDiv">
-                        <h2>
+                        <h4>
                             <span name="playName"></span>
-                        </h2>
+                        </h4>
+                        <p>
+                            ※ 카카오톡 같은 인앱 브라우저에서 '뒤로가기' 누르면 이 화면이 닫힐 수 있으니 주의하세요. 가급적 크롬이나 삼성, 사파리 브라우저에서 보시는 것을 추천합니다.
+                        </p>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
@@ -115,7 +118,7 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openMyRoleModal()">
+                            <button type="button" class="btn btn-danger btn-block" onclick="openMyCharacterModal()">
                                 내 역할 보기
                             </button>
                         </div>
@@ -127,8 +130,8 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/townModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/myRoleModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/myCharacterModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" %>
