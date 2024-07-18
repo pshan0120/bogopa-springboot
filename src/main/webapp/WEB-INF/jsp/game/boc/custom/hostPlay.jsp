@@ -37,6 +37,7 @@
             showPlayingDivs();
 
             await renderPlayerStatusList();
+            await renderExecution();
         });
 
         const readEditionList = async () => {
@@ -294,6 +295,7 @@
             showPlayingDivs();
 
             await renderPlayerStatusList();
+            await renderExecution();
         }
 
         const showSettingDivs = () => {
@@ -311,11 +313,13 @@
         const showPlayingDivs = () => {
             $("#backgroundMusicDiv").show();
             $("#playerStatusDiv").show();
+            $("#executionDiv").show();
         }
 
         const hidePlayingDivs = () => {
             $("#backgroundMusicDiv").hide();
             $("#playerStatusDiv").hide();
+            $("#executionDiv").hide();
         }
 
         const renderPlayerStatusList = () => {
@@ -395,6 +399,26 @@
             });
         }
 
+        const renderExecution = async () => {
+            const $executionDiv = $("#executionDiv");
+
+            const virginPlayer = Character.getInPlayerListById(playerList, "virgin");
+            $executionDiv.find("span[name='virginPlayer']").html((virginPlayer ? virginPlayer.nickname : ""));
+
+            const impPlayer = Character.getInPlayerListById(playerList, "imp");
+            $executionDiv.find("span[name='impPlayer']").html((impPlayer ? impPlayer.nickname : ""));
+
+            const scarletWomanPlayer = Character.getInPlayerListById(playerList, "scarlet_woman");
+            $executionDiv.find("span[name='scarletWomanPlayer']").html((scarletWomanPlayer ? scarletWomanPlayer.nickname : ""));
+
+            const alivePlayerList = playerList.filter(player => !player.died);
+            const numberOfVoteSuccess = Math.ceil(alivePlayerList.length / 2);
+            $executionDiv.find("span[name='numberOfVoteSuccess']").html(numberOfVoteSuccess);
+        }
+
+
+
+
         const hideCharacterToPlayer = () => {
             playStatus.playerCharacterDisplayed = false;
 
@@ -405,10 +429,25 @@
         }
 
         const resetNominationStatus = () => {
+            if (!confirm("현재까지의 모든 투표 상황을 초기화하고 투표를 처음부터 진행합니다.")) {
+                return;
+            }
+
             playerList.forEach(player => {
                 player.nominating = false;
                 player.nominated = false;
             });
+
+            executionModal.nominatingPlayer = null;
+            executionModal.nominatedPlayer = null;
+            executionModal.votingPlayerList = [];
+            $.each(executionModal.diedAndVotedPlayerList, (index, player) => {
+                player.votable = true;
+            });
+            executionModal.diedAndVotedPlayerList = [];
+            executionModal.candidatePlayer = null;
+            executionModal.candidatePlayerListOfToday = [];
+            executionModal.executionPlayerOfToday = null;
 
             renderPlayerStatusList();
         }
@@ -420,6 +459,7 @@
 
             saveGameStatus();
             renderPlayerStatusList();
+            renderExecution();
         }
 
         const renderPlayMemberList = playerList => {
@@ -793,10 +833,6 @@
                                 플레이어 캐릭터 숨기기
                             </button>
                             <button type="button" class="btn btn-warning btn-block"
-                                    name="resetNominationStatusButton" onclick="resetNominationStatus()">
-                                지명/지명됨 초기화
-                            </button>
-                            <button type="button" class="btn btn-warning btn-block"
                                     name="savePlayerStatusButton" onclick="savePlayerStatus()">
                                 상태 저장
                             </button>
@@ -805,6 +841,74 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                <div class="card shadow display-none" id="executionDiv">
+                    <div class="card-header bg-white border-0">
+                        <h2>
+                            처형 투표
+                            <a data-toggle="collapse" href="#executionVoteDiv" role="button" aria-expanded="false"
+                               aria-controls="executionVoteDiv">
+                                열기/닫기
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="collapse" id="executionVoteDiv">
+                            <p>
+                                1. 한 번에 한 명의 플레이어만 지명할 수 있습니다.<br/>
+                                2. 생존 플레이어만 지명할 수 있습니다.<br/>
+                                - 만약 처녀가 지명당했고 지명한 사람이 마을주민이라면 지명한 사람은 즉시 처형됩니다.<br/>
+                                - 처녀가 지명당했고 지명한 사람이 생존 플레이어라면 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
+                                - 처녀가 취했거나 중독된 상태라면 지명한 사람이 죽지 않습니다. 다만 이 때에도 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
+                                <strong class="font-blue">
+                                    - 처녀 : <span name="virginPlayer"></span>
+                                </strong><br/>
+                                3. 각 플레이어는 하루에 한 번만 지명할 수 있으며, 각 플레이어는 하루에 한 번만 지명될 수 있습니다.<br/>
+                                4. 지명한 플레이어에게는 이유를, 지명당한 플레이어에게 변호할 기회를 줍니다.<br/>
+                                5. 투표를 시작합니다. 후보자로부터 시계 반향으로 돌면서 손을 든 플레이어를 셉니다.<br/>
+                                - 생존 플레이어는 하루에 원하는 만큼의 플레이어에게 투표할 수 있습니다.<br/>
+                                - 사망 플레이어는 남은 게임 동안 단 한 번만 투표할 수 있습니다.<br/>
+                                - 생존 플레이어의 수의 절반 이상을 받았다면 처형 대상자가 됩니다.<br/>
+                                <strong class="font-orange">
+                                    - 필요한 득표 수 : <span name="numberOfVoteSuccess"></span>
+                                </strong><br/>
+                                6. 투표 결과를 발표합니다.<br/>
+                                7. 다음 처형 투표를 진행합니다. 만약 더 이상 지명하는 플레이어가 없다면 투표가 종료됩니다.<br/>
+                                - 처형 대상자가 없었거나 두 사람 이상인데 투표 수가 같다면 아무도 처형되지 않습니다.<br/>
+                                - 처형 대상자 중 가장 많은 표를 받은 플레이어는 처형됩니다. 만약 악마가 처형되었고 부정한 여자가 없다면 선한 편이 승리합니다.<br/>
+                                <strong class="font-red">
+                                    - 임프 : <span name="impPlayer"></span>
+                                </strong><br/>
+                                <strong class="font-red">
+                                    - 부정한 여자 : <span name="scarletWomanPlayer"></span>
+                                </strong><br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer py-4">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-info btn-block"
+                                    onclick="executionModal.openNominationModal(playerList, selectedCharacterList)">
+                                투표 지명
+                            </button>
+                            <%--<button type="button" class="btn btn-warning btn-block"
+                                    onclick="executionModal.resetNomination()">
+                                투표 지명 재설정
+                            </button>--%>
+                            <button type="button" class="btn btn-warning btn-block"
+                                    name="resetNominationStatusButton" onclick="resetNominationStatus()">
+                                지명/지명됨 초기화
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
         <div class="row">
             <div class="col-xl-12 mb-2 mt-2 mb-xl-0">

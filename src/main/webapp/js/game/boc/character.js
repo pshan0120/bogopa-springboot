@@ -4,8 +4,8 @@ class Character {
         return characterList.find(item => this.characterIdEquals(item.id, characterId));
     }
 
-    static getInPlayerListById(characterList, characterId) {
-        return characterList.find(item => this.characterIdEquals(item.characterId, characterId));
+    static getInPlayerListById(playerList, characterId) {
+        return playerList.find(item => this.characterIdEquals(item.characterId, characterId));
     }
 
     static characterIdEquals(characterId1, characterId2) {
