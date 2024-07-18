@@ -10,9 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="역할설명, 마을광장 완료">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/myCharacterModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/myCharacterModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/character.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/character.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +69,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "false",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/guide",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -84,9 +87,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\guide" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\boc" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
     </key>
@@ -292,14 +295,8 @@
       <workItem from="1720924103685" duration="3500000" />
       <workItem from="1721098599910" duration="3599000" />
       <workItem from="1721142352936" duration="560000" />
-      <workItem from="1721142963956" duration="7285000" />
-    </task>
-    <task id="LOCAL-00091" summary="페이징 수정중">
-      <created>1715533392303</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1715533392304</updated>
+      <workItem from="1721142963956" duration="7921000" />
+      <workItem from="1721269373796" duration="4355000" />
     </task>
     <task id="LOCAL-00092" summary="readClubPlayImagePageById 진행중">
       <created>1715535190225</created>
@@ -637,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721149715802</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="역할설명, 마을광장 완료">
+      <created>1721150409597</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1721150409597</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

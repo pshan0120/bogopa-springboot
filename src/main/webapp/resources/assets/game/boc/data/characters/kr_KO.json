@@ -2954,12 +2954,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 56,
-        "otherNightReminder": "첫날 밤을 제외한 매일 밤 당신은 오늘 처형된 플레이어의 역할을 알게 됩니다.",
+        "otherNightReminder": "If a player was executed today: Show that player's character token.",
         "reminders": [
             "Executed"
         ],
         "setup": false,
-        "ability": "Each night*, you learn which character died by execution today.",
+        "ability": "첫날 밤을 제외한 매일 밤 당신은 오늘 처형된 플레이어의 역할을 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/undertaker.webp"
     },
     {

@@ -187,7 +187,7 @@
             $playedCharacterListDiv.empty();
 
             const listHtml = playedCharacterList.reduce((prev, next) => {
-                const character = Character.getCharacterInListById(selectedCharacterList, next);
+                const character = Character.getInCharacterListById(selectedCharacterList, next);
                 const fontClass = Character.calculateCharacterNameClass(character.team);
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}">
@@ -248,7 +248,7 @@
 
             const playerListHtml = playerList
                 .reduce((prev, next) => {
-                    const character = Character.getCharacterInListById(selectedCharacterList, next.characterId);
+                    const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
                     const fontClass = Character.calculateCharacterNameClass(character.team);
                     return prev +
                         `<div class="row" name="\${next.memberId}">
@@ -330,7 +330,7 @@
 
             const playerListHtml = playerList
                     .reduce((prev, next) => {
-                        const character = Character.getCharacterInListById(selectedCharacterList, next.characterId);
+                        const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
                         const fontClass = Character.calculateCharacterNameClass(character.team);
 
                         return prev +
@@ -598,6 +598,10 @@
             townModal.open(PLAY_ID);
         }
 
+        const openExecutionModal = () => {
+            executionModal.open(playerList);
+        }
+
         const openQrLoginModal = () => {
             qrLoginModal.open(createAssignedPlayerList());
         }
@@ -667,22 +671,22 @@
                     <%--<p>
                         1. 목표<br/>
                         시간 단축을 위해...<br/>
-                        - 닉네임 입력은 참여자가 직접 하도록 한다.<br/>
-                        - 참여자는 주어진 역할을 확인할 수 있다.<br/>
+                        - 닉네임 입력은 참여자가 직접 하도록 한다.<br/> -> 완료
+                        - 참여자는 주어진 역할을 확인할 수 있다.<br/> -> 완료
                         <br/>
                         진행 편의를 위해<br/>
-                        - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/>
-                        자동이면 좋겠지만 안되면 직접 선택이라도<br/>
-                        - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/>
-                        지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/>
-                        커스톰 스크립트라면 포켓그리모어에 붙혀넣기 할 수 있는 json 생성과 복사 기능을 추가한다.<br/>
-                        - 포켓그리모어에서 죽었을 때 호스트 화면에서도 죽음 표시를 할 수 있는 기능을 추가한다.<br/>
+                        - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/> -> 완료
+                        자동이면 좋겠지만 안되면 직접 선택이라도<br/> -> 완료
+                        - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/> -> 완료
+                        지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/> -> 완료
+                        커스톰 스크립트라면 포켓그리모어에 붙혀넣기 할 수 있는 json 생성과 복사 기능을 추가한다.<br/> -> 완료
+                        - 포켓그리모어에서 죽었을 때 호스트 화면에서도 죽음 표시를 할 수 있는 기능을 추가한다.<br/> -> 완료
                         - 투표 기능은 호스트 화면에서 진행한다.<br/>
                         <br/>
                         게임성을 위해...<br/>
-                        - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/>
+                        - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/> -> 완료
                         - html5 canvas를 이용하여 원형으로 세팅한다.<br/>
-                        - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/>
+                        - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/> -> 완료
                     </p>--%>
                     <div class="card-header bg-white border-0">
                         <h2>
@@ -825,6 +829,9 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장 보기
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openExecutionModal()">
+                                처형 투표 진행
+                            </button>
                             <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
@@ -848,6 +855,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/messageModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" %>
