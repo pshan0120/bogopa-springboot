@@ -650,8 +650,8 @@
         "image": "/images/fo/boc/icons/traveller/deviant.webp"
     },
     {
-        "id": "devilsadvocate",
-        "name": "Devil's Advocate",
+        "id": "devils_advocate",
+        "name": "악마의 대변인",
         "edition": "bmr",
         "team": "minion",
         "firstNight": 22,
@@ -663,6 +663,7 @@
         ],
         "setup": false,
         "ability": "Each night, choose a living player (different to last night): if executed tomorrow, they don't die.",
+        "ability": "매일 밤 어제 밤과 다른 살아있는 플레이어를 선택합니다. 그는 내일 처형되도 죽지 않습니다.",
         "image": "/images/fo/boc/icons/minion/devilsadvocate.webp"
     },
     {

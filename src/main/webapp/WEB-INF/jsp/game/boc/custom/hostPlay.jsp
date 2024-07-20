@@ -688,24 +688,6 @@
     <div class="row">
         <div class="col-md-6 col-xs-12">
             <div class="container mt--7">
-                <div class="row">
-                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                        <div class="card shadow display-none" id="backgroundMusicDiv">
-                            <div class="card-header bg-white border-0">
-                            </div>
-                            <div class="card-body">
-                                <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
-                            </div>
-                            <div class="card-footer py-4">
-                                <div name="buttonDiv">
-                                    <button type="button" class="btn btn-info" onclick="turnOffBackgroundMusic()">
-                                        음악 끄기
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
@@ -846,6 +828,25 @@
 
                 <div class="row">
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="backgroundMusicDiv">
+                            <div class="card-header bg-white border-0">
+                            </div>
+                            <div class="card-body">
+                                <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-info" onclick="turnOffBackgroundMusic()">
+                                        음악 끄기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                         <div class="card shadow display-none" id="executionDiv">
                             <div class="card-header bg-white border-0">
                                 <h2>
@@ -958,7 +959,7 @@
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                         <div class="card shadow">
                             <div class="card-body p-0">
-                                <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/" height="1000" width="100%"></iframe>
+                                <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/" height="800" width="100%"></iframe>
                             </div>
                         </div>
                     </div>

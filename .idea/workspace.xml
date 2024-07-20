@@ -9,16 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="executionModal ing">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/laissez-un-faire.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/over-the-river.json" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="역할 설명 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/fo/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/fo/common.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,14 +296,7 @@
       <workItem from="1721269373796" duration="4400000" />
       <workItem from="1721311076851" duration="7587000" />
       <workItem from="1721436873403" duration="976000" />
-      <workItem from="1721484329595" duration="6720000" />
-    </task>
-    <task id="LOCAL-00094" summary="마을 모달 오류 수정">
-      <created>1715715009952</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1715715009953</updated>
+      <workItem from="1721484329595" duration="8351000" />
     </task>
     <task id="LOCAL-00095" summary="도둑잡기 밸런스 조정">
       <created>1715742876258</created>
@@ -647,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721318549336</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="역할 설명 추가">
+      <created>1721491832185</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1721491832185</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +662,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="gfn_deepCopyByJSON 추가" />
     <MESSAGE value="게임설명 모달 추가" />
     <MESSAGE value="Dictator 개발중" />
     <MESSAGE value="직업 작성" />
@@ -693,7 +686,8 @@
     <MESSAGE value="마을 광장 진행해야 함" />
     <MESSAGE value="역할설명, 마을광장 완료" />
     <MESSAGE value="executionModal ing" />
-    <option name="LAST_COMMIT_MESSAGE" value="executionModal ing" />
+    <MESSAGE value="역할 설명 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="역할 설명 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
