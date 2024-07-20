@@ -33,5 +33,15 @@
         "id": "cd",
         "name": "Comrade Demon",
         "scriptJson": "comrade-demon.json"
+    },
+    {
+        "id": "otr",
+        "name": "Over the River",
+        "scriptJson": "over-the-river.json"
+    },
+    {
+        "id": "luf",
+        "name": "LAISSEZ UN FAIRE",
+        "scriptJson": "laissez-un-faire.json"
     }
 ]

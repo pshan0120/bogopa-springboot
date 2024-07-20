@@ -211,7 +211,7 @@
     },
     {
         "id": "barber",
-        "name": "Barber",
+        "name": "이발사",
         "edition": "snv",
         "team": "outsider",
         "firstNight": 0,
@@ -222,7 +222,7 @@
             "Haircuts tonight"
         ],
         "setup": false,
-        "ability": "If you died today or tonight, the Demon may choose 2 players (not another Demon) to swap characters.",
+        "ability": "만약 오늘 낮이나 오늘 밤에 당신이 죽으면 악마는 2명의 플레이어 역할을(다른 악마 제외) 교체할 수 있습니다. 교체된 플레이어는 각자 자신들의 새 역할을 알게 되는데, 이 때 편은 바뀌지 않습니다.",
         "image": "/images/fo/boc/icons/outsider/barber.webp"
     },
     {
@@ -724,7 +724,7 @@
     },
     {
         "id": "dreamer",
-        "name": "Dreamer",
+        "name": "몽상가",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 41,
@@ -733,7 +733,7 @@
         "otherNightReminder": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night, choose a player (not yourself or Travellers): you learn 1 good and 1 evil character, 1 of which is correct.",
+        "ability": "매일 밤 플레이어(본인이나 여행자 제외)를 선택합니다. 선한 역할 1개와 악한 역할 1개를 알게 되는데, 그 중 한 개가 맞습니다.",
         "image": "/images/fo/boc/icons/townsfolk/dreamer.webp"
     },
     {
@@ -822,7 +822,7 @@
     },
     {
         "id": "exorcist",
-        "name": "Exorcist",
+        "name": "퇴마사",
         "edition": "bmr",
         "team": "townsfolk",
         "firstNight": 0,
@@ -833,7 +833,7 @@
             "Chosen"
         ],
         "setup": false,
-        "ability": "Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight.",
+        "ability": "첫날 밤을 제외한 매일 밤 어제와 다른 플레이어를 선택합니다. 만약 악마를 선택하면 악마는 당신을 알게 되고 오늘 밤 깨어나지 않습니다.",
         "image": "/images/fo/boc/icons/townsfolk/exorcist.webp"
     },
     {
@@ -952,7 +952,7 @@
     },
     {
         "id": "fisherman",
-        "name": "Fisherman",
+        "name": "어부",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 0,
@@ -963,7 +963,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "Once per game, during the day, visit the Storyteller for some advice to help you win.",
+        "ability": "게임 중 단 한번, 이야기꾼에게 비밀리에 접근하여 승리에 도움이 되는 조언을 구할 수 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/fisherman.webp"
     },
     {
@@ -1550,7 +1550,7 @@
     },
     {
         "id": "juggler",
-        "name": "Juggler",
+        "name": "저글러",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 0,
@@ -1561,7 +1561,7 @@
             "Correct"
         ],
         "setup": false,
-        "ability": "On your 1st day, publicly guess up to 5 players' characters. That night, you learn how many you got correct.",
+        "ability": "첫번째 낮에 최대 5명의 플레이어 역할을 공개적으로 추측할 수 있습니다. 그날 밤, 당신은 몇 개나 맞혔는지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/juggler.webp"
     },
     {
@@ -1735,7 +1735,7 @@
     },
     {
         "id": "lleech",
-        "name": "Lleech",
+        "name": "거거머리",
         "edition": "",
         "team": "demon",
         "firstNight": 15,
@@ -1747,7 +1747,7 @@
             "Poisoned"
         ],
         "setup": false,
-        "ability": "Each night*, choose a player: they die. You start by choosing an alive player: they are poisoned - you die if & only if they die.",
+        "ability": "첫날 밤 미참여 역할 3개를 알고 시작합니다. 첫날 밤을 제외한 매일 밤 당신은 플레이어를 지목하고 그 참가자는 사망합니다. 당신은 시작할 때 한 명의 살아있는 플레이어를 선택하는데 그는 게임이 끝날 때까지 중독 당합니다. 이 플레이어가 살아 있다면 거거머리는 죽지 않으며, 죽으면 같이 죽습니다.",
         "image": "/images/fo/boc/icons/demon/lleech.webp"
     },
     {
@@ -1800,7 +1800,7 @@
     },
     {
         "id": "marionette",
-        "name": "Marionette",
+        "name": "꼭두각시",
         "edition": "",
         "team": "minion",
         "firstNight": 11,
@@ -1819,6 +1819,7 @@
         ],
         "setup": true,
         "ability": "You think you are a good character but you are not. The Demon knows who you are. [You neighbour the Demon]",
+        "ability": "당신은 스스로가 선한 역할이라고 생각하지만 사실 아닙니다. 악마는 당신이 누구인지 알고 있으며, 당신은 악마의 이웃입니다.",
         "image": "/images/fo/boc/icons/minion/marionette.webp"
     },
     {
@@ -1930,7 +1931,7 @@
     },
     {
         "id": "moonchild",
-        "name": "Moonchild",
+        "name": "문차일드",
         "edition": "bmr",
         "team": "outsider",
         "firstNight": 0,
@@ -1942,6 +1943,7 @@
         ],
         "setup": false,
         "ability": "When you learn that you died, publicly choose 1 alive player. Tonight, if it was a good player, they die.",
+        "ability": "당신이 죽었다는 사실을 알게 되면 공개적으로 살아있는 플레이어 1명을 선택합니다. 선한 플레이어라면 그는 오늘 밤 죽습니다.",
         "image": "/images/fo/boc/icons/outsider/moonchild.webp"
     },
     {
@@ -1992,7 +1994,7 @@
     },
     {
         "id": "nightwatchman",
-        "name": "Nightwatchman",
+        "name": "야간경비원",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 46,
@@ -2003,12 +2005,12 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "Once per game, at night, choose a player: they learn who you are.",
+        "ability": "게임 중 한 번, 밤에 한 플레이어를 선택합니다. 그들은 당신이 누군지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/nightwatchman.webp"
     },
     {
         "id": "noble",
-        "name": "Noble",
+        "name": "귀족",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 43,
@@ -2019,7 +2021,7 @@
             "Seen"
         ],
         "setup": false,
-        "ability": "You start knowing 3 players, 1 and only 1 of which is evil.",
+        "ability": "당신은 시작할 때 세 명의 플레이어를 알게 되는데 그 중 한 명만이 악한 편입니다.",
         "image": "/images/fo/boc/icons/townsfolk/noble.webp"
     },
     {
@@ -2164,7 +2166,7 @@
     },
     {
         "id": "pixie",
-        "name": "Pixie",
+        "name": "요정",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 29,
@@ -2176,7 +2178,7 @@
             "Has ability"
         ],
         "setup": false,
-        "ability": "You start knowing 1 in-play Townsfolk. If you were mad that you were this character, you gain their ability when they die.",
+        "ability": "당신은 시작할 때 1명의 참여중인 마을주민 역할을 알게 됩니다. 만약 당신이 그 역할에 대해 광기에 빠지면, 그 마을주민 역할이 죽었을 때 그 능력을 얻게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/pixie.webp"
     },
     {
@@ -2307,7 +2309,7 @@
     },
     {
         "id": "pukka",
-        "name": "Pukka",
+        "name": "푸카",
         "edition": "bmr",
         "team": "demon",
         "firstNight": 28,
@@ -2319,7 +2321,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "Each night, choose a player: they are poisoned. The previously poisoned player dies then becomes healthy.",
+        "ability": "첫날 밤 미참여 역할 3개를 알고 시작합니다. 매일 밤 당신은 플레이어를 지목하고 그 참가자는 중독됩니다. 이전 중독된 플레이어는 사망합니다. 푸카가 죽인 플레이어는 사망 시 여전히 중독 상태입니다.",
         "image": "/images/fo/boc/icons/demon/pukka.webp"
     },
     {
@@ -2421,9 +2423,10 @@
             "Used"
         ],
         "setup": false,
-        "name": "Revolutionary",
+        "name": "혁명가",
         "team": "fabled",
         "ability": "2 neighboring players are known to be the same alignment. Once per game, one of them registers falsely.",
+        "ability": "이웃 플레이어 2명이 같은 편인 것으로 알려져 있습니다. 게임 중 한 번, 그들 중 한 명을 허위로 등록합니다.",
         "image": "/images/fo/boc/icons/fabled/revolutionary.webp"
     },
     {
@@ -2566,9 +2569,9 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": true,
-        "name": "Sentinel",
+        "name": "센티넬",
         "team": "fabled",
-        "ability": "There might be 1 extra or 1 fewer Outsider in play.",
+        "ability": "참여하는 이방인이 1명 더 있거나 1명 더 적을 수 있습니다.",
         "image": "/images/fo/boc/icons/fabled/sentinel.webp"
     },
     {

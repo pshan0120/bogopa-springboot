@@ -685,273 +685,289 @@
         </div>
     </div>
     <!-- Page content -->
-    <div class="container mt--7">
-        <div class="row">
-            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                <div class="card shadow display-none" id="backgroundMusicDiv">
-                    <div class="card-header bg-white border-0">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="container mt--7">
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="backgroundMusicDiv">
+                            <div class="card-header bg-white border-0">
+                            </div>
+                            <div class="card-body">
+                                <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-info" onclick="turnOffBackgroundMusic()">
+                                        음악 끄기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="editionDiv">
+                            <%--<p>
+                                1. 목표<br/>
+                                시간 단축을 위해...<br/>
+                                - 닉네임 입력은 참여자가 직접 하도록 한다.<br/> -> 완료
+                                - 참여자는 주어진 역할을 확인할 수 있다.<br/> -> 완료
+                                <br/>
+                                진행 편의를 위해<br/>
+                                - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/> -> 완료
+                                자동이면 좋겠지만 안되면 직접 선택이라도<br/> -> 완료
+                                - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/> -> 완료
+                                지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/> -> 완료
+                                커스톰 스크립트라면 포켓그리모어에 붙혀넣기 할 수 있는 json 생성과 복사 기능을 추가한다.<br/> -> 완료
+                                - 포켓그리모어에서 죽었을 때 호스트 화면에서도 죽음 표시를 할 수 있는 기능을 추가한다.<br/> -> 완료
+                                - 투표 기능은 호스트 화면에서 진행한다.<br/>
+                                <br/>
+                                게임성을 위해...<br/>
+                                - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/> -> 완료
+                                - html5 canvas를 이용하여 원형으로 세팅한다.<br/>
+                                - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/> -> 완료
+                            </p>--%>
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    에디션 선택
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <select class="form-control" onchange="selectEdition()"></select>
+                                </div>
+                                <div class="mt-1">
+                                    <textarea rows="4" class="form-control" cols="20"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-info btn-block" onclick="copyEditionJson()">
+                                        복사하기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-info" onclick="turnOffBackgroundMusic()">
-                                음악 끄기
-                            </button>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="characterDiv">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    참여 역할 선택
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    트러블 브루잉 추천 조합(8인 기준)<br/>
+                                    - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
+                                    - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
+                                    - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
+                                </p>
+                                <div class="" name="characterListDiv"></div>
+                                <hr>
+                                <div class="text-right" name="playedCharacterCountDiv"></div>
+                                <div class="" name="playedCharacterListDiv"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 pr-0 pl-0">
+                        <div class="card bg-transparent">
+                            <div class="card-body p-0">
+                                <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/pocketGrimoire.jspf" %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="seatDiv">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    플레이어 배치
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="mt-4" name="playerSeatsDiv"></div>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-info" onclick="setPlayerSeatsRandomly()">
+                                        무작위 배치
+                                    </button>
+                                    <%--<button type="button" class="btn btn-info" onclick="setPlayerSeatsSpecifically()" disabled>
+                                        지정 배치
+                                    </button>--%>
+                                    <button type="button" class="btn btn-primary" onclick="confirmPlayerSeatList()">
+                                        배치 확정
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="playerStatusDiv">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    플레이어 상태
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="" name="playerStatusListDiv"></div>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-warning btn-block display-none"
+                                            name="hideCharacterToPlayerButton" onclick="hideCharacterToPlayer()">
+                                        플레이어 캐릭터 숨기기
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-block"
+                                            name="savePlayerStatusButton" onclick="savePlayerStatus()">
+                                        상태 저장
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="executionDiv">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    처형 투표
+                                    <a data-toggle="collapse" href="#executionVoteDiv" role="button" aria-expanded="false"
+                                       aria-controls="executionVoteDiv">
+                                        열기/닫기
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="collapse" id="executionVoteDiv">
+                                    <p>
+                                        1. 한 번에 한 명의 플레이어만 지명할 수 있습니다.<br/>
+                                        2. 생존 플레이어만 지명할 수 있습니다.<br/>
+                                        - 만약 처녀가 지명당했고 지명한 사람이 마을주민이라면 지명한 사람은 즉시 처형됩니다.<br/>
+                                        - 처녀가 지명당했고 지명한 사람이 생존 플레이어라면 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
+                                        - 처녀가 취했거나 중독된 상태라면 지명한 사람이 죽지 않습니다. 다만 이 때에도 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
+                                        <strong class="font-blue">
+                                            - 처녀 : <span name="virginPlayer"></span>
+                                        </strong><br/>
+                                        3. 각 플레이어는 하루에 한 번만 지명할 수 있으며, 각 플레이어는 하루에 한 번만 지명될 수 있습니다.<br/>
+                                        4. 지명한 플레이어에게는 이유를, 지명당한 플레이어에게 변호할 기회를 줍니다.<br/>
+                                        5. 투표를 시작합니다. 후보자로부터 시계 반향으로 돌면서 손을 든 플레이어를 셉니다.<br/>
+                                        - 생존 플레이어는 하루에 원하는 만큼의 플레이어에게 투표할 수 있습니다.<br/>
+                                        - 사망 플레이어는 남은 게임 동안 단 한 번만 투표할 수 있습니다.<br/>
+                                        - 생존 플레이어의 수의 절반 이상을 받았다면 처형 대상자가 됩니다.<br/>
+                                        <strong class="font-orange">
+                                            - 필요한 득표 수 : <span name="numberOfVoteSuccess"></span>
+                                        </strong><br/>
+                                        6. 투표 결과를 발표합니다.<br/>
+                                        7. 다음 처형 투표를 진행합니다. 만약 더 이상 지명하는 플레이어가 없다면 투표가 종료됩니다.<br/>
+                                        - 처형 대상자가 없었거나 두 사람 이상인데 투표 수가 같다면 아무도 처형되지 않습니다.<br/>
+                                        - 처형 대상자 중 가장 많은 표를 받은 플레이어는 처형됩니다. 만약 악마가 처형되었고 부정한 여자가 없다면 선한 편이 승리합니다.<br/>
+                                        <strong class="font-red">
+                                            - 임프 : <span name="impPlayer"></span>
+                                        </strong><br/>
+                                        <strong class="font-red">
+                                            - 부정한 여자 : <span name="scarletWomanPlayer"></span>
+                                        </strong><br/>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-info btn-block"
+                                            onclick="executionModal.openNominationModal(playerList, selectedCharacterList)">
+                                        투표 지명
+                                    </button>
+                                    <%--<button type="button" class="btn btn-warning btn-block"
+                                            onclick="executionModal.resetNomination()">
+                                        투표 지명 재설정
+                                    </button>--%>
+                                    <button type="button" class="btn btn-warning btn-block"
+                                            name="resetNominationStatusButton" onclick="resetNominationStatus()">
+                                        지명/지명됨 초기화
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow">
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
+                                        인트로 보기
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                        로그인 QR 공유
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
+                                        QR 이미지로 공유
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
+                                        게임 설명
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-block" onclick="openCharacterGuideModal()">
+                                        역할 설명
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
+                                        마을 광장 보기
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-block" onclick="openExecutionModal()">
+                                        처형 투표 진행
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
+                                        노트
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
+                                        소리 효과
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
+                                        게임 재설정
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                <div class="card shadow display-none" id="editionDiv">
-                    <%--<p>
-                        1. 목표<br/>
-                        시간 단축을 위해...<br/>
-                        - 닉네임 입력은 참여자가 직접 하도록 한다.<br/> -> 완료
-                        - 참여자는 주어진 역할을 확인할 수 있다.<br/> -> 완료
-                        <br/>
-                        진행 편의를 위해<br/>
-                        - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/> -> 완료
-                        자동이면 좋겠지만 안되면 직접 선택이라도<br/> -> 완료
-                        - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/> -> 완료
-                        지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/> -> 완료
-                        커스톰 스크립트라면 포켓그리모어에 붙혀넣기 할 수 있는 json 생성과 복사 기능을 추가한다.<br/> -> 완료
-                        - 포켓그리모어에서 죽었을 때 호스트 화면에서도 죽음 표시를 할 수 있는 기능을 추가한다.<br/> -> 완료
-                        - 투표 기능은 호스트 화면에서 진행한다.<br/>
-                        <br/>
-                        게임성을 위해...<br/>
-                        - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/> -> 완료
-                        - html5 canvas를 이용하여 원형으로 세팅한다.<br/>
-                        - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/> -> 완료
-                    </p>--%>
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            에디션 선택
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <select class="form-control" onchange="selectEdition()"></select>
-                        </div>
-                        <div class="mt-1">
-                            <textarea rows="4" class="form-control" cols="20"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block" onclick="copyEditionJson()">
-                                복사하기
-                            </button>
+        <div class="col-md-6 col-xs-12 hidden-xs">
+            <div class="container mt--7">
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow">
+                            <div class="card-body p-0">
+                                <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/" height="1000" width="100%"></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                <div class="card shadow display-none" id="characterDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            참여 역할 선택
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            트러블 브루잉 추천 조합(8인 기준)<br/>
-                            - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
-                            - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
-                            - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
-                        </p>
-                        <div class="" name="characterListDiv"></div>
-                        <hr>
-                        <div class="text-right" name="playedCharacterCountDiv"></div>
-                        <div class="" name="playedCharacterListDiv"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xl-12 pr-0 pl-0">
-                <div class="card bg-transparent">
-                    <div class="card-body p-0">
-                        <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/pocketGrimoire.jspf" %>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                <div class="card shadow display-none" id="seatDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            플레이어 배치
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="mt-4" name="playerSeatsDiv"></div>
-                    </div>
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-info" onclick="setPlayerSeatsRandomly()">
-                                무작위 배치
-                            </button>
-                            <%--<button type="button" class="btn btn-info" onclick="setPlayerSeatsSpecifically()" disabled>
-                                지정 배치
-                            </button>--%>
-                            <button type="button" class="btn btn-primary" onclick="confirmPlayerSeatList()">
-                                배치 확정
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                <div class="card shadow display-none" id="playerStatusDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            플레이어 상태
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="" name="playerStatusListDiv"></div>
-                    </div>
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-warning btn-block display-none"
-                                    name="hideCharacterToPlayerButton" onclick="hideCharacterToPlayer()">
-                                플레이어 캐릭터 숨기기
-                            </button>
-                            <button type="button" class="btn btn-warning btn-block"
-                                    name="savePlayerStatusButton" onclick="savePlayerStatus()">
-                                상태 저장
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                <div class="card shadow display-none" id="executionDiv">
-                    <div class="card-header bg-white border-0">
-                        <h2>
-                            처형 투표
-                            <a data-toggle="collapse" href="#executionVoteDiv" role="button" aria-expanded="false"
-                               aria-controls="executionVoteDiv">
-                                열기/닫기
-                            </a>
-                        </h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="collapse" id="executionVoteDiv">
-                            <p>
-                                1. 한 번에 한 명의 플레이어만 지명할 수 있습니다.<br/>
-                                2. 생존 플레이어만 지명할 수 있습니다.<br/>
-                                - 만약 처녀가 지명당했고 지명한 사람이 마을주민이라면 지명한 사람은 즉시 처형됩니다.<br/>
-                                - 처녀가 지명당했고 지명한 사람이 생존 플레이어라면 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
-                                - 처녀가 취했거나 중독된 상태라면 지명한 사람이 죽지 않습니다. 다만 이 때에도 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
-                                <strong class="font-blue">
-                                    - 처녀 : <span name="virginPlayer"></span>
-                                </strong><br/>
-                                3. 각 플레이어는 하루에 한 번만 지명할 수 있으며, 각 플레이어는 하루에 한 번만 지명될 수 있습니다.<br/>
-                                4. 지명한 플레이어에게는 이유를, 지명당한 플레이어에게 변호할 기회를 줍니다.<br/>
-                                5. 투표를 시작합니다. 후보자로부터 시계 반향으로 돌면서 손을 든 플레이어를 셉니다.<br/>
-                                - 생존 플레이어는 하루에 원하는 만큼의 플레이어에게 투표할 수 있습니다.<br/>
-                                - 사망 플레이어는 남은 게임 동안 단 한 번만 투표할 수 있습니다.<br/>
-                                - 생존 플레이어의 수의 절반 이상을 받았다면 처형 대상자가 됩니다.<br/>
-                                <strong class="font-orange">
-                                    - 필요한 득표 수 : <span name="numberOfVoteSuccess"></span>
-                                </strong><br/>
-                                6. 투표 결과를 발표합니다.<br/>
-                                7. 다음 처형 투표를 진행합니다. 만약 더 이상 지명하는 플레이어가 없다면 투표가 종료됩니다.<br/>
-                                - 처형 대상자가 없었거나 두 사람 이상인데 투표 수가 같다면 아무도 처형되지 않습니다.<br/>
-                                - 처형 대상자 중 가장 많은 표를 받은 플레이어는 처형됩니다. 만약 악마가 처형되었고 부정한 여자가 없다면 선한 편이 승리합니다.<br/>
-                                <strong class="font-red">
-                                    - 임프 : <span name="impPlayer"></span>
-                                </strong><br/>
-                                <strong class="font-red">
-                                    - 부정한 여자 : <span name="scarletWomanPlayer"></span>
-                                </strong><br/>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-info btn-block"
-                                    onclick="executionModal.openNominationModal(playerList, selectedCharacterList)">
-                                투표 지명
-                            </button>
-                            <%--<button type="button" class="btn btn-warning btn-block"
-                                    onclick="executionModal.resetNomination()">
-                                투표 지명 재설정
-                            </button>--%>
-                            <button type="button" class="btn btn-warning btn-block"
-                                    name="resetNominationStatusButton" onclick="resetNominationStatus()">
-                                지명/지명됨 초기화
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="row">
-            <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                <div class="card shadow">
-                    <div class="card-footer py-4">
-                        <div name="buttonDiv">
-                            <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
-                                인트로 보기
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
-                                로그인 QR 공유
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
-                                QR 이미지로 공유
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
-                                게임 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openCharacterGuideModal()">
-                                역할 설명
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
-                                마을 광장 보기
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openExecutionModal()">
-                                처형 투표 진행
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
-                                노트
-                            </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
-                                소리 효과
-                            </button>
-                            <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
-                                게임 재설정
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
