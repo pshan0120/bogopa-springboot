@@ -57,6 +57,14 @@ class Character {
             return "text-danger";
         }
 
+        if (positionName === POSITION.TRAVELLER.name) {
+            return "font-purple-light";
+        }
+
+        if (positionName === POSITION.FABLED.name) {
+            return "font-orange";
+        }
+
         return "";
     }
 

@@ -10,6 +10,8 @@ const POSITION = {
     OUTSIDER: {name: "outsider", title: "이방인", iconImagePath: ICON_PATH + "/outsider"},
     MINION: {name: "minion", title: "하수인", iconImagePath: ICON_PATH + "/minion"},
     DEMON: {name: "demon", title: "악마", iconImagePath: ICON_PATH + "/demon"},
+    TRAVELLER: {name: "traveller", title: "여행자", iconImagePath: ICON_PATH + "/traveller"},
+    FABLED: {name: "fabled", title: "전설", iconImagePath: ICON_PATH + "/fabled"},
 };
 
 const EDITION = {

@@ -10,7 +10,9 @@
                 characterGuideModal.createPositionHtml(characterList, POSITION.TOWNS_FOLK)
                 + characterGuideModal.createPositionHtml(characterList, POSITION.OUTSIDER)
                 + characterGuideModal.createPositionHtml(characterList, POSITION.MINION)
-                + characterGuideModal.createPositionHtml(characterList, POSITION.DEMON);
+                + characterGuideModal.createPositionHtml(characterList, POSITION.DEMON)
+                + characterGuideModal.createPositionHtml(characterList, POSITION.TRAVELLER)
+                + characterGuideModal.createPositionHtml(characterList, POSITION.FABLED);
 
             const $characterGuideModal = $("#characterGuideModal");
             const $characterListDiv = $characterGuideModal.find("div[name='characterListDiv']");
@@ -32,6 +34,10 @@
         },
         createPositionHtml: (characterList, position) => {
             const list = characterList.filter(character => character.team === position.name);
+            if (list.length === 0) {
+                return "";
+            }
+
             return `
                 <h3 class="\${Character.calculateCharacterNameClass(position.name)}">\${position.title}(\${position.name})</h3>
                 <ol class="pl-4">

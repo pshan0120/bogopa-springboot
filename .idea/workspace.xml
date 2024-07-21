@@ -11,7 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="역할 설명 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/guideModal.jspf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/character.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/character.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -296,14 +299,8 @@
       <workItem from="1721269373796" duration="4400000" />
       <workItem from="1721311076851" duration="7587000" />
       <workItem from="1721436873403" duration="976000" />
-      <workItem from="1721484329595" duration="8351000" />
-    </task>
-    <task id="LOCAL-00095" summary="도둑잡기 밸런스 조정">
-      <created>1715742876258</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1715742876258</updated>
+      <workItem from="1721484329595" duration="9244000" />
+      <workItem from="1721575205181" duration="7738000" />
     </task>
     <task id="LOCAL-00096" summary="투표 개선">
       <created>1715745416971</created>
@@ -641,7 +638,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721491832185</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="역할 설명 추가">
+      <created>1721494705350</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1721494705350</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
