@@ -118,6 +118,18 @@
             $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
 
             renderCharacterList(scriptJson, characterList);
+
+            const playerSetting = initializationSetting.player
+                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+
+            const roleInitializationHtml = `
+                <span class="text-default">총 \${playerList.length}명</span>
+                (<span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
+                <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
+                <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
+                <span class="text-danger">악마 \${playerSetting.demon}명</span>)`;
+            const $characterDiv = $("#characterDiv");
+            $characterDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
         }
 
         const copyEditionJson = () => {
@@ -150,6 +162,14 @@
 
             const listHtml = selectedCharacterList.reduce((prev, next) => {
                 const fontClass = Character.calculateCharacterNameClass(next.team);
+                if (next.team === POSITION.FABLED.name) {
+                    return prev +
+                        `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
+                            <small class="\${fontClass}">\${next.name}</small>
+                            <img src="\${next.image}" class="img-responsive img-rounded m-auto" >
+                        </div>`;
+                }
+
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
                         <small class="\${fontClass}">\${next.name}</small>
@@ -341,6 +361,7 @@
                             `<tr class="text-center" name="\${next.memberId}" data-member-id="\${next.memberId}">
                             <td class="pl-1 pr-1 text-left">
                                 \${next.seatNumber}. \${next.nickname}(<span class="\${fontClass}">\${character.name}</span>)
+                                <img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:10%" />
                             </td>
                             <td class="pl-1 pr-1">
                                 <input type="checkbox" name="diedCheckbox" \${next.died ? "checked" : ""}>
@@ -415,8 +436,6 @@
             const numberOfVoteSuccess = Math.ceil(alivePlayerList.length / 2);
             $executionDiv.find("span[name='numberOfVoteSuccess']").html(numberOfVoteSuccess);
         }
-
-
 
 
         const hideCharacterToPlayer = () => {
@@ -746,16 +765,19 @@
                                 </h2>
                             </div>
                             <div class="card-body">
-                                <p>
-                                    트러블 브루잉 추천 조합(8인 기준)<br/>
-                                    - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
-                                    - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
-                                    - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
-                                </p>
+                                <h4><span name="roleInitialization"></span></h4>
+                                <hr>
                                 <div class="" name="characterListDiv"></div>
                                 <hr>
                                 <div class="text-right" name="playedCharacterCountDiv"></div>
                                 <div class="" name="playedCharacterListDiv"></div>
+                                <hr>
+                                트러블 브루잉 추천 조합(8인 기준)<br/>
+                                <small>
+                                    - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
+                                    - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
+                                    - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -851,7 +873,8 @@
                             <div class="card-header bg-white border-0">
                                 <h2>
                                     처형 투표
-                                    <a data-toggle="collapse" href="#executionVoteDiv" role="button" aria-expanded="false"
+                                    <a data-toggle="collapse" href="#executionVoteDiv" role="button"
+                                       aria-expanded="false"
                                        aria-controls="executionVoteDiv">
                                         열기/닫기
                                     </a>
@@ -915,10 +938,12 @@
                         <div class="card shadow">
                             <div class="card-footer py-4">
                                 <div name="buttonDiv">
-                                    <button type="button" class="btn btn-default btn-block" onclick="openIntroductionModal()">
+                                    <button type="button" class="btn btn-default btn-block"
+                                            onclick="openIntroductionModal()">
                                         인트로 보기
                                     </button>
-                                    <button type="button" class="btn btn-default btn-block" onclick="openQrLoginModal()">
+                                    <button type="button" class="btn btn-default btn-block"
+                                            onclick="openQrLoginModal()">
                                         로그인 QR 공유
                                     </button>
                                     <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
@@ -927,7 +952,8 @@
                                     <button type="button" class="btn btn-info btn-block" onclick="openRuleGuideModal()">
                                         게임 설명
                                     </button>
-                                    <button type="button" class="btn btn-info btn-block" onclick="openCharacterGuideModal()">
+                                    <button type="button" class="btn btn-info btn-block"
+                                            onclick="openCharacterGuideModal()">
                                         역할 설명
                                     </button>
                                     <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
@@ -939,7 +965,8 @@
                                     <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                         노트
                                     </button>
-                                    <button type="button" class="btn btn-default btn-block" onclick="openSoundEffectModal()">
+                                    <button type="button" class="btn btn-default btn-block"
+                                            onclick="openSoundEffectModal()">
                                         소리 효과
                                     </button>
                                     <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
@@ -959,7 +986,8 @@
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                         <div class="card shadow">
                             <div class="card-body p-0">
-                                <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/" height="800" width="100%"></iframe>
+                                <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/"
+                                        height="800" width="100%"></iframe>
                             </div>
                         </div>
                     </div>

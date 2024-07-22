@@ -9,12 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="역할 설명 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="가이드 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/translations/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/translations/messages.en_GB.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/translations/messages.kr_KO.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/guideModal.jspf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/character.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/character.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,37 +61,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/scripts&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\guide" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\boc" />
-      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets" />
@@ -300,14 +300,8 @@
       <workItem from="1721311076851" duration="7587000" />
       <workItem from="1721436873403" duration="976000" />
       <workItem from="1721484329595" duration="9244000" />
-      <workItem from="1721575205181" duration="7738000" />
-    </task>
-    <task id="LOCAL-00096" summary="투표 개선">
-      <created>1715745416971</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1715745416971</updated>
+      <workItem from="1721575205181" duration="8262000" />
+      <workItem from="1721662302140" duration="3515000" />
     </task>
     <task id="LOCAL-00097" summary="대기실 진행중">
       <created>1715794930740</created>
@@ -645,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721494705350</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="가이드 추가">
+      <created>1721585459146</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1721585459147</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +667,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="게임설명 모달 추가" />
     <MESSAGE value="Dictator 개발중" />
     <MESSAGE value="직업 작성" />
     <MESSAGE value="게임 세팅까지" />
@@ -691,7 +691,8 @@
     <MESSAGE value="역할설명, 마을광장 완료" />
     <MESSAGE value="executionModal ing" />
     <MESSAGE value="역할 설명 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="역할 설명 추가" />
+    <MESSAGE value="가이드 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="가이드 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
