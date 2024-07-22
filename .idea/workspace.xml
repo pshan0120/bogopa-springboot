@@ -9,13 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="가이드 추가">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/translations/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/translations/messages.en_GB.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/translations/messages.kr_KO.yaml" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="이미지 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,14 +297,7 @@
       <workItem from="1721436873403" duration="976000" />
       <workItem from="1721484329595" duration="9244000" />
       <workItem from="1721575205181" duration="8262000" />
-      <workItem from="1721662302140" duration="3515000" />
-    </task>
-    <task id="LOCAL-00097" summary="대기실 진행중">
-      <created>1715794930740</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1715794930741</updated>
+      <workItem from="1721662302140" duration="7477000" />
     </task>
     <task id="LOCAL-00098" summary="대기실 진행중">
       <created>1715795566165</created>
@@ -646,7 +635,14 @@
       <option name="project" value="LOCAL" />
       <updated>1721585459147</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="이미지 추가">
+      <created>1721666435818</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1721666435818</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -679,7 +675,6 @@
     <MESSAGE value="votingPlayerList 초기화 추가" />
     <MESSAGE value="역할 지정 추가" />
     <MESSAGE value="독재자 수정" />
-    <MESSAGE value="이미지 추가" />
     <MESSAGE value="탄시빌 캐릭터 추가" />
     <MESSAGE value="탄시빌 추가" />
     <MESSAGE value="배경음악 추가" />
@@ -692,7 +687,8 @@
     <MESSAGE value="executionModal ing" />
     <MESSAGE value="역할 설명 추가" />
     <MESSAGE value="가이드 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="가이드 추가" />
+    <MESSAGE value="이미지 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="이미지 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

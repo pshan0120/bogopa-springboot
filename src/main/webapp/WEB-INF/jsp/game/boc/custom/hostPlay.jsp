@@ -185,7 +185,10 @@
                 // alert("플레이어 수보다 많이 선택할 수 없습니다");
                 return;
             }
-            playedCharacterList.push(characterId);
+            playedCharacterList.push({
+                characterId,
+                displayedCharacterId: characterId
+            });
 
             const $characterDiv = $("#characterDiv");
             const $characterListDiv = $characterDiv.find("div[name='characterListDiv']");
@@ -208,20 +211,50 @@
             $playedCharacterListDiv.empty();
 
             const listHtml = playedCharacterList.reduce((prev, next) => {
-                const character = Character.getInCharacterListById(selectedCharacterList, next);
+                const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, next.displayedCharacterId);
                 const fontClass = Character.calculateCharacterNameClass(character.team);
+                const displayedCharacterButtonClass = Character.createChoiceButtonClass(character.team);
+
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}">
                         <small class="\${fontClass}">\${character.name}</small>
-                        <img src="\${character.image}" class="img-responsive img-thumbnail m-auto" onclick="removePlayedCharacter('\${next}')">
+                        <!--<button type="button" class="\${displayedCharacterButtonClass} d-inline"  onclick="changePlayedCharacterDisplayed('\${next}')">
+                            \${displayedCharacter.name}
+                        </button>-->
+                        <img src="\${character.image}" class="img-responsive img-thumbnail m-auto" onclick="removePlayedCharacter('\${next.characterId}')">
+                        <!--<select class="form-control" onchange="selectPlayedCharacterDisplayed('\${next.characterId}')"></select>-->
+                        <select class="form-control" onchange="selectPlayedCharacterDisplayed('\${next.characterId}')" name='\${next.characterId}'></select>
                     </div>`;
             }, `<div class="row">`) + '</div>';
 
             $playedCharacterListDiv.append(listHtml);
+
+            renderPlayedCharacterDisplayedSelect(selectedCharacterList);
+        }
+
+        const renderPlayedCharacterDisplayedSelect = selectedCharacterList => {
+            const $characterDiv = $("#characterDiv");
+            const $playedCharacterListDiv = $characterDiv.find("div[name='playedCharacterListDiv']");
+
+            const optionsHtml = selectedCharacterList.reduce((prev, next) => {
+                return prev + `<option value="\${next.id}">\${next.name}</option>`;
+            }, `<option value="">선택</option>`);
+            $playedCharacterListDiv.find("select").append(optionsHtml);
+
+            console.log('select', $playedCharacterListDiv.find("select").attr("name"));
+
+            $playedCharacterListDiv.find("select").each(select => {
+
+
+                $(select).val($(select).attr("name"));
+
+            });
+
         }
 
         const removePlayedCharacter = characterId => {
-            const thrownAwayIndex = playedCharacterList.findIndex(item => Character.characterIdEquals(item, characterId));
+            const thrownAwayIndex = playedCharacterList.findIndex(item => Character.characterIdEquals(item.characterId, characterId));
             if (thrownAwayIndex > -1) {
                 playedCharacterList.splice(thrownAwayIndex, 1);
             }
@@ -231,6 +264,46 @@
             const $selectedCharacterDiv = $characterListDiv.find("div[name='" + characterId + "']");
             $selectedCharacterDiv.find("img").removeClass("img-rounded");
             $selectedCharacterDiv.find("img").addClass("img-thumbnail");
+
+            renderPlayedCharacterList();
+        }
+
+        const selectPlayedCharacterDisplayed = characterId => {
+            const $characterDiv = $("#characterDiv");
+            const $characterListDiv = $characterDiv.find("div[name='characterListDiv']");
+            const $selectedCharacterSelect = $characterListDiv.find("select[name='" + characterId + "']");
+            alert(characterId);
+
+
+            /*selectedCharacterList = playedCharacterList
+                .filter(character => scriptJson.find(item => Character.characterIdEquals(item, character.id)))*/
+
+
+            /*const selected = editionList.find(edition => edition.id === id);
+            if (!selected) {
+                alert("존재하지 않는 에디션입니다.");
+                return;
+            }
+
+            selectedEditionId = id;
+
+            scriptJson = await readScriptJsonOfEdition(selected.scriptJson);
+            scriptJson.splice(0, 1);
+            $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
+
+            renderCharacterList(scriptJson, characterList);
+
+            const playerSetting = initializationSetting.player
+                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+
+            const roleInitializationHtml = `
+                <span class="text-default">총 \${playerList.length}명</span>
+                (<span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
+                <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
+                <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
+                <span class="text-danger">악마 \${playerSetting.demon}명</span>)`;
+            const $characterDiv = $("#characterDiv");
+            $characterDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);*/
 
             renderPlayedCharacterList();
         }
@@ -259,7 +332,7 @@
                     return {
                         ...originalPlayer,
                         seatNumber: index + 1,
-                        characterId: playedCharacterList[index],
+                        characterId: playedCharacterList[index].characterId,
                         nominating: false,
                         nominated: false,
                         died: false,
