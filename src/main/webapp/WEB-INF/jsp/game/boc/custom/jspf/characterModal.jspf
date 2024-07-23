@@ -1,0 +1,63 @@
+<%@ page import="boardgame.com.util.SessionUtils" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const characterModal = {
+        selectedCharacterList: [],
+        characterId: null,
+        callback: null,
+        open: (selectedCharacterList, characterId, callback) => {
+            characterModal.selectedCharacterList = selectedCharacterList;
+            characterModal.characterId = characterId;
+            characterModal.callback = callback;
+
+            const $modal = $("#characterModal");
+
+            const $characterDiv = $modal.find("div[name='characterDiv']");
+            $characterDiv.empty();
+
+            const listHtml = selectedCharacterList.reduce((prev, next) => {
+                const fontClass = Character.calculateCharacterNameClass(next.team);
+
+                return prev +
+                    `<div class="col-4 text-center pt-2 \${fontClass}">
+                        <small class="\${fontClass}">\${next.name}</small>
+                        <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" onclick="characterModal.selectCharacter('\${next.id}')">
+                    </div>`;
+            }, `<div class="row">`) + '</div>';
+
+            $characterDiv.append(listHtml);
+
+            $modal.modal("show");
+        },
+        selectCharacter: selectedCharacterId => {
+            characterModal.callback(characterModal.characterId, selectedCharacterId);
+            const $modal = $("#characterModal");
+            $modal.modal("hide");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="characterModal" role="dialog"
+     aria-labelledby="characterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">역할 목록</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="characterDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

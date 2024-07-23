@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div name="backgroundMusicDiv">
-    <h3>
+    <h2>
         배경음악
         <a data-toggle="collapse" href="#backgroundMusicListDiv" role="button" aria-expanded="false"
            aria-controls="backgroundMusicListDiv">
             열기/닫기
         </a>
-    </h3>
+    </h2>
     <div class="collapse" id="backgroundMusicListDiv">
         <h4>80s-mystical-stranger-things</h4>
         <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/80s-mystical-stranger-things-133254.mp3"

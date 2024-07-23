@@ -38,6 +38,7 @@
 
             await renderPlayerStatusList();
             await renderExecution();
+            await renderInfoMessageDiv();
         });
 
         const readEditionList = async () => {
@@ -66,6 +67,12 @@
 
         const readNightOrderList = async () => {
             return await gfn_callGetApi(BOC_DATA_PATH + "/night-order.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const readMessageList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/messages/kr_KO.json")
                 .then(data => data)
                 .catch(response => console.error('error', response));
         }
@@ -166,14 +173,15 @@
                     return prev +
                         `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
                             <small class="\${fontClass}">\${next.name}</small>
-                            <img src="\${next.image}" class="img-responsive img-rounded m-auto" >
+                            <img src="\${next.image}" class="img-responsive img-rounded m-auto" />
                         </div>`;
                 }
 
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
                         <small class="\${fontClass}">\${next.name}</small>
-                        <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" onclick="setPlayedCharacter('\${next.id}')">
+                        <img src="\${next.image}" class="img-responsive img-thumbnail m-auto"
+                            onclick="setPlayedCharacter('\${next.id}')" />
                     </div>`;
             }, `<div class="row">`) + '</div>';
 
@@ -212,45 +220,17 @@
 
             const listHtml = playedCharacterList.reduce((prev, next) => {
                 const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
-                const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, next.displayedCharacterId);
                 const fontClass = Character.calculateCharacterNameClass(character.team);
-                const displayedCharacterButtonClass = Character.createChoiceButtonClass(character.team);
 
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}">
                         <small class="\${fontClass}">\${character.name}</small>
-                        <!--<button type="button" class="\${displayedCharacterButtonClass} d-inline"  onclick="changePlayedCharacterDisplayed('\${next}')">
-                            \${displayedCharacter.name}
-                        </button>-->
-                        <img src="\${character.image}" class="img-responsive img-thumbnail m-auto" onclick="removePlayedCharacter('\${next.characterId}')">
-                        <!--<select class="form-control" onchange="selectPlayedCharacterDisplayed('\${next.characterId}')"></select>-->
-                        <select class="form-control" onchange="selectPlayedCharacterDisplayed('\${next.characterId}')" name='\${next.characterId}'></select>
+                        <img src="\${character.image}" class="img-responsive img-thumbnail m-auto"
+                            onclick="removePlayedCharacter('\${next.characterId}')" />
                     </div>`;
             }, `<div class="row">`) + '</div>';
 
             $playedCharacterListDiv.append(listHtml);
-
-            renderPlayedCharacterDisplayedSelect(selectedCharacterList);
-        }
-
-        const renderPlayedCharacterDisplayedSelect = selectedCharacterList => {
-            const $characterDiv = $("#characterDiv");
-            const $playedCharacterListDiv = $characterDiv.find("div[name='playedCharacterListDiv']");
-
-            const optionsHtml = selectedCharacterList.reduce((prev, next) => {
-                return prev + `<option value="\${next.id}">\${next.name}</option>`;
-            }, `<option value="">선택</option>`);
-            $playedCharacterListDiv.find("select").append(optionsHtml);
-
-            console.log('select', $playedCharacterListDiv.find("select").attr("name"));
-
-            $playedCharacterListDiv.find("select").each(select => {
-
-
-                $(select).val($(select).attr("name"));
-
-            });
-
         }
 
         const removePlayedCharacter = characterId => {
@@ -268,44 +248,72 @@
             renderPlayedCharacterList();
         }
 
-        const selectPlayedCharacterDisplayed = characterId => {
-            const $characterDiv = $("#characterDiv");
-            const $characterListDiv = $characterDiv.find("div[name='characterListDiv']");
-            const $selectedCharacterSelect = $characterListDiv.find("select[name='" + characterId + "']");
-            alert(characterId);
-
-
-            /*selectedCharacterList = playedCharacterList
-                .filter(character => scriptJson.find(item => Character.characterIdEquals(item, character.id)))*/
-
-
-            /*const selected = editionList.find(edition => edition.id === id);
-            if (!selected) {
-                alert("존재하지 않는 에디션입니다.");
+        const confirmPlayedCharacterList = async () => {
+            if (playedCharacterList.length !== playerList.length) {
+                alert("참여 역할들이 모두 선택되지 않았습니다.");
                 return;
             }
 
-            selectedEditionId = id;
+            if (!confirm("현재 역할로 확정하시겠습니까?")) {
+                return;
+            }
 
-            scriptJson = await readScriptJsonOfEdition(selected.scriptJson);
-            scriptJson.splice(0, 1);
-            $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
+            $("#characterDiv").hide();
 
-            renderCharacterList(scriptJson, characterList);
+            renderCharacterDisplayedDiv();
+        }
 
-            const playerSetting = initializationSetting.player
-                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+        const renderCharacterDisplayedDiv = () => {
+            const $characterDisplayedDiv = $("#characterDisplayedDiv");
+            const $playedCharacterListDiv = $characterDisplayedDiv.find("div[name='playedCharacterListDiv']");
+            $playedCharacterListDiv.empty();
 
-            const roleInitializationHtml = `
-                <span class="text-default">총 \${playerList.length}명</span>
-                (<span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
-                <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
-                <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
-                <span class="text-danger">악마 \${playerSetting.demon}명</span>)`;
-            const $characterDiv = $("#characterDiv");
-            $characterDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);*/
+            const listHtml = playedCharacterList
+                /*.map(playedCharacter => Character.getInCharacterListById(selectedCharacterList, playedCharacter.characterId))
+                .sort((prev, next) => calculateTeamIndex(prev.team) - calculateTeamIndex(next.team))*/
+                .reduce((prev, next) => {
+                    const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                    const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, next.displayedCharacterId);
+                    const fontClass = Character.calculateCharacterNameClass(character.team);
+                    const displayedCharacterFontClass = Character.calculateCharacterNameClass(displayedCharacter.team);
 
-            renderPlayedCharacterList();
+                    return prev +
+                        `<div class="col-4 text-center pt-2 \${fontClass}">
+                            <small class="\${fontClass}">\${character.name}</small>
+                            <img src="\${character.image}" class="img-responsive img-rounded m-auto" />
+                        </div>
+                        <div class="col-4 text-center display-1" style="margin: auto">
+                            <i class="ni ni-bold-right"></i>
+                        </div>
+                        <div class="col-4 text-center pt-2 \${displayedCharacterFontClass}"
+                            name="displayedCharacterDiv" data-character-id="\${next.characterId}">
+                            <small class="\${displayedCharacterFontClass}">\${displayedCharacter.name}</small>
+                            <img src="\${displayedCharacter.image}" class="img-responsive img-thumbnail m-auto"
+                                onclick="openSelectCharacterModal('\${next.characterId}')" />
+                        </div>`;
+                }, `<div class="row">`) + '</div>';
+
+            $playedCharacterListDiv.append(listHtml);
+        }
+
+        const openSelectCharacterModal = characterId => {
+            characterModal.open(selectedCharacterList, characterId, setCharacterDisplayed);
+        }
+
+        const setCharacterDisplayed = (characterId, displayedCharacterId) => {
+            const playedCharacter = playedCharacterList.find(character => character.characterId === characterId);
+            playedCharacter.displayedCharacterId = displayedCharacterId;
+            renderCharacterDisplayedDiv();
+        }
+
+        const confirmCharacterDisplayed = async () => {
+            if (!confirm("현재 표시 역할로 확정하시겠습니까?")) {
+                return;
+            }
+
+            $("#characterDisplayedDiv").hide();
+
+            setPlayerSeatsRandomly();
         }
 
         const setPlayerSeatsRandomly = () => {
@@ -373,7 +381,7 @@
         }
 
         const confirmPlayerSeatList = async () => {
-            if (!confirm("현재 자리와 역할로 확정하시겠습니까?")) {
+            if (!confirm("현재 자리와 플레이어 역할을 확정하시겠습니까?")) {
                 return;
             }
 
@@ -394,12 +402,14 @@
         const showSettingDivs = () => {
             $("#editionDiv").show();
             $("#characterDiv").show();
+            $("#characterDisplayedDiv").show();
             $("#seatDiv").show();
         }
 
         const hideSettingDivs = () => {
             $("#editionDiv").hide();
             $("#characterDiv").hide();
+            $("#characterDisplayedDiv").hide();
             $("#seatDiv").hide();
         }
 
@@ -407,12 +417,14 @@
             $("#backgroundMusicDiv").show();
             $("#playerStatusDiv").show();
             $("#executionDiv").show();
+            $("#infoMessageDiv").show();
         }
 
         const hidePlayingDivs = () => {
             $("#backgroundMusicDiv").hide();
             $("#playerStatusDiv").hide();
             $("#executionDiv").hide();
+            $("#infoMessageDiv").hide();
         }
 
         const renderPlayerStatusList = () => {
@@ -430,11 +442,22 @@
                         const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
                         const fontClass = Character.calculateCharacterNameClass(character.team);
 
+                        const characterHtml = `<img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:10%" />`;
+
+                        const playedCharacter = playedCharacterList
+                            .find(playedCharacter => playedCharacter.characterId === next.characterId);
+
+                        const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, playedCharacter.displayedCharacterId);
+                        const displayedCharacterHtml = playedCharacter.characterId !== playedCharacter.displayedCharacterId
+                            ? `(<img src="\${displayedCharacter.image}" class="img-responsive w-25 d-inline" style="max-width:10%" />)`
+                            : "";
+
                         return prev +
                             `<tr class="text-center" name="\${next.memberId}" data-member-id="\${next.memberId}">
                             <td class="pl-1 pr-1 text-left">
                                 \${next.seatNumber}. \${next.nickname}(<span class="\${fontClass}">\${character.name}</span>)
-                                <img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:10%" />
+                                \${characterHtml}
+                                \${displayedCharacterHtml}
                             </td>
                             <td class="pl-1 pr-1">
                                 <input type="checkbox" name="diedCheckbox" \${next.died ? "checked" : ""}>
@@ -509,6 +532,93 @@
             const numberOfVoteSuccess = Math.ceil(alivePlayerList.length / 2);
             $executionDiv.find("span[name='numberOfVoteSuccess']").html(numberOfVoteSuccess);
         }
+
+        const renderInfoMessageDiv = async () => {
+            const messageList = await readMessageList();
+
+            const $infoMessageDiv = $("#infoMessageDiv");
+
+            const setInfoMessageTextDivHtml = messageList.reduce((prev, next) => {
+                return prev +
+                    `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.id}"
+                        onclick="setInfoMessageText('\${next.text}')">
+                        \${next.text}
+                    </button>`;
+            }, "");
+
+            const $setInfoMessageTextDiv = $infoMessageDiv.find("div[name='setInfoMessageTextDiv']");
+            $setInfoMessageTextDiv.append(setInfoMessageTextDivHtml);
+
+            const setInfoMessageCharacterDivHtml = selectedCharacterList.reduce((prev, next) => {
+                const fontClass = Character.calculateCharacterNameClass(next.team);
+
+                return prev +
+                    `<div class="col-2 text-center pt-2 \${fontClass}" name="\${next.id}">
+                        <small class="\${fontClass}">\${next.name}</small>
+                        <img src="\${next.image}" class="img-responsive img-rounded m-auto"
+                            onclick="setInfoMessageCharacter('\${next.id}')" />
+                    </div>`;
+            }, `<div class="row">`) + '</div>';
+
+            const $setInfoMessageCharacterDiv = $infoMessageDiv.find("div[name='setInfoMessageCharacterDiv']");
+            $setInfoMessageCharacterDiv.append(setInfoMessageCharacterDivHtml);
+
+
+            const setInfoMessagePlayerDivHtml = playerList.reduce((prev, next) => {
+                return prev +
+                    `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
+                        onclick="setInfoMessagePlayer('\${next.nickname}')">
+                        \${next.nickname}
+                    </button>`;
+            }, "");
+
+            const $setInfoMessagePlayerDiv = $infoMessageDiv.find("div[name='setInfoMessagePlayerDiv']");
+            $setInfoMessagePlayerDiv.append(setInfoMessagePlayerDivHtml);
+        }
+
+        const setInfoMessageText = text => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageTextDiv = $infoMessageResultDiv.find("div[name='infoMessageTextDiv']");
+
+            const html = `<span class="text-center display-4">\${text}</span>`;
+            $infoMessageTextDiv.empty().html(html);
+        }
+
+        const setInfoMessageCharacter = characterId => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageCharacterDiv = $infoMessageResultDiv.find("div[name='infoMessageCharacterDiv']");
+
+            const character = Character.getInCharacterListById(selectedCharacterList, characterId);
+            const fontClass = Character.calculateCharacterNameClass(character.team);
+
+            const html =
+                `<div class="col-4 pt-2 \${fontClass}" name="\${character.id}" style="margin: auto;">
+                    <small class="\${fontClass}">\${character.name}</small>
+                    <img src="\${character.image}" class="img-responsive img-rounded m-auto" />
+                </div>`;
+            $infoMessageCharacterDiv.append(html);
+        }
+
+        const setInfoMessagePlayer = nickname => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessagePlayerDiv = $infoMessageResultDiv.find("div[name='infoMessagePlayerDiv']");
+
+            const html =
+                `<div class="col-4 pt-2" name="\${nickname}" style="margin: auto;">
+                    <span class="text-center display-4">\${nickname}</span>
+                </div>`;
+            $infoMessagePlayerDiv.append(html);
+        }
+
+        const resetInfoMessageResult = () => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            $infoMessageResultDiv.find("div").empty();
+        }
+
 
 
         const hideCharacterToPlayer = () => {
@@ -730,8 +840,8 @@
             townModal.open(PLAY_ID);
         }
 
-        const openExecutionModal = () => {
-            executionModal.open(playerList);
+        const openInfoMessageModal = () => {
+            // executionModal.open(playerList);
         }
 
         const openQrLoginModal = () => {
@@ -839,18 +949,48 @@
                             </div>
                             <div class="card-body">
                                 <h4><span name="roleInitialization"></span></h4>
-                                <hr>
+                                <hr class="mt-2 mb-2">
                                 <div class="" name="characterListDiv"></div>
-                                <hr>
+                                <hr class="mt-2 mb-2">
                                 <div class="text-right" name="playedCharacterCountDiv"></div>
                                 <div class="" name="playedCharacterListDiv"></div>
-                                <hr>
+                                <hr class="mt-2 mb-2">
                                 트러블 브루잉 추천 조합(8인 기준)<br/>
                                 <small>
                                     - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
                                     - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
                                     - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
                                 </small>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-primary"
+                                            onclick="confirmPlayedCharacterList()">
+                                        역할 확정
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="characterDisplayedDiv">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    표시 역할 선택
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="" name="playedCharacterListDiv"></div>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-primary" onclick="confirmCharacterDisplayed()">
+                                        표시 역할 확정
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -900,10 +1040,15 @@
                             <div class="card-header bg-white border-0">
                                 <h2>
                                     플레이어 상태
+                                    <a data-toggle="collapse" href="#playerStatusListDiv" role="button"
+                                       aria-expanded="false"
+                                       aria-controls="playerStatusListDiv">
+                                        열기/닫기
+                                    </a>
                                 </h2>
                             </div>
                             <div class="card-body">
-                                <div class="" name="playerStatusListDiv"></div>
+                                <div class="collapse" name="playerStatusListDiv" id="playerStatusListDiv"></div>
                             </div>
                             <div class="card-footer py-4">
                                 <div name="buttonDiv">
@@ -1008,6 +1153,52 @@
 
                 <div class="row">
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="infoMessageDiv">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    정보메세지 조합
+                                    <a data-toggle="collapse" href="#setInfoMessageDiv" role="button"
+                                       aria-expanded="false"
+                                       aria-controls="setInfoMessageDiv">
+                                        열기/닫기
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="collapse" name="setInfoMessageDiv" id="setInfoMessageDiv">
+                                    <div name="setInfoMessageTextDiv"></div>
+                                    <hr class="mt-2 mb-2">
+                                    <div name="setInfoMessageCharacterDiv"></div>
+                                    <hr class="mt-2 mb-2">
+                                    <div name="setInfoMessagePlayerDiv"></div>
+                                    <hr class="mt-2 mb-2">
+                                    <div name="infoMessageResultDiv">
+                                        <div name="infoMessageTextDiv" class="text-center"></div>
+                                        <hr class="mt-2 mb-2">
+                                        <div name="infoMessageCharacterDiv" class="row text-center"></div>
+                                        <hr class="mt-2 mb-2">
+                                        <div name="infoMessagePlayerDiv" class="row text-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer py-4">
+                                <div name="buttonDiv">
+                                    <button type="button" class="btn btn-warning btn-block"
+                                            onclick="resetInfoMessageResult()">
+                                        정보메세지 초기화
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-block"
+                                            onclick="openInfoMessageModal()">
+                                        정보메세지 표시
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                         <div class="card shadow">
                             <div class="card-footer py-4">
                                 <div name="buttonDiv">
@@ -1031,9 +1222,6 @@
                                     </button>
                                     <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                         마을 광장 보기
-                                    </button>
-                                    <button type="button" class="btn btn-info btn-block" onclick="openExecutionModal()">
-                                        처형 투표 진행
                                     </button>
                                     <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                         노트
@@ -1076,6 +1264,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/introductionModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/messageModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/playStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/characterModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" %>
 

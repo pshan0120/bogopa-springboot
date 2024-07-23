@@ -115,6 +115,19 @@ public class PlayServiceImpl implements PlayService {
     }
 
     @Override
+    public void reJoinPlay(JoinPlayRequestDto requestDto) {
+        Long memberId = memberService.readOrCreateMemberByNickname(requestDto.getNickname());
+        List<Map<String, Object>> clientPlayMemberList = playDao.selectClientPlayMemberList(requestDto.getPlayId());
+        boolean joined = clientPlayMemberList.stream()
+                .anyMatch(member -> memberId.equals(member.get("memberId")));
+        if (!joined) {
+            throw new ApiException(ApiExceptionEnum.NOT_CLIENT_OF_PLAY);
+        }
+
+        loginService.setLogin(memberId, SessionUtils.getHttpServletRequest());
+    }
+
+    @Override
     public void beginPlay(BeginPlayRequestDto requestDto) {
         Map<String, Object> playMap = this.readById(requestDto.getPlayId());
 

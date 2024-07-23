@@ -23,6 +23,7 @@ public enum ApiExceptionEnum {
 
     PLAY_BEGUN(HttpStatus.BAD_REQUEST, "PLAY_BEGUN", "이미 플레이가 시작된 상태입니다."),
     NOT_HOST_OF_PLAY(HttpStatus.BAD_REQUEST, "NOT_HOST_OF_PLAY", "해당 플레이의 호스트가 아닙니다."),
+    NOT_CLIENT_OF_PLAY(HttpStatus.BAD_REQUEST, "NOT_CLIENT_OF_PLAY", "해당 플레이의 클라이언트가 아닙니다."),
 
     ;
 

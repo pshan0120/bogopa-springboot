@@ -43,8 +43,12 @@
             console.log('playStatus', myCharacterModal.playStatus);
             const $modal = $("#myCharacterModal");
 
-            const character = Character.getInCharacterListById(myCharacterModal.selectedCharacterList, player.characterId);
+            const playedCharacter = myCharacterModal.playedCharacterList
+                .find(playedCharacter => playedCharacter.characterId === player.characterId);
+
+            const character = Character.getInCharacterListById(myCharacterModal.selectedCharacterList, playedCharacter.displayedCharacterId);
             const fontClass = Character.calculateCharacterNameClass(character.team);
+
             const characterHtml =
                 `<div class="text-center pt-2 \${fontClass}">
                     <h1 class="\${fontClass}">\${character.name}(\${character.id})</h1>

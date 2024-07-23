@@ -10,6 +10,7 @@
 
     <script>
         const PLAY_ID = ${playId};
+        let playerList = [];
         let selectedCharacterList = [];
 
         $(async () => {
@@ -17,6 +18,11 @@
             $("#titleDiv").find("span[name='playName']").text(play.playName);
 
             await loadGameStatus();
+
+            const loggedIn = JSON.parse("<%= SessionUtils.isMemberLoggedIn() %>");
+            if (!loggedIn) {
+                $("#reJoinPlayButton").show();
+            }
         });
 
         const loadGameStatus = async () => {
@@ -28,6 +34,7 @@
             const lastPlayLogJson = JSON.parse(lastPlayLog);
             console.log('lastPlayLogJson', lastPlayLogJson);
 
+            playerList = JSON.parse(lastPlayLogJson.playerList);
             selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
 
             console.log('game status loaded !!');
@@ -62,6 +69,32 @@
             noteModal.open();
         }
 
+        const reJoinPlay = () => {
+            const nickname = prompt("참여중이었던 닉네임을 입력해 주세요.");
+            if (!nickname) {
+                return;
+            }
+
+            const replacedNickname = nickname.replace(/\s+/g, "");
+            const joined = playerList.some(player => player.nickname === replacedNickname);
+
+            if (!joined) {
+                alert("참여중인 플레이어가 아닌데요!");
+                return;
+            }
+
+            const request = {
+                playId: PLAY_ID,
+                nickname: replacedNickname
+            }
+
+            gfn_callPostApi("/api/play/member/reJoinPlay", request)
+                .then(data => {
+                    console.log('play rejoined !!', data);
+                    document.location.reload();
+                })
+                .catch(response => console.error('error', response));
+        }
     </script>
 </head>
 
@@ -125,6 +158,10 @@
                             </button>
                             <button type="button" class="btn btn-danger btn-block" onclick="openMyCharacterModal()">
                                 내 역할 보기
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block display-none"
+                                    onclick="reJoinPlay()" id="reJoinPlayButton">
+                                다시 마을 입장
                             </button>
                         </div>
                     </div>

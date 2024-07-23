@@ -1,0 +1,38 @@
+[
+    {
+        "id": "is_demon",
+        "text": "이 사람은 악마입니다."
+    },
+    {
+        "id": "is_minion",
+        "text": "이 사람들은 당신의 하수인입니다."
+    },
+    {
+        "id": "not_in_play",
+        "text": "이 역할들은 참여하고 있지 않습니다."
+    },
+    {
+        "id": "nominate_today",
+        "text": "오늘 낮에 지명한 적이 있나요?"
+    },
+    {
+        "id": "player_is",
+        "text": "이 플레이어는"
+    },
+    {
+        "id": "vote_today",
+        "text": "오늘 낮에 투표한 적이 있나요?"
+    },
+    {
+        "id": "you_are",
+        "text": "당신은"
+    },
+    {
+        "id": "selected_you",
+        "text": "이 역할은 당신을 선택했었습니다."
+    },
+    {
+        "id": "this_selected",
+        "text": "그가 선택한 사람은"
+    }
+]
