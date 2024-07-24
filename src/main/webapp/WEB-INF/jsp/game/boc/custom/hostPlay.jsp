@@ -541,7 +541,7 @@
             const setInfoMessageTextDivHtml = messageList.reduce((prev, next) => {
                 return prev +
                     `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.id}"
-                        onclick="setInfoMessageText('\${next.text}')">
+                        onclick="setInfoMessageText('\${next.id}', '\${next.text}')">
                         \${next.text}
                     </button>`;
             }, "");
@@ -563,7 +563,6 @@
             const $setInfoMessageCharacterDiv = $infoMessageDiv.find("div[name='setInfoMessageCharacterDiv']");
             $setInfoMessageCharacterDiv.append(setInfoMessageCharacterDivHtml);
 
-
             const setInfoMessagePlayerDivHtml = playerList.reduce((prev, next) => {
                 return prev +
                     `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
@@ -574,15 +573,58 @@
 
             const $setInfoMessagePlayerDiv = $infoMessageDiv.find("div[name='setInfoMessagePlayerDiv']");
             $setInfoMessagePlayerDiv.append(setInfoMessagePlayerDivHtml);
+
+            const teamList = [
+                POSITION.TOWNS_FOLK,
+                POSITION.OUTSIDER,
+                POSITION.MINION,
+                POSITION.DEMON,
+                POSITION.TRAVELLER,
+            ];
+            const setInfoMessageTeamDivHtml = teamList.reduce((prev, next) => {
+                return prev +
+                    `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.name}"
+                        onclick="setInfoMessageTeam('\${next.name}', '\${next.title}')">
+                        \${next.title}
+                    </button>`;
+            }, "");
+
+            const $setInfoMessageTeamDiv = $infoMessageDiv.find("div[name='setInfoMessageTeamDiv']");
+            $setInfoMessageTeamDiv.append(setInfoMessageTeamDivHtml);
+
+            const alignmentList = [
+                ALIGNMENT.GOOD,
+                ALIGNMENT.EVIL,
+            ];
+            const setInfoMessageAlignmentDivHtml = alignmentList.reduce((prev, next) => {
+                return prev +
+                    `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.name}"
+                        onclick="setInfoMessageAlignment('\${next.name}', '\${next.title}')">
+                        \${next.title}
+                    </button>`;
+            }, "");
+
+            const $setInfoMessageAlignmentDiv = $infoMessageDiv.find("div[name='setInfoMessageAlignmentDiv']");
+            $setInfoMessageAlignmentDiv.append(setInfoMessageAlignmentDivHtml);
         }
 
-        const setInfoMessageText = text => {
+        const setInfoMessageText = (id, text) => {
             const $infoMessageDiv = $("#infoMessageDiv");
             const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
             const $infoMessageTextDiv = $infoMessageResultDiv.find("div[name='infoMessageTextDiv']");
 
-            const html = `<span class="text-center display-4">\${text}</span>`;
+            const html =
+                `<div class="text-center display-4" name="\${id}" onclick="removeInfoMessageText('\${id}')">
+                    \${text}
+                </div>`;
             $infoMessageTextDiv.empty().html(html);
+        }
+
+        const removeInfoMessageText = id => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageTextDiv = $infoMessageResultDiv.find("div[name='infoMessageTextDiv']");
+            $infoMessageTextDiv.find("div[name=" + id + "]").remove();
         }
 
         const setInfoMessageCharacter = characterId => {
@@ -594,11 +636,19 @@
             const fontClass = Character.calculateCharacterNameClass(character.team);
 
             const html =
-                `<div class="col-4 pt-2 \${fontClass}" name="\${character.id}" style="margin: auto;">
+                `<div class="col-4 pt-2 \${fontClass}" name="\${character.id}" style="margin: auto;"
+                    onclick="removeInfoMessageCharacter('\${character.id}')">
                     <small class="\${fontClass}">\${character.name}</small>
                     <img src="\${character.image}" class="img-responsive img-rounded m-auto" />
                 </div>`;
             $infoMessageCharacterDiv.append(html);
+        }
+
+        const removeInfoMessageCharacter = characterId => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageCharacterDiv = $infoMessageResultDiv.find("div[name='infoMessageCharacterDiv']");
+            $infoMessageCharacterDiv.find("div[name=" + characterId + "]").remove();
         }
 
         const setInfoMessagePlayer = nickname => {
@@ -607,10 +657,58 @@
             const $infoMessagePlayerDiv = $infoMessageResultDiv.find("div[name='infoMessagePlayerDiv']");
 
             const html =
-                `<div class="col-4 pt-2" name="\${nickname}" style="margin: auto;">
+                `<div class="col-4 pt-2" name="\${nickname}" style="margin: auto;"
+                    onclick="removeInfoMessagePlayer('\${nickname}')">
                     <span class="text-center display-4">\${nickname}</span>
                 </div>`;
             $infoMessagePlayerDiv.append(html);
+        }
+
+        const removeInfoMessagePlayer = nickname => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessagePlayerDiv = $infoMessageResultDiv.find("div[name='infoMessagePlayerDiv']");
+            $infoMessagePlayerDiv.find("div[name=" + nickname + "]").remove();
+        }
+
+        const setInfoMessageTeam = (name, title) => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageTeamDiv = $infoMessageResultDiv.find("div[name='infoMessageTeamDiv']");
+
+            const html =
+                `<div class="col-4 pt-2" name="\${name}" style="margin: auto;"
+                    onclick="removeInfoMessageTeam('\${name}')">
+                    <span class="text-center display-4">\${title}(\${name})</span>
+                </div>`;
+            $infoMessageTeamDiv.append(html);
+        }
+
+        const removeInfoMessageTeam = name => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageTeamDiv = $infoMessageResultDiv.find("div[name='infoMessageTeamDiv']");
+            $infoMessageTeamDiv.find("div[name=" + name + "]").remove();
+        }
+
+        const setInfoMessageAlignment = (name, title) => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageAlignmentDiv = $infoMessageResultDiv.find("div[name='infoMessageAlignmentDiv']");
+
+            const html =
+                `<div class="col-4 pt-2" name="\${name}" style="margin: auto;"
+                    onclick="removeInfoMessageAlignment('\${name}')">
+                    <span class="text-center display-4">\${title}(\${name})</span>
+                </div>`;
+            $infoMessageAlignmentDiv.append(html);
+        }
+
+        const removeInfoMessageAlignment = name => {
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageAlignmentDiv = $infoMessageResultDiv.find("div[name='infoMessageAlignmentDiv']");
+            $infoMessageAlignmentDiv.find("div[name=" + name + "]").remove();
         }
 
         const resetInfoMessageResult = () => {
@@ -618,8 +716,6 @@
             const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
             $infoMessageResultDiv.find("div").empty();
         }
-
-
 
         const hideCharacterToPlayer = () => {
             playStatus.playerCharacterDisplayed = false;
@@ -753,71 +849,6 @@
             console.log('game status loaded !!');
         }
 
-        const diePlayer = diedPlayer => {
-            diedPlayer.died = true;
-            diedPlayer.diedRound = playStatus.round;
-            diedPlayer.nominatable = false;
-
-            if (playStatus.night) {
-                diedPlayer.diedTonight = true;
-            } else {
-                diedPlayer.diedToday = true;
-            }
-
-            if (diedPlayer.name === Saint.name
-                && diedPlayer.executed) {
-                alert("성자가 사망하여 악한 팀이 승리했습니다.");
-                // $("#setDiedPlayerByExecutionModal").modal("hide");
-                winByEvil();
-                saveGameStatus();
-                return true;
-            }
-
-            const alivePlayerList = createAssignedPlayerList().filter(player => !player.died);
-
-            if (diedPlayer.name === Imp.name) {
-                const scarletWomanPlayer = Role.getPlayerByRole(minionPlayerList, ScarletWoman);
-
-                if (scarletWomanPlayer
-                    && !scarletWomanPlayer.died) {
-                    if (4 <= alivePlayerList.length) {
-                        scarletWomanPlayer.changedToImp = true;
-                        alert("임프는 사망하였지만 부정한 여자가 새로운 임프가 되었습니다. 게임이 계속 진행됩니다.");
-                        return false;
-                    }
-                }
-
-                alert("모든 악마가 사망하여 선한 팀이 승리했습니다.");
-                winByGood();
-                saveGameStatus();
-                return true;
-            }
-
-            const minionPlayer = minionPlayerList.find(minionPlayer => minionPlayer.name === diedPlayer.name);
-            if (minionPlayer
-                && minionPlayer.changedToImp) {
-                alert("임프가 된 하수인이 사망하여 선한 팀이 승리했습니다.");
-                winByGood();
-                saveGameStatus();
-                return true;
-            }
-
-            const aliveImpPlayer = Role.getPlayerByRole(alivePlayerList, Imp);
-            const changedToImpMinionPlayer = minionPlayerList.find(minionPlayer => !minionPlayer.died && minionPlayer.changedToImp);
-            if (aliveImpPlayer
-                || changedToImpMinionPlayer) {
-                if (alivePlayerList.length <= 2) {
-                    alert("임프가 생존한 상태에서 생존한 플레이어의 수가 2 이하가 되어 악한 팀이 승리했습니다.");
-                    winByEvil();
-                    saveGameStatus();
-                    return true;
-                }
-            }
-
-            alert(diedPlayer.playerName + "(" + diedPlayer.title + ") 플레이어가 사망하였습니다.");
-            return false;
-        }
-
         const turnOffBackgroundMusic = () => {
             $("audio[name='backgroundMusic']").each((index, audio) => {
                 audio.pause();
@@ -841,7 +872,12 @@
         }
 
         const openInfoMessageModal = () => {
-            // executionModal.open(playerList);
+            const $infoMessageDiv = $("#infoMessageDiv");
+            const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
+            const $infoMessageDirectDiv = $infoMessageResultDiv.find("div[name='infoMessageDirectDiv']");
+
+            const html = $infoMessageResultDiv.html() + $infoMessageDirectDiv.find("input").val();
+            openMessageModal(html);
         }
 
         const openQrLoginModal = () => {
@@ -1172,12 +1208,24 @@
                                     <hr class="mt-2 mb-2">
                                     <div name="setInfoMessagePlayerDiv"></div>
                                     <hr class="mt-2 mb-2">
+                                    <div name="setInfoMessageTeamDiv"></div>
+                                    <hr class="mt-2 mb-2">
+                                    <div name="setInfoMessageAlignmentDiv"></div>
+                                    <hr class="mt-2 mb-2">
                                     <div name="infoMessageResultDiv">
                                         <div name="infoMessageTextDiv" class="text-center"></div>
                                         <hr class="mt-2 mb-2">
                                         <div name="infoMessageCharacterDiv" class="row text-center"></div>
                                         <hr class="mt-2 mb-2">
                                         <div name="infoMessagePlayerDiv" class="row text-center"></div>
+                                        <hr class="mt-2 mb-2">
+                                        <div name="infoMessageTeamDiv" class="row text-center"></div>
+                                        <hr class="mt-2 mb-2">
+                                        <div name="infoMessageAlignmentDiv" class="row text-center"></div>
+                                        <hr class="mt-2 mb-2">
+                                        <div name="infoMessageDirectDiv" class="row text-center">
+                                            <input class="form-control" type="text" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
