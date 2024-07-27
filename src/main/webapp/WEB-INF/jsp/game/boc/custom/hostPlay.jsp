@@ -442,14 +442,14 @@
                         const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
                         const fontClass = Character.calculateCharacterNameClass(character.team);
 
-                        const characterHtml = `<img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:10%" />`;
+                        const characterHtml = `<img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />`;
 
                         const playedCharacter = playedCharacterList
                             .find(playedCharacter => playedCharacter.characterId === next.characterId);
 
                         const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, playedCharacter.displayedCharacterId);
                         const displayedCharacterHtml = playedCharacter.characterId !== playedCharacter.displayedCharacterId
-                            ? `(<img src="\${displayedCharacter.image}" class="img-responsive w-25 d-inline" style="max-width:10%" />)`
+                            ? `(<img src="\${displayedCharacter.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />)`
                             : "";
 
                         return prev +
@@ -638,7 +638,7 @@
             const html =
                 `<div class="col-4 pt-2 \${fontClass}" name="\${character.id}" style="margin: auto;"
                     onclick="removeInfoMessageCharacter('\${character.id}')">
-                    <small class="\${fontClass}">\${character.name}</small>
+                    <span class="\${fontClass}">\${character.name}<span/>
                     <img src="\${character.image}" class="img-responsive img-rounded m-auto" />
                 </div>`;
             $infoMessageCharacterDiv.append(html);
@@ -1032,7 +1032,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <%--<div class="row">
                     <div class="col-xl-12 pr-0 pl-0">
                         <div class="card bg-transparent">
                             <div class="card-body p-0">
@@ -1040,7 +1040,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
 
                 <div class="row">
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">

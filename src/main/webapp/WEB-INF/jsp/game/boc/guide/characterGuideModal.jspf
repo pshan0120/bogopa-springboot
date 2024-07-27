@@ -39,7 +39,7 @@
             }
 
             return `
-                <h3 class="\${Character.calculateCharacterNameClass(position.name)}">\${position.title}(\${position.name})</h3>
+                <h3 class="\${Character.calculateCharacterNameClass(position.name)}">\${position.title}</h3>
                 <ol class="pl-4">
                     \${characterGuideModal.createCharacterHtml(list)}
                 </ol>
@@ -49,7 +49,7 @@
             const fontClass = Character.calculateCharacterNameClass(next.team);
             return prev +
                 `<li class="\${fontClass} mb-4">
-                    <h4 class="\${fontClass}">\${next.name}(\${next.id})</h4>
+                    <h4 class="\${fontClass}">\${next.name}</h4>
                     <div class="row">
                         <div class="col-3 pl-0 pr-0">
                             <img src="\${next.image}" class="img-responsive img-thumbnail m-auto">
@@ -64,15 +64,15 @@
             return nightList.reduce((prev, next) => {
                     const fontClass = Character.calculateCharacterNameClass(next.team);
                     return prev +
-                        `<li class="\${fontClass}">\${next.name}(\${next.id})</li>`;
+                        `<li class="\${fontClass}">\${next.name}</li>`;
                 }, `<li class="font-orange">
                         황혼 단계
                     </li>
                     <li class="font-red">
-                        하수인 정보
+                        하수인들끼리 악마 확인
                     </li>
                     <li class="font-red">
-                        악마 정보
+                        악마가 하수인들 확인 / 미참여 역할 받기
                     </li>`
             ) + `<li class="font-orange">
                     새벽 단계
