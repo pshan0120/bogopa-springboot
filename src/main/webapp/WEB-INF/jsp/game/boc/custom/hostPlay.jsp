@@ -299,15 +299,15 @@
                             name="displayedCharacterDiv" data-character-id="\${next.characterId}">
                             <small class="\${displayedCharacterFontClass}">\${displayedCharacter.name}</small>
                             <img src="\${displayedCharacter.image}" class="img-responsive img-thumbnail m-auto"
-                                onclick="openSelectCharacterModal('\${next.characterId}')" />
+                                onclick="openSetCharacterDisplayedModal('\${next.characterId}')" />
                         </div>`;
                 }, `<div class="row">`) + '</div>';
 
             $playedCharacterListDiv.append(listHtml);
         }
 
-        const openSelectCharacterModal = characterId => {
-            characterModal.open(selectedCharacterList, characterId, setCharacterDisplayed);
+        const openSetCharacterDisplayedModal = characterId => {
+            characterModal.open(selectedCharacterList, characterId, null, setCharacterDisplayed);
         }
 
         const setCharacterDisplayed = (characterId, displayedCharacterId) => {
@@ -329,7 +329,7 @@
                     character.reminders.forEach(reminder => {
                         playedReminderList.push({
                             characterId: character.id,
-                            reminder: reminder,
+                            reminder,
                         });
                     });
                 }
@@ -536,18 +536,17 @@
 
                         const addReminderButtonHtml = playedReminderList.length > 0
                                 ? `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
-                                        onclick="openSelectReminder(\${player.memberId})">
+                                        onclick="openAddPlayerReminderModal(\${player.memberId})">
                                         +
                                     </button>`
                                 : "";
 
                         const changeCharacterButtonHtml =
                             `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
-                                onclick="openSelectReminder(\${player.memberId})">
+                                onclick="openChangePlayerCharacterModal(\${player.memberId}, '\${player.characterId}')">
                                 ↔
                             </button>`;
 
-                        console.log('player.alignment', player.alignment);
                         const alignmentFontClass = player.alignment.name === ALIGNMENT.GOOD.name ? "text-primary" : "text-danger";
                         const changeAlignmentButtonHtml =
                             `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
@@ -607,25 +606,19 @@
         }
 
         const capitalizeFirstAndAfterUnderBar = source => {
-            // 빈 문자열 처리
             if (source.length === 0) return source;
 
-            // 문자열을 배열로 변환하여 언더바를 기준으로 분리
-            let parts = source.split('_');
-
-            // 첫 부분의 첫 글자 대문자화
+            let parts = source.split("_");
             parts[0] = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
 
-            // 나머지 부분의 각 부분의 첫 글자 대문자화
             for (let i = 1; i < parts.length; i++) {
                 parts[i] = parts[i].charAt(0).toUpperCase() + parts[i].slice(1);
             }
 
-            // 배열을 다시 문자열로 변환
-            return parts.join('_');
+            return parts.join("_");
         }
 
-        const openSelectReminder = memberId => {
+        const openAddPlayerReminderModal = memberId => {
             reminderModal.open(selectedCharacterList, playedReminderList, memberId, addPlayerReminder);
         }
 
@@ -660,7 +653,43 @@
             await renderPlayerStatusList();
         }
 
+        const openChangePlayerCharacterModal = (memberId, characterId) => {
+            characterModal.open(selectedCharacterList, characterId, memberId, changePlayerCharacter);
+        }
 
+        const changePlayerCharacter = async (characterId, selectedCharacterId, memberId) => {
+            console.log(characterId, selectedCharacterId, memberId)
+            const player = playerList.find(player => player.memberId === memberId);
+            const character = Character.getInCharacterListById(selectedCharacterList, characterId);
+            const selectedCharacter = Character.getInCharacterListById(selectedCharacterList, selectedCharacterId);
+
+            if (!confirm(player.nickname + "님의 역할을 [" + character.name + "]에서 [" + selectedCharacter.name + "]로 바꾸시겠습니까?")) {
+                return;
+            }
+
+            player.characterId = selectedCharacterId;
+
+            const thrownAwayIndex = playedCharacterList.findIndex(item => Character.characterIdEquals(item.characterId, characterId));
+            if (thrownAwayIndex > -1) {
+                playedCharacterList.splice(thrownAwayIndex, 1);
+            }
+
+            playedCharacterList.push({
+                characterId: selectedCharacterId,
+                displayedCharacterId: selectedCharacterId
+            });
+
+            if (selectedCharacter.reminders && selectedCharacter.reminders.length > 0) {
+                selectedCharacter.reminders.forEach(reminder => {
+                    playedReminderList.push({
+                        characterId: selectedCharacterId,
+                        reminder,
+                    });
+                });
+            }
+
+            await renderPlayerStatusList();
+        }
 
 
         const renderInfoMessageDiv = async () => {

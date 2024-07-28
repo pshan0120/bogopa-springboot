@@ -6,9 +6,10 @@
         selectedCharacterList: [],
         characterId: null,
         callback: null,
-        open: (selectedCharacterList, characterId, callback) => {
+        open: (selectedCharacterList, characterId, memberId, callback) => {
             characterModal.selectedCharacterList = selectedCharacterList;
             characterModal.characterId = characterId;
+            characterModal.memberId = memberId;
             characterModal.callback = callback;
 
             const $modal = $("#characterModal");
@@ -31,7 +32,7 @@
             $modal.modal("show");
         },
         selectCharacter: selectedCharacterId => {
-            characterModal.callback(characterModal.characterId, selectedCharacterId);
+            characterModal.callback(characterModal.characterId, selectedCharacterId, characterModal.memberId);
             const $modal = $("#characterModal");
             $modal.modal("hide");
         },
