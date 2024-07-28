@@ -1463,14 +1463,14 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-xs-12 hidden-xs">
-            <div class="container mt--7">
+        <div class="col-md-6 col-xs-12">
+            <div class="container">
                 <div class="row">
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                         <div class="card shadow">
                             <div class="card-body p-0">
                                 <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/"
-                                        height="800" width="100%"></iframe>
+                                        height="700" width="100%"></iframe>
                             </div>
                         </div>
                     </div>

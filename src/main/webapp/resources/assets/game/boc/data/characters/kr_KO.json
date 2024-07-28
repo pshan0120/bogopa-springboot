@@ -130,7 +130,7 @@
     },
     {
         "id": "assassin",
-        "name": "Assassin",
+        "name": "암살자",
         "edition": "bmr",
         "team": "minion",
         "firstNight": 0,
@@ -143,6 +143,7 @@
         ],
         "setup": false,
         "ability": "Once per game, at night*, choose a player: they die, even if for some reason they could not.",
+        "ability": "게임 중 단 한번, 밤에 1명의 플레이어를 선택합니다. 그는 무조건 죽습니다.",
         "image": "/images/fo/boc/icons/minion/assassin.webp"
     },
     {
