@@ -755,10 +755,12 @@
 
             const setInfoMessageCharacterDivHtml = selectedCharacterList.reduce((prev, next) => {
                 const fontClass = Character.calculateCharacterNameClass(next.team);
+                const played = playedCharacterList.some(played => Character.characterIdEquals(played.characterId, next.id));
+                const playedClass = played ? "font-weight-bold" : "";
 
                 return prev +
                     `<div class="col-3 text-center pt-2 \${fontClass}" name="\${next.id}">
-                        <small class="\${fontClass}">\${next.name}</small>
+                        <small class="\${fontClass} \${playedClass}">\${next.name}</small>
                         <img src="\${next.image}" class="img-responsive img-rounded m-auto"
                             onclick="setInfoMessageCharacter('\${next.id}')" />
                     </div>`;
