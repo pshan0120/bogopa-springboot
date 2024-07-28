@@ -73,10 +73,10 @@
                         황혼 단계
                     </li>
                     <li class="font-red">
-                        하수인들이 악마 확인
+                        하수인의 시간
                     </li>
                     <li class="font-red">
-                        악마가 하수인들 확인 / 미참여 역할 받기
+                        악마의 시간
                     </li>`
             ) + `<li class="font-orange">
                     새벽 단계

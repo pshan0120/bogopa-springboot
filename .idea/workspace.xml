@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="boardgame:war exploded" />
+      <artifact name="bogopa:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -11,6 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="설명 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +38,8 @@
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
-    <option name="FILTER_INFO" value="false" />
-    <option name="FILTER_DEBUG" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -56,37 +60,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "C:/boardgame/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15136719",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode",
-    "show.migrate.to.gradle.popup": "false",
-    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/messages&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\boardgame\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\messages" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\guide" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets" />
@@ -109,7 +113,7 @@
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
       <option name="UPDATING_POLICY" value="update-resources" />
       <deployment>
-        <artifact name="boardgame:war exploded">
+        <artifact name="bogopa:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
@@ -190,7 +194,6 @@
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
           <artifact name="bogopa:war exploded" />
-          <artifact name="boardgame:war exploded" />
         </option>
       </method>
     </configuration>
@@ -301,14 +304,8 @@
       <workItem from="1721742812547" duration="14777000" />
       <workItem from="1721836415729" duration="4745000" />
       <workItem from="1721961703673" duration="1135000" />
-      <workItem from="1722039764945" duration="1417000" />
-    </task>
-    <task id="LOCAL-00103" summary="내 역할 보기 추가">
-      <created>1715884679272</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1715884679272</updated>
+      <workItem from="1722039764945" duration="2050000" />
+      <workItem from="1722176101720" duration="6173000" />
     </task>
     <task id="LOCAL-00104" summary="내 역할 보기 추가">
       <created>1715885281736</created>
@@ -646,7 +643,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722042130888</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="설명 수정">
+      <created>1722042167082</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1722042167082</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

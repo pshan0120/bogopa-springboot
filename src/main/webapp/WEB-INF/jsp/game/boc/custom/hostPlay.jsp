@@ -28,6 +28,15 @@
 
             await loadGameStatus();
 
+            const $playerStatusDiv = $("#playerStatusDiv");
+            const $filterDiv = $playerStatusDiv.find("div[name='filterDiv']");
+
+            $filterDiv.find("input[type='radio']").on("click", async event => {
+                /*console.log($(event.currentTarget).val());
+                const filteredBy = $(event.currentTarget).val();*/
+                await renderPlayerStatusList();
+            });
+
             console.log('playStatus', playStatus);
             if (Object.keys(playStatus).length === 0) {
                 await initializeGame();
@@ -477,7 +486,43 @@
             const $playerStatusListDiv = $playerStatusDiv.find("div[name='playerStatusListDiv']");
             $playerStatusListDiv.empty();
 
-            const playerListHtml = playerList
+            const $filterDiv = $playerStatusDiv.find("div[name='filterDiv']");
+            const filteredBy = $filterDiv.find("input[type='radio']:checked").val();
+
+            let filteredPlayerList = playerList;
+            if (filteredBy) {
+                if (filteredBy === "seatNumber") {
+                    filteredPlayerList = playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
+                }
+
+                if (filteredBy === "firstNight") {
+                    filteredPlayerList = playerList
+                        .filter(player => {
+                            const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
+                            return character.firstNight > 0;
+                        })
+                        .sort((prev, next) => {
+                            const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
+                            const nextCharacter = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                            return prevCharacter.firstNight - nextCharacter.firstNight;
+                        });
+                }
+
+                if (filteredBy === "otherNight") {
+                    filteredPlayerList = playerList
+                        .filter(player => {
+                            const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
+                            return character.otherNight > 0;
+                        })
+                        .sort((prev, next) => {
+                            const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
+                            const nextCharacter = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                            return prevCharacter.otherNight - nextCharacter.otherNight;
+                        });
+                }
+            }
+
+            const playerListHtml = filteredPlayerList
                     .reduce((prev, next) => {
                         const player = next;
 
@@ -535,11 +580,11 @@
                         }, "");
 
                         const addReminderButtonHtml = playedReminderList.length > 0
-                                ? `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
+                            ? `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
                                         onclick="openAddPlayerReminderModal(\${player.memberId})">
                                         +
                                     </button>`
-                                : "";
+                            : "";
 
                         const changeCharacterButtonHtml =
                             `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
@@ -1277,15 +1322,28 @@
                             <div class="card-header bg-white border-0">
                                 <h2>
                                     플레이어 상태
-                                    <a data-toggle="collapse" href="#playerStatusListDiv" role="button"
+                                    <a data-toggle="collapse" href="#playerStatusBodyDiv" role="button"
                                        aria-expanded="false"
-                                       aria-controls="playerStatusListDiv">
+                                       aria-controls="playerStatusBodyDiv">
                                         열기/닫기
                                     </a>
                                 </h2>
                             </div>
                             <div class="card-body">
-                                <div class="collapse" name="playerStatusListDiv" id="playerStatusListDiv"></div>
+                                <div class="collapse" id="playerStatusBodyDiv">
+                                    <div name="filterDiv">
+                                        <input type="radio" id="filterBySeatNumber" name="playerStatusFilter"
+                                               value="seatNumber" checked/>
+                                        <label for="filterBySeatNumber">자리 순서</label>
+                                        <input type="radio" id="filterByFirstNight" name="playerStatusFilter"
+                                               value="firstNight"/>
+                                        <label for="filterByFirstNight">첫날 밤</label>
+                                        <input type="radio" id="filterByOtherNight" name="playerStatusFilter"
+                                               value="otherNight"/>
+                                        <label for="filterByOtherNight">다음날 밤</label>
+                                    </div>
+                                    <div name="playerStatusListDiv" id="playerStatusListDiv"></div>
+                                </div>
                             </div>
                             <div class="card-footer py-4">
                                 <div name="buttonDiv">
@@ -1297,7 +1355,7 @@
                                             name="restNominationButton" onclick="restNomination()">
                                         지명 초기화
                                     </button>
-                                    <button type="button" class="btn btn-warning btn-block"
+                                    <button type="button" class="btn btn-primary btn-block"
                                             name="savePlayerStatusButton" onclick="savePlayerStatus()">
                                         상태 저장
                                     </button>
@@ -1313,7 +1371,7 @@
                             <div class="card-header bg-white border-0">
                             </div>
                             <div class="card-body">
-                                <%@ include file="/WEB-INF/jsp/game/boc/troubleBrewing/jspf/backgroundMusic.jspf" %>
+                                <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" %>
                             </div>
                             <div class="card-footer py-4">
                                 <div name="buttonDiv">
@@ -1478,7 +1536,6 @@
             </div>
         </div>
     </div>
-
 
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
