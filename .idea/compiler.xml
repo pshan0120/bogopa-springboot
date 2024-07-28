@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="boardgame" />
       </profile>
       <profile name="Annotation profile for boardgame" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -18,12 +17,13 @@
           <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
         </processorPath>
         <module name="bogopa" />
+        <module name="boardgame" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="boardgame" options="-Xlint:all" />
+      <module name="boardgame" options="-Xlint:all -Xlint:-processing" />
       <module name="bogopa" options="-Xlint:all -Xlint:-processing" />
     </option>
   </component>

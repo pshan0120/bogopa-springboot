@@ -12,6 +12,7 @@
         const PLAY_ID = ${playId};
         let playerList = [];
         let selectedCharacterList = [];
+        let playStatus = {};
 
         $(async () => {
             const play = await gfn_readPlayablePlayById(PLAY_ID);
@@ -36,6 +37,7 @@
 
             playerList = JSON.parse(lastPlayLogJson.playerList);
             selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
+            playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
             console.log('game status loaded !!');
         }
@@ -49,12 +51,19 @@
                 .catch(response => console.error('error', response));
         }
 
+        const readEditionList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/editions.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
         const openRuleGuideModal = () => {
             ruleGuideModal.open();
         }
 
-        const openCharacterGuideModal = () => {
-            characterGuideModal.open(selectedCharacterList);
+        const openCharacterGuideModal = async () => {
+            await loadGameStatus();
+            characterGuideModal.open(selectedCharacterList, playStatus.editionName);
         }
 
         const openTownModal = () => {
@@ -76,12 +85,12 @@
             }
 
             const replacedNickname = nickname.replace(/\s+/g, "");
-            const joined = playerList.some(player => player.nickname === replacedNickname);
+            /*const joined = playerList.some(player => player.nickname === replacedNickname);
 
             if (!joined) {
                 alert("참여중인 플레이어가 아닌데요!");
                 return;
-            }
+            }*/
 
             const request = {
                 playId: PLAY_ID,
@@ -93,7 +102,10 @@
                     console.log('play rejoined !!', data);
                     document.location.reload();
                 })
-                .catch(response => console.error('error', response));
+                .catch(response => {
+                    console.error('error', response);
+                    alert(response.responseJSON?.message);
+                });
         }
     </script>
 </head>

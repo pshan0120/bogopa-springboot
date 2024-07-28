@@ -2,46 +2,46 @@
     {
         "id": "tb",
         "name": "Trouble Brewing",
-        "scriptJson": "trouble-brewing.json"
+        "jsonFileName": "trouble-brewing.json"
     },
     {
         "id": "snv",
         "name": "Sects and Violets",
-        "scriptJson": "sects-and-violets.json"
+        "jsonFileName": "sects-and-violets.json"
     },
     {
         "id": "bmr",
         "name": "Bad Moon Rising",
-        "scriptJson": "bad-moon-rising.json"
+        "jsonFileName": "bad-moon-rising.json"
     },
     {
         "id": "tbm",
         "name": "Trouble Brewing Medium",
-        "scriptJson": "trouble-brewing-medium.json"
+        "jsonFileName": "trouble-brewing-medium.json"
     },
     {
         "id": "ngj",
         "name": "No Greater Joy",
-        "scriptJson": "no-greater-joy.json"
+        "jsonFileName": "no-greater-joy.json"
     },
     {
         "id": "lod",
         "name": "Lleech Of Distrust",
-        "scriptJson": "lleech-of-distrust.json"
+        "jsonFileName": "lleech-of-distrust.json"
     },
     {
         "id": "cd",
         "name": "Comrade Demon",
-        "scriptJson": "comrade-demon.json"
+        "jsonFileName": "comrade-demon.json"
     },
     {
         "id": "otr",
         "name": "Over the River",
-        "scriptJson": "over-the-river.json"
+        "jsonFileName": "over-the-river.json"
     },
     {
         "id": "luf",
         "name": "LAISSEZ UN FAIRE",
-        "scriptJson": "laissez-un-faire.json"
+        "jsonFileName": "laissez-un-faire.json"
     }
 ]

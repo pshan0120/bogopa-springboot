@@ -3,8 +3,12 @@
 <script>
     const characterGuideModal = {
         characterList: [],
-        open: characterList => {
+        open: (characterList, editionName) => {
             characterGuideModal.characterList = characterList;
+
+            const $characterGuideModal = $("#characterGuideModal");
+            const $editionName = $characterGuideModal.find("span[name='editionName']");
+            $editionName.empty().html(editionName);
 
             const characterListHtml =
                 characterGuideModal.createPositionHtml(characterList, POSITION.TOWNS_FOLK)
@@ -14,7 +18,7 @@
                 + characterGuideModal.createPositionHtml(characterList, POSITION.TRAVELLER)
                 + characterGuideModal.createPositionHtml(characterList, POSITION.FABLED);
 
-            const $characterGuideModal = $("#characterGuideModal");
+
             const $characterListDiv = $characterGuideModal.find("div[name='characterListDiv']");
             $characterListDiv.empty().html(characterListHtml);
 
@@ -88,7 +92,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">역할 설명</h4>
+                <h4 class=""><span name="editionName"></span></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

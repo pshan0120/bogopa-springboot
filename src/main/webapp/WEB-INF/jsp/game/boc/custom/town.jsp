@@ -29,15 +29,6 @@
             }
 
             console.log('playStatus', playStatus);
-            /*if (0 < playStatus.round) {
-                if (playStatus.night) {
-                    renderOtherNight();
-                    return;
-                }
-
-                renderOtherDay();
-                return;
-            }*/
 
             playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
 

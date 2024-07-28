@@ -17,6 +17,7 @@
         let characterList = [];
         let selectedCharacterList = [];
         let playedCharacterList = [];
+        let playedReminderList = [];
         let nightOrderList = [];
         let playerList = [];
         let scriptJson = {};
@@ -36,8 +37,8 @@
             hideSettingDivs();
             showPlayingDivs();
 
+            await renderEditionInfo();
             await renderPlayerStatusList();
-            await renderExecution();
             await renderInfoMessageDiv();
         });
 
@@ -120,7 +121,15 @@
 
             selectedEditionId = id;
 
-            scriptJson = await readScriptJsonOfEdition(selected.scriptJson);
+            scriptJson = await readScriptJsonOfEdition(selected.jsonFileName);
+
+            playStatus = {
+                ...playStatus,
+                editionId: id,
+                editionName: scriptJson[0].name,
+                scriptJson,
+            }
+
             scriptJson.splice(0, 1);
             $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
 
@@ -193,6 +202,7 @@
                 // alert("플레이어 수보다 많이 선택할 수 없습니다");
                 return;
             }
+
             playedCharacterList.push({
                 characterId,
                 displayedCharacterId: characterId
@@ -311,6 +321,20 @@
                 return;
             }
 
+            playedReminderList = [];
+
+            playedCharacterList.forEach(played => {
+                const character = Character.getInCharacterListById(selectedCharacterList, played.characterId);
+                if (character.reminders && character.reminders.length > 0) {
+                    character.reminders.forEach(reminder => {
+                        playedReminderList.push({
+                            characterId: character.id,
+                            reminder: reminder,
+                        });
+                    });
+                }
+            });
+
             $("#characterDisplayedDiv").hide();
 
             setPlayerSeatsRandomly();
@@ -337,14 +361,17 @@
             playerList = playerList
                 .sort(() => Math.random() - 0.5)
                 .map((originalPlayer, index) => {
+                    const characterId = playedCharacterList[index].characterId;
                     return {
                         ...originalPlayer,
                         seatNumber: index + 1,
-                        characterId: playedCharacterList[index].characterId,
+                        characterId,
+                        alignment: Character.getAlignmentInCharacterListById(selectedCharacterList, characterId),
                         nominating: false,
                         nominated: false,
                         died: false,
                         votable: true,
+                        reminderList: [],
                     };
                 });
 
@@ -395,8 +422,9 @@
             hideSettingDivs();
             showPlayingDivs();
 
+            await renderEditionInfo();
             await renderPlayerStatusList();
-            await renderExecution();
+            await renderInfoMessageDiv();
         }
 
         const showSettingDivs = () => {
@@ -414,17 +442,29 @@
         }
 
         const showPlayingDivs = () => {
-            $("#backgroundMusicDiv").show();
+            $("#editionInfoDiv").show();
             $("#playerStatusDiv").show();
+            $("#backgroundMusicDiv").show();
             $("#executionDiv").show();
             $("#infoMessageDiv").show();
         }
 
         const hidePlayingDivs = () => {
-            $("#backgroundMusicDiv").hide();
+            $("#editionInfoDiv").hide();
             $("#playerStatusDiv").hide();
+            $("#backgroundMusicDiv").hide();
             $("#executionDiv").hide();
             $("#infoMessageDiv").hide();
+        }
+
+        const renderEditionInfo = async () => {
+            const $editionInfoDiv = $("#editionInfoDiv");
+            $editionInfoDiv.find("[name='editionName']").text(playStatus.editionName);
+
+            const scriptJson = playStatus.scriptJson;
+
+            scriptJson.splice(0, 1);
+            $editionInfoDiv.find("textarea").val(JSON.stringify(scriptJson));
         }
 
         const renderPlayerStatusList = () => {
@@ -439,49 +479,99 @@
 
             const playerListHtml = playerList
                     .reduce((prev, next) => {
-                        const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                        const player = next;
+
+                        const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
                         const fontClass = Character.calculateCharacterNameClass(character.team);
 
-                        const characterHtml = `<img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />`;
+                        const wikiUrl = "https://wiki.bloodontheclocktower.com/";
+                        const characterHtml =
+                            `<a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(player.characterId)}" target="_blank">
+                                <img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />
+                            </a>`;
 
                         const playedCharacter = playedCharacterList
-                            .find(playedCharacter => playedCharacter.characterId === next.characterId);
+                            .find(playedCharacter => playedCharacter.characterId === player.characterId);
 
                         const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, playedCharacter.displayedCharacterId);
                         const displayedCharacterHtml = playedCharacter.characterId !== playedCharacter.displayedCharacterId
-                            ? `(<img src="\${displayedCharacter.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />)`
+                            ? `→ <a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(displayedCharacter.id)}" target="_blank">
+                                    <img src="\${displayedCharacter.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />
+                                </a>`
                             : "";
 
-                        return prev +
-                            `<tr class="text-center" name="\${next.memberId}" data-member-id="\${next.memberId}">
-                            <td class="pl-1 pr-1 text-left">
-                                \${next.seatNumber}. \${next.nickname}(<span class="\${fontClass}">\${character.name}</span>)
-                                \${characterHtml}
-                                \${displayedCharacterHtml}
-                            </td>
-                            <td class="pl-1 pr-1">
-                                <input type="checkbox" name="diedCheckbox" \${next.died ? "checked" : ""}>
-                            </td>
-                            <td class="pl-1 pr-1">
-                                <input type="checkbox" name="nominatingCheckbox" \${next.nominating ? "checked" : ""}>
-                            </td>
-                            <td class="pl-1 pr-1">
-                                <input type="checkbox" name="nominatedCheckbox" \${next.nominated ? "checked" : ""}>
-                            </td>
-                            <td class="pl-1 pr-1">
-                                <input type="checkbox" name="votableCheckbox"
-                                    \${next.votable ? "checked" : ""} \${next.died ? "" : "disabled"}>
-                            </td>
-                        </tr>`;
+                        const statusHtml =
+                            `<tr class="text-center" name="\${player.memberId}" data-member-id="\${player.memberId}">
+                                <td class="pl-1 text-left">
+                                    \${player.seatNumber}. \${player.nickname}(<span class="\${fontClass}">\${character.name}</span>)
+                                    \${characterHtml}
+                                    \${displayedCharacterHtml}
+                                </td>
+                                <td class="pl-1">
+                                    <input type="checkbox" name="diedCheckbox" \${player.died ? "checked" : ""}>
+                                </td>
+                                <td class="pl-1">
+                                    <input type="checkbox" name="nominatingCheckbox"
+                                        \${player.nominating ? "checked" : ""} \${(player.died || player.nominating) ? "disabled" : ""}>
+                                </td>
+                                <td class="pl-1">
+                                    <input type="checkbox" name="nominatedCheckbox"
+                                        \${player.nominated ? "checked" : ""} \${player.nominated ? "disabled" : ""}>
+                                </td>
+                                <td class="pl-1">
+                                    <input type="checkbox" name="votableCheckbox"
+                                        \${player.votable ? "checked" : ""} \${player.died ? "" : "disabled"}>
+                                </td>
+                            </tr>`;
+
+
+                        const playedReminderListHtml = player.reminderList.reduce((prev, next) => {
+                            const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                            return prev
+                                + "<button class=\"" + Character.createChoiceButtonClass(character.team) + "\""
+                                + " onclick=\"removeReminder(" + player.memberId + ", '" + next.characterId + "', '" + next.reminder + "')\" >"
+                                + " " + "[" + character.name + "] " + next.reminder
+                                + "</button>";
+                        }, "");
+
+                        const addReminderButtonHtml = playedReminderList.length > 0
+                                ? `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
+                                        onclick="openSelectReminder(\${player.memberId})">
+                                        +
+                                    </button>`
+                                : "";
+
+                        const changeCharacterButtonHtml =
+                            `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
+                                onclick="openSelectReminder(\${player.memberId})">
+                                ↔
+                            </button>`;
+
+                        console.log('player.alignment', player.alignment);
+                        const alignmentFontClass = player.alignment.name === ALIGNMENT.GOOD.name ? "text-primary" : "text-danger";
+                        const changeAlignmentButtonHtml =
+                            `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
+                                onclick="changeAlignment(\${player.memberId})">
+                                <span class="\${alignmentFontClass}">\${player.alignment.title}</span>
+                            </button>`;
+
+                        const actionListHtml =
+                            `<tr class="text-center">
+                                <td class="p-1 text-left" colspan="5">
+                                    \${playedReminderListHtml} \${addReminderButtonHtml} \${changeCharacterButtonHtml} \${changeAlignmentButtonHtml}
+                                </td>
+                            </tr>`;
+
+                        return prev + statusHtml + actionListHtml;
                     }, `<div class="table-responsive">
                         <table class="table align-items-center table-condensed">
                             <thead class="thead-light">
                                 <tr class="text-center">
-                                    <th scope="col" class="pl-1 pr-1">이름(역할)</th>
-                                    <th scope="col" class="pl-1 pr-1">사망함</th>
-                                    <th scope="col" class="pl-1 pr-1">지명함</th>
-                                    <th scope="col" class="pl-1 pr-1">지명됨</th>
-                                    <th scope="col" class="pl-1 pr-1">투표권</th>
+                                    <th scope="col" class="pl-1">이름(역할)</th>
+                                    <th scope="col" class="pl-1">사망함</th>
+                                    <th scope="col" class="pl-1">지명함</th>
+                                    <th scope="col" class="pl-1">지명됨</th>
+                                    <th scope="col" class="pl-1">투표권</th>
                                 </tr>
                             </thead>
                             <tbody>`)
@@ -516,22 +606,62 @@
             });
         }
 
-        const renderExecution = async () => {
-            const $executionDiv = $("#executionDiv");
+        const capitalizeFirstAndAfterUnderBar = source => {
+            // 빈 문자열 처리
+            if (source.length === 0) return source;
 
-            const virginPlayer = Character.getInPlayerListById(playerList, "virgin");
-            $executionDiv.find("span[name='virginPlayer']").html((virginPlayer ? virginPlayer.nickname : ""));
+            // 문자열을 배열로 변환하여 언더바를 기준으로 분리
+            let parts = source.split('_');
 
-            const impPlayer = Character.getInPlayerListById(playerList, "imp");
-            $executionDiv.find("span[name='impPlayer']").html((impPlayer ? impPlayer.nickname : ""));
+            // 첫 부분의 첫 글자 대문자화
+            parts[0] = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
 
-            const scarletWomanPlayer = Character.getInPlayerListById(playerList, "scarlet_woman");
-            $executionDiv.find("span[name='scarletWomanPlayer']").html((scarletWomanPlayer ? scarletWomanPlayer.nickname : ""));
+            // 나머지 부분의 각 부분의 첫 글자 대문자화
+            for (let i = 1; i < parts.length; i++) {
+                parts[i] = parts[i].charAt(0).toUpperCase() + parts[i].slice(1);
+            }
 
-            const alivePlayerList = playerList.filter(player => !player.died);
-            const numberOfVoteSuccess = Math.ceil(alivePlayerList.length / 2);
-            $executionDiv.find("span[name='numberOfVoteSuccess']").html(numberOfVoteSuccess);
+            // 배열을 다시 문자열로 변환
+            return parts.join('_');
         }
+
+        const openSelectReminder = memberId => {
+            reminderModal.open(selectedCharacterList, playedReminderList, memberId, addPlayerReminder);
+        }
+
+        const addPlayerReminder = async (memberId, characterId, reminder) => {
+            const player = playerList.find(player => player.memberId === memberId);
+            player.reminderList.push({characterId, reminder});
+            await renderPlayerStatusList();
+        }
+
+        const removeReminder = async (memberId, characterId, reminder) => {
+            const player = playerList.find(player => player.memberId === memberId);
+            if (!confirm(player.nickname + "님의 '" + reminder + "' 리마인더를 제거하시겠습니까?")) {
+                return;
+            }
+
+            const thrownAwayIndex = player.reminderList
+                .findIndex(item => item.characterId === characterId && item.reminder === reminder);
+            if (thrownAwayIndex > -1) {
+                player.reminderList.splice(thrownAwayIndex, 1);
+            }
+
+            await renderPlayerStatusList();
+        }
+
+        const changeAlignment = async memberId => {
+            const player = playerList.find(player => player.memberId === memberId);
+            if (!confirm(player.nickname + "님의 편을 바꾸시겠습니까?")) {
+                return;
+            }
+
+            player.alignment = player.alignment.name === ALIGNMENT.GOOD.name ? ALIGNMENT.EVIL : ALIGNMENT.GOOD;
+            await renderPlayerStatusList();
+        }
+
+
+
 
         const renderInfoMessageDiv = async () => {
             const messageList = await readMessageList();
@@ -553,7 +683,7 @@
                 const fontClass = Character.calculateCharacterNameClass(next.team);
 
                 return prev +
-                    `<div class="col-2 text-center pt-2 \${fontClass}" name="\${next.id}">
+                    `<div class="col-3 text-center pt-2 \${fontClass}" name="\${next.id}">
                         <small class="\${fontClass}">\${next.name}</small>
                         <img src="\${next.image}" class="img-responsive img-rounded m-auto"
                             onclick="setInfoMessageCharacter('\${next.id}')" />
@@ -745,7 +875,23 @@
             executionModal.diedAndVotedPlayerList = [];
             executionModal.candidatePlayer = null;
             executionModal.candidatePlayerListOfToday = [];
-            executionModal.executionPlayerOfToday = null;
+
+            renderPlayerStatusList();
+        }
+
+
+        const restNomination = () => {
+            if (!confirm("지명 상태를 초기화하시겠습니까?")) {
+                return;
+            }
+
+            playerList.map(player => {
+                if (!player.died) {
+                    player.nominating = false;
+                }
+
+                player.nominated = false;
+            });
 
             renderPlayerStatusList();
         }
@@ -757,7 +903,6 @@
 
             saveGameStatus();
             renderPlayerStatusList();
-            renderExecution();
         }
 
         const renderPlayMemberList = playerList => {
@@ -815,6 +960,7 @@
                 selectedEditionId,
                 selectedCharacterList: JSON.stringify(selectedCharacterList),
                 playedCharacterList: JSON.stringify(playedCharacterList),
+                playedReminderList: JSON.stringify(playedReminderList),
                 playerList: JSON.stringify(playerList),
                 playStatus: JSON.stringify(playStatus),
             }
@@ -843,6 +989,7 @@
             selectedEditionId = lastPlayLogJson.selectedEditionId;
             selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
             playedCharacterList = JSON.parse(lastPlayLogJson.playedCharacterList);
+            playedReminderList = JSON.parse(lastPlayLogJson.playedReminderList);
             playerList = JSON.parse(lastPlayLogJson.playerList);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
@@ -863,8 +1010,8 @@
             ruleGuideModal.open();
         }
 
-        const openCharacterGuideModal = () => {
-            characterGuideModal.open(selectedCharacterList);
+        const openCharacterGuideModal = async () => {
+            characterGuideModal.open(selectedCharacterList, playStatus.editionName);
         }
 
         const openTownModal = () => {
@@ -984,11 +1131,11 @@
                                 </h2>
                             </div>
                             <div class="card-body">
-                                <h4><span name="roleInitialization"></span></h4>
-                                <hr class="mt-2 mb-2">
                                 <div class="" name="characterListDiv"></div>
                                 <hr class="mt-2 mb-2">
                                 <div class="text-right" name="playedCharacterCountDiv"></div>
+                                <h4><span name="roleInitialization"></span></h4>
+                                <hr class="mt-2 mb-2">
                                 <div class="" name="playedCharacterListDiv"></div>
                                 <hr class="mt-2 mb-2">
                                 트러블 브루잉 추천 조합(8인 기준)<br/>
@@ -1072,6 +1219,31 @@
 
                 <div class="row">
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
+                        <div class="card shadow display-none" id="editionInfoDiv">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    에디션 정보
+                                    <a data-toggle="collapse" href="#editionInfoBodyDiv" role="button"
+                                       aria-expanded="false"
+                                       aria-controls="playerStatusListDiv">
+                                        열기/닫기
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="collapse" id="editionInfoBodyDiv">
+                                    <h3 name="editionName"></h3>
+                                    <div class="mt-1">
+                                        <textarea rows="4" class="form-control" cols="20"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                         <div class="card shadow display-none" id="playerStatusDiv">
                             <div class="card-header bg-white border-0">
                                 <h2>
@@ -1091,6 +1263,10 @@
                                     <button type="button" class="btn btn-warning btn-block display-none"
                                             name="hideCharacterToPlayerButton" onclick="hideCharacterToPlayer()">
                                         플레이어 캐릭터 숨기기
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-block"
+                                            name="restNominationButton" onclick="restNomination()">
+                                        지명 초기화
                                     </button>
                                     <button type="button" class="btn btn-warning btn-block"
                                             name="savePlayerStatusButton" onclick="savePlayerStatus()">
@@ -1127,50 +1303,19 @@
                             <div class="card-header bg-white border-0">
                                 <h2>
                                     처형 투표
-                                    <a data-toggle="collapse" href="#executionVoteDiv" role="button"
+                                    <%--<a data-toggle="collapse" href="#executionVoteDiv" role="button"
                                        aria-expanded="false"
                                        aria-controls="executionVoteDiv">
                                         열기/닫기
-                                    </a>
+                                    </a>--%>
                                 </h2>
                             </div>
                             <div class="card-body">
-                                <div class="collapse" id="executionVoteDiv">
-                                    <p>
-                                        1. 한 번에 한 명의 플레이어만 지명할 수 있습니다.<br/>
-                                        2. 생존 플레이어만 지명할 수 있습니다.<br/>
-                                        - 만약 처녀가 지명당했고 지명한 사람이 마을주민이라면 지명한 사람은 즉시 처형됩니다.<br/>
-                                        - 처녀가 지명당했고 지명한 사람이 생존 플레이어라면 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
-                                        - 처녀가 취했거나 중독된 상태라면 지명한 사람이 죽지 않습니다. 다만 이 때에도 '처녀 능력 사용됨'으로 바꿔야 합니다.<br/>
-                                        <strong class="font-blue">
-                                            - 처녀 : <span name="virginPlayer"></span>
-                                        </strong><br/>
-                                        3. 각 플레이어는 하루에 한 번만 지명할 수 있으며, 각 플레이어는 하루에 한 번만 지명될 수 있습니다.<br/>
-                                        4. 지명한 플레이어에게는 이유를, 지명당한 플레이어에게 변호할 기회를 줍니다.<br/>
-                                        5. 투표를 시작합니다. 후보자로부터 시계 반향으로 돌면서 손을 든 플레이어를 셉니다.<br/>
-                                        - 생존 플레이어는 하루에 원하는 만큼의 플레이어에게 투표할 수 있습니다.<br/>
-                                        - 사망 플레이어는 남은 게임 동안 단 한 번만 투표할 수 있습니다.<br/>
-                                        - 생존 플레이어의 수의 절반 이상을 받았다면 처형 대상자가 됩니다.<br/>
-                                        <strong class="font-orange">
-                                            - 필요한 득표 수 : <span name="numberOfVoteSuccess"></span>
-                                        </strong><br/>
-                                        6. 투표 결과를 발표합니다.<br/>
-                                        7. 다음 처형 투표를 진행합니다. 만약 더 이상 지명하는 플레이어가 없다면 투표가 종료됩니다.<br/>
-                                        - 처형 대상자가 없었거나 두 사람 이상인데 투표 수가 같다면 아무도 처형되지 않습니다.<br/>
-                                        - 처형 대상자 중 가장 많은 표를 받은 플레이어는 처형됩니다. 만약 악마가 처형되었고 부정한 여자가 없다면 선한 편이 승리합니다.<br/>
-                                        <strong class="font-red">
-                                            - 임프 : <span name="impPlayer"></span>
-                                        </strong><br/>
-                                        <strong class="font-red">
-                                            - 부정한 여자 : <span name="scarletWomanPlayer"></span>
-                                        </strong><br/>
-                                    </p>
-                                </div>
                             </div>
                             <div class="card-footer py-4">
                                 <div name="buttonDiv">
                                     <button type="button" class="btn btn-info btn-block"
-                                            onclick="executionModal.openNominationModal(playerList, selectedCharacterList)">
+                                            onclick="executionModal.open(playerList, selectedCharacterList)">
                                         투표 지명
                                     </button>
                                     <%--<button type="button" class="btn btn-warning btn-block"
@@ -1224,7 +1369,7 @@
                                         <div name="infoMessageAlignmentDiv" class="row text-center"></div>
                                         <hr class="mt-2 mb-2">
                                         <div name="infoMessageDirectDiv" class="row text-center">
-                                            <input class="form-control" type="text" />
+                                            <input class="form-control" type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1315,6 +1460,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/characterModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/reminderModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" %>

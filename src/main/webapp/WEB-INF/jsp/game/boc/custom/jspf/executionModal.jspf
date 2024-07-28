@@ -16,7 +16,7 @@
         diedAndVotedPlayerList: [],
         candidatePlayer: null,
         candidatePlayerListOfToday: [],
-        openNominationModal: (playerList, selectedCharacterList) => {
+        open: (playerList, selectedCharacterList) => {
             executionModal.playerList = playerList;
             executionModal.selectedCharacterList = selectedCharacterList;
 

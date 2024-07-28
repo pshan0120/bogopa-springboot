@@ -1187,7 +1187,7 @@
     },
     {
         "id": "grandmother",
-        "name": "헐머니",
+        "name": "할머니",
         "edition": "bmr",
         "team": "townsfolk",
         "firstNight": 39,
@@ -1198,7 +1198,7 @@
             "Grandchild"
         ],
         "setup": false,
-        "ability": "첫날 밤 당신의 손자인 선한 플레이어와 그의 역할을 알 수 있습니다. 악마가 손자를 죽이면 당신도 죽습니다.",
+        "ability": "첫날 밤 당신의 손주인 선한 플레이어와 그의 역할을 알 수 있습니다. 악마가 손주를 죽이면 당신도 죽습니다.",
         "image": "/images/fo/boc/icons/townsfolk/grandmother.webp"
     },
     {
@@ -1735,7 +1735,7 @@
     },
     {
         "id": "lleech",
-        "name": "거거머리",
+        "name": "꺼머리",
         "edition": "",
         "team": "demon",
         "firstNight": 15,
@@ -1747,7 +1747,7 @@
             "Poisoned"
         ],
         "setup": false,
-        "ability": "첫날 밤을 제외한 매일 밤 당신은 플레이어를 지목하고 그 참가자는 사망합니다. 당신은 시작할 때 1명의 살아있는 플레이어를 선택하는데 그는 게임이 끝날 때까지 중독 당합니다. 이 플레이어가 살아 있다면 거거머리는 죽지 않으며, 죽으면 같이 죽습니다.",
+        "ability": "첫날 밤을 제외한 매일 밤 당신은 플레이어를 지목하고 그 참가자는 사망합니다. 당신은 시작할 때 1명의 살아있는 플레이어를 선택하는데 그는 게임이 끝날 때까지 중독 당합니다. 이 플레이어가 살아 있다면 꺼머리는 죽지 않으며, 죽으면 같이 죽습니다.",
         "image": "/images/fo/boc/icons/demon/lleech.webp"
     },
     {

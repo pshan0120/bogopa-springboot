@@ -68,4 +68,17 @@ class Character {
         return "";
     }
 
+    static getAlignmentInCharacterListById(characterList, characterId) {
+        const character = characterList.find(item => this.characterIdEquals(item.id, characterId));
+        if (character.team === POSITION.TOWNS_FOLK.name || character.team === POSITION.OUTSIDER.name) {
+            return ALIGNMENT.GOOD;
+        }
+
+        if (character.team === POSITION.MINION.name || character.team === POSITION.DEMON.name) {
+            return ALIGNMENT.EVIL;
+        }
+
+        return null;
+    }
+
 }
