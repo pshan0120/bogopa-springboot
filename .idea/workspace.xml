@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="한글화">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="오타 수정">
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -303,14 +302,7 @@
       <workItem from="1721961703673" duration="1135000" />
       <workItem from="1722039764945" duration="2050000" />
       <workItem from="1722176101720" duration="7169000" />
-      <workItem from="1722266325418" duration="5561000" />
-    </task>
-    <task id="LOCAL-00107" summary="스토리텔러 -&gt; 이야기꾼">
-      <created>1715971031451</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1715971031451</updated>
+      <workItem from="1722266325418" duration="5636000" />
     </task>
     <task id="LOCAL-00108" summary="trim 추가">
       <created>1715971438269</created>
@@ -648,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722271857741</updated>
     </task>
-    <option name="localTasksCounter" value="156" />
+    <task id="LOCAL-00156" summary="오타 수정">
+      <created>1722272013208</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1722272013208</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -669,7 +668,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="독재자 1차 완성" />
     <MESSAGE value="결과 테스트 중" />
     <MESSAGE value="14인테스트" />
     <MESSAGE value="votingPlayerList 초기화 추가" />
@@ -694,7 +692,8 @@
     <MESSAGE value="상태정렬 추가" />
     <MESSAGE value="setInfoMessageTeam 수정" />
     <MESSAGE value="한글화" />
-    <option name="LAST_COMMIT_MESSAGE" value="한글화" />
+    <MESSAGE value="오타 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="오타 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
