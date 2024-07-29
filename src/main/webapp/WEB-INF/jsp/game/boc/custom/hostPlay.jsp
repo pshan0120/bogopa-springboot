@@ -498,40 +498,40 @@
             $playerStatusListDiv.empty();
 
             const $filterDiv = $playerStatusDiv.find("div[name='filterDiv']");
-            const filteredBy = $filterDiv.find("input[type='radio']:checked").val();
+            const filteredBy = $filterDiv.find("input[type='radio']:checked").val() ?? "seatNumber";
 
             let filteredPlayerList = playerList;
-            if (filteredBy) {
-                if (filteredBy === "seatNumber") {
-                    filteredPlayerList = playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
-                }
-
-                if (filteredBy === "firstNight") {
-                    filteredPlayerList = playerList
-                        .filter(player => {
-                            const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
-                            return character.firstNight > 0;
-                        })
-                        .sort((prev, next) => {
-                            const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
-                            const nextCharacter = Character.getInCharacterListById(selectedCharacterList, next.characterId);
-                            return prevCharacter.firstNight - nextCharacter.firstNight;
-                        });
-                }
-
-                if (filteredBy === "otherNight") {
-                    filteredPlayerList = playerList
-                        .filter(player => {
-                            const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
-                            return character.otherNight > 0;
-                        })
-                        .sort((prev, next) => {
-                            const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
-                            const nextCharacter = Character.getInCharacterListById(selectedCharacterList, next.characterId);
-                            return prevCharacter.otherNight - nextCharacter.otherNight;
-                        });
-                }
+            // if (filteredBy) {
+            if (filteredBy === "seatNumber") {
+                filteredPlayerList = playerList.sort((prev, next) => prev.seatNumber - next.seatNumber);
             }
+
+            if (filteredBy === "firstNight") {
+                filteredPlayerList = playerList
+                    .filter(player => {
+                        const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
+                        return character.firstNight > 0;
+                    })
+                    .sort((prev, next) => {
+                        const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
+                        const nextCharacter = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                        return prevCharacter.firstNight - nextCharacter.firstNight;
+                    });
+            }
+
+            if (filteredBy === "otherNight") {
+                filteredPlayerList = playerList
+                    .filter(player => {
+                        const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
+                        return character.otherNight > 0;
+                    })
+                    .sort((prev, next) => {
+                        const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
+                        const nextCharacter = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                        return prevCharacter.otherNight - nextCharacter.otherNight;
+                    });
+            }
+            // }
 
             const playerListHtml = filteredPlayerList
                     .reduce((prev, next) => {
@@ -580,7 +580,6 @@
                                 </td>
                             </tr>`;
 
-
                         const playedReminderListHtml = player.reminderList.reduce((prev, next) => {
                             const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
                             return prev
@@ -617,7 +616,26 @@
                                 </td>
                             </tr>`;
 
-                        return prev + statusHtml + actionListHtml;
+                        let nightReminderHtml = "";
+                        if (filteredBy === "firstNight" && character.firstNightReminder) {
+                            nightReminderHtml =
+                                `<tr class="text-center">
+                                    <td class="p-1 text-left" colspan="5">
+                                        <textarea rows="4" class="form-control">\${character.firstNightReminder}</textarea>
+                                    </td>
+                                </tr>`;
+                        }
+
+                        if (filteredBy === "otherNight" && character.otherNightReminder) {
+                            nightReminderHtml =
+                                `<tr class="text-center">
+                                    <td class="p-1 text-left" colspan="5">
+                                        <textarea rows="4" class="form-control">\${character.otherNightReminder}</textarea>
+                                    </td>
+                                </tr>`;
+                        }
+
+                        return prev + statusHtml + actionListHtml + nightReminderHtml;
                     }, `<div class="table-responsive">
                         <table class="table align-items-center table-condensed">
                             <thead class="thead-light">

@@ -2314,7 +2314,7 @@
         "firstNight": 28,
         "firstNightReminder": "The Pukka points to a player. That player is poisoned.",
         "otherNight": 26,
-        "otherNightReminder": "The Pukka points to a player. That player is poisoned. The previously poisoned player dies. ",
+        "otherNightReminder": "The Pukka points to a player. That player is poisoned. The previously poisoned player dies.",
         "reminders": [
             "Poisoned",
             "Dead"
