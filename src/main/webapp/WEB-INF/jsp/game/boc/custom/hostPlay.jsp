@@ -344,6 +344,17 @@
                 }
             });
 
+            selectedCharacterList.forEach(selected => {
+                if (selected.remindersGlobal && selected.remindersGlobal.length > 0) {
+                    selected.remindersGlobal.forEach(reminder => {
+                        playedReminderList.push({
+                            characterId: selected.id,
+                            reminder,
+                        });
+                    });
+                }
+            });
+
             $("#characterDisplayedDiv").hide();
 
             setPlayerSeatsRandomly();

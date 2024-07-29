@@ -9,9 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="상태정렬 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="한글화">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,14 +303,8 @@
       <workItem from="1721836415729" duration="4745000" />
       <workItem from="1721961703673" duration="1135000" />
       <workItem from="1722039764945" duration="2050000" />
-      <workItem from="1722176101720" duration="6847000" />
-    </task>
-    <task id="LOCAL-00105" summary="대기실 추가">
-      <created>1715962315026</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1715962315027</updated>
+      <workItem from="1722176101720" duration="7169000" />
+      <workItem from="1722266325418" duration="5403000" />
     </task>
     <task id="LOCAL-00106" summary="대기실 추가">
       <created>1715962702102</created>
@@ -647,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722182326927</updated>
     </task>
-    <option name="localTasksCounter" value="154" />
+    <task id="LOCAL-00154" summary="setInfoMessageTeam 수정">
+      <created>1722183103421</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1722183103422</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,8 +670,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="기각 진행중" />
-    <MESSAGE value="openRoleGuideModal 정리" />
     <MESSAGE value="독재자 1차 완성" />
     <MESSAGE value="결과 테스트 중" />
     <MESSAGE value="14인테스트" />
@@ -693,7 +693,9 @@
     <MESSAGE value="정보메세지 추가" />
     <MESSAGE value="설명 수정" />
     <MESSAGE value="상태정렬 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="상태정렬 추가" />
+    <MESSAGE value="setInfoMessageTeam 수정" />
+    <MESSAGE value="한글화" />
+    <option name="LAST_COMMIT_MESSAGE" value="한글화" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
