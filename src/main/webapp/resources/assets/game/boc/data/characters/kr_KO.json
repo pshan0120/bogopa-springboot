@@ -2295,7 +2295,7 @@
     },
     {
         "id": "psychopath",
-        "name": "Psychopath",
+        "name": "사이코패스",
         "edition": "",
         "team": "minion",
         "firstNight": 0,
@@ -2304,7 +2304,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "Each day, before nominations, you may publicly choose a player: they die. If executed, you only die if you lose roshambo.",
+        "ability": "매일 낮, 처형 투표 전 당신은 공개적으로 플레이어를 선택할 수 있습니다. 그는 죽습니다. 만약 당신이 처형당하면 당신을 지명한 플레이어와 가위바위보를 합니다. 당신은 그가 이길 때만 죽습니다.",
         "image": "/images/fo/boc/icons/minion/psychopath.webp"
     },
     {

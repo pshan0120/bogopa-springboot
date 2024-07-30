@@ -9,9 +9,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="밤순서 가이드 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="한글화">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/catfishing.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/devils-spoke.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/immortal-dance-party.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/kaboom.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/race-to-the-bottom.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/the-midnight-oasis.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/bad-moon-rising.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/bad-moon-rising.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/comrade-demon.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/comrade-demon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/laissez-un-faire.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/laissez-un-faire.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/lleech-of-distrust.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/lleech-of-distrust.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/no-greater-joy.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/no-greater-joy.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/over-the-river.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/over-the-river.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/sects-and-violets.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/sects-and-violets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/trouble-brewing-medium.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/trouble-brewing-medium.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/trouble-brewing.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/trouble-brewing.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,44 +74,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/messages&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/scripts",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\messages" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data" />
-      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\guide" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\game\boc" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\troubleBrewing\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\boc" />
-      <recent name="D:\dev\bogopa\src\main\resources\config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="boardgame.fo.game.presentation" />
@@ -304,14 +321,7 @@
       <workItem from="1722039764945" duration="2050000" />
       <workItem from="1722176101720" duration="7169000" />
       <workItem from="1722266325418" duration="8127000" />
-      <workItem from="1722343441139" duration="4184000" />
-    </task>
-    <task id="LOCAL-00110" summary="openMiniGameModal 추가">
-      <created>1716485518647</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1716485518647</updated>
+      <workItem from="1722343441139" duration="7197000" />
     </task>
     <task id="LOCAL-00111" summary="gfn_deepCopyByJSON 추가">
       <created>1716830321909</created>
@@ -649,7 +659,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722274394079</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="한글화">
+      <created>1722350480318</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1722350480318</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -692,10 +709,10 @@
     <MESSAGE value="설명 수정" />
     <MESSAGE value="상태정렬 추가" />
     <MESSAGE value="setInfoMessageTeam 수정" />
-    <MESSAGE value="한글화" />
     <MESSAGE value="오타 수정" />
     <MESSAGE value="밤순서 가이드 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="밤순서 가이드 추가" />
+    <MESSAGE value="한글화" />
+    <option name="LAST_COMMIT_MESSAGE" value="한글화" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

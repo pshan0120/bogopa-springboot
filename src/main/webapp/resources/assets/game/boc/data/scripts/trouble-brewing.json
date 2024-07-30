@@ -1,1 +1,29 @@
-[{"id":"_meta","author":"official","name":"사건 발생"},"chef","empath","fortune_teller","investigator","librarian","mayor","monk","ravenkeeper","slayer","soldier","undertaker","virgin","washerwoman","butler","drunk","recluse","saint","baron","poisoner","scarlet_woman","spy","imp"]
+[
+    {
+        "id": "_meta",
+        "author": "official",
+        "name": "사건 발생"
+    },
+    "chef",
+    "empath",
+    "fortune_teller",
+    "investigator",
+    "librarian",
+    "mayor",
+    "monk",
+    "ravenkeeper",
+    "slayer",
+    "soldier",
+    "undertaker",
+    "virgin",
+    "washerwoman",
+    "butler",
+    "drunk",
+    "recluse",
+    "saint",
+    "baron",
+    "poisoner",
+    "scarlet_woman",
+    "spy",
+    "imp"
+]

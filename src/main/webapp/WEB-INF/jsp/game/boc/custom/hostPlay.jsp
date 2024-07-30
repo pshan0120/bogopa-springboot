@@ -112,10 +112,18 @@
 
         const renderEditionSelect = editionList => {
             const $editionDiv = $("#editionDiv");
-            const optionsHtml = editionList.reduce((prev, next) => {
-                return prev + `<option value="\${next.id}">\${next.name}</option>`;
+            const optionsHtml = editionList
+                .sort((prev, next) => calculateEditionIndex(prev.type) - calculateEditionIndex(next.type))
+                .reduce((prev, next) => {
+                const typeTag = next.type === "full" ? "F" : "T";
+                return prev + `<option value="\${next.id}">[\${typeTag}] \${next.name}</option>`;
             }, `<option value="">선택</option>`);
             $editionDiv.find("select").append(optionsHtml);
+        }
+
+        const calculateEditionIndex = type => {
+            if (type === "teensyville") return 1;
+            return 0;
         }
 
         const selectEdition = async () => {

@@ -1,1 +1,18 @@
-[{"id":"luf","author":"","name":"한 번 해보자구"},"balloonist","savant","amnesiac","fisherman","artist","cannibal","mutant","lunatic","widow","goblin","leviathan"]
+[
+    {
+        "id": "luf",
+        "author": "",
+        "name": "한 번 해보자구"
+    },
+    "balloonist",
+    "savant",
+    "amnesiac",
+    "fisherman",
+    "artist",
+    "cannibal",
+    "mutant",
+    "lunatic",
+    "widow",
+    "goblin",
+    "leviathan"
+]

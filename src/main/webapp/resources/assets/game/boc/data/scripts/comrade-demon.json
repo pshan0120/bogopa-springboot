@@ -1,1 +1,22 @@
-[{"id":"cd","author":"Zets","name":"악마 깐부"},"noble","investigator","empath","dreamer","nightwatchman","fisherman","moonchild","barber","lunatic","spy","marionette","pukka","lil_monsta","revolutionary","sentinel"]
+[
+    {
+        "id": "cd",
+        "author": "Zets",
+        "name": "악마 깐부"
+    },
+    "noble",
+    "investigator",
+    "empath",
+    "dreamer",
+    "nightwatchman",
+    "fisherman",
+    "moonchild",
+    "barber",
+    "lunatic",
+    "spy",
+    "marionette",
+    "pukka",
+    "lil_monsta",
+    "revolutionary",
+    "sentinel"
+]

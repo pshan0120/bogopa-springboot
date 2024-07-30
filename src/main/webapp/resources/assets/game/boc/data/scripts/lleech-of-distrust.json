@@ -1,1 +1,19 @@
-[{"id":"lod","author":"OJ","name":"믿을 수 없는 꺼머리"},"pixie","undertaker","exorcist","fisherman","slayer","juggler","drunk","lunatic","devils_advocate","marionette","lleech","sentinel"]
+[
+    {
+        "id": "lod",
+        "author": "OJ",
+        "name": "믿을 수 없는 꺼머리"
+    },
+    "pixie",
+    "undertaker",
+    "exorcist",
+    "fisherman",
+    "slayer",
+    "juggler",
+    "drunk",
+    "lunatic",
+    "devils_advocate",
+    "marionette",
+    "lleech",
+    "sentinel"
+]

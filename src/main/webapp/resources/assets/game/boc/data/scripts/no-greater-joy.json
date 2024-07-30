@@ -1,1 +1,18 @@
-[{"id":"ngj","author":"","name":"이보다 기쁠 수 없다"},"clockmaker","investigator","empath","chambermaid","artist","sage","drunk","klutz","scarlet_woman","baron","imp"]
+[
+    {
+        "id": "ngj",
+        "author": "",
+        "name": "이보다 기쁠 수 없다"
+    },
+    "clockmaker",
+    "investigator",
+    "empath",
+    "chambermaid",
+    "artist",
+    "sage",
+    "drunk",
+    "klutz",
+    "scarlet_woman",
+    "baron",
+    "imp"
+]

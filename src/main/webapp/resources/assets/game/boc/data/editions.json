@@ -2,46 +2,91 @@
     {
         "id": "tb",
         "name": "Trouble Brewing",
+        "type": "full",
         "jsonFileName": "trouble-brewing.json"
     },
     {
         "id": "snv",
         "name": "Sects and Violets",
+        "type": "full",
         "jsonFileName": "sects-and-violets.json"
     },
     {
         "id": "bmr",
         "name": "Bad Moon Rising",
+        "type": "full",
         "jsonFileName": "bad-moon-rising.json"
     },
     {
         "id": "tbm",
         "name": "Trouble Brewing Medium",
+        "type": "full",
         "jsonFileName": "trouble-brewing-medium.json"
     },
     {
         "id": "ngj",
         "name": "No Greater Joy",
+        "type": "teensyville",
         "jsonFileName": "no-greater-joy.json"
     },
     {
         "id": "lod",
         "name": "Lleech Of Distrust",
+        "type": "teensyville",
         "jsonFileName": "lleech-of-distrust.json"
     },
     {
         "id": "cd",
         "name": "Comrade Demon",
+        "type": "teensyville",
         "jsonFileName": "comrade-demon.json"
     },
     {
         "id": "otr",
         "name": "Over the River",
+        "type": "teensyville",
         "jsonFileName": "over-the-river.json"
     },
     {
         "id": "luf",
         "name": "LAISSEZ UN FAIRE",
+        "type": "teensyville",
         "jsonFileName": "laissez-un-faire.json"
+    },
+    {
+        "id": "catfishing",
+        "name": "Catfishing",
+        "type": "full",
+        "jsonFileName": "catfishing.json"
+    },
+    {
+        "id": "devils-spoke",
+        "name": "Devil's spoke",
+        "type": "full",
+        "jsonFileName": "devils-spoke.json"
+    },
+    {
+        "id": "immortal-dance-party",
+        "name": "Immortal Dance Party",
+        "type": "full",
+        "jsonFileName": "immortal-dance-party.json"
+    },
+    {
+        "id": "kaboom",
+        "name": "kaboom",
+        "type": "full",
+        "jsonFileName": "kaboom.json"
+    },
+    {
+        "id": "race-to-the-bottom",
+        "name": "Race to the Bottom",
+        "type": "teensyville",
+        "jsonFileName": "race-to-the-bottom.json"
+    },
+    {
+        "id": "the-midnight-oasis",
+        "name": "The Midnight Oasis",
+        "type": "full",
+        "jsonFileName": "the-midnight-oasis.json"
     }
 ]

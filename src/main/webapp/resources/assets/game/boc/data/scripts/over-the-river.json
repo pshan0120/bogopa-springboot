@@ -1,1 +1,18 @@
-[{"id":"otr","name":"그 강 너머","author":"Andrew Nathenson"},"grandmother","clockmaker","innkeeper","snake_charmer","professor","slayer","lunatic","recluse","godfather","spy","imp"]
+[
+    {
+        "id": "otr",
+        "name": "그 강 너머",
+        "author": "Andrew Nathenson"
+    },
+    "grandmother",
+    "clockmaker",
+    "innkeeper",
+    "snake_charmer",
+    "professor",
+    "slayer",
+    "lunatic",
+    "recluse",
+    "godfather",
+    "spy",
+    "imp"
+]
