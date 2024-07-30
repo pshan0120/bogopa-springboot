@@ -790,7 +790,7 @@
     },
     {
         "id": "engineer",
-        "name": "Engineer",
+        "name": "엔지니어",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 13,
@@ -801,7 +801,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "Once per game, at night, choose which Minions or which Demon is in play.",
+        "ability": "게임 중 1번, 밤에 어떤 하수인 또는 어떤 악마를 플레이에 참여시킬지 선택합니다. 둘 다 선택할 수는 없으며, 만약 선택한 역할이 이미 플레이중이라면 아무 일도 일어나지 않습니다.",
         "image": "/images/fo/boc/icons/townsfolk/engineer.webp"
     },
     {
@@ -1771,7 +1771,7 @@
     },
     {
         "id": "lycanthrope",
-        "name": "Lycanthrope",
+        "name": "늑대인간",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 0,
@@ -1782,7 +1782,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "Each night*, choose a living player: if good, they die, but they are the only player that can die tonight.",
+        "ability": "첫날 밤을 제외한 매일 밤, 살아있는 플레이어를 선택합니다. 만약 그가 선한 편이라면 죽지만, 오늘 밤 죽는 플레이어는 오직 그 뿐입니다.",
         "image": "/images/fo/boc/icons/townsfolk/lycanthrope.webp"
     },
     {
@@ -1882,7 +1882,7 @@
     },
     {
         "id": "mezepheles",
-        "name": "Mezepheles",
+        "name": "메제펠레스",
         "edition": "",
         "team": "minion",
         "firstNight": 27,
@@ -1894,7 +1894,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night.",
+        "ability": "당신은 시작할 때 비밀 단어를 알게 됩니다. 첫 번째로 그 단어를 말한 선한 플레이어는 그날 밤 악한 편이 됩니다.",
         "image": "/images/fo/boc/icons/minion/mezepheles.webp"
     },
     {
@@ -2931,7 +2931,7 @@
             "Minion nominated"
         ],
         "setup": false,
-        "ability": "첫날 밤을 제외한 매일 밤, 오늘 하수인이 지명되었었는지 알게 됩니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 오늘 낮에 하수인이 지명되었었는지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/towncrier.webp"
     },
     {
