@@ -304,14 +304,7 @@
       <workItem from="1722039764945" duration="2050000" />
       <workItem from="1722176101720" duration="7169000" />
       <workItem from="1722266325418" duration="8127000" />
-      <workItem from="1722343441139" duration="8359000" />
-    </task>
-    <task id="LOCAL-00112" summary="게임설명 모달 추가">
-      <created>1716831048355</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1716831048355</updated>
+      <workItem from="1722343441139" duration="8850000" />
     </task>
     <task id="LOCAL-00113" summary="Dictator 개발중">
       <created>1716909745739</created>
@@ -649,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722353523934</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="스크립트 추가">
+      <created>1722354658890</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1722354658890</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

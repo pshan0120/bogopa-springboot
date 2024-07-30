@@ -872,7 +872,7 @@
     },
     {
         "id": "farmer",
-        "name": "Farmer",
+        "name": "농부",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 0,
@@ -881,7 +881,7 @@
         "otherNightReminder": "If a Farmer died tonight, choose another good player and make them the Farmer. Wake this player, show them the 'You are' card and the Farmer character token.",
         "reminders": [],
         "setup": false,
-        "ability": "If you die at night, an alive good player becomes a Farmer.",
+        "ability": "만약 당신이 밤에 죽으면, 살아있는 선한 플레이어는 농부가 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/farmer.webp"
     },
     {
@@ -2704,7 +2704,7 @@
     },
     {
         "id": "snitch",
-        "name": "Snitch",
+        "name": "고자질쟁이",
         "edition": "",
         "team": "outsider",
         "firstNight": 6,
@@ -2713,7 +2713,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "Minions start knowing 3 not-in-play characters.",
+        "ability": "하수인들은 시작할 때 플레이에 참여하지 않은 3가지의 역할을 알게 됩니다.",
         "image": "/images/fo/boc/icons/outsider/snitch.webp"
     },
     {
@@ -3189,7 +3189,7 @@
     },
     {
         "id": "yaggababble",
-        "name": "Yaggababble",
+        "name": "야가바블",
         "edition": "",
         "team": "demon",
         "firstNight": 2,
@@ -3200,7 +3200,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "You start knowing a secret phrase. For each time you said it publicly today, a player might die.",
+        "ability": "당신은 시작할 때 비밀 문구를 알게 됩니다. 오늘 그 문구를 공개적으로 말할 때마다 플레이어가 죽을 수 있습니다. 여러 번 말하면 여러 플레이어가 죽을 수 있습니다.",
         "image": "/images/fo/boc/icons/demon/yaggababble.webp"
     },
     {
