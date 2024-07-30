@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="오타 수정">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="밤순서 가이드 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -304,14 +303,8 @@
       <workItem from="1721961703673" duration="1135000" />
       <workItem from="1722039764945" duration="2050000" />
       <workItem from="1722176101720" duration="7169000" />
-      <workItem from="1722266325418" duration="7793000" />
-    </task>
-    <task id="LOCAL-00109" summary="blindBiddingResultList 오류 수정">
-      <created>1716088657700</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1716088657700</updated>
+      <workItem from="1722266325418" duration="8127000" />
+      <workItem from="1722343441139" duration="4184000" />
     </task>
     <task id="LOCAL-00110" summary="openMiniGameModal 추가">
       <created>1716485518647</created>
@@ -649,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722272078962</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="밤순서 가이드 추가">
+      <created>1722274394079</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1722274394079</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +670,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="결과 테스트 중" />
     <MESSAGE value="14인테스트" />
     <MESSAGE value="votingPlayerList 초기화 추가" />
     <MESSAGE value="역할 지정 추가" />
@@ -695,7 +694,8 @@
     <MESSAGE value="setInfoMessageTeam 수정" />
     <MESSAGE value="한글화" />
     <MESSAGE value="오타 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="오타 수정" />
+    <MESSAGE value="밤순서 가이드 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="밤순서 가이드 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

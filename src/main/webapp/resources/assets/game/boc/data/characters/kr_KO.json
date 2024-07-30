@@ -418,7 +418,7 @@
             "Master"
         ],
         "setup": false,
-        "ability": "매일 밤, 다른 플레이어 1명을 지목합니다. 그리고 그 날은 당신이 지정한 플레이어가 투표할 때만 투표할 수 있습니다.",
+        "ability": "매일 밤, 다른 플레이어 1명을 선택합니다. 그리고 그 날은 당신이 지정한 플레이어가 투표할 때만 투표할 수 있습니다.",
         "image": "/images/fo/boc/icons/outsider/butler.webp"
     },
     {
@@ -440,7 +440,7 @@
     },
     {
         "id": "cerenovus",
-        "name": "Cerenovus",
+        "name": "세레노부스",
         "edition": "snv",
         "team": "minion",
         "firstNight": 25,
@@ -451,7 +451,7 @@
             "Mad"
         ],
         "setup": false,
-        "ability": "Each night, choose a player & a good character: they are \"mad\" they are this character tomorrow, or might be executed.",
+        "ability": "매일 밤, 플레이어와 좋은 역할 하나를 선택합니다. 그는 내일 그 역할이라는 '광기'에 빠지게 되며, 그렇게 하지 않으면 처형될 수 있습니다.",
         "image": "/images/fo/boc/icons/minion/cerenovus.webp"
     },
     {
@@ -806,7 +806,7 @@
     },
     {
         "id": "evil_twin",
-        "name": "Evil Twin",
+        "name": "사악한 쌍둥이",
         "edition": "snv",
         "team": "minion",
         "firstNight": 23,
@@ -817,7 +817,7 @@
             "Twin"
         ],
         "setup": false,
-        "ability": "You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live.",
+        "ability": "당신과 상대 플레이어는 서로 알고 있습니다. 만약 그 선한 플레이어가 처형되면 악이 승리합니다. 둘 다 살아 있는 한 선한 편은 이길 수 없습니다.",
         "image": "/images/fo/boc/icons/minion/eviltwin.webp"
     },
     {
@@ -838,7 +838,7 @@
     },
     {
         "id": "fang_gu",
-        "name": "Fang Gu",
+        "name": "팡구",
         "edition": "snv",
         "team": "demon",
         "firstNight": 0,
@@ -851,6 +851,7 @@
         ],
         "setup": true,
         "ability": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
+        "ability": "첫날 밤을 제외한 매일 밤, 플레이어를 선택합니다. 그는 죽습니다. 당신이 선택한 첫 번째 이방인은 사악한 팡구가 되고 대신 당신이 죽습니다. 이 효과는 게임 중 한 번만 일어날 수 있습니다. [+1 이방인]",
         "image": "/images/fo/boc/icons/demon/fanggu.webp"
     },
     {
@@ -968,7 +969,7 @@
     },
     {
         "id": "flowergirl",
-        "name": "Flowergirl",
+        "name": "꽃파는 소녀",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 0,
@@ -980,7 +981,7 @@
             "Demon not voted"
         ],
         "setup": false,
-        "ability": "Each night*, you learn if a Demon voted today.",
+        "ability": "첫날 밤을 제외한 매일 밤, 오늘 악마가 투표했는지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/flowergirl.webp"
     },
     {
@@ -1414,7 +1415,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "첫날 밤을 제외한 매일 밤, 당신은 플레이어를 선택하고 그 참가자는 사망합니다. 만약 당신이 자신을 지목했다면 하수인들 중 1명이 임프가 됩니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 당신은 플레이어를 선택하고 그 참가자는 사망합니다. 만약 당신이 자신을 선택했다면 하수인들 중 1명이 임프가 됩니다.",
         "image": "/images/fo/boc/icons/demon/imp.webp"
     },
     {
@@ -1689,7 +1690,7 @@
             "Good player executed"
         ],
         "setup": false,
-        "ability": "선한 플레이어가 2명 이상 처형(처녀 지목, 광기로 인한 처형 등도 포함)된다면 승리합니다. 모든 플레이어는 당신이 참여중이라는 것을 알게 됩니다. 5일차 이후 악이 승리합니다. 레비아탄은 사람을 죽이지 않습니다.",
+        "ability": "선한 플레이어가 2명 이상 처형(처녀 지명, 광기로 인한 처형 등도 포함)된다면 승리합니다. 모든 플레이어는 당신이 참여중이라는 것을 알게 됩니다. 5일차 이후 악이 승리합니다. 레비아탄은 사람을 죽이지 않습니다.",
         "image": "/images/fo/boc/icons/demon/leviathan.webp"
     },
     {
@@ -1837,7 +1838,7 @@
     },
     {
         "id": "mathematician",
-        "name": "Mathematician",
+        "name": "수학자",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 50,
@@ -1848,7 +1849,7 @@
             "Abnormal"
         ],
         "setup": false,
-        "ability": "Each night, you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.",
+        "ability": "매일 밤, 얼마나 많은 플레이어의 능력이 다른 플레이어의 능력으로 인해 비정상적으로 작동되었는지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/mathematician.webp"
     },
     {
@@ -2025,7 +2026,7 @@
     },
     {
         "id": "no_dashii",
-        "name": "No Dashii",
+        "name": "노 다시",
         "edition": "snv",
         "team": "demon",
         "firstNight": 0,
@@ -2037,7 +2038,7 @@
             "Poisoned"
         ],
         "setup": false,
-        "ability": "Each night*, choose a player: they die. Your 2 Townsfolk neighbours are poisoned.",
+        "ability": "첫날 밤을 제외한 매일 밤, 플레이어를 선택합니다. 그는 죽습니다. 당신의 가장 가까운 마을주민 이웃들은 그들의 생사와 상관없이 중독됩니다.",
         "image": "/images/fo/boc/icons/demon/nodashii.webp"
     },
     {
@@ -2074,7 +2075,7 @@
     },
     {
         "id": "oracle",
-        "name": "Oracle",
+        "name": "예언자",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 0,
@@ -2083,7 +2084,7 @@
         "otherNightReminder": "Show the hand signal for the number (0, 1, 2, etc.) of dead evil players.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night*, you learn how many dead players are evil.",
+        "ability": "첫날 밤을 제외한 매일 밤, 죽은 플레이어 중 몇 명이 악한 편인지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/oracle.webp"
     },
     {
@@ -2134,7 +2135,7 @@
     },
     {
         "id": "philosopher",
-        "name": "Philosopher",
+        "name": "철학자",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 2,
@@ -2146,12 +2147,12 @@
             "Is the Philosopher"
         ],
         "setup": false,
-        "ability": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
+        "ability": "게임 중 한 번, 밤에 선한 역할을 선택하면 그 능력을 얻습니다. 만약 그 역할이 플레이에 참가하고 있다면, 그들은 취하게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/philosopher.webp"
     },
     {
         "id": "pithag",
-        "name": "Pit-Hag",
+        "name": "마귀할멈",
         "edition": "snv",
         "team": "minion",
         "firstNight": 0,
@@ -2160,7 +2161,7 @@
         "otherNightReminder": "The Pit-Hag points to a player and a character on the sheet. If this character is not in play, wake that player and show them the 'You are' card and the relevant character token. If the character is in play, nothing happens.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night*, choose a player & a character they become (if not-in-play). If a Demon is made, deaths tonight are arbitrary.",
+        "ability": "첫날 밤을 제외한 매일 밤, 플레이어와 그가 될 역할을 선택합니다. 만약 그 역할이 참여하지 않고 있다면 그는 변신합니다. 만약 이 방식으로 악마가 만들어지면 그 밤의 죽음은 임의의 발생할 수 있습니다.",
         "image": "/images/fo/boc/icons/minion/pithag.webp"
     },
     {
@@ -2226,7 +2227,7 @@
             "Poisoned"
         ],
         "setup": false,
-        "ability": "매일 밤 당신은 1명의 플레이어를 지목합니다. 그 플레이어는 오늘 밤부터 내일 해 질 녘까지 중독 상태가 됩니다.",
+        "ability": "매일 밤 당신은 1명의 플레이어를 선택합니다. 그 플레이어는 오늘 밤부터 내일 해 질 녘까지 중독 상태가 됩니다.",
         "image": "/images/fo/boc/icons/minion/poisoner.webp"
     },
     {
@@ -2547,7 +2548,7 @@
     },
     {
         "id": "seamstress",
-        "name": "Seamstress",
+        "name": "재봉사",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 42,
@@ -2558,7 +2559,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
+        "ability": "게임 중 한 번, 밤에 자신을 제외한 2명의 플레이어를 선택합니다. 당신은 그들이 같은 편인지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/seamstress.webp"
     },
     {
@@ -2682,7 +2683,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "게임 중 한 번, 낮에 공개적으로 플레이어를 지목합니다. 악마를 제대로 지목했다면 그 악마는 사망합니다.",
+        "ability": "게임 중 한 번, 낮에 공개적으로 플레이어를 선택합니다. 악마를 제대로 선택했다면 그 악마는 사망합니다.",
         "image": "/images/fo/boc/icons/townsfolk/slayer.webp"
     },
     {
@@ -2806,7 +2807,7 @@
     },
     {
         "id": "sweetheart",
-        "name": "Sweetheart",
+        "name": "연인",
         "edition": "snv",
         "team": "outsider",
         "firstNight": 0,
@@ -2817,7 +2818,7 @@
             "Drunk"
         ],
         "setup": false,
-        "ability": "When you die, 1 player is drunk from now on.",
+        "ability": "당신이 죽는 순간부터, 플레이어 중 1명은 게임이 끝날 때까지 취하게 됩니다.",
         "image": "/images/fo/boc/icons/outsider/sweetheart.webp"
     },
     {
@@ -2918,7 +2919,7 @@
     },
     {
         "id": "town_crier",
-        "name": "Town Crier",
+        "name": "포고꾼",
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 0,
@@ -2930,7 +2931,7 @@
             "Minion nominated"
         ],
         "setup": false,
-        "ability": "Each night*, you learn if a Minion nominated today.",
+        "ability": "첫날 밤을 제외한 매일 밤, 오늘 하수인이 지명되었었는지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/towncrier.webp"
     },
     {
@@ -2965,7 +2966,7 @@
     },
     {
         "id": "vigormortis",
-        "name": "Vigormortis",
+        "name": "비고모르티스",
         "edition": "snv",
         "team": "demon",
         "firstNight": 0,
@@ -2978,7 +2979,7 @@
             "Poisoned"
         ],
         "setup": true,
-        "ability": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbour. [−1 Outsider]",
+        "ability": "첫날 밤을 제외한 매일 밤, 플레이어를 선택합니다. 그는 죽습니다. 당신이 죽인 하수인은 능력을 유지하며, 그의 가장 가까운 마을주민 이웃 중 1명을 독살합니다. [−1 이방인]",
         "image": "/images/fo/boc/icons/demon/vigormortis.webp"
     },
     {
@@ -3029,7 +3030,7 @@
     },
     {
         "id": "vortox",
-        "name": "Vortox",
+        "name": "소용돌이",
         "edition": "snv",
         "team": "demon",
         "firstNight": 0,
@@ -3040,7 +3041,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "Each night*, choose a player: they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins.",
+        "ability": "첫날 밤을 제외한 매일 밤, 플레이어를 선택합니다. 그는 죽습니다. 마을주민들은 능력으로 정보를 얻을 때 거짓(진실의 반대)으로 받게 됩니다. 만약 낮에 아무도 처형되지 않으면, 악이 승리합니다.",
         "image": "/images/fo/boc/icons/demon/vortox.webp"
     },
     {
@@ -3095,7 +3096,7 @@
     },
     {
         "id": "witch",
-        "name": "Witch",
+        "name": "마녀",
         "edition": "snv",
         "team": "minion",
         "firstNight": 24,
@@ -3106,7 +3107,7 @@
             "Cursed"
         ],
         "setup": false,
-        "ability": "Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability.",
+        "ability": "매일 밤 플레이어를 선택합니다. 만약 그가 내일 지명한다면 죽습니다. 만약 3명의 플레이어만 살아 있다면 이 능력은 사라집니다.",
         "image": "/images/fo/boc/icons/minion/witch.webp"
     },
     {
