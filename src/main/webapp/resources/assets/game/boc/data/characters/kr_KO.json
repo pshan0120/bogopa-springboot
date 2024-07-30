@@ -17,7 +17,7 @@
     },
     {
         "id": "alchemist",
-        "name": "Alchemist",
+        "name": "연금술사",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 3,
@@ -29,12 +29,12 @@
             "Is the Alchemist"
         ],
         "setup": false,
-        "ability": "You have a not-in-play Minion ability.",
+        "ability": "당신은 참여하고 있지 않은 하수인의 능력을 가지고 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/alchemist.webp"
     },
     {
         "id": "alhadikhia",
-        "name": "Al-Hadikhia",
+        "name": "알-하디키아",
         "edition": "",
         "team": "demon",
         "firstNight": 0,
@@ -49,7 +49,7 @@
             "Chose life"
         ],
         "setup": false,
-        "ability": "Each night*, choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die.",
+        "ability": "첫날 밤을 제외한 매일 밤, 3명의 플레이어를 차례로 선택합니다(이 플레이어들은 공개됩니다.). 그 플레이어들은 선택된 순서대로 살 것인지 죽을 것인지 결정합니다. 만약 모두 살기를 원했다면 모두 죽습니다.",
         "image": "/images/fo/boc/icons/demon/alhadikhia.webp"
     },
     {
@@ -125,7 +125,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "게임 중 단 한번, 이야기꾼에게 비밀리에 '예' 또는 '아니오'로 답변할 수 있는 질문을 할 수 있습니다. 이야기꾼은 정직하게 대답합니다.",
+        "ability": "게임 중 1번, 이야기꾼에게 비밀리에 '예' 또는 '아니오'로 답변할 수 있는 질문을 할 수 있습니다. 이야기꾼은 정직하게 대답합니다.",
         "image": "/images/fo/boc/icons/townsfolk/artist.webp"
     },
     {
@@ -142,7 +142,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "게임 중 단 한번, 밤에 1명의 플레이어를 선택합니다. 그는 무조건 죽습니다.",
+        "ability": "게임 중 1번, 밤에 1명의 플레이어를 선택합니다. 그는 무조건 죽습니다.",
         "image": "/images/fo/boc/icons/minion/assassin.webp"
     },
     {
@@ -556,7 +556,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "게임 중 단 한번, 역할을 선택합니다. 그 역할은 있다면 그 중 1명은 3박 3일동안 술에 취하게 됩니다.",
+        "ability": "게임 중 1번, 역할을 선택합니다. 그 역할은 있다면 그 중 1명은 3박 3일동안 술에 취하게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/courtier.webp"
     },
     {
@@ -592,7 +592,7 @@
     },
     {
         "id": "damsel",
-        "name": "Damsel",
+        "name": "아씨",
         "edition": "",
         "team": "outsider",
         "firstNight": 31,
@@ -603,7 +603,7 @@
             "Guess used"
         ],
         "setup": false,
-        "ability": "All Minions know you are in play. If a Minion publicly guesses you (once), your team loses.",
+        "ability": "모든 하수인은 당신이 플레이중이라는 것을 알고 있습니다. 게임 중 1번, 하수인이 공개적으로 당신을 추측해서 맞춘다면, 당신의 팀은 패배합니다.",
         "image": "/images/fo/boc/icons/outsider/damsel.webp"
     },
     {
@@ -964,7 +964,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "게임 중 단 한번, 이야기꾼에게 비밀리에 접근하여 승리에 도움이 되는 조언을 구할 수 있습니다.",
+        "ability": "게임 중 1번, 이야기꾼에게 비밀리에 접근하여 승리에 도움이 되는 조언을 구할 수 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/fisherman.webp"
     },
     {
@@ -1388,7 +1388,7 @@
     },
     {
         "id": "huntsman",
-        "name": "Huntsman",
+        "name": "수렵가",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 30,
@@ -1399,7 +1399,7 @@
             "No ability"
         ],
         "setup": true,
-        "ability": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
+        "ability": "게임 중 1번, 밤에 살아있는 플레이어를 선택합니다. 만약 아씨였다면 그는 플레이에 참여하고 있지 않는 마을주민이 됩니다. [+ 아씨]",
         "image": "/images/fo/boc/icons/townsfolk/huntsman.webp"
     },
     {
@@ -1957,7 +1957,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "당신은 스스로가 이방인인 것에 대해 '광기'(사람들에게 무언가를 납득시키려고 노력하는 것)하면 언제든 이야기꾼에 의해 처형될 수 있습니다.",
+        "ability": "당신은 스스로가 이방인이 아니라는 것에 대해 '광기'(사람들에게 무언가를 납득시키려고 노력하는 것)하지 않으면, 언제든 이야기꾼에 의해 처형될 수 있습니다.",
         "image": "/images/fo/boc/icons/outsider/mutant.webp"
     },
     {
@@ -2161,7 +2161,7 @@
         "otherNightReminder": "The Pit-Hag points to a player and a character on the sheet. If this character is not in play, wake that player and show them the 'You are' card and the relevant character token. If the character is in play, nothing happens.",
         "reminders": [],
         "setup": false,
-        "ability": "첫날 밤을 제외한 매일 밤, 플레이어와 그가 될 역할을 선택합니다. 만약 그 역할이 참여하지 않고 있다면 그는 변신합니다. 만약 이 방식으로 악마가 만들어지면 그 밤의 죽음은 임의의 발생할 수 있습니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 플레이어와 그가 될 역할을 선택합니다. 만약 그 역할이 참여하지 않고 있다면 그는 변신합니다. 만약 이 방식으로 악마가 만들어지면 그 밤의 죽음은 임의적으로 발생합니다.",
         "image": "/images/fo/boc/icons/minion/pithag.webp"
     },
     {
