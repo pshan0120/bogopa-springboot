@@ -794,10 +794,11 @@
                 const fontClass = Character.calculateCharacterNameClass(next.team);
                 const played = playedCharacterList.some(played => Character.characterIdEquals(played.characterId, next.id));
                 const playedClass = played ? "font-weight-bold" : "";
+                const playedIcon = played ? "v" : "";
 
                 return prev +
                     `<div class="col-3 text-center pt-2 \${fontClass}" name="\${next.id}">
-                        <small class="\${fontClass} \${playedClass}">\${next.name}</small>
+                        <small class="\${fontClass} \${playedClass}">\${playedIcon} \${next.name}</small>
                         <img src="\${next.image}" class="img-responsive img-rounded m-auto"
                             onclick="setInfoMessageCharacter('\${next.id}')" />
                     </div>`;
@@ -922,7 +923,7 @@
             const html =
                 `<div class="col-4 pt-2" name="\${name}" style="margin: auto;"
                     onclick="removeInfoMessageTeam('\${name}')">
-                    <span class="text-center display-4">\${title}(\${name})</span>
+                    <span class="text-center display-4">\${title}</span>
                 </div>`;
             $infoMessageTeamDiv.append(html);
         }
@@ -942,7 +943,7 @@
             const html =
                 `<div class="col-4 pt-2" name="\${name}" style="margin: auto;"
                     onclick="removeInfoMessageAlignment('\${name}')">
-                    <span class="text-center display-4">\${title}(\${name})</span>
+                    <span class="text-center display-4">\${title}</span>
                 </div>`;
             $infoMessageAlignmentDiv.append(html);
         }
@@ -1134,9 +1135,22 @@
         const openInfoMessageModal = () => {
             const $infoMessageDiv = $("#infoMessageDiv");
             const $infoMessageResultDiv = $infoMessageDiv.find("div[name='infoMessageResultDiv']");
-            const $infoMessageDirectDiv = $infoMessageResultDiv.find("div[name='infoMessageDirectDiv']");
 
-            const html = $infoMessageResultDiv.html() + $infoMessageDirectDiv.find("input").val();
+            const $infoMessageTextDiv = $infoMessageResultDiv.find("div[name='infoMessageTextDiv']");
+            const $infoMessageCharacterDiv = $infoMessageResultDiv.find("div[name='infoMessageCharacterDiv']");
+            const $infoMessagePlayerDiv = $infoMessageResultDiv.find("div[name='infoMessagePlayerDiv']");
+            const $infoMessageTeamDiv = $infoMessageResultDiv.find("div[name='infoMessageTeamDiv']");
+            const $infoMessageAlignmentDiv = $infoMessageResultDiv.find("div[name='infoMessageAlignmentDiv']");
+            const $infoMessageDirectDiv = $infoMessageResultDiv.find("div[name='infoMessageDirectDiv']");
+            const infoMessageDirect = $infoMessageDirectDiv.find("input").val();
+
+            const html = $infoMessageTextDiv.html()
+                + $infoMessageCharacterDiv.html()
+                + $infoMessagePlayerDiv.html()
+                + $infoMessageTeamDiv.html()
+                + $infoMessageAlignmentDiv.html()
+                + (infoMessageDirect ? `<br/><span class="text-center display-4">\${infoMessageDirect}</span>` : ``);
+
             openMessageModal(html);
         }
 
@@ -1486,15 +1500,15 @@
                                     <div name="infoMessageResultDiv">
                                         <div name="infoMessageTextDiv" class="text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessageCharacterDiv" class="row text-center"></div>
+                                        <div name="infoMessageCharacterDiv" class="text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessagePlayerDiv" class="row text-center"></div>
+                                        <div name="infoMessagePlayerDiv" class="text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessageTeamDiv" class="row text-center"></div>
+                                        <div name="infoMessageTeamDiv" class="text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessageAlignmentDiv" class="row text-center"></div>
+                                        <div name="infoMessageAlignmentDiv" class="text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessageDirectDiv" class="row text-center">
+                                        <div name="infoMessageDirectDiv" class="text-center">
                                             <input class="form-control" type="text"/>
                                         </div>
                                     </div>
@@ -1565,9 +1579,21 @@
                 <div class="row">
                     <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
                         <div class="card shadow">
+                            <div class="card-header bg-white border-0">
+                                <h2>
+                                    Pocket Grimoire
+                                    <a data-toggle="collapse" href="#pocketGrimoireBodyDiv" role="button"
+                                       aria-expanded="false"
+                                       aria-controls="pocketGrimoireDiv">
+                                        열기/닫기
+                                    </a>
+                                </h2>
+                            </div>
                             <div class="card-body p-0">
-                                <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/"
-                                        height="700" width="100%"></iframe>
+                                <div class="collapse" id="pocketGrimoireBodyDiv">
+                                    <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/"
+                                            height="700" width="100%"></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>

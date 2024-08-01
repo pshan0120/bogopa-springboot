@@ -88,5 +88,11 @@
         "name": "The Midnight Oasis",
         "type": "full",
         "jsonFileName": "the-midnight-oasis.json"
+    },
+    {
+        "id": "strange-and-uncanny",
+        "name": "Strange and uncanny phenomenon",
+        "type": "full",
+        "jsonFileName": "strange-and-uncanny.json"
     }
 ]
