@@ -18,6 +18,7 @@
         let selectedCharacterList = [];
         let playedCharacterList = [];
         let playedReminderList = [];
+        let travellerCharacterList = [];
         let nightOrderList = [];
         let playerList = [];
         let scriptJson = {};
@@ -115,9 +116,9 @@
             const optionsHtml = editionList
                 .sort((prev, next) => calculateEditionIndex(prev.type) - calculateEditionIndex(next.type))
                 .reduce((prev, next) => {
-                const typeTag = next.type === "full" ? "F" : "T";
-                return prev + `<option value="\${next.id}">[\${typeTag}] \${next.name}</option>`;
-            }, `<option value="">선택</option>`);
+                    const typeTag = next.type === "full" ? "F" : "T";
+                    return prev + `<option value="\${next.id}">[\${typeTag}] \${next.name}</option>`;
+                }, `<option value="">선택</option>`);
             $editionDiv.find("select").append(optionsHtml);
         }
 
@@ -149,6 +150,10 @@
 
             scriptJson.splice(0, 1);
             $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
+
+            travellerCharacterList = characterList
+                .filter(character => character.team === "traveller" && character.edition === selectedEditionId)
+                .sort((prev, next) => prev.id - next.id);
 
             renderCharacterList(scriptJson, characterList);
 
@@ -1010,6 +1015,20 @@
             renderPlayerStatusList();
         }
 
+        const openAddTravellerCharacterModal = () => {
+            characterModal.open(travellerCharacterList, null, null, addTravellerCharacter);
+        }
+
+        const addTravellerCharacter = (characterId, travellerCharacterId) => {
+            console.log('characterId', characterId);
+            console.log('travellerCharacterId', travellerCharacterId);
+
+            addTravellerModal.open(travellerCharacterList, selectedCharacterList, playedCharacterList, playedReminderList, travellerCharacterId);
+            /*const playedCharacter = playedCharacterList.find(character => character.characterId === characterId);
+            playedCharacter.displayedCharacterId = displayedCharacterId;
+            renderCharacterDisplayedDiv();*/
+        }
+
         const savePlayerStatus = () => {
             if (!confirm("현재 상태로 저장하시겠습니까?")) {
                 return;
@@ -1075,6 +1094,7 @@
                 selectedCharacterList: JSON.stringify(selectedCharacterList),
                 playedCharacterList: JSON.stringify(playedCharacterList),
                 playedReminderList: JSON.stringify(playedReminderList),
+                travellerCharacterList: JSON.stringify(travellerCharacterList),
                 playerList: JSON.stringify(playerList),
                 playStatus: JSON.stringify(playStatus),
             }
@@ -1104,6 +1124,7 @@
             selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
             playedCharacterList = JSON.parse(lastPlayLogJson.playedCharacterList);
             playedReminderList = JSON.parse(lastPlayLogJson.playedReminderList);
+            travellerCharacterList = JSON.parse(lastPlayLogJson.travellerCharacterList);
             playerList = JSON.parse(lastPlayLogJson.playerList);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
@@ -1408,6 +1429,10 @@
                                             name="restNominationButton" onclick="restNomination()">
                                         지명 초기화
                                     </button>
+                                    <button type="button" class="btn btn-info btn-block display-none"
+                                            name="hideCharacterToPlayerButton" onclick="openAddTravellerCharacterModal()">
+                                        여행자 추가
+                                    </button>
                                     <button type="button" class="btn btn-primary btn-block"
                                             name="savePlayerStatusButton" onclick="savePlayerStatus()">
                                         상태 저장
@@ -1612,6 +1637,7 @@
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/reminderModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/boc/custom/jspf/addTravellerModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/boc/guide/ruleGuideModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" %>

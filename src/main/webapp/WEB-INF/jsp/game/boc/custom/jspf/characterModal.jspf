@@ -3,11 +3,11 @@
 
 <script>
     const characterModal = {
-        selectedCharacterList: [],
+        characterList: [],
         characterId: null,
         callback: null,
-        open: (selectedCharacterList, characterId, memberId, callback) => {
-            characterModal.selectedCharacterList = selectedCharacterList;
+        open: (characterList, characterId, memberId, callback) => {
+            characterModal.characterList = characterList;
             characterModal.characterId = characterId;
             characterModal.memberId = memberId;
             characterModal.callback = callback;
@@ -17,7 +17,7 @@
             const $characterDiv = $modal.find("div[name='characterDiv']");
             $characterDiv.empty();
 
-            const listHtml = selectedCharacterList.reduce((prev, next) => {
+            const listHtml = characterList.reduce((prev, next) => {
                 const fontClass = Character.calculateCharacterNameClass(next.team);
 
                 return prev +

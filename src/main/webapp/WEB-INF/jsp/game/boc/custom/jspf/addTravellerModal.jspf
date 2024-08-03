@@ -1,0 +1,74 @@
+<%@ page import="boardgame.com.util.SessionUtils" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const addTravellerModal = {
+        travellerCharacterList: [],
+        selectedCharacterList: [],
+        playedCharacterList: [],
+        playedReminderList: [],
+        travellerCharacterId: null,
+        open: (travellerCharacterList, selectedCharacterList, playedCharacterList, playedReminderList, travellerCharacterId) => {
+            addTravellerModal.travellerCharacterList = travellerCharacterList;
+            addTravellerModal.selectedCharacterList = selectedCharacterList;
+            addTravellerModal.playedCharacterList = playedCharacterList;
+            addTravellerModal.playedReminderList = playedReminderList;
+            addTravellerModal.travellerCharacterId = travellerCharacterId;
+
+            const character = Character.getInCharacterListById(travellerCharacterList, travellerCharacterId);
+
+            const $modal = $("#addTravellerModal");
+
+            const $characterDiv = $modal.find("div[name='characterDiv']");
+            $characterDiv.empty();
+
+            const fontClass = Character.calculateCharacterNameClass(character.team);
+            const characterHtml =
+                `<div class="row">
+                    <div class="col-6 text-center pt-2 \${fontClass}">
+                        <strong class="\${fontClass}">\${character.name}</strong>
+                        <img src="\${character.image}" class="img-responsive img-thumbnail m-auto"">
+                    </div>
+                    <div class="col-6 text-center pt-2 \${fontClass}">
+                        <select class="\${fontClass}">
+                            <option>선</option>
+                            <option>악</option>
+                        </select>
+                    </div>
+                </div>`;
+
+            $characterDiv.append(characterHtml);
+
+            $modal.modal("show");
+        },
+        selectCharacter: selectedCharacterId => {
+            addTravellerModal.callback(addTravellerModal.characterId, selectedCharacterId, addTravellerModal.memberId);
+            const $modal = $("#addTravellerModal");
+            $modal.modal("hide");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="addTravellerModal" role="dialog"
+     aria-labelledby="addTravellerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">역할 목록</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="characterDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
