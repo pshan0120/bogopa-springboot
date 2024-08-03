@@ -1016,17 +1016,13 @@
         }
 
         const openAddTravellerCharacterModal = () => {
-            characterModal.open(travellerCharacterList, null, null, addTravellerCharacter);
-        }
-
-        const addTravellerCharacter = (characterId, travellerCharacterId) => {
-            console.log('characterId', characterId);
-            console.log('travellerCharacterId', travellerCharacterId);
-
-            addTravellerModal.open(travellerCharacterList, selectedCharacterList, playedCharacterList, playedReminderList, travellerCharacterId);
-            /*const playedCharacter = playedCharacterList.find(character => character.characterId === characterId);
-            playedCharacter.displayedCharacterId = displayedCharacterId;
-            renderCharacterDisplayedDiv();*/
+            addTravellerModal.open(
+                playerList,
+                travellerCharacterList,
+                selectedCharacterList,
+                playedCharacterList,
+                playedReminderList
+            );
         }
 
         const savePlayerStatus = () => {

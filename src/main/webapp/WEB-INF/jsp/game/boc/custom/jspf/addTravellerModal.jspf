@@ -1,70 +1,175 @@
-<%@ page import="boardgame.com.util.SessionUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script>
     const addTravellerModal = {
+        playerList: [],
         travellerCharacterList: [],
         selectedCharacterList: [],
         playedCharacterList: [],
         playedReminderList: [],
-        travellerCharacterId: null,
-        open: (travellerCharacterList, selectedCharacterList, playedCharacterList, playedReminderList, travellerCharacterId) => {
+        nickname: null,
+        selectedCharacterId: null,
+        selectedAlignment: null,
+        selectedSeatNumber: null,
+        open: (
+            playerList,
+            travellerCharacterList,
+            selectedCharacterList,
+            playedCharacterList,
+            playedReminderList
+        ) => {
+            addTravellerModal.playerList = playerList;
             addTravellerModal.travellerCharacterList = travellerCharacterList;
             addTravellerModal.selectedCharacterList = selectedCharacterList;
             addTravellerModal.playedCharacterList = playedCharacterList;
             addTravellerModal.playedReminderList = playedReminderList;
-            addTravellerModal.travellerCharacterId = travellerCharacterId;
-
-            const character = Character.getInCharacterListById(travellerCharacterList, travellerCharacterId);
 
             const $modal = $("#addTravellerModal");
 
-            const $characterDiv = $modal.find("div[name='characterDiv']");
-            $characterDiv.empty();
+            const characterListDivHtml = travellerCharacterList.reduce((prev, next) => {
+                const fontClass = Character.calculateCharacterNameClass(next.team);
 
-            const fontClass = Character.calculateCharacterNameClass(character.team);
-            const characterHtml =
-                `<div class="row">
-                    <div class="col-6 text-center pt-2 \${fontClass}">
-                        <strong class="\${fontClass}">\${character.name}</strong>
-                        <img src="\${character.image}" class="img-responsive img-thumbnail m-auto"">
-                    </div>
-                    <div class="col-6 text-center pt-2">
-                        <select class="\${fontClass}">
-                            <option>선</option>
-                            <option>악</option>
-                        </select>
-                        <input type="text" class="form-control" name="nickname" />
-                    </div>
-                </div>`;
+                return prev +
+                    `<div class="row" name="\${next.id}">
+                        <div class="col-4 pt-2">
+                            <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" 
+                                onclick="addTravellerModal.selectCharacter('\${next.id}')">
+                        </div>
+                        <div class="col-8 \${fontClass}">
+                            <strong class="\${fontClass}">\${next.name}</strong>
+                            <p>\${next.ability}</p>
+                        </div>
+                    </div>`;
+            }, "");
+
+            const $characterListDiv = $modal.find("div[name='characterListDiv']");
+            $characterListDiv.empty();
+            $characterListDiv.append(characterListDivHtml);
 
             const alignmentList = [
                 ALIGNMENT.GOOD,
                 ALIGNMENT.EVIL,
             ];
-            const setInfoMessageAlignmentDivHtml = alignmentList.reduce((prev, next) => {
+            const alignmentListDivHtml = alignmentList.reduce((prev, next) => {
                 return prev +
                     `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.name}"
-                        onclick="setInfoMessageAlignment('\${next.name}', '\${next.title}')">
+                        onclick="addTravellerModal.selectAlignment('\${next.name}')">
                         \${next.title}
                     </button>`;
             }, "");
 
-            const $setInfoMessageAlignmentDiv = $infoMessageDiv.find("div[name='setInfoMessageAlignmentDiv']");
-            $setInfoMessageAlignmentDiv.append(setInfoMessageAlignmentDivHtml);
+            const $alignmentListDiv = $modal.find("div[name='alignmentListDiv']");
+            $alignmentListDiv.empty();
+            $alignmentListDiv.append(alignmentListDivHtml);
 
-            $characterDiv.append(characterHtml);
+
+            const seatListDivHtml = playerList.reduce((prev, next) => {
+                return prev +
+                    `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.seatNumber}"
+                        onclick="addTravellerModal.selectSeat('\${next.seatNumber}')">
+                        \${next.seatNumber}. \${next.nickname}
+                    </button>`;
+            }, "");
+            
+            const $seatListDiv = $modal.find("div[name='seatListDiv']");
+            $seatListDiv.empty();
+            $seatListDiv.append(seatListDivHtml);
 
             $modal.modal("show");
         },
         selectCharacter: selectedCharacterId => {
-            addTravellerModal.callback(addTravellerModal.characterId, selectedCharacterId, addTravellerModal.memberId);
             const $modal = $("#addTravellerModal");
-            $modal.modal("hide");
+            const $characterListDiv = $modal.find("div[name='characterListDiv']");
+            $characterListDiv.find("img")
+                .removeClass("img-thumbnail")
+                .removeClass("img-rounded")
+                .addClass("img-thumbnail");
+
+            const $selectedCharacterDiv = $characterListDiv.find("div[name='" + selectedCharacterId + "']");
+            $selectedCharacterDiv.find("img").removeClass("img-thumbnail");
+            $selectedCharacterDiv.find("img").addClass("img-rounded");
+
+            addTravellerModal.selectedCharacterId = selectedCharacterId;
+
+            addTravellerModal.renderSelected();
+        },
+        selectAlignment: selectedAlignmentName => {
+            const $modal = $("#addTravellerModal");
+            const $alignmentListDiv = $modal.find("div[name='alignmentListDiv']");
+            $alignmentListDiv.find("button")
+                .removeClass("btn-outline-default")
+                .removeClass("btn-default")
+                .addClass("btn-outline-default");
+
+            const $selectedAlignmentDiv = $alignmentListDiv.find("button[name='" + selectedAlignmentName + "']");
+            $selectedAlignmentDiv.removeClass("btn-outline-default");
+            $selectedAlignmentDiv.addClass("btn-default");
+
+            addTravellerModal.selectedAlignment = Character.getAlignmentByName(selectedAlignmentName);
+
+            addTravellerModal.renderSelected();
         },
 
-        joinPlay: () => {
-            if (numberOfMaxPlayer <= clientPlayMemberList.length) {
+        selectSeat: selectedSeatNumber => {
+            const $modal = $("#addTravellerModal");
+            const $seatListDiv = $modal.find("div[name='seatListDiv']");
+            $seatListDiv.find("button")
+                .removeClass("btn-outline-default")
+                .removeClass("btn-default")
+                .addClass("btn-outline-default");
+
+            const $selectedSeatDiv = $seatListDiv.find("button[name='" + selectedSeatNumber + "']");
+            $selectedSeatDiv.removeClass("btn-outline-default");
+            $selectedSeatDiv.addClass("btn-default");
+
+            addTravellerModal.selectedSeatNumber = selectedSeatNumber;
+
+            addTravellerModal.renderSelected();
+        },
+
+        renderSelected: () => {
+            const $modal = $("#addTravellerModal");
+            const $selectedDiv = $modal.find("div[name='selectedDiv']");
+            $selectedDiv.empty();
+
+            const nickname = $modal.find("div[name='nicknameDiv']").find("input").val();
+            const character = Character.getInCharacterListById(
+                addTravellerModal.travellerCharacterList, addTravellerModal.selectedCharacterId
+            );
+            const characterName = character ? character.name : "미선택";
+            const alignmentTitle = addTravellerModal.selectedAlignment ? addTravellerModal.selectedAlignment.title : "미선택";
+            const seatNumber = addTravellerModal.selectedSeatNumber ? addTravellerModal.selectedSeatNumber : "미선택";
+
+            const selectedHtml =
+                `<span>닉네임 : \${nickname}</span><br/>
+                <span>역할 : \${characterName}</span><br/>
+                <span>편 : \${alignmentTitle}</span><br/>
+                <span>자리 : \${seatNumber}</span>`;
+
+            $selectedDiv.append(selectedHtml);
+        },
+        add: () => {
+            /*playerList: [],
+            travellerCharacterList: [],
+            selectedCharacterList: [],
+            playedCharacterList: [],
+            playedReminderList: [],
+            nickname: null,
+            selectedCharacterId: null,
+            selectedAlignment: null,
+            selectedSeatNumber: null,*/
+
+            const character = Character.getInCharacterListById(
+                addTravellerModal.travellerCharacterList, addTravellerModal.selectedCharacterId
+            );
+
+            addTravellerModal.selectedCharacterList.push(character);
+            addTravellerModal.playedCharacterList.push(character);
+
+            //TODO: 자리 바꾸기
+
+
+            /*if (numberOfMaxPlayer <= clientPlayMemberList.length) {
                 alert("자리가 부족하네요!");
                 return;
             }
@@ -89,7 +194,7 @@
                     console.log('play joined !!', data);
                     document.location.reload();
                 })
-                .catch(response => console.error('error', response));
+                .catch(response => console.error('error', response));*/
         },
         close: () => {
         },
@@ -101,15 +206,29 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">역할 목록</h4>
+                <h4 class="">여행자 추가</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div name="characterDiv"></div>
+                <div name="nicknameDiv">
+                    <label class="form-control-label">닉네임</label>
+                    <input type="text" class="form-control" maxlength="20"/>
+                </div>
+                <hr class="mt-2 mb-2">
+                <div name="characterListDiv"></div>
+                <hr class="mt-2 mb-2">
+                <div name="alignmentListDiv"></div>
+                <hr class="mt-2 mb-2">
+                <div name="seatListDiv"></div>
+                <hr class="mt-2 mb-2">
+                <div name="selectedDiv"></div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-block" onclick="addTravellerModal.add()">
+                    추가하기
+                </button>
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
             </div>
         </div>

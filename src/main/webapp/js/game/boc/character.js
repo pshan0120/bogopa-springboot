@@ -81,4 +81,16 @@ class Character {
         return null;
     }
 
+    static getAlignmentByName(alignmentName) {
+        if (alignmentName === ALIGNMENT.GOOD.name) {
+            return ALIGNMENT.GOOD;
+        }
+
+        if (alignmentName === ALIGNMENT.EVIL.name) {
+            return ALIGNMENT.EVIL;
+        }
+
+        return null;
+    }
+
 }
