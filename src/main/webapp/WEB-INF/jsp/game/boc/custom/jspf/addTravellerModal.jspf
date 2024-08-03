@@ -29,13 +29,29 @@
                         <strong class="\${fontClass}">\${character.name}</strong>
                         <img src="\${character.image}" class="img-responsive img-thumbnail m-auto"">
                     </div>
-                    <div class="col-6 text-center pt-2 \${fontClass}">
+                    <div class="col-6 text-center pt-2">
                         <select class="\${fontClass}">
                             <option>선</option>
                             <option>악</option>
                         </select>
+                        <input type="text" class="form-control" name="nickname" />
                     </div>
                 </div>`;
+
+            const alignmentList = [
+                ALIGNMENT.GOOD,
+                ALIGNMENT.EVIL,
+            ];
+            const setInfoMessageAlignmentDivHtml = alignmentList.reduce((prev, next) => {
+                return prev +
+                    `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.name}"
+                        onclick="setInfoMessageAlignment('\${next.name}', '\${next.title}')">
+                        \${next.title}
+                    </button>`;
+            }, "");
+
+            const $setInfoMessageAlignmentDiv = $infoMessageDiv.find("div[name='setInfoMessageAlignmentDiv']");
+            $setInfoMessageAlignmentDiv.append(setInfoMessageAlignmentDivHtml);
 
             $characterDiv.append(characterHtml);
 
@@ -45,6 +61,35 @@
             addTravellerModal.callback(addTravellerModal.characterId, selectedCharacterId, addTravellerModal.memberId);
             const $modal = $("#addTravellerModal");
             $modal.modal("hide");
+        },
+
+        joinPlay: () => {
+            if (numberOfMaxPlayer <= clientPlayMemberList.length) {
+                alert("자리가 부족하네요!");
+                return;
+            }
+
+            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
+            if (!nickname) {
+                return;
+            }
+
+            const replacedNickname = nickname.replace(/\s+/g, "");
+            if (!confirm("[" + replacedNickname + "] 닉네임으로 참가할까요?")) {
+                return;
+            }
+
+            const request = {
+                playId: PLAY_ID,
+                nickname: replacedNickname
+            }
+
+            gfn_callPostApi("/api/play/member/join", request)
+                .then(data => {
+                    console.log('play joined !!', data);
+                    document.location.reload();
+                })
+                .catch(response => console.error('error', response));
         },
         close: () => {
         },
