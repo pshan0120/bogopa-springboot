@@ -2,6 +2,7 @@
 
 <script>
     const addTravellerModal = {
+        playId: null,
         playerList: [],
         travellerCharacterList: [],
         selectedCharacterList: [],
@@ -12,12 +13,14 @@
         selectedAlignment: null,
         selectedSeatNumber: null,
         open: (
+            playId,
             playerList,
             travellerCharacterList,
             selectedCharacterList,
             playedCharacterList,
             playedReminderList
         ) => {
+            addTravellerModal.playId = playId;
             addTravellerModal.playerList = playerList;
             addTravellerModal.travellerCharacterList = travellerCharacterList;
             addTravellerModal.selectedCharacterList = selectedCharacterList;
@@ -70,7 +73,7 @@
                         \${next.seatNumber}. \${next.nickname}
                     </button>`;
             }, "");
-            
+
             const $seatListDiv = $modal.find("div[name='seatListDiv']");
             $seatListDiv.empty();
             $seatListDiv.append(seatListDivHtml);
@@ -133,6 +136,8 @@
             $selectedDiv.empty();
 
             const nickname = $modal.find("div[name='nicknameDiv']").find("input").val();
+            addTravellerModal.nickname = nickname;
+
             const character = Character.getInCharacterListById(
                 addTravellerModal.travellerCharacterList, addTravellerModal.selectedCharacterId
             );
@@ -148,53 +153,99 @@
 
             $selectedDiv.append(selectedHtml);
         },
-        add: () => {
-            /*playerList: [],
-            travellerCharacterList: [],
-            selectedCharacterList: [],
-            playedCharacterList: [],
-            playedReminderList: [],
-            nickname: null,
-            selectedCharacterId: null,
-            selectedAlignment: null,
-            selectedSeatNumber: null,*/
+        add: async () => {
+            addTravellerModal.renderSelected();
+
+            if (!addTravellerModal.nickname) {
+                alert("닉네임을 입력해 주세요.");
+                return;
+            }
+
+            if (!addTravellerModal.selectedCharacterId) {
+                alert("역할을 선택해 주세요.");
+                return;
+            }
+
+            if (!addTravellerModal.selectedAlignment) {
+                alert("편을 선택해 주세요.");
+                return;
+            }
+
+            if (!addTravellerModal.selectedSeatNumber) {
+                alert("자리 번호를 선택해 주세요.");
+                return;
+            }
+
+            const exists = addTravellerModal.playerList.some(player => player.nickname === addTravellerModal.nickname);
+            if (exists) {
+                alert("이미 참여하고 있는 플레이어입니다.");
+                return;
+            }
+
+            const replacedNickname = addTravellerModal.nickname.replace(/\s+/g, "");
+            if (!confirm("[" + replacedNickname + "] 닉네임으로 참여시킬까요?")) {
+                return;
+            }
+
+            const playerAdded = await addTravellerModal.addPlay(addTravellerModal.playId, replacedNickname);
 
             const character = Character.getInCharacterListById(
                 addTravellerModal.travellerCharacterList, addTravellerModal.selectedCharacterId
             );
 
             addTravellerModal.selectedCharacterList.push(character);
-            addTravellerModal.playedCharacterList.push(character);
+            addTravellerModal.playedCharacterList.push({
+                characterId: addTravellerModal.selectedCharacterId,
+                displayedCharacterId: addTravellerModal.selectedCharacterId,
+            });
 
-            //TODO: 자리 바꾸기
-
-
-            /*if (numberOfMaxPlayer <= clientPlayMemberList.length) {
-                alert("자리가 부족하네요!");
-                return;
+            if (character.reminders && character.reminders.length > 0) {
+                character.reminders.forEach(reminder => {
+                    addTravellerModal.playedReminderList.push({
+                        characterId: character.id,
+                        reminder,
+                    });
+                });
             }
 
-            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
-            if (!nickname) {
-                return;
-            }
+            addTravellerModal.playerList
+                .forEach(player => {
+                    if (addTravellerModal.selectedSeatNumber <= player.seatNumber) {
+                        player.seatNumber++;
+                    }
+                });
 
-            const replacedNickname = nickname.replace(/\s+/g, "");
-            if (!confirm("[" + replacedNickname + "] 닉네임으로 참가할까요?")) {
-                return;
-            }
+            addTravellerModal.playerList.push({
+                memberId: playerAdded.memberId,
+                hashKey: playerAdded.hashKey,
+                nickname: playerAdded.nickname,
+                profileImageFileName: playerAdded.profileImageFileName,
+                seatNumber: addTravellerModal.selectedSeatNumber,
+                characterId: addTravellerModal.selectedCharacterId,
+                alignment: addTravellerModal.selectedAlignment,
+                nominating: false,
+                nominated: false,
+                died: false,
+                votable: true,
+                reminderList: [],
+            });
 
+            await saveGameStatus();
+
+            await document.location.reload();
+        },
+        addPlay: async (playId, nickname) => {
             const request = {
-                playId: PLAY_ID,
-                nickname: replacedNickname
+                playId: addTravellerModal.playId,
+                nickname
             }
 
-            gfn_callPostApi("/api/play/member/join", request)
-                .then(data => {
-                    console.log('play joined !!', data);
-                    document.location.reload();
+            return await gfn_callPostApi("/api/play/member/add", request)
+                .then(async data => {
+                    console.log('play added !!', data);
+                    return data;
                 })
-                .catch(response => console.error('error', response));*/
+                .catch(response => console.error('error', response));
         },
         close: () => {
         },
@@ -217,12 +268,16 @@
                     <input type="text" class="form-control" maxlength="20"/>
                 </div>
                 <hr class="mt-2 mb-2">
+                <h4>역할</h4>
                 <div name="characterListDiv"></div>
                 <hr class="mt-2 mb-2">
+                <h4>편</h4>
                 <div name="alignmentListDiv"></div>
                 <hr class="mt-2 mb-2">
+                <h4>자리</h4>
                 <div name="seatListDiv"></div>
                 <hr class="mt-2 mb-2">
+                <h4>요약</h4>
                 <div name="selectedDiv"></div>
             </div>
             <div class="modal-footer">

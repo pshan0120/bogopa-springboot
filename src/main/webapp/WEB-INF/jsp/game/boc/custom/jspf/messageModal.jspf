@@ -23,7 +23,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h1 class="display-3" name="message"></h1>
+                <span name="message"></span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

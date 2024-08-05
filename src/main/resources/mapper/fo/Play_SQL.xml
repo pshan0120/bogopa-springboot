@@ -99,6 +99,26 @@
             pm.insDt
     </select>
 
+	<select id="selectClientPlayMemberById" parameterType="hashmap" resultType="hashmap">
+        SELECT
+            pm.mmbrNo AS memberId,
+            encVal(pm.mmbrNo) AS hashKey,
+            m.nickNm AS nickname,
+            IFNULL(m.prflImgFileNm, '') AS profileImageFileName
+        FROM
+            play p,
+            playMmbr pm,
+            mmbr m
+        WHERE
+            p.playNo = pm.playNo
+          AND
+            pm.mmbrNo = m.mmbrNo
+          AND
+            p.playNo = #{playId}
+          AND
+            pm.mmbrNo = #{memberId}
+    </select>
+
 	<select id="selectHostPlayMember" parameterType="hashmap" resultType="hashmap">
         SELECT
             m.mmbrNo AS memberId,

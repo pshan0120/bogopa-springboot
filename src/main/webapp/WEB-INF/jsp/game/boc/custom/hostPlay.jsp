@@ -813,10 +813,12 @@
             $setInfoMessageCharacterDiv.append(setInfoMessageCharacterDivHtml);
 
             const setInfoMessagePlayerDivHtml = playerList.reduce((prev, next) => {
+                const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
+                const buttonClass = Character.createChoiceButtonClass(character.team);
                 return prev +
-                    `<button class="btn btn-sm btn-outline-default mr-1 my-1" name="\${next.memberId}"
+                    `<button class="\${buttonClass}" name="\${next.memberId}"
                         onclick="setInfoMessagePlayer('\${next.nickname}')">
-                        \${next.nickname}
+                        \${next.nickname}(\${character.name})
                     </button>`;
             }, "");
 
@@ -885,7 +887,7 @@
             const fontClass = Character.calculateCharacterNameClass(character.team);
 
             const html =
-                `<div class="col-4 pt-2 \${fontClass}" name="\${character.id}" style="margin: auto;"
+                `<div class="col-6 pt-2 \${fontClass}" name="\${character.id}" style="margin: auto;"
                     onclick="removeInfoMessageCharacter('\${character.id}')">
                     <span class="\${fontClass}">\${character.name}<span/>
                     <img src="\${character.image}" class="img-responsive img-rounded m-auto" />
@@ -906,7 +908,7 @@
             const $infoMessagePlayerDiv = $infoMessageResultDiv.find("div[name='infoMessagePlayerDiv']");
 
             const html =
-                `<div class="col-4 pt-2" name="\${nickname}" style="margin: auto;"
+                `<div class="col-10 pt-2" name="\${nickname}" style="margin: auto;"
                     onclick="removeInfoMessagePlayer('\${nickname}')">
                     <span class="text-center display-4">\${nickname}</span>
                 </div>`;
@@ -926,7 +928,7 @@
             const $infoMessageTeamDiv = $infoMessageResultDiv.find("div[name='infoMessageTeamDiv']");
 
             const html =
-                `<div class="col-4 pt-2" name="\${name}" style="margin: auto;"
+                `<div class="col-10 pt-2" name="\${name}" style="margin: auto;"
                     onclick="removeInfoMessageTeam('\${name}')">
                     <span class="text-center display-4">\${title}</span>
                 </div>`;
@@ -946,7 +948,7 @@
             const $infoMessageAlignmentDiv = $infoMessageResultDiv.find("div[name='infoMessageAlignmentDiv']");
 
             const html =
-                `<div class="col-4 pt-2" name="\${name}" style="margin: auto;"
+                `<div class="col-10 pt-2" name="\${name}" style="margin: auto;"
                     onclick="removeInfoMessageAlignment('\${name}')">
                     <span class="text-center display-4">\${title}</span>
                 </div>`;
@@ -1017,6 +1019,7 @@
 
         const openAddTravellerCharacterModal = () => {
             addTravellerModal.open(
+                PLAY_ID,
                 playerList,
                 travellerCharacterList,
                 selectedCharacterList,
@@ -1161,11 +1164,11 @@
             const $infoMessageDirectDiv = $infoMessageResultDiv.find("div[name='infoMessageDirectDiv']");
             const infoMessageDirect = $infoMessageDirectDiv.find("input").val();
 
-            const html = $infoMessageTextDiv.html()
-                + $infoMessageCharacterDiv.html()
-                + $infoMessagePlayerDiv.html()
-                + $infoMessageTeamDiv.html()
-                + $infoMessageAlignmentDiv.html()
+            const html = $infoMessageTextDiv[0].outerHTML + "<br/>"
+                + $infoMessageCharacterDiv[0].outerHTML + "<br/>"
+                + $infoMessagePlayerDiv[0].outerHTML + "<br/>"
+                + $infoMessageTeamDiv[0].outerHTML + "<br/>"
+                + $infoMessageAlignmentDiv[0].outerHTML + "<br/>"
                 + (infoMessageDirect ? `<br/><span class="text-center display-4">\${infoMessageDirect}</span>` : ``);
 
             openMessageModal(html);
@@ -1521,13 +1524,13 @@
                                     <div name="infoMessageResultDiv">
                                         <div name="infoMessageTextDiv" class="text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessageCharacterDiv" class="text-center"></div>
+                                        <div name="infoMessageCharacterDiv" class="row text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessagePlayerDiv" class="text-center"></div>
+                                        <div name="infoMessagePlayerDiv" class="row text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessageTeamDiv" class="text-center"></div>
+                                        <div name="infoMessageTeamDiv" class="row text-center"></div>
                                         <hr class="mt-2 mb-2">
-                                        <div name="infoMessageAlignmentDiv" class="text-center"></div>
+                                        <div name="infoMessageAlignmentDiv" class="row text-center"></div>
                                         <hr class="mt-2 mb-2">
                                         <div name="infoMessageDirectDiv" class="text-center">
                                             <input class="form-control" type="text"/>

@@ -128,6 +128,34 @@ public class PlayServiceImpl implements PlayService {
     }
 
     @Override
+    public Map<String, Object> addPlay(JoinPlayRequestDto requestDto) {
+        Long memberId = memberService.readOrCreateMemberByNickname(requestDto.getNickname());
+
+        List<Map<String, Object>> clientPlayMemberList = playDao.selectClientPlayMemberList(requestDto.getPlayId());
+        boolean joined = clientPlayMemberList.stream()
+                .anyMatch(member -> memberId.equals(member.get("memberId")));
+        if (!joined) {
+            this.insertPlayMember(requestDto.getPlayId(), memberId);
+        }
+
+        return this.readClientPlayMemberById(requestDto.getPlayId(), memberId);
+    }
+
+    private void insertPlayMember(long playId, long memberId) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("playNo", playId);
+        requestMap.put("mmbrNo", memberId);
+        playDao.insertPlayMember(requestMap);
+    }
+
+    private Map<String, Object> readClientPlayMemberById(long playId, long memberId) {
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("playId", playId);
+        requestMap.put("memberId", memberId);
+        return playDao.selectClientPlayMemberById(requestMap);
+    }
+
+    @Override
     public void beginPlay(BeginPlayRequestDto requestDto) {
         Map<String, Object> playMap = this.readById(requestDto.getPlayId());
 

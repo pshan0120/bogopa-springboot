@@ -30,6 +30,10 @@ public class PlayDao extends AbstractDao {
         return selectList("play.selectClientPlayMemberList", playId);
     }
 
+    public Map<String, Object> selectClientPlayMemberById(Map<String, Object> map) {
+        return selectOne("play.selectClientPlayMemberById", map);
+    }
+
     public Map<String, Object> selectHostPlayMember(long playId) {
         return selectOne("play.selectHostPlayMember", playId);
     }

@@ -244,7 +244,7 @@
     },
     {
         "id": "beggar",
-        "name": "Beggar",
+        "name": "거지",
         "edition": "tb",
         "team": "traveller",
         "firstNight": 0,
@@ -253,7 +253,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "You must use a vote token to vote. Dead players may choose to give you theirs. If so, you learn their alignment.",
+        "ability": "투표하려면 다른 플레이어의 투표 토큰이 필요합니다. 죽은 플레이어만이 당신에게 투표 토큰을 줄 수 있는데, 그러면 당신은 그의 편을 알게 됩니다. 당신은 술에 취하거나 중독되지 않습니다.",
         "image": "/images/fo/boc/icons/traveller/beggar.webp"
     },
     {
@@ -344,7 +344,7 @@
     },
     {
         "id": "bureaucrat",
-        "name": "Bureaucrat",
+        "name": "관료",
         "edition": "tb",
         "team": "traveller",
         "firstNight": 1,
@@ -355,7 +355,7 @@
             "3 votes"
         ],
         "setup": false,
-        "ability": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow.",
+        "ability": "매일 밤, 자신을 제외한 1명의 플레이어를 선택합니다. 내일 그의 투표는 3표로 계산됩니다.",
         "image": "/images/fo/boc/icons/traveller/bureaucrat.webp"
     },
     {
@@ -1007,7 +1007,7 @@
     },
     {
         "id": "gunslinger",
-        "name": "Gunslinger",
+        "name": "총잡이",
         "edition": "tb",
         "team": "traveller",
         "firstNight": 0,
@@ -1016,7 +1016,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "Each day, after the 1st vote has been tallied, you may choose a player that voted: they die.",
+        "ability": "매일 낮, 처형에 대한 첫 번째 투표가 집계된 뒤 투표한 플레이어 중 1명을 선택하여 죽일 수 있습니다.",
         "image": "/images/fo/boc/icons/traveller/gunslinger.webp"
     },
     {
@@ -1522,7 +1522,6 @@
             "Everyone drunk"
         ],
         "setup": false,
-        "ability": "When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow.",
         "ability": "하수인이 처형으로 죽으면, 여행자를 제외한 모든 플레이어는 내일 황혼까지 술에 취하게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/minstrel.webp"
     },
@@ -2020,7 +2019,7 @@
     },
     {
         "id": "scapegoat",
-        "name": "Scapegoat",
+        "name": "희생양",
         "edition": "tb",
         "team": "traveller",
         "firstNight": 0,
@@ -2029,7 +2028,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "If a player of your alignment is executed, you might be executed instead.",
+        "ability": "당신과 같은 편의 플레이어가 처형당하면, 당신이 대신 처형당할 수 있습니다.",
         "image": "/images/fo/boc/icons/traveller/scapegoat.webp"
     },
     {
@@ -2275,7 +2274,7 @@
     },
     {
         "id": "thief",
-        "name": "Thief",
+        "name": "도둑",
         "edition": "tb",
         "team": "traveller",
         "firstNight": 1,
@@ -2286,7 +2285,7 @@
             "Negative vote"
         ],
         "setup": false,
-        "ability": "Each night, choose a player (not yourself): their vote counts negatively tomorrow.",
+        "ability": "매일 밤, 자신을 제외한 플레이어 1명을 선택합니다. 내일 그의 투표는 마이너스로 계산됩니다.",
         "image": "/images/fo/boc/icons/traveller/thief.webp"
     },
     {

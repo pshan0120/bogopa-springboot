@@ -53,6 +53,11 @@ public class PlayRestController {
         playService.reJoinPlay(requestDto);
     }
 
+    @PostMapping("/member/add")
+    public Map<String, Object> addPlay(@Validated @RequestBody JoinPlayRequestDto requestDto) {
+        return playService.addPlay(requestDto);
+    }
+
     @PatchMapping("/begin")
     public void beginPlay(@Validated @RequestBody BeginPlayRequestDto requestDto) {
         playService.beginPlay(requestDto);

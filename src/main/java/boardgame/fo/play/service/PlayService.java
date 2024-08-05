@@ -16,6 +16,8 @@ public interface PlayService {
 
     void reJoinPlay(JoinPlayRequestDto requestDto);
 
+    Map<String, Object> addPlay(JoinPlayRequestDto requestDto);
+
     void beginPlay(BeginPlayRequestDto requestDto);
 
     void cancelPlay(JoinPlayRequestDto requestDto);
