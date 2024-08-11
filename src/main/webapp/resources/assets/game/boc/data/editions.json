@@ -94,5 +94,29 @@
         "name": "Strange and uncanny phenomenon",
         "type": "full",
         "jsonFileName": "strange-and-uncanny.json"
+    },
+    {
+        "id": "art-thou-evil-sir",
+        "name": "Art Thou Evil, Sir?",
+        "type": "full",
+        "jsonFileName": "art-thou-evil-sir.json"
+    },
+    {
+        "id": "oops-all-outsiders",
+        "name": "Oops! All Outsiders",
+        "type": "full",
+        "jsonFileName": "oops-all-outsiders.json"
+    },
+    {
+        "id": "Wherein Everyone is a Witch-Cursed Recluse",
+        "name": "Strange and uncanny phenomenon",
+        "type": "full",
+        "jsonFileName": "wherein-everyone-is-a-witch-cursed-recluse.json"
+    },
+    {
+        "id": "im-your-demon-now",
+        "name": "I'm your demon now",
+        "type": "teensyville",
+        "jsonFileName": "im-your-demon-now.json"
     }
 ]
