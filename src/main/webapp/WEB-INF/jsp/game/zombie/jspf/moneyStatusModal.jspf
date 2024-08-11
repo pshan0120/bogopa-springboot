@@ -1,0 +1,116 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const moneyStatusModal = {
+        playSetting: {},
+        playStatus: {},
+        playerList: [],
+        uptownOutcastList: [],
+        downtownOutcastList: [],
+        open: async playNo => {
+            moneyStatusModal.playSetting = {};
+            moneyStatusModal.playStatus = {};
+            moneyStatusModal.playerList = [];
+            moneyStatusModal.uptownOutcastList = [];
+            moneyStatusModal.downtownOutcastList = [];
+
+            await moneyStatusModal.loadGameStatus(playNo);
+
+            if (Object.keys(moneyStatusModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
+            console.log('playStatus', moneyStatusModal.playStatus);
+            const $moneyStatusModal = $("#moneyStatusModal");
+            const $settingDiv = $moneyStatusModal.find("div[name='settingDiv']");
+            const playSetting = initializationSetting.player
+                .find(item => moneyStatusModal.playerList.length === item.numberOfPlayer);
+
+            const townInitializationHtml = `
+                \${UPTOWN.title} \${playSetting.uptown}명,
+                \${DOWNTOWN.title} \${playSetting.downtown}명,
+                도둑은 한 번에 \${playSetting.stolenMoney}원을 훔침`
+            $settingDiv.find("span[name='townInitialization']").html(townInitializationHtml);
+
+            const $moneyDiv = $moneyStatusModal.find("div[name='moneyDiv']");
+            $moneyDiv.empty();
+
+            if (moneyStatusModal.playStatus.round < moneyStatusModal.playSetting.round
+                && moneyStatusModal.playStatus.round % 2 === 1) {
+                const moneyHtml = moneyStatusModal.playerList
+                    .sort((prev, next) => next.money - prev.money)
+                    .reduce((prev, next) => {
+                        return prev +
+                            `<div class="row">
+                            <div class="col-4">
+                                \${next.fakePlayerName}
+                            </div>
+                            <div class="col-8">
+                                \${next.money}
+                            </div>
+                        </div>
+                        <br>`;
+                    }, "");
+                $moneyStatusModal.find("[name='moneyDiv']").empty().html(moneyHtml);
+            } else {
+                $moneyStatusModal.find("[name='moneyDiv']").empty().html("비공개입니다.");
+            }
+
+            $moneyStatusModal.modal("show");
+        },
+        loadGameStatus: async playNo => {
+            const lastPlayLog = await moneyStatusModal.readLastPlayLog(playNo);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+
+            moneyStatusModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            moneyStatusModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            moneyStatusModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            moneyStatusModal.uptownOutcastList = JSON.parse(lastPlayLogJson.uptownOutcastList);
+            moneyStatusModal.downtownOutcastList = JSON.parse(lastPlayLogJson.downtownOutcastList);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="moneyStatusModal" role="dialog"
+     aria-labelledby="moneyStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">재산 상태</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="settingDiv">
+                    <h3>마을 사람들(초기 세팅)</h3>
+                    <h4><span name="townInitialization"></span></h4>
+                </div>
+                <hr>
+                <div name="moneyDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

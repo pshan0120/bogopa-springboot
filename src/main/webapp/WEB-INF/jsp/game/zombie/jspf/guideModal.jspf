@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const guideModal = {
+        open: () => {
+            const $guideModal = $("#guideModal");
+            $guideModal.modal("show");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="guideModal" role="dialog"
+     aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">게임 가이드</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h2>
+                        좀비 게임이란?
+                    </h2>
+                    <p>
+                        인간은 좀비가 되지 않고 인간끼리 터치해 가장 많은 승점을 얻어내라, <br/>
+                        좀비는 인간을 터치해 좀비로 감염시켜서 모든 인간을 좀비로 만들어라!
+                    </p>
+                </div>
+                <hr>
+                <div>
+                    <h2>
+                        규칙
+                    </h2>
+                    <ul class="">
+                        <li class="">
+                            플레이어 사이에는 최초 좀비들(플레이어 수에 따라 다름)이 숨어 있습니다. 그 정체는 본인만 알고 있습니다.
+                        </li>
+                        <li class="">
+                            총 3라운드로 진행됩니다.
+                        </li>
+                        <li class="">
+                            매 라운드마다 최소 한 번씩 터치하지 못했을 경우, 라운드 종료시 좀비가 됩니다.
+                        </li>
+                        <li class="">
+                            라운드별로 한 사람과는 한 번씩만 터치를 할 수 있다.
+                        </li>
+                        <li class="">
+                            터치는 두 플레이어가 진행자 앞에서 손을 잡으면 진행되며, 결과는 다음과 같습니다.<br/>
+                            좀비 - 좀비 = 아무 일도 일어나지 않습니다.<br/>
+                            좀비 - 인간 = 인간이 좀비가 됩니다.<br/>
+                            인간 - 인간 = 둘 다 승점을 획득합니다.
+                        </li>
+                        <li class="">
+                            매 라운드가 끝날 때마다 좀비와 생존자의 수가 공개됩니다.
+                        </li>
+                        <li class="">
+                            플레이어당 치료제를 하나씩 가지고 시작합니다. 다만 치료제는 좀비가 되고 10분 내에 사용해야 효과가 있으며, 최초 좀비는 치료제를 써도 효과가 없습니다. 필요시 승점 5개로 치료제를 구입할 수 있습니다.
+                        </li>
+                        <li class="">
+                            게임 종료 후 다음과 같이 결과가 정해집니다.<br/>
+                            - 모든 사람이 좀비가 되었다면 : 최초 좀비들이 공동 우승자가 되며, 나머지 좀비들 중에서 탈락 후보를 선정합니다.<br/>
+                            - 2명 이상의 생존자가 있다면 : 승점이 가장 많은 인간이 우승자, 승점이 가장 적은 인간이 탈락 후보가 됩니다.<br/>
+                            - 모든 생존자의 승점이 같다면 : 공동 우승이 되며, 좀비 중에서 탈락 후보를 선정합니다.
+                        </li>
+                        <li class="">
+                            우승한 생존자는 승점 1점당 칩 1개를 받으며, 최초 좀비가 모든 사람을 감염시켜서 우승한 경우에는 칩 3개를 받습니다.
+                        </li>
+                        <li class="">
+                            탈락 후보는 우승한 플레이어를 제외한 나머지 중 최후의 승부를 할 한 명을 선택합니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

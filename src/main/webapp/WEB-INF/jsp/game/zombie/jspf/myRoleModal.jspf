@@ -1,0 +1,93 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const myRoleModal = {
+        playStatus: {},
+        playerList: [],
+        open: async playNo => {
+            myRoleModal.playStatus = {};
+            myRoleModal.playerList = [];
+
+            await myRoleModal.loadGameStatus(playNo);
+
+            if (Object.keys(myRoleModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
+            if (myRoleModal.playStatus.round !== 1) {
+                alert("첫 라운드에서만 확인 가능합니다.");
+                return;
+            }
+
+            const loggedIn = JSON.parse("<%= SessionUtils.isMemberLoggedIn() %>");
+            if (!loggedIn) {
+                alert("로그인 상태가 아닙니다.");
+                return;
+            }
+
+            const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
+            const player = myRoleModal.playerList.find(player => player.playerId === memberId);
+
+            if (!player) {
+                alert("참가중 상태가 아닙니다.");
+                return;
+            }
+
+            console.log('playStatus', myRoleModal.playStatus);
+            const $modal = $("#myRoleModal");
+            const roleHtml = player.thief ? "도둑" : "마을주민";
+
+            $modal.find("[name='roleDiv']").empty().html(roleHtml);
+
+            $modal.modal("show");
+        },
+        loadGameStatus: async playNo => {
+            const lastPlayLog = await myRoleModal.readLastPlayLog(playNo);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+
+            myRoleModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            myRoleModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="myRoleModal" role="dialog"
+     aria-labelledby="myRoleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">내 역할</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>첫 라운드에서만 확인 가능합니다.</h3>
+                <hr>
+                <div name="roleDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

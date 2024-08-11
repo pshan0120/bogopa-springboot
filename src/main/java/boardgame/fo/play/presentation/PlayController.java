@@ -387,4 +387,19 @@ public class PlayController {
         return mv;
     }
 
+    @RequestMapping(value = "/selectZombiePlayRecordList")
+    public ModelAndView selectZombiePlayRecordList(CommandMap commandMap) {
+        ModelAndView mv = new ModelAndView("jsonView");
+        Boolean result = false;
+        String resultMsg = "";
+
+        mv.addObject("map", playRecordService.selectZombiePlayRecordList(commandMap.getMap()));
+        result = true;
+
+        mv.addObject("result", result);
+        mv.addObject("resultMsg", resultMsg);
+        return mv;
+    }
+
+
 }

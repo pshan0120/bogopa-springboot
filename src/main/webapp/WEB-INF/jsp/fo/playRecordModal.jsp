@@ -13,7 +13,7 @@
         gfn_setDataVal(data.map, "playRecordForm");
         $("#playRecordModalLabel").text(data.map.playNm);
 
-        var body = $("#playRecordListTbl>tbody");
+        var body = $("#playRecordModal tbody");
         body.empty();
         var str = "";
 
@@ -221,7 +221,7 @@
                 <hr class="my-4"/>
                 <h3>플레이 결과</h3>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="playRecordListTbl">
+                    <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                         <tr>
                             <th scope="col">닉네임</th>

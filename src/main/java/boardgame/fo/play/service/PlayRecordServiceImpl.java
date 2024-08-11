@@ -100,6 +100,11 @@ public class PlayRecordServiceImpl implements PlayRecordService {
         return this.selectPlayRecordListByGameId(map, Game.BECOMING_A_DICTATOR.getGameId());
     }
 
+    @Override
+    public Map<String, Object> selectZombiePlayRecordList(Map<String, Object> map) {
+        return this.selectPlayRecordListByGameId(map, Game.ZOMBIE.getGameId());
+    }
+
     public List<Map<String, Object>> selectMainPlayRecordList(Map<String, Object> map) {
         return playDao.selectMainPlayRecordList(map);
     }

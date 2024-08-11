@@ -250,7 +250,7 @@
                                 QR 이미지로 공유
                             </button>
                             <button type="button" class="btn btn-success btn-block" onclick="document.location.reload()">
-                                마을 입장
+                                플레이 시작
                             </button>
                         </div>
 

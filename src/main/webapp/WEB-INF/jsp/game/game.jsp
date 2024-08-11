@@ -13,6 +13,10 @@
             window.location.href = "/game/boc-custom/play";
         }
 
+        const openZombie = () => {
+            window.location.href = "/game/zombie/play";
+        }
+
         const openFruitShop = () => {
             window.location.href = "/game/fruit-shop/play";
         }
@@ -74,6 +78,9 @@
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="openBocCustom()">
                                 블러드 온 더 클락타워 - 커스톰
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block" onclick="openZombie()">
+                                좀비게임
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="openFruitShop()">
                                 과일가게

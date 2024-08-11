@@ -14,6 +14,7 @@ public enum Game {
     CATCH_A_THIEF("도둑잡기", 1953, 6),
     BECOMING_A_DICTATOR("이리하여 나는 독재자가 되었다", 1954, 7),
     BOC_CUSTOM("BOC CUSTOM", 1955, 4),
+    ZOMBIE("좀비게임", 1956, 8),
     ;
 
     private final String gameName;

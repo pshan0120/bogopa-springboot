@@ -31,6 +31,8 @@ public interface PlayRecordService {
 
     Map<String, Object> selectBecomingADictatorPlayRecordList(Map<String, Object> map);
 
+    Map<String, Object> selectZombiePlayRecordList(Map<String, Object> map);
+
     List<Map<String, Object>> selectMainPlayRecordList(Map<String, Object> map);
 
 }

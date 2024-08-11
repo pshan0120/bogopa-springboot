@@ -9,8 +9,7 @@ import java.util.Optional;
 
 public class SessionUtils {
 
-    // private static Long ADMIN_MEMBER_ID = 25L;
-    private static Long[] ADMIN_MEMBER_IDS = new Long[]{4L, 13L, 14L, 15L, 16L};
+    private static Long[] ADMIN_MEMBER_IDS = new Long[]{4L, 13L, 14L, 15L, 16L, 17L};
 
     public static String getCurrentUserId() {
         try {

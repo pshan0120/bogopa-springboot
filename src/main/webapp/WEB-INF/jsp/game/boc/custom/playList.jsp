@@ -92,7 +92,7 @@
                 htmlString += "		</div>";
                 htmlString += "	</td>";
                 htmlString += "	<td>";
-                htmlString += "		" + value.htmlStringtDt + " ~ ";
+                htmlString += "		" + value.strtDt + " ~ ";
                 if (value.endDt != "") {
                     htmlString += value.endDt;
                 }

@@ -4,8 +4,8 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
-    <script src="<c:url value='/js/game/catchAThief/initializationSetting.js'/>"></script>
-    <script src="<c:url value='/js/game/catchAThief/constants.js'/>"></script>
+    <script src="<c:url value='/js/game/zombie/initializationSetting.js'/>"></script>
+    <script src="<c:url value='/js/game/zombie/constants.js'/>"></script>
 
     <script>
         const PLAY_ID = ${playId};
@@ -13,9 +13,6 @@
         let playStatus = {};
         let originalPlayerList = [];
         let playerList = [];
-        let uptownOutcastList = [];
-        let downtownOutcastList = [];
-        let beforeOutcastList = [];
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -42,9 +39,6 @@
             playSetting = {};
             playStatus = {};
             playerList = [];
-            uptownOutcastList = [];
-            downtownOutcastList = [];
-            beforeOutcastList = [];
 
             console.log('initializationSetting', initializationSetting);
 
@@ -66,7 +60,7 @@
 
             playSetting = initializationSetting.player
                 .find(item => originalPlayerList.length === item.numberOfPlayer);
-            playSetting = {...playSetting, round: initializationSetting.round, money: initializationSetting.money};
+            playSetting = {...playSetting, round: initializationSetting.round};
 
             renderPlayMemberList(originalPlayerList);
         };
@@ -94,81 +88,55 @@
                 .catch(response => console.error('error', response));
         }
 
-        const setTownOfPlayer = () => {
+        const setRoleOfPlayer = () => {
             playerList = createPlayerList(originalPlayerList);
 
-            showPlayerTownList(playerList);
+            showRoleOfPlayerList(playerList);
         }
-
-        const createThiefOfTown = playerListOfTown => {
-            let thiefChosen = false;
-            return playerListOfTown
-                .sort(() => Math.random() - 0.5)
-                .map(player => {
-                    if (!thiefChosen) {
-                        thiefChosen = true;
-                        return {
-                            ...player,
-                            money: 0,
-                            thief: true,
-                        };
-                    }
-                    return {
-                        ...player,
-                        money: playSetting.money,
-                        thief: false,
-                    };
-                })
-                .sort(() => Math.random() - 0.5);
-        };
 
         const createPlayerList = playerList => {
             let playerNumber = 0;
 
-            const playerListOfTown = playerList
+            return playerList
                 .sort(() => Math.random() - 0.5)
                 .map(player => {
-                    const fakePlayerName = FAKE_PLAYER_NAME_LIST[playerNumber];
-
                     playerNumber++;
-                    if (playerNumber <= playSetting.uptown) {
+                    if (playerNumber <= playSetting.zombie) {
                         return {
-                            playerName: player.nickname,
-                            fakePlayerName,
-                            playerId: player.memberId,
-                            hashKey: player.hashKey,
+                            ...player,
                             playerNumber,
-                            town: UPTOWN,
-                            outcast: false,
-                        };
+                            firstZombie: true,
+                            zombie: true,
+                            cure: true,
+                            point: 0,
+                            touchedMemberIdByRound: null,
+                            lastInfectedAt: null,
+                        }
                     }
 
                     return {
-                        playerName: player.nickname,
-                        fakePlayerName,
-                        playerId: player.memberId,
-                        hashKey: player.hashKey,
+                        ...player,
                         playerNumber,
-                        town: DOWNTOWN,
-                        outcast: false,
-                    };
-                });
-
-            return [
-                ...createThiefOfTown(playerListOfTown.filter(player => player.town.name === UPTOWN.name)),
-                ...createThiefOfTown(playerListOfTown.filter(player => player.town.name === DOWNTOWN.name)),
-            ]
+                        firstZombie: false,
+                        zombie: false,
+                        cure: true,
+                        point: 0,
+                        touchedMemberIdByRound: null,
+                        lastInfectedAt: null,
+                    }
+                })
+                .sort(() => Math.random() - 0.5);
         }
 
-        const showPlayerTownList = playerList => {
+        const showRoleOfPlayerList = playerList => {
             const $settingDiv = $("#settingDiv");
             const $playerDiv = $settingDiv.find("div[name='playerDiv']");
             playerList.forEach(player => {
                 console.log('player', player);
                 const found = $playerDiv.find("input[name='items']").toArray()
-                    .filter(itemsObject => player.playerId == $(itemsObject).data("memberId"));
+                    .filter(itemsObject => player.memberId == $(itemsObject).data("memberId"));
 
-                $(found).val(player.town.title + (player.thief ? "(도둑)" : ""));
+                $(found).val(player.firstZombie ? "최초 좀비" : "사람");
 
                 $(found).removeClass();
                 $(found).addClass("form-control form-control-alternative");
@@ -180,9 +148,6 @@
                 playSetting: JSON.stringify(playSetting),
                 playStatus: JSON.stringify(playStatus),
                 playerList: JSON.stringify(playerList),
-                uptownOutcastList: JSON.stringify(uptownOutcastList),
-                downtownOutcastList: JSON.stringify(downtownOutcastList),
-                beforeOutcastList: JSON.stringify(beforeOutcastList),
             }
 
             const request = {
@@ -209,9 +174,6 @@
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            uptownOutcastList = JSON.parse(lastPlayLogJson.uptownOutcastList);
-            downtownOutcastList = JSON.parse(lastPlayLogJson.downtownOutcastList);
-            beforeOutcastList = JSON.parse(lastPlayLogJson.beforeOutcastList);
 
             console.log('game status loaded !!');
         }
@@ -243,70 +205,23 @@
                 return;
             }
 
-            if (uptownOutcastList.length === 0
-                || downtownOutcastList.length === 0) {
-                alert("이번 라운드의 추방자가 선택되지 않았습니다.");
-                throw new Error("추방자 미선택");
-            }
-
             if (!confirm("결과를 계산한 뒤 저장하시겠습니까?")) {
                 return;
             }
 
-            steal();
-            move();
+            infect();
 
-            uptownOutcastList = [];
-            downtownOutcastList = [];
-            playerList.forEach(player => player.outcast = false);
+            playerList.forEach(player => player.touchedMemberIdByRound = null);
 
             playStatus.round = playStatus.round + 1;
             saveGameStatus();
             renderRound();
         }
 
-        const steal = () => {
-            const thiefPlayerList = playerList.filter(player => player.thief);
+        const infect = () => {
+            // TODO: 감염 계산
 
-            thiefPlayerList.forEach(thiefPlayer => {
-                if (thiefPlayer.outcast) {
-                    return;
-                }
-
-                if (thiefPlayer.town.name === UPTOWN.name) {
-                    const uptownPlayerList = playerList.filter(player => {
-                        return player.town.name === UPTOWN.name
-                            && !uptownOutcastList.some(outcast => outcast.playerName === player.playerName)
-                    });
-
-                    uptownPlayerList.forEach(player => {
-                        player.money = player.money - playSetting.stolenMoney;
-                        thiefPlayer.money = thiefPlayer.money + playSetting.stolenMoney;
-                    });
-                    return;
-                }
-
-                const downtownPlayerList = playerList.filter(player => {
-                    return player.town.name === DOWNTOWN.name
-                        && !downtownOutcastList.some(outcast => outcast.playerName === player.playerName)
-                });
-
-                downtownPlayerList.forEach(player => {
-                    player.money = player.money - playSetting.stolenMoney;
-                    thiefPlayer.money = thiefPlayer.money + playSetting.stolenMoney;
-                });
-            })
-
-        }
-
-        const move = () => {
-            const uptownOutcast = uptownOutcastList.pop();
-            playerList.find(player => player.playerName === uptownOutcast.playerName).town = DOWNTOWN;
-            beforeOutcastList.push(uptownOutcast);
-
-            const downtownOutcast = downtownOutcastList.pop();
-            playerList.find(player => player.playerName === downtownOutcast.playerName).town = UPTOWN;
-            beforeOutcastList.push(downtownOutcast);
+            // touchedMemberIdByRound
         }
 
         const renderRound = () => {
@@ -319,21 +234,17 @@
             $roundDiv.show();
 
             $roundDiv.find("span[name='roundTitle']").text(playStatus.round + " / " + playSetting.round);
-
-            renderTown($roundDiv.find("div[name='uptownDiv']"), UPTOWN);
-            renderTown($roundDiv.find("div[name='downtownDiv']"), DOWNTOWN);
-
             console.log('playerList', playerList);
         }
 
-        const renderTown = ($townDiv, town) => {
-            const $townTitle = $townDiv.find("span[name='townTitle']");
+        const renderTown = ($touchDiv, town) => {
+            const $townTitle = $touchDiv.find("span[name='townTitle']");
             $townTitle.empty().append(town.title);
 
-            const $playerDiv = $townDiv.find("div[name='playerDiv']");
+            const $playerDiv = $touchDiv.find("div[name='playerDiv']");
             $playerDiv.empty().append(createPlayerHtml(town));
 
-            const $outcastDiv = $townDiv.find("div[name='outcastDiv']");
+            const $outcastDiv = $touchDiv.find("div[name='outcastDiv']");
             $outcastDiv.empty();
         }
 
@@ -350,36 +261,6 @@
                 }, "");
         }
 
-        const setOutcast = playerName => {
-            if (beforeOutcastList.some(outcast => outcast.playerName === playerName)) {
-                alert("직전 추방된 사람은 다음 라운드가 지나서 추방될 수 있습니다.");
-                return;
-            }
-
-            const player = playerList.find(player => player.playerName === playerName);
-            player.outcast = true;
-
-            if (player.town.name === UPTOWN.name) {
-                const beforeOutcastIndex = beforeOutcastList.findIndex(beforeOutcast => beforeOutcast.town.name === UPTOWN.name);
-                beforeOutcastList.splice(beforeOutcastIndex, 1);
-
-                uptownOutcastList.push(player);
-                const $roundDiv = $("#roundDiv");
-                const $uptownDiv = $roundDiv.find("div[name='uptownDiv']");
-                $uptownDiv.find("div[name='playerDiv']").empty();
-                $uptownDiv.find("div[name='outcastDiv']").empty().html(player.playerName);
-                return;
-            }
-
-            const beforeOutcastIndex = beforeOutcastList.findIndex(beforeOutcast => beforeOutcast.town.name === DOWNTOWN.name);
-            beforeOutcastList.splice(beforeOutcastIndex, 1);
-
-            downtownOutcastList.push(player);
-            const $roundDiv = $("#roundDiv");
-            const $downtownDiv = $roundDiv.find("div[name='downtownDiv']");
-            $downtownDiv.find("div[name='playerDiv']").empty();
-            $downtownDiv.find("div[name='outcastDiv']").empty().html(player.playerName);
-        }
 
         const resetGame = () => {
             if (!confirm("현재까지의 모든 진행 상황을 초기화하고 게임을 처음부터 진행합니다.")) {
@@ -497,6 +378,14 @@
             return "도둑 승리!";
         }
 
+        const openTouchModal = () => {
+            touchModal.open(playerList);
+        }
+
+        const openUseCureModal = () => {
+            useCureModal.open(playerList);
+        }
+
         const openTownStatusModal = () => {
             townStatusModal.open();
         }
@@ -513,40 +402,7 @@
             qrLoginModal.open(playerList);
         }
 
-        const openMiniGameModal = () => {
-            if (uptownOutcastList.length === 0
-                || downtownOutcastList.length === 0) {
-                alert("이번 라운드의 추방자가 선택되지 않았습니다.");
-                throw new Error("추방자 미선택");
-            }
 
-            miniGameModal.open(uptownOutcastList[0], downtownOutcastList[0]);
-        }
-
-        const setMiniGameResult = () => {
-            if (!miniGameModal.winner
-                || !miniGameModal.loser) {
-                alert("게임 결과가 선택되지 않았습니다.");
-                throw new Error("게임 결과 미선택");
-            }
-
-            const winner = playerList.find(player => player.playerName === miniGameModal.winner);
-            const loser = playerList.find(player => player.playerName === miniGameModal.loser);
-
-            if (!confirm("승리한 플레이어는 [" + winner.playerName + "]입니다. 저장하시겠습니까?")) {
-                return;
-            }
-
-            winner.money = winner.money + playSetting.stolenMoney;
-            loser.money = loser.money - playSetting.stolenMoney;
-
-            miniGameModal.winner = null;
-            miniGameModal.loser = null;
-
-            alert(winner.playerName + " +" + playSetting.stolenMoney + " / " + loser.playerName + " -" + playSetting.stolenMoney);
-
-            saveGameStatus();
-        }
 
     </script>
 </head>
@@ -562,7 +418,7 @@
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">도둑잡기</h1>
+                        <h1 class="text-white">좀비 게임</h1>
                         <p class="text-lead text-light">호스트 참조</p>
                     </div>
                 </div>
@@ -590,8 +446,8 @@
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-default" onclick="setTownOfPlayer()">
-                                마을 지정
+                            <button type="button" class="btn btn-default" onclick="setRoleOfPlayer()">
+                                역할 지정
                             </button>
                             <button type="button" class="btn btn-primary" onclick="beginGame()">
                                 게임 시작
@@ -606,25 +462,13 @@
                             [<span name="roundTitle"></span>] 번째 라운드
                         </h2>
                     </div>
-                    <div class="card-body" name="townDiv">
-                        <div name="uptownDiv">
-                            <h4><span name="townTitle"></span> 추방자</h4>
-                            <div name="playerDiv"></div>
-                            <div name="outcastDiv"></div>
-                        </div>
-                        <hr>
-                        <div name="downtownDiv">
-                            <h4><span name="townTitle"></span> 추방자</h4>
-                            <div name="playerDiv"></div>
-                            <div name="outcastDiv"></div>
-                        </div>
-                        <hr>
-                        <div name="miniGameDiv">
-                            <button type="button" class="btn btn-success btn-block" onclick="openMiniGameModal()">
-                                미니게임
+                    <div class="card-body" name="touchDiv">
+                        <div name="buttonDiv">
+                            <button type="button" class="btn btn-default btn-block" onclick="openTouchModal()">
+                                터치 모달 표시
                             </button>
-                            <button type="button" class="btn btn-warning btn-block" onclick="setMiniGameResult()">
-                                미니게임 결과 적용
+                            <button type="button" class="btn btn-default btn-block" onclick="openUseCureModal()">
+                                치료제 사용 모달 표시
                             </button>
                         </div>
                     </div>
@@ -682,9 +526,6 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
-                                주민 보기
-                            </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
                                 재산 보기
                             </button>
@@ -704,10 +545,10 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/miniGameModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/touchModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/useCureModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/moneyStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/guideModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/qrLoginModal.jspf" %>
 
