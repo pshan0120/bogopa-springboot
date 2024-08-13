@@ -522,8 +522,11 @@
             if (filteredBy === "firstNight") {
                 filteredPlayerList = playerList
                     .filter(player => {
-                        const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
-                        return character.firstNight > 0;
+                        // const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
+                        const playedCharacter = playedCharacterList
+                            .find(playedCharacter => playedCharacter.characterId === player.characterId);
+                        const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, playedCharacter.displayedCharacterId);
+                        return displayedCharacter.firstNight > 0;
                     })
                     .sort((prev, next) => {
                         const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
@@ -535,8 +538,11 @@
             if (filteredBy === "otherNight") {
                 filteredPlayerList = playerList
                     .filter(player => {
-                        const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
-                        return character.otherNight > 0;
+                        const playedCharacter = playedCharacterList
+                            .find(playedCharacter => playedCharacter.characterId === player.characterId);
+                        const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, playedCharacter.displayedCharacterId);
+                        //const character = Character.getInCharacterListById(selectedCharacterList, player.characterId);
+                        return displayedCharacter.otherNight > 0;
                     })
                     .sort((prev, next) => {
                         const prevCharacter = Character.getInCharacterListById(selectedCharacterList, prev.characterId);
@@ -555,26 +561,21 @@
 
                         const wikiUrl = "https://wiki.bloodontheclocktower.com/";
                         const characterHtml =
-                            `<a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(player.characterId)}" target="_blank">
-                                <img src="\${character.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />
-                            </a>`;
+                            `<a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(player.characterId)}" target="_blank" class="\${fontClass}">\${character.name}</a>`;
 
                         const playedCharacter = playedCharacterList
                             .find(playedCharacter => playedCharacter.characterId === player.characterId);
 
                         const displayedCharacter = Character.getInCharacterListById(selectedCharacterList, playedCharacter.displayedCharacterId);
+                        const displayedFontClass = Character.calculateCharacterNameClass(displayedCharacter.team);
                         const displayedCharacterHtml = playedCharacter.characterId !== playedCharacter.displayedCharacterId
-                            ? `→ <a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(displayedCharacter.id)}" target="_blank">
-                                    <img src="\${displayedCharacter.image}" class="img-responsive w-25 d-inline" style="max-width:15%" />
-                                </a>`
+                            ? `→<a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(displayedCharacter.id)}" target="_blank" class="\${displayedFontClass}">\${displayedCharacter.name}</a>`
                             : "";
 
                         const statusHtml =
                             `<tr class="text-center" name="\${player.memberId}" data-member-id="\${player.memberId}">
                                 <td class="pl-1 text-left">
-                                    \${player.seatNumber}. \${player.nickname}(<span class="\${fontClass}">\${character.name}</span>)
-                                    \${characterHtml}
-                                    \${displayedCharacterHtml}
+                                    \${player.seatNumber}. \${player.nickname}<br/>\${characterHtml}\${displayedCharacterHtml}
                                 </td>
                                 <td class="pl-1">
                                     <input type="checkbox" name="diedCheckbox" \${player.died ? "checked" : ""}>
@@ -1001,7 +1002,7 @@
         }
 
 
-        const restNomination = () => {
+        /*const restNomination = () => {
             if (!confirm("지명 상태를 초기화하시겠습니까?")) {
                 return;
             }
@@ -1015,7 +1016,7 @@
             });
 
             renderPlayerStatusList();
-        }
+        }*/
 
         const openAddTravellerCharacterModal = () => {
             addTravellerModal.open(
@@ -1424,12 +1425,13 @@
                                             name="hideCharacterToPlayerButton" onclick="hideCharacterToPlayer()">
                                         플레이어 캐릭터 숨기기
                                     </button>
-                                    <button type="button" class="btn btn-warning btn-block"
+                                    <%--<button type="button" class="btn btn-warning btn-block"
                                             name="restNominationButton" onclick="restNomination()">
                                         지명 초기화
-                                    </button>
+                                    </button>--%>
                                     <button type="button" class="btn btn-info btn-block display-none"
-                                            name="hideCharacterToPlayerButton" onclick="openAddTravellerCharacterModal()">
+                                            name="hideCharacterToPlayerButton"
+                                            onclick="openAddTravellerCharacterModal()">
                                         여행자 추가
                                     </button>
                                     <button type="button" class="btn btn-primary btn-block"
@@ -1467,11 +1469,6 @@
                             <div class="card-header bg-white border-0">
                                 <h2>
                                     처형 투표
-                                    <%--<a data-toggle="collapse" href="#executionVoteDiv" role="button"
-                                       aria-expanded="false"
-                                       aria-controls="executionVoteDiv">
-                                        열기/닫기
-                                    </a>--%>
                                 </h2>
                             </div>
                             <div class="card-body">
