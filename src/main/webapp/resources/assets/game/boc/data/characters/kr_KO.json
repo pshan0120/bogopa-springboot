@@ -446,7 +446,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "당신은 악한 플레이어가 몇 쌍으로 앉아 있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.",
+        "ability": "첫날 밤, 당신은 악한 플레이어가 몇 쌍으로 앉아 있는지 알고 시작합니다. 예를 들어 악한 플레이어가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/chef.webp"
     },
     {
@@ -474,7 +474,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "첫날 밤 악마로부터 가장 가까운 하수인까지 얼마나 떨어져 있는지 알게 됩니다. 가령 악마와 하수인이 붙어 있다면 1입니다.",
+        "ability": "첫날 밤, 악마로부터 가장 가까운 하수인까지 얼마나 떨어져 있는지 알게 됩니다. 가령 악마와 하수인이 붙어 있다면 1입니다.",
         "image": "/images/fo/boc/icons/townsfolk/clockmaker.webp"
     },
     {
@@ -566,7 +566,7 @@
             "Survives execution"
         ],
         "setup": false,
-        "ability": "매일 밤 어제 밤과 다른 살아있는 플레이어를 선택합니다. 그는 내일 처형되도 죽지 않습니다.",
+        "ability": "매일 밤, 어제 밤과 다른 살아있는 플레이어를 선택합니다. 그는 내일 처형되도 죽지 않습니다.",
         "image": "/images/fo/boc/icons/minion/devilsadvocate.webp"
     },
     {
@@ -603,7 +603,7 @@
         "otherNightReminder": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
         "reminders": [],
         "setup": false,
-        "ability": "매일 밤 플레이어(본인이나 여행자 제외)를 선택합니다. 선한 역할 1개와 악한 역할 1개를 알게 되는데, 그 중 한 개가 맞습니다.",
+        "ability": "매일 밤, 플레이어(본인이나 여행자 제외)를 선택합니다. 선한 역할 1개와 악한 역할 1개를 알게 되는데, 그 중 한 개가 맞습니다.",
         "image": "/images/fo/boc/icons/townsfolk/dreamer.webp"
     },
     {
@@ -631,6 +631,9 @@
     },
     {
         "id": "duchess",
+        "name": "공작부인",
+        "edition": "",
+        "team": "fabled",
         "firstNightReminder": "",
         "otherNight": 1,
         "otherNightReminder": "Wake each player marked \"Visitor\" or \"False Info\" one at a time. Show them the Duchess token, then fingers (1, 2, 3) equaling the number of evil players marked \"Visitor\" or, if you are waking the player marked \"False Info,\" show them any number of fingers except the number of evil players marked \"Visitor.\"",
@@ -639,9 +642,7 @@
             "False Info"
         ],
         "setup": false,
-        "name": "Duchess",
-        "team": "fabled",
-        "ability": "Each day, 3 players may choose to visit you. At night*, each visitor learns how many visitors are evil, but 1 gets false info.",
+        "ability": "매일 낮, 3명의 플레이어들은 밤에 공작부인을 방문하기로 선택할 수 있습니다. 정확히 3명의 플레이어가 방문하겠다고 지원하면 밤에, 각 방문자는 그 중 몇 명이 악한 편인지 알 수 있습니다. 다만 그 중 1명은 거짓 정보를 받습니다.",
         "image": "/images/fo/boc/icons/fabled/duchess.webp"
     },
     {
@@ -850,7 +851,7 @@
             "Red herring"
         ],
         "setup": false,
-        "ability": "매일 밤 당신은 당신이 지정한 2명의 플레이어 중 악마가 있는지 알게 됩니다. 다만 실제로는 선한 플레이어지만 당신에게는 악마로 보이는 사람이 1명 있습니다.",
+        "ability": "매일 밤, 당신은 당신이 지정한 2명의 플레이어 중 악마가 있는지 알게 됩니다. 다만 실제로는 선한 플레이어지만 당신에게는 악마로 보이는 사람이 1명 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/fortuneteller.webp"
     },
     {
@@ -938,7 +939,7 @@
             "Dead"
         ],
         "setup": true,
-        "ability": "첫날 밤 참여중인 모든 이방인 역할을 알게 됩니다. 오늘 낮에 이방인이 죽었다면 오늘 밤 1명을 죽일 수 있습니다. [-1 또는 +1 이방인]",
+        "ability": "첫날 밤, 참여중인 모든 이방인 역할을 알게 됩니다. 오늘 낮에 이방인이 죽었다면 오늘 밤 1명을 죽일 수 있습니다. [-1 또는 +1 이방인]",
         "image": "/images/fo/boc/icons/minion/godfather.webp"
     },
     {
@@ -1002,7 +1003,7 @@
             "Grandchild"
         ],
         "setup": false,
-        "ability": "첫날 밤 당신의 손주인 선한 플레이어와 그의 역할을 알 수 있습니다. 악마가 손주를 죽이면 당신도 죽습니다.",
+        "ability": "첫날 밤, 당신의 손주인 선한 플레이어와 그의 역할을 알 수 있습니다. 악마가 손주를 죽이면 당신도 죽습니다.",
         "image": "/images/fo/boc/icons/townsfolk/grandmother.webp"
     },
     {
@@ -1037,7 +1038,7 @@
     },
     {
         "id": "harpy",
-        "name": "Harpy",
+        "name": "하피",
         "edition": "",
         "team": "minion",
         "firstNight": 24,
@@ -1049,7 +1050,7 @@
             "2nd"
         ],
         "setup": false,
-        "ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or one or both might die.",
+        "ability": "매일 밤, 2명의 플레이어를 순서대로 선택합니다. 내일, 첫 번째 플레이어는 두 번째 플레이어가 악이라는 광기에 빠집니다. 그렇게 하지 않으면 그 중 한 명 또는 둘 다 죽을 수 있습니다.",
         "image": "/images/fo/boc/icons/minion/harpy.webp"
     },
     {
@@ -1172,7 +1173,7 @@
             "Wrong"
         ],
         "setup": false,
-        "ability": "당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.",
+        "ability": "첫날 밤, 당신은 이야기꾼이 지정한 2명의 참가자 중 한 명이 어떤 역할을 가진 하수인인지 알고 시작합니다.",
         "image": "/images/fo/boc/icons/townsfolk/investigator.webp"
     },
     {
@@ -1209,18 +1210,19 @@
     },
     {
         "id": "kazali",
-        "name": "Kazali",
+        "name": "카잘리",
+        "edition": "",
         "team": "demon",
-        "image": "/images/fo/boc/icons/demon/kazali.webp",
-        "ability": "Each night*, choose a player: they die. [You choose which players are Minions. -? to +? Outsiders]",
-        "setup": true,
         "firstNight": 2,
         "firstNightReminder": "The Kazali points at a player and a Minion on the character sheet. Replace their old character token with the Minion token, show them the “You Are” info token then the Minion character token, and give a thumbs down. Repeat until the normal number of Minions exist. Put the Kazali to sleep.",
         "otherNight": 35,
         "otherNightReminder": "The Kazali points to a player. That player dies.",
         "reminders": [
             "Dead"
-        ]
+        ],
+        "setup": true,
+        "ability": "첫날 밤을 제외한 매일 밤, 당신은 플레이어를 선택하고 그 참가자는 사망합니다. [당신은 어떤 플레이어가 하수인인지 선택합니다. -? ~ +? 이방인]",
+        "image": "/images/fo/boc/icons/demon/kazali.webp"
     },
     {
         "id": "king",
@@ -1319,7 +1321,7 @@
             "Wrong"
         ],
         "setup": false,
-        "ability": "당신은 이야기꾼이 지정한 2명의 참가자 중 1명이 어떤 역할을 가진 이방인인지 알고 시작합니다.",
+        "ability": "첫날 밤, 당신은 이야기꾼이 지정한 2명의 참가자 중 1명이 어떤 역할을 가진 이방인인지 알고 시작합니다.",
         "image": "/images/fo/boc/icons/townsfolk/librarian.webp"
     },
     {
@@ -1343,7 +1345,7 @@
             }
         ],
         "setup": true,
-        "ability": "매일 밤 하수인들은 누가 애긔앙마를 돌볼지 정합니다. 매일 밤 플레이어가 죽을 수 있습니다. [+1 하수인]",
+        "ability": "매일 밤, 하수인들은 누가 애긔앙마를 돌볼지 정합니다. 매일 밤 플레이어가 죽을 수 있습니다. [+1 하수인]",
         "image": "/images/fo/boc/icons/demon/lilmonsta.webp"
     },
     {
@@ -1790,7 +1792,7 @@
             "Poisoned"
         ],
         "setup": false,
-        "ability": "매일 밤 당신은 1명의 플레이어를 선택합니다. 그 플레이어는 오늘 밤부터 내일 해 질 녘까지 중독 상태가 됩니다.",
+        "ability": "매일 밤, 당신은 1명의 플레이어를 선택합니다. 그 플레이어는 오늘 밤부터 내일 해 질 녘까지 중독 상태가 됩니다.",
         "image": "/images/fo/boc/icons/minion/poisoner.webp"
     },
     {
@@ -1884,12 +1886,12 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "매일 밤 당신은 플레이어를 선택하고 그는 중독됩니다. 이전 중독된 플레이어는 죽고, 그 후 건강해집니다.",
+        "ability": "매일 밤, 당신은 플레이어를 선택하고 그는 중독됩니다. 이전 중독된 플레이어는 죽고, 그 후 건강해집니다.",
         "image": "/images/fo/boc/icons/demon/pukka.webp"
     },
     {
         "id": "puzzlemaster",
-        "name": "Puzzlemaster",
+        "name": "퍼즐마스터",
         "edition": "",
         "team": "outsider",
         "firstNight": 0,
@@ -1901,7 +1903,7 @@
             "Guess used"
         ],
         "setup": false,
-        "ability": "1 player is drunk, even if you die. If you guess (once) who it is, learn the Demon player, but guess wrong & get false info.",
+        "ability": "1명의 플레이어는 (비록 당신이 죽더라도) 취해 있습니다. 게임 중 1번, 만약 당신이 그가 누구인지 맞춘다면 어떤 사람이 악마인지 알게 됩니다. 하지만 추측이 틀렸다면 거짓 정보를 받게 됩니다.",
         "image": "/images/fo/boc/icons/outsider/puzzlemaster.webp"
     },
     {
@@ -2014,7 +2016,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "매일 밤 이야기꾼을 만나면 개인적으로 두 가지 사실을 알게 됩니다. 그 중 하나는 참이고 하나는 거짓입니다.",
+        "ability": "매일 밤, 이야기꾼을 만나면 개인적으로 두 가지 사실을 알게 됩니다. 그 중 하나는 참이고 하나는 거짓입니다.",
         "image": "/images/fo/boc/icons/townsfolk/savant.webp"
     },
     {
@@ -2134,7 +2136,7 @@
             "Poisoned"
         ],
         "setup": false,
-        "ability": "매일 밤 살아있는 플레이어를 선택합니다. 만약 그가 악마라면 당신과 역할과 성향이 교체되며 그는 영원히 중독됩니다.",
+        "ability": "매일 밤, 살아있는 플레이어를 선택합니다. 만약 그가 악마라면 당신과 역할과 성향이 교체되며 그는 영원히 중독됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/snakecharmer.webp"
     },
     {
@@ -2189,7 +2191,7 @@
         "otherNightReminder": "Show the Grimoire to the Spy for as long as they need.",
         "reminders": [],
         "setup": false,
-        "ability": "매일 밤 당신은 이야기꾼을 통해 게임 진행상황을 볼 수 있습니다. 당신은 악한 편이지만 살아서나 죽어서나 다른 사람들에게 마을주민이나 이방인으로 보일 수 있습니다.",
+        "ability": "매일 밤, 당신은 이야기꾼을 통해 게임 진행상황을 볼 수 있습니다. 당신은 악한 편이지만 살아서나 죽어서나 다른 사람들에게 마을주민이나 이방인으로 보일 수 있습니다.",
         "image": "/images/fo/boc/icons/minion/spy.webp"
     },
     {
@@ -2494,7 +2496,7 @@
             "Cursed"
         ],
         "setup": false,
-        "ability": "매일 밤 플레이어를 선택합니다. 만약 그가 내일 지명한다면 죽습니다. 만약 3명의 플레이어만 살아 있다면 이 능력은 사라집니다.",
+        "ability": "매일 밤, 플레이어를 선택합니다. 만약 그가 내일 지명한다면 죽습니다. 만약 3명의 플레이어만 살아 있다면 이 능력은 사라집니다.",
         "image": "/images/fo/boc/icons/minion/witch.webp"
     },
     {

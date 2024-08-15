@@ -9,9 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="touchModal 진행중">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="투표 개선">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,14 +311,8 @@
       <workItem from="1722867272042" duration="8429000" />
       <workItem from="1723377705216" duration="10975000" />
       <workItem from="1723510468184" duration="1962000" />
-      <workItem from="1723563368867" duration="2529000" />
-    </task>
-    <task id="LOCAL-00120" summary="openRoleGuideModal 정리">
-      <created>1717338628565</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1717338628565</updated>
+      <workItem from="1723563368867" duration="3096000" />
+      <workItem from="1723682934067" duration="3358000" />
     </task>
     <task id="LOCAL-00121" summary="독재자 1차 완성">
       <created>1717606880862</created>
@@ -655,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1723393239275</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="투표 개선">
+      <created>1723566164923</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1723566164923</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,7 +678,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="탄시빌 추가" />
     <MESSAGE value="배경음악 추가" />
     <MESSAGE value="pocketGrimoire 추가" />
     <MESSAGE value="setCharacter" />
@@ -701,7 +702,8 @@
     <MESSAGE value="개선" />
     <MESSAGE value="스크립트 추가" />
     <MESSAGE value="touchModal 진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="touchModal 진행중" />
+    <MESSAGE value="투표 개선" />
+    <option name="LAST_COMMIT_MESSAGE" value="투표 개선" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

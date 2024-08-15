@@ -152,7 +152,7 @@
             $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
 
             travellerCharacterList = characterList
-                .filter(character => character.team === "traveller" && character.edition === selectedEditionId)
+                .filter(character => character.team === POSITION.TRAVELLER.name && character.edition === selectedEditionId)
                 .sort((prev, next) => prev.id - next.id);
 
             renderCharacterList(scriptJson, characterList);
@@ -362,6 +362,20 @@
                     selected.remindersGlobal.forEach(reminder => {
                         playedReminderList.push({
                             characterId: selected.id,
+                            reminder,
+                        });
+                    });
+                }
+            });
+
+            selectedCharacterList.forEach(selected => {
+                const character = Character.getInCharacterListById(selectedCharacterList, selected.id);
+                if (character.team === POSITION.FABLED.name
+                    && selected.reminders
+                    && selected.reminders.length > 0) {
+                    selected.reminders.forEach(reminder => {
+                        playedReminderList.push({
+                            characterId: character.id,
                             reminder,
                         });
                     });
