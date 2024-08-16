@@ -164,6 +164,10 @@
         if (GAME.BOC_CUSTOM == gameNo) {
             location.href = "/game/boc-custom/play/" + playNo;
         }
+
+        if (GAME.ZOMBIE == gameNo) {
+            location.href = "/game/zombie/play/" + playNo;
+        }
     };
 
 </script>

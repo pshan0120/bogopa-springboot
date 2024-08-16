@@ -5,6 +5,8 @@
         playerList: [],
         open: playerList => {
             useCureModal.playerList = playerList;
+            // TODO: 작업해야 함
+            return;
 
 
 

@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="boardgame:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="투표 개선">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="번역중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +48,23 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myAllFileTypesSelected" value="false" />
+    <option name="mySelectedFileTypes">
+      <set>
+        <option value="ActionScript" />
+        <option value="Dart" />
+        <option value="Groovy" />
+        <option value="HTML" />
+        <option value="JAVA" />
+        <option value="JavaScript" />
+        <option value="Kotlin" />
+        <option value="TypeScript" />
+        <option value="XML" />
+        <option value="protobuf" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="2eHA3fct1a9bGsS5ZRBM3WuZOkv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -58,37 +73,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/zombie/jspf&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "C:/boardgame/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "179d0c3cf65e4287e7d6cfdf0bd6855d"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\zombie\jspf" />
-      <recent name="D:\dev\bogopa\src\main\webapp\js\game" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
+      <recent name="C:\boardgame\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\messages" />
+      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom\jspf" />
+      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
@@ -111,7 +133,7 @@
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
       <option name="UPDATING_POLICY" value="update-resources" />
       <deployment>
-        <artifact name="bogopa:war exploded">
+        <artifact name="boardgame:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
@@ -192,6 +214,7 @@
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
           <artifact name="bogopa:war exploded" />
+          <artifact name="boardgame:war exploded" />
         </option>
       </method>
     </configuration>
@@ -306,13 +329,37 @@
       <workItem from="1722176101720" duration="7169000" />
       <workItem from="1722266325418" duration="8127000" />
       <workItem from="1722343441139" duration="9758000" />
-      <workItem from="1722524067417" duration="5867000" />
-      <workItem from="1722696624761" duration="4444000" />
-      <workItem from="1722867272042" duration="8429000" />
-      <workItem from="1723377705216" duration="10975000" />
-      <workItem from="1723510468184" duration="1962000" />
-      <workItem from="1723563368867" duration="3096000" />
-      <workItem from="1723682934067" duration="3358000" />
+      <workItem from="1722524067417" duration="5752000" />
+      <workItem from="1722661724853" duration="7555000" />
+      <workItem from="1723819280615" duration="5540000" />
+    </task>
+    <task id="LOCAL-00117" summary="기각 진행중">
+      <created>1717259928663</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1717259928664</updated>
+    </task>
+    <task id="LOCAL-00118" summary="기각 진행중">
+      <created>1717260678088</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1717260678088</updated>
+    </task>
+    <task id="LOCAL-00119" summary="기각 진행중">
+      <created>1717337404540</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1717337404541</updated>
+    </task>
+    <task id="LOCAL-00120" summary="openRoleGuideModal 정리">
+      <created>1717338628565</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1717338628565</updated>
     </task>
     <task id="LOCAL-00121" summary="독재자 1차 완성">
       <created>1717606880862</created>
@@ -616,48 +663,20 @@
       <updated>1722355883750</updated>
     </task>
     <task id="LOCAL-00164" summary="번역중">
-      <created>1722531515693</created>
+      <created>1722677147338</created>
       <option name="number" value="00164" />
       <option name="presentableId" value="LOCAL-00164" />
       <option name="project" value="LOCAL" />
-      <updated>1722531515693</updated>
+      <updated>1722677147338</updated>
     </task>
-    <task id="LOCAL-00165" summary="자리 바꾸기 할 차례">
-      <created>1722701079793</created>
+    <task id="LOCAL-00165" summary="addTravellerModal 차례">
+      <created>1722692195028</created>
       <option name="number" value="00165" />
       <option name="presentableId" value="LOCAL-00165" />
       <option name="project" value="LOCAL" />
-      <updated>1722701079793</updated>
+      <updated>1722692195028</updated>
     </task>
-    <task id="LOCAL-00166" summary="개선">
-      <created>1722875397545</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL-00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1722875397545</updated>
-    </task>
-    <task id="LOCAL-00167" summary="스크립트 추가">
-      <created>1723379193235</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1723379193235</updated>
-    </task>
-    <task id="LOCAL-00168" summary="touchModal 진행중">
-      <created>1723393239275</created>
-      <option name="number" value="00168" />
-      <option name="presentableId" value="LOCAL-00168" />
-      <option name="project" value="LOCAL" />
-      <updated>1723393239275</updated>
-    </task>
-    <task id="LOCAL-00169" summary="투표 개선">
-      <created>1723566164923</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1723566164923</updated>
-    </task>
-    <option name="localTasksCounter" value="170" />
+    <option name="localTasksCounter" value="166" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -678,6 +697,9 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
+    <MESSAGE value="독재자 수정" />
+    <MESSAGE value="탄시빌 캐릭터 추가" />
+    <MESSAGE value="탄시빌 추가" />
     <MESSAGE value="배경음악 추가" />
     <MESSAGE value="pocketGrimoire 추가" />
     <MESSAGE value="setCharacter" />
@@ -697,13 +719,10 @@
     <MESSAGE value="오타 수정" />
     <MESSAGE value="밤순서 가이드 추가" />
     <MESSAGE value="한글화" />
-    <MESSAGE value="번역중" />
-    <MESSAGE value="자리 바꾸기 할 차례" />
-    <MESSAGE value="개선" />
     <MESSAGE value="스크립트 추가" />
-    <MESSAGE value="touchModal 진행중" />
-    <MESSAGE value="투표 개선" />
-    <option name="LAST_COMMIT_MESSAGE" value="투표 개선" />
+    <MESSAGE value="번역중" />
+    <MESSAGE value="addTravellerModal 차례" />
+    <option name="LAST_COMMIT_MESSAGE" value="addTravellerModal 차례" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

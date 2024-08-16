@@ -27,6 +27,12 @@
             const playSetting = initializationSetting.player
                 .find(item => moneyStatusModal.playerList.length === item.numberOfPlayer);
 
+            // TOOD: 작업해야 함
+
+            /*const $settingDiv = $touchModal.find("div[name='settingDiv']");
+            const initializationHtml = `최초 좀비 \${playSetting.zombie}명`;
+            $settingDiv.find("span[name='townInitialization']").html(initializationHtml);*/
+
             const townInitializationHtml = `
                 \${UPTOWN.title} \${playSetting.uptown}명,
                 \${DOWNTOWN.title} \${playSetting.downtown}명,

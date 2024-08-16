@@ -3,15 +3,22 @@
 <script>
     const touchModal = {
         playerList: [],
+        touchingMemberId: null,
+        touchedMemberId: null,
         open: playerList => {
+            touchModal.touchingMemberId = null;
+            touchModal.touchedMemberId = null;
             touchModal.playerList = playerList;
 
-            const $touchModal = $("#touchModal");
-            const $settingDiv = $touchModal.find("div[name='settingDiv']");
-            const initializationHtml = `최초 좀비 \${playSetting.zombie}명`;
-            $settingDiv.find("span[name='townInitialization']").html(initializationHtml);
+            touchModal.renderTouchingDiv();
 
+            const $touchModal = $("#touchModal");
+            $touchModal.modal("show");
+        },
+        renderTouchingDiv: () => {
+            const $touchModal = $("#touchModal");
             const touchingHtml = touchModal.playerList
+                .filter(player => !player.touchedMemberIdByRound)
                 .reduce((prev, next) => {
                     return prev +
                         `<button class="btn btn-sm btn-outline-default mr-1 my-1"
@@ -19,11 +26,23 @@
                             \${next.nickname}
                         </button>
                         <br>`;
-                }, "");
+                }, `<h4>터치할 플레이어</h4>`);
             const $touchingDiv = $touchModal.find("div[name='touching']");
             $touchingDiv.empty().html(touchingHtml);
 
+            const $touchedDiv = $touchModal.find("div[name='touched']");
+            $touchedDiv.empty();
+        },
+        setTouching: touchingMemberId => {
+            touchModal.touchingMemberId = touchingMemberId;
+            touchModal.touchedMemberId = null;
+            touchModal.renderTouchedDiv(touchingMemberId);
+            touchModal.renderMessageDiv();
+        },
+        renderTouchedDiv: touchingMemberId => {
             const touchedHtml = touchModal.playerList
+                .filter(player => !player.touchedMemberIdByRound)
+                .filter(player => player.memberId !== touchingMemberId)
                 .reduce((prev, next) => {
                     return prev +
                         `<button class="btn btn-sm btn-outline-default mr-1 my-1"
@@ -31,19 +50,80 @@
                             \${next.nickname}
                         </button>
                         <br>`;
-                }, "");
+                }, `<h4>터치당할 플레이어</h4>`);
+            const $touchModal = $("#touchModal");
             const $touchedDiv = $touchModal.find("div[name='touched']");
             $touchedDiv.empty().html(touchedHtml);
-
-            $touchModal.modal("show");
         },
-        setTouching: () => {
-
+        setTouched: touchedMemberId => {
+            touchModal.touchedMemberId = touchedMemberId;
+            touchModal.renderMessageDiv();
         },
-        setTouched: () => {
+        renderMessageDiv: () => {
+            const touchingPlayer = touchModal.playerList
+                .find(player => player.memberId === touchModal.touchingMemberId);
+            const touchingPlayerHtml = touchingPlayer ? touchingPlayer.nickname : "미선택";
 
+            const touchedPlayer = touchModal.playerList
+                .find(player => player.memberId === touchModal.touchedMemberId);
+            const touchedPlayerHtml = touchedPlayer ? touchedPlayer.nickname : "미선택";
+
+            const messageHtml = `<span>\${touchingPlayerHtml} → \${touchedPlayerHtml}</span>`
+            const $touchModal = $("#touchModal");
+            const $messageDiv = $touchModal.find("div[name='messageDiv']");
+            $messageDiv.empty().html(messageHtml);
+        },
+        touch: () => {
+            if (!confirm("터치 확정하시겠습니까?")) {
+                return;
+            }
+
+            if (!touchModal.touchingMemberId
+                || !touchModal.touchedMemberId
+                || touchModal.touchingMemberId === touchModal.touchedMemberId) {
+                alert("터치 플레이어들을 정확히 선택해 주세요.");
+                return;
+            }
+
+            const touchingPlayer = touchModal.playerList
+                .find(player => player.memberId === touchModal.touchingMemberId);
+            touchingPlayer.touchedMemberIdByRound = touchModal.touchedMemberId;
+
+            const touchedPlayer = touchModal.playerList
+                .find(player => player.memberId === touchModal.touchedMemberId);
+            touchedPlayer.touchedMemberIdByRound = touchModal.touchingMemberId;
+
+            if (touchingPlayer.zombie
+                && touchedPlayer.zombie) {
+                touchModal.close();
+                return;
+            }
+
+            if (!touchingPlayer.zombie
+                && !touchedPlayer.zombie) {
+                touchingPlayer.point++;
+                touchedPlayer.point++;
+                touchModal.close();
+                return;
+            }
+
+            touchModal.infect(touchingPlayer);
+            touchModal.infect(touchedPlayer);
+            touchModal.close();
+        },
+        infect: player => {
+            if (player.zombie) {
+                return;
+            }
+
+            player.zombie = true;
+            player.lastInfectedAt = new Date();
         },
         close: () => {
+            saveGameStatus();
+
+            const $touchModal = $("#touchModal");
+            $touchModal.modal("hide");
         },
     }
 </script>
@@ -59,10 +139,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div name="settingDiv"></div>
                 <div class="row">
                     <div class="col-6" name="touching"></div>
                     <div class="col-6" name="touched"></div>
+                </div>
+                <hr>
+                <div name="messageDiv"></div>
+                <hr>
+                <div class="btnDiv">
+                    <button type="button" class="btn btn-warning btn-block" onclick="touchModal.touch();">
+                        터치 확정
+                    </button>
                 </div>
             </div>
             <div class="modal-footer">
