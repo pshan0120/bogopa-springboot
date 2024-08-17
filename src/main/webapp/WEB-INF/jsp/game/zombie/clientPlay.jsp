@@ -12,8 +12,6 @@
         let playSetting = {};
         let playStatus = {};
         let playerList = [];
-        let uptownOutcastList = [];
-        let downtownOutcastList = [];
 
         $(async () => {
             const play = await gfn_readPlayablePlayById(PLAY_ID);
@@ -34,8 +32,6 @@
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
             playerList = JSON.parse(lastPlayLogJson.playerList);
-            uptownOutcastList = JSON.parse(lastPlayLogJson.uptownOutcastList);
-            downtownOutcastList = JSON.parse(lastPlayLogJson.downtownOutcastList);
 
             console.log('game status loaded !!');
         }

@@ -5,73 +5,68 @@
         playerList: [],
         open: playerList => {
             useCureModal.playerList = playerList;
-            // TODO: 작업해야 함
-            return;
-
-
-
-
-            console.log('playStatus', useCureModal.playStatus);
             const $useCureModal = $("#useCureModal");
-            const $settingDiv = $useCureModal.find("div[name='settingDiv']");
-            const playSetting = initializationSetting.player
-                .find(item => useCureModal.playerList.length === item.numberOfPlayer);
 
-            const townInitializationHtml = `
-                \${UPTOWN.title} \${playSetting.uptown}명,
-                \${DOWNTOWN.title} \${playSetting.downtown}명,
-                도둑은 한 번에 \${playSetting.stolenMoney}원을 훔침`
-            $settingDiv.find("span[name='townInitialization']").html(townInitializationHtml);
-
-            const $moneyDiv = $useCureModal.find("div[name='moneyDiv']");
-            $moneyDiv.empty();
-
-            if (useCureModal.playStatus.round < useCureModal.playSetting.round
-                && useCureModal.playStatus.round % 2 === 1) {
-                const moneyHtml = useCureModal.playerList
-                    .sort((prev, next) => next.money - prev.money)
-                    .reduce((prev, next) => {
+            const playerListHtml = playerList
+                .reduce((prev, next) => {
+                        const useButtonHtml = next.cure
+                            ? `<button class="btn btn-sm btn-outline-warning mr-1 my-1"
+                                onclick="useCureModal.useCure(\${next.memberId})">
+                                사용
+                            </button>`
+                            : ``;
                         return prev +
-                            `<div class="row">
-                            <div class="col-4">
-                                \${next.fakePlayerName}
+                            `<div class="row text-center">
+                            <div class="col-6">
+                                \${next.nickname}
                             </div>
-                            <div class="col-8">
-                                \${next.money}
+                            <div class="col-6">
+                                \${useButtonHtml}
                             </div>
-                        </div>
-                        <br>`;
-                    }, "");
-                $useCureModal.find("[name='moneyDiv']").empty().html(moneyHtml);
-            } else {
-                $useCureModal.find("[name='moneyDiv']").empty().html("비공개입니다.");
-            }
+                        </div>`;
+                    },
+                    `<div class="row text-center">
+                    <div class="col-6">
+                        닉네임
+                    </div>
+                    <div class="col-6">
+                        치료제 사용
+                    </div>
+                </div>`
+                );
+
+            const $playerListDiv = $useCureModal.find("div[name='playerListDiv']");
+            $playerListDiv.empty().html(playerListHtml);
 
             $useCureModal.modal("show");
         },
-        loadGameStatus: async playNo => {
-            const lastPlayLog = await useCureModal.readLastPlayLog(playNo);
-            if (!lastPlayLog) {
+        useCure: memberId => {
+            const player = useCureModal.playerList
+                .find(player => player.memberId === memberId);
+            player.cure = false;
+            if (player.firstZombie
+                || !player.zombie) {
+                useCureModal.saveAndClose();
                 return;
             }
 
-            const lastPlayLogJson = JSON.parse(lastPlayLog);
+            const lastInfectedAt = new Date(player.lastInfectedAt);
+            const now = new Date();
+            lastInfectedAt.setMinutes(lastInfectedAt.getMinutes() + 10);
+            if (lastInfectedAt.getTime() < now.getTime()) {
+                console.log('too late');
+                useCureModal.saveAndClose();
+                return;
+            }
 
-            useCureModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
-            useCureModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
-            useCureModal.playerList = JSON.parse(lastPlayLogJson.playerList);
-            useCureModal.uptownOutcastList = JSON.parse(lastPlayLogJson.uptownOutcastList);
-            useCureModal.downtownOutcastList = JSON.parse(lastPlayLogJson.downtownOutcastList);
-
-            console.log('game status loaded !!');
+            player.zombie = false;
+            useCureModal.saveAndClose();
         },
-        readLastPlayLog: playId => {
-            return gfn_callGetApi("/api/play/log/last", {playId})
-                .then(data => {
-                    // console.log('data', data);
-                    return data?.log;
-                })
-                .catch(response => console.error('error', response));
+        saveAndClose: () => {
+            saveGameStatus();
+
+            const $useCureModal = $("#useCureModal");
+            $useCureModal.modal("hide");
         },
         close: () => {
         },
@@ -83,18 +78,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="">재산 상태</h4>
+                <h4 class="">치료제 사용</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div name="settingDiv">
-                    <h3>마을 사람들(초기 세팅)</h3>
-                    <h4><span name="townInitialization"></span></h4>
-                </div>
-                <hr>
-                <div name="moneyDiv"></div>
+                <div name="playerListDiv"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

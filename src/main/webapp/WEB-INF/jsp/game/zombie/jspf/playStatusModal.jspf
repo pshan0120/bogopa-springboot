@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const playStatusModal = {
+        open: (playSetting, playerList) => {
+            const $playStatusModal = $("#playStatusModal");
+            const $settingDiv = $playStatusModal.find("div[name='settingDiv']");
+            const initializationHtml = `총 \${playSetting.numberOfPlayer}명 중 최초 좀비 \${playSetting.zombie}명`;
+            $settingDiv.find("span[name='playerInitialization']").html(initializationHtml);
+
+            const playerListHtml = playerList
+                .reduce((prev, next) => {
+                    return prev +
+                        `<div class="row text-center">
+                            <div class="col-3">
+                                \${next.nickname}
+                            </div>
+                            <div class="col-3">
+                                \${next.firstZombie ? "○" : ""}
+                            </div>
+                            <div class="col-3">
+                                \${next.zombie ? "○" : ""}
+                            </div>
+                            <div class="col-3">
+                                \${next.cure ? "○" : ""}
+                            </div>
+                        </div>`;
+                },
+                `<div class="row text-center">
+                    <div class="col-3">
+                        닉네임
+                    </div>
+                    <div class="col-3">
+                        최초 좀비
+                    </div>
+                    <div class="col-3">
+                        좀비
+                    </div>
+                    <div class="col-3">
+                        치료제보유
+                    </div>
+                </div>`
+                );
+
+            const $playerListDiv = $playStatusModal.find("div[name='playerListDiv']");
+            $playerListDiv.empty().html(playerListHtml);
+
+            $playStatusModal.modal("show");
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="playStatusModal" role="dialog"
+     aria-labelledby="playStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">플레이 상태</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="settingDiv">
+                    <h3>플레이어 초기 세팅</h3>
+                    <h4><span name="playerInitialization"></span></h4>
+                </div>
+                <hr>
+                <div name="playerListDiv"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

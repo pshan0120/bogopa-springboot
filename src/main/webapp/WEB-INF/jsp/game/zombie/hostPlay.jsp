@@ -386,12 +386,8 @@
             useCureModal.open(playerList);
         }
 
-        const openTownStatusModal = () => {
-            townStatusModal.open();
-        }
-
-        const openMoneyStatusModal = () => {
-            moneyStatusModal.open(PLAY_ID);
+        const openPlayStatusModal = () => {
+            playStatusModal.open(playSetting, playerList);
         }
 
         const openGuideModal = () => {
@@ -464,10 +460,10 @@
                     </div>
                     <div class="card-body" name="touchDiv">
                         <div name="buttonDiv">
-                            <button type="button" class="btn btn-default btn-block" onclick="openTouchModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openTouchModal()">
                                 터치 모달 표시
                             </button>
-                            <button type="button" class="btn btn-default btn-block" onclick="openUseCureModal()">
+                            <button type="button" class="btn btn-info btn-block" onclick="openUseCureModal()">
                                 치료제 사용 모달 표시
                             </button>
                         </div>
@@ -483,11 +479,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
-                                플레이 상태 모달 표시
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
-                                재산 보기
+                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
+                                플레이상태 보기
                             </button>
                             <button type="button" class="btn btn-primary btn-block" onclick="proceedToNextRound()">
                                 다음 라운드 진행
@@ -526,8 +519,8 @@
                             <button type="button" class="btn btn-default btn-block" onclick="gfn_openQrImage()">
                                 QR 이미지로 공유
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
-                                재산 보기
+                            <button type="button" class="btn btn-info btn-block" onclick="openPlayStatusModal()">
+                                플레이상태 보기
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
@@ -547,7 +540,7 @@
 
 <%@ include file="/WEB-INF/jsp/game/zombie/jspf/touchModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/zombie/jspf/useCureModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/zombie/jspf/moneyStatusModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/playStatusModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/zombie/jspf/guideModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/qrLoginModal.jspf" %>

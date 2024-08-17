@@ -32,6 +32,9 @@
 
             const $touchedDiv = $touchModal.find("div[name='touched']");
             $touchedDiv.empty();
+
+            const $messageDiv = $touchModal.find("div[name='messageDiv']");
+            $messageDiv.empty();
         },
         setTouching: touchingMemberId => {
             touchModal.touchingMemberId = touchingMemberId;
@@ -95,7 +98,7 @@
 
             if (touchingPlayer.zombie
                 && touchedPlayer.zombie) {
-                touchModal.close();
+                touchModal.saveAndClose();
                 return;
             }
 
@@ -103,13 +106,13 @@
                 && !touchedPlayer.zombie) {
                 touchingPlayer.point++;
                 touchedPlayer.point++;
-                touchModal.close();
+                touchModal.saveAndClose();
                 return;
             }
 
             touchModal.infect(touchingPlayer);
             touchModal.infect(touchedPlayer);
-            touchModal.close();
+            touchModal.saveAndClose();
         },
         infect: player => {
             if (player.zombie) {
@@ -119,11 +122,13 @@
             player.zombie = true;
             player.lastInfectedAt = new Date();
         },
-        close: () => {
+        saveAndClose: () => {
             saveGameStatus();
 
             const $touchModal = $("#touchModal");
             $touchModal.modal("hide");
+        },
+        close: () => {
         },
     }
 </script>
