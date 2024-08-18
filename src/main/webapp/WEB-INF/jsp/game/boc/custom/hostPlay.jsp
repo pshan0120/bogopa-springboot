@@ -756,11 +756,11 @@
         }
 
         const openChangePlayerCharacterModal = (memberId, characterId) => {
-            characterModal.open(selectedCharacterList, characterId, memberId, changePlayerCharacter);
+            const playableCharacterList = selectedCharacterList.filter(selected => selected.team !== POSITION.FABLED.name);
+            characterModal.open(playableCharacterList, characterId, memberId, changePlayerCharacter);
         }
 
         const changePlayerCharacter = async (characterId, selectedCharacterId, memberId) => {
-            console.log(characterId, selectedCharacterId, memberId)
             const player = playerList.find(player => player.memberId === memberId);
             const character = Character.getInCharacterListById(selectedCharacterList, characterId);
             const selectedCharacter = Character.getInCharacterListById(selectedCharacterList, selectedCharacterId);
