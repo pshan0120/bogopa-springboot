@@ -3,8 +3,10 @@
 <script>
     const useCureModal = {
         playerList: [],
-        open: playerList => {
+        curableMinutes: null,
+        open: (playerList, curableMinutes) => {
             useCureModal.playerList = playerList;
+            useCureModal.curableMinutes = curableMinutes;
             const $useCureModal = $("#useCureModal");
 
             const playerListHtml = playerList
@@ -52,7 +54,7 @@
 
             const lastInfectedAt = new Date(player.lastInfectedAt);
             const now = new Date();
-            lastInfectedAt.setMinutes(lastInfectedAt.getMinutes() + 10);
+            lastInfectedAt.setMinutes(lastInfectedAt.getMinutes() + useCureModal.curableMinutes);
             if (lastInfectedAt.getTime() < now.getTime()) {
                 console.log('too late');
                 useCureModal.saveAndClose();

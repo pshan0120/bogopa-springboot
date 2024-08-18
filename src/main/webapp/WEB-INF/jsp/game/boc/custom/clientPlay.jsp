@@ -85,13 +85,6 @@
             }
 
             const replacedNickname = nickname.replace(/\s+/g, "");
-            /*const joined = playerList.some(player => player.nickname === replacedNickname);
-
-            if (!joined) {
-                alert("참여중인 플레이어가 아닌데요!");
-                return;
-            }*/
-
             const request = {
                 playId: PLAY_ID,
                 nickname: replacedNickname

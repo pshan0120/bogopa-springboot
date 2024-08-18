@@ -132,7 +132,6 @@
             const $settingDiv = $("#settingDiv");
             const $playerDiv = $settingDiv.find("div[name='playerDiv']");
             playerList.forEach(player => {
-                console.log('player', player);
                 const found = $playerDiv.find("input[name='items']").toArray()
                     .filter(itemsObject => player.memberId == $(itemsObject).data("memberId"));
 
@@ -193,6 +192,25 @@
                 return;
             }
 
+            const $settingDiv = $("#settingDiv");
+            const minutesOfRound = $settingDiv.find("input[name='minutesOfRound']").val();
+            if (!minutesOfRound) {
+                alert("라운드 당 몇 분인가요?");
+                return;
+            }
+
+            const curableMinutes = $settingDiv.find("input[name='curableMinutes']").val();
+            if (!curableMinutes) {
+                alert("감염 후 몇 분 안에 치료제를 마셔야 치료되나요?");
+                return;
+            }
+
+            playSetting = {
+                ...playSetting,
+                minutesOfRound: Number(minutesOfRound),
+                curableMinutes: Number(curableMinutes),
+            };
+
             $("#settingDiv").hide();
             proceedToNextRound();
         }
@@ -209,19 +227,17 @@
                 return;
             }
 
-            infect();
+            playerList.forEach(player => {
+                if (!player.touchedMemberIdByRound) {
+                    player.zombie = true;
+                }
 
-            playerList.forEach(player => player.touchedMemberIdByRound = null);
+                player.touchedMemberIdByRound = null
+            });
 
             playStatus.round = playStatus.round + 1;
             saveGameStatus();
             renderRound();
-        }
-
-        const infect = () => {
-            // TODO: 감염 계산
-
-            // touchedMemberIdByRound
         }
 
         const renderRound = () => {
@@ -234,33 +250,7 @@
             $roundDiv.show();
 
             $roundDiv.find("span[name='roundTitle']").text(playStatus.round + " / " + playSetting.round);
-            console.log('playerList', playerList);
         }
-
-        const renderTown = ($touchDiv, town) => {
-            const $townTitle = $touchDiv.find("span[name='townTitle']");
-            $townTitle.empty().append(town.title);
-
-            const $playerDiv = $touchDiv.find("div[name='playerDiv']");
-            $playerDiv.empty().append(createPlayerHtml(town));
-
-            const $outcastDiv = $touchDiv.find("div[name='outcastDiv']");
-            $outcastDiv.empty();
-        }
-
-        const createPlayerHtml = town => {
-            return playerList
-                .filter(player => player.town.name === town.name)
-                .reduce((prev, next) => {
-                    return prev
-                        + "<button class=\"btn btn-sm btn-outline-default mr-1 my-1\" "
-                        + " onclick=\"setOutcast('" + next.playerName + "')\" >"
-                        + " " + next.playerName + (next.thief ? "(도둑)" : "")
-                        + "</button>";
-                    // }, `<h3>\${town.title} 추방자</h3>`) + "<hr>";
-                }, "");
-        }
-
 
         const resetGame = () => {
             if (!confirm("현재까지의 모든 진행 상황을 초기화하고 게임을 처음부터 진행합니다.")) {
@@ -288,78 +278,27 @@
         }
 
         const renderResult = () => {
+            /*게임 종료 후 다음과 같이 결과가 정해집니다.<br/>
+            - 모든 사람이 좀비가 되었다면 : 최초 좀비들이 공동 우승자가 되며, 나머지 좀비들 중에서 탈락 후보를 선정합니다.<br/>
+            - 2명 이상의 생존자가 있다면 : 승점이 가장 많은 인간이 우승자, 승점이 가장 적은 인간이 탈락 후보가 됩니다.<br/>
+            - 모든 생존자의 승점이 같다면 : 공동 우승이 되며, 좀비 중에서 탈락 후보를 선정합니다.*/
             const $resultDiv = $("#resultDiv");
-
             const $winnerDiv = $resultDiv.find("div[name='winnerDiv']");
-            $winnerDiv.empty().append(createWinnerHtml());
+            $winnerDiv.empty();
 
-            let uptownPlayerRank = 0;
-            const uptownPlayerHtmlString = playerList
-                .filter(player => !player.thief)
-                .filter(player => player.town.name === UPTOWN.name)
-                .sort((prev, next) => next.money - prev.money)
-                .reduce((prev, next) => {
-                    uptownPlayerRank++;
-                    return prev +
-                        `<div class="row">
-                            <div class="col-2">
-                                \${uptownPlayerRank}위
-                            </div>
-                            <div class="col-6">
-                                \${next.playerName}
-                            </div>
-                            <div class="col-4 text-right">
-                                \${next.money}
-                            </div>
-                        </div>`;
-                }, "");
-            const $uptownPlayerDiv = $resultDiv.find("div[name='uptownPlayerDiv']");
-            $uptownPlayerDiv.empty().append(uptownPlayerHtmlString);
+            const survivorList = playerList.filter(player => !player.zombie);
+            if (survivorList.length === 0) {
+                $winnerDiv.empty().html(`모든 사람이 좀비가 되어 최초 좀비 승리 !!`);
+                return;
+            }
 
-            let downtownPlayerRank = 0;
-            const downtownPlayerHtmlString = playerList
-                .filter(player => !player.thief)
-                .filter(player => player.town.name === DOWNTOWN.name)
-                .sort((prev, next) => next.money - prev.money)
-                .reduce((prev, next) => {
-                    downtownPlayerRank++;
-                    return prev +
-                        `<div class="row">
-                            <div class="col-2">
-                                \${downtownPlayerRank}위
-                            </div>
-                            <div class="col-6">
-                                \${next.playerName}
-                            </div>
-                            <div class="col-4 text-right">
-                                \${next.money}
-                            </div>
-                        </div>`;
-                }, "");
-            const $downtownPlayerDiv = $resultDiv.find("div[name='downtownPlayerDiv']");
-            $downtownPlayerDiv.empty().append(downtownPlayerHtmlString);
+            if (survivorList.length === 1) {
+                $winnerDiv.empty().html(`단독 생존자 \${survivorList[0].nickname} 승리 !!`);
+                return;
+            }
 
-            let thiefRank = 0;
-            const thiefPlayerHtmlString = playerList
-                .filter(player => player.thief)
-                .sort((prev, next) => next.money - prev.money)
-                .reduce((prev, next) => {
-                    thiefRank++;
-                    return prev +
-                        `<div class="row">
-                            <div class="col-2">
-                                \${thiefRank}위
-                            </div>
-                            <div class="col-6">
-                                \${next.playerName}
-                            </div>
-                            <div class="col-4 text-right">
-                                \${next.money}
-                            </div>
-                        </div>`;
-                }, "");
-            const $thiefPlayerDiv = $resultDiv.find("div[name='thiefPlayerDiv']");
-            $thiefPlayerDiv.empty().append(thiefPlayerHtmlString);
+            $winnerDiv.empty().html("생존자 승리 !!");
+
         }
 
         const createWinnerHtml = () => {
@@ -383,7 +322,7 @@
         }
 
         const openUseCureModal = () => {
-            useCureModal.open(playerList);
+            useCureModal.open(playerList, playSetting.curableMinutes);
         }
 
         const openPlayStatusModal = () => {
@@ -397,7 +336,6 @@
         const openQrLoginModal = () => {
             qrLoginModal.open(playerList);
         }
-
 
 
     </script>
@@ -439,6 +377,15 @@
                     </div>
                     <div class="card-body">
                         <div name="playerDiv"></div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="form-control-label">라운드 당 시간(분)</label>
+                            <input type="text" name="minutesOfRound" class="form-control form-control-alternative">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">감염 후 치료가능 시간(분)</label>
+                            <input type="text" name="curableMinutes" class="form-control form-control-alternative">
+                        </div>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">
@@ -501,15 +448,6 @@
                     <div class="card-body">
                         <h4>우승자</h4>
                         <div name="winnerDiv"></div>
-                        <hr>
-                        <h4>큰 마을</h4>
-                        <div name="uptownPlayerDiv"></div>
-                        <hr>
-                        <h4>작은 마을</h4>
-                        <div name="downtownPlayerDiv"></div>
-                        <hr>
-                        <h4>도둑</h4>
-                        <div name="thiefPlayerDiv"></div>
                     </div>
                     <div class="card-footer py-4">
                         <div name="buttonDiv">

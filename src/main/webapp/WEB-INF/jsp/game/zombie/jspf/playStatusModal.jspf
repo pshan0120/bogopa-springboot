@@ -8,21 +8,25 @@
             const initializationHtml = `총 \${playSetting.numberOfPlayer}명 중 최초 좀비 \${playSetting.zombie}명`;
             $settingDiv.find("span[name='playerInitialization']").html(initializationHtml);
 
+            const zombieCount = playerList.filter(player => player.zombie).length;
+            const $statusDiv = $playStatusModal.find("div[name='statusDiv']");
+            $settingDiv.find("span").html(`현재 좀비 : \${zombieCount}명 / \${playerList.length}명`);
+
             const playerListHtml = playerList
                 .reduce((prev, next) => {
                     return prev +
                         `<div class="row text-center">
                             <div class="col-3">
-                                \${next.nickname}
-                            </div>
-                            <div class="col-3">
-                                \${next.firstZombie ? "○" : ""}
+                                \${next.firstZombie ? "★" : ""} \${next.nickname}
                             </div>
                             <div class="col-3">
                                 \${next.zombie ? "○" : ""}
                             </div>
                             <div class="col-3">
                                 \${next.cure ? "○" : ""}
+                            </div>
+                            <div class="col-3">
+                                \${next.point}
                             </div>
                         </div>`;
                 },
@@ -31,13 +35,13 @@
                         닉네임
                     </div>
                     <div class="col-3">
-                        최초 좀비
+                        감염됨
                     </div>
                     <div class="col-3">
-                        좀비
+                        약 보유
                     </div>
                     <div class="col-3">
-                        치료제보유
+                        포인트
                     </div>
                 </div>`
                 );
@@ -66,6 +70,11 @@
                 <div name="settingDiv">
                     <h3>플레이어 초기 세팅</h3>
                     <h4><span name="playerInitialization"></span></h4>
+                </div>
+                <hr>
+                <div name="statusDiv">
+                    <h3>감염 상태</h3>
+                    <h4><span></span></h4>
                 </div>
                 <hr>
                 <div name="playerListDiv"></div>

@@ -18,6 +18,11 @@
             $("#titleDiv").find("span[name='playName']").text(play.playName);
 
             await loadGameStatus();
+
+            const loggedIn = JSON.parse("<%= SessionUtils.isMemberLoggedIn() %>");
+            if (!loggedIn) {
+                $("#reJoinPlayButton").show();
+            }
         });
 
         const loadGameStatus = async () => {
@@ -49,18 +54,36 @@
             guideModal.open();
         }
 
-        const openTownStatusModal = () => {
-            townStatusModal.open();
-        }
-
-        const openMoneyStatusModal = () => {
-            moneyStatusModal.open(PLAY_ID);
-        }
-
         const openMyRoleModal = () => {
             myRoleModal.open(PLAY_ID);
         }
 
+        const openNoteModal = () => {
+            noteModal.open();
+        }
+
+        const reJoinPlay = () => {
+            const nickname = prompt("참여중이었던 닉네임을 입력해 주세요.");
+            if (!nickname) {
+                return;
+            }
+
+            const replacedNickname = nickname.replace(/\s+/g, "");
+            const request = {
+                playId: PLAY_ID,
+                nickname: replacedNickname
+            }
+
+            gfn_callPostApi("/api/play/member/reJoinPlay", request)
+                .then(data => {
+                    console.log('play rejoined !!', data);
+                    document.location.reload();
+                })
+                .catch(response => {
+                    console.error('error', response);
+                    alert(response.responseJSON?.message);
+                });
+        }
     </script>
 </head>
 
@@ -110,14 +133,15 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openGuideModal()">
                                 게임 설명
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openTownStatusModal()">
-                                주민 보기
-                            </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openMoneyStatusModal()">
-                                재산 보기
+                            <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
+                                노트
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openMyRoleModal()">
                                 내 역할 보기
+                            </button>
+                            <button type="button" class="btn btn-primary btn-block display-none"
+                                    onclick="reJoinPlay()" id="reJoinPlayButton">
+                                다시 입장
                             </button>
                         </div>
                     </div>
@@ -128,10 +152,10 @@
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/townStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/moneyStatusModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/myRoleModal.jspf" %>
-<%@ include file="/WEB-INF/jsp/game/catchAThief/jspf/guideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/myRoleModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/guideModal.jspf" %>
+
+<%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>
 

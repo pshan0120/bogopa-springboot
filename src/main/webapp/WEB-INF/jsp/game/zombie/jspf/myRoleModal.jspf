@@ -27,7 +27,7 @@
             }
 
             const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
-            const player = myRoleModal.playerList.find(player => player.playerId === memberId);
+            const player = myRoleModal.playerList.find(player => player.memberId === memberId);
 
             if (!player) {
                 alert("참가중 상태가 아닙니다.");
@@ -36,7 +36,7 @@
 
             console.log('playStatus', myRoleModal.playStatus);
             const $modal = $("#myRoleModal");
-            const roleHtml = player.thief ? "도둑" : "마을주민";
+            const roleHtml = player.firstZombie ? "좀비" : "인간";
 
             $modal.find("[name='roleDiv']").empty().html(roleHtml);
 
