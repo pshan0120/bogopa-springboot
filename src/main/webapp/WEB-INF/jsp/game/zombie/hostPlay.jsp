@@ -60,8 +60,8 @@
 
             playSetting = initializationSetting.player
                 .find(item => originalPlayerList.length === item.numberOfPlayer);
-            playSetting = {...playSetting, round: initializationSetting.round};
 
+            // playSetting = {...playSetting, round: initializationSetting.round};
             renderPlayMemberList(originalPlayerList);
         };
 
@@ -193,6 +193,13 @@
             }
 
             const $settingDiv = $("#settingDiv");
+
+            const numberOfRound = $settingDiv.find("input[name='numberOfRound']").val();
+            if (!numberOfRound) {
+                alert("몇 라운드인가요?");
+                return;
+            }
+
             const minutesOfRound = $settingDiv.find("input[name='minutesOfRound']").val();
             if (!minutesOfRound) {
                 alert("라운드 당 몇 분인가요?");
@@ -207,6 +214,7 @@
 
             playSetting = {
                 ...playSetting,
+                round: Number(numberOfRound),
                 minutesOfRound: Number(minutesOfRound),
                 curableMinutes: Number(curableMinutes),
             };
@@ -378,6 +386,10 @@
                     <div class="card-body">
                         <div name="playerDiv"></div>
                         <hr>
+                        <div class="form-group">
+                            <label class="form-control-label">라운드 수</label>
+                            <input type="text" name="numberOfRound" class="form-control form-control-alternative">
+                        </div>
                         <div class="form-group">
                             <label class="form-control-label">라운드 당 시간(분)</label>
                             <input type="text" name="minutesOfRound" class="form-control form-control-alternative">
