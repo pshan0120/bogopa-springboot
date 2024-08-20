@@ -33,7 +33,7 @@
         "image": "/images/fo/boc/icons/townsfolk/alchemist.webp"
     },
     {
-        "id": "alhadikhia",
+        "id": "al-hadikhia",
         "name": "알-하디키아",
         "edition": "",
         "team": "demon",
@@ -316,7 +316,7 @@
         "image": "/images/fo/boc/icons/fabled/bootlegger.webp"
     },
     {
-        "id": "bountyhunter",
+        "id": "bounty_hunter",
         "name": "Bounty Hunter",
         "edition": "",
         "team": "townsfolk",
@@ -497,7 +497,7 @@
         "image": "/images/fo/boc/icons/townsfolk/courtier.webp"
     },
     {
-        "id": "cultleader",
+        "id": "cult_leader",
         "name": "Cult Leader",
         "edition": "",
         "team": "townsfolk",
@@ -1716,7 +1716,7 @@
         "image": "/images/fo/boc/icons/townsfolk/philosopher.webp"
     },
     {
-        "id": "pithag",
+        "id": "pit-hag",
         "name": "마귀할멈",
         "edition": "snv",
         "team": "minion",
@@ -1747,7 +1747,7 @@
         "image": "/images/fo/boc/icons/townsfolk/pixie.webp"
     },
     {
-        "id": "plaguedoctor",
+        "id": "plague_doctor",
         "name": "Plague Doctor",
         "edition": "",
         "team": "outsider",
@@ -2372,7 +2372,7 @@
         "image": "/images/fo/boc/icons/demon/vigormortis.webp"
     },
     {
-        "id": "villageidiot",
+        "id": "village_idiot",
         "name": "Village Idiot",
         "edition": "",
         "team": "townsfolk",
