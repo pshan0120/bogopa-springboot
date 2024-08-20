@@ -16,6 +16,7 @@
         let jinxList = [];
         let characterList = [];
         let selectedCharacterList = [];
+        let selectedJinxList = [];
         let playedCharacterList = [];
         let playedReminderList = [];
         let travellerCharacterList = [];
@@ -217,6 +218,26 @@
             }, `<div class="row">`) + '</div>';
 
             $characterListDiv.append(listHtml);
+
+            selectedJinxList = [];
+
+            selectedCharacterList.forEach(character => {
+                const source = jinxList.find(jinx => jinx.id === character.id);
+                if (source) {   // 원인이 있음
+                    const targetList = source.jinx;
+
+                    targetList.forEach(target => {
+                        const existsTarget = selectedCharacterList.find(character => target.id === character.id);
+                        if (existsTarget) {
+                            selectedJinxList.push({
+                                source: source.id,
+                                target: target.id,
+                                reason: target.reason,
+                            })
+                        }
+                    });
+                }
+            });
         }
 
         const setPlayedCharacter = characterId => {

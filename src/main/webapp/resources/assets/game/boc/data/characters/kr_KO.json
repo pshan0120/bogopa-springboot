@@ -1624,7 +1624,7 @@
     },
     {
         "id": "ogre",
-        "name": "Ogre",
+        "name": "오우거",
         "edition": "",
         "team": "outsider",
         "firstNight": 49,
@@ -1635,12 +1635,12 @@
             "Friend"
         ],
         "setup": false,
-        "ability": "On your 1st night, choose a player (not yourself): you become their alignment (you don't know which) even if drunk or poisoned.",
+        "ability": "첫날 밤, 당신을 제외한 플레이어를 선택합니다: 당신은 그의 편이 됩니다(어느 쪽인지 모릅니다). 이 것은 술에 취하거나 중독되었더라도 변하지 않습니다.",
         "image": "/images/fo/boc/icons/outsider/ogre.webp"
     },
     {
         "id": "ojo",
-        "name": "Ojo",
+        "name": "오조",
         "edition": "",
         "team": "demon",
         "firstNight": 0,
@@ -1651,7 +1651,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "Each night*, choose a character: they die. If they are not in play, the Storyteller chooses who dies.",
+        "ability": "첫날 밤을 제외한 매일 밤, 역할을 선택합니다: 그들은 사망합니다. 만약 그 역할이 참여하고 있지 않다면, 누가 죽을지는 이야기꾼이 선택합니다.",
         "image": "/images/fo/boc/icons/demon/ojo.webp"
     },
     {
@@ -1669,7 +1669,7 @@
         "image": "/images/fo/boc/icons/townsfolk/oracle.webp"
     },
     {
-        "id": "organgrinder",
+        "id": "organ_grinder",
         "name": "Organ Grinder",
         "edition": "",
         "team": "minion",
@@ -2226,7 +2226,7 @@
     },
     {
         "id": "summoner",
-        "name": "Summoner",
+        "name": "소환사",
         "edition": "",
         "team": "minion",
         "firstNight": 8,
@@ -2239,7 +2239,7 @@
             "Night 3"
         ],
         "setup": true,
-        "ability": "You get 3 bluffs. On the 3rd night, choose a player: they become an evil Demon of your choice. [No Demon]",
+        "ability": "당신은 3개의 미참여 역할을 알게 됩니다. 3번째 밤, 플레이어 1명을 선택합니다. 그는 당신이 선택한 사악한 악마가 됩니다. 이 때 새로운 악마와 하수인들은 서로 알지 못합니다. 만약 이 날 악마를 만들지 못하면 선한 편이 승리합니다. [악마 없음]",
         "image": "/images/fo/boc/icons/minion/summoner.webp"
     },
     {
