@@ -317,7 +317,7 @@
     },
     {
         "id": "bounty_hunter",
-        "name": "Bounty Hunter",
+        "name": "현상금 사냥꾼",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 45,
@@ -328,7 +328,7 @@
             "Known"
         ],
         "setup": true,
-        "ability": "You start knowing 1 evil player. If the player you know dies, you learn another evil player tonight. [1 Townsfolk is evil]",
+        "ability": "당신은 1명의 악한 플레이어를 알고 시작합니다. 만약 그가 죽으면, 그날 밤 당신은 새로운 악한 플레이어를 알게 됩니다. [1명의 마을주민은 악한 편입니다.]",
         "image": "/images/fo/boc/icons/townsfolk/bountyhunter.webp"
     },
     {
@@ -498,7 +498,7 @@
     },
     {
         "id": "cult_leader",
-        "name": "Cult Leader",
+        "name": "사이비 교주",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 46,
@@ -507,7 +507,7 @@
         "otherNightReminder": "If the cult leader changed alignment, show them the thumbs up good signal of the thumbs down evil signal accordingly.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night, you become the alignment of an alive neighbour. If all good players choose to join your cult, your team wins.",
+        "ability": "매일 밤, 당신은 살아있는 이웃 중 하나의 편이 됩니다. 당신은 낮에 공개적으로 당신의 종교에 가입하기를 요청할 수 있습니다. 만약 모든 선한 플레이어가 당신의 종교에 가입했다면 당신의 편은 승리합니다.",
         "image": "/images/fo/boc/icons/townsfolk/cultleader.webp"
     },
     {
@@ -587,9 +587,9 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "name": "Doomsayer",
+        "name": "종말론자",
         "team": "fabled",
-        "ability": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies.",
+        "ability": "만약 4명 이상의 플레이어가 살아 있다면, 살아있는 각 플레이어는 게임당 한 번씩 같은 편에 속한 플레이어가 죽는 것을 공개적으로 선택할 수 있습니다. 이 때 죽는 플레이어는 이야기꾼이 결정합니다.",
         "image": "/images/fo/boc/icons/fabled/doomsayer.webp"
     },
     {
@@ -944,7 +944,7 @@
     },
     {
         "id": "golem",
-        "name": "Golem",
+        "name": "골렘",
         "edition": "",
         "team": "outsider",
         "firstNight": 0,
@@ -955,7 +955,7 @@
             "Can not nominate"
         ],
         "setup": false,
-        "ability": "You may only nominate once per game. When you do, if the nominee is not the Demon, they die.",
+        "ability": "게임 당 1번만 지명할 수 있습니다. 만약 지명했다면, 지명당한 플레이어는 악마가 아니라면 죽습니다.",
         "image": "/images/fo/boc/icons/outsider/golem.webp"
     },
     {
@@ -2373,7 +2373,7 @@
     },
     {
         "id": "village_idiot",
-        "name": "Village Idiot",
+        "name": "동네 바보",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 45,
@@ -2384,7 +2384,7 @@
             "Drunk"
         ],
         "setup": true,
-        "ability": "Each night, choose a player: you learn their alignment. [+0 to +2 Village Idiots. 1 of the extras is drunk]",
+        "ability": "매일 밤, 1명의 플레이어를 선택합니다. 당신은 그의 편을 알게 됩니다. [+0 에서 +2 동네 바보. 추가된 바보 중 1명은 만취 상태입니다.]",
         "image": "/images/fo/boc/icons/townsfolk/villageidiot.webp"
     },
     {
