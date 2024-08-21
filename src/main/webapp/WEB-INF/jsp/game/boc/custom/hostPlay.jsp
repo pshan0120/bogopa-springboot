@@ -156,19 +156,10 @@
                 .filter(character => character.team === POSITION.TRAVELLER.name && character.edition === selectedEditionId)
                 .sort((prev, next) => prev.id - next.id);
 
-            renderCharacterList(scriptJson, characterList);
+            await renderCharacterList(scriptJson, characterList);
+            await renderJinxList(selectedCharacterList);
 
-            const playerSetting = initializationSetting.player
-                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
 
-            const roleInitializationHtml = `
-                <span class="text-default">총 \${playerList.length}명</span>
-                (<span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
-                <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
-                <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
-                <span class="text-danger">악마 \${playerSetting.demon}명</span>)`;
-            const $characterDiv = $("#characterDiv");
-            $characterDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
         }
 
         const copyEditionJson = () => {
@@ -219,6 +210,19 @@
 
             $characterListDiv.append(listHtml);
 
+            const playerSetting = initializationSetting.player
+                .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+
+            const roleInitializationHtml = `
+                <span class="text-default">총 \${playerList.length}명</span>
+                (<span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
+                <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
+                <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
+                <span class="text-danger">악마 \${playerSetting.demon}명</span>)`;
+            $characterDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
+        }
+
+        const renderJinxList = selectedCharacterList => {
             selectedJinxList = [];
 
             selectedCharacterList.forEach(character => {
@@ -238,6 +242,23 @@
                     });
                 }
             });
+
+            const listHtml = selectedJinxList.reduce((prev, next) => {
+                const sourceCharacter = Character.getInCharacterListById(selectedCharacterList, next.source);
+                const sourceFontClass = Character.calculateCharacterNameClass(sourceCharacter.team);
+                const targetCharacter = Character.getInCharacterListById(selectedCharacterList, next.target);
+                const targetFontClass = Character.calculateCharacterNameClass(sourceCharacter.team);
+
+                return prev +
+                    `<div class="col-12 pt-2">
+                        <span class="\${sourceFontClass}">\${sourceCharacter.name}</span> & <span class="\${targetFontClass}">\${targetCharacter.name}</span><br/>
+                        <small>\${next.reason}</small>
+                    </div>`;
+            }, `<div class="row">`) + '</div>';
+
+            const $characterDiv = $("#characterDiv");
+            const $selectedJinxListDiv = $characterDiv.find("div[name='selectedJinxListDiv']");
+            $selectedJinxListDiv.empty().append(listHtml);
         }
 
         const setPlayedCharacter = characterId => {
@@ -263,13 +284,8 @@
         const renderPlayedCharacterList = () => {
             const $characterDiv = $("#characterDiv");
             const $playedCharacterCountDiv = $characterDiv.find("div[name='playedCharacterCountDiv']");
-            $playedCharacterCountDiv.empty();
-
             const spanClass = playerList.length === playedCharacterList.length ? "text-primary font-weight-bold" : "";
-            $playedCharacterCountDiv.append(`<span class="\${spanClass}">\${playedCharacterList.length} / \${playerList.length}</span>`);
-
-            const $playedCharacterListDiv = $characterDiv.find("div[name='playedCharacterListDiv']");
-            $playedCharacterListDiv.empty();
+            $playedCharacterCountDiv.empty().append(`<span class="\${spanClass}">\${playedCharacterList.length} / \${playerList.length}</span>`);
 
             const listHtml = playedCharacterList.reduce((prev, next) => {
                 const character = Character.getInCharacterListById(selectedCharacterList, next.characterId);
@@ -283,7 +299,8 @@
                     </div>`;
             }, `<div class="row">`) + '</div>';
 
-            $playedCharacterListDiv.append(listHtml);
+            const $playedCharacterListDiv = $characterDiv.find("div[name='playedCharacterListDiv']");
+            $playedCharacterListDiv.empty().append(listHtml);
         }
 
         const removePlayedCharacter = characterId => {
@@ -1127,6 +1144,7 @@
             const log = {
                 selectedEditionId,
                 selectedCharacterList: JSON.stringify(selectedCharacterList),
+                selectedJinxList: JSON.stringify(selectedJinxList),
                 playedCharacterList: JSON.stringify(playedCharacterList),
                 playedReminderList: JSON.stringify(playedReminderList),
                 travellerCharacterList: JSON.stringify(travellerCharacterList),
@@ -1157,6 +1175,7 @@
 
             selectedEditionId = lastPlayLogJson.selectedEditionId;
             selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
+            selectedJinxList = JSON.parse(lastPlayLogJson.selectedJinxList);
             playedCharacterList = JSON.parse(lastPlayLogJson.playedCharacterList);
             playedReminderList = JSON.parse(lastPlayLogJson.playedReminderList);
             travellerCharacterList = JSON.parse(lastPlayLogJson.travellerCharacterList);
@@ -1181,7 +1200,7 @@
         }
 
         const openCharacterGuideModal = async () => {
-            characterGuideModal.open(selectedCharacterList, playStatus.editionName);
+            characterGuideModal.open(playStatus.editionName, selectedCharacterList, selectedJinxList);
         }
 
         const openTownModal = () => {
@@ -1316,10 +1335,13 @@
                             <div class="card-body">
                                 <div class="" name="characterListDiv"></div>
                                 <hr class="mt-2 mb-2">
+                                <h4>참여 역할</h4>
                                 <div class="text-right" name="playedCharacterCountDiv"></div>
                                 <h4><span name="roleInitialization"></span></h4>
-                                <hr class="mt-2 mb-2">
                                 <div class="" name="playedCharacterListDiv"></div>
+                                <hr class="mt-2 mb-2">
+                                <h4>징크스</h4>
+                                <div class="" name="selectedJinxListDiv"></div>
                                 <hr class="mt-2 mb-2">
                                 트러블 브루잉 추천 조합(8인 기준)<br/>
                                 <small>

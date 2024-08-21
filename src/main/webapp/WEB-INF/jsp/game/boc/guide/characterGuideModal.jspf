@@ -2,10 +2,7 @@
 
 <script>
     const characterGuideModal = {
-        characterList: [],
-        open: (characterList, editionName) => {
-            characterGuideModal.characterList = characterList;
-
+        open: (editionName, characterList, jinxList) => {
             const $characterGuideModal = $("#characterGuideModal");
             const $editionName = $characterGuideModal.find("span[name='editionName']");
             $editionName.empty().html(editionName);
@@ -17,7 +14,6 @@
                 + characterGuideModal.createPositionHtml(characterList, POSITION.DEMON)
                 + characterGuideModal.createPositionHtml(characterList, POSITION.TRAVELLER)
                 + characterGuideModal.createPositionHtml(characterList, POSITION.FABLED);
-
 
             const $characterListDiv = $characterGuideModal.find("div[name='characterListDiv']");
             $characterListDiv.empty().html(characterListHtml);
@@ -33,6 +29,22 @@
                 .sort((prev, next) => prev.otherNight - next.otherNight);
             const $otherNightOl = $characterGuideModal.find("ol[name='otherNightOl']");
             $otherNightOl.empty().html(characterGuideModal.createNightActionHtml(otherNightList));
+
+            const jinxListHtml = jinxList.reduce((prev, next) => {
+                const sourceCharacter = Character.getInCharacterListById(selectedCharacterList, next.source);
+                const sourceFontClass = Character.calculateCharacterNameClass(sourceCharacter.team);
+                const targetCharacter = Character.getInCharacterListById(selectedCharacterList, next.target);
+                const targetFontClass = Character.calculateCharacterNameClass(sourceCharacter.team);
+
+                return prev +
+                    `<div class="col-12 pt-2">
+                        <span class="\${sourceFontClass}">\${sourceCharacter.name}</span> & <span class="\${targetFontClass}">\${targetCharacter.name}</span><br/>
+                        <small>\${next.reason}</small>
+                    </div>`;
+            }, `<div class="row">`) + '</div>';
+
+            const $jinxListDiv = $characterGuideModal.find("div[name='jinxListDiv']");
+            $jinxListDiv.empty().html(jinxListHtml);
 
             $characterGuideModal.modal("show");
         },
@@ -105,6 +117,9 @@
                     <h4>두번째 밤부터</h4>
                     <ol class="pl-4" name="otherNightOl"></ol>
                 </div>
+                <hr>
+                <h4>징크스</h4>
+                <div name="jinxListDiv"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
