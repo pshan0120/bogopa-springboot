@@ -292,7 +292,7 @@
     },
     {
         "id": "boomdandy",
-        "name": "Boomdandy",
+        "name": "붐댄디",
         "edition": "",
         "team": "minion",
         "firstNight": 0,
@@ -301,7 +301,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "If you are executed, all but 3 players die. 1 minute later, the player with the most players pointing at them dies.",
+        "ability": "당신이 처형당하면, 3명의 플레이어들만 남고 모두 죽습니다. 1분 후, 생사여부와 관계없이 모든 플레이어가 죽이고 싶은 플레이어를 가리킵니다. 가장 많이 받은 플레이어는 사망합니다. 동점이라면 밤이 옵니다.",
         "image": "/images/fo/boc/icons/minion/boomdandy.webp"
     },
     {
@@ -740,7 +740,7 @@
     },
     {
         "id": "fearmonger",
-        "name": "Fearmonger",
+        "name": "공포유발자",
         "edition": "",
         "team": "minion",
         "firstNight": 26,
@@ -751,7 +751,7 @@
             "Fear"
         ],
         "setup": false,
-        "ability": "Each night, choose a player. If you nominate & execute them, their team loses. All players know if you choose a new player.",
+        "ability": "매일 밤, 플레이어 1명을 선택합니다. 만약 당신이 그를 지명하고 처형까지 시켰다면, 그의 팀은 패배합니다. 만약 당신이 새로운 플레이어를 선택했다면(첫날 밤 포함), 모든 플레이어들은 그 사실을 알게 됩니다.",
         "image": "/images/fo/boc/icons/minion/fearmonger.webp"
     },
     {
@@ -1949,7 +1949,7 @@
     },
     {
         "id": "riot",
-        "name": "Riot",
+        "name": "폭동",
         "edition": "",
         "team": "demon",
         "firstNight": 0,
@@ -1958,7 +1958,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": true,
-        "ability": "Nominees die, but may nominate again immediately (on day 3, they must). After day 3, evil wins. [All Minions are Riot]",
+        "ability": "지명당한 플레이어는 바로 죽지만, 원한다면(3일째 낮에는 반드시) 즉시 다시 지명할 수 있습니다. 3일째 낮이 지나가면 악이 승리합니다. [모든 하수인은 폭동이 됩니다.]",
         "image": "/images/fo/boc/icons/demon/riot.webp"
     },
     {
