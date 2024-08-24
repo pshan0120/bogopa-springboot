@@ -31,7 +31,7 @@
                 const character = Character.getInCharacterListById(executionModal.selectedCharacterList, next.characterId);
                 return prev
                     + "<button class=\"" + Character.createChoiceButtonClass(character.team) + "\""
-                    + " onclick=\"executionModal.setNominatingPlayer('" + next.characterId + "')\" >"
+                    + " onclick=\"executionModal.setNominatingPlayer(" + next.memberId + ")\" >"
                     + " " + next.nickname + "(" + character.name + ")"
                     + "</button>";
             }, "");
@@ -46,7 +46,7 @@
                 const character = Character.getInCharacterListById(executionModal.selectedCharacterList, next.characterId);
                 return prev
                     + "<button class=\"" + Character.createChoiceButtonClass(character.team) + "\" "
-                    + " onclick=\"executionModal.setNominatedPlayer('" + next.characterId + "')\" >"
+                    + " onclick=\"executionModal.setNominatedPlayer(" + next.memberId + ")\" >"
                     + " " + next.nickname + "(" + character.name + ")"
                     + "</button>";
             }, "");
@@ -62,7 +62,7 @@
                     const character = Character.getInCharacterListById(executionModal.selectedCharacterList, player.characterId);
                     return prev
                         + "<button class=\"" + Character.createChoiceButtonClass(character.team) + "\" "
-                        + " onclick=\"executionModal.setExecutionPlayer('" + player.characterId + "')\" >"
+                        + " onclick=\"executionModal.setExecutionPlayer(" + player.memberId + ")\" >"
                         + " " + player.nickname + "(" + next.numberOfVote + ")"
                         + "</button>";
                 }, "");
@@ -78,8 +78,9 @@
 
             $modal.modal("show");
         },
-        setNominatingPlayer: characterId => {
-            const player = Character.getInPlayerListById(executionModal.playerList, characterId);
+        setNominatingPlayer: memberId => {
+            const player = executionModal.playerList.find(player => player.memberId === memberId);
+
             player.nominating = true;
 
             executionModal.nominatingPlayer = player;
@@ -88,8 +89,10 @@
             $modal.find("[name='nominatingPlayerName']").text(player.nickname);
             $modal.find("[name='nominatingPlayerListDiv']").find("button").hide();
         },
-        setNominatedPlayer: characterId => {
-            const nominatedPlayer = Character.getInPlayerListById(executionModal.playerList, characterId);
+        setNominatedPlayer: memberId => {
+            //const nominatedPlayer = Character.getInPlayerListById(executionModal.playerList, characterId);
+            const nominatedPlayer = executionModal.playerList.find(player => player.memberId === memberId);
+
             nominatedPlayer.nominated = true;
 
             executionModal.nominatedPlayer = nominatedPlayer;
@@ -114,7 +117,7 @@
                 if (next.votable) {
                     return prev
                         + "<button class=\"btn btn-outline-default mr-1 my-1 btn-block\""
-                        + " onclick=\"executionModal.setVotingPlayer('" + next.characterId + "')\" >"
+                        + " onclick=\"executionModal.setVotingPlayer('" + next.memberId + "')\" >"
                         + " " + next.nickname + (next.died ? "-사망" : "")
                         + "</button>";
                 }
@@ -132,8 +135,9 @@
                 }
             });
         },
-        setVotingPlayer: characterId => {
-            const player = Character.getInPlayerListById(executionModal.playerList, characterId);
+        setVotingPlayer: memberId => {
+            const player = executionModal.playerList.find(player => player.memberId === memberId);
+
             if (player.died) {
                 player.votable = false;
                 executionModal.diedAndVotedPlayerList.push(player);
@@ -143,8 +147,8 @@
             const $modal = $("#setNominationModal");
             $modal.find("[name='votedPlayerListDiv']").append(player.nickname + (player.died ? "-사망" : "") + ", ");
         },
-        setExecutionPlayer: characterId => {
-            const player = Character.getInPlayerListById(executionModal.playerList, characterId);
+        setExecutionPlayer: memberId => {
+            const player = executionModal.playerList.find(player => player.memberId === memberId);
 
             if (!confirm("[" + player.nickname + "] 처형 집행 하시겠습니까?")) {
                 return;

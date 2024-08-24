@@ -12,6 +12,7 @@
         const PLAY_ID = ${playId};
         let playerList = [];
         let selectedCharacterList = [];
+        let selectedJinxList = [];
         let playStatus = {};
 
         $(async () => {
@@ -37,6 +38,7 @@
 
             playerList = JSON.parse(lastPlayLogJson.playerList);
             selectedCharacterList = JSON.parse(lastPlayLogJson.selectedCharacterList);
+            selectedJinxList = JSON.parse(lastPlayLogJson.selectedJinxList);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
 
             console.log('game status loaded !!');
@@ -63,7 +65,7 @@
 
         const openCharacterGuideModal = async () => {
             await loadGameStatus();
-            characterGuideModal.open(selectedCharacterList, playStatus.editionName);
+            characterGuideModal.open(playStatus.editionName, selectedCharacterList, selectedJinxList);
         }
 
         const openTownModal = () => {
