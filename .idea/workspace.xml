@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="bogopa:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="리마인더 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="번역 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/guideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/guideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/myRoleModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/myRoleModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/playStatusModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/playStatusModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/useCureModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/useCureModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -320,42 +314,10 @@
       <workItem from="1723682934067" duration="3555000" />
       <workItem from="1723794413684" duration="1419000" />
       <workItem from="1723798007444" duration="115000" />
-      <workItem from="1723937352758" duration="3492000" />
-    </task>
-    <task id="LOCAL-00122" summary="결과 테스트 중">
-      <created>1717681914780</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1717681914780</updated>
-    </task>
-    <task id="LOCAL-00123" summary="14인테스트">
-      <created>1717683007277</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1717683007277</updated>
-    </task>
-    <task id="LOCAL-00124" summary="votingPlayerList 초기화 추가">
-      <created>1717780778232</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1717780778233</updated>
-    </task>
-    <task id="LOCAL-00125" summary="역할 지정 추가">
-      <created>1718129313518</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1718129313519</updated>
-    </task>
-    <task id="LOCAL-00126" summary="독재자 수정">
-      <created>1718391738372</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1718391738373</updated>
+      <workItem from="1723937352758" duration="4026000" />
+      <workItem from="1723996717322" duration="1406000" />
+      <workItem from="1724202247536" duration="5199000" />
+      <workItem from="1724459423293" duration="4225000" />
     </task>
     <task id="LOCAL-00127" summary="이미지 추가">
       <created>1720204416241</created>
@@ -665,7 +627,42 @@
       <option name="project" value="LOCAL" />
       <updated>1723690100206</updated>
     </task>
-    <option name="localTasksCounter" value="171" />
+    <task id="LOCAL-00171" summary="좀비">
+      <created>1723940928686</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1723940928687</updated>
+    </task>
+    <task id="LOCAL-00172" summary="좀비">
+      <created>1723997603599</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1723997603600</updated>
+    </task>
+    <task id="LOCAL-00173" summary="징크스 추가">
+      <created>1724204986019</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1724204986019</updated>
+    </task>
+    <task id="LOCAL-00174" summary="번역 추가">
+      <created>1724205968275</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1724205968277</updated>
+    </task>
+    <task id="LOCAL-00175" summary="번역 추가">
+      <created>1724207284015</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1724207284015</updated>
+    </task>
+    <option name="localTasksCounter" value="176" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -698,9 +695,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="pocketGrimoire 추가" />
-    <MESSAGE value="setCharacter" />
-    <MESSAGE value="renderPlayerStatusList 진행중" />
     <MESSAGE value="savePlayerStatus" />
     <MESSAGE value="마을 광장 진행해야 함" />
     <MESSAGE value="역할설명, 마을광장 완료" />
@@ -723,7 +717,10 @@
     <MESSAGE value="touchModal 진행중" />
     <MESSAGE value="투표 개선" />
     <MESSAGE value="리마인더 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="리마인더 추가" />
+    <MESSAGE value="좀비" />
+    <MESSAGE value="징크스 추가" />
+    <MESSAGE value="번역 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="번역 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
