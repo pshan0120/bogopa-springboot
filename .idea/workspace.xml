@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="bogopa:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="번역 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="오류수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -320,14 +319,7 @@
       <workItem from="1724202247536" duration="5199000" />
       <workItem from="1724459423293" duration="4438000" />
       <workItem from="1724464205352" duration="63000" />
-      <workItem from="1724520390629" duration="1325000" />
-    </task>
-    <task id="LOCAL-00128" summary="이미지 추가">
-      <created>1720204520988</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1720204520988</updated>
+      <workItem from="1724520390629" duration="1962000" />
     </task>
     <task id="LOCAL-00129" summary="탄시빌 캐릭터 추가">
       <created>1720206210814</created>
@@ -665,7 +657,14 @@
       <option name="project" value="LOCAL" />
       <updated>1724463963903</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="오류수정">
+      <created>1724521749418</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1724521749419</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -698,7 +697,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="savePlayerStatus" />
     <MESSAGE value="마을 광장 진행해야 함" />
     <MESSAGE value="역할설명, 마을광장 완료" />
     <MESSAGE value="executionModal ing" />
@@ -723,7 +721,8 @@
     <MESSAGE value="좀비" />
     <MESSAGE value="징크스 추가" />
     <MESSAGE value="번역 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="번역 추가" />
+    <MESSAGE value="오류수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="오류수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

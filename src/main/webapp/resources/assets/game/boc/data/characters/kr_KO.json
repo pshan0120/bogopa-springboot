@@ -2461,7 +2461,7 @@
             "Wrong"
         ],
         "setup": false,
-        "ability": "당신은 이야기꾼이 지정한 2명의 참가자 중 1명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.",
+        "ability": "첫날 밤, 당신은 이야기꾼이 지정한 2명의 참가자 중 1명이 어떤 역할을 가진 마을주민인지 알고 시작합니다.",
         "image": "/images/fo/boc/icons/townsfolk/washerwoman.webp"
     },
     {
