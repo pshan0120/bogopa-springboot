@@ -1,0 +1,121 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    const infectionModal = {
+        playSetting: {},
+        playStatus: {},
+        infectionByRound: [],
+        open: async playNo => {
+            infectionModal.playSetting = {};
+            infectionModal.playStatus = {};
+            infectionModal.infectionByRound = [];
+
+            await infectionModal.loadGameStatus(playNo);
+
+            if (Object.keys(infectionModal.playStatus).length === 0) {
+                alert("게임이 시작되지 않았습니다.");
+                return;
+            }
+
+            if (playStatus.round <= 1) {
+                alert("라운드 종료 이후 확인 가능합니다.");
+                return;
+            }
+
+            const $modal = $("#infectionModal");
+
+
+            /*const auctionHtml = infectionModal.auctionByRound
+                .sort((prev, next) => prev.round - next.round)
+                .reduce((prev, next) => {
+                    const resultHtml = next.resultList.reduce((prev, next) => {
+                        const biddingList = next.biddingList;
+                        const totalBiddingHtml = next.blind ? "비공개" : next.totalBidding;
+                        const minimumBiddingHtml = next.blind ? "비공개" : next.minimumBidding;
+
+                        return prev + `
+                                <h4>\${fruit.title}</h4>
+                                <div class="table-responsive">
+                                    <table class="table align-items-center table-flush">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col" class="text-center">총 판매금액</th>
+                                                <th scope="col" class="text-center">최저 판매가</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">\${totalBiddingHtml}</td>
+                                                <td class="text-center">\${minimumBiddingHtml}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            `;
+                    }, "");
+
+                    return prev + `<h3>\${next.round} 라운드</h3>
+                            <div>\${resultHtml}</div>
+                            <hr>`;
+                }, "");
+            $modal.find("[name='infectionDiv']").empty().html(auctionHtml);*/
+
+            $modal.modal("show");
+        },
+        loadGameStatus: async playNo => {
+            const lastPlayLog = await infectionModal.readLastPlayLog(playNo);
+            if (!lastPlayLog) {
+                return;
+            }
+
+            const lastPlayLogJson = JSON.parse(lastPlayLog);
+            infectionModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
+            infectionModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            infectionModal.playerList = JSON.parse(lastPlayLogJson.playerList);
+            infectionModal.auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+
+            console.log('game status loaded !!');
+        },
+        readLastPlayLog: playId => {
+            return gfn_callGetApi("/api/play/log/last", {playId})
+                .then(data => {
+                    // console.log('data', data);
+                    return data?.log;
+                })
+                .catch(response => console.error('error', response));
+        },
+        close: () => {
+        },
+    }
+</script>
+
+<div class="modal fade" id="infectionModal" role="dialog"
+     aria-labelledby="infectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">감염 상태</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span>인간 3</span>
+                    </div>
+                    <div class="col-md-6">
+                        <span name="infectionDiv">
+                            좀비 3
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

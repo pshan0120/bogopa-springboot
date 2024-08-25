@@ -62,6 +62,10 @@
             noteModal.open();
         }
 
+        const openInfectionModal = () => {
+            infectionModal.open(PLAY_ID);
+        }
+
         const reJoinPlay = () => {
             const nickname = prompt("참여중이었던 닉네임을 입력해 주세요.");
             if (!nickname) {
@@ -139,6 +143,9 @@
                             <button type="button" class="btn btn-danger btn-block" onclick="openMyRoleModal()">
                                 내 역할 보기
                             </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openAuctionResultModal()">
+                                감염 상태
+                            </button>
                             <button type="button" class="btn btn-primary btn-block display-none"
                                     onclick="reJoinPlay()" id="reJoinPlayButton">
                                 다시 입장
@@ -154,6 +161,7 @@
 
 <%@ include file="/WEB-INF/jsp/game/zombie/jspf/myRoleModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/zombie/jspf/guideModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/zombie/jspf/infectionModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
 

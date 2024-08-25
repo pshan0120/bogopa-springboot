@@ -13,6 +13,7 @@
         let playStatus = {};
         let originalPlayerList = [];
         let playerList = [];
+        let infectionByRound = [];
 
         $(async () => {
             await gfn_readPlayablePlayById(PLAY_ID);
@@ -39,6 +40,7 @@
             playSetting = {};
             playStatus = {};
             playerList = [];
+            infectionByRound = [];
 
             console.log('initializationSetting', initializationSetting);
 
@@ -147,6 +149,7 @@
                 playSetting: JSON.stringify(playSetting),
                 playStatus: JSON.stringify(playStatus),
                 playerList: JSON.stringify(playerList),
+                infectionByRound: JSON.stringify(infectionByRound),
             }
 
             const request = {
@@ -173,6 +176,7 @@
             playSetting = JSON.parse(lastPlayLogJson.playSetting);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
             playerList = JSON.parse(lastPlayLogJson.playerList);
+            infectionByRound = JSON.parse(lastPlayLogJson.infectionByRound);
 
             console.log('game status loaded !!');
         }
@@ -244,6 +248,13 @@
             });
 
             playStatus.round = playStatus.round + 1;
+
+            const numberOfZombie = playerList.filter(player => player.zombie).length;
+            infectionByRound.push({
+                round: playStatus.round,
+                numberOfZombie: numberOfZombie,
+            });
+
             saveGameStatus();
             renderRound();
         }

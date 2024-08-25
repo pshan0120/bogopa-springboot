@@ -30,5 +30,8 @@ const initializationSetting = {
         {numberOfPlayer:28, zombie: 5},
         {numberOfPlayer:29, zombie: 5},
         {numberOfPlayer:30, zombie: 5},
+        {numberOfPlayer:31, zombie: 5},
+        {numberOfPlayer:32, zombie: 5},
+        {numberOfPlayer:33, zombie: 5},
     ],
 };
