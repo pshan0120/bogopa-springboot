@@ -17,48 +17,22 @@
                 return;
             }
 
-            if (playStatus.round <= 1) {
-                alert("라운드 종료 이후 확인 가능합니다.");
+            if (infectionModal.playStatus.round <= 1) {
+                alert("2라운드부터 확인 가능합니다.");
                 return;
             }
 
             const $modal = $("#infectionModal");
 
+            $modal.find("span[name='round']").empty().html(`\${infectionModal.playStatus.round - 1}`);
+            const lastInfectionStatus = await infectionModal.infectionByRound
+                .find(infection => infection.round === infectionModal.playStatus.round - 1);
+            $modal.find("span[name='numberOfHuman']").empty().html(`\${lastInfectionStatus.numberOfHuman}`);
+            $modal.find("span[name='numberOfZombie']").empty().html(`\${lastInfectionStatus.numberOfZombie}`);
 
-            /*const auctionHtml = infectionModal.auctionByRound
-                .sort((prev, next) => prev.round - next.round)
-                .reduce((prev, next) => {
-                    const resultHtml = next.resultList.reduce((prev, next) => {
-                        const biddingList = next.biddingList;
-                        const totalBiddingHtml = next.blind ? "비공개" : next.totalBidding;
-                        const minimumBiddingHtml = next.blind ? "비공개" : next.minimumBidding;
-
-                        return prev + `
-                                <h4>\${fruit.title}</h4>
-                                <div class="table-responsive">
-                                    <table class="table align-items-center table-flush">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col" class="text-center">총 판매금액</th>
-                                                <th scope="col" class="text-center">최저 판매가</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center">\${totalBiddingHtml}</td>
-                                                <td class="text-center">\${minimumBiddingHtml}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            `;
-                    }, "");
-
-                    return prev + `<h3>\${next.round} 라운드</h3>
-                            <div>\${resultHtml}</div>
-                            <hr>`;
-                }, "");
-            $modal.find("[name='infectionDiv']").empty().html(auctionHtml);*/
+            if (infectionModal.playSetting.round < infectionModal.playStatus.round) {
+                $modal.find("span[name='result']").empty().html("게임이 종료되었습니다.");
+            }
 
             $modal.modal("show");
         },
@@ -71,8 +45,7 @@
             const lastPlayLogJson = JSON.parse(lastPlayLog);
             infectionModal.playSetting = JSON.parse(lastPlayLogJson.playSetting);
             infectionModal.playStatus = JSON.parse(lastPlayLogJson.playStatus);
-            infectionModal.playerList = JSON.parse(lastPlayLogJson.playerList);
-            infectionModal.auctionByRound = JSON.parse(lastPlayLogJson.auctionByRound);
+            infectionModal.infectionByRound = JSON.parse(lastPlayLogJson.infectionByRound);
 
             console.log('game status loaded !!');
         },
@@ -100,16 +73,18 @@
                 </button>
             </div>
             <div class="modal-body">
+                <h2 class="text-center"><span name="round"></span> 라운드 결과</h2>
+                <hr>
                 <div class="row">
-                    <div class="col-md-6">
-                        <span>인간 3</span>
+                    <div class="col-6">
+                        <h1 class="text-center font-blue">인간 <span name="numberOfHuman"></span></h1>
                     </div>
-                    <div class="col-md-6">
-                        <span name="infectionDiv">
-                            좀비 3
-                        </span>
+                    <div class="col-6">
+                        <h1 class="text-center font-red">좀비 <span name="numberOfZombie"></span></h1>
                     </div>
                 </div>
+                <hr>
+                <h3 class="text-center font-purple-light"><span name="result"></span></h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

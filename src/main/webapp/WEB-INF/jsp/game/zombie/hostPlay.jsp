@@ -247,13 +247,15 @@
                 player.touchedMemberIdByRound = null
             });
 
-            playStatus.round = playStatus.round + 1;
-
+            const numberOfHuman = playerList.filter(player => !player.zombie).length;
             const numberOfZombie = playerList.filter(player => player.zombie).length;
             infectionByRound.push({
                 round: playStatus.round,
-                numberOfZombie: numberOfZombie,
+                numberOfHuman,
+                numberOfZombie,
             });
+
+            playStatus.round = playStatus.round + 1;
 
             saveGameStatus();
             renderRound();
