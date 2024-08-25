@@ -136,7 +136,7 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
                                 노트
                             </button>
-                            <button type="button" class="btn btn-info btn-block" onclick="openMyRoleModal()">
+                            <button type="button" class="btn btn-danger btn-block" onclick="openMyRoleModal()">
                                 내 역할 보기
                             </button>
                             <button type="button" class="btn btn-primary btn-block display-none"

@@ -227,7 +227,7 @@
 
             selectedCharacterList.forEach(character => {
                 const source = jinxList.find(jinx => jinx.id === character.id);
-                if (source) {   // 원인이 있음
+                if (source) {
                     const targetList = source.jinx;
 
                     targetList.forEach(target => {
