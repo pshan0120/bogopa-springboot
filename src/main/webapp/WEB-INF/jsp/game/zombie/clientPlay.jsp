@@ -22,6 +22,8 @@
             const loggedIn = JSON.parse("<%= SessionUtils.isMemberLoggedIn() %>");
             if (!loggedIn) {
                 $("#reJoinPlayButton").show();
+            } else {
+                $("#openMyCharacterModalButton").show();
             }
         });
 
@@ -143,7 +145,8 @@
                             <button type="button" class="btn btn-info btn-block" onclick="openInfectionModal()">
                                 감염 상태
                             </button>
-                            <button type="button" class="btn btn-danger btn-block" onclick="openMyRoleModal()">
+                            <button type="button" class="btn btn-danger btn-block display-none"
+                                    onclick="openMyCharacterModal()" id="openMyCharacterModalButton">
                                 내 역할 보기
                             </button>
                             <button type="button" class="btn btn-primary btn-block display-none"
