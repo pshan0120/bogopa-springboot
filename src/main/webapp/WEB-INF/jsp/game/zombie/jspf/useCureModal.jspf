@@ -43,6 +43,10 @@
             $useCureModal.modal("show");
         },
         useCure: memberId => {
+            if (!confirm("치료제를 사용할까요?")) {
+                return;
+            }
+
             const player = useCureModal.playerList
                 .find(player => player.memberId === memberId);
             player.cure = false;
