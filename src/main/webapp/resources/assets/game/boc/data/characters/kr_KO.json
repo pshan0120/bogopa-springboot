@@ -1384,6 +1384,20 @@
         "image": "/images/fo/boc/icons/outsider/lunatic.webp"
     },
     {
+        "id": "lord_of_typhon",
+        "name": "Lord of Typhon",
+        "edition": "",
+        "team": "demon",
+        "firstNight": 0.1,
+        "firstNightReminder": "Wake the players on either side of the Demon. Show them the 'You Are' card, the token of the Minion they now are, and a thumbs down to indicate they are evil.",
+        "otherNight": 31.1,
+        "otherNightReminder": "The Lord of Typhon points to a player. That player dies.",
+        "reminders": ["Dead"],
+        "setup": true,
+        "ability": "Each night*, choose a player: they die. [Evil characters are in a line. You are in the middle. +1 Minion. -? To +? Outsiders]",
+        "image": "/build/img/icons/demon/lordoftyphon.webp"
+    },
+    {
         "id": "lycanthrope",
         "name": "늑대인간",
         "edition": "",
@@ -2514,6 +2528,20 @@
         "setup": false,
         "ability": "당신은 시작할 때 비밀 문구를 알게 됩니다. 오늘 그 문구를 공개적으로 말할 때마다 플레이어가 죽을 수 있습니다. 여러 번 말하면 여러 플레이어가 죽을 수 있습니다.",
         "image": "/images/fo/boc/icons/demon/yaggababble.webp"
+    },
+    {
+        "id": "zealot",
+        "name": "Zealot",
+        "edition": "",
+        "team": "outsider",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [],
+        "setup": false,
+        "ability": "If there are 5 or more players alive, you must vote for every nomination.",
+        "image": "/build/img/icons/outsider/zealot.webp"
     },
     {
         "id": "zombuul",

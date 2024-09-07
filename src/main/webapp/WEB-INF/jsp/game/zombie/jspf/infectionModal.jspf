@@ -24,7 +24,7 @@
 
             const $modal = $("#infectionModal");
 
-            $modal.find("span[name='round']").empty().html(`\${infectionModal.playStatus.round - 1}`);
+            $modal.find("span[name='round']").empty().html(`\${infectionModal.playStatus.round - 1} / \${infectionModal.playSetting.round}`);
             const lastInfectionStatus = await infectionModal.infectionByRound
                 .find(infection => infection.round === infectionModal.playStatus.round - 1);
             $modal.find("span[name='numberOfHuman']").empty().html(`\${lastInfectionStatus.numberOfHuman}`);

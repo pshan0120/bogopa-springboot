@@ -9,11 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="오류수정">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="감염상태 모달 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/lordoftyphon.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/zealot.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/clientPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/hostPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/infectionModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/infectionModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinx.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinx.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinxes/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinxes/kr_KO.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,30 +63,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/zombie/jspf&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/images/fo/boc/icons/demon",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\zombie\jspf" />
@@ -322,14 +326,9 @@
       <workItem from="1724459423293" duration="4438000" />
       <workItem from="1724464205352" duration="63000" />
       <workItem from="1724520390629" duration="1980000" />
-      <workItem from="1724598912485" duration="2896000" />
-    </task>
-    <task id="LOCAL-00130" summary="탄시빌 추가">
-      <created>1720207336774</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1720207336774</updated>
+      <workItem from="1724598912485" duration="4026000" />
+      <workItem from="1725293085039" duration="391000" />
+      <workItem from="1725677295577" duration="914000" />
     </task>
     <task id="LOCAL-00131" summary="배경음악 추가">
       <created>1720328803679</created>
@@ -667,7 +666,14 @@
       <option name="project" value="LOCAL" />
       <updated>1724522374187</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="감염상태 모달 추가">
+      <created>1724601950637</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1724601950637</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -700,7 +706,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="마을 광장 진행해야 함" />
     <MESSAGE value="역할설명, 마을광장 완료" />
     <MESSAGE value="executionModal ing" />
     <MESSAGE value="역할 설명 추가" />
@@ -725,7 +730,8 @@
     <MESSAGE value="징크스 추가" />
     <MESSAGE value="번역 추가" />
     <MESSAGE value="오류수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="오류수정" />
+    <MESSAGE value="감염상태 모달 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="감염상태 모달 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -763,6 +763,10 @@
             {
                 "id": "preacher",
                 "reason": "If the Preacher chose the Summoner on or before the 3rd night, the Summoner chooses which Demon, but the Storyteller chooses which player."
+            },
+            {
+                "id": "lord_of_typhon",
+                "reason": "If the Summoner creates a Lord Of Typhon, the Lord Of Typhon must neighbor a Minion. The other neighbor becomes a not-in-play evil Minion."
             }
         ]
     },
