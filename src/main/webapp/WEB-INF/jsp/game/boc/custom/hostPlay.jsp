@@ -722,25 +722,25 @@
 
             $playerStatusListDiv.find("input:checkbox[name='diedCheckbox']").on("click", event => {
                 const memberId = $(event.currentTarget).closest("tr").data("memberId");
-                const player = playerList.find(player => player.memberId === memberId);
+                const player = playerList.find(player => player.memberId == memberId);
                 player.died = $(event.currentTarget).is(":checked");
             });
 
             $playerStatusListDiv.find("input:checkbox[name='nominatingCheckbox']").on("click", event => {
                 const memberId = $(event.currentTarget).closest("tr").data("memberId");
-                const player = playerList.find(player => player.memberId === memberId);
+                const player = playerList.find(player => player.memberId == memberId);
                 player.nominating = $(event.currentTarget).is(":checked");
             });
 
             $playerStatusListDiv.find("input:checkbox[name='nominatedCheckbox']").on("click", event => {
                 const memberId = $(event.currentTarget).closest("tr").data("memberId");
-                const player = playerList.find(player => player.memberId === memberId);
+                const player = playerList.find(player => player.memberId == memberId);
                 player.nominated = $(event.currentTarget).is(":checked");
             });
 
             $playerStatusListDiv.find("input:checkbox[name='votableCheckbox']").on("click", event => {
                 const memberId = $(event.currentTarget).closest("tr").data("memberId");
-                const player = playerList.find(player => player.memberId === memberId);
+                const player = playerList.find(player => player.memberId == memberId);
                 player.votable = $(event.currentTarget).is(":checked");
             });
         }
@@ -763,13 +763,13 @@
         }
 
         const addPlayerReminder = async (memberId, characterId, reminder) => {
-            const player = playerList.find(player => player.memberId === memberId);
+            const player = playerList.find(player => player.memberId == memberId);
             player.reminderList.push({characterId, reminder});
             await renderPlayerStatusList();
         }
 
         const removeReminder = async (memberId, characterId, reminder) => {
-            const player = playerList.find(player => player.memberId === memberId);
+            const player = playerList.find(player => player.memberId == memberId);
             if (!confirm(player.nickname + "님의 '" + reminder + "' 리마인더를 제거하시겠습니까?")) {
                 return;
             }
@@ -784,7 +784,7 @@
         }
 
         const changeAlignment = async memberId => {
-            const player = playerList.find(player => player.memberId === memberId);
+            const player = playerList.find(player => player.memberId == memberId);
             if (!confirm(player.nickname + "님의 편을 바꾸시겠습니까?")) {
                 return;
             }
@@ -799,7 +799,7 @@
         }
 
         const changePlayerCharacter = async (characterId, selectedCharacterId, memberId) => {
-            const player = playerList.find(player => player.memberId === memberId);
+            const player = playerList.find(player => player.memberId == memberId);
             const character = Character.getInCharacterListById(selectedCharacterList, characterId);
             const selectedCharacter = Character.getInCharacterListById(selectedCharacterList, selectedCharacterId);
 

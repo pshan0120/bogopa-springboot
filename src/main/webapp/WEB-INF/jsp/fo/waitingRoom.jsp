@@ -96,14 +96,14 @@
             const $buttonDiv = $("#buttonDiv");
 
             const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
-            if (hostPlayMember.memberId === memberId) {
+            if (hostPlayMember.memberId == memberId) {
                 $buttonDiv.find("button[name='beginPlayButton']").show();
                 $buttonDiv.find("button[name='cancelPlayButton']").show();
                 return;
             }
 
             const $joinDiv = $("#joinDiv");
-            if (!clientPlayMemberList.some(playMember => playMember.memberId === memberId)) {
+            if (!clientPlayMemberList.some(playMember => playMember.memberId == memberId)) {
                 $joinDiv.find("button[name='joinPlayButton']").show();
                 return;
             }

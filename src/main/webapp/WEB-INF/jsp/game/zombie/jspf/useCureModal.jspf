@@ -48,7 +48,7 @@
             }
 
             const player = useCureModal.playerList
-                .find(player => player.memberId === memberId);
+                .find(player => player.memberId == memberId);
             player.cure = false;
             if (player.firstZombie
                 || !player.zombie) {

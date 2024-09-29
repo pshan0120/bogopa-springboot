@@ -34,7 +34,7 @@
 
             const memberId = JSON.parse("<%= SessionUtils.getCurrentMemberIdOrNull() %>");
 
-            const player = myCharacterModal.playerList.find(player => player.memberId === memberId);
+            const player = myCharacterModal.playerList.find(player => player.memberId == memberId);
             if (!player) {
                 alert("참가중 상태가 아닙니다.");
                 return;

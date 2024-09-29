@@ -79,7 +79,7 @@
             $modal.modal("show");
         },
         setNominatingPlayer: memberId => {
-            const player = executionModal.playerList.find(player => player.memberId === memberId);
+            const player = executionModal.playerList.find(player => player.memberId == memberId);
 
             player.nominating = true;
 
@@ -91,7 +91,7 @@
         },
         setNominatedPlayer: memberId => {
             //const nominatedPlayer = Character.getInPlayerListById(executionModal.playerList, characterId);
-            const nominatedPlayer = executionModal.playerList.find(player => player.memberId === memberId);
+            const nominatedPlayer = executionModal.playerList.find(player => player.memberId == memberId);
 
             nominatedPlayer.nominated = true;
 
@@ -136,7 +136,7 @@
             });
         },
         setVotingPlayer: memberId => {
-            const player = executionModal.playerList.find(player => player.memberId === memberId);
+            const player = executionModal.playerList.find(player => player.memberId == memberId);
 
             if (player.died) {
                 player.votable = false;
@@ -148,7 +148,7 @@
             $modal.find("[name='votedPlayerListDiv']").append(player.nickname + (player.died ? "-사망" : "") + ", ");
         },
         setExecutionPlayer: memberId => {
-            const player = executionModal.playerList.find(player => player.memberId === memberId);
+            const player = executionModal.playerList.find(player => player.memberId == memberId);
 
             if (!confirm("[" + player.nickname + "] 처형 집행 하시겠습니까?")) {
                 return;

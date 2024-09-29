@@ -9,16 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="감염상태 모달 추가">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/demon/lordoftyphon.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/outsider/zealot.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/infectionModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/zombie/jspf/infectionModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinx.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinx.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinxes/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinxes/kr_KO.json" afterDir="false" />
-    </list>
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="zealot, lord of typhon 추가" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,11 +80,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\demon" />
+      <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\outsider" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\zombie\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
-      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
-      <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\messages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
@@ -328,14 +319,7 @@
       <workItem from="1724520390629" duration="1980000" />
       <workItem from="1724598912485" duration="4026000" />
       <workItem from="1725293085039" duration="391000" />
-      <workItem from="1725677295577" duration="914000" />
-    </task>
-    <task id="LOCAL-00131" summary="배경음악 추가">
-      <created>1720328803679</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
-      <option name="project" value="LOCAL" />
-      <updated>1720328803680</updated>
+      <workItem from="1725677295577" duration="1581000" />
     </task>
     <task id="LOCAL-00132" summary="배경음악 추가">
       <created>1720329603484</created>
@@ -673,7 +657,14 @@
       <option name="project" value="LOCAL" />
       <updated>1724601950637</updated>
     </task>
-    <option name="localTasksCounter" value="180" />
+    <task id="LOCAL-00180" summary="zealot, lord of typhon 추가">
+      <created>1725679942945</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1725679942946</updated>
+    </task>
+    <option name="localTasksCounter" value="181" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -706,7 +697,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="역할설명, 마을광장 완료" />
     <MESSAGE value="executionModal ing" />
     <MESSAGE value="역할 설명 추가" />
     <MESSAGE value="가이드 추가" />
@@ -731,7 +721,8 @@
     <MESSAGE value="번역 추가" />
     <MESSAGE value="오류수정" />
     <MESSAGE value="감염상태 모달 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="감염상태 모달 추가" />
+    <MESSAGE value="zealot, lord of typhon 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="zealot, lord of typhon 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
