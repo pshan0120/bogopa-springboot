@@ -818,5 +818,42 @@
                 "reason": "If the Al-Hadikhia dies by execution, and the Mastermind is alive, the Al-Hadikhia chooses 3 good players tonight: if all 3 choose to live, evil wins. Otherwise, good wins."
             }
         ]
+    },
+    {
+        "id": "boffin",
+        "jinx": [
+            {
+                "id": "heretic",
+                "reason": "The Demon cannot have the Heretic ability."
+            },
+            {
+                "id": "cult_leader",
+                "reason": "If the Demon has the Cult Leader ability, they can’t turn good due to this ability."
+            },
+            {
+                "id": "goon",
+                "reason": "If the Demon has the Goon ability, they can’t turn good due to this ability."
+            },
+            {
+                "id": "ogre",
+                "reason": "The Demon cannot have the Ogre ability."
+            },
+            {
+                "id": "politician",
+                "reason": "The Demon cannot have the Politician ability."
+            },
+            {
+                "id": "drunk",
+                "reason": "If the Demon would have the Drunk ability, the Boffin chooses a Townsfolk player to have this ability instead."
+            },
+            {
+                "id": "alchemist",
+                "reason": "If the Alchemist has the Boffin ability, the Alchemist does not learn what ability the Demon has."
+            },
+            {
+                "id": "village_idiot",
+                "reason": "If there is a spare token, the Boffin can give the Demon the Village Idiot ability."
+            }
+        ]
     }
 ]

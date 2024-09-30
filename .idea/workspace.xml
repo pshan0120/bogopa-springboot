@@ -9,7 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="zealot, lord of typhon 추가" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="오류수정">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/minion/boffin.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinx.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinx.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/night-order.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/night-order.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,7 +68,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "false",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/images/fo/boc/icons/demon",
+    "last_opened_file_path": "D:/dev/bogopa/src/main/webapp/images/fo/boc/icons/minion",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -80,11 +86,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\minion" />
       <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\demon" />
       <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\outsider" />
       <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\zombie\jspf" />
       <recent name="D:\dev\bogopa\src\main\webapp\js\game" />
-      <recent name="D:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
@@ -320,20 +326,8 @@
       <workItem from="1724598912485" duration="4026000" />
       <workItem from="1725293085039" duration="391000" />
       <workItem from="1725677295577" duration="1581000" />
-    </task>
-    <task id="LOCAL-00132" summary="배경음악 추가">
-      <created>1720329603484</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1720329603484</updated>
-    </task>
-    <task id="LOCAL-00133" summary="pocketGrimoire 추가">
-      <created>1720632133232</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1720632133233</updated>
+      <workItem from="1727600695654" duration="199000" />
+      <workItem from="1727714363432" duration="1273000" />
     </task>
     <task id="LOCAL-00134" summary="pocketGrimoire 추가">
       <created>1720719489934</created>
@@ -664,7 +658,21 @@
       <option name="project" value="LOCAL" />
       <updated>1725679942946</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="오류수정">
+      <created>1727600893662</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1727600893662</updated>
+    </task>
+    <task id="LOCAL-00182" summary="오류수정">
+      <created>1727714515393</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1727714515394</updated>
+    </task>
+    <option name="localTasksCounter" value="183" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -719,10 +727,10 @@
     <MESSAGE value="좀비" />
     <MESSAGE value="징크스 추가" />
     <MESSAGE value="번역 추가" />
-    <MESSAGE value="오류수정" />
     <MESSAGE value="감염상태 모달 추가" />
     <MESSAGE value="zealot, lord of typhon 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="zealot, lord of typhon 추가" />
+    <MESSAGE value="오류수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="오류수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

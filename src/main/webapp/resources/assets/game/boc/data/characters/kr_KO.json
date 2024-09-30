@@ -274,6 +274,21 @@
         "image": "/images/fo/boc/icons/traveller/bishop.webp"
     },
     {
+        "id": "boffin",
+        "name": "과학자",
+        "edition": "",
+        "team": "minion",
+        "firstNight": 1,
+        "firstNightReminder": "Wake the Boffin and how them the token of the ability the Demon has. Put the Boffin back to sleep. Wake the Demon, show the Boffin token, then show the token of the good ability the Demon has.",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [],
+        "setup": false,
+        "ability": "The Demon (even if drunk or poisoned) has a not-in-play good character’s ability. You both know which.",
+        "ability": "1명의 악마는(만취했거나 중독되었어도) 참여하고 있지 않은 선한 역할의 능력을 가집니다. 당신과 그는 그게 어떤 역할인지 알게 됩니다.",
+        "image": "/build/img/icons/minion/boffin.webp"
+    },
+    {
         "id": "bonecollector",
         "name": "뼈 수집가",
         "edition": "snv",
