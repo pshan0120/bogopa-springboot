@@ -117,7 +117,7 @@
                 if (next.votable) {
                     return prev
                         + "<button class=\"btn btn-outline-default mr-1 my-1 btn-block\""
-                        + " onclick=\"executionModal.setVotingPlayer('" + next.memberId + "')\" >"
+                        + " onclick=\"executionModal.setVotingPlayer(" + next.memberId + ")\" >"
                         + " " + next.nickname + (next.died ? "-사망" : "")
                         + "</button>";
                 }
