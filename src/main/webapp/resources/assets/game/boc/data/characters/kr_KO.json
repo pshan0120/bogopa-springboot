@@ -29,7 +29,7 @@
             "Is the Alchemist"
         ],
         "setup": false,
-        "ability": "당신은 참여하고 있지 않은 하수인의 능력을 가지고 있습니다.",
+        "ability": "당신은 하수인의 능력을 가지고 있습니다. 이를 사용할 때, 이야기꾼이 당신에게 다르게 선택하라고 요청할 수 있습니다",
         "image": "/images/fo/boc/icons/townsfolk/alchemist.webp"
     },
     {
@@ -49,7 +49,7 @@
             "Chose life"
         ],
         "setup": false,
-        "ability": "첫날 밤을 제외한 매일 밤, 3명의 플레이어를 차례로 선택합니다(이 플레이어들은 공개됩니다.). 그 플레이어들은 선택된 순서대로 살 것인지 죽을 것인지 결정합니다. 만약 모두 살기를 원했다면 모두 죽습니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 3명의 플레이어를 선택할 수 있습니다(이 플레이어들은 공개됩니다). 그 플레이어들은 살 것인지 죽을 것인지 결정합니다. 만약 모두 살기를 원했다면 모두 죽습니다.",
         "image": "/images/fo/boc/icons/demon/alhadikhia.webp"
     },
     {
@@ -63,7 +63,7 @@
         "otherNightReminder": "Choose a player, that player dies.",
         "reminders": [],
         "setup": false,
-        "ability": "매일 낮 1번, 공개적으로 하수인과 악마이 누구인지 추측할 수 있습니다. 전부 맞다면 선한 편이 승리합니다.",
+        "ability": "매일, 공개적으로 하수인과 악마가 누구인지 추측할 수 있습니다. 전부 맞다면 선한 편이 승리합니다.",
         "image": "/images/fo/boc/icons/townsfolk/alsaahir.webp"
     },
     {
@@ -284,7 +284,6 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "The Demon (even if drunk or poisoned) has a not-in-play good character’s ability. You both know which.",
         "ability": "1명의 악마는(만취했거나 중독되었어도) 참여하고 있지 않은 선한 역할의 능력을 가집니다. 당신과 그는 그게 어떤 역할인지 알게 됩니다.",
         "image": "/build/img/icons/minion/boffin.webp"
     },
@@ -316,7 +315,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "당신이 처형당하면, 3명의 플레이어들만 남고 모두 죽습니다. 1분 후, 생사여부와 관계없이 모든 플레이어가 죽이고 싶은 플레이어를 가리킵니다. 가장 많이 받은 플레이어는 사망합니다. 동점이라면 밤이 옵니다.",
+        "ability": "당신이 처형당하면, 3명의 플레이어들만 남고 모두 죽습니다. 1부터 10까지의 카운트다운 후, 생사여부와 관계없이 모든 플레이어가 죽이고 싶은 플레이어를 가리킵니다. 가장 많이 받은 플레이어는 사망합니다. 동점이라면 밤이 옵니다.",
         "image": "/images/fo/boc/icons/minion/boomdandy.webp"
     },
     {
@@ -538,7 +537,7 @@
             "Guess used"
         ],
         "setup": false,
-        "ability": "모든 하수인은 당신이 참여중이라는 것을 알고 있습니다. 게임 중 1번, 하수인이 공개적으로 당신을 추측해서 맞춘다면, 당신의 팀은 패배합니다.",
+        "ability": "모든 하수인은 아가씨가 참여중이라는 것을 알고 있습니다. 게임 중 1번, 하수인이 공개적으로 당신을 추측해서 맞춘다면, 당신의 팀은 패배합니다.",
         "image": "/images/fo/boc/icons/outsider/damsel.webp"
     },
     {
@@ -750,7 +749,7 @@
         "otherNightReminder": "If a Farmer died tonight, choose another good player and make them the Farmer. Wake this player, show them the 'You are' card and the Farmer character token.",
         "reminders": [],
         "setup": false,
-        "ability": "만약 당신이 밤에 죽으면, 살아있는 선한 플레이어는 농부가 됩니다.",
+        "ability": "밤에 당신이 죽으면, 살아있는 선한 플레이어는 농부가 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/farmer.webp"
     },
     {
@@ -1250,7 +1249,7 @@
         "otherNightReminder": "If there are more dead than living, show the King a character token of a living player.",
         "reminders": [],
         "setup": false,
-        "ability": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows who you are.",
+        "ability": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King.",
         "image": "/images/fo/boc/icons/townsfolk/king.webp"
     },
     {
@@ -1425,7 +1424,7 @@
             "Dead"
         ],
         "setup": false,
-        "ability": "첫날 밤을 제외한 매일 밤, 살아있는 플레이어를 선택합니다. 만약 그가 선한 편이라면 죽지만, 오늘 밤 죽는 플레이어는 오직 그 뿐입니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 살아있는 플레이어를 선택합니다. 만약 그가 선하다면 죽고, 악은 오늘 밤 죽일 수 없습니다. 1명의 선한 플레이어는 악으로 보입니다.",
         "image": "/images/fo/boc/icons/townsfolk/lycanthrope.webp"
     },
     {
@@ -1615,7 +1614,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "게임 중 한 번, 밤에 한 플레이어를 선택합니다. 그들은 당신이 누군지 알게 됩니다.",
+        "ability": "게임 중 한 번, 밤에 한 플레이어를 선택합니다. 그들은 당신이 야간경비원라는 것을 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/nightwatchman.webp"
     },
     {
@@ -1710,7 +1709,7 @@
             "About to die"
         ],
         "setup": false,
-        "ability": "All players keep their eyes closed when voting & the vote tally is secret. Votes for you only count if you vote.",
+        "ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk or not.",
         "image": "/images/fo/boc/icons/minion/organgrinder.webp"
     },
     {
@@ -1788,7 +1787,7 @@
             "Storyteller Ability"
         ],
         "setup": false,
-        "ability": "If you die, the Storyteller gains a Minion ability.",
+        "ability": "When you die, the Storyteller gains a Minion ability.",
         "image": "/images/fo/boc/icons/outsider/plaguedoctor.webp"
     },
     {
@@ -1987,7 +1986,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": true,
-        "ability": "지명당한 플레이어는 바로 죽지만, 원한다면(3일째 낮에는 반드시) 즉시 다시 지명할 수 있습니다. 3일째 낮이 지나가면 악이 승리합니다. [모든 하수인은 폭동이 됩니다.]",
+        "ability": "3일째 낮에, 하수인들은 폭도가 됩니다. 그리고 이제부터 지명된 플레이어는 죽습니다. 다만 그 후 즉시 살아 있는 플레이어를 지명해야 합니다. 이는 반드시 일어나야 합니다.",
         "image": "/images/fo/boc/icons/demon/riot.webp"
     },
     {
@@ -2443,7 +2442,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "All players know who you are. You can not die during the day. If good voted, you may choose to execute immediately.",
+        "ability": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately.",
         "image": "/images/fo/boc/icons/minion/vizier.webp"
     },
     {

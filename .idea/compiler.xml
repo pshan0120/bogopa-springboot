@@ -16,7 +16,6 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
         </processorPath>
-        <module name="bogopa" />
         <module name="boardgame" />
       </profile>
     </annotationProcessing>
