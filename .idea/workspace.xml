@@ -16,72 +16,18 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="bogopa:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="boffin 추가">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/bulgasal.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/ceramicartisan.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/changgwi.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/crownprinceghost.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/darknessspirit.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/dokkaebi.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/executioner.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/ginsenggatherer.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/hundredlegsghost.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/jangsantiger.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/lifeanddeathghost.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/liondancersofbukcheong.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/mendicantmonk.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/mimicghost.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/ninetailedfox.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/peddlerguildsman.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/25_lovekorea_v2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/26_lovekorea_v2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/bulgasal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/ceramicartisan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/changgwi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/chill_lovekorea_v2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/crownprinceghost.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/darknessspirit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/dokkaebi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/executioner.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/ginsenggatherer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/hundredlegsghost.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/jangsantiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/lifeanddeathghost.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/liondancersofbukcheong.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/mendicantmonk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/mimicghost.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/ninetailedfox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/peddlerguildsman.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/secretroyalinspector.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/shaman.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/snailbride.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/taoisthermit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/tavernmistress.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/tigersandplague.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/tigerslayingguard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/vengefulspirit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/villageaccountant.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/secretroyalinspector.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/shaman.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/snailbride.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/taoisthermit.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/tavernmistress.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/tigersandplague.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/tigerslayingguard.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/vengefulspirit.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/villageaccountant.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/supernatural-incidents-in-joseon.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- &quot;.idea/workspace.xml&quot; 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/supernatural-incidents-in-joseon.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/supernatural-incidents-in-joseon.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,35 +86,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
-    "Tomcat Server.Tomcat 9.0.64.executor": "Run",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/scripts",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15136719",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
-    "show.migrate.to.gradle.popup": "false",
-    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.64.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/scripts&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
@@ -423,7 +369,7 @@
       <workItem from="1727714363432" duration="1825000" />
       <workItem from="1737173944520" duration="41000" />
       <workItem from="1746365790608" duration="2957000" />
-      <workItem from="1753163594095" duration="13330000" />
+      <workItem from="1753163594095" duration="14450000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -768,7 +714,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="184" />
+    <option name="localTasksCounter" value="185" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -801,7 +747,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="역할 설명 추가" />
     <MESSAGE value="가이드 추가" />
     <MESSAGE value="이미지 추가" />
     <MESSAGE value="renderPlayedCharacterDisplayedSelect" />
@@ -826,7 +771,8 @@
     <MESSAGE value="zealot, lord of typhon 추가" />
     <MESSAGE value="오류수정" />
     <MESSAGE value="boffin 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="boffin 추가" />
+    <MESSAGE value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- &quot;.idea/workspace.xml&quot; 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- &quot;.idea/workspace.xml&quot; 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

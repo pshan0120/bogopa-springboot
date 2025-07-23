@@ -118,5 +118,11 @@
         "name": "I'm your demon now",
         "type": "teensyville",
         "jsonFileName": "im-your-demon-now.json"
+    },
+    {
+        "id": "siij",
+        "name": "Supernatural incidents in-Joseon",
+        "type": "full",
+        "jsonFileName": "supernatural-incidents-in-joseon.json"
     }
 ]
