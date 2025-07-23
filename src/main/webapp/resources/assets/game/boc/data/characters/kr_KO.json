@@ -3314,11 +3314,11 @@
         "edition": "siij",
         "team": "townsfolk",
         "firstNight": 7,
-        "firstNightReminder": "참가중인 역할 하나를 보여 줍니다.",
+        "firstNightReminder": "우렁각시를 깨운 뒤 참가중인 역할 하나를 보여 줍니다.",
         "otherNight": 13,
         "otherNightReminder": "",
         "reminders": [
-            "우렁각시의 보호"
+            "보호"
         ],
         "setup": false,
         "ability": "첫날 밤, 참가중인 역할을 알게 됩니다. 그 역할로 '광기' 했다면, 그 역할은 밤에 사망할 수 없습니다.",
@@ -3330,11 +3330,11 @@
         "edition": "siij",
         "team": "townsfolk",
         "firstNight": 8,
-        "firstNightReminder": "참가중인 하수인 역할 하나를 보여 줍니다.",
+        "firstNightReminder": "망나니를 깨운 뒤 참가중인 하수인 역할 하나를 보여 줍니다.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
-            "망나니 칼 휘두름"
+            "칼 휘두름"
         ],
         "setup": false,
         "ability": "첫날 밤, 참가중인 하수인 역할 하나를 알고 시작합니다. 게임 중 한번 망나니임을 선언하고 지명할 수 있습니다. 하수인 지명 시 무조건 처형시킵니다.",
@@ -3350,8 +3350,9 @@
         "otherNight": 14,
         "otherNightReminder": "",
         "reminders": [
+            "법 제정",
             "위법사실 인지함",
-            "강력한 법에 의한 사망"
+            "과한 법 제정함"
         ],
         "setup": false,
         "ability": "첫날 낮, 악한 자에 대한 법을 이야기하세요. 처음으로 법이 어겨졌다면, 당신은 그 사실을 알게 됩니다. 단, 너무 강력한 법을 만들면 밤에 사망할 수도 있습니다.",
@@ -3363,7 +3364,7 @@
         "edition": "siij",
         "team": "townsfolk",
         "firstNight": 6,
-        "firstNightReminder": "참가자 1명을 선택하게 합니다.",
+        "firstNightReminder": "탁발승을 깨운 뒤 참가자 1명을 선택하게 합니다.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
@@ -3379,7 +3380,7 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 5,
-        "otherNightReminder": "참가자 1명을 선택하게 합니다.",
+        "otherNightReminder": "주모를 깨운 뒤 참가자 1명을 선택하게 합니다.",
         "reminders": [
             "술상을 받음"
         ],
@@ -3393,9 +3394,9 @@
         "edition": "siij",
         "team": "townsfolk",
         "firstNight": 10,
-        "firstNightReminder": "첫 질문을 합니다.",
+        "firstNightReminder": "보부상을 깨운 뒤 첫 질문을 합니다.",
         "otherNight": 16,
-        "otherNightReminder": "그 전 날과 같은 / 또는 새로운 질문을 합니다.",
+        "otherNightReminder": "보부상을 깨운 뒤 '정답' 상태거나 '중독' 또는 '만취' 상태라면 새로운 질문을 합니다. 아니라면 그 전날 질문을 합니다.",
         "reminders": [
             "정답",
             "오답"
@@ -3410,9 +3411,9 @@
         "edition": "siij",
         "team": "outsider",
         "firstNight": 11,
-        "firstNightReminder": "마을에 대한 정보를 알려줍니다.",
+        "firstNightReminder": "무당을 깨운 뒤 마을에 대한 정보를 알려줍니다.",
         "otherNight": 10,
-        "otherNightReminder": "마을에 대한 정보를 알려줍니다.",
+        "otherNightReminder": "무당을 깨운 뒤 마을에 대한 정보를 알려줍니다.",
         "reminders": [
             "천기누설로 사망"
         ],
@@ -3426,25 +3427,28 @@
         "edition": "siij",
         "team": "townsfolk",
         "firstNight": 9,
-        "firstNightReminder": "1 또는 0으로 알려줍니다.",
+        "firstNightReminder": "심마니를 깨운 뒤 1 또는 0으로 알려줍니다.",
         "otherNight": 15,
-        "otherNightReminder": "1 또는 0으로 알려줍니다.",
-        "reminders": [],
-        "setup": false,
-        "ability": "매일 밤, 살아있는 참가자(본인 제외)를 선택하고 1 또는 0의 정보를 받습니다. 1과 0이 어떤 값인지는 모르고 시작합니다. (1과 0의 정보 : 마을주민 / 이방인 하수인 악마)",
+        "otherNightReminder": "심마니를 깨운 뒤 1 또는 0으로 알려줍니다.",
+        "reminders": [
+            "1이 마을주민",
+            "1이 이방인 + 하수인 + 악마"
+        ],
+        "setup": true,
+        "ability": "매일 밤, 살아있는 참가자(본인 제외)를 선택하고 1 또는 0의 정보를 받습니다. 1과 0이 어떤 값인지는 모르고 시작합니다. (1과 0의 정보 : 마을주민 / 이방인 + 하수인 + 악마)",
         "image": "/images/fo/boc/icons/siij/ginsenggatherer.webp"
     },
     {
         "id": "liondancersofbukcheong",
         "name": "북청사자놀음패",
         "edition": "siij",
-        "team": "traveler",
+        "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
-            "놀음패 가입됨"
+            "가입됨"
         ],
         "setup": false,
         "ability": "매일 낮, 공개적으로 이웃한 참가자 1명에게 놀음패 가입을 권유할 수 있습니다. 만약 사악한 참가자가 놀음패에 가입하거나, 기존 가입자가 사악해진다면, 모두 처형 됩니다.",
@@ -3458,12 +3462,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 9,
-        "otherNightReminder": "정보를 알려줍니다. 이후 리마인더를 제거합니다.",
+        "otherNightReminder": "식리인을 깨운 뒤 전날 처형에 따라 진실 또는 거짓 정보를 알려줍니다. 이후 리마인더를 제거합니다.",
         "reminders": [
             "사악한 참가자 처형됨"
         ],
         "setup": false,
-        "ability": "매일 밤(첫날 제외) 처형이 있었다면, 이야기꾼으로부터 정보를 듣습니다. 사악한 참가자가 처형되었다면, 잘못된 정보를 알게 됩니다.",
+        "ability": "매일 밤(첫날 제외), 낮에 처형이 있었다면, 이야기꾼으로부터 정보를 듣습니다. 사악한 참가자가 처형되었었다면, 잘못된 정보를 알게 됩니다.",
         "image": "/images/fo/boc/icons/siij/villageaccountant.webp"
     },
     {
@@ -3474,7 +3478,7 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 11,
-        "otherNightReminder": "도자기가 깨졌는지 알려줍니다. 이후 리마인더를 제거합니다.",
+        "otherNightReminder": "사기장을 깨운 뒤 도자기가 깨졌는지 알려줍니다. 이후 리마인더를 제거합니다.",
         "reminders": [
             "악마와 함께 투표함"
         ],
@@ -3524,7 +3528,7 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
-        "setup": false,
+        "setup": true,
         "ability": "참가중인 마을주민 혹은 악마의 블러프 역할 중 1개를 받지만, 당신은 따라귀입니다.",
         "image": "/images/fo/boc/icons/siij/mimicghost.webp"
     },
@@ -3538,7 +3542,7 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
-            "만취(생사귀)"
+            "만취"
         ],
         "setup": false,
         "ability": "마을주민 역할을 받고 능력도 정상적이지만, 당신은 생사귀입니다. 이웃한 마을주민 2명이 만취합니다. 당신이 사망한다면, 생사귀가 사망했음을 말해줍니다.",
@@ -3594,7 +3598,7 @@
         "edition": "siij",
         "team": "minion",
         "firstNight": 3,
-        "firstNightReminder": "1명을 선택하게 합니다.",
+        "firstNightReminder": "태자귀를 깨운 뒤 1명을 선택하게 합니다.",
         "otherNight": 0,
         "otherNightReminder": "태자귀 처형됨 상태라면 태자귀가 선택한 참가자를 깨우고 서로 알게 합니다. 이후 태자귀 처형됨 리마인더를 제거합니다.",
         "reminders": [
@@ -3613,7 +3617,7 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 6,
-        "otherNightReminder": "1명을 선택하게 합니다. 그 참가자를 깨우고 가위바위보를 시킵니다.",
+        "otherNightReminder": "어둑시니을 깨운 뒤 다른 참가자 1명을 선택하게 합니다. 그 참가자를 깨우고 가위바위보를 시킵니다.",
         "reminders": [],
         "setup": false,
         "ability": "매일밤(첫날 제외), 참가자 1명을 선택해 가위바위보를 합니다. 패자는 사망합니다. 어둑시니에게 선택된 참가자는 '어둑시니가 없음'을 '광기' 해야합니다. 광기를 깰 경우 참가자 팀은 패배합니다. 어둑시니는 오직 가위바위보에서 패배해야만 사망합니다.",
@@ -3625,11 +3629,14 @@
         "edition": "siij",
         "team": "minion",
         "firstNight": 1,
-        "firstNightReminder": "첫날 황혼 단계에서 선한 역할 하나를 중복되게 설정합니다. 그리고 한 명을 중독시킵니다.",
+        "firstNightReminder": "첫날 황혼 단계에서 선한 역할 하나를 중복되게 설정합니다. 그리고 한 명을 중독시킵니다. 장산범을 깨운 뒤 선한 역할과 중독된 중복 참가자를 알려줍니다.",
         "otherNight": 7,
         "otherNightReminder": "장산범이 사망했다면 중독(장산범) 상태 참가자에게 장산범을 알려줍니다.",
         "reminders": [
-            "중독(장산범)"
+            "중독"
+        ],
+        "remindersGlobal": [
+            "중독된 참가자"
         ],
         "setup": true,
         "ability": "중복된 선한 캐릭터가 존재하고, 그중 한 명은 중독된 상태입니다. 첫날밤, 당신은 그 역할과 중독된 자가 누구인지 알고 있습니다. 장산범이 사망할 경우, 그날 밤 중독된 자는 장산범이 누구인지 알게 됩니다.",
@@ -3667,7 +3674,7 @@
         "otherNight": 3,
         "firstNightReminder": "구미호를 깨워 한 명의 참가자를 선택하고, 해당 참가자를 '매혹됨'으로 표시합니다. 그 후 해당 참가자를 깨우고 '이 역할은 당신을 선택했었습니다.'와 구미호 역할 표식을 보여줍니다.",
         "reminders": [
-            "매혹(구미호)",
+            "매혹됨",
             "매혹된 참가자가 지명함"
         ],
         "setup": false,
@@ -3679,7 +3686,7 @@
         "name": "호환마마",
         "edition": "siij",
         "team": "demon",
-        "firstNight": 1,
+        "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
@@ -3700,7 +3707,7 @@
         "otherNight": 17,
         "otherNightReminder": "",
         "reminders": [
-            "숙주(백각귀)"
+            "숙주"
         ],
         "setup": false,
         "ability": "당신이 죽었더라도 매일밤(첫날 제외) 참가자 1명을 선택 해 '사망'시킵니다. 당신을 처음으로 지명한 참가자는 숙주가 되어, 숙주가 사망하면 백각귀도 사망합니다. (지명한 참가자는 숙주가 된 사실은 모릅니다.)",

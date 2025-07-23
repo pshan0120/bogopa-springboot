@@ -16,18 +16,16 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war" />
+      <artifact name="bogopa:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- &quot;.idea/workspace.xml&quot; 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- `.idea/workspace.xml` 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/supernatural-incidents-in-joseon.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/supernatural-incidents-in-joseon.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -369,7 +367,7 @@
       <workItem from="1727714363432" duration="1825000" />
       <workItem from="1737173944520" duration="41000" />
       <workItem from="1746365790608" duration="2957000" />
-      <workItem from="1753163594095" duration="14450000" />
+      <workItem from="1753163594095" duration="22486000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -714,7 +712,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="185" />
+    <option name="localTasksCounter" value="186" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -747,7 +745,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="가이드 추가" />
     <MESSAGE value="이미지 추가" />
     <MESSAGE value="renderPlayedCharacterDisplayedSelect" />
     <MESSAGE value="정보메세지 추가" />
@@ -772,7 +769,8 @@
     <MESSAGE value="오류수정" />
     <MESSAGE value="boffin 추가" />
     <MESSAGE value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- &quot;.idea/workspace.xml&quot; 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
-    <option name="LAST_COMMIT_MESSAGE" value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- &quot;.idea/workspace.xml&quot; 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
+    <MESSAGE value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- `.idea/workspace.xml` 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- `.idea/workspace.xml` 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
