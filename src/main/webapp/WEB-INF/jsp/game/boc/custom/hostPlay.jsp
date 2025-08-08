@@ -560,7 +560,7 @@
                 $playerStatusDiv.find("button[name='hideCharacterToPlayerButton']").show();
             }
 
-            if (playStatus.changeToDay) {
+            if (playStatus.isDay) {
                 $playerStatusDiv.find("button[name='changeToNightButton']").show();
             } else {
                 $playerStatusDiv.find("button[name='changeToDayButton']").show();
