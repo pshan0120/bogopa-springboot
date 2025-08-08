@@ -74,6 +74,10 @@
             townModal.open(PLAY_ID);
         }
 
+        const goTownLive = () => {
+            location.href = "/game/boc-custom/play/live/" + PLAY_ID;
+        }
+
         const openMyCharacterModal = () => {
             myCharacterModal.open(PLAY_ID);
         }
@@ -161,6 +165,9 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                 마을 광장
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="goTownLive()">
+                                마을 광장 Live
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openNoteModal()">
                                 노트

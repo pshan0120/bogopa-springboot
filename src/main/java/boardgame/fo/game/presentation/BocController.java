@@ -124,4 +124,11 @@ public class BocController {
         return mv;
     }
 
+    @GetMapping("/game/boc-custom/play/live/{playId}")
+    public ModelAndView openBocCustomLiveByPlayNo(@PathVariable("playId") long playId) {
+        ModelAndView mv = new ModelAndView("/game/boc/custom/live");
+        mv.addObject("playId", playId);
+        return mv;
+    }
+
 }

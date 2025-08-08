@@ -500,6 +500,7 @@
             playStatus = {
                 ...playStatus,
                 playerCharacterDisplayed: true,
+                townLiveOn: true,
             }
 
             saveGameStatus();
@@ -557,6 +558,12 @@
 
             if (playStatus.playerCharacterDisplayed) {
                 $playerStatusDiv.find("button[name='hideCharacterToPlayerButton']").show();
+            }
+
+            if (playStatus.townLiveOn) {
+                $playerStatusDiv.find("button[name='townLiveOffButton']").show();
+            } else {
+                $playerStatusDiv.find("button[name='townLiveOnButton']").show();
             }
 
             const $playerStatusListDiv = $playerStatusDiv.find("div[name='playerStatusListDiv']");
@@ -1030,6 +1037,26 @@
             saveGameStatus();
         }
 
+        const setTownLiveOn = () => {
+            playStatus.townLiveOn = true;
+
+            const $playerStatusDiv = $("#playerStatusDiv");
+            $playerStatusDiv.find("button[name='townLiveOnButton']").hide();
+            $playerStatusDiv.find("button[name='townLiveOffButton']").show();
+
+            saveGameStatus();
+        }
+
+        const setTownLiveOff = () => {
+            playStatus.townLiveOn = false;
+
+            const $playerStatusDiv = $("#playerStatusDiv");
+            $playerStatusDiv.find("button[name='townLiveOffButton']").hide();
+            $playerStatusDiv.find("button[name='townLiveOnButton']").show();
+
+            saveGameStatus();
+        }
+
         const resetNominationStatus = () => {
             if (!confirm("현재까지의 모든 투표 상황을 초기화하고 투표를 처음부터 진행합니다.")) {
                 return;
@@ -1482,12 +1509,20 @@
                                             name="hideCharacterToPlayerButton" onclick="hideCharacterToPlayer()">
                                         플레이어 캐릭터 숨기기
                                     </button>
+                                    <button type="button" class="btn btn-warning btn-block display-none"
+                                            name="townLiveOnButton" onclick="setTownLiveOn()">
+                                        마을광장 LIVE ON
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-block display-none"
+                                            name="townLiveOffButton" onclick="setTownLiveOff()">
+                                        마을광장 LIVE OFF
+                                    </button>
                                     <%--<button type="button" class="btn btn-warning btn-block"
                                             name="restNominationButton" onclick="restNomination()">
                                         지명 초기화
                                     </button>--%>
                                     <button type="button" class="btn btn-info btn-block display-none"
-                                            name="hideCharacterToPlayerButton"
+                                            name="addTravellerCharacterButton"
                                             onclick="openAddTravellerCharacterModal()">
                                         여행자 추가
                                     </button>

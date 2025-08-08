@@ -67,7 +67,13 @@
 
             $townDiv.append(htmlString);
 
+            window.addEventListener("resize", townModal.renderTown);
+
             $townModal.modal("show");
+
+            $townModal.one("shown.bs.modal", () => {
+                townModal.renderTown();
+            });
         },
         loadGameStatus: async playId => {
             const lastPlayLog = await townModal.readLastPlayLog(playId);
@@ -93,6 +99,78 @@
                 })
                 .catch(response => console.error('error', response));
         },
+        renderTown: () => {
+            const canvas = document.getElementById("townCanvas");
+            const ctx = canvas.getContext("2d");
+
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = width * 0.35;
+            const seatRadius = width * 0.08;
+
+            // 배경 그라데이션
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, "#4a2d55");
+            gradient.addColorStop(1, "#270432");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // 하단 공백 각도 계산
+            const totalSeats = townModal.playerList.length;
+            const gapAngle = Math.PI / 6; // 30도 공백
+            const anglePerSeat = (2 * Math.PI - gapAngle) / totalSeats;
+            const startAngle = Math.PI / 2 + gapAngle; // 6시 방향 공백 시작
+
+            for (let i = 0; i < totalSeats; i++) {
+                const player = townModal.playerList[i];
+                const angle = startAngle + i * anglePerSeat;
+
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+
+                // 원의 입체감
+                const gradient = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, seatRadius);
+                if (player.died) {
+                    gradient.addColorStop(0, "#aaa");
+                    gradient.addColorStop(1, "#666");
+                } else {
+                    gradient.addColorStop(0, "#fff");
+                    gradient.addColorStop(1, "#ccc");
+                }
+
+                // 원 (좌석)
+                ctx.beginPath();
+                ctx.arc(x, y, seatRadius, 0, 2 * Math.PI);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                ctx.lineWidth = player.votable ? 5 : 1;
+                ctx.strokeStyle = player.votable ? "#ccc" : "#333";
+                ctx.stroke();
+                ctx.closePath();
+
+                // nickname
+                ctx.font = (seatRadius * 0.45) + "px bold sans-serif";
+                ctx.fillStyle = "#000";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(player.nickname, x, y - seatRadius * 0.2);
+
+                // 아이콘 (원 안 하단)
+                let icons = "";
+                if (player.nominating) icons += "🫵";
+                if (player.nominated) icons += "🙅";
+
+                ctx.font = (seatRadius * 0.4) + "px sans-serif";
+                ctx.fillText(icons, x, y + seatRadius * 0.35);
+            }
+        },
         close: () => {
         },
     }
@@ -114,6 +192,10 @@
                 </div>
                 <br>
                 <div name="townDiv"></div>
+                <br>
+                <div style="width: 100%; max-width: 700px; aspect-ratio: 1 / 1; position: relative;">
+                    <canvas id="townCanvas" style="width: 100%; height: 100%; display: block;"></canvas>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
