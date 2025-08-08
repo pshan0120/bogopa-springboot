@@ -23,9 +23,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="추가: 마을 광장 Live 기능 및 관련 로직 구현&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 컨트롤러 메서드 추가&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현&#10;- townModal 및 clientPlay.jsp에 Live 기능 연결 및 버튼 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="추가: 마을 광장 Live 기능 지원 및 UI 개선&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 관련 컨트롤러 메서드 추가.&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현.&#10;- townModal 및 clientPlay.jsp에 Live 관련 버튼과 연결 작업 수행.&#10;- votable UI의 선 굵기 조정으로 가시성 개선.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/townModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/live.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/live.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -371,7 +371,7 @@
       <workItem from="1753163594095" duration="22526000" />
       <workItem from="1753337512049" duration="521000" />
       <workItem from="1754571000696" duration="7612000" />
-      <workItem from="1754631832400" duration="11922000" />
+      <workItem from="1754631832400" duration="14002000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -716,7 +716,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="189" />
+    <option name="localTasksCounter" value="190" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -749,7 +749,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="설명 수정" />
     <MESSAGE value="상태정렬 추가" />
     <MESSAGE value="setInfoMessageTeam 수정" />
     <MESSAGE value="오타 수정" />
@@ -774,7 +773,8 @@
     <MESSAGE value="수정: 참가자 표현 개선 및 기능 상세화&#10;&#10;- 역할 설명과 알림 메시지의 구체화 및 문구 개선&#10;- `.idea/workspace.xml` 파일에서 설정 업데이트&#10;- 일부 역할의 초기 설정값 변경 및 리마인더 추가" />
     <MESSAGE value="수정: 참가자 표현 개선 및 기능 상세화&#10;&#10;- 역할 설명과 알림 메시지를 구체화하고 문구를 개선.&#10;- `.idea/workspace.xml` 및 데이터 파일 내용 업데이트.&#10;- 일부 역할의 설정값 수정 및 리마인더 추가." />
     <MESSAGE value="추가: 마을 광장 Live 기능 및 관련 로직 구현&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 컨트롤러 메서드 추가&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현&#10;- townModal 및 clientPlay.jsp에 Live 기능 연결 및 버튼 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="추가: 마을 광장 Live 기능 및 관련 로직 구현&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 컨트롤러 메서드 추가&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현&#10;- townModal 및 clientPlay.jsp에 Live 기능 연결 및 버튼 추가" />
+    <MESSAGE value="추가: 마을 광장 Live 기능 지원 및 UI 개선&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 관련 컨트롤러 메서드 추가.&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현.&#10;- townModal 및 clientPlay.jsp에 Live 관련 버튼과 연결 작업 수행.&#10;- votable UI의 선 굵기 조정으로 가시성 개선." />
+    <option name="LAST_COMMIT_MESSAGE" value="추가: 마을 광장 Live 기능 지원 및 UI 개선&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 관련 컨트롤러 메서드 추가.&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현.&#10;- townModal 및 clientPlay.jsp에 Live 관련 버튼과 연결 작업 수행.&#10;- votable UI의 선 굵기 조정으로 가시성 개선." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

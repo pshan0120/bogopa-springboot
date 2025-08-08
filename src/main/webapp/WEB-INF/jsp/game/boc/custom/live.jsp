@@ -84,7 +84,7 @@
             await loadGameStatus();
             console.log('playStatus', playStatus);
 
-            if (playStatus.townLiveOn) {
+            if (playStatus.isDay) {
                 await renderTown();
             }
         }

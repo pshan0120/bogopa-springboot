@@ -500,7 +500,7 @@
             playStatus = {
                 ...playStatus,
                 playerCharacterDisplayed: true,
-                townLiveOn: true,
+                changeToDay: true,
             }
 
             saveGameStatus();
@@ -560,10 +560,10 @@
                 $playerStatusDiv.find("button[name='hideCharacterToPlayerButton']").show();
             }
 
-            if (playStatus.townLiveOn) {
-                $playerStatusDiv.find("button[name='townLiveOffButton']").show();
+            if (playStatus.changeToDay) {
+                $playerStatusDiv.find("button[name='changeToNightButton']").show();
             } else {
-                $playerStatusDiv.find("button[name='townLiveOnButton']").show();
+                $playerStatusDiv.find("button[name='changeToDayButton']").show();
             }
 
             const $playerStatusListDiv = $playerStatusDiv.find("div[name='playerStatusListDiv']");
@@ -1037,22 +1037,22 @@
             saveGameStatus();
         }
 
-        const setTownLiveOn = () => {
-            playStatus.townLiveOn = true;
+        const changeToDay = () => {
+            playStatus.isDay = true;
 
             const $playerStatusDiv = $("#playerStatusDiv");
-            $playerStatusDiv.find("button[name='townLiveOnButton']").hide();
-            $playerStatusDiv.find("button[name='townLiveOffButton']").show();
+            $playerStatusDiv.find("button[name='changeToDayButton']").hide();
+            $playerStatusDiv.find("button[name='changeToNightButton']").show();
 
             saveGameStatus();
         }
 
-        const setTownLiveOff = () => {
-            playStatus.townLiveOn = false;
+        const changeToNight = () => {
+            playStatus.isDay = false;
 
             const $playerStatusDiv = $("#playerStatusDiv");
-            $playerStatusDiv.find("button[name='townLiveOffButton']").hide();
-            $playerStatusDiv.find("button[name='townLiveOnButton']").show();
+            $playerStatusDiv.find("button[name='changeToNightButton']").hide();
+            $playerStatusDiv.find("button[name='changeToDayButton']").show();
 
             saveGameStatus();
         }
@@ -1510,12 +1510,12 @@
                                         플레이어 캐릭터 숨기기
                                     </button>
                                     <button type="button" class="btn btn-warning btn-block display-none"
-                                            name="townLiveOnButton" onclick="setTownLiveOn()">
-                                        마을광장 LIVE ON
+                                            name="changeToDayButton" onclick="changeToDay()">
+                                        ☀️ 낮으로 변경
                                     </button>
                                     <button type="button" class="btn btn-warning btn-block display-none"
-                                            name="townLiveOffButton" onclick="setTownLiveOff()">
-                                        마을광장 LIVE OFF
+                                            name="changeToNightButton" onclick="changeToNight()">
+                                        🌙 밤으로 변경
                                     </button>
                                     <%--<button type="button" class="btn btn-warning btn-block"
                                             name="restNominationButton" onclick="restNomination()">
