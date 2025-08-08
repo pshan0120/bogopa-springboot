@@ -150,7 +150,7 @@
                 ctx.arc(x, y, seatRadius, 0, 2 * Math.PI);
                 ctx.fillStyle = gradient;
                 ctx.fill();
-                ctx.lineWidth = player.votable ? 5 : 1;
+                ctx.lineWidth = player.votable ? 10 : 1;
                 ctx.strokeStyle = player.votable ? "#ccc" : "#333";
                 ctx.stroke();
                 ctx.closePath();
