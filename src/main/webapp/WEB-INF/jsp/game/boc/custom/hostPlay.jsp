@@ -561,8 +561,10 @@
             }
 
             if (playStatus.isDay) {
+                $playerStatusDiv.find("span[name='daySpan']").text("☀️");
                 $playerStatusDiv.find("button[name='changeToNightButton']").show();
             } else {
+                $playerStatusDiv.find("span[name='daySpan']").text("🌙");
                 $playerStatusDiv.find("button[name='changeToDayButton']").show();
             }
 
@@ -1041,6 +1043,7 @@
             playStatus.isDay = true;
 
             const $playerStatusDiv = $("#playerStatusDiv");
+            $playerStatusDiv.find("span[name='daySpan']").text("☀️");
             $playerStatusDiv.find("button[name='changeToDayButton']").hide();
             $playerStatusDiv.find("button[name='changeToNightButton']").show();
 
@@ -1051,6 +1054,7 @@
             playStatus.isDay = false;
 
             const $playerStatusDiv = $("#playerStatusDiv");
+            $playerStatusDiv.find("span[name='daySpan']").text("🌙");
             $playerStatusDiv.find("button[name='changeToNightButton']").hide();
             $playerStatusDiv.find("button[name='changeToDayButton']").show();
 
@@ -1489,17 +1493,23 @@
                             </div>
                             <div class="card-body">
                                 <div class="collapse" id="playerStatusBodyDiv">
-                                    <div name="filterDiv">
-                                        <input type="radio" id="filterBySeatNumber" name="playerStatusFilter"
-                                               value="seatNumber" checked/>
-                                        <label for="filterBySeatNumber">자리 순서</label>
-                                        <input type="radio" id="filterByFirstNight" name="playerStatusFilter"
-                                               value="firstNight"/>
-                                        <label for="filterByFirstNight">첫날 밤</label>
-                                        <input type="radio" id="filterByOtherNight" name="playerStatusFilter"
-                                               value="otherNight"/>
-                                        <label for="filterByOtherNight">다음날 밤</label>
+                                    <div class="row">
+                                        <div class="col-10" name="filterDiv">
+                                            <input type="radio" id="filterBySeatNumber" name="playerStatusFilter"
+                                                   value="seatNumber" checked/>
+                                            <label for="filterBySeatNumber">자리 순서</label>
+                                            <input type="radio" id="filterByFirstNight" name="playerStatusFilter"
+                                                   value="firstNight"/>
+                                            <label for="filterByFirstNight">첫날 밤</label>
+                                            <input type="radio" id="filterByOtherNight" name="playerStatusFilter"
+                                                   value="otherNight"/>
+                                            <label for="filterByOtherNight">다음날 밤</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <span name="daySpan"></span>
+                                        </div>
                                     </div>
+
                                     <div name="playerStatusListDiv" id="playerStatusListDiv"></div>
                                 </div>
                             </div>
