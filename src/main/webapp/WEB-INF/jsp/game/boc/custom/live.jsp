@@ -34,6 +34,9 @@
 
             const $townDiv = $("#townDiv");
             const $settingDiv = $townDiv.find("div[name='settingDiv']");
+
+            await $settingDiv.find("span[name='daySpan']").text(createDaySpanText());
+
             const playerSetting = initializationSetting.player
                 .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
             const roleInitializationHtml = `
@@ -84,6 +87,11 @@
             await loadGameStatus();
             console.log('playStatus', playStatus);
 
+            const $townDiv = $("#townDiv");
+            const $settingDiv = $townDiv.find("div[name='settingDiv']");
+
+            await $settingDiv.find("span[name='daySpan']").text(createDaySpanText());
+
             if (playStatus.isDay) {
                 await renderTown();
             }
@@ -109,7 +117,7 @@
 
             // 배경 그라데이션
             const gradient = ctx.createLinearGradient(0, 0, width, height);
-            gradient.addColorStop(0, "#4a2d55");
+            gradient.addColorStop(0, "#462556");
             gradient.addColorStop(1, "#270432");
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, width, height);
@@ -130,8 +138,8 @@
                 // 원의 입체감
                 const gradient = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, seatRadius);
                 if (player.died) {
-                    gradient.addColorStop(0, "#aaa");
-                    gradient.addColorStop(1, "#666");
+                    gradient.addColorStop(0, "#b49494");
+                    gradient.addColorStop(1, "#af3a3a");
                 } else {
                     gradient.addColorStop(0, "#fff");
                     gradient.addColorStop(1, "#ccc");
@@ -163,6 +171,12 @@
                 ctx.fillText(icons, x, y + seatRadius * 0.35);
             }
         }
+
+        const createDaySpanText = () => createDayCountText() + " " + createDayAndNightEmoji();
+
+        const createDayCountText = () => (playStatus.dayCount ?? "-") + "일차";
+
+        const createDayAndNightEmoji = () => playStatus.isDay ? "낮" : "밤";
     </script>
 </head>
 
@@ -195,22 +209,16 @@
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
                 <div class="card shadow mt-5 text-center" id="townDiv">
-                    <div class="card-header bg-white border-0">
+                    <div class="card-body">
                         <div name="settingDiv">
+                            <h3 class="text-right"><span name="daySpan"></span></h3>
                             <h4><span name="roleInitialization"></span></h4>
                         </div>
-                    </div>
-                    <div class="card-body">
                         <div style="width: 100%; aspect-ratio: 1 / 1; position: relative; justify-content: center; display: flex;">
                             <canvas id="townCanvas"
                                     style="width: 100%; max-width: 900px; height: 100%; max-height: 900px; display: block;"></canvas>
                         </div>
                     </div>
-                    <%--<div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-                        <div style="width: 100%; aspect-ratio: 1 / 1; position: relative; display: flex; justify-content: center; align-items: center;">
-                            <canvas id="townCanvas" style="width: 100%; height: auto; max-width: 900px; max-height: 900px; display: block;"></canvas>
-                        </div>
-                    </div>--%>
                 </div>
             </div>
         </div>

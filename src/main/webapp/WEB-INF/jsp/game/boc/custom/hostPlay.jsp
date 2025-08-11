@@ -561,11 +561,11 @@
                 $playerStatusDiv.find("button[name='hideCharacterToPlayerButton']").show();
             }
 
+            $playerStatusDiv.find("span[name='daySpan']").text(createDaySpanText());
+
             if (playStatus.isDay) {
-                $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
                 $playerStatusDiv.find("button[name='changeToNightButton']").show();
             } else {
-                $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
                 $playerStatusDiv.find("button[name='changeToDayButton']").show();
             }
 
@@ -1049,7 +1049,7 @@
             playStatus.dayCount = playStatus.dayCount ? ++playStatus.dayCount : 2;
 
             const $playerStatusDiv = $("#playerStatusDiv");
-            $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
+            $playerStatusDiv.find("span[name='daySpan']").text(createDaySpanText());
             $playerStatusDiv.find("button[name='changeToDayButton']").hide();
             $playerStatusDiv.find("button[name='changeToNightButton']").show();
 
@@ -1064,16 +1064,18 @@
             playStatus.isDay = false;
 
             const $playerStatusDiv = $("#playerStatusDiv");
-            $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
+            $playerStatusDiv.find("span[name='daySpan']").text(createDaySpanText());
             $playerStatusDiv.find("button[name='changeToNightButton']").hide();
             $playerStatusDiv.find("button[name='changeToDayButton']").show();
 
             saveGameStatus();
         }
 
+        const createDaySpanText = () => createDayCountText() + " " + createDayAndNightEmoji();
+
         const createDayCountText = () => (playStatus.dayCount ?? "-") + "일차";
 
-        const createDayAndNightEmoji = () => playStatus.isDay ? "☀️" : "🌙";
+        const createDayAndNightEmoji = () => playStatus.isDay ? "낮" : "밤";
 
         const resetNominationStatus = () => {
             if (!confirm("현재까지의 모든 투표 상황을 초기화하고 투표를 처음부터 진행합니다.")) {
@@ -1250,6 +1252,10 @@
 
         const openTownModal = () => {
             townModal.open(PLAY_ID);
+        }
+
+        const goTownLive = () => {
+            location.href = "/game/boc-custom/play/live/" + PLAY_ID;
         }
 
         const openInfoMessageModal = () => {
@@ -1694,6 +1700,9 @@
                                     </button>
                                     <button type="button" class="btn btn-info btn-block" onclick="openTownModal()">
                                         마을 광장 보기
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-block" onclick="goTownLive()">
+                                        마을 광장 Live
                                     </button>
                                     <button type="button" class="btn btn-default btn-block" onclick="openNoteModal()">
                                         노트

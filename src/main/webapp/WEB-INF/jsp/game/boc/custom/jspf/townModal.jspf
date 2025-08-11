@@ -24,6 +24,9 @@
 
             const $townModal = $("#townModal");
             const $settingDiv = $townModal.find("div[name='settingDiv']");
+
+            $settingDiv.find("span[name='daySpan']").text(townModal.createDaySpanText());
+
             const playerSetting = initializationSetting.player
                 .find(player => townModal.playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
             const roleInitializationHtml = `
@@ -171,6 +174,9 @@
                 ctx.fillText(icons, x, y + seatRadius * 0.35);
             }
         },
+        createDaySpanText: () => townModal.createDayCountText() + " " + townModal.createDayAndNightEmoji(),
+        createDayCountText: () => (townModal.playStatus.dayCount ?? "-") + "일차",
+        createDayAndNightEmoji: () => townModal.playStatus.isDay ? "낮" : "밤",
         close: () => {
         },
     }
@@ -188,6 +194,7 @@
             </div>
             <div class="modal-body">
                 <div name="settingDiv">
+                    <h3 class="text-right"><span name="daySpan"></span></h3>
                     <h4><span name="roleInitialization"></span></h4>
                 </div>
                 <br>
