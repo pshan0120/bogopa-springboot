@@ -500,7 +500,8 @@
             playStatus = {
                 ...playStatus,
                 playerCharacterDisplayed: true,
-                changeToDay: true,
+                isDay: false,
+                dayCount: 1,
             }
 
             saveGameStatus();
@@ -561,10 +562,10 @@
             }
 
             if (playStatus.isDay) {
-                $playerStatusDiv.find("span[name='daySpan']").text("☀️");
+                $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
                 $playerStatusDiv.find("button[name='changeToNightButton']").show();
             } else {
-                $playerStatusDiv.find("span[name='daySpan']").text("🌙");
+                $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
                 $playerStatusDiv.find("button[name='changeToDayButton']").show();
             }
 
@@ -1040,10 +1041,15 @@
         }
 
         const changeToDay = () => {
+            if (!confirm("다음날 낮으로 변경하시겠습니까?")) {
+                return;
+            }
+
             playStatus.isDay = true;
+            playStatus.dayCount = playStatus.dayCount ? ++playStatus.dayCount : 2;
 
             const $playerStatusDiv = $("#playerStatusDiv");
-            $playerStatusDiv.find("span[name='daySpan']").text("☀️");
+            $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
             $playerStatusDiv.find("button[name='changeToDayButton']").hide();
             $playerStatusDiv.find("button[name='changeToNightButton']").show();
 
@@ -1051,15 +1057,23 @@
         }
 
         const changeToNight = () => {
+            if (!confirm("밤으로 변경하시겠습니까?")) {
+                return;
+            }
+
             playStatus.isDay = false;
 
             const $playerStatusDiv = $("#playerStatusDiv");
-            $playerStatusDiv.find("span[name='daySpan']").text("🌙");
+            $playerStatusDiv.find("span[name='daySpan']").text(createDayCountText() + " " + createDayAndNightEmoji());
             $playerStatusDiv.find("button[name='changeToNightButton']").hide();
             $playerStatusDiv.find("button[name='changeToDayButton']").show();
 
             saveGameStatus();
         }
+
+        const createDayCountText = () => (playStatus.dayCount ?? "-") + "일차";
+
+        const createDayAndNightEmoji = () => playStatus.isDay ? "☀️" : "🌙";
 
         const resetNominationStatus = () => {
             if (!confirm("현재까지의 모든 투표 상황을 초기화하고 투표를 처음부터 진행합니다.")) {
@@ -1494,7 +1508,12 @@
                             <div class="card-body">
                                 <div class="collapse" id="playerStatusBodyDiv">
                                     <div class="row">
-                                        <div class="col-10" name="filterDiv">
+                                        <div class="col-12 text-right">
+                                            <span name="daySpan"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" name="filterDiv">
                                             <input type="radio" id="filterBySeatNumber" name="playerStatusFilter"
                                                    value="seatNumber" checked/>
                                             <label for="filterBySeatNumber">자리 순서</label>
@@ -1504,9 +1523,6 @@
                                             <input type="radio" id="filterByOtherNight" name="playerStatusFilter"
                                                    value="otherNight"/>
                                             <label for="filterByOtherNight">다음날 밤</label>
-                                        </div>
-                                        <div class="col-2">
-                                            <span name="daySpan"></span>
                                         </div>
                                     </div>
 

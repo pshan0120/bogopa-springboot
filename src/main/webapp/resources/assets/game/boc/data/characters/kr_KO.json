@@ -6,9 +6,14 @@
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 39,
-        "otherNightReminder": "If a good living neighbour is drunk or poisoned, the Acrobat player dies.",
+        "otherNightReminder": "살아있는 선한 이웃이 술에 취하거나 중독되면, 곡예사 플레이어는 죽습니다.",
+        "otherNightReminder_en": "If a good living neighbour is drunk or poisoned, the Acrobat player dies.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -21,11 +26,17 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 3,
-        "firstNightReminder": "Show the Alchemist a not-in-play Minion token",
+        "firstNightReminder": "연금술사에게 게임에 참여하지 않는 하수인 토큰을 보여줍니다",
+        "firstNightReminder_en": "Show the Alchemist a not-in-play Minion token",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "remindersGlobal": [
+            "연금술사입니다"
+        ],
+        "remindersGlobal_en": [
             "Is the Alchemist"
         ],
         "setup": false,
@@ -39,9 +50,18 @@
         "team": "demon",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 33,
-        "otherNightReminder": "The Al-Hadikhia chooses 3 players. Announce the first player, wake them to nod yes to live or shake head no to die, kill or resurrect accordingly, then put to sleep and announce the next player. If all 3 are alive after this, all 3 die.",
+        "otherNightReminder": "알-하디키아가 3명의 플레이어를 선택합니다. 첫 번째 플레이어를 발표하고, 살기 위해 고개를 끄덕이거나 죽기 위해 고개를 흔들도록 깨웁니다. 그에 따라 죽이거나 부활시킨 후, 재우고 다음 플레이어를 발표합니다. 만약 이 과정 후 3명 모두 살아있다면, 3명 모두 죽습니다.",
+        "otherNightReminder_en": "The Al-Hadikhia chooses 3 players. Announce the first player, wake them to nod yes to live or shake head no to die, kill or resurrect accordingly, then put to sleep and announce the next player. If all 3 are alive after this, all 3 die.",
         "reminders": [
+            "1",
+            "2",
+            "3",
+            "죽음을 선택함",
+            "생명을 선택함"
+        ],
+        "reminders_en": [
             "1",
             "2",
             "3",
@@ -59,9 +79,12 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
-        "otherNightReminder": "Choose a player, that player dies.",
+        "otherNightReminder": "플레이어를 선택하면, 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "Choose a player, that player dies.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일, 공개적으로 하수인과 악마가 누구인지 추측할 수 있습니다. 전부 맞다면 선한 편이 승리합니다.",
         "image": "/images/fo/boc/icons/townsfolk/alsaahir.webp"
@@ -72,10 +95,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 12,
-        "firstNightReminder": "Decide the Amnesiac's entire ability. If the Amnesiac's ability causes them to wake tonight: Wake the Amnesiac and run their ability.",
+        "firstNightReminder": "기억상실증의 전체 능력을 결정합니다. 만약 기억상실증의 능력이 오늘 밤 깨우게 한다면: 기억상실증을 깨우고 능력을 실행합니다.",
+        "firstNightReminder_en": "Decide the Amnesiac's entire ability. If the Amnesiac's ability causes them to wake tonight: Wake the Amnesiac and run their ability.",
         "otherNight": 5,
-        "otherNightReminder": "If the Amnesiac's ability causes them to wake tonight: Wake the Amnesiac and run their ability.",
+        "otherNightReminder": "만약 기억상실증의 능력이 오늘 밤 깨우게 한다면: 기억상실증을 깨우고 능력을 실행합니다.",
+        "otherNightReminder_en": "If the Amnesiac's ability causes them to wake tonight: Wake the Amnesiac and run their ability.",
         "reminders": [
+            "?"
+        ],
+        "reminders_en": [
             "?"
         ],
         "setup": false,
@@ -85,13 +113,20 @@
     {
         "id": "angel",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "보호",
+            "나쁜 일"
+        ],
+        "reminders_en": [
             "Protect",
             "Something Bad"
         ],
         "setup": false,
-        "name": "Angel",
+        "name": "천사",
+        "name_en": "Angel",
         "team": "fabled",
         "ability": "새로운 참가자(초보)의 죽음에 가장 큰 책임이 있는 사람에게는 불행한 일이 생길 수 있습니다.",
         "image": "/images/fo/boc/icons/fabled/angel.webp"
@@ -102,10 +137,15 @@
         "edition": "bmr",
         "team": "traveller",
         "firstNight": 1,
-        "firstNightReminder": "Show the Apprentice the 'You are' card, then a Townsfolk or Minion token. In the Grimoire, replace the Apprentice token with that character token, and put the Apprentice's 'Is the Apprentice' reminder by that character token.",
+        "firstNightReminder": "견습생에게 '당신은' 카드를 보여주고, 마을주민이나 하수인 토큰을 보여줍니다. 마법서에서 견습생 토큰을 그 캐릭터 토큰으로 교체하고, 견습생의 '견습생입니다' 리마인더를 그 캐릭터 토큰 옆에 둡니다.",
+        "firstNightReminder_en": "Show the Apprentice the 'You are' card, then a Townsfolk or Minion token. In the Grimoire, replace the Apprentice token with that character token, and put the Apprentice's 'Is the Apprentice' reminder by that character token.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "견습생입니다"
+        ],
+        "reminders_en": [
             "Is the Apprentice"
         ],
         "setup": false,
@@ -119,9 +159,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -135,9 +180,15 @@
         "team": "minion",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 37,
-        "otherNightReminder": "If the Assassin has not yet used their ability: The Assassin either shows the 'no' head signal, or points to a player. That player dies.",
+        "otherNightReminder": "만약 암살자가 아직 능력을 사용하지 않았다면: 암살자는 '아니오' 신호를 보이거나 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "If the Assassin has not yet used their ability: The Assassin either shows the 'no' head signal, or points to a player. That player dies.",
         "reminders": [
+            "죽음",
+            "능력 없음"
+        ],
+        "reminders_en": [
             "Dead",
             "No ability"
         ],
@@ -152,9 +203,12 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": true,
         "ability": "무신론자가 있으면 악마와 하수인이 없습니다. 처형 단계 때, 이야기꾼을 처형시키면 선이 승리합니다. 무신론자가 없을 때 이야기꾼을 처형시키거나 2명의 참가자만 남아 있다면 악이 승리합니다. 그리고 이야기꾼은 게임의 모든 규칙을 어길 수 있습니다. 가령 밤에 참가자를 죽이거나 만취시킬 수 있으며, 잘못된 수의 이방인을 플레이에 참가시킬 수도 있습니다.",
         "image": "/images/fo/boc/icons/townsfolk/atheist.webp"
@@ -165,10 +219,19 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 44,
-        "firstNightReminder": "Choose a character type. Point to a player whose character is of that type. Place the Balloonist's Seen reminder next to that character.",
+        "firstNightReminder": "캐릭터 유형을 선택합니다. 그 유형의 캐릭터를 가진 플레이어를 가리킵니다. 기구 조종사의 '보았음' 리마인더를 그 캐릭터 옆에 둡니다.",
+        "firstNightReminder_en": "Choose a character type. Point to a player whose character is of that type. Place the Balloonist's Seen reminder next to that character.",
         "otherNight": 63,
-        "otherNightReminder": "Choose a character type that does not yet have a Seen reminder next to a character of that type. Point to a player whose character is of that type, if there are any. Place the Balloonist's Seen reminder next to that character.",
+        "otherNightReminder": "아직 '보았음' 리마인더가 없는 캐릭터 유형을 선택합니다. 그 유형의 캐릭터를 가진 플레이어가 있다면 가리킵니다. 기구 조종사의 '보았음' 리마인더를 그 캐릭터 옆에 둡니다.",
+        "otherNightReminder_en": "Choose a character type that does not yet have a Seen reminder next to a character of that type. Point to a player whose character is of that type, if there are any. Place the Balloonist's Seen reminder next to that character.",
         "reminders": [
+            "마을주민 보았음",
+            "이방인 보았음",
+            "하수인 보았음",
+            "악마 보았음",
+            "여행자 보았음"
+        ],
+        "reminders_en": [
             "Seen Townsfolk",
             "Seen Outsider",
             "Seen Minion",
@@ -186,9 +249,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 42,
-        "otherNightReminder": "Announce that the Banshee has died.",
+        "otherNightReminder": "밴시가 죽었다고 발표합니다.",
+        "otherNightReminder_en": "Announce that the Banshee has died.",
         "reminders": [
+            "능력 보유"
+        ],
+        "reminders_en": [
             "Has Ability"
         ],
         "setup": false,
@@ -202,9 +270,14 @@
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 40,
-        "otherNightReminder": "If the Barber died today: Wake the Demon. Show the 'This character selected you' card, then Barber token. The Demon either shows a 'no' head signal, or points to 2 players. If they chose players: Swap the character tokens. Wake each player. Show 'You are', then their new character token.",
+        "otherNightReminder": "만약 이발사가 오늘 죽었다면: 악마를 깨웁니다. '이 캐릭터가 당신을 선택했습니다' 카드를 보여주고, 이발사 토큰을 보여줍니다. 악마는 '아니오' 신호를 보이거나 2명의 플레이어를 가리킵니다. 만약 플레이어를 선택했다면: 캐릭터 토큰을 교체합니다. 각 플레이어를 깨웁니다. '당신은'을 보여주고, 그들의 새 캐릭터 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If the Barber died today: Wake the Demon. Show the 'This character selected you' card, then Barber token. The Demon either shows a 'no' head signal, or points to 2 players. If they chose players: Swap the character tokens. Wake each player. Show 'You are', then their new character token.",
         "reminders": [
+            "오늘 밤 이발"
+        ],
+        "reminders_en": [
             "Haircuts tonight"
         ],
         "setup": false,
@@ -217,10 +290,16 @@
         "edition": "snv",
         "team": "traveller",
         "firstNight": 1,
-        "firstNightReminder": "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
+        "firstNightReminder": "플레이어를 선택하고, 깨워서 어떤 바리스타 능력이 영향을 미치는지 알려줍니다. 그에 따라 처리합니다 (만취 해제/건강 회복/진실한 정보 또는 능력을 두 번 활성화).",
+        "firstNightReminder_en": "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
         "otherNight": 1,
-        "otherNightReminder": "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
+        "otherNightReminder": "플레이어를 선택하고, 깨워서 어떤 바리스타 능력이 영향을 미치는지 알려줍니다. 그에 따라 처리합니다 (만취 해제/건강 회복/진실한 정보 또는 능력을 두 번 활성화).",
+        "otherNightReminder_en": "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
         "reminders": [
+            "만취 해제 & 건강 회복",
+            "능력 두 번"
+        ],
+        "reminders_en": [
             "Sober & Healthy",
             "Ability twice"
         ],
@@ -235,9 +314,12 @@
         "team": "minion",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": true,
         "ability": "게임을 시작할 때 마을주민 역할 2명을 이방인 역할로 교체합니다. [+2 이방인]",
         "image": "/images/fo/boc/icons/minion/baron.webp"
@@ -249,23 +331,33 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "투표하려면 다른 참가자의 투표 토큰이 필요합니다. 죽은 참가자만이 당신에게 투표 토큰을 줄 수 있는데, 그러면 당신은 그의 편을 알게 됩니다. 당신은 술에 취하거나 중독되지 않습니다.",
         "image": "/images/fo/boc/icons/traveller/beggar.webp"
     },
     {
         "id": "bishop",
-        "name": "Bishop",
+        "name": "주교",
+        "name_en": "Bishop",
         "edition": "bmr",
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "선한 편 지명",
+            "악한 편 지명"
+        ],
+        "reminders_en": [
             "Nominate good",
             "Nominate evil"
         ],
@@ -279,13 +371,16 @@
         "edition": "",
         "team": "minion",
         "firstNight": 1,
-        "firstNightReminder": "Wake the Boffin and how them the token of the ability the Demon has. Put the Boffin back to sleep. Wake the Demon, show the Boffin token, then show the token of the good ability the Demon has.",
+        "firstNightReminder": "과학자를 깨우고 악마가 가진 능력의 토큰을 보여줍니다. 과학자를 다시 재웁니다. 악마를 깨우고, 과학자 토큰을 보여주고, 그 다음 악마가 가진 선한 능력의 토큰을 보여줍니다.",
+        "firstNightReminder_en": "Wake the Boffin and how them the token of the ability the Demon has. Put the Boffin back to sleep. Wake the Demon, show the Boffin token, then show the token of the good ability the Demon has.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "1명의 악마는(만취했거나 중독되었어도) 참여하고 있지 않은 선한 역할의 능력을 가집니다. 당신과 그는 그게 어떤 역할인지 알게 됩니다.",
-        "image": "/build/img/icons/minion/boffin.webp"
+        "image": "/images/fo/boc/icons/minion/boffin.webp"
     },
     {
         "id": "bonecollector",
@@ -294,9 +389,15 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 1,
-        "otherNightReminder": "The Bone Collector either shakes their head no or points at any dead player. If they pointed at any dead player, put the Bone Collector's 'Has Ability' reminder by the chosen player's character token. (They may need to be woken tonight to use it.)",
+        "otherNightReminder": "뼈 수집가는 고개를 흔들거나 죽은 플레이어를 가리킵니다. 만약 죽은 플레이어를 가리켰다면, 뼈 수집가의 '능력 보유' 리마인더를 선택된 플레이어의 캐릭터 토큰 옆에 둡니다. (오늘 밤 깨워서 사용해야 할 수도 있습니다.)",
+        "otherNightReminder_en": "The Bone Collector either shakes their head no or points at any dead player. If they pointed at any dead player, put the Bone Collector's 'Has Ability' reminder by the chosen player's character token. (They may need to be woken tonight to use it.)",
         "reminders": [
+            "능력 없음",
+            "능력 보유"
+        ],
+        "reminders_en": [
             "No ability",
             "Has ability"
         ],
@@ -311,9 +412,12 @@
         "team": "minion",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "당신이 처형당하면, 3명의 참가자들만 남고 모두 죽습니다. 1부터 10까지의 카운트다운 후, 생사여부와 관계없이 모든 참가자가 죽이고 싶은 참가자를 가리킵니다. 가장 많이 받은 참가자는 사망합니다. 동점이라면 밤이 옵니다.",
         "image": "/images/fo/boc/icons/minion/boomdandy.webp"
@@ -321,8 +425,11 @@
     {
         "id": "bootlegger",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "name": "밀주업자",
         "team": "fabled",
@@ -335,10 +442,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 45,
-        "firstNightReminder": "Point to 1 evil player. Wake the townsfolk who is evil and show them the 'You are' card and the thumbs down evil sign.",
+        "firstNightReminder": "악한 플레이어 1명을 가리킵니다. 악한 편인 마을주민을 깨우고 '당신은' 카드와 엄지손가락을 아래로 향한 악한 신호를 보여줍니다.",
+        "firstNightReminder_en": "Point to 1 evil player. Wake the townsfolk who is evil and show them the 'You are' card and the thumbs down evil sign.",
         "otherNight": 65,
-        "otherNightReminder": "If the known evil player has died, point to another evil player. ",
+        "otherNightReminder": "만약 알려진 악한 플레이어가 죽었다면, 다른 악한 플레이어를 가리킵니다.",
+        "otherNightReminder_en": "If the known evil player has died, point to another evil player. ",
         "reminders": [
+            "알려짐"
+        ],
+        "reminders_en": [
             "Known"
         ],
         "setup": true,
@@ -348,8 +460,11 @@
     {
         "id": "buddhist",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "name": "불교도",
         "team": "fabled",
@@ -362,10 +477,15 @@
         "edition": "tb",
         "team": "traveller",
         "firstNight": 1,
-        "firstNightReminder": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
+        "firstNightReminder": "관료가 플레이어를 가리킵니다. 관료의 '3표' 리마인더를 선택된 플레이어의 캐릭터 토큰 옆에 둡니다.",
+        "firstNightReminder_en": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
         "otherNight": 1,
-        "otherNightReminder": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
+        "otherNightReminder": "관료가 플레이어를 가리킵니다. 관료의 '3표' 리마인더를 선택된 플레이어의 캐릭터 토큰 옆에 둡니다.",
+        "otherNightReminder_en": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
         "reminders": [
+            "3표"
+        ],
+        "reminders_en": [
             "3 votes"
         ],
         "setup": false,
@@ -379,9 +499,12 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 낮, 첫 번째 처형 집행 후(처형으로 죽지 않았더라도), 당신은 다시 지명할 수 있습니다.",
         "image": "/images/fo/boc/icons/traveller/butcher.webp"
@@ -392,15 +515,42 @@
         "edition": "tb",
         "team": "outsider",
         "firstNight": 38,
-        "firstNightReminder": "The Butler points to a player. Mark that player as 'Master'.",
+        "firstNightReminder": "집사가 플레이어를 가리킵니다. 그 플레이어를 '주인'으로 표시합니다.",
+        "firstNightReminder_en": "The Butler points to a player. Mark that player as 'Master'.",
         "otherNight": 55,
-        "otherNightReminder": "The Butler points to a player. Mark that player as 'Master'.",
+        "otherNightReminder": "집사가 플레이어를 가리킵니다. 그 플레이어를 '주인'으로 표시합니다.",
+        "otherNightReminder_en": "The Butler points to a player. Mark that player as 'Master'.",
         "reminders": [
+            "주인"
+        ],
+        "reminders_en": [
             "Master"
         ],
         "setup": false,
         "ability": "매일 밤, 다른 참가자 1명을 선택합니다. 그리고 그 날은 당신이 지정한 참가자가 투표할 때만 투표할 수 있습니다.",
         "image": "/images/fo/boc/icons/outsider/butler.webp"
+    },
+    {
+        "id": "cacklejack",
+        "name": "카클잭",
+        "name_en": "Cacklejack",
+        "edition": "",
+        "team": "traveller",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 2,
+        "otherNightReminder": "카클잭이 오늘 선택하지 않은 플레이어의 캐릭터 토큰을 다른 캐릭터 토큰으로 교체합니다. 그 플레이어를 깨우고 '당신은' 카드와 새로운 캐릭터 토큰을 보여줍니다.",
+        "otherNightReminder_en": "Replace the character token of any player (besides the player the Cacklejack chose today) with a different character token. Wake that player and show them the 'You are' card and their new character token.",
+        "reminders": [
+            "나 아님"
+        ],
+        "reminders_en": [
+            "Not Me"
+        ],
+        "setup": false,
+        "ability": "매일, 플레이어를 선택합니다: 오늘 밤 다른 플레이어가 캐릭터를 바꿉니다",
+        "ability_en": "Each day, choose a player: a different player changes character tonight",
+        "image": "/images/fo/boc/icons/traveller/cacklejack.webp"
     },
     {
         "id": "cannibal",
@@ -409,9 +559,15 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "중독됨",
+            "오늘 죽음"
+        ],
+        "reminders_en": [
             "Poisoned",
             "Died today"
         ],
@@ -425,10 +581,15 @@
         "edition": "snv",
         "team": "minion",
         "firstNight": 25,
-        "firstNightReminder": "The Cerenovus points to a player, then to a character on their sheet. Wake that player. Show the 'This character selected you' card, then the Cerenovus token. Show the selected character token. If the player is not mad about being that character tomorrow, they can be executed.",
+        "firstNightReminder": "세레노부스가 플레이어를 가리키고, 그 다음 시트의 캐릭터를 가리킵니다. 그 플레이어를 깨웁니다. '이 캐릭터가 당신을 선택했습니다' 카드를 보여주고, 세레노부스 토큰을 보여줍니다. 선택된 캐릭터 토큰을 보여줍니다. 만약 내일 플레이어가 그 캐릭터라는 '광기'에 빠지지 않는다면, 처형될 수 있습니다.",
+        "firstNightReminder_en": "The Cerenovus points to a player, then to a character on their sheet. Wake that player. Show the 'This character selected you' card, then the Cerenovus token. Show the selected character token. If the player is not mad about being that character tomorrow, they can be executed.",
         "otherNight": 16,
-        "otherNightReminder": "The Cerenovus points to a player, then to a character on their sheet. Wake that player. Show the 'This character selected you' card, then the Cerenovus token. Show the selected character token. If the player is not mad about being that character tomorrow, they can be executed.",
+        "otherNightReminder": "세레노부스가 플레이어를 가리키고, 그 다음 시트의 캐릭터를 가리킵니다. 그 플레이어를 깨웁니다. '이 캐릭터가 당신을 선택했습니다' 카드를 보여주고, 세레노부스 토큰을 보여줍니다. 선택된 캐릭터 토큰을 보여줍니다. 만약 내일 플레이어가 그 캐릭터라는 '광기'에 빠지지 않는다면, 처형될 수 있습니다.",
+        "otherNightReminder_en": "The Cerenovus points to a player, then to a character on their sheet. Wake that player. Show the 'This character selected you' card, then the Cerenovus token. Show the selected character token. If the player is not mad about being that character tomorrow, they can be executed.",
         "reminders": [
+            "광기"
+        ],
+        "reminders_en": [
             "Mad"
         ],
         "setup": false,
@@ -441,10 +602,13 @@
         "edition": "bmr",
         "team": "townsfolk",
         "firstNight": 49,
-        "firstNightReminder": "The Chambermaid points to two players. Show the number signal (0, 1, 2, …) for how many of those players wake tonight for their ability.",
+        "firstNightReminder": "가정부가 두 명의 플레이어를 가리킵니다. 오늘 밤 능력을 위해 깨어났던 플레이어의 수에 대한 숫자 신호(0, 1, 2, …)를 보여줍니다.",
+        "firstNightReminder_en": "The Chambermaid points to two players. Show the number signal (0, 1, 2, …) for how many of those players wake tonight for their ability.",
         "otherNight": 69,
-        "otherNightReminder": "The Chambermaid points to two players. Show the number signal (0, 1, 2, …) for how many of those players wake tonight for their ability.",
+        "otherNightReminder": "가정부가 두 명의 플레이어를 가리킵니다. 오늘 밤 능력을 위해 깨어났던 플레이어의 수에 대한 숫자 신호(0, 1, 2, …)를 보여줍니다.",
+        "otherNightReminder_en": "The Chambermaid points to two players. Show the number signal (0, 1, 2, …) for how many of those players wake tonight for their ability.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 밤, 당신은 살아있는 다른 참가자 2명을 선택합니다. 오늘 밤 능력을 사용하기 위해 깨어났던 참가자의 수를 알 수 있습니다. 선택할 참가자가 부족하다면 능력을 사용할 수 없습니다.",
         "image": "/images/fo/boc/icons/townsfolk/chambermaid.webp"
@@ -455,10 +619,13 @@
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 35,
-        "firstNightReminder": "Show the finger signal (0, 1, 2, …) for the number of pairs of neighbouring evil players.",
+        "firstNightReminder": "인접한 악한 플레이어 쌍의 수에 대한 손가락 신호(0, 1, 2, …)를 보여줍니다.",
+        "firstNightReminder_en": "Show the finger signal (0, 1, 2, …) for the number of pairs of neighbouring evil players.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "첫날 밤, 당신은 악한 참가자가 몇 쌍으로 앉아 있는지 알고 시작합니다. 예를 들어 악한 참가자가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/chef.webp"
@@ -470,9 +637,12 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 44,
-        "otherNightReminder": "If the King was killed by the Demon, wake the Choirboy and point to the Demon player.",
+        "otherNightReminder": "만약 악마가 왕을 죽였다면, 합창단원을 깨우고 악마 플레이어를 가리킵니다.",
+        "otherNightReminder_en": "If the King was killed by the Demon, wake the Choirboy and point to the Demon player.",
         "reminders": [],
+        "reminders_en": [],
         "setup": true,
         "ability": "만약 악마가 왕을 죽이면 당신은 어떤 참가자가 악마인지 알게 됩니다. [+ 왕]",
         "image": "/images/fo/boc/icons/townsfolk/choirboy.webp"
@@ -483,10 +653,13 @@
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 40,
-        "firstNightReminder": "Show the hand signal for the number (1, 2, 3, etc.) of places from Demon to closest Minion.",
+        "firstNightReminder": "악마로부터 가장 가까운 하수인까지의 거리 수(1, 2, 3 등)에 대한 손 신호를 보여줍니다.",
+        "firstNightReminder_en": "Show the hand signal for the number (1, 2, 3, etc.) of places from Demon to closest Minion.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "첫날 밤, 악마로부터 가장 가까운 하수인까지 얼마나 떨어져 있는지 알게 됩니다. 가령 악마와 하수인이 붙어 있다면 1입니다.",
         "image": "/images/fo/boc/icons/townsfolk/clockmaker.webp"
@@ -497,10 +670,18 @@
         "edition": "bmr",
         "team": "townsfolk",
         "firstNight": 19,
-        "firstNightReminder": "The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
+        "firstNightReminder": "아첨꾼은 '아니오' 신호를 보이거나 시트의 캐릭터를 가리킵니다. 만약 아첨꾼이 능력을 사용했다면: 그 캐릭터가 게임에 참여하고 있다면, 그 플레이어는 술에 취합니다.",
+        "firstNightReminder_en": "The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
         "otherNight": 10,
-        "otherNightReminder": "Reduce the remaining number of days the marked player is poisoned. If the Courtier has not yet used their ability: The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
+        "otherNightReminder": "표시된 플레이어가 중독된 남은 일수를 줄입니다. 만약 아첨꾼이 아직 능력을 사용하지 않았다면: 아첨꾼은 '아니오' 신호를 보이거나 시트의 캐릭터를 가리킵니다. 만약 아첨꾼이 능력을 사용했다면: 그 캐릭터가 게임에 참여하고 있다면, 그 플레이어는 술에 취합니다.",
+        "otherNightReminder_en": "Reduce the remaining number of days the marked player is poisoned. If the Courtier has not yet used their ability: The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
         "reminders": [
+            "술에 취함 3",
+            "술에 취함 2",
+            "술에 취함 1",
+            "능력 없음"
+        ],
+        "reminders_en": [
             "Drunk 3",
             "Drunk 2",
             "Drunk 1",
@@ -516,10 +697,13 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 46,
-        "firstNightReminder": "If the cult leader changed alignment, show them the thumbs up good signal of the thumbs down evil signal accordingly.",
+        "firstNightReminder": "만약 사이비 교주의 편이 바뀌었다면, 그에 따라 엄지손가락을 위로 향한 선한 신호나 아래로 향한 악한 신호를 보여줍니다.",
+        "firstNightReminder_en": "If the cult leader changed alignment, show them the thumbs up good signal of the thumbs down evil signal accordingly.",
         "otherNight": 66,
-        "otherNightReminder": "If the cult leader changed alignment, show them the thumbs up good signal of the thumbs down evil signal accordingly.",
+        "otherNightReminder": "만약 사이비 교주의 편이 바뀌었다면, 그에 따라 엄지손가락을 위로 향한 선한 신호나 아래로 향한 악한 신호를 보여줍니다.",
+        "otherNightReminder_en": "If the cult leader changed alignment, show them the thumbs up good signal of the thumbs down evil signal accordingly.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 밤, 당신은 살아있는 이웃 중 하나의 편이 됩니다. 당신은 낮에 공개적으로 당신의 종교에 가입하기를 요청할 수 있습니다. 만약 모든 선한 참가자가 당신의 종교에 가입했다면 당신의 편은 승리합니다.",
         "image": "/images/fo/boc/icons/townsfolk/cultleader.webp"
@@ -530,10 +714,15 @@
         "edition": "",
         "team": "outsider",
         "firstNight": 31,
-        "firstNightReminder": "Wake all the Minions, show them the 'This character selected you' card and the Damsel token.",
+        "firstNightReminder": "모든 하수인을 깨우고, '이 캐릭터가 당신을 선택했습니다' 카드와 아가씨 토큰을 보여줍니다.",
+        "firstNightReminder_en": "Wake all the Minions, show them the 'This character selected you' card and the Damsel token.",
         "otherNight": 52,
-        "otherNightReminder": "If selected by the Huntsman, wake the Damsel, show 'You are' card and a not-in-play Townsfolk token.",
+        "otherNightReminder": "만약 사냥꾼에 의해 선택되었다면, 아가씨를 깨우고 '당신은' 카드와 게임에 참여하지 않는 마을주민 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If selected by the Huntsman, wake the Damsel, show 'You are' card and a not-in-play Townsfolk token.",
         "reminders": [
+            "추측 사용됨"
+        ],
+        "reminders_en": [
             "Guess used"
         ],
         "setup": false,
@@ -543,14 +732,21 @@
     {
         "id": "deusexfiasco",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
-            "Whoops"
+            "이런"
         ],
-        "setup": false,
-        "name": "Deus ex Fiasco",
+        "reminders_en": [
+            "Whoopsie"
+        ],
+        "setup": true,
+        "name": "데우스 엑스 피아스코",
+        "name_en": "Deus ex Fiasco",
         "team": "fabled",
-        "ability": "Once per game, the Storyteller will make a \"mistake\", correct it and publicly admit to it.",
+        "ability": "게임당 최소 한 번, 이야기꾼은 실수를 하고, 이를 수정하고 공개적으로 인정합니다.",
+        "ability_en": "At least once per game, the Storyteller will make a mistake, correct it, and publicly admit to it.",
         "image": "/images/fo/boc/icons/fabled/deusexfiasco.webp"
     },
     {
@@ -560,9 +756,12 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "만약 당신이 오늘 사람들을 즐겁게 만들어 줬다면 당신은 추방되어 죽지 않습니다.",
         "image": "/images/fo/boc/icons/traveller/deviant.webp"
@@ -573,10 +772,15 @@
         "edition": "bmr",
         "team": "minion",
         "firstNight": 22,
-        "firstNightReminder": "The Devil's Advocate points to a living player. That player survives execution tomorrow.",
+        "firstNightReminder": "악마의 대변인이 살아있는 플레이어를 가리킵니다. 그 플레이어는 내일 처형에서 살아남습니다.",
+        "firstNightReminder_en": "The Devil's Advocate points to a living player. That player survives execution tomorrow.",
         "otherNight": 14,
-        "otherNightReminder": "The Devil's Advocate points to a living player, different from the previous night. That player survives execution tomorrow.",
+        "otherNightReminder": "악마의 대변인이 어제 밤과 다른 살아있는 플레이어를 가리킵니다. 그 플레이어는 내일 처형에서 살아남습니다.",
+        "otherNightReminder_en": "The Devil's Advocate points to a living player, different from the previous night. That player survives execution tomorrow.",
         "reminders": [
+            "처형 생존"
+        ],
+        "reminders_en": [
             "Survives execution"
         ],
         "setup": false,
@@ -587,8 +791,11 @@
         "id": "djinn",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "name": "지니",
         "team": "fabled",
@@ -598,8 +805,11 @@
     {
         "id": "doomsayer",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "name": "종말론자",
         "team": "fabled",
@@ -612,10 +822,13 @@
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 41,
-        "firstNightReminder": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
+        "firstNightReminder": "몽상가가 플레이어를 가리킵니다. 선한 캐릭터 토큰 1개와 악한 캐릭터 토큰 1개를 보여줍니다. 그 중 하나가 맞습니다.",
+        "firstNightReminder_en": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
         "otherNight": 57,
-        "otherNightReminder": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
+        "otherNightReminder": "몽상가가 플레이어를 가리킵니다. 선한 캐릭터 토큰 1개와 악한 캐릭터 토큰 1개를 보여줍니다. 그 중 하나가 맞습니다.",
+        "otherNightReminder_en": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 밤, 참가자(본인이나 여행자 제외)를 선택합니다. 선한 역할 1개와 악한 역할 1개를 알게 되는데, 그 중 한 개가 맞습니다.",
         "image": "/images/fo/boc/icons/townsfolk/dreamer.webp"
@@ -627,10 +840,16 @@
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "remindersGlobal": [
+            "술에 취함"
+        ],
+        "remindersGlobal_en": [
             "Drunk"
         ],
         "special": [
@@ -649,9 +868,15 @@
         "edition": "",
         "team": "fabled",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 1,
-        "otherNightReminder": "Wake each player marked \"Visitor\" or \"False Info\" one at a time. Show them the Duchess token, then fingers (1, 2, 3) equaling the number of evil players marked \"Visitor\" or, if you are waking the player marked \"False Info,\" show them any number of fingers except the number of evil players marked \"Visitor.\"",
+        "otherNightReminder": "\"방문자\" 또는 \"거짓 정보\"로 표시된 각 플레이어를 한 번에 하나씩 깨웁니다. 공작부인 토큰을 보여주고, 그 다음 \"방문자\"로 표시된 악한 플레이어의 수와 같은 손가락(1, 2, 3)을 보여줍니다. 또는 \"거짓 정보\"로 표시된 플레이어를 깨우고 있다면, \"방문자\"로 표시된 악한 플레이어의 수를 제외한 아무 숫자의 손가락을 보여줍니다.",
+        "otherNightReminder_en": "Wake each player marked \"Visitor\" or \"False Info\" one at a time. Show them the Duchess token, then fingers (1, 2, 3) equaling the number of evil players marked \"Visitor\" or, if you are waking the player marked \"False Info,\" show them any number of fingers except the number of evil players marked \"Visitor.\"",
         "reminders": [
+            "방문자",
+            "거짓 정보"
+        ],
+        "reminders_en": [
             "Visitor",
             "False Info"
         ],
@@ -665,10 +890,13 @@
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 36,
-        "firstNightReminder": "Show the finger signal (0, 1, 2) for the number of evil alive neighbours of the Empath.",
+        "firstNightReminder": "공감능력자의 살아있는 악한 이웃의 수에 대한 손가락 신호(0, 1, 2)를 보여줍니다.",
+        "firstNightReminder_en": "Show the finger signal (0, 1, 2) for the number of evil alive neighbours of the Empath.",
         "otherNight": 53,
-        "otherNightReminder": "Show the finger signal (0, 1, 2) for the number of evil neighbours.",
+        "otherNightReminder": "악한 이웃의 수에 대한 손가락 신호(0, 1, 2)를 보여줍니다.",
+        "otherNightReminder_en": "Show the finger signal (0, 1, 2) for the number of evil neighbours.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 밤, 당신은 좌우에 있는 살아있는 두 이웃 중 얼마나 많은 사람이 악한지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/empath.webp"
@@ -679,10 +907,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 13,
-        "firstNightReminder": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the You are card and the relevant character tokens.",
+        "firstNightReminder": "엔지니어는 '아니오' 신호를 보이거나 악마를 가리키거나 관련된 수의 하수인을 가리킵니다. 만약 엔지니어가 캐릭터를 선택했다면, 선택한 것으로 악마나 하수인을 교체하고, 관련된 플레이어들을 깨워서 '당신은' 카드와 관련된 캐릭터 토큰을 보여줍니다.",
+        "firstNightReminder_en": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the You are card and the relevant character tokens.",
         "otherNight": 6,
-        "otherNightReminder": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the 'You are' card and the relevant character tokens.",
+        "otherNightReminder": "엔지니어는 '아니오' 신호를 보이거나 악마를 가리키거나 관련된 수의 하수인을 가리킵니다. 만약 엔지니어가 캐릭터를 선택했다면, 선택한 것으로 악마나 하수인을 교체하고, 관련된 플레이어들을 깨워서 '당신은' 카드와 관련된 캐릭터 토큰을 보여줍니다.",
+        "otherNightReminder_en": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the 'You are' card and the relevant character tokens.",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -695,10 +928,15 @@
         "edition": "snv",
         "team": "minion",
         "firstNight": 23,
-        "firstNightReminder": "Wake the Evil Twin and their twin. Confirm that they have acknowledged each other. Point to the Evil Twin. Show their Evil Twin token to the twin player. Point to the twin. Show their character token to the Evil Twin player.",
+        "firstNightReminder": "사악한 쌍둥이와 그들의 쌍둥이를 깨웁니다. 서로 인정했는지 확인합니다. 사악한 쌍둥이를 가리킵니다. 쌍둥이 플레이어에게 사악한 쌍둥이 토큰을 보여줍니다. 쌍둥이를 가리킵니다. 사악한 쌍둥이 플레이어에게 그들의 캐릭터 토큰을 보여줍니다.",
+        "firstNightReminder_en": "Wake the Evil Twin and their twin. Confirm that they have acknowledged each other. Point to the Evil Twin. Show their Evil Twin token to the twin player. Point to the twin. Show their character token to the Evil Twin player.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "쌍둥이"
+        ],
+        "reminders_en": [
             "Twin"
         ],
         "setup": false,
@@ -712,9 +950,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 22,
-        "otherNightReminder": "The Exorcist points to a player, different from the previous night. If that player is the Demon: Wake the Demon. Show the Exorcist token. Point to the Exorcist. The Demon does not act tonight.",
+        "otherNightReminder": "퇴마사가 어제 밤과 다른 플레이어를 가리킵니다. 만약 그 플레이어가 악마라면: 악마를 깨웁니다. 퇴마사 토큰을 보여줍니다. 퇴마사를 가리킵니다. 악마는 오늘 밤 행동하지 않습니다.",
+        "otherNightReminder_en": "The Exorcist points to a player, different from the previous night. If that player is the Demon: Wake the Demon. Show the Exorcist token. Point to the Exorcist. The Demon does not act tonight.",
         "reminders": [
+            "선택됨"
+        ],
+        "reminders_en": [
             "Chosen"
         ],
         "setup": false,
@@ -728,9 +971,15 @@
         "team": "demon",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 29,
-        "otherNightReminder": "The Fang Gu points to a player. That player dies. Or, if that player was an Outsider and there are no other Fang Gu in play: The Fang Gu dies instead of the chosen player. The chosen player is now an evil Fang Gu. Wake the new Fang Gu. Show the 'You are' card, then the Fang Gu token. Show the 'You are' card, then the thumb-down 'evil' hand sign.",
+        "otherNightReminder": "팡구가 플레이어를 가리킵니다. 그 플레이어는 죽습니다. 또는, 만약 그 플레이어가 이방인이었고 다른 팡구가 게임에 참여하지 않는다면: 선택된 플레이어 대신 팡구가 죽습니다. 선택된 플레이어는 이제 악한 팡구가 됩니다. 새로운 팡구를 깨웁니다. '당신은' 카드를 보여주고, 팡구 토큰을 보여줍니다. '당신은' 카드를 보여주고, 엄지손가락을 아래로 향한 '악한' 손 신호를 보여줍니다.",
+        "otherNightReminder_en": "The Fang Gu points to a player. That player dies. Or, if that player was an Outsider and there are no other Fang Gu in play: The Fang Gu dies instead of the chosen player. The chosen player is now an evil Fang Gu. Wake the new Fang Gu. Show the 'You are' card, then the Fang Gu token. Show the 'You are' card, then the thumb-down 'evil' hand sign.",
         "reminders": [
+            "죽음",
+            "한 번"
+        ],
+        "reminders_en": [
             "Dead",
             "Once"
         ],
@@ -745,9 +994,12 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 46,
-        "otherNightReminder": "If a Farmer died tonight, choose another good player and make them the Farmer. Wake this player, show them the 'You are' card and the Farmer character token.",
+        "otherNightReminder": "만약 농부가 오늘 밤 죽었다면, 다른 선한 플레이어를 선택하고 그를 농부로 만듭니다. 이 플레이어를 깨우고, '당신은' 카드와 농부 캐릭터 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If a Farmer died tonight, choose another good player and make them the Farmer. Wake this player, show them the 'You are' card and the Farmer character token.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "밤에 당신이 죽으면, 살아있는 선한 참가자는 농부가 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/farmer.webp"
@@ -758,10 +1010,15 @@
         "edition": "",
         "team": "minion",
         "firstNight": 26,
-        "firstNightReminder": "The Fearmonger points to a player. Place the Fear token next to that player and announce that a new player has been selected with the Fearmonger ability.",
+        "firstNightReminder": "공포유발자가 플레이어를 가리킵니다. 공포 토큰을 그 플레이어 옆에 두고 공포유발자 능력으로 새로운 플레이어가 선택되었다고 발표합니다.",
+        "firstNightReminder_en": "The Fearmonger points to a player. Place the Fear token next to that player and announce that a new player has been selected with the Fearmonger ability.",
         "otherNight": 18,
-        "otherNightReminder": "The Fearmonger points to a player. If different from the previous night, place the Fear token next to that player and announce that a new player has been selected with the Fearmonger ability.",
+        "otherNightReminder": "공포유발자가 플레이어를 가리킵니다. 만약 어제 밤과 다르다면, 공포 토큰을 그 플레이어 옆에 두고 공포유발자 능력으로 새로운 플레이어가 선택되었다고 발표합니다.",
+        "otherNightReminder_en": "The Fearmonger points to a player. If different from the previous night, place the Fear token next to that player and announce that a new player has been selected with the Fearmonger ability.",
         "reminders": [
+            "공포"
+        ],
+        "reminders_en": [
             "Fear"
         ],
         "setup": false,
@@ -771,8 +1028,11 @@
     {
         "id": "ferryman",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "name": "뱃사공",
         "team": "fabled",
@@ -782,8 +1042,13 @@
     {
         "id": "fibbin",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "사용됨"
+        ],
+        "reminders_en": [
             "Used"
         ],
         "setup": false,
@@ -795,8 +1060,11 @@
     {
         "id": "fiddler",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "name": "바이올리니스트",
         "team": "fabled",
@@ -810,9 +1078,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -826,9 +1099,15 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 58,
-        "otherNightReminder": "Nod 'yes' or shake head 'no' for whether the Demon voted today. Place the 'Demon not voted' marker (remove 'Demon voted', if any).",
+        "otherNightReminder": "오늘 악마가 투표했는지에 대해 '예'라고 고개를 끄덕이거나 '아니오'라고 고개를 흔듭니다. '악마 투표 안함' 표시를 둡니다 ('악마 투표함'이 있다면 제거합니다).",
+        "otherNightReminder_en": "Nod 'yes' or shake head 'no' for whether the Demon voted today. Place the 'Demon not voted' marker (remove 'Demon voted', if any).",
         "reminders": [
+            "악마 투표함",
+            "악마 투표 안함"
+        ],
+        "reminders_en": [
             "Demon voted",
             "Demon not voted"
         ],
@@ -843,9 +1122,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -858,10 +1142,15 @@
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 37,
-        "firstNightReminder": "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
+        "firstNightReminder": "점쟁이가 두 명의 플레이어를 가리킵니다. 그 플레이어 중 하나가 악마인지에 대해 고개 신호(예라고 끄덕임, 아니오라고 흔듦)를 보여줍니다.",
+        "firstNightReminder_en": "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
         "otherNight": 54,
-        "otherNightReminder": "The Fortune Teller points to two players. Show the head signal (nod 'yes', shake 'no') for whether one of those players is the Demon.",
+        "otherNightReminder": "점쟁이가 두 명의 플레이어를 가리킵니다. 그 플레이어 중 하나가 악마인지에 대해 고개 신호('예'라고 끄덕임, '아니오'라고 흔듦)를 보여줍니다.",
+        "otherNightReminder_en": "The Fortune Teller points to two players. Show the head signal (nod 'yes', shake 'no') for whether one of those players is the Demon.",
         "reminders": [
+            "빨간 청어"
+        ],
+        "reminders_en": [
             "Red herring"
         ],
         "setup": false,
@@ -875,9 +1164,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 11,
-        "otherNightReminder": "The Gambler points to a player, and a character on their sheet. If incorrect, the Gambler dies.",
+        "otherNightReminder": "도박사가 플레이어와 시트의 캐릭터를 가리킵니다. 만약 틀렸다면, 도박사는 죽습니다.",
+        "otherNightReminder_en": "The Gambler points to a player, and a character on their sheet. If incorrect, the Gambler dies.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -891,9 +1185,12 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 1번, 살아있는 이웃이 동의한다면 다른 살아있는 이웃을 죽일 수 있습니다. 만약 2명의 이웃 모두 서로 죽이고 싶어한다면 누구를 죽을지는 갱스터가 결정합니다.",
         "image": "/images/fo/boc/icons/traveller/gangster.webp"
@@ -901,8 +1198,11 @@
     {
         "id": "gardener",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "name": "정원사",
         "team": "fabled",
@@ -915,13 +1215,36 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 48,
-        "firstNightReminder": "Show the General thumbs up for good winning, thumbs down for evil winning or thumb to the side for neither.",
+        "firstNightReminder": "장군에게 선이 이기고 있다면 엄지손가락을 위로, 악이 이기고 있다면 아래로, 둘 다 아니라면 옆으로 향한 엄지손가락을 보여줍니다.",
+        "firstNightReminder_en": "Show the General thumbs up for good winning, thumbs down for evil winning or thumb to the side for neither.",
         "otherNight": 68,
-        "otherNightReminder": "Show the General thumbs up for good winning, thumbs down for evil winning or thumb to the side for neither.",
+        "otherNightReminder": "장군에게 선이 이기고 있다면 엄지손가락을 위로, 악이 이기고 있다면 아래로, 둘 다 아니라면 옆으로 향한 엄지손가락을 보여줍니다.",
+        "otherNightReminder_en": "Show the General thumbs up for good winning, thumbs down for evil winning or thumb to the side for neither.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 밤, '이야기꾼이 이기고 있다고 생각하는 편'을 '선', '악', '둘 다 아님' 표시로 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/general.webp"
+    },
+    {
+        "id": "gnome",
+        "name": "노움",
+        "edition": "",
+        "team": "traveller",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [
+            "친구야"
+        ],
+        "reminders_en": [
+            "Amigo"
+        ],
+        "setup": false,
+        "ability": "모든 플레이어는 당신의 편을 알고 시작합니다. 당신은 그들을 지명하는 사람을 죽일 수 있습니다.",
+        "ability_en": "All players start knowing a player of your alignment. You may choose to kill anyone who nominates them.",
+        "image": "/images/fo/boc/icons/traveller/gnome.webp"
     },
     {
         "id": "goblin",
@@ -930,9 +1253,14 @@
         "team": "minion",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "주장됨"
+        ],
+        "reminders_en": [
             "Claimed"
         ],
         "setup": false,
@@ -945,10 +1273,16 @@
         "edition": "bmr",
         "team": "minion",
         "firstNight": 21,
-        "firstNightReminder": "Show each of the Outsider tokens in play.",
+        "firstNightReminder": "게임에 참여중인 각 이방인 토큰을 보여줍니다.",
+        "firstNightReminder_en": "Show each of the Outsider tokens in play.",
         "otherNight": 38,
-        "otherNightReminder": "If an Outsider died today: The Godfather points to a player. That player dies.",
+        "otherNightReminder": "만약 오늘 이방인이 죽었다면: 대부가 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "If an Outsider died today: The Godfather points to a player. That player dies.",
         "reminders": [
+            "오늘 죽음",
+            "죽음"
+        ],
+        "reminders_en": [
             "Died today",
             "Dead"
         ],
@@ -963,9 +1297,14 @@
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "지명할 수 없음"
+        ],
+        "reminders_en": [
             "Can not nominate"
         ],
         "setup": false,
@@ -979,9 +1318,14 @@
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "술에 취함"
+        ],
+        "reminders_en": [
             "Drunk"
         ],
         "setup": false,
@@ -995,9 +1339,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 47,
-        "otherNightReminder": "If the Gossip's public statement was true: Choose a player not protected from dying tonight. That player dies.",
+        "otherNightReminder": "만약 험담꾼의 공개 성명이 사실이었다면: 오늘 밤 죽음으로부터 보호받지 않는 플레이어를 선택합니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "If the Gossip's public statement was true: Choose a player not protected from dying tonight. That player dies.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -1010,10 +1359,15 @@
         "edition": "bmr",
         "team": "townsfolk",
         "firstNight": 39,
-        "firstNightReminder": "Show the marked character token. Point to the marked player.",
+        "firstNightReminder": "표시된 캐릭터 토큰을 보여줍니다. 표시된 플레이어를 가리킵니다.",
+        "firstNightReminder_en": "Show the marked character token. Point to the marked player.",
         "otherNight": 50,
-        "otherNightReminder": "If the Grandmother's grandchild was killed by the Demon tonight: The Grandmother dies.",
+        "otherNightReminder": "만약 오늘 밤 악마가 할머니의 손주를 죽였다면: 할머니는 죽습니다.",
+        "otherNightReminder_en": "If the Grandmother's grandchild was killed by the Demon tonight: The Grandmother dies.",
         "reminders": [
+            "손주"
+        ],
+        "reminders_en": [
             "Grandchild"
         ],
         "setup": false,
@@ -1027,9 +1381,12 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 낮, 처형에 대한 첫 번째 투표가 집계된 뒤 투표한 참가자 중 1명을 선택하여 죽일 수 있습니다.",
         "image": "/images/fo/boc/icons/traveller/gunslinger.webp"
@@ -1041,9 +1398,14 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 1,
-        "otherNightReminder": "The Harlot points at any player. Then, put the Harlot to sleep. Wake the chosen player, show them the 'This character selected you' token, then the Harlot token. That player either nods their head yes or shakes their head no. If they nodded their head yes, wake the Harlot and show them the chosen player's character token. Then, you may decide that both players die.",
+        "otherNightReminder": "매춘부가 아무 플레이어나 가리킵니다. 그 다음, 매춘부를 재웁니다. 선택된 플레이어를 깨우고, '이 캐릭터가 당신을 선택했습니다' 토큰을 보여주고, 그 다음 매춘부 토큰을 보여줍니다. 그 플레이어는 고개를 끄덕이거나 흔듭니다. 만약 고개를 끄덕였다면, 매춘부를 깨우고 선택된 플레이어의 캐릭터 토큰을 보여줍니다. 그 다음, 두 플레이어 모두 죽게 할 수 있습니다.",
+        "otherNightReminder_en": "The Harlot points at any player. Then, put the Harlot to sleep. Wake the chosen player, show them the 'This character selected you' token, then the Harlot token. That player either nods their head yes or shakes their head no. If they nodded their head yes, wake the Harlot and show them the chosen player's character token. Then, you may decide that both players die.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -1056,10 +1418,16 @@
         "edition": "",
         "team": "minion",
         "firstNight": 24,
-        "firstNightReminder": "Wake the Harpy; they point at one player, then another. Wake the 1st player the Harpy pointed to, show them the 'This character has selected you' card, show them the Harpy token, then point at the 2nd player the Harpy pointed to.",
+        "firstNightReminder": "하피를 깨웁니다. 그들은 한 명의 플레이어를 가리키고, 그 다음 다른 플레이어를 가리킵니다. 하피가 가리킨 첫 번째 플레이어를 깨우고, '이 캐릭터가 당신을 선택했습니다' 카드를 보여주고, 하피 토큰을 보여주고, 그 다음 하피가 가리킨 두 번째 플레이어를 가리킵니다.",
+        "firstNightReminder_en": "Wake the Harpy; they point at one player, then another. Wake the 1st player the Harpy pointed to, show them the 'This character has selected you' card, show them the Harpy token, then point at the 2nd player the Harpy pointed to.",
         "otherNight": 14,
-        "otherNightReminder": "Wake the Harpy; they point at one player, then another. Wake the 1st player the Harpy pointed to, show them the 'This character has selected you' card, show them the Harpy token, then point at the 2nd player the Harpy pointed to.",
+        "otherNightReminder": "하피를 깨웁니다. 그들은 한 명의 플레이어를 가리키고, 그 다음 다른 플레이어를 가리킵니다. 하피가 가리킨 첫 번째 플레이어를 깨우고, '이 캐릭터가 당신을 선택했습니다' 카드를 보여주고, 하피 토큰을 보여주고, 그 다음 하피가 가리킨 두 번째 플레이어를 가리킵니다.",
+        "otherNightReminder_en": "Wake the Harpy; they point at one player, then another. Wake the 1st player the Harpy pointed to, show them the 'This character has selected you' card, show them the Harpy token, then point at the 2nd player the Harpy pointed to.",
         "reminders": [
+            "광기",
+            "2번째"
+        ],
+        "reminders_en": [
             "Mad",
             "2nd"
         ],
@@ -1074,9 +1442,14 @@
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 40,
-        "otherNightReminder": "If the Hatter died today: Wake the Minions and Demon. Show them the 'This Character Selected You' info token, then the Hatter token. Each player either shakes their head no or points to another character of the same type as their current character.  If a second player would end up with the same character as another player, shake your head no and gesture for them to choose again. Put them to sleep. Change each player to the character they chose.",
+        "otherNightReminder": "만약 모자장수가 오늘 죽었다면: 하수인과 악마를 깨웁니다. '이 캐릭터가 당신을 선택했습니다' 정보 토큰을 보여주고, 그 다음 모자장수 토큰을 보여줍니다. 각 플레이어는 고개를 흔들거나 현재 캐릭터와 같은 유형의 다른 캐릭터를 가리킵니다. 만약 두 번째 플레이어가 다른 플레이어와 같은 캐릭터를 가지게 된다면, 고개를 흔들고 다시 선택하도록 제스처를 합니다. 그들을 재웁니다. 각 플레이어를 그들이 선택한 캐릭터로 변경합니다.",
+        "otherNightReminder_en": "If the Hatter died today: Wake the Minions and Demon. Show them the 'This Character Selected You' info token, then the Hatter token. Each player either shakes their head no or points to another character of the same type as their current character.  If a second player would end up with the same character as another player, shake your head no and gesture for them to choose again. Put them to sleep. Change each player to the character they chose.",
         "reminders": [
+            "오늘 밤 차 파티"
+        ],
+        "reminders_en": [
             "Tea Party Tonight"
         ],
         "setup": false,
@@ -1086,8 +1459,13 @@
     {
         "id": "hellslibrarian",
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "나쁜 일"
+        ],
+        "reminders_en": [
             "Something Bad"
         ],
         "setup": false,
@@ -1098,17 +1476,37 @@
     },
     {
         "id": "heretic",
-        "name": "Heretic",
+        "name": "이단자",
+        "name_en": "Heretic",
+        "edition": "",
+        "team": "outsider",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "firstNightReminder_en": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "otherNightReminder_en": "",
+        "reminders": [],
+        "reminders_en": [],
+        "setup": false,
+        "ability": "승리한 사람은 지고 진 사람은 이깁니다. 이 능력은 당신이 죽었어도 작동하지만 술에 취하거나 중독되었다면 작동하지 않습니다.",
+        "image": "/images/fo/boc/icons/outsider/heretic.webp"
+    },
+    {
+        "id": "hermit",
+        "name": "은거인",
+        "name_en": "Hermit",
         "edition": "",
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
-        "reminders": [],
-        "setup": false,
-        "ability": "승리한 사람은 지고 진 사람은 이깁니다. 이 능력은 당신이 죽었어도 작동하지만 술에 취하거나 중독되었다면 작동하지 않습니다.",
-        "image": "/images/fo/boc/icons/outsider/heretic.webp"
+        "reminders": ["1", "2", "3"],
+        "setup": true,
+        "ability": "당신은 모든 이방인 능력을 가지고 있습니다. [-0 또는 -1 이방인]",
+        "ability_en": "You have all Outsider abilities. [-0 or -1 Outsider]",
+        "image": "/images/fo/boc/icons/outsider/hermit.webp"
     },
     {
         "id": "highpriestess",
@@ -1116,10 +1514,13 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 50,
-        "firstNightReminder": "Point to a player.",
+        "firstNightReminder": "플레이어를 가리킵니다.",
+        "firstNightReminder_en": "Point to a player.",
         "otherNight": 69,
-        "otherNightReminder": "Point to a player.",
+        "otherNightReminder": "플레이어를 가리킵니다.",
+        "otherNightReminder_en": "Point to a player.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "매일 밤, '이야기꾼이 생각할 때 당신이 가장 많이 대화해야 할 참가자'가 누구인지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/highpriestess.webp"
@@ -1130,10 +1531,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 30,
-        "firstNightReminder": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
+        "firstNightReminder": "수렵가는 '아니오'라고 고개를 흔들거나 플레이어를 가리킵니다. 만약 아가씨를 가리켰다면, 그 플레이어를 깨우고 '당신은' 카드와 게임에 참여하지 않는 캐릭터 토큰을 보여줍니다.",
+        "firstNightReminder_en": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
         "otherNight": 51,
-        "otherNightReminder": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
+        "otherNightReminder": "수렵가는 '아니오'라고 고개를 흔들거나 플레이어를 가리킵니다. 만약 아가씨를 가리켰다면, 그 플레이어를 깨우고 '당신은' 카드와 게임에 참여하지 않는 캐릭터 토큰을 보여줍니다.",
+        "otherNightReminder_en": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": true,
@@ -1147,9 +1553,14 @@
         "team": "demon",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 24,
-        "otherNightReminder": "The Imp points to a player. That player dies. If the Imp chose themselves: Replace the character of 1 alive minion with a spare Imp token. Show the 'You are' card, then the Imp token.",
+        "otherNightReminder": "임프가 플레이어를 가리킵니다. 그 플레이어는 죽습니다. 만약 임프가 자신을 선택했다면: 살아있는 하수인 1명의 캐릭터를 여분의 임프 토큰으로 교체합니다. '당신은' 카드를 보여주고, 그 다음 임프 토큰을 보여줍니다.",
+        "otherNightReminder_en": "The Imp points to a player. That player dies. If the Imp chose themselves: Replace the character of 1 alive minion with a spare Imp token. Show the 'You are' card, then the Imp token.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -1163,9 +1574,15 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 9,
-        "otherNightReminder": "The previously protected and drunk players lose those markers. The Innkeeper points to two players. Those players are protected. One is drunk.",
+        "otherNightReminder": "이전에 보호받고 술에 취했던 플레이어들은 그 표시들을 잃습니다. 여관주인이 두 명의 플레이어를 가리킵니다. 그 플레이어들은 보호받습니다. 한 명은 술에 취합니다.",
+        "otherNightReminder_en": "The previously protected and drunk players lose those markers. The Innkeeper points to two players. Those players are protected. One is drunk.",
         "reminders": [
+            "보호됨",
+            "술에 취함"
+        ],
+        "reminders_en": [
             "Protected",
             "Drunk"
         ],
@@ -1179,10 +1596,16 @@
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 34,
-        "firstNightReminder": "Show the character token of a Minion in play. Point to two players, one of which is that character.",
+        "firstNightReminder": "게임에 참여중인 하수인의 캐릭터 토큰을 보여줍니다. 두 명의 플레이어를 가리키는데, 그 중 하나가 그 캐릭터입니다.",
+        "firstNightReminder_en": "Show the character token of a Minion in play. Point to two players, one of which is that character.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "하수인",
+            "틀림"
+        ],
+        "reminders_en": [
             "Minion",
             "Wrong"
         ],
@@ -1197,9 +1620,14 @@
         "team": "traveller",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -1213,9 +1641,14 @@
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 62,
-        "otherNightReminder": "If today was the Juggler's first day: Show the hand signal for the number (0, 1, 2, etc.) of 'Correct' markers. Remove markers.",
+        "otherNightReminder": "만약 오늘이 저글러의 첫 번째 날이었다면: '맞음' 표시의 수(0, 1, 2 등)에 대한 손 신호를 보여줍니다. 표시들을 제거합니다.",
+        "otherNightReminder_en": "If today was the Juggler's first day: Show the hand signal for the number (0, 1, 2, etc.) of 'Correct' markers. Remove markers.",
         "reminders": [
+            "맞음"
+        ],
+        "reminders_en": [
             "Correct"
         ],
         "setup": false,
@@ -1228,10 +1661,15 @@
         "edition": "",
         "team": "demon",
         "firstNight": 2,
-        "firstNightReminder": "The Kazali points at a player and a Minion on the character sheet. Replace their old character token with the Minion token, show them the “You Are” info token then the Minion character token, and give a thumbs down. Repeat until the normal number of Minions exist. Put the Kazali to sleep.",
+        "firstNightReminder": "카잘리가 플레이어와 시트의 하수인을 가리킵니다. 그들의 기존 캐릭터 토큰을 하수인 토큰으로 교체하고, '당신은' 정보 토큰을 보여주고 하수인 캐릭터 토큰을 보여주고, 엄지손가락을 아래로 향합니다. 정상적인 수의 하수인이 존재할 때까지 반복합니다. 카잘리를 재웁니다.",
+        "firstNightReminder_en": "The Kazali points at a player and a Minion on the character sheet. Replace their old character token with the Minion token, show them the \"You Are\" info token then the Minion character token, and give a thumbs down. Repeat until the normal number of Minions exist. Put the Kazali to sleep.",
         "otherNight": 35,
-        "otherNightReminder": "The Kazali points to a player. That player dies.",
+        "otherNightReminder": "카잘리가 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "The Kazali points to a player. That player dies.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": true,
@@ -1240,16 +1678,20 @@
     },
     {
         "id": "king",
-        "name": "King",
+        "name": "왕",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 9,
-        "firstNightReminder": "Wake the Demon, show them the 'This character selected you' card, show the King token and point to the King player.",
+        "firstNightReminder": "악마를 깨우고, '이 캐릭터가 당신을 선택했습니다' 카드를 보여주고, 왕 토큰을 보여주고 왕 플레이어를 가리킵니다.",
+        "firstNightReminder_en": "Wake the Demon, show them the 'This character selected you' card, show the King token and point to the King player.",
         "otherNight": 64,
-        "otherNightReminder": "If there are more dead than living, show the King a character token of a living player.",
+        "otherNightReminder": "만약 죽은 사람이 살아있는 사람보다 많다면, 왕에게 살아있는 플레이어의 캐릭터 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If there are more dead than living, show the King a character token of a living player.",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
-        "ability": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King.",
+        "ability": "매일 밤, 죽은 사람이 살아있는 사람과 같거나 많다면, 살아있는 캐릭터 1명을 알게 됩니다. 악마는 당신이 왕이라는 것을 알고 있습니다.",
+        "ability_en": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King.",
         "image": "/images/fo/boc/icons/townsfolk/king.webp"
     },
     {
@@ -1259,28 +1701,39 @@
         "team": "outsider",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [],
+        "reminders_en": [],
         "setup": false,
         "ability": "당신이 죽으면 공개적으로 참가자 1명을 선택해야 합니다. 만약 악한 참가자를 선택했다면 당신의 팀은 패배합니다.",
         "image": "/images/fo/boc/icons/outsider/klutz.webp"
     },
     {
         "id": "knight",
-        "name": "Knight",
+        "name": "기사",
+        "name_en": "Knight",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 42,
-        "firstNightReminder": "Point to 2 non-Demon players.",
+        "firstNightReminder": "악마가 아닌 플레이어 2명을 가리킵니다.",
+        "firstNightReminder_en": "Point to 2 non-Demon players.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "알음",
+            "알음"
+        ],
+        "reminders_en": [
             "Know",
             "Know"
         ],
         "setup": false,
-        "ability": "You start knowing 2 players that are not the Demon.",
+        "ability": "당신은 악마가 아닌 플레이어 2명을 알면서 시작합니다.",
+        "ability_en": "You start knowing 2 players that are not the Demon.",
         "image": "/images/fo/boc/icons/townsfolk/knight.webp"
     },
     {
@@ -1290,9 +1743,15 @@
         "team": "demon",
         "firstNight": 0,
         "firstNightReminder": "",
+        "firstNightReminder_en": "",
         "otherNight": 34,
-        "otherNightReminder": "Choose a player, that player dies.",
+        "otherNightReminder": "플레이어를 선택하고, 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "Choose a player, that player dies.",
         "reminders": [
+            "죽음",
+            "곧 죽을 예정"
+        ],
+        "reminders_en": [
             "Dead",
             "About to die"
         ],
@@ -1306,10 +1765,20 @@
         "edition": "",
         "team": "demon",
         "firstNight": 52,
-        "firstNightReminder": "Place the Leviathan 'Day 1' marker. Announce 'The Leviathan is in play; this is Day 1.'",
+        "firstNightReminder": "레비아탄 '1일차' 표시를 둡니다. '레비아탄이 게임에 참여중입니다. 이것은 1일차입니다.'라고 발표합니다.",
+        "firstNightReminder_en": "Place the Leviathan 'Day 1' marker. Announce 'The Leviathan is in play; this is Day 1.'",
         "otherNight": 72,
-        "otherNightReminder": "Change the Leviathan Day reminder for the next day.",
+        "otherNightReminder": "레비아탄 날짜 리마인더를 다음 날로 변경합니다.",
+        "otherNightReminder_en": "Change the Leviathan Day reminder for the next day.",
         "reminders": [
+            "1일차",
+            "2일차",
+            "3일차",
+            "4일차",
+            "5일차",
+            "선한 플레이어 처형됨"
+        ],
+        "reminders_en": [
             "Day 1",
             "Day 2",
             "Day 3",
@@ -1327,10 +1796,16 @@
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 33,
-        "firstNightReminder": "Show the character token of an Outsider in play. Point to two players, one of which is that character.",
+        "firstNightReminder": "게임에 참여중인 이방인의 캐릭터 토큰을 보여줍니다. 두 명의 플레이어를 가리키는데, 그 중 하나가 그 캐릭터입니다.",
+        "firstNightReminder_en": "Show the character token of an Outsider in play. Point to two players, one of which is that character.",
         "otherNight": 0,
         "otherNightReminder": "",
+        "otherNightReminder_en": "",
         "reminders": [
+            "이방인",
+            "틀림"
+        ],
+        "reminders_en": [
             "Outsider",
             "Wrong"
         ],
@@ -1344,11 +1819,18 @@
         "edition": "",
         "team": "demon",
         "firstNight": 16,
-        "firstNightReminder": "Wake all Minions together, allow them to vote by pointing at who they want to babysit Lil' Monsta.",
+        "firstNightReminder": "모든 하수인을 함께 깨우고, 누가 애긔앙마를 돌보고 싶은지 가리켜서 투표하도록 합니다.",
+        "firstNightReminder_en": "Wake all Minions together, allow them to vote by pointing at who they want to babysit Lil' Monsta.",
         "otherNight": 36,
-        "otherNightReminder": "Wake all Minions together, allow them to vote by pointing at who they want to babysit Lil' Monsta. Choose a player, that player dies.",
+        "otherNightReminder": "모든 하수인을 함께 깨우고, 누가 애긔앙마를 돌보고 싶은지 가리켜서 투표하도록 합니다. 플레이어를 선택하고, 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "Wake all Minions together, allow them to vote by pointing at who they want to babysit Lil' Monsta. Choose a player, that player dies.",
         "reminders": [],
+        "reminders_en": [],
         "remindersGlobal": [
+            "악마입니다",
+            "죽음"
+        ],
+        "remindersGlobal_en": [
             "Is the Demon",
             "Dead"
         ],
@@ -1368,10 +1850,16 @@
         "edition": "",
         "team": "demon",
         "firstNight": 15,
-        "firstNightReminder": "The Lleech points to a player. Place the Poisoned reminder token.",
+        "firstNightReminder": "꺼머리가 플레이어를 가리킵니다. 중독 리마인더 토큰을 둡니다.",
+        "firstNightReminder_en": "The Lleech points to a player. Place the Poisoned reminder token.",
         "otherNight": 35,
-        "otherNightReminder": "The Lleech points to a player. That player dies.",
+        "otherNightReminder": "꺼머리가 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "The Lleech points to a player. That player dies.",
         "reminders": [
+            "죽음",
+            "중독됨"
+        ],
+        "reminders_en": [
             "Dead",
             "Poisoned"
         ],
@@ -1385,10 +1873,17 @@
         "edition": "bmr",
         "team": "outsider",
         "firstNight": 7,
-        "firstNightReminder": "If 7 or more players: Show the Lunatic a number of arbitrary 'Minions', players equal to the number of Minions in play. Show 3 character tokens of arbitrary good characters. If the token received by the Lunatic is a Demon that would wake tonight: Allow the Lunatic to do the Demon actions. Place their 'attack' markers. Wake the Demon. Show the Demon's real character token. Show them the Lunatic player. If the Lunatic attacked players: Show the real demon each marked player. Remove any Lunatic 'attack' markers.",
+        "firstNightReminder": "만약 7명 이상의 플레이어가 있다면: 미치광이에게 게임에 참여중인 하수인의 수와 같은 수의 임의의 '하수인' 플레이어들을 보여줍니다. 임의의 선한 캐릭터 3개의 캐릭터 토큰을 보여줍니다. 만약 미치광이가 받은 토큰이 오늘 밤 깨어날 악마라면: 미치광이가 악마 행동을 하도록 허용합니다. 그들의 '공격' 표시를 둡니다. 악마를 깨웁니다. 악마의 진짜 캐릭터 토큰을 보여줍니다. 미치광이 플레이어를 보여줍니다. 만약 미치광이가 플레이어들을 공격했다면: 표시된 각 플레이어에게 진짜 악마를 보여줍니다. 미치광이의 '공격' 표시를 모두 제거합니다.",
+        "firstNightReminder_en": "If 7 or more players: Show the Lunatic a number of arbitrary 'Minions', players equal to the number of Minions in play. Show 3 character tokens of arbitrary good characters. If the token received by the Lunatic is a Demon that would wake tonight: Allow the Lunatic to do the Demon actions. Place their 'attack' markers. Wake the Demon. Show the Demon's real character token. Show them the Lunatic player. If the Lunatic attacked players: Show the real demon each marked player. Remove any Lunatic 'attack' markers.",
         "otherNight": 21,
-        "otherNightReminder": "Allow the Lunatic to do the actions of the Demon. Place their 'attack' markers. If the Lunatic selected players: Wake the Demon. Show the 'attack' marker, then point to each marked player. Remove any Lunatic 'attack' markers.",
+        "otherNightReminder": "미치광이가 악마의 행동을 하도록 허용합니다. 그들의 '공격' 표시를 둡니다. 만약 미치광이가 플레이어들을 선택했다면: 악마를 깨웁니다. '공격' 표시를 보여주고, 그 다음 표시된 각 플레이어를 가리킵니다. 미치광이의 '공격' 표시를 모두 제거합니다.",
+        "otherNightReminder_en": "Allow the Lunatic to do the actions of the Demon. Place their 'attack' markers. If the Lunatic selected players: Wake the Demon. Show the 'attack' marker, then point to each marked player. Remove any Lunatic 'attack' markers.",
         "reminders": [
+            "공격 1",
+            "공격 2",
+            "공격 3"
+        ],
+        "reminders_en": [
             "Attack 1",
             "Attack 2",
             "Attack 3"
@@ -1399,17 +1894,22 @@
     },
     {
         "id": "lord_of_typhon",
-        "name": "Lord of Typhon",
+        "name": "티폰의 군주",
+        "name_en": "Lord of Typhon",
         "edition": "",
         "team": "demon",
         "firstNight": 0.1,
-        "firstNightReminder": "Wake the players on either side of the Demon. Show them the 'You Are' card, the token of the Minion they now are, and a thumbs down to indicate they are evil.",
+        "firstNightReminder": "악마 양쪽에 있는 플레이어들을 깨웁니다. 그들에게 '당신은' 카드, 이제 그들이 된 하수인 토큰, 그리고 악하다는 것을 나타내는 엄지손가락을 아래로 보여줍니다.",
+        "firstNightReminder_en": "Wake the players on either side of the Demon. Show them the 'You Are' card, the token of the Minion they now are, and a thumbs down to indicate they are evil.",
         "otherNight": 31.1,
-        "otherNightReminder": "The Lord of Typhon points to a player. That player dies.",
-        "reminders": ["Dead"],
+        "otherNightReminder": "Lord of Typhon이 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "The Lord of Typhon points to a player. That player dies.",
+        "reminders": ["죽음"],
+        "reminders_en": ["Dead"],
         "setup": true,
-        "ability": "Each night*, choose a player: they die. [Evil characters are in a line. You are in the middle. +1 Minion. -? To +? Outsiders]",
-        "image": "/build/img/icons/demon/lordoftyphon.webp"
+        "ability": "매일 밤*, 플레이어를 선택합니다: 그들은 죽습니다. [악한 캐릭터들은 한 줄에 있습니다. 당신은 중앙에 있습니다. +1 하수인. -? ~ +? 이방인]",
+        "ability_en": "Each night*, choose a player: they die. [Evil characters are in a line. You are in the middle. +1 Minion. -? To +? Outsiders]",
+        "image": "/images/fo/boc/icons/demon/lordoftyphon.webp"
     },
     {
         "id": "lycanthrope",
@@ -1419,9 +1919,15 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 23,
-        "otherNightReminder": "The Lycanthrope points to a living player: if good, they die and no one else can die tonight.",
+        "otherNightReminder": "늑대인간이 살아있는 플레이어를 가리킵니다: 만약 선하다면 죽고, 다른 누구도 오늘 밤 죽을 수 없습니다.",
+        "otherNightReminder_en": "The Lycanthrope points to a living player: if good, they die and no one else can die tonight.",
         "reminders": [
-            "Dead"
+            "죽음",
+            "Faux Paw"
+        ],
+        "reminders_en": [
+            "Dead",
+            "Faux Paw"
         ],
         "setup": false,
         "ability": "첫날 밤을 제외한 매일 밤, 살아있는 참가자를 선택합니다. 만약 그가 선하다면 죽고, 악은 오늘 밤 죽일 수 없습니다. 1명의 선한 참가자는 악으로 보입니다.",
@@ -1429,7 +1935,8 @@
     },
     {
         "id": "magician",
-        "name": "Magician",
+        "name": "마법사",
+        "name_en": "Magician",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 0,
@@ -1438,7 +1945,8 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "The Demon thinks you are a Minion. Minions think you are a Demon.",
+        "ability": "악마는 당신이 하수인이라고 생각합니다. 하수인들은 당신이 악마라고 생각합니다.",
+        "ability_en": "The Demon thinks you are a Minion. Minions think you are a Demon.",
         "image": "/images/fo/boc/icons/townsfolk/magician.webp"
     },
     {
@@ -1447,7 +1955,8 @@
         "edition": "",
         "team": "minion",
         "firstNight": 11,
-        "firstNightReminder": "Select one of the good players next to the Demon and place the Is the Marionette reminder token. Wake the Demon and show them the Marionette.",
+        "firstNightReminder": "악마 옆에 있는 선한 플레이어 중 한 명을 선택하고 꼭두각시입니다 리마인더 토큰을 놓습니다. 악마를 깨우고 꼭두각시를 보여줍니다.",
+        "firstNightReminder_en": "Select one of the good players next to the Demon and place the Is the Marionette reminder token. Wake the Demon and show them the Marionette.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
@@ -1484,10 +1993,15 @@
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 50,
-        "firstNightReminder": "Show the hand signal for the number (0, 1, 2, etc.) of players whose ability malfunctioned due to other abilities.",
+        "firstNightReminder": "다른 능력으로 인해 능력이 비정상적으로 작동한 플레이어의 수(0, 1, 2 등)에 대한 손 신호를 보여줍니다.",
+        "firstNightReminder_en": "Show the hand signal for the number (0, 1, 2, etc.) of players whose ability malfunctioned due to other abilities.",
         "otherNight": 70,
-        "otherNightReminder": "Show the hand signal for the number (0, 1, 2, etc.) of players whose ability malfunctioned due to other abilities.",
+        "otherNightReminder": "다른 능력으로 인해 능력이 비정상적으로 작동한 플레이어의 수(0, 1, 2 등)에 대한 손 신호를 보여줍니다.",
+        "otherNightReminder_en": "Show the hand signal for the number (0, 1, 2, etc.) of players whose ability malfunctioned due to other abilities.",
         "reminders": [
+            "비정상"
+        ],
+        "reminders_en": [
             "Abnormal"
         ],
         "setup": false,
@@ -1496,7 +2010,8 @@
     },
     {
         "id": "matron",
-        "name": "Matron",
+        "name": "여사감",
+        "name_en": "Matron",
         "edition": "bmr",
         "team": "traveller",
         "firstNight": 0,
@@ -1505,7 +2020,8 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
+        "ability": "매일, 최대 3쌍의 2명 플레이어를 선택하여 자리를 바꿀 수 있습니다. 플레이어들은 개인적으로 대화하기 위해 자리를 떠날 수 없습니다.",
+        "ability_en": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
         "image": "/images/fo/boc/icons/traveller/matron.webp"
     },
     {
@@ -1528,10 +2044,16 @@
         "edition": "",
         "team": "minion",
         "firstNight": 27,
-        "firstNightReminder": "Show the Mezepheles their secret word.",
+        "firstNightReminder": "메제펠레스에게 그들의 비밀 단어를 보여줍니다.",
+        "firstNightReminder_en": "Show the Mezepheles their secret word.",
         "otherNight": 19,
-        "otherNightReminder": "Wake the 1st good player that said the Mezepheles' secret word and show them the 'You are' card and the thumbs down evil signal.",
+        "otherNightReminder": "메제펠레스의 비밀 단어를 말한 첫 번째 선한 플레이어를 깨우고 '당신은' 카드와 악하다는 엄지손가락 아래 신호를 보여줍니다.",
+        "otherNightReminder_en": "Wake the 1st good player that said the Mezepheles' secret word and show them the 'You are' card and the thumbs down evil signal.",
         "reminders": [
+            "악으로 변함",
+            "능력 없음"
+        ],
+        "reminders_en": [
             "Turns evil",
             "No ability"
         ],
@@ -1549,6 +2071,9 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "모두 취함"
+        ],
+        "reminders_en": [
             "Everyone drunk"
         ],
         "setup": false,
@@ -1563,8 +2088,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 13,
-        "otherNightReminder": "The previously protected player is no longer protected. The Monk points to a player not themself. Mark that player 'Protected'.",
+        "otherNightReminder": "이전에 보호받던 플레이어는 더 이상 보호받지 않습니다. 수도승은 자신이 아닌 플레이어를 가리킵니다. 그 플레이어를 '보호됨'으로 표시합니다.",
+        "otherNightReminder_en": "The previously protected player is no longer protected. The Monk points to a player not themself. Mark that player 'Protected'.",
         "reminders": [
+            "보호됨"
+        ],
+        "reminders_en": [
             "Protected"
         ],
         "setup": false,
@@ -1579,8 +2108,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 49,
-        "otherNightReminder": "If the Moonchild used their ability to target a player today: If that player is good, they die.",
+        "otherNightReminder": "만약 문차일드가 오늘 플레이어를 대상으로 능력을 사용했다면: 그 플레이어가 선하다면 죽습니다.",
+        "otherNightReminder_en": "If the Moonchild used their ability to target a player today: If that player is good, they die.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -1607,10 +2140,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 46,
-        "firstNightReminder": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
+        "firstNightReminder": "야간경비원이 플레이어를 가리킬 수 있습니다. 그 플레이어를 깨우고 '이 역할이 당신을 선택했습니다' 카드와 야간경비원 토큰을 보여준 후, 야간경비원 플레이어를 가리킵니다.",
+        "firstNightReminder_en": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
         "otherNight": 66,
-        "otherNightReminder": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
+        "otherNightReminder": "야간경비원이 플레이어를 가리킬 수 있습니다. 그 플레이어를 깨우고 '이 역할이 당신을 선택했습니다' 카드와 야간경비원 토큰을 보여준 후, 야간경비원 플레이어를 가리킵니다.",
+        "otherNightReminder_en": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -1623,10 +2161,14 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 43,
-        "firstNightReminder": "Point to 3 players including one evil player, in no particular order.",
+        "firstNightReminder": "특정 순서 없이 악한 플레이어 1명을 포함한 3명의 플레이어를 가리킵니다.",
+        "firstNightReminder_en": "Point to 3 players including one evil player, in no particular order.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "보임"
+        ],
+        "reminders_en": [
             "Seen"
         ],
         "setup": false,
@@ -1641,8 +2183,13 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 30,
-        "otherNightReminder": "The No Dashii points to a player. That player dies.",
+        "otherNightReminder": "노 다시가 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "The No Dashii points to a player. That player dies.",
         "reminders": [
+            "죽음",
+            "중독됨"
+        ],
+        "reminders_en": [
             "Dead",
             "Poisoned"
         ],
@@ -1656,10 +2203,14 @@
         "edition": "",
         "team": "outsider",
         "firstNight": 49,
-        "firstNightReminder": "The Ogre points to a player (not themselves) and becomes their alignment.",
+        "firstNightReminder": "오우거가 플레이어(자신이 아닌)를 가리키고 그들의 편이 됩니다.",
+        "firstNightReminder_en": "The Ogre points to a player (not themselves) and becomes their alignment.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "친구"
+        ],
+        "reminders_en": [
             "Friend"
         ],
         "setup": false,
@@ -1674,8 +2225,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 32,
-        "otherNightReminder": "The Ojo points to a character on the sheet; if in play, that player dies. If it is not in play, the Storyteller chooses who dies instead.",
+        "otherNightReminder": "오조가 시트의 역할을 가리킵니다; 만약 플레이에 참여하고 있다면 그 플레이어는 죽습니다. 만약 플레이에 참여하고 있지 않다면, 누가 죽을지는 이야기꾼이 선택합니다.",
+        "otherNightReminder_en": "The Ojo points to a character on the sheet; if in play, that player dies. If it is not in play, the Storyteller chooses who dies instead.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -1690,7 +2245,8 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 60,
-        "otherNightReminder": "Show the hand signal for the number (0, 1, 2, etc.) of dead evil players.",
+        "otherNightReminder": "죽은 악한 플레이어의 수(0, 1, 2 등)에 대한 손 신호를 보여줍니다.",
+        "otherNightReminder_en": "Show the hand signal for the number (0, 1, 2, etc.) of dead evil players.",
         "reminders": [],
         "setup": false,
         "ability": "첫날 밤을 제외한 매일 밤, 죽은 참가자 중 몇 명이 악한 편인지 알게 됩니다.",
@@ -1698,7 +2254,8 @@
     },
     {
         "id": "organ_grinder",
-        "name": "Organ Grinder",
+        "name": "오르간 연주자",
+        "name_en": "Organ Grinder",
         "edition": "",
         "team": "minion",
         "firstNight": 0,
@@ -1706,10 +2263,14 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "곧 죽을 예정"
+        ],
+        "reminders_en": [
             "About to die"
         ],
         "setup": false,
-        "ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk or not.",
+        "ability": "모든 플레이어는 투표할 때 눈을 감고 있고 투표 집계는 비밀입니다. 매일 밤, 당신이 취했는지 아닌지 선택합니다.",
+        "ability_en": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk or not.",
         "image": "/images/fo/boc/icons/minion/organgrinder.webp"
     },
     {
@@ -1732,10 +2293,16 @@
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 2,
-        "firstNightReminder": "The Philosopher either shows a 'no' head signal, or points to a good character on their sheet. If they chose a character: Swap the out-of-play character token with the Philosopher token. Or, if the character is in play, place the drunk marker by that player and the Not the Philosopher token by the Philosopher.",
+        "firstNightReminder": "철학자는 '아니오' 머리 신호를 보이거나, 시트의 선한 역할을 가리킵니다. 만약 역할을 선택했다면: 플레이에 참여하지 않는 역할 토큰과 철학자 토큰을 바꿉니다. 또는, 만약 그 역할이 플레이에 참여하고 있다면, 그 플레이어 옆에 취함 표시를 놓고 철학자 옆에 철학자가 아닙니다 토큰을 놓습니다.",
+        "firstNightReminder_en": "The Philosopher either shows a 'no' head signal, or points to a good character on their sheet. If they chose a character: Swap the out-of-play character token with the Philosopher token. Or, if the character is in play, place the drunk marker by that player and the Not the Philosopher token by the Philosopher.",
         "otherNight": 2,
-        "otherNightReminder": "If the Philosopher has not used their ability: the Philosopher either shows a 'no' head signal, or points to a good character on their sheet. If they chose a character: Swap the out-of-play character token with the Philosopher token. Or, if the character is in play, place the drunk marker by that player and the Not the Philosopher token by the Philosopher.",
+        "otherNightReminder": "만약 철학자가 능력을 사용하지 않았다면: 철학자는 '아니오' 머리 신호를 보이거나, 시트의 선한 역할을 가리킵니다. 만약 역할을 선택했다면: 플레이에 참여하지 않는 역할 토큰과 철학자 토큰을 바꿉니다. 또는, 만약 그 역할이 플레이에 참여하고 있다면, 그 플레이어 옆에 취함 표시를 놓고 철학자 옆에 철학자가 아닙니다 토큰을 놓습니다.",
+        "otherNightReminder_en": "If the Philosopher has not used their ability: the Philosopher either shows a 'no' head signal, or points to a good character on their sheet. If they chose a character: Swap the out-of-play character token with the Philosopher token. Or, if the character is in play, place the drunk marker by that player and the Not the Philosopher token by the Philosopher.",
         "reminders": [
+            "취함",
+            "철학자입니다"
+        ],
+        "reminders_en": [
             "Drunk",
             "Is the Philosopher"
         ],
@@ -1751,7 +2318,8 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 17,
-        "otherNightReminder": "The Pit-Hag points to a player and a character on the sheet. If this character is not in play, wake that player and show them the 'You are' card and the relevant character token. If the character is in play, nothing happens.",
+        "otherNightReminder": "마귀할멈이 플레이어와 시트의 역할을 가리킵니다. 만약 이 역할이 플레이에 참여하지 않고 있다면, 그 플레이어를 깨우고 '당신은' 카드와 관련된 역할 토큰을 보여줍니다. 만약 그 역할이 플레이에 참여하고 있다면 아무 일도 일어나지 않습니다.",
+        "otherNightReminder_en": "The Pit-Hag points to a player and a character on the sheet. If this character is not in play, wake that player and show them the 'You are' card and the relevant character token. If the character is in play, nothing happens.",
         "reminders": [],
         "setup": false,
         "ability": "첫날 밤을 제외한 매일 밤, 참가자와 그가 될 역할을 선택합니다. 만약 그 역할이 참여하지 않고 있다면 그는 변신합니다. 만약 이 방식으로 악마가 만들어지면 그 밤의 죽음은 임의적으로 발생합니다.",
@@ -1763,10 +2331,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 29,
-        "firstNightReminder": "Show the Pixie 1 in-play Townsfolk character token.",
+        "firstNightReminder": "요정에게 플레이에 참여 중인 마을주민 역할 토큰 1개를 보여줍니다.",
+        "firstNightReminder_en": "Show the Pixie 1 in-play Townsfolk character token.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "광기",
+            "능력 보유"
+        ],
+        "reminders_en": [
             "Mad",
             "Has ability"
         ],
@@ -1776,7 +2349,8 @@
     },
     {
         "id": "plague_doctor",
-        "name": "Plague Doctor",
+        "name": "역병 의사",
+        "name_en": "Plague Doctor",
         "edition": "",
         "team": "outsider",
         "firstNight": 0,
@@ -1784,10 +2358,14 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "이야기꾼 능력"
+        ],
+        "reminders_en": [
             "Storyteller Ability"
         ],
         "setup": false,
-        "ability": "When you die, the Storyteller gains a Minion ability.",
+        "ability": "당신이 죽으면, 이야기꾼은 하수인 능력을 얻게 됩니다.",
+        "ability_en": "When you die, the Storyteller gains a Minion ability.",
         "image": "/images/fo/boc/icons/outsider/plaguedoctor.webp"
     },
     {
@@ -1798,8 +2376,13 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 28,
-        "otherNightReminder": "If the Po chose no-one the previous night: The Po points to three players. Otherwise: The Po either shows the 'no' head signal , or points to a player. Chosen players die",
+        "otherNightReminder": "만약 포가 직전 밤에 아무도 선택하지 않았다면: 포는 세 명의 플레이어를 가리킵니다. 그렇지 않다면: 포는 '아니오' 머리 신호를 보이거나 플레이어를 가리킵니다. 선택된 플레이어들은 죽습니다.",
+        "otherNightReminder_en": "If the Po chose no-one the previous night: The Po points to three players. Otherwise: The Po either shows the 'no' head signal , or points to a player. Chosen players die",
         "reminders": [
+            "죽음",
+            "3번 공격"
+        ],
+        "reminders_en": [
             "Dead",
             "3 attacks"
         ],
@@ -1813,10 +2396,15 @@
         "edition": "tb",
         "team": "minion",
         "firstNight": 17,
-        "firstNightReminder": "The Poisoner points to a player. That player is poisoned.",
+        "firstNightReminder": "독살범이 플레이어를 가리킵니다. 그 플레이어는 중독됩니다.",
+        "firstNightReminder_en": "The Poisoner points to a player. That player is poisoned.",
         "otherNight": 8,
-        "otherNightReminder": "The previously poisoned player is no longer poisoned. The Poisoner points to a player. That player is poisoned.",
+        "otherNightReminder": "이전에 중독된 플레이어는 더 이상 중독되지 않습니다. 독살범이 플레이어를 가리킵니다. 그 플레이어는 중독됩니다.",
+        "otherNightReminder_en": "The previously poisoned player is no longer poisoned. The Poisoner points to a player. That player is poisoned.",
         "reminders": [
+            "중독됨"
+        ],
+        "reminders_en": [
             "Poisoned"
         ],
         "setup": false,
@@ -1825,7 +2413,8 @@
     },
     {
         "id": "politician",
-        "name": "Politician",
+        "name": "정치인",
+        "name_en": "Politician",
         "edition": "",
         "team": "outsider",
         "firstNight": 0,
@@ -1834,7 +2423,8 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "If you were the player most responsible for your team losing, you change alignment & win, even if dead.",
+        "ability": "만약 당신이 당신의 팀이 패배하는 데 가장 책임이 있는 플레이어였다면, 당신은 편을 바꾸고 승리합니다. 죽었더라도 마찬가지입니다.",
+        "ability_en": "If you were the player most responsible for your team losing, you change alignment & win, even if dead.",
         "image": "/images/fo/boc/icons/outsider/politician.webp"
     },
     {
@@ -1843,10 +2433,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 4,
-        "firstNightReminder": "Do not inform the Demon/Minions who each other are",
+        "firstNightReminder": "악마/하수인들에게 서로가 누구인지 알려주지 마세요",
+        "firstNightReminder_en": "Do not inform the Demon/Minions who each other are",
         "otherNight": 3,
-        "otherNightReminder": "If the Poppy Grower has died, show the Minions/Demon who each other are.",
+        "otherNightReminder": "만약 양귀비 재배자가 죽었다면, 하수인/악마들에게 서로가 누구인지 보여줍니다.",
+        "otherNightReminder_en": "If the Poppy Grower has died, show the Minions/Demon who each other are.",
         "reminders": [
+            "악한 편 깨어남"
+        ],
+        "reminders_en": [
             "Evil wakes"
         ],
         "setup": false,
@@ -1855,19 +2450,48 @@
     },
     {
         "id": "preacher",
-        "name": "Preacher",
+        "name": "설교자",
+        "name_en": "Preacher",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 14,
-        "firstNightReminder": "The Preacher chooses a player. If a Minion is chosen, wake the Minion and show the 'This character selected you' card and then the Preacher token.",
+        "firstNightReminder": "설교자가 플레이어를 선택합니다. 만약 하수인이 선택되었다면, 하수인을 깨우고 '이 역할이 당신을 선택했습니다' 카드를 보여준 후 설교자 토큰을 보여줍니다.",
+        "firstNightReminder_en": "The Preacher chooses a player. If a Minion is chosen, wake the Minion and show the 'This character selected you' card and then the Preacher token.",
         "otherNight": 7,
-        "otherNightReminder": "The Preacher chooses a player. If a Minion is chosen, wake the Minion and show the 'This character selected you' card and then the Preacher token.",
+        "otherNightReminder": "설교자가 플레이어를 선택합니다. 만약 하수인이 선택되었다면, 하수인을 깨우고 '이 역할이 당신을 선택했습니다' 카드를 보여준 후 설교자 토큰을 보여줍니다.",
+        "otherNightReminder_en": "The Preacher chooses a player. If a Minion is chosen, wake the Minion and show the 'This character selected you' card and then the Preacher token.",
         "reminders": [
+            "설교 중"
+        ],
+        "reminders_en": [
             "At a sermon"
         ],
         "setup": false,
-        "ability": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability.",
+        "ability": "매일 밤, 플레이어를 선택합니다: 하수인이 선택되었다면 이를 알게 됩니다. 선택된 모든 하수인들은 능력이 없습니다.",
+        "ability_en": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability.",
         "image": "/images/fo/boc/icons/townsfolk/preacher.webp"
+    },
+    {
+        "id": "princess",
+        "name": "공주",
+        "name_en": "Princess",
+        "edition": "",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 34,
+        "otherNightReminder": "만약 오늘이 공주의 첫 번째 날이었고, 그들이 플레이어를 지명하고 처형했다면, 악마는 죽이지 않습니다.",
+        "otherNightReminder_en": "If it was the Princess' first day today, and they nominated and executed a player, the Demon doesn't kill.",
+        "reminders": [
+            "죽이지 않음"
+        ],
+        "reminders_en": [
+            "Doesn't Kill"
+        ],
+        "setup": false,
+        "ability": "당신의 첫 번째 날에, 만약 당신이 플레이어를 지명하고 처형했다면, 오늘 밤 악마는 죽이지 않습니다.",
+        "ability_en": "On your 1st day, if you nominated & executed a player, the Demon doesn't kill tonight.",
+        "image": "/images/fo/boc/icons/townsfolk/princess.webp"
     },
     {
         "id": "professor",
@@ -1877,8 +2501,13 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 45,
-        "otherNightReminder": "If the Professor has not used their ability: The Professor either shakes their head no, or points to a player. If that player is a Townsfolk, they are now alive.",
+        "otherNightReminder": "만약 교수가 능력을 사용하지 않았다면: 교수는 '아니오' 머리를 흔들거나 플레이어를 가리킵니다. 만약 그 플레이어가 마을주민이라면, 이제 살아있습니다.",
+        "otherNightReminder_en": "If the Professor has not used their ability: The Professor either shakes their head no, or points to a player. If that player is a Townsfolk, they are now alive.",
         "reminders": [
+            "살아있음",
+            "능력 없음"
+        ],
+        "reminders_en": [
             "Alive",
             "No ability"
         ],
@@ -1906,10 +2535,16 @@
         "edition": "bmr",
         "team": "demon",
         "firstNight": 28,
-        "firstNightReminder": "The Pukka points to a player. That player is poisoned.",
+        "firstNightReminder": "푸카가 플레이어를 가리킵니다. 그 플레이어는 중독됩니다.",
+        "firstNightReminder_en": "The Pukka points to a player. That player is poisoned.",
         "otherNight": 26,
-        "otherNightReminder": "The Pukka points to a player. That player is poisoned. The previously poisoned player dies.",
+        "otherNightReminder": "푸카가 플레이어를 가리킵니다. 그 플레이어는 중독됩니다. 이전에 중독된 플레이어는 죽습니다.",
+        "otherNightReminder_en": "The Pukka points to a player. That player is poisoned. The previously poisoned player dies.",
         "reminders": [
+            "중독됨",
+            "죽음"
+        ],
+        "reminders_en": [
             "Poisoned",
             "Dead"
         ],
@@ -1927,6 +2562,10 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "취함",
+            "추측 사용됨"
+        ],
+        "reminders_en": [
             "Drunk",
             "Guess used"
         ],
@@ -1942,7 +2581,8 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 42,
-        "otherNightReminder": "If the Ravenkeeper died tonight: The Ravenkeeper points to a player. Show that player's character token.",
+        "otherNightReminder": "만약 레이븐키퍼가 오늘 밤 죽었다면: 레이븐키퍼가 플레이어를 가리킵니다. 그 플레이어의 역할 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If the Ravenkeeper died tonight: The Ravenkeeper points to a player. Show that player's character token.",
         "reminders": [],
         "setup": false,
         "ability": "만약 당신이 밤에 죽는다면, 당신은 참가자를 선택한 뒤 그 사람의 역할을 알게 됩니다.",
@@ -1967,6 +2607,9 @@
         "firstNightReminder": "",
         "otherNightReminder": "",
         "reminders": [
+            "사용됨"
+        ],
+        "reminders_en": [
             "Used"
         ],
         "setup": false,
@@ -1997,7 +2640,8 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 43,
-        "otherNightReminder": "If the Sage was killed by a Demon: Point to two players, one of which is that Demon.",
+        "otherNightReminder": "만약 현자가 악마에 의해 죽었다면: 두 명의 플레이어를 가리키는데, 그 중 하나가 그 악마입니다.",
+        "otherNightReminder_en": "If the Sage was killed by a Demon: Point to two players, one of which is that Demon.",
         "reminders": [],
         "setup": false,
         "ability": "당신이 악마의 공격으로 죽으면 2명의 참가자 중 1명이 악마라는 것을 알게 됩니다. 처형당해서 죽는 것은 포함되지 않습니다.",
@@ -2009,10 +2653,15 @@
         "edition": "bmr",
         "team": "townsfolk",
         "firstNight": 10,
-        "firstNightReminder": "The Sailor points to a living player. Either the Sailor, or the chosen player, is drunk.",
+        "firstNightReminder": "선원이 살아있는 플레이어를 가리킵니다. 선원 또는 선택된 플레이어 중 하나가 취합니다.",
+        "firstNightReminder_en": "The Sailor points to a living player. Either the Sailor, or the chosen player, is drunk.",
         "otherNight": 4,
-        "otherNightReminder": "The previously drunk player is no longer drunk. The Sailor points to a living player. Either the Sailor, or the chosen player, is drunk.",
+        "otherNightReminder": "이전에 취했던 플레이어는 더 이상 취하지 않습니다. 선원이 살아있는 플레이어를 가리킵니다. 선원 또는 선택된 플레이어 중 하나가 취합니다.",
+        "otherNightReminder_en": "The previously drunk player is no longer drunk. The Sailor points to a living player. Either the Sailor, or the chosen player, is drunk.",
         "reminders": [
+            "취함"
+        ],
+        "reminders_en": [
             "Drunk"
         ],
         "setup": false,
@@ -2069,8 +2718,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 20,
-        "otherNightReminder": "If the Scarlet Woman became the Demon today: Show the 'You are' card, then the demon token.",
+        "otherNightReminder": "만약 부정한 여자가 오늘 악마가 되었다면: '당신은' 카드를 보여주고, 그 다음 악마 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If the Scarlet Woman became the Demon today: Show the 'You are' card, then the demon token.",
         "reminders": [
+            "악마"
+        ],
+        "reminders_en": [
             "Demon"
         ],
         "setup": false,
@@ -2083,10 +2736,15 @@
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 42,
-        "firstNightReminder": "The Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
+        "firstNightReminder": "재봉사는 '아니오' 머리 신호를 보이거나, 다른 두 명의 플레이어를 가리킵니다. 만약 재봉사가 플레이어들을 선택했다면, 그들이 같은 편인지에 대해 '예' 고개를 끄덕이거나 '아니오' 고개를 흔듭니다.",
+        "firstNightReminder_en": "The Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
         "otherNight": 61,
-        "otherNightReminder": "If the Seamstress has not yet used their ability: the Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
+        "otherNightReminder": "만약 재봉사가 아직 능력을 사용하지 않았다면: 재봉사는 '아니오' 머리 신호를 보이거나, 다른 두 명의 플레이어를 가리킵니다. 만약 재봉사가 플레이어들을 선택했다면, 그들이 같은 편인지에 대해 '예' 고개를 끄덕이거나 '아니오' 고개를 흔듭니다.",
+        "otherNightReminder_en": "If the Seamstress has not yet used their ability: the Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -2112,8 +2770,13 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 27,
-        "otherNightReminder": "One player that the Shabaloth chose the previous night might be resurrected. The Shabaloth points to two players. Those players die.",
+        "otherNightReminder": "샤발롯이 직전 밤에 선택한 플레이어 중 한 명이 부활할 수 있습니다. 샤발롯이 두 명의 플레이어를 가리킵니다. 그 플레이어들은 죽습니다.",
+        "otherNightReminder_en": "One player that the Shabaloth chose the previous night might be resurrected. The Shabaloth points to two players. Those players die.",
         "reminders": [
+            "죽음",
+            "살아있음"
+        ],
+        "reminders_en": [
             "Dead",
             "Alive"
         ],
@@ -2123,16 +2786,19 @@
     },
     {
         "id": "shugenja",
-        "name": "Shugenja",
+        "name": "슈겐자",
+        "name_en": "Shugenja",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 33,
-        "firstNightReminder": "Wake the Shugenja; point horizontally in the direction of the closest evil player. If the two closest evil players are equidistant, point your finger horizontally in either direction.",
+        "firstNightReminder": "슈겐자를 깨웁니다; 가장 가까운 악한 플레이어의 방향으로 수평하게 가리킵니다. 만약 가장 가까운 두 명의 악한 플레이어가 같은 거리에 있다면, 어느 방향이든 수평하게 손가락을 가리킵니다.",
+        "firstNightReminder_en": "Wake the Shugenja; point horizontally in the direction of the closest evil player. If the two closest evil players are equidistant, point your finger horizontally in either direction.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "You start knowing if your closest evil player is clockwise or anti-clockwise. If equidistant, this info is arbitrary.",
+        "ability": "당신은 가장 가까운 악한 플레이어가 시계 방향인지 반시계 방향인지 알면서 시작합니다. 만약 같은 거리에 있다면, 이 정보는 임의적입니다.",
+        "ability_en": "You start knowing if your closest evil player is clockwise or anti-clockwise. If equidistant, this info is arbitrary.",
         "image": "/images/fo/boc/icons/townsfolk/shugenja.webp"
     },
     {
@@ -2145,6 +2811,9 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -2157,10 +2826,15 @@
         "edition": "snv",
         "team": "townsfolk",
         "firstNight": 20,
-        "firstNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
+        "firstNightReminder": "뱀 조련사가 플레이어를 가리킵니다. 만약 그 플레이어가 악마라면: 악마와 뱀 조련사의 캐릭터와 성향을 교체합니다. 각 플레이어를 깨워서 새로운 역할과 성향을 알려줍니다. 새로운 뱀 조련사는 중독됩니다.",
+        "firstNightReminder_en": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
         "otherNight": 12,
-        "otherNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
+        "otherNightReminder": "뱀 조련사가 플레이어를 가리킵니다. 만약 그 플레이어가 악마라면: 악마와 뱀 조련사의 캐릭터와 성향을 교체합니다. 각 플레이어를 깨워서 새로운 역할과 성향을 알려줍니다. 새로운 뱀 조련사는 중독됩니다.",
+        "otherNightReminder_en": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
         "reminders": [
+            "중독됨"
+        ],
+        "reminders_en": [
             "Poisoned"
         ],
         "setup": false,
@@ -2173,7 +2847,8 @@
         "edition": "",
         "team": "outsider",
         "firstNight": 6,
-        "firstNightReminder": "After Minion info wake each Minion and show them three not-in-play character tokens. These may be the same or different to each other and the ones shown to the Demon.",
+        "firstNightReminder": "하수인 정보 후 각 하수인을 깨우고 플레이에 참여하지 않는 3개의 캐릭터 토큰을 보여줍니다. 이들은 서로 같거나 다를 수 있으며 악마에게 보여진 것들과도 같거나 다를 수 있습니다.",
+        "firstNightReminder_en": "After Minion info wake each Minion and show them three not-in-play character tokens. These may be the same or different to each other and the ones shown to the Demon.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
@@ -2200,12 +2875,17 @@
         "firstNightReminder": "",
         "otherNightReminder": "",
         "reminders": [
+            "추가 악한 이 없음"
+        ],
+        "reminders_en": [
             "No extra evil"
         ],
         "setup": false,
-        "name": "Spirit of Ivory",
+        "name": "상아의 영혼",
+        "name_en": "Spirit of Ivory",
         "team": "fabled",
-        "ability": "There can't be more than 1 extra evil player.",
+        "ability": "추가 악한 플레이어는 1명을 초과할 수 없습니다.",
+        "ability_en": "There can't be more than 1 extra evil player.",
         "image": "/images/fo/boc/icons/fabled/spiritofivory.webp"
     },
     {
@@ -2214,9 +2894,11 @@
         "edition": "tb",
         "team": "minion",
         "firstNight": 47,
-        "firstNightReminder": "Show the Grimoire to the Spy for as long as they need.",
+        "firstNightReminder": "스파이가 필요로 하는 만큼 그리모어를 보여줍니다.",
+        "firstNightReminder_en": "Show the Grimoire to the Spy for as long as they need.",
         "otherNight": 67,
-        "otherNightReminder": "Show the Grimoire to the Spy for as long as they need.",
+        "otherNightReminder": "스파이가 필요로 하는 만큼 그리모어를 보여줍니다.",
+        "otherNightReminder_en": "Show the Grimoire to the Spy for as long as they need.",
         "reminders": [],
         "setup": false,
         "ability": "매일 밤, 당신은 이야기꾼을 통해 게임 진행상황을 볼 수 있습니다. 당신은 악한 편이지만 살아서나 죽어서나 다른 사람들에게 마을주민이나 이방인으로 보일 수 있습니다.",
@@ -2224,32 +2906,44 @@
     },
     {
         "id": "steward",
-        "name": "Steward",
+        "name": "청지기",
+        "name_en": "Steward",
         "edition": "",
         "team": "townsfolk",
         "firstNight": 41,
-        "firstNightReminder": "Point to 1 good player.",
+        "firstNightReminder": "선한 플레이어 1명을 가리킵니다.",
+        "firstNightReminder_en": "Point to 1 good player.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "알기"
+        ],
+        "reminders_en": [
             "Know"
         ],
         "setup": false,
-        "ability": "You start knowing 1 good player.",
+        "ability": "당신은 선한 플레이어 1명을 알면서 시작합니다.",
+        "ability_en": "You start knowing 1 good player.",
         "image": "/images/fo/boc/icons/townsfolk/steward.webp"
     },
     {
         "id": "stormcatcher",
         "firstNight": 1,
-        "firstNightReminder": "Mark a good player as \"Safe\". Wake each evil player and show them the marked player.",
+        "firstNightReminder": "선한 플레이어를 \"안전\"으로 표시합니다. 각 악한 플레이어를 깨우고 표시된 플레이어를 보여줍니다.",
+        "firstNightReminder_en": "Mark a good player as \"Safe\". Wake each evil player and show them the marked player.",
         "otherNightReminder": "",
         "reminders": [
+            "안전"
+        ],
+        "reminders_en": [
             "Safe"
         ],
         "setup": false,
-        "name": "Storm Catcher",
+        "name": "스톰 캐처",
+        "name_en": "Storm Catcher",
         "team": "fabled",
-        "ability": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
+        "ability": "첫날 밤, 선한 역할을 지정합니다. 만약 플레이에 참여하고 있다면, 그들은 처형으로만 죽을 수 있지만, 악한 플레이어들은 그 플레이어가 누구인지 알게 됩니다.",
+        "ability_en": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
         "image": "/images/fo/boc/icons/fabled/stormcatcher.webp"
     },
     {
@@ -2258,10 +2952,17 @@
         "edition": "",
         "team": "minion",
         "firstNight": 8,
-        "firstNightReminder": "Show the 'These characters are not in play' card. Show 3 character tokens of good characters not in play.",
+        "firstNightReminder": "'이 역할들은 플레이에 참여하지 않습니다' 카드를 보여줍니다. 플레이에 참여하지 않는 선한 역할의 토큰 3개를 보여줍니다.",
+        "firstNightReminder_en": "Show the 'These characters are not in play' card. Show 3 character tokens of good characters not in play.",
         "otherNight": 19,
-        "otherNightReminder": "If it is the 3rd night, wake the Summoner. They point to a player and a Demon on the character sheet - that player becomes that Demon.",
+        "otherNightReminder": "만약 3번째 밤이라면, 소환사를 깨웁니다. 그들은 플레이어와 역할 시트의 악마를 가리킵니다 - 그 플레이어는 그 악마가 됩니다.",
+        "otherNightReminder_en": "If it is the 3rd night, wake the Summoner. They point to a player and a Demon on the character sheet - that player becomes that Demon.",
         "reminders": [
+            "밤 1",
+            "밤 2",
+            "밤 3"
+        ],
+        "reminders_en": [
             "Night 1",
             "Night 2",
             "Night 3"
@@ -2278,8 +2979,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 41,
-        "otherNightReminder": "Choose a player that is drunk.",
+        "otherNightReminder": "취한 플레이어를 선택합니다.",
+        "otherNightReminder_en": "Choose a player that is drunk.",
         "reminders": [
+            "취함"
+        ],
+        "reminders_en": [
             "Drunk"
         ],
         "setup": false,
@@ -2296,6 +3001,9 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "죽을 수 없음"
+        ],
+        "reminders_en": [
             "Can not die"
         ],
         "setup": false,
@@ -2308,10 +3016,15 @@
         "edition": "tb",
         "team": "traveller",
         "firstNight": 1,
-        "firstNightReminder": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
+        "firstNightReminder": "도둑이 플레이어를 가리킵니다. 선택된 플레이어의 역할 토큰 옆에 도둑의 '부정적 투표' 리마인더를 놓습니다.",
+        "firstNightReminder_en": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
         "otherNight": 1,
-        "otherNightReminder": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
+        "otherNightReminder": "도둑이 플레이어를 가리킵니다. 선택된 플레이어의 역할 토큰 옆에 도둑의 '부정적 투표' 리마인더를 놓습니다.",
+        "otherNightReminder_en": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
         "reminders": [
+            "부정적 투표"
+        ],
+        "reminders_en": [
             "Negative vote"
         ],
         "setup": false,
@@ -2326,8 +3039,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 48,
-        "otherNightReminder": "The Tinker might die.",
+        "otherNightReminder": "땜장이가 죽을 수 있습니다.",
+        "otherNightReminder_en": "The Tinker might die.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -2342,8 +3059,13 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 59,
-        "otherNightReminder": "Nod 'yes' or shake head 'no' for whether a Minion nominated today. Place the 'Minion not nominated' marker (remove 'Minion nominated', if any).",
+        "otherNightReminder": "오늘 하수인이 지명되었는지에 대해 '예' 고개를 끄덕이거나 '아니오' 고개를 흔듭니다. '하수인 지명되지 않음' 표시를 놓습니다('하수인 지명됨'이 있다면 제거).",
+        "otherNightReminder_en": "Nod 'yes' or shake head 'no' for whether a Minion nominated today. Place the 'Minion not nominated' marker (remove 'Minion nominated', if any).",
         "reminders": [
+            "하수인들 지명되지 않음",
+            "하수인 지명됨"
+        ],
+        "reminders_en": [
             "Minions not nominated",
             "Minion nominated"
         ],
@@ -2355,14 +3077,20 @@
         "id": "toymaker",
         "firstNightReminder": "",
         "otherNight": 1,
-        "otherNightReminder": "If it is a night when a Demon attack could end the game, and the Demon is marked \"Final night: No Attack,\" then the Demon does not act tonight. (Do not wake them.)",
+        "otherNightReminder": "만약 악마의 공격이 게임을 끝낼 수 있는 밤이고, 악마가 \"마지막 밤: 공격 없음\"으로 표시되어 있다면, 악마는 오늘 밤 행동하지 않습니다. (그들을 깨우지 마세요.)",
+        "otherNightReminder_en": "If it is a night when a Demon attack could end the game, and the Demon is marked \"Final night: No Attack,\" then the Demon does not act tonight. (Do not wake them.)",
         "reminders": [
+            "마지막 밤: 공격 없음"
+        ],
+        "reminders_en": [
             "Final Night: No Attack"
         ],
         "setup": false,
-        "name": "Toymaker",
+        "name": "장난감 제작자",
+        "name_en": "Toymaker",
         "team": "fabled",
-        "ability": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
+        "ability": "악마는 공격하지 않기를 선택할 수 있으며, 게임당 최소 한 번은 이를 해야 합니다. 악한 플레이어들은 정상적인 시작 정보를 받습니다.",
+        "ability_en": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
         "image": "/images/fo/boc/icons/fabled/toymaker.webp"
     },
     {
@@ -2373,8 +3101,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 56,
-        "otherNightReminder": "If a player was executed today: Show that player's character token.",
+        "otherNightReminder": "만약 오늘 플레이어가 처형되었다면: 그 플레이어의 역할 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If a player was executed today: Show that player's character token.",
         "reminders": [
+            "처형됨"
+        ],
+        "reminders_en": [
             "Executed"
         ],
         "setup": false,
@@ -2389,8 +3121,14 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 32,
-        "otherNightReminder": "The Vigormortis points to a player. That player dies. If a Minion, they keep their ability and one of their Townsfolk neighbours is poisoned.",
+        "otherNightReminder": "비고모르티스가 플레이어를 가리킵니다. 그 플레이어는 죽습니다. 만약 하수인이라면, 그들은 능력을 유지하고 그들의 마을주민 이웃 중 한 명이 중독됩니다.",
+        "otherNightReminder_en": "The Vigormortis points to a player. That player dies. If a Minion, they keep their ability and one of their Townsfolk neighbours is poisoned.",
         "reminders": [
+            "죽음",
+            "능력 보유",
+            "중독됨"
+        ],
+        "reminders_en": [
             "Dead",
             "Has ability",
             "Poisoned"
@@ -2405,10 +3143,15 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 45,
-        "firstNightReminder": "The Village Idiot points to a player; give a thumbs up if that player is good or a thumbs down if that player is evil.",
+        "firstNightReminder": "동네 바보가 플레이어를 가리킵니다; 그 플레이어가 선하다면 엄지손가락을 위로, 악하다면 아래로 보여줍니다.",
+        "firstNightReminder_en": "The Village Idiot points to a player; give a thumbs up if that player is good or a thumbs down if that player is evil.",
         "otherNight": 62,
-        "otherNightReminder": "The Village Idiot points to a player; give a thumbs up if that player is good or a thumbs down if that player is evil.",
+        "otherNightReminder": "동네 바보가 플레이어를 가리킵니다; 그 플레이어가 선하다면 엄지손가락을 위로, 악하다면 아래로 보여줍니다.",
+        "otherNightReminder_en": "The Village Idiot points to a player; give a thumbs up if that player is good or a thumbs down if that player is evil.",
         "reminders": [
+            "취함"
+        ],
+        "reminders_en": [
             "Drunk"
         ],
         "setup": true,
@@ -2425,6 +3168,9 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
             "No ability"
         ],
         "setup": false,
@@ -2433,16 +3179,19 @@
     },
     {
         "id": "vizier",
-        "name": "Vizier",
+        "name": "재상",
+        "name_en": "Vizier",
         "edition": "",
         "team": "minion",
         "firstNight": 54,
-        "firstNightReminder": "Announce 'The Vizier is in play' and state which player they are.",
+        "firstNightReminder": "'재상이 플레이에 참여하고 있습니다'라고 발표하고 그들이 어떤 플레이어인지 말합니다.",
+        "firstNightReminder_en": "Announce 'The Vizier is in play' and state which player they are.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately.",
+        "ability": "모든 플레이어는 당신이 재상이라는 것을 압니다. 당신은 낮 동안 죽을 수 없습니다. 만약 선한 편이 투표했다면, 당신은 즉시 처형을 선택할 수 있습니다.",
+        "ability_en": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately.",
         "image": "/images/fo/boc/icons/minion/vizier.webp"
     },
     {
@@ -2453,8 +3202,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 31,
-        "otherNightReminder": "The Vortox points to a player. That player dies.",
+        "otherNightReminder": "소용돌이가 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "The Vortox points to a player. That player dies.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "Dead"
         ],
         "setup": false,
@@ -2463,7 +3216,8 @@
     },
     {
         "id": "voudon",
-        "name": "Voudon",
+        "name": "부동",
+        "name_en": "Voudon",
         "edition": "bmr",
         "team": "traveller",
         "firstNight": 0,
@@ -2472,7 +3226,8 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "Only you and the dead can vote. They don't need a vote token to do so. A 50% majority is not required.",
+        "ability": "오직 당신과 죽은 자들만 투표할 수 있습니다. 그들은 투표 토큰이 필요하지 않습니다. 50% 과반수는 필요하지 않습니다.",
+        "ability_en": "Only you and the dead can vote. They don't need a vote token to do so. A 50% majority is not required.",
         "image": "/images/fo/boc/icons/traveller/voudon.webp"
     },
     {
@@ -2481,10 +3236,15 @@
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 32,
-        "firstNightReminder": "Show the character token of a Townsfolk in play. Point to two players, one of which is that character.",
+        "firstNightReminder": "플레이에 참여 중인 마을주민 역할의 토큰을 보여줍니다. 두 명의 플레이어를 가리키는데, 그 중 하나가 그 역할입니다.",
+        "firstNightReminder_en": "Show the character token of a Townsfolk in play. Point to two players, one of which is that character.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "마을주민",
+            "틀림"
+        ],
+        "reminders_en": [
             "Townsfolk",
             "Wrong"
         ],
@@ -2498,13 +3258,20 @@
         "edition": "",
         "team": "minion",
         "firstNight": 18,
-        "firstNightReminder": "Show the Grimoire to the Widow for as long as they need. The Widow points to a player. That player is poisoned. Wake a good player. Show the 'These characters are in play' card, then the Widow character token.",
+        "firstNightReminder": "과부가 필요로 하는 만큼 그리모아를 보여줍니다. 과부가 플레이어를 가리킵니다. 그 플레이어는 중독됩니다. 선한 플레이어를 깨웁니다. '이 역할들이 플레이에 참여하고 있습니다' 카드를 보여주고, 그 다음 과부 역할 토큰을 보여줍니다.",
+        "firstNightReminder_en": "Show the Grimoire to the Widow for as long as they need. The Widow points to a player. That player is poisoned. Wake a good player. Show the 'These characters are in play' card, then the Widow character token.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "중독됨"
+        ],
+        "reminders_en": [
             "Poisoned"
         ],
         "remindersGlobal": [
+            "알기"
+        ],
+        "remindersGlobal_en": [
             "Knows"
         ],
         "setup": false,
@@ -2517,10 +3284,15 @@
         "edition": "snv",
         "team": "minion",
         "firstNight": 24,
-        "firstNightReminder": "The Witch points to a player. If that player nominates tomorrow they die immediately.",
+        "firstNightReminder": "마녀가 플레이어를 가리킵니다. 만약 그 플레이어가 내일 지명한다면 즉시 죽습니다.",
+        "firstNightReminder_en": "The Witch points to a player. If that player nominates tomorrow they die immediately.",
         "otherNight": 15,
-        "otherNightReminder": "If there are 4 or more players alive: The Witch points to a player. If that player nominates tomorrow they die immediately.",
+        "otherNightReminder": "만약 4명 이상의 플레이어가 살아있다면: 마녀가 플레이어를 가리킵니다. 만약 그 플레이어가 내일 지명한다면 즉시 죽습니다.",
+        "otherNightReminder_en": "If there are 4 or more players alive: The Witch points to a player. If that player nominates tomorrow they die immediately.",
         "reminders": [
+            "저주받음"
+        ],
+        "reminders_en": [
             "Cursed"
         ],
         "setup": false,
@@ -2533,9 +3305,11 @@
         "edition": "",
         "team": "demon",
         "firstNight": 2,
-        "firstNightReminder": "Show the Yaggababble their secret phrase.",
+        "firstNightReminder": "야가바블에게 비밀 문구를 보여줍니다.",
+        "firstNightReminder_en": "Show the Yaggababble their secret phrase.",
         "otherNight": 35,
-        "otherNightReminder": "Choose a number of players up to the total number of times the Yaggababble said their secret phrase publicly, those players die.",
+        "otherNightReminder": "야가바블이 공개적으로 비밀 문구를 말한 총 횟수만큼 플레이어를 선택합니다. 그 플레이어들은 죽습니다.",
+        "otherNightReminder_en": "Choose a number of players up to the total number of times the Yaggababble said their secret phrase publicly, those players die.",
         "reminders": [
             "Dead"
         ],
@@ -2545,7 +3319,8 @@
     },
     {
         "id": "zealot",
-        "name": "Zealot",
+        "name": "광신자",
+        "name_en": "Zealot",
         "edition": "",
         "team": "outsider",
         "firstNight": 0,
@@ -2554,8 +3329,9 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "If there are 5 or more players alive, you must vote for every nomination.",
-        "image": "/build/img/icons/outsider/zealot.webp"
+        "ability": "만약 5명 이상의 플레이어가 살아있다면, 당신은 모든 지명에 대해 투표해야 합니다.",
+        "ability_en": "If there are 5 or more players alive, you must vote for every nomination.",
+        "image": "/images/fo/boc/icons/outsider/zealot.webp"
     },
     {
         "id": "zombuul",
@@ -2565,8 +3341,13 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 25,
-        "otherNightReminder": "If no-one died during the day: The Zombuul points to a player. That player dies.",
+        "otherNightReminder": "만약 낮 동안 아무도 죽지 않았다면: 좀부울이 플레이어를 가리킵니다. 그 플레이어는 죽습니다.",
+        "otherNightReminder_en": "If no-one died during the day: The Zombuul points to a player. That player dies.",
         "reminders": [
+            "오늘 죽음",
+            "죽음"
+        ],
+        "reminders_en": [
             "Died today",
             "Dead"
         ],
@@ -2600,7 +3381,13 @@
         "reminders": [
             "광기"
         ],
+        "reminders_en": [
+            "광기"
+        ],
         "remindersGlobal": [
+            "변검사이다"
+        ],
+        "remindersGlobal_en": [
             "변검사이다"
         ],
         "setup": false,
@@ -2619,6 +3406,9 @@
         "reminders": [
             "능력을 잃음"
         ],
+        "reminders_en": [
+            "능력을 잃음"
+        ],
         "setup": false,
         "ability": "게임당 단 한 번, 스토리텔러가 당신과 관련된 규칙을 깰 수 있습니다. 그 후 스토리텔러가 어떤 행동을 했는지 비밀리에 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/chongfei.webp"
@@ -2632,7 +3422,12 @@
         "firstNightReminder": "",
         "otherNight": 13,
         "otherNightReminder": "야경인을 깨워서 거리 예측을 요청하고, 그에 따라 '경계' 표식을 배치합니다. 이번 밤 '경계'가 배치된 참가자 중 첫 번째 죽음을 막거나 야경인을 죽음에 이르게 할 수 있습니다.",
+        "otherNightReminder_en": "야경인을 깨워서 거리 예측을 요청하고, 그에 따라 '경계' 표식을 배치합니다. 이번 밤 '경계'가 배치된 참가자 중 첫 번째 죽음을 막거나 야경인을 죽음에 이르게 할 수 있습니다.",
         "reminders": [
+            "경계",
+            "죽음"
+        ],
+        "reminders_en": [
             "경계",
             "죽음"
         ],
@@ -2649,7 +3444,11 @@
         "firstNightReminder": "",
         "otherNight": 22,
         "otherNightReminder": "도사를 깨워 참가자를 선택하게 합니다. 선택한 참가자가 악마라면, '죽음' 표식을 배치합니다.",
+        "otherNightReminder_en": "도사를 깨워 참가자를 선택하게 합니다. 선택한 참가자가 악마라면, '죽음' 표식을 배치합니다.",
         "reminders": [
+            "죽음"
+        ],
+        "reminders_en": [
             "죽음"
         ],
         "setup": false,
@@ -2663,9 +3462,14 @@
         "team": "townsfolk",
         "firstNight": 44,
         "firstNightReminder": "종업원을 깨운 뒤, 두 명의 선한 참가자를 알려주고 둘 중 하나가 '취함' 상태임을 나타냅니다.",
+        "firstNightReminder_en": "종업원을 깨운 뒤, 두 명의 선한 참가자를 알려주고 둘 중 하나가 '취함' 상태임을 나타냅니다.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "단골손님",
+            "술 취함"
+        ],
+        "reminders_en": [
             "단골손님",
             "술 취함"
         ],
@@ -2682,7 +3486,11 @@
         "firstNightReminder": "",
         "otherNight": 69,
         "otherNightReminder": "방사를 깨워 스토리북의 일부 내용을 보여줍니다. 이후 '능력을 잃음' 표식을 배치합니다.",
+        "otherNightReminder_en": "방사를 깨워 스토리북의 일부 내용을 보여줍니다. 이후 '능력을 잃음' 표식을 배치합니다.",
         "reminders": [
+            "능력을 잃음"
+        ],
+        "reminders_en": [
             "능력을 잃음"
         ],
         "setup": false,
@@ -2698,7 +3506,11 @@
         "firstNightReminder": "",
         "otherNight": 54,
         "otherNightReminder": "풍수사를 깨워 능력을 발동하거나 발동하지 않는 선택을 요청합니다. 발동 시, 두 명의 참가자를 선택하고 악마 존재 여부와 관련된 정보를 제공합니다.",
+        "otherNightReminder_en": "풍수사를 깨워 능력을 발동하거나 발동하지 않는 선택을 요청합니다. 발동 시, 두 명의 참가자를 선택하고 악마 존재 여부와 관련된 정보를 제공합니다.",
         "reminders": [
+            "능력을 잃음"
+        ],
+        "reminders_en": [
             "능력을 잃음"
         ],
         "setup": false,
@@ -2714,7 +3526,13 @@
         "firstNightReminder": "",
         "otherNight": 62,
         "otherNightReminder": "가무꾼이 낮에 능력을 사용했을 때, 악마가 관객이 된다면 가무꾼이 죽음으로 표시됩니다.",
+        "otherNightReminder_en": "가무꾼이 낮에 능력을 사용했을 때, 악마가 관객이 된다면 가무꾼이 죽음으로 표시됩니다.",
         "reminders": [
+            "능력을 잃음",
+            "죽음",
+            "관객"
+        ],
+        "reminders_en": [
             "능력을 잃음",
             "죽음",
             "관객"
@@ -2735,6 +3553,9 @@
         "reminders": [
             "죽음"
         ],
+        "reminders_en": [
+            "죽음"
+        ],
         "setup": false,
         "ability": "같은 진영의 참가자를 지명하면, 그가 그날 밤 죽을 수도 있습니다.",
         "image": "/images/fo/boc/icons/traveller/hebo.webp"
@@ -2751,6 +3572,9 @@
         "reminders": [
             "발동됨"
         ],
+        "reminders_en": [
+            "발동됨"
+        ],
         "setup": false,
         "ability": "매일 밤, 악한 참가자의 능력이 처음으로 당신 옆에 위치한 생존 참가자에게 사용되거나 영향을 미칠 때, 그 능력은 효과를 잃으며 당신은 이 정보를 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/heshang.webp"
@@ -2764,7 +3588,11 @@
         "firstNightReminder": "",
         "otherNight": 14,
         "otherNightReminder": "이전 밤에 배치된 '보호' 표식을 제거합니다. 금의위를 깨워 그가 한 명의 참가자를 선택하게 합니다. 선택된 참가자 옆에 '보호' 표식을 배치합니다.",
+        "otherNightReminder_en": "이전 밤에 배치된 '보호' 표식을 제거합니다. 금의위를 깨워 그가 한 명의 참가자를 선택하게 합니다. 선택된 참가자 옆에 '보호' 표식을 배치합니다.",
         "reminders": [
+            "보호"
+        ],
+        "reminders_en": [
             "보호"
         ],
         "setup": false,
@@ -2778,8 +3606,10 @@
         "team": "townsfolk",
         "firstNight": 35,
         "firstNightReminder": "의사를 깨워 한 명의 참가자를 선택하게 하고, 다른 참가자들이 알아차리지 못하게 해당 참가자의 능력과 관련된 단어를 제공합니다.",
+        "firstNightReminder_en": "의사를 깨워 한 명의 참가자를 선택하게 하고, 다른 참가자들이 알아차리지 못하게 해당 참가자의 능력과 관련된 단어를 제공합니다.",
         "otherNight": 61,
         "otherNightReminder": "의사를 깨워 한 명의 참가자를 선택하게 하고, 다른 참가자들이 알아차리지 못하게 해당 참가자의 능력과 관련된 단어를 제공합니다.",
+        "otherNightReminder_en": "의사를 깨워 한 명의 참가자를 선택하게 하고, 다른 참가자들이 알아차리지 못하게 해당 참가자의 능력과 관련된 단어를 제공합니다.",
         "reminders": [],
         "setup": false,
         "ability": "매일 밤, 당신은 한 명의 참가자를 선택합니다. 선택된 참가자의 능력과 관련된 단어 하나를 알게 됩니다.",
@@ -2792,9 +3622,13 @@
         "team": "townsfolk",
         "firstNight": 28,
         "firstNightReminder": "낙과인의 진영을 정하고 그를 깨워 세 명의 참가자를 가리킵니다. 그 중 두 명은 낙과인과 같은 진영입니다.",
+        "firstNightReminder_en": "낙과인의 진영을 정하고 그를 깨워 세 명의 참가자를 가리킵니다. 그 중 두 명은 낙과인과 같은 진영입니다.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "알려짐"
+        ],
+        "reminders_en": [
             "알려짐"
         ],
         "setup": false,
@@ -2808,9 +3642,14 @@
         "team": "townsfolk",
         "firstNight": 4,
         "firstNightReminder": "운반꾼을 깨워 두 명의 생존 참가자를 선택하게 합니다. 두 참가자가 같은 진영이라면, 이들 참가자의 역할 표시 옆에 '고객' 표식을 배치합니다.",
+        "firstNightReminder_en": "운반꾼을 깨워 두 명의 생존 참가자를 선택하게 합니다. 두 참가자가 같은 진영이라면, 이들 참가자의 역할 표시 옆에 '고객' 표식을 배치합니다.",
         "otherNight": 2,
         "otherNightReminder": "이전 밤에 배치된 '고객' 표식을 제거합니다. 운반꾼을 깨워 두 명의 생존 참가자를 선택하게 하며, 두 참가자가 같은 진영이라면 역할 표시 옆에 '고객' 표식을 배치합니다.",
+        "otherNightReminder_en": "이전 밤에 배치된 '고객' 표식을 제거합니다. 운반꾼을 깨워 두 명의 생존 참가자를 선택하게 하며, 두 참가자가 같은 진영이라면 역할 표시 옆에 '고객' 표식을 배치합니다.",
         "reminders": [
+            "고객"
+        ],
+        "reminders_en": [
             "고객"
         ],
         "setup": false,
@@ -2824,6 +3663,7 @@
         "team": "townsfolk",
         "firstNight": 49,
         "firstNightReminder": "흠천감을 깨워 손가락으로 그의 왼쪽 또는 오른쪽을 가리킵니다. 양쪽의 악한 참가자와의 거리가 동일하다면 엄지를 아래로 내립니다.",
+        "firstNightReminder_en": "흠천감을 깨워 손가락으로 그의 왼쪽 또는 오른쪽을 가리킵니다. 양쪽의 악한 참가자와의 거리가 동일하다면 엄지를 아래로 내립니다.",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
@@ -2840,12 +3680,54 @@
         "firstNightReminder": "",
         "otherNight": 56,
         "otherNightReminder": "형률관이 낮 동안 게임 중 첫 번째 지명을 하면, 그를 깨어나게 해 지명된 참가자의 역할 표식을 보여줍니다.",
+        "otherNightReminder_en": "형률관이 낮 동안 게임 중 첫 번째 지명을 하면, 그를 깨어나게 해 지명된 참가자의 역할 표식을 보여줍니다.",
         "reminders": [
+            "첫 지명"
+        ],
+        "reminders_en": [
             "첫 지명"
         ],
         "setup": false,
         "ability": "당신이 처음으로 참가자를 지명한 뒤, 그 밤에 그의 역할을 알게 됩니다. 외부자는 당신의 능력에 의해 하수인이나 악마로 간주됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/tixingguan.webp"
+    },
+    {
+        "id": "wizard",
+        "name": "마법사",
+        "name_en": "Wizard",
+        "edition": "",
+        "team": "minion",
+        "firstNight": 24,
+        "firstNightReminder": "해당하는 경우 마법사 능력을 실행합니다.",
+        "firstNightReminder_en": "Run the Wizard ability if applicable.",
+        "otherNight": 15,
+        "otherNightReminder": "해당하는 경우 마법사 능력을 실행합니다.",
+        "otherNightReminder_en": "Run the Wizard ability if applicable.",
+        "reminders": [
+            "?"
+        ],
+        "setup": false,
+        "ability": "게임당 한 번, 소원을 빌 기회를 선택합니다. 만약 이루어진다면, 대가가 있을 수 있고 그 성격에 대한 단서를 남길 수 있습니다.",
+        "ability_en": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature.",
+        "image": "/images/fo/boc/icons/minion/wizard.webp"
+    },
+    {
+        "id": "wraith",
+        "name": "망령",
+        "name_en": "Wraith",
+        "edition": "",
+        "team": "minion",
+        "firstNight": 1,
+        "firstNightReminder": "다른 악한 플레이어들이 깨어날 때마다 망령을 깨웁니다.",
+        "firstNightReminder_en": "Wake the Wraith whenever other evil players wake.",
+        "otherNight": 1,
+        "otherNightReminder": "다른 악한 플레이어들이 깨어날 때마다 망령을 깨웁니다.",
+        "otherNightReminder_en": "Wake the Wraith whenever other evil players wake.",
+        "reminders": [],
+        "setup": false,
+        "ability": "밤에 눈을 뜰 수 있습니다. 다른 악한 플레이어들이 깨어날 때 당신도 깨어납니다.",
+        "ability_en": "You may choose to open your eyes at night. You wake when other evil players do.",
+        "image": "/images/fo/boc/icons/demon/wraith.webp"
     },
     {
         "id": "wudaozhe",
@@ -2881,6 +3763,34 @@
         "image": "/images/fo/boc/icons/townsfolk/wushiren.webp"
     },
     {
+        "id": "xaan",
+        "name": "시안",
+        "edition": "",
+        "team": "minion",
+        "firstNight": 22,
+        "firstNightReminder": "만약 X 토큰이 그리모어에 배치되었다면, 모든 마을주민이 중독됩니다.",
+        "firstNightReminder_en": "If the X token is placed in the Grimoire, all Townsfolk are poisoned.",
+        "otherNight": 5,
+        "otherNightReminder": "만약 X 토큰이 그리모어에 배치되었다면, 모든 마을주민이 중독됩니다.",
+        "otherNightReminder_en": "If the X token is placed in the Grimoire, all Townsfolk are poisoned.",
+        "reminders": [
+            "밤 1",
+            "밤 2",
+            "밤 3",
+            "X"
+        ],
+        "reminders_en": [
+            "Night 1",
+            "Night 2",
+            "Night 3",
+            "X"
+        ],
+        "setup": true,
+        "ability": "X번째 밤에, 모든 마을주민이 황혼까지 중독됩니다. [X 이방인]",
+        "ability_en": "On night X, all Townsfolk are poisoned until dusk. [X Outsiders]",
+        "image": "/images/fo/boc/icons/minion/xaan.webp"
+    },
+    {
         "id": "xingjiaoshang",
         "name": "행상꾼",
         "edition": "hdcs",
@@ -2904,6 +3814,9 @@
         "otherNight": 5,
         "otherNightReminder": "이전 밤에 배치된 '말썽' 표식을 제거합니다. 말썽쟁이를 깨워 두 명의 선한 역할을 선택하게 하며, 해당 역할 옆에 '말썽' 표식을 배치합니다.",
         "reminders": [
+            "말썽"
+        ],
+        "reminders_en": [
             "말썽"
         ],
         "setup": false,
@@ -2961,7 +3874,11 @@
         "firstNightReminder": "",
         "otherNight": 20,
         "otherNightReminder": "만약 낮에 납관사가 악마를 지명하고 처형했다면, 그를 깨워 '당신은' 표식과 악마 역할 표식을 보여줍니다.",
+        "otherNightReminder_en": "만약 낮에 납관사가 악마를 지명하고 처형했다면, 그를 깨워 '당신은' 표식과 악마 역할 표식을 보여줍니다.",
         "reminders": [
+            "악마임"
+        ],
+        "reminders_en": [
             "악마임"
         ],
         "setup": false,
@@ -2980,6 +3897,9 @@
         "reminders": [
             "죽음"
         ],
+        "reminders_en": [
+            "죽음"
+        ],
         "setup": false,
         "ability": "당신이 죽으면, 그날 밤 당신의 양옆에 위치한 생존 참가자 중 한 명이 죽을 수도 있습니다.",
         "image": "/images/fo/boc/icons/outsider/shaxing.webp"
@@ -2994,6 +3914,9 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
+            "발동됨"
+        ],
+        "reminders_en": [
             "발동됨"
         ],
         "setup": false,
@@ -3364,7 +4287,7 @@
         "edition": "siij",
         "team": "townsfolk",
         "firstNight": 6,
-        "firstNightReminder": "탁발승을 깨운 뒤 참가자 1명을 선택하게 합니다.",
+        "firstNightReminder": "탁발승을 깨운 뒤 참가자 1명을 선택하게 합니다. 선택한 참가자와 이웃들의 역할 유형의 수를 알려줍니다.(역할 유형 : 마을주민, 이방인, 하수인, 악마)",
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
@@ -3380,12 +4303,12 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 5,
-        "otherNightReminder": "주모를 깨운 뒤 참가자 1명을 선택하게 합니다.",
+        "otherNightReminder": "주모를 깨운 뒤 참가자 1명을 선택하게 합니다. 선택한 참가자는 사망할 수 있습니다. 이방인이라면, 참가중이지 않은 마을주민으로 바뀝니다.",
         "reminders": [
             "술상을 받음"
         ],
         "setup": true,
-        "ability": "매일 밤(첫날 제외), 참가자 1명을 선택 합니다. 선택한 참가자는 사망할 수 있습니다. 이방인이라면, 참가중이지 않은 마을주민으로 바뀝니다. [+0 또는 +1 이방인]",
+        "ability": "첫날 밤을 제외한 매일 밤, 참가자 1명을 선택 합니다. 선택한 참가자는 사망할 수 있습니다. 이방인이라면, 참가중이지 않은 마을주민으로 바뀝니다. [+0 또는 +1 이방인]",
         "image": "/images/fo/boc/icons/siij/tavernmistress.webp"
     },
     {
@@ -3427,9 +4350,9 @@
         "edition": "siij",
         "team": "townsfolk",
         "firstNight": 9,
-        "firstNightReminder": "심마니를 깨운 뒤 1 또는 0으로 알려줍니다.",
+        "firstNightReminder": "심마니를 깨운 뒤 1 또는 0으로 알려줍니다. (1과 0의 정보 : 마을주민 / 이방인 + 하수인 + 악마)",
         "otherNight": 15,
-        "otherNightReminder": "심마니를 깨운 뒤 1 또는 0으로 알려줍니다.",
+        "otherNightReminder": "심마니를 깨운 뒤 1 또는 0으로 알려줍니다. (1과 0의 정보 : 마을주민 / 이방인 + 하수인 + 악마)",
         "reminders": [
             "1이 마을주민",
             "1이 이방인 + 하수인 + 악마"
@@ -3467,7 +4390,7 @@
             "사악한 참가자 처형됨"
         ],
         "setup": false,
-        "ability": "매일 밤(첫날 제외), 낮에 처형이 있었다면, 이야기꾼으로부터 정보를 듣습니다. 사악한 참가자가 처형되었었다면, 잘못된 정보를 알게 됩니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 낮에 처형이 있었다면, 이야기꾼으로부터 정보를 듣습니다. 사악한 참가자가 처형되었었다면, 잘못된 정보를 알게 됩니다.",
         "image": "/images/fo/boc/icons/siij/villageaccountant.webp"
     },
     {
@@ -3480,10 +4403,10 @@
         "otherNight": 11,
         "otherNightReminder": "사기장을 깨운 뒤 도자기가 깨졌는지 알려줍니다. 이후 리마인더를 제거합니다.",
         "reminders": [
-            "악마와 함께 투표함"
+            "도자기 깨짐"
         ],
         "setup": false,
-        "ability": "매일 밤(첫 날 제외), 도자기를 만듭니다. 오늘 낮, 악마와 함께 투표 했다면, 도자기가 깨졌음을 알게됩니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 도자기를 만듭니다. 오늘 낮, 악마와 함께 투표했다면, 도자기가 깨졌음을 알게됩니다.",
         "image": "/images/fo/boc/icons/siij/ceramicartisan.webp"
     },
     {
@@ -3617,10 +4540,10 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 6,
-        "otherNightReminder": "어둑시니을 깨운 뒤 다른 참가자 1명을 선택하게 합니다. 그 참가자를 깨우고 가위바위보를 시킵니다.",
+        "otherNightReminder": "어둑시니를 깨운 뒤 다른 참가자 1명을 선택하게 합니다. 그 참가자를 깨우고 가위바위보를 시킵니다.",
         "reminders": [],
         "setup": false,
-        "ability": "매일밤(첫날 제외), 참가자 1명을 선택해 가위바위보를 합니다. 패자는 사망합니다. 어둑시니에게 선택된 참가자는 '어둑시니가 없음'을 '광기' 해야합니다. 광기를 깰 경우 참가자 팀은 패배합니다. 어둑시니는 오직 가위바위보에서 패배해야만 사망합니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 참가자 1명을 선택해 가위바위보를 합니다. 패자는 사망합니다. 어둑시니에게 선택된 참가자는 '어둑시니가 없음'을 '광기' 해야합니다. 광기를 깰 경우 참가자 팀은 패배합니다. 어둑시니는 오직 가위바위보에서 패배해야만 사망합니다.",
         "image": "/images/fo/boc/icons/siij/darknessspirit.webp"
     },
     {
@@ -3670,12 +4593,12 @@
         "edition": "siij",
         "team": "demon",
         "firstNight": 4,
-        "firstNightReminder": "구미호를 깨워 한 명의 참가자를 선택하고, 해당 참가자를 '매혹됨'으로 표시합니다. 그 후 해당 참가자를 깨우고 '이 역할은 당신을 선택했었습니다.'와 구미호 역할 표식을 보여줍니다.",
+        "firstNightReminder": "1명의 참가자를 '매혹됨'으로 표시합니다. 그 후 해당 참가자를 깨우고 구미호 역할을 보여준 뒤 구미호 참가자를 알려줍니다.",
         "otherNight": 3,
-        "firstNightReminder": "구미호를 깨워 한 명의 참가자를 선택하고, 해당 참가자를 '매혹됨'으로 표시합니다. 그 후 해당 참가자를 깨우고 '이 역할은 당신을 선택했었습니다.'와 구미호 역할 표식을 보여줍니다.",
+        "otherNightReminder": "낮에 매혹된 자의 지명에 의해 죽었고, 5인 이상 남아 있다면 매혹된 참가자를 깨우고 새로운 구미호가 되었음을 알려줍니다. 잠들게 한 뒤 첫 날 설정을 진행합니다.",
         "reminders": [
             "매혹됨",
-            "매혹된 참가자가 지명함"
+            "매혹된 자의 지명에 의한 죽음"
         ],
         "setup": false,
         "ability": "첫날 밤을 제외한 매일 밤, 당신은 참가자를 선택하고 그 참가자는 사망합니다. 구미호를 알고 있는 매혹된 참가자가 1명 있으며, 그는 당신이 죽는다면 사악해집니다. 매혹된 참가자의 지명으로 당신이 처형 될 경우, 그는 새로운 구미호가 됩니다. 4인 이하일 경우 새로운 구미호가 탄생하지 않습니다.",
@@ -3694,7 +4617,7 @@
             "호환마마로 변함"
         ],
         "setup": true,
-        "ability": "선한 참가자가 사망하면, 오늘밤, 사악한 호환마마가 되고, 다른 사악한 참가자들을 알게 됩니다. 사악한 참가자들만 투표할 경우 0표로 집계되며, 가장 많은 표가 나온다면 처형됩니다. 5일 황혼에 승리를 선언합니다. [-1 이방인]",
+        "ability": "선한 참가자가 사망하면, 오늘 밤, 사악한 호환마마가 되고, 다른 사악한 참가자들을 알게 됩니다. 사악한 참가자들만 투표할 경우 0표로 집계되며, 가장 많은 표가 나온다면 처형됩니다. 5일 황혼에 승리를 선언합니다. [-1 이방인]",
         "image": "/images/fo/boc/icons/siij/tigersandplague.webp"
     },
     {
@@ -3710,7 +4633,7 @@
             "숙주"
         ],
         "setup": false,
-        "ability": "당신이 죽었더라도 매일밤(첫날 제외) 참가자 1명을 선택 해 '사망'시킵니다. 당신을 처음으로 지명한 참가자는 숙주가 되어, 숙주가 사망하면 백각귀도 사망합니다. (지명한 참가자는 숙주가 된 사실은 모릅니다.)",
+        "ability": "첫날 밤을 제외한 매일 밤, (비록 당신이 죽더라도) 참가자를 선택합니다. 그는 죽습니다. 당신을 처음으로 지명한 참가자는 숙주가 되며, 숙주가 사망해야 백각귀도 사망합니다. (지명한 참가자는 숙주가 된 사실은 모릅니다.)",
         "image": "/images/fo/boc/icons/siij/hundredlegsghost.webp"
     }
 
