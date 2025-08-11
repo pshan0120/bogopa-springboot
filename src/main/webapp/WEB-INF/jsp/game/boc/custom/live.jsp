@@ -105,7 +105,7 @@
             const centerX = width / 2;
             const centerY = height / 2;
             const radius = width * 0.35;
-            const seatRadius = width * 0.08;
+            const seatRadius = width * 0.06;
 
             // 배경 그라데이션
             const gradient = ctx.createLinearGradient(0, 0, width, height);
@@ -131,10 +131,10 @@
                 const gradient = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, seatRadius);
                 if (player.died) {
                     gradient.addColorStop(0, "#aaa");
-                    gradient.addColorStop(1, "#666");
+                    gradient.addColorStop(1, "#888");
                 } else {
                     gradient.addColorStop(0, "#fff");
-                    gradient.addColorStop(1, "#ccc");
+                    gradient.addColorStop(1, "#ddd");
                 }
 
                 // 원 (좌석)
@@ -142,8 +142,8 @@
                 ctx.arc(x, y, seatRadius, 0, 2 * Math.PI);
                 ctx.fillStyle = gradient;
                 ctx.fill();
-                ctx.lineWidth = player.votable ? 10 : 1;
-                ctx.strokeStyle = player.votable ? "#ccc" : "#333";
+                ctx.lineWidth = player.votable ? 5 : 1;
+                ctx.strokeStyle = player.votable ? "#fff" : "#888";
                 ctx.stroke();
                 ctx.closePath();
 
