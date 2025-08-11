@@ -48,7 +48,7 @@
                 const playerNameHtml = next.died
                     ? `\${next.nickname} <i class="ni ni-tie-bow"></i>`
                     : `<strong>\${next.nickname}</strong>`;
-                const votableHtml = next.votable ? `<strong>투표 ○</strong>` : `투표 ×`;
+                const votableHtml = next.votable ? `<strong>투표권 ○</strong>` : `투표권 ×`;
 
                 return prev +
                     `<div class="row">
@@ -150,8 +150,8 @@
                 ctx.arc(x, y, seatRadius, 0, 2 * Math.PI);
                 ctx.fillStyle = gradient;
                 ctx.fill();
-                ctx.lineWidth = player.votable ? 10 : 1;
-                ctx.strokeStyle = player.votable ? "#ccc" : "#333";
+                ctx.lineWidth = player.votable ? 5 : 1;
+                ctx.strokeStyle = player.votable ? "#fff" : "#888";
                 ctx.stroke();
                 ctx.closePath();
 
@@ -191,11 +191,11 @@
                     <h4><span name="roleInitialization"></span></h4>
                 </div>
                 <br>
-                <div name="townDiv"></div>
-                <br>
                 <div style="width: 100%; max-width: 700px; aspect-ratio: 1 / 1; position: relative;">
                     <canvas id="townCanvas" style="width: 100%; height: 100%; display: block;"></canvas>
                 </div>
+                <br>
+                <div name="townDiv"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

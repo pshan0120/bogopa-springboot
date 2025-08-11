@@ -59,7 +59,7 @@
                         ? `\${found.playerName} <i class="ni ni-tie-bow"></i>`
                         : `<strong>\${found.playerName}</strong>`;
                         // ? `<i class="ni ni-tie-bow"></i>` : "";
-                    const votableHtml = found.votable ? `<strong>투표 ○</strong>` : `투표 ×`;
+                    const votableHtml = found.votable ? `<strong>투표권 ○</strong>` : `투표권 ×`;
 
                     return prev +
                         `<div class="row">

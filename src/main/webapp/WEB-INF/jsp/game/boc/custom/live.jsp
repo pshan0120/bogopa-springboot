@@ -19,7 +19,7 @@
         $(async () => {
             await initialize();
 
-            setInterval(function() {
+            setInterval(function () {
                 loadAndRenderTown();
             }, 5000);
         });
@@ -131,10 +131,10 @@
                 const gradient = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, seatRadius);
                 if (player.died) {
                     gradient.addColorStop(0, "#aaa");
-                    gradient.addColorStop(1, "#888");
+                    gradient.addColorStop(1, "#666");
                 } else {
                     gradient.addColorStop(0, "#fff");
-                    gradient.addColorStop(1, "#ddd");
+                    gradient.addColorStop(1, "#ccc");
                 }
 
                 // 원 (좌석)
@@ -197,7 +197,7 @@
                 <div class="card shadow mt-5 text-center" id="townDiv">
                     <div class="card-header bg-white border-0">
                         <div name="settingDiv">
-                            <h2><span name="roleInitialization"></span></h2>
+                            <h4><span name="roleInitialization"></span></h4>
                         </div>
                     </div>
                     <div class="card-body">
