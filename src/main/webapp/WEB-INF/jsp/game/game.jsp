@@ -33,6 +33,10 @@
             window.location.href = "/game/food-chain-magnate/calculator";
         }
 
+        const openPokerTimer = () => {
+            window.location.href = "/game/poker/timer";
+        }
+
     </script>
 </head>
 
@@ -93,6 +97,9 @@
                             </button>
                             <button type="button" class="btn btn-info btn-block" onclick="openFoodChainMagnateCalculator()">
                                 푸드체인거물 계산기
+                            </button>
+                            <button type="button" class="btn btn-info btn-block" onclick="openPokerTimer()">
+                                포커 토너먼트 타이머
                             </button>
                         </div>
                     </div>
