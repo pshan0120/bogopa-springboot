@@ -19,9 +19,27 @@
             justify-content: space-between;
             font-size: 18px;
         }
+
+        .blink {
+            animation: blink-animation 1s ease-in-out infinite;
+        }
+
+        @keyframes blink-animation {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 
     <script>
+        /*1. Blinds 폰트 키우고 눈에 잘 띄게 색깔 넣기
+        2. 현재 시간 추가
+        3. 플레이 시간 추가(첫 플레이부터의 시간)
+        4. prev blinds 추가(직전 블라인드)
+        5. 카운트다운 들어갈 때 HH:MM 애니메이션 추가*/
         const blindLevels = [
             100, 200, 400, 600, 800,
             1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000,
@@ -34,13 +52,30 @@
         let timeLeft = baseTime;
         let timerInterval = null;
         let running = false;
+
+        let playTimerInterval = null;
+        let playTime = 0;
+        let begun = false;
+
+        let clockInterval = null;
         const audio = new Audio("https://bogopayo.cafe24.com/sound/countdown-10-to-1.mp3");
 
         $(() => {
             console.log("Document ready - initializing DOM elements");
+
+            setInterval(updateClock, 1000);
+
+            updateClock();
         });
 
-        function updateGame() {
+        const updateClock = () => {
+            const now = new Date();
+            const options = { hour12: false };
+            const formattedTime = now.toLocaleTimeString('en-US', options);
+            document.getElementById("clock").textContent = formattedTime;
+        }
+
+        const updateGame = () => {
             console.log("updateGame function");
             currentLevel = parseInt(document.getElementById("currentLevel").value);
             baseTime = parseInt(document.getElementById("baseMinutes").value) * 60;
@@ -48,24 +83,27 @@
             timeLeft = baseTime;
         }
 
-        function resetGame() {
+        const resetGame = () => {
             console.log("restGame function");
+            begun = false;
+
             stopTimer();
+            stopPlayTimer();
 
             document.getElementById("currentLevel").value = 1;
             document.getElementById("baseMinutes").value = 7;
             document.getElementById("baseBlind").value = 100;
 
             document.getElementById("level").textContent = "LEVEL 1";
-            document.getElementById("blinds").textContent = "-/-";
+            document.getElementById("blinds").textContent = "- / -";
             document.getElementById("next-level").textContent = "-";
             document.getElementById("next-blinds").textContent = "-";
             document.getElementById("timer").textContent = "--:--";
 
             updateGame();
-        }
+        };
 
-        function toggleTimer() {
+        const toggleTimer = () => {
             console.log("toggleTimer function");
 
             if (running) {
@@ -73,7 +111,7 @@
             } else {
                 startTimer();
             }
-        }
+        };
 
         const stopTimer = () => {
             console.log("stopTimer function");
@@ -88,7 +126,7 @@
             }
         }
 
-        function startTimer() {
+        const startTimer = () => {
             console.log("Entering startTimer function");
 
             document.getElementById("pauseBtn").textContent = "⏸";
@@ -99,15 +137,21 @@
                     timeLeft--;
                     if (timeLeft <= 10 && audio.paused) {
                         playCountSound10to1();
+                        document.getElementById("timer").classList.add("blink");
                     }
                     updateDisplay();
                 } else {
                     nextLevel();
                 }
             }, 1000);
+
+            if (!begun) {
+                begun = true;
+                startPlayTimer();
+            }
         }
 
-        function updateDisplay() {
+        const updateDisplay = () => {
             console.log("Entering updateDisplay function");
 
             // 레벨 범위 보호
@@ -117,14 +161,16 @@
             document.getElementById("level").textContent = "LEVEL " + currentLevel;
 
             // const blind = blindLevels[currentLevel - 1] || 0;
-            document.getElementById("blinds").textContent = blind + "/" + (blind * 2);
+            document.getElementById("blinds").textContent =
+                formatNumberWithComma(blind) + " / " + formatNumberWithComma(blind * 2);
 
             // 다음 레벨
             if (currentLevel < blindLevels.length) {
                 document.getElementById("next-level").textContent = (currentLevel + 1) + "";
 
                 const nextBlind = blindLevels[currentLevel];
-                document.getElementById("next-blinds").textContent = nextBlind + "/" + (nextBlind * 2);
+                document.getElementById("next-blinds").textContent =
+                    formatNumberWithComma(nextBlind) + " / " + formatNumberWithComma(nextBlind * 2);
             } else {
                 document.getElementById("next-level").textContent = "-";
                 document.getElementById("next-blinds").textContent = "-";
@@ -136,12 +182,12 @@
             document.getElementById("timer").textContent = mm + ":" + ss;
         }
 
-        function playCountSound10to1() {
+        const playCountSound10to1 = () => {
             audio.play();
             return;
         }
 
-        function prevLevel() {
+        const prevLevel = () => {
             console.log("prevLevel function");
 
             if (currentLevel < 1) {
@@ -157,7 +203,7 @@
             startTimer();
         }
 
-        function nextLevel() {
+        const nextLevel = () => {
             console.log("nextLevel function");
 
             if (currentLevel >= blindLevels.length) {
@@ -170,11 +216,40 @@
 
             document.getElementById("currentLevel").value = currentLevel;
             document.getElementById("baseBlind").value = blind;
+            document.getElementById("timer").classList.remove("blink");
 
             if (timerInterval) clearInterval(timerInterval);
 
             startTimer();
         }
+
+
+        const stopPlayTimer = () => {
+            console.log("stopPlayTimer function");
+
+            clearInterval(playTimerInterval);
+        }
+
+        const startPlayTimer = () => {
+            console.log("Entering startPlayTimer function");
+
+            playTimerInterval = setInterval(() => {
+                updatePlayTimerDisplay();
+            }, 1000);
+        }
+
+        const updatePlayTimerDisplay = () => {
+            console.log("Entering updatePlayTimerDisplay function");
+            playTime++;
+
+            // 타이머
+            const mm = String(Math.floor(playTime / 60)).padStart(2, '0');
+            const ss = String(playTime % 60).padStart(2, '0');
+            document.getElementById("playTimer").textContent = mm + ":" + ss;
+        }
+
+        const formatNumberWithComma = number => number.toLocaleString();
+
     </script>
 </head>
 
@@ -207,23 +282,37 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="text-center font-white" style="margin-top: 10px; font-size: 24px">
-                <strong>
-                    BLINDS <span id="blinds">-/-</span>
-                </strong>
-                <%--<br> Ante <span id="ante">-</span>--%>
-            </div>
+            <strong class="text-center font-white" style="margin: 10px 0; font-size: 60px">
+                BLINDS <span id="blinds" class="text-yellow" style="font-size: 60px">- / -</span>
+            </strong>
+            <%--<br> Ante <span id="ante">-</span>--%>
         </div>
     </div>
 
     <hr>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="text-center font-white" style="font-size: 20px">
+    <div class="row" class="text-center font-white" style="font-size: 20px">
+        <div class="col-md-4 col-xs-12">
+            <div style="margin: 10px 0;">
+                Current Time<br>
+                <span id="clock">
+                    --:--:--
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div style="margin: 10px 0;">
                 Next LEVEL <span id="next-level">2</span><br>
                 BLINDS <span id="next-blinds">-/-</span><br>
                 <%--Ante <span id="next-ante">-</span>--%>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div style="margin: 10px 0;">
+                Play Time<br>
+                <span id="playTimer">
+                    --:--
+                </span>
             </div>
         </div>
     </div>

@@ -23,9 +23,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 낮/밤 전환 로직 및 UI 리팩토링&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 변경.&#10;- 관련 버튼 이름 및 로직 업데이트.">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,42 +84,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
-    "Tomcat Server.Tomcat 9.0.64.executor": "Run",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/boc/custom",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15136719",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
-    "show.migrate.to.gradle.popup": "false",
-    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.64.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/poker&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\poker" />
       <recent name="C:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom" />
       <recent name="C:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
       <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\minion" />
       <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\demon" />
-      <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\outsider" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
@@ -371,6 +371,10 @@
       <workItem from="1753337512049" duration="521000" />
       <workItem from="1754571000696" duration="7612000" />
       <workItem from="1754631832400" duration="16652000" />
+      <workItem from="1754893414493" duration="15032000" />
+      <workItem from="1754975340295" duration="11114000" />
+      <workItem from="1755061876817" duration="12284000" />
+      <workItem from="1755671261794" duration="4284000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -715,7 +719,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="192" />
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -748,14 +752,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="오타 수정" />
-    <MESSAGE value="밤순서 가이드 추가" />
-    <MESSAGE value="한글화" />
-    <MESSAGE value="번역중" />
-    <MESSAGE value="자리 바꾸기 할 차례" />
-    <MESSAGE value="개선" />
-    <MESSAGE value="스크립트 추가" />
-    <MESSAGE value="touchModal 진행중" />
     <MESSAGE value="투표 개선" />
     <MESSAGE value="리마인더 추가" />
     <MESSAGE value="좀비" />
@@ -773,7 +769,15 @@
     <MESSAGE value="추가: 마을 광장 Live 기능 지원 및 UI 개선&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 관련 컨트롤러 메서드 추가.&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현.&#10;- townModal 및 clientPlay.jsp에 Live 관련 버튼과 연결 작업 수행.&#10;- votable UI의 선 굵기 조정으로 가시성 개선." />
     <MESSAGE value="수정: 마을 광장 Live 상태를 낮/밤으로 변경&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 리팩토링.&#10;- 관련 버튼 이름 및 로직을 낮/밤 전환 기능으로 변경." />
     <MESSAGE value="수정: 낮/밤 전환 로직 및 UI 리팩토링&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 변경.&#10;- 관련 버튼 이름 및 로직 업데이트." />
-    <option name="LAST_COMMIT_MESSAGE" value="수정: 낮/밤 전환 로직 및 UI 리팩토링&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 변경.&#10;- 관련 버튼 이름 및 로직 업데이트." />
+    <MESSAGE value="live.jsp 및 townModal.jspf 좌석 스타일 수정&#10;&#10;- 좌석 크기(seatRadius) 및 색상 그라데이션 값 조정.&#10;- 투표 가능 상태의 외곽선 두께 및 색상 변경.&#10;- 관련 UI 변경으로 사용자 경험 향상 기대." />
+    <MESSAGE value="UI 요소 수정 및 스타일 업데이트&#10;&#10;- '투표 ○/×'를 '투표권 ○/×'로 변경하여 의미 명확화&#10;- 색상 그라데이션 및 선 스타일 변경으로 시각적 개선&#10;- 제목 태그 크기 조정 및 레이아웃 수정" />
+    <MESSAGE value="업데이트: 게임 캐릭터 데이터 및 낮/밤 상태 관리 개선&#10;&#10;- 캐릭터 능력 설명 및 리마인더 텍스트 수정&#10;- 낮/밤 상태 변경 로직에 날짜 표시 및 확인 모달 추가&#10;- UI 개선: 날짜 및 낮/밤 정보를 명확히 표시" />
+    <MESSAGE value="한글화 및 다국어 지원 추가&#10;&#10;- 캐릭터 이름, 능력 설명, 리마인더 등 한글 번역 추가&#10;- 기존의 영어 데이터와 다국어 지원 병행 가능하도록 구조 수정&#10;- 일부 이미지 경로 수정" />
+    <MESSAGE value="Day/Night 상태 텍스트 생성 로직 추가&#10;&#10;- Day/Night 상태에 따라 텍스트 형식 및 이모지를 생성하는 함수 추가&#10;- 관련 화면들에 Day/Night 상태 표시 로직 통합&#10;- CSS 수정 및 UI 개선 사항 적용 (배경 그라데이션 및 텍스트 위치 변경)" />
+    <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads" />
+    <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads 스크립트 추가로 광고 기능 도입" />
+    <MESSAGE value="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
