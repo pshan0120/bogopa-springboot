@@ -86,6 +86,8 @@
         const resetGame = () => {
             console.log("restGame function");
             begun = false;
+            timeLeft = baseTime;
+            playTime = 0;
 
             stopTimer();
             stopPlayTimer();
@@ -99,6 +101,7 @@
             document.getElementById("next-level").textContent = "-";
             document.getElementById("next-blinds").textContent = "-";
             document.getElementById("timer").textContent = "--:--";
+            document.getElementById("playTimer").textContent = "--:--:--";
 
             updateGame();
         };
@@ -243,9 +246,11 @@
             playTime++;
 
             // 타이머
+            const hh = String(Math.floor(playTime / 60 / 60)).padStart(2, '0');
             const mm = String(Math.floor(playTime / 60)).padStart(2, '0');
             const ss = String(playTime % 60).padStart(2, '0');
-            document.getElementById("playTimer").textContent = mm + ":" + ss;
+
+            document.getElementById("playTimer").textContent = hh + ":" + mm + ":" + ss;
         }
 
         const formatNumberWithComma = number => number.toLocaleString();
@@ -255,7 +260,7 @@
 
 <body class="bg-default">
 <div class="wrap">
-    <div class="row">
+    <div class="row" style="font-size: x-large;">
         <div class="col-12">
             <div class="header">
                 <span class="game-name">Friendly Game</span>
@@ -264,9 +269,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="font-size: x-large;">
         <div class="col-12">
-            <span class="text-center font-white" style="margin: 10px 0; font-size: 24px">
+            <span class="text-center font-white" style="margin: 10px 0;">
                 ROFL
             </span>
         </div>
@@ -291,7 +296,7 @@
 
     <hr>
 
-    <div class="row" class="text-center font-white" style="font-size: 20px">
+    <div class="row" class="text-center font-white" style="font-size: x-large">
         <div class="col-md-4 col-xs-12">
             <div style="margin: 10px 0;">
                 Current Time<br>
@@ -311,7 +316,7 @@
             <div style="margin: 10px 0;">
                 Play Time<br>
                 <span id="playTimer">
-                    --:--
+                    --:--:--
                 </span>
             </div>
         </div>
@@ -321,12 +326,15 @@
         <div class="col-12">
             <div class="text-center font-white"
                  style="font-size: 32px; margin: 10px;">
-                <button style="background: none; border: none;color: white;cursor: pointer;" onclick="prevLevel()">⏮
+                <button style="background: none; border: none;color: white;cursor: pointer;" onclick="prevLevel()">
+                    ⏮
                 </button>
                 <button style="background: none; border: none;color: white;cursor: pointer;" id="pauseBtn"
-                        onclick="toggleTimer()">▶
+                        onclick="toggleTimer()">
+                    ▶
                 </button>
-                <button style="background: none; border: none;color: white;cursor: pointer;" onclick="nextLevel()">⏭
+                <button style="background: none; border: none;color: white;cursor: pointer;" onclick="nextLevel()">
+                    ⏭
                 </button>
             </div>
         </div>
