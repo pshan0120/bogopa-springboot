@@ -23,7 +23,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" afterDir="false" />
     </list>
@@ -374,7 +374,9 @@
       <workItem from="1754893414493" duration="15032000" />
       <workItem from="1754975340295" duration="11114000" />
       <workItem from="1755061876817" duration="12284000" />
-      <workItem from="1755671261794" duration="4284000" />
+      <workItem from="1755671261794" duration="5671000" />
+      <workItem from="1756033974846" duration="2834000" />
+      <workItem from="1757310097687" duration="585000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -719,7 +721,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -752,7 +754,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="투표 개선" />
     <MESSAGE value="리마인더 추가" />
     <MESSAGE value="좀비" />
     <MESSAGE value="징크스 추가" />
@@ -777,7 +778,8 @@
     <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads" />
     <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads 스크립트 추가로 광고 기능 도입" />
     <MESSAGE value="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가" />
+    <MESSAGE value="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트" />
+    <option name="LAST_COMMIT_MESSAGE" value="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

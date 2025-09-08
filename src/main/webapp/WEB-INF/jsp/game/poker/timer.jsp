@@ -35,17 +35,14 @@
     </style>
 
     <script>
-        /*1. Blinds 폰트 키우고 눈에 잘 띄게 색깔 넣기
-        2. 현재 시간 추가
-        3. 플레이 시간 추가(첫 플레이부터의 시간)
-        4. prev blinds 추가(직전 블라인드)
-        5. 카운트다운 들어갈 때 HH:MM 애니메이션 추가*/
-        const blindLevels = [
+        /*const blindLevels = [
             100, 200, 400, 600, 800,
             1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000,
             11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000,
             21000, 22000, 23000, 24000, 25000, 26000, 27000, 28000, 29000, 30000
-        ];
+        ];*/
+        const blindLevels = [100, 200, 300, 500, 1000, 1500, 2000, 3000, 5000, 10000, 20000, 30000, 50000, 100000];
+        const antes = [0, 0, 0, 100, 200, 300, 400, 600, 1000, 2000, 4000, 6000, 10000, 20000];
         let currentLevel = 1;
         let baseTime = 7 * 60; // seconds
         let blind = 100; // seconds
@@ -163,7 +160,6 @@
 
             document.getElementById("level").textContent = "LEVEL " + currentLevel;
 
-            // const blind = blindLevels[currentLevel - 1] || 0;
             document.getElementById("blinds").textContent =
                 formatNumberWithComma(blind) + " / " + formatNumberWithComma(blind * 2);
 
