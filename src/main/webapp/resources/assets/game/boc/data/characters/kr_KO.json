@@ -3059,18 +3059,18 @@
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 59,
-        "otherNightReminder": "오늘 하수인이 지명되었는지에 대해 '예' 고개를 끄덕이거나 '아니오' 고개를 흔듭니다. '하수인 지명되지 않음' 표시를 놓습니다('하수인 지명됨'이 있다면 제거).",
+        "otherNightReminder": "오늘 하수인이 지명했는지에 대해 '예' 고개를 끄덕이거나 '아니오' 고개를 흔듭니다. '하수인 지명하지 않음' 표시를 놓습니다('하수인 지명함'이 있다면 제거).",
         "otherNightReminder_en": "Nod 'yes' or shake head 'no' for whether a Minion nominated today. Place the 'Minion not nominated' marker (remove 'Minion nominated', if any).",
         "reminders": [
-            "하수인들 지명되지 않음",
-            "하수인 지명됨"
+            "하수인 지명하지 않음",
+            "하수인 지명함"
         ],
         "reminders_en": [
             "Minions not nominated",
             "Minion nominated"
         ],
         "setup": false,
-        "ability": "첫날 밤을 제외한 매일 밤, 오늘 낮에 하수인이 지명되었었는지 알게 됩니다.",
+        "ability": "첫날 밤을 제외한 매일 밤, 오늘 낮에 하수인이 지명했었는지 알게 됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/towncrier.webp"
     },
     {
@@ -4260,7 +4260,7 @@
             "칼 휘두름"
         ],
         "setup": false,
-        "ability": "첫날 밤, 참가중인 하수인 역할 하나를 알고 시작합니다. 게임 중 한번 망나니임을 선언하고 지명할 수 있습니다. 하수인 지명 시 무조건 처형시킵니다.",
+        "ability": "첫날 밤, 참가중인 하수인 역할 하나를 알고 시작합니다. 게임 중 한 번 망나니임을 선언하고 지명할 수 있습니다. 하수인 지명 시 무조건 처형시킵니다.",
         "image": "/images/fo/boc/icons/siij/executioner.webp"
     },
     {
@@ -4324,7 +4324,7 @@
             "정답",
             "오답"
         ],
-        "setup": false,
+        "setup": true,
         "ability": "매일 밤, 이야기꾼이 질문을 합니다. 낮에 이야기꾼을 찾아가 정답을 말하면, 그날 밤, 새로운 질문을 듣습니다. '중독'이나 '만취'상태라면, 오답을 말해도 이야기꾼이 새로운 질문을 합니다.",
         "image": "/images/fo/boc/icons/siij/peddlerguildsman.webp"
     },
@@ -4422,7 +4422,7 @@
             "능력 설정됨"
         ],
         "setup": false,
-        "ability": "게임 당 한번, 낮에 이야기꾼을 찾아와 원하는 능력을 말한다면, 이야기꾼은 조건을 말합니다. 이야기꾼의 조건과 당신의 제안이 곧 당신의 능력입니다.",
+        "ability": "게임 당 한 번, 낮에 이야기꾼을 찾아와 원하는 능력을 말한다면, 이야기꾼은 조건을 말합니다. 이야기꾼의 조건과 당신의 제안이 곧 당신의 능력입니다.",
         "image": "/images/fo/boc/icons/siij/taoisthermit.webp"
     },
     {
@@ -4467,7 +4467,7 @@
         "reminders": [
             "만취"
         ],
-        "setup": false,
+        "setup": true,
         "ability": "마을주민 역할을 받고 능력도 정상적이지만, 당신은 생사귀입니다. 이웃한 마을주민 2명이 만취합니다. 당신이 사망한다면, 생사귀가 사망했음을 말해줍니다.",
         "image": "/images/fo/boc/icons/siij/lifeanddeathghost.webp"
     },
@@ -4482,7 +4482,7 @@
         "otherNightReminder": "",
         "reminders": [],
         "setup": false,
-        "ability": "도깨비가 사망했음을 인지했다면, 도깨비임을 주장해야합니다. 참가자들 중 1명은 도깨비를 위해 대신 사망해 줄 수 있습니다. 사악한 참가자가 대신 사망하기로 결정 된다면, 도깨비 팀은 패배 합니다.",
+        "ability": "도깨비가 사망했음을 인지했다면, 도깨비임을 주장해야 합니다. 참가자들 중 1명은 도깨비를 위해 대신 사망해 줄 수 있습니다. 사악한 참가자가 대신 사망하기로 결정 된다면, 도깨비 팀은 패배 합니다.",
         "image": "/images/fo/boc/icons/siij/dokkaebi.webp"
     },
     {
@@ -4562,7 +4562,7 @@
             "중독된 참가자"
         ],
         "setup": true,
-        "ability": "중복된 선한 캐릭터가 존재하고, 그중 한 명은 중독된 상태입니다. 첫날밤, 당신은 그 역할과 중독된 자가 누구인지 알고 있습니다. 장산범이 사망할 경우, 그날 밤 중독된 자는 장산범이 누구인지 알게 됩니다.",
+        "ability": "중복된 선한 캐릭터가 존재하고, 그 중 한 명은 중독된 상태입니다. 첫날 밤, 당신은 그 역할과 중독된 자가 누구인지 알고 있습니다. 장산범이 사망할 경우, 그날 밤 중독된 자는 장산범이 누구인지 알게 됩니다.",
         "image": "/images/fo/boc/icons/siij/jangsantiger.webp"
     },
     {
@@ -4600,7 +4600,7 @@
             "매혹됨",
             "매혹된 자의 지명에 의한 죽음"
         ],
-        "setup": false,
+        "setup": true,
         "ability": "첫날 밤을 제외한 매일 밤, 당신은 참가자를 선택하고 그 참가자는 사망합니다. 구미호를 알고 있는 매혹된 참가자가 1명 있으며, 그는 당신이 죽는다면 사악해집니다. 매혹된 참가자의 지명으로 당신이 처형 될 경우, 그는 새로운 구미호가 됩니다. 4인 이하일 경우 새로운 구미호가 탄생하지 않습니다.",
         "image": "/images/fo/boc/icons/siij/ninetailedfox.webp"
     },

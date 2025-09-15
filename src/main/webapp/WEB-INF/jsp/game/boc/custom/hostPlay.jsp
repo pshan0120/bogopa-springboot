@@ -349,7 +349,7 @@
 
                     return prev +
                         `<div class="col-4 text-center pt-2 \${fontClass}">
-                            <small class="\${fontClass}">\${character.name}</small>
+                            <small class="\${fontClass}">\${character.setup ? "*" : ""}\${character.name}</small>
                             <img src="\${character.image}" class="img-responsive img-rounded m-auto" />
                         </div>
                         <div class="col-4 text-center display-1" style="margin: auto">
@@ -623,7 +623,7 @@
 
                         const wikiUrl = "https://wiki.bloodontheclocktower.com/";
                         const characterHtml =
-                            `<a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(player.characterId)}" target="_blank" class="\${fontClass}">\${character.name}</a>`;
+                            `<a href="\${wikiUrl + capitalizeFirstAndAfterUnderBar(player.characterId)}" target="_blank" class="\${fontClass}">\${character.setup ? "*" : ""}\${character.name}</a>`;
 
                         const playedCharacter = playedCharacterList
                             .find(playedCharacter => playedCharacter.characterId === player.characterId);
@@ -1046,7 +1046,6 @@
             }
 
             playStatus.isDay = true;
-            playStatus.dayCount = playStatus.dayCount ? ++playStatus.dayCount : 2;
 
             const $playerStatusDiv = $("#playerStatusDiv");
             $playerStatusDiv.find("span[name='daySpan']").text(createDaySpanText());
@@ -1062,6 +1061,7 @@
             }
 
             playStatus.isDay = false;
+            playStatus.dayCount = playStatus.dayCount ? ++playStatus.dayCount : 2;
 
             const $playerStatusDiv = $("#playerStatusDiv");
             $playerStatusDiv.find("span[name='daySpan']").text(createDaySpanText());
@@ -1073,7 +1073,7 @@
 
         const createDaySpanText = () => createDayCountText() + " " + createDayAndNightEmoji();
 
-        const createDayCountText = () => (playStatus.dayCount ?? "-") + "일차";
+        const createDayCountText = () => (playStatus.dayCount ?? "-") + "번째";
 
         const createDayAndNightEmoji = () => playStatus.isDay ? "낮" : "밤";
 

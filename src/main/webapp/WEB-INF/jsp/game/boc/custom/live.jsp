@@ -174,7 +174,7 @@
 
         const createDaySpanText = () => createDayCountText() + " " + createDayAndNightEmoji();
 
-        const createDayCountText = () => (playStatus.dayCount ?? "-") + "일차";
+        const createDayCountText = () => (playStatus.dayCount ?? "-") + "번째";
 
         const createDayAndNightEmoji = () => playStatus.isDay ? "낮" : "밤";
     </script>
