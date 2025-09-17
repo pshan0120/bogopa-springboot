@@ -6,6 +6,7 @@
 
     <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
     <script src="<c:url value='/js/game/boc/character.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/edition.js'/>"></script>
     <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
 
     <script>
@@ -67,7 +68,8 @@
 
         const openCharacterGuideModal = async () => {
             await loadGameStatus();
-            characterGuideModal.open(playStatus.editionName, selectedCharacterList, selectedJinxList);
+
+            await characterGuideModal.open(playStatus.edition, selectedCharacterList, selectedJinxList);
         }
 
         const openTownModal = () => {

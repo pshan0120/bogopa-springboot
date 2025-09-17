@@ -1,0 +1,36 @@
+[
+    {
+        "id": "_meta",
+        "author": "mainstone",
+        "name": "큰 소란"
+    },
+    "chef",
+    "investigator",
+    "washerwoman",
+    "librarian",
+    "empath",
+    "fortune_teller",
+    "undertaker",
+    "monk",
+    "slayer",
+    "princess",
+    "soldier",
+    "ravenkeeper",
+    "mayor",
+    "virgin",
+    "shugenja",
+
+    "ogre",
+    "drunk",
+    "recluse",
+    "saint",
+
+    "godfather",
+    "poisoner",
+    "spy",
+    "witch",
+    "marionette",
+    "scarlet_woman",
+
+    "imp"
+]

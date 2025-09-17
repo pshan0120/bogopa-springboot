@@ -4,9 +4,10 @@
 <head>
     <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
 
-    <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
     <script src="<c:url value='/js/game/boc/constants.js'/>"></script>
     <script src="<c:url value='/js/game/boc/character.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/edition.js'/>"></script>
+    <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
 
     <script>
         const PLAY_ID = ${playId};
@@ -118,7 +119,7 @@
                 .sort((prev, next) => calculateEditionIndex(prev.type) - calculateEditionIndex(next.type))
                 .reduce((prev, next) => {
                     const typeTag = next.type === "full" ? "F" : "T";
-                    return prev + `<option value="\${next.id}">[\${typeTag}] \${next.name}</option>`;
+                    return prev + `<option value="\${next.id}">[\${typeTag}] \${next.name_kr}(\${next.name})</option>`;
                 }, `<option value="">선택</option>`);
             $editionDiv.find("select").append(optionsHtml);
         }
@@ -142,15 +143,17 @@
 
             scriptJson = await readScriptJsonOfEdition(selected.jsonFileName);
 
+            const edition = await Edition.getInEditionListById(editionList, id);
+
             playStatus = {
                 ...playStatus,
-                editionId: id,
-                editionName: scriptJson[0].name,
+                edition,
                 scriptJson,
             }
 
             scriptJson.splice(0, 1);
             $editionDiv.find("textarea").val(JSON.stringify(scriptJson));
+            $editionDiv.find("[name='note']").html(edition.note);
 
             travellerCharacterList = characterList
                 .filter(character => character.team === POSITION.TRAVELLER.name && character.edition === selectedEditionId)
@@ -158,8 +161,6 @@
 
             await renderCharacterList(scriptJson, characterList);
             await renderJinxList(selectedCharacterList);
-
-
         }
 
         const copyEditionJson = () => {
@@ -387,6 +388,12 @@
                 const character = Character.getInCharacterListById(selectedCharacterList, played.characterId);
                 if (character.reminders && character.reminders.length > 0) {
                     character.reminders.forEach(reminder => {
+                        if (playedReminderList.some(playedReminder => playedReminder.characterId === character.id
+                            && playedReminder.reminder === reminder)
+                        ) {
+                            return;
+                        }
+
                         playedReminderList.push({
                             characterId: character.id,
                             reminder,
@@ -546,12 +553,14 @@
 
         const renderEditionInfo = async () => {
             const $editionInfoDiv = $("#editionInfoDiv");
-            $editionInfoDiv.find("[name='editionName']").text(playStatus.editionName);
+            $editionInfoDiv.find("[name='name']").text(playStatus.edition.name_kr + "(" + playStatus.edition.name + ")");
 
             const scriptJson = playStatus.scriptJson;
 
             scriptJson.splice(0, 1);
             $editionInfoDiv.find("textarea").val(JSON.stringify(scriptJson));
+
+            $editionInfoDiv.find("[name='note']").html(playStatus.edition.note);
         }
 
         const renderPlayerStatusList = () => {
@@ -1247,7 +1256,7 @@
         }
 
         const openCharacterGuideModal = async () => {
-            characterGuideModal.open(playStatus.editionName, selectedCharacterList, selectedJinxList);
+            await characterGuideModal.open(playStatus.edition, selectedCharacterList, selectedJinxList);
         }
 
         const openTownModal = () => {
@@ -1361,6 +1370,9 @@
                                 </div>
                                 <div class="mt-1">
                                     <textarea rows="4" class="form-control" cols="20"></textarea>
+                                </div>
+                                <div class="mt-1">
+                                    <i><small name="note"></small></i>
                                 </div>
                             </div>
 
@@ -1481,16 +1493,19 @@
                                     에디션 정보
                                     <a data-toggle="collapse" href="#editionInfoBodyDiv" role="button"
                                        aria-expanded="false"
-                                       aria-controls="playerStatusListDiv">
+                                       aria-controls="ditionInfoBodyDiv">
                                         열기/닫기
                                     </a>
                                 </h2>
                             </div>
                             <div class="card-body">
                                 <div class="collapse" id="editionInfoBodyDiv">
-                                    <h3 name="editionName"></h3>
+                                    <h3 name="name"></h3>
                                     <div class="mt-1">
                                         <textarea rows="4" class="form-control" cols="20"></textarea>
+                                    </div>
+                                    <div class="mt-1">
+                                        <i><small name="note"></small></i>
                                     </div>
                                 </div>
                             </div>

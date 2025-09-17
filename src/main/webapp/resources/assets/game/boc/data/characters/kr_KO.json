@@ -4635,6 +4635,16 @@
         "setup": false,
         "ability": "첫날 밤을 제외한 매일 밤, (비록 당신이 죽더라도) 참가자를 선택합니다. 그는 죽습니다. 당신을 처음으로 지명한 참가자는 숙주가 되며, 숙주가 사망해야 백각귀도 사망합니다. (지명한 참가자는 숙주가 된 사실은 모릅니다.)",
         "image": "/images/fo/boc/icons/siij/hundredlegsghost.webp"
+    },
+    {
+        "id": "chill_guy",
+        "firstNightReminder": "",
+        "otherNightReminder": "",
+        "reminders": [],
+        "setup": true,
+        "name": "CHILL GUY",
+        "team": "fabled",
+        "ability": "chill하게 하고 재미있게 하는 사람은 이야기꾼이 이뻐해 줌",
+        "image": "/images/fo/boc/icons/siij/chill_lovekorea_v2.webp"
     }
-
 ]

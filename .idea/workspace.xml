@@ -23,9 +23,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="번역 수정">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/edition.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/big-trouble.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/clientPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/initializationSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/initializationSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/devils-spoke.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/devils-spoke.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/supernatural-incidents-in-joseon.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/supernatural-incidents-in-joseon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/wherein-everyone-is-a-witch-cursed-recluse.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/wherein-everyone-is-a-witch-cursed-recluse.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,42 +94,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;Tomcat Server.Tomcat 9.0.64.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/bogopa/src/main/webapp/WEB-INF/jsp/game/poker&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1f9a44daaf28cb2cfebd6be8e005db77&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "Tomcat Server.Tomcat 9.0.64.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/scripts",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15136719",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "1f9a44daaf28cb2cfebd6be8e005db77",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
+      <recent name="C:\dev\bogopa\src\main\webapp\js\game\boc" />
       <recent name="C:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\poker" />
       <recent name="C:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game\boc\custom" />
-      <recent name="C:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
       <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\minion" />
-      <recent name="D:\dev\bogopa\src\main\webapp\images\fo\boc\icons\demon" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
@@ -376,7 +386,10 @@
       <workItem from="1755061876817" duration="12284000" />
       <workItem from="1755671261794" duration="5671000" />
       <workItem from="1756033974846" duration="2834000" />
-      <workItem from="1757310097687" duration="585000" />
+      <workItem from="1757310097687" duration="3439000" />
+      <workItem from="1757657946680" duration="1950000" />
+      <workItem from="1757917463420" duration="1333000" />
+      <workItem from="1758084864553" duration="16023000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -721,7 +734,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="199" />
+    <option name="localTasksCounter" value="202" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,10 +767,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="리마인더 추가" />
-    <MESSAGE value="좀비" />
-    <MESSAGE value="징크스 추가" />
-    <MESSAGE value="번역 추가" />
     <MESSAGE value="감염상태 모달 추가" />
     <MESSAGE value="zealot, lord of typhon 추가" />
     <MESSAGE value="오류수정" />
@@ -779,7 +788,11 @@
     <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads 스크립트 추가로 광고 기능 도입" />
     <MESSAGE value="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가" />
     <MESSAGE value="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트" />
-    <option name="LAST_COMMIT_MESSAGE" value="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트" />
+    <MESSAGE value="추가: 포커 토너먼트 타이머 데이터 및 설정 업데이트&#10;&#10;- 블라인드 레벨 및 Antes 데이터 변경&#10;- 타이머 관련 주석 및 불필요한 코드 정리&#10;- workspace.xml의 변경 기록 갱신 및 커밋 메세지 업데이트" />
+    <MESSAGE value="추가: 캐릭터 데이터 수정 및 설정 업데이트&#10;&#10;- setup 값 및 능력 설명 수정&#10;- JSP에서 캐릭터 관련 표시 로직 개선&#10;- 기타 부정확한 텍스트 수정 및 정리" />
+    <MESSAGE value="수정: 한글 문구 및 설정 관련 문자열 수정&#10;&#10;- '일차'를 '번째'로 변경하여 문구 통일성 개선.&#10;- 캐릭터 정보에서 setup 상태 표시 추가.&#10;- JSON 데이터의 일부 오탈자 수정 및 문맥 개선.&#10;- setup 값 변경으로 로직 및 설정 업데이트." />
+    <MESSAGE value="번역 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="번역 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
