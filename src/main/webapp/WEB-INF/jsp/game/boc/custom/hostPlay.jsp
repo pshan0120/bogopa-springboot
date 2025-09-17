@@ -237,7 +237,7 @@
                             selectedJinxList.push({
                                 source: source.id,
                                 target: target.id,
-                                reason: target.reason,
+                                reason: target.reason_kr,
                             })
                         }
                     });

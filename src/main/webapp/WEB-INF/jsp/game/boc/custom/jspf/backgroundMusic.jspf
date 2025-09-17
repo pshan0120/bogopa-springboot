@@ -48,6 +48,9 @@
         <h4>cassio</h4>
         <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/leonell-cassio-the-blackest-bouquet-118766.mp3"
                controls loop></audio>
+        <h4>한국 무당 음악</h4>
+        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/korean-shaman-music.mp3"
+               controls loop></audio>
         <hr>
         <h4>닭 소리</h4>
         <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
