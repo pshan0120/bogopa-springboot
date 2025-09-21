@@ -4238,7 +4238,7 @@
         "team": "townsfolk",
         "firstNight": 7,
         "firstNightReminder": "우렁각시를 깨운 뒤 참가중인 역할 하나를 보여 줍니다.",
-        "otherNight": 13,
+        "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [
             "보호"
