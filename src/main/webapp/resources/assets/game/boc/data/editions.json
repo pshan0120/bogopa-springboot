@@ -47,7 +47,7 @@
     {
         "id": "ngj",
         "name": "No Greater Joy",
-        "name_kr": "이보다 큰 기쁨은 없다",
+        "name_kr": "극한의 즐거움",
         "type": "teensyville",
         "jsonFileName": "no-greater-joy.json",
         "description": "",
@@ -56,7 +56,7 @@
     {
         "id": "lod",
         "name": "Lleech Of Distrust",
-        "name_kr": "불신의 리치",
+        "name_kr": "못 믿을 거거머리",
         "type": "teensyville",
         "jsonFileName": "lleech-of-distrust.json",
         "description": "",
@@ -74,7 +74,7 @@
     {
         "id": "otr",
         "name": "Over the River",
-        "name_kr": "강 너머로",
+        "name_kr": "할머니 댁으로",
         "type": "teensyville",
         "jsonFileName": "over-the-river.json",
         "description": "",
@@ -83,7 +83,7 @@
     {
         "id": "luf",
         "name": "Laissez un Faire",
-        "name_kr": "라세즈 운 페어[내버려 두라]",
+        "name_kr": "자유방임불공정주의",
         "type": "teensyville",
         "jsonFileName": "laissez-un-faire.json",
         "description": "",
@@ -92,7 +92,7 @@
     {
         "id": "catfishing",
         "name": "Catfishing",
-        "name_kr": "가짜 미끼 사기",
+        "name_kr": "낚시질",
         "type": "full",
         "jsonFileName": "catfishing.json",
         "description": "",
@@ -180,11 +180,11 @@
         "note": "**Kazali - 병사(Soldier) 선택 가능성을 중심으로 한 Teensy 스크립트**<br/>제가 몇 번 이 스크립트를 진행했을 때, Kazali에게 미치광이(Lunatic)가 가진 모든 선택지를 제공했습니다. 여기에는 플레이어와 역할(Role) 선택이 포함되었습니다. 하지만 이 방식은 악의 세력(Evil)에게 조금 너무 유리하게 작용할 수 있습니다. 이를 해결할 수 있는 한 가지 방안은, 하수인(Minion)의 역할이 아닌 플레이어만 제공하는 것입니다.<br/>**Fabled 캐릭터: Duchess**<br/>이 캐릭터는 밤 동안 정보를 수집하는 추가적인 방법을 제공하며, 미치광이(Lunatic)가 자신이 미치광이라는 사실을 깨달을 수 있는 가능성을 제공합니다."
     },
     {
-        "id": "strange-and-uncanny",
-        "name": "Strange and uncanny phenomenon",
-        "name_kr": "기묘하고 불가사의한 현상",
+        "id": "festival-of-lanterns",
+        "name": "Festival of Lanterns",
+        "name_kr": "등불 축제",
         "type": "full",
-        "jsonFileName": "strange-and-uncanny.json",
+        "jsonFileName": "festival-of-lanterns.json",
         "description": "",
         "note": ""
     },

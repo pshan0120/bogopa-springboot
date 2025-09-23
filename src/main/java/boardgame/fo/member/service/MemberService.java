@@ -8,6 +8,8 @@ public interface MemberService {
 
     Map<String, Object> readById(long memberId);
 
+    Long readIdByNickname(String nickname);
+
     Map<String, Object> readByNickname(String nickname);
 
     Long readOrCreateMemberByNickname(String nickname);

@@ -10,6 +10,16 @@
     <script src="<c:url value='/js/game/boc/initializationSetting.js'/>"></script>
 
     <script>
+        /* TODO:
+            1. 참가자 추가, 제거 기능 : 완료
+            2. 조선귀사 수정 : 완료
+            3. 동양풍 음악 추가 : 완료
+            4. 스크립트 추가 - 크리스마스 등
+            5. 스크립트 제목 변경 : 완료
+            6. 자리 변경 기능
+            7. 그리모어 표시 기능
+            8. 정보/질문 생성 기능
+         */
         const PLAY_ID = ${playId};
         let editionList = [];
         let selectedEditionId = null;
@@ -1178,6 +1188,55 @@
                 .catch(response => console.error('error', response));
         }
 
+        const addPlayer = async () => {
+            if (playStatus.edition) {
+                alert("에디션 선택 전에만 참가자 추가가 가능합니다.")
+                return;
+            }
+
+            const nickname = prompt("닉네임을 입력해 주세요.\n※ 만약 첫 플레이라면 계정이 생성됩니다.");
+            if (!nickname) {
+                return;
+            }
+
+            const request = {
+                playId: PLAY_ID,
+                nickname
+            }
+
+            gfn_callPostApi("/api/play/member/add", request)
+                .then(data => {
+                    console.log('player added !!', data);
+                    initializeGame();
+                })
+                .catch(response => console.error('error', response));
+        }
+
+        const removePlayer = async () => {
+            if (playStatus.edition) {
+                alert("에디션 선택 전에만 참가자 제거가 가능합니다.")
+                return;
+            }
+
+            const nickname = prompt("참가자 닉네임을 입력해 주세요.");
+            if (!nickname) {
+                return;
+            }
+
+            const request = {
+                playId: PLAY_ID,
+                nickname
+            }
+
+            gfn_callPostApi("/api/play/member/remove", request)
+                .then(data => {
+                    console.log('player removed !!', data);
+                    alert("[" + nickname + "] 참가자가 플레이에서 제거되었습니다.");
+                    initializeGame();
+                })
+                .catch(response => console.error('error', response));
+        }
+
         const resetGame = () => {
             if (!confirm("현재까지의 모든 진행 상황을 초기화하고 게임을 처음부터 진행합니다.")) {
                 return;
@@ -1342,11 +1401,11 @@
                             <%--<p>
                                 1. 목표<br/>
                                 시간 단축을 위해...<br/>
-                                - 닉네임 입력은 참여자가 직접 하도록 한다.<br/> -> 완료
-                                - 참여자는 주어진 역할을 확인할 수 있다.<br/> -> 완료
+                                - 닉네임 입력은 참가자가 직접 하도록 한다.<br/> -> 완료
+                                - 참가자는 주어진 역할을 확인할 수 있다.<br/> -> 완료
                                 <br/>
                                 진행 편의를 위해<br/>
-                                - 포켓그리모어에서 설정한 역할을 참여자에 맞게 설정할 수 있도록 한다.<br/> -> 완료
+                                - 포켓그리모어에서 설정한 역할을 참가자에 맞게 설정할 수 있도록 한다.<br/> -> 완료
                                 자동이면 좋겠지만 안되면 직접 선택이라도<br/> -> 완료
                                 - 어떤 에디션을 쓸 것인지 호스트 화면에서 지정할 수 있게 한다.<br/> -> 완료
                                 지정되면 그에 따라 역할 설명도 자동으로 만들어지도록 한다.<br/> -> 완료
@@ -1355,7 +1414,7 @@
                                 - 투표 기능은 호스트 화면에서 진행한다.<br/>
                                 <br/>
                                 게임성을 위해...<br/>
-                                - 마을 광장은 참여자 화면에서 볼 수 있게 한다.<br/> -> 완료
+                                - 마을 광장은 참가자 화면에서 볼 수 있게 한다.<br/> -> 완료
                                 - html5 canvas를 이용하여 원형으로 세팅한다.<br/>
                                 - 뒤로가기 누르지 말라는 경고 문구를 추가한다.<br/> -> 완료
                             </p>--%>
@@ -1725,6 +1784,12 @@
                                     <button type="button" class="btn btn-default btn-block"
                                             onclick="openSoundEffectModal()">
                                         소리 효과
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-block" onclick="addPlayer()">
+                                        참가자 추가
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-block" onclick="removePlayer()">
+                                        참가자 제거
                                     </button>
                                     <button type="button" class="btn btn-danger btn-block" onclick="resetGame()">
                                         게임 재설정

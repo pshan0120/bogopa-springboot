@@ -16,18 +16,28 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war" />
+      <artifact name="bogopa:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 번역 및 게임 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 통일하여 표현 개선&#10;- JSON 및 JSP에서 한국어 번역과 설정 수정&#10;- 새로운 배경음악 추가 및 관련 데이터 업데이트">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 번역 및 데이터 설정 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 변경하여 표현 통일.&#10;- JSON 데이터 설정 수정 및 새로운 배경음악 추가.&#10;- 이미지 리소스 업데이트 및 관련 설정 변경.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/snailbride.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/png/snailbride.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/snailbride.webp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/siij/snailbride.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/member/service/MemberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dao/PlayDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/dao/PlayDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/presentation/PlayRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boardgame/fo/play/service/PlayServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/fo/Play_SQL.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/fo/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/fo/common.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/strange-and-uncanny.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/festival-of-lanterns.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,8 +141,8 @@
       <recent name="D:\dev\bogopa\src\main\webapp\js\game\boc" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="boardgame.fo.game.presentation" />
       <recent name="boardgame.fo.play.dto" />
+      <recent name="boardgame.fo.game.presentation" />
       <recent name="boardgame.com.constant" />
       <recent name="boardgame.fo.play.service" />
       <recent name="boardgame.fo.play.presentation" />
@@ -383,7 +393,8 @@
       <workItem from="1757917463420" duration="1333000" />
       <workItem from="1758084864553" duration="25084000" />
       <workItem from="1758171204369" duration="4346000" />
-      <workItem from="1758465578105" duration="405000" />
+      <workItem from="1758465578105" duration="425000" />
+      <workItem from="1758604673391" duration="13750000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -728,7 +739,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="204" />
+    <option name="localTasksCounter" value="205" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,7 +772,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="오류수정" />
     <MESSAGE value="boffin 추가" />
     <MESSAGE value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- &quot;.idea/workspace.xml&quot; 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
     <MESSAGE value="수정: 참가자 표현으로 용어 변경 및 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 용어 통일&#10;- `.idea/workspace.xml` 및 주요 데이터 파일에 업데이트 사항 반영&#10;- 추가된 이미지 리소스 및 설정 변경 포함" />
@@ -786,7 +796,8 @@
     <MESSAGE value="번역 수정" />
     <MESSAGE value="수정: 번역 및 게임 데이터 업데이트&#10;&#10;- 새로운 한글 번역 및 문구 개선&#10;- JSP와 JSON 데이터 관련 설정 추가 및 수정&#10;- 캐릭터 및 에디션 설명 추가, 로직 업데이트" />
     <MESSAGE value="수정: 번역 및 게임 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 통일하여 표현 개선&#10;- JSON 및 JSP에서 한국어 번역과 설정 수정&#10;- 새로운 배경음악 추가 및 관련 데이터 업데이트" />
-    <option name="LAST_COMMIT_MESSAGE" value="수정: 번역 및 게임 데이터 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 통일하여 표현 개선&#10;- JSON 및 JSP에서 한국어 번역과 설정 수정&#10;- 새로운 배경음악 추가 및 관련 데이터 업데이트" />
+    <MESSAGE value="수정: 번역 및 데이터 설정 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 변경하여 표현 통일.&#10;- JSON 데이터 설정 수정 및 새로운 배경음악 추가.&#10;- 이미지 리소스 업데이트 및 관련 설정 변경." />
+    <option name="LAST_COMMIT_MESSAGE" value="수정: 번역 및 데이터 설정 업데이트&#10;&#10;- &quot;플레이어&quot;를 &quot;참가자&quot;로 변경하여 표현 통일.&#10;- JSON 데이터 설정 수정 및 새로운 배경음악 추가.&#10;- 이미지 리소스 업데이트 및 관련 설정 변경." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

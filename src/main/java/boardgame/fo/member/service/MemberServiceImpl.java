@@ -34,6 +34,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Long readIdByNickname(String nickname) {
+        return (Long) readByNickname(nickname).get("mmbrNo");
+    }
+
+    @Override
     public Map<String, Object> readByNickname(String nickname) {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put("nickname", nickname);

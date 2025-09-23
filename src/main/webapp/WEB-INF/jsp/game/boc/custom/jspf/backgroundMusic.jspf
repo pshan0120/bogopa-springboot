@@ -1,5 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<script>
+    $(() => {
+        // 탭 클릭 이벤트 정의
+        $("#backgroundMusicTab a").on("click", function (e) {
+            e.preventDefault(); // 기본 동작 방지 (href 작동 방지)
+
+            // 부모 <li>에서 모든 active 클래스 제거
+            $("#backgroundMusicTab li").removeClass("active");
+
+            // 클릭한 탭의 부모 <li>에 active 클래스 추가
+            $(this).parent().addClass("active");
+
+            // 모든 탭 콘텐츠에서 active 및 in 클래스 제거
+            $(".tab-content .tab-pane").removeClass("active in");
+
+            // 현재 클릭된 탭이 가리키는 콘텐츠 ID 추출하여 활성화
+            const targetContent = $(this).attr("href");
+            $(targetContent).addClass("active in");
+        });
+
+        $("#backgroundMusicDiv").on("show.bs.collapse", () => {
+            // 현재 활성화된 탭을 확인
+            const activeTab = $("#backgroundMusicListDiv .nav-tabs li.active");
+
+            // 활성화된 탭이 없을 때 첫 번째 탭을 클릭
+            if (activeTab.length === 0) {
+                $("#backgroundMusicListDiv .nav-tabs li:first-child a").trigger("click");
+            }
+        });
+    })
+</script>
+
 <div name="backgroundMusicDiv">
     <h3>
         배경음악
@@ -9,55 +41,106 @@
         </a>
     </h3>
     <div class="collapse" id="backgroundMusicListDiv">
-        <h4>80s-mystical-stranger-things</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/80s-mystical-stranger-things-133254.mp3"
-               controls loop></audio>
-        <h4>piano-dark-mystery-up-tempo-urgency</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/180121-piano-dark-mystery-up-tempo-urgency-96263.mp3"
-               controls loop></audio>
-        <h4>piano-dark-mysterious-emotional-asian</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/180216-piano-dark-mysterious-emotional-asian-96280.mp3"
-               controls loop></audio>
-        <h4>ghost-in-the-darkness</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/ghost-in-the-darkness-217445.mp3"
-               controls loop></audio>
-        <h4>gotham</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/gotham-194893.mp3"
-               controls loop></audio>
-        <h4>dark-thrill-theme-1</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-1-153359.mp3"
-               controls loop></audio>
-        <h4>dark-thrill-theme-2</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-2-153363.mp3"
-               controls loop></audio>
-        <h4>dark-thrill-theme-4</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-4-153364.mp3"
-               controls loop></audio>
-        <h4>piano-horror</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/piano-horror-soundtrack-bruno-magic-166661.mp3"
-               controls loop></audio>
-        <h4>dramatic-horror</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/dramatic-horror-cinematic-epic-trailer-action-intro-opener-115496.mp3"
-               controls loop></audio>
-        <h4>horror-box</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/horror-box-149248.mp3"
-               controls loop></audio>
-        <h4>horror-ambience-music</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/horror-ambience-music-with-vocals-hard-to-trust-186979.mp3"
-               controls loop></audio>
-        <h4>cassio</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/leonell-cassio-the-blackest-bouquet-118766.mp3"
-               controls loop></audio>
-        <h4>한국 무당 음악</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/korean-shaman-music.mp3"
-               controls loop></audio>
-        <hr>
-        <h4>닭 소리</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
-               controls loop></audio>
-        <h4>교회 종 소리</h4>
-        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3"
-               controls loop></audio>
+        <div class="tab-content">
+            <ul id="backgroundMusicTab" class="nav nav-tabs bar_tabs" role="tablist">
+                <li role="presentation">
+                    <a href="#backgroundMusic1TabContent" id="backgroundMusic1Tab" role="tab" data-toggle="tab"
+                       aria-expanded="true">
+                        리스트#1
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#backgroundMusic2TabContent" id="backgroundMusic2Tab" role="tab" data-toggle="tab"
+                       aria-expanded="false">
+                        리스트#2
+                    </a>
+                </li>
+                <li role="presentation" class="">
+                    <a href="#backgroundMusic3TabContent" id="backgroundMusic3Tab" role="tab" data-toggle="tab"
+                       aria-expanded="false">
+                        효과음
+                    </a>
+                </li>
+            </ul>
+            <div id="tabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade" id="backgroundMusic1TabContent"
+                     aria-labelledby="backgroundMusicTab">
+                    <h4>80s-mystical-stranger-things</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/80s-mystical-stranger-things-133254.mp3"
+                           controls loop></audio>
+                    <h4>piano-dark-mystery-up-tempo-urgency</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/180121-piano-dark-mystery-up-tempo-urgency-96263.mp3"
+                           controls loop></audio>
+                    <h4>piano-dark-mysterious-emotional-asian</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/180216-piano-dark-mysterious-emotional-asian-96280.mp3"
+                           controls loop></audio>
+                    <h4>ghost-in-the-darkness</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/ghost-in-the-darkness-217445.mp3"
+                           controls loop></audio>
+                    <h4>gotham</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/gotham-194893.mp3"
+                           controls loop></audio>
+                    <h4>dark-thrill-theme-1</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-1-153359.mp3"
+                           controls loop></audio>
+                    <h4>dark-thrill-theme-2</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-2-153363.mp3"
+                           controls loop></audio>
+                    <h4>dark-thrill-theme-4</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/dark-thrill-theme-4-153364.mp3"
+                           controls loop></audio>
+                    <h4>piano-horror</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/piano-horror-soundtrack-bruno-magic-166661.mp3"
+                           controls loop></audio>
+                    <h4>dramatic-horror</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/dramatic-horror-cinematic-epic-trailer-action-intro-opener-115496.mp3"
+                           controls loop></audio>
+                    <h4>horror-box</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/horror-box-149248.mp3"
+                           controls loop></audio>
+                    <h4>horror-ambience-music</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/horror-ambience-music-with-vocals-hard-to-trust-186979.mp3"
+                           controls loop></audio>
+                    <h4>cassio</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/leonell-cassio-the-blackest-bouquet-118766.mp3"
+                           controls loop></audio>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="backgroundMusic2TabContent"
+                     aria-labelledby="backgroundMusicTab">
+                    <h4>작두</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/jakdu.mp3"
+                           controls loop></audio>
+                    <h4>한국 무당 음악</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/bgm/korean-shaman-music.mp3"
+                           controls loop></audio>
+                    <h4>만조상해원경</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/manzhao-shanghai-yuanjing.mp3"
+                           controls loop></audio>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="backgroundMusic3TabContent"
+                     aria-labelledby="backgroundMusicTab">
+                    <h4>닭 소리</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
+                           controls loop></audio>
+                    <h4>교회 종 소리</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3"
+                           controls loop></audio>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

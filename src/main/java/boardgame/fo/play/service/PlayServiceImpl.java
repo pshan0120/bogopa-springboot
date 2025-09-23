@@ -128,7 +128,7 @@ public class PlayServiceImpl implements PlayService {
     }
 
     @Override
-    public Map<String, Object> addPlay(JoinPlayRequestDto requestDto) {
+    public Map<String, Object> addMemberToPlay(JoinPlayRequestDto requestDto) {
         Long memberId = memberService.readOrCreateMemberByNickname(requestDto.getNickname());
 
         List<Map<String, Object>> clientPlayMemberList = playDao.selectClientPlayMemberList(requestDto.getPlayId());
@@ -146,6 +146,16 @@ public class PlayServiceImpl implements PlayService {
         requestMap.put("playNo", playId);
         requestMap.put("mmbrNo", memberId);
         playDao.insertPlayMember(requestMap);
+    }
+
+    @Override
+    public void removeMemberFromPlay(JoinPlayRequestDto requestDto) {
+        Long memberId = memberService.readIdByNickname(requestDto.getNickname());
+
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("playId", requestDto.getPlayId());
+        requestMap.put("memberId", memberId);
+        playDao.deleteClientPlayMember(requestMap);
     }
 
     private Map<String, Object> readClientPlayMemberById(long playId, long memberId) {

@@ -54,8 +54,13 @@ public class PlayRestController {
     }
 
     @PostMapping("/member/add")
-    public Map<String, Object> addPlay(@Validated @RequestBody JoinPlayRequestDto requestDto) {
-        return playService.addPlay(requestDto);
+    public Map<String, Object> addMemberToPlay(@Validated @RequestBody JoinPlayRequestDto requestDto) {
+        return playService.addMemberToPlay(requestDto);
+    }
+
+    @PostMapping("/member/remove")
+    public void removeMemberFromPlay(@Validated @RequestBody JoinPlayRequestDto requestDto) {
+        playService.removeMemberFromPlay(requestDto);
     }
 
     @PatchMapping("/begin")

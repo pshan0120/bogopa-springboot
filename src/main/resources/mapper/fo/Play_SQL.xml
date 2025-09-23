@@ -119,6 +119,15 @@
             pm.mmbrNo = #{memberId}
     </select>
 
+	<delete id="deleteClientPlayMember" parameterType="hashmap">
+		DELETE FROM
+			playMmbr
+		WHERE
+			playNo = #{playId}
+		  AND
+			mmbrNo = #{memberId}
+	</delete>
+
 	<select id="selectHostPlayMember" parameterType="hashmap" resultType="hashmap">
         SELECT
             m.mmbrNo AS memberId,
