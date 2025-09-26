@@ -34,19 +34,9 @@
             }
 
             const $townDiv = $("#townDiv");
-            const $settingDiv = $townDiv.find("div[name='settingDiv']");
-
-            // await $settingDiv.find("span[name='daySpan']").text(createDaySpanText());
 
             playerSetting = initializationSetting.player
                 .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
-
-            // const roleInitializationHtml = `
-            //     <span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
-            //     <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
-            //     <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
-            //     <span class="text-danger">악마 \${playerSetting.demon}명</span>`;
-            // $settingDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
 
             if (Object.keys(playStatus).length === 0) {
                 const htmlString = `게임이 시작되지 않았습니다.`;
@@ -174,7 +164,7 @@
             }
 
             const img = new Image();
-            img.src = "https://wiki.bloodontheclocktower.com/skins/pivot/assets/images/logo.png";
+            img.src = "<c:url value='/images/fo/boc/logo.png'/>";
             img.onload = () => {
                 const imgSize = width * 0.18;
 
@@ -227,20 +217,8 @@
 <body class="bg-default">
 <%@ include file="/WEB-INF/include/fo/includeBody.jspf" %>
 <div class="main-content">
-    <%@ include file="/WEB-INF/jsp/fo/navbar.jsp" %>
-
     <!-- Header -->
     <div class="header bg-gradient-primary pb-5 pt-7 pt-md-8">
-        <div class="container">
-            <div class="header-body text-center mb-7">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 col-md-8">
-                        <h1 class="text-white">Blood on the Clocktower</h1>
-                        <p class="text-lead text-light">custom</p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="separator separator-bottom separator-skew zindex-100">
             <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
                  xmlns="http://www.w3.org/2000/svg">
@@ -250,24 +228,11 @@
     </div>
     <!-- Page content -->
     <div class="container mt--7">
-        <div class="row">
-            <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card shadow mt-5 text-center" id="townDiv">
-                    <div class="card-body">
-                        <div name="settingDiv">
-                            <h3 class="text-right"><span name="daySpan"></span></h3>
-                            <h4><span name="roleInitialization"></span></h4>
-                        </div>
-                        <div style="width: 100%; aspect-ratio: 1 / 1; position: relative; justify-content: center; display: flex;">
-                            <canvas id="townCanvas"
-                                    style="width: 100%; max-width: 900px; height: 100%; max-height: 900px; display: block;"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div style="width: 100%; aspect-ratio: 1 / 1; position: relative; justify-content: center; display: flex;">
+            <canvas id="townCanvas"
+                    style="width: 100%; max-width: 900px; height: 100%; max-height: 900px; display: block;"></canvas>
         </div>
     </div>
-    <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
 </div>
 
 <%@ include file="/WEB-INF/include/fo/includeFooter.jspf" %>

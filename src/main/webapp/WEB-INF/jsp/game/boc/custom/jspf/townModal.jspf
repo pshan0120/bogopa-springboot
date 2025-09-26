@@ -179,7 +179,7 @@
             }
 
             const img = new Image();
-            img.src = "https://wiki.bloodontheclocktower.com/skins/pivot/assets/images/logo.png";
+            img.src = "<c:url value='/images/fo/boc/logo.png'/>";
             img.onload = () => {
                 const imgSize = width * 0.18;
 
