@@ -18,7 +18,8 @@
             5. 스크립트 제목 변경 : 완료
             6. 자리 변경 기능
             7. 그리모어 표시 기능
-            8. 정보/질문 생성 기능
+            8. 정보/질문 생성 기능 : 완료
+            9. 마을광장 개선 : 완료
          */
         const PLAY_ID = ${playId};
         let editionList = [];
@@ -32,6 +33,10 @@
         let playedReminderList = [];
         let travellerCharacterList = [];
         let nightOrderList = [];
+        let informationTemplateList = [];
+        let questionTemplateList = [];
+        let informationMessageHistoryList = [];
+        let questionMessageHistoryList = [];
         let playerList = [];
         let scriptJson = {};
         let playStatus = {};
@@ -90,6 +95,18 @@
 
         const readNightOrderList = async () => {
             return await gfn_callGetApi(BOC_DATA_PATH + "/night-order.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const readInformationTemplateList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/information/kr_KO.json")
+                .then(data => data)
+                .catch(response => console.error('error', response));
+        }
+
+        const readQuestionsTemplateList = async () => {
+            return await gfn_callGetApi(BOC_DATA_PATH + "/questions/kr_KO.json")
                 .then(data => data)
                 .catch(response => console.error('error', response));
         }
@@ -206,14 +223,14 @@
                 if (next.team === POSITION.FABLED.name) {
                     return prev +
                         `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
-                            <small class="\${fontClass}">\${next.name}</small>
+                            <small class="\${fontClass}">\${next.setup ? "*" : ""}\${next.name}</small>
                             <img src="\${next.image}" class="img-responsive img-rounded m-auto" />
                         </div>`;
                 }
 
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
-                        <small class="\${fontClass}">\${next.name}</small>
+                        <small class="\${fontClass}">\${next.setup ? "*" : ""}\${next.name}</small>
                         <img src="\${next.image}" class="img-responsive img-thumbnail m-auto"
                             onclick="setPlayedCharacter('\${next.id}')" />
                     </div>`;
@@ -304,7 +321,7 @@
 
                 return prev +
                     `<div class="col-4 text-center pt-2 \${fontClass}">
-                        <small class="\${fontClass}">\${character.name}</small>
+                        <small class="\${fontClass}">\${character.setup ? "*" : ""}\${character.name}</small>
                         <img src="\${character.image}" class="img-responsive img-thumbnail m-auto"
                             onclick="removePlayedCharacter('\${next.characterId}')" />
                     </div>`;
@@ -1265,6 +1282,8 @@
                 travellerCharacterList: JSON.stringify(travellerCharacterList),
                 playerList: JSON.stringify(playerList),
                 playStatus: JSON.stringify(playStatus),
+                informationMessageHistoryList: JSON.stringify(informationMessageHistoryList),
+                questionMessageHistoryList: JSON.stringify(questionMessageHistoryList),
             }
 
             const request = {
@@ -1296,6 +1315,8 @@
             travellerCharacterList = JSON.parse(lastPlayLogJson.travellerCharacterList);
             playerList = JSON.parse(lastPlayLogJson.playerList);
             playStatus = JSON.parse(lastPlayLogJson.playStatus);
+            informationMessageHistoryList = JSON.parse(lastPlayLogJson.informationMessageHistoryList);
+            questionMessageHistoryList = JSON.parse(lastPlayLogJson.questionMessageHistoryList);
 
             console.log('game status loaded !!');
         }
@@ -1350,6 +1371,16 @@
 
         const openQrLoginModal = () => {
             qrLoginModal.open(createAssignedPlayerList());
+        }
+
+        const openInformationGenerationModal = async () => {
+            informationTemplateList = await readInformationTemplateList();
+            await informationGenerationModal.open(informationTemplateList, informationMessageHistoryList);
+        }
+
+        const openQuestionGenerationModal = async () => {
+            questionTemplateList = await readQuestionsTemplateList();
+            await questionGenerationModal.open(questionTemplateList, questionMessageHistoryList);
         }
 
         const openSoundEffectModal = () => {
@@ -1464,13 +1495,6 @@
                                 <hr class="mt-2 mb-2">
                                 <h4>징크스</h4>
                                 <div class="" name="selectedJinxListDiv"></div>
-                                <hr class="mt-2 mb-2">
-                                트러블 브루잉 추천 조합(8인 기준)<br/>
-                                <small>
-                                    - 밸런스 : 요리사, 공감능력자, 점쟁이, 장의사, 처녀, 주정뱅이(조사관), 부정한 여자, 임프<br/>
-                                    - 조용한 게임 : 공감능력자, 점쟁이, 레이븐키퍼, 슬레이어, 시장, 성자, 독살범, 임프<br/>
-                                    - 숙련자 게임 : 세탁부, 점쟁이, 장의사, 슬레이어, 처녀, 은둔자, 스파이, 임프<br/>
-                                </small>
                             </div>
                             <div class="card-footer py-4">
                                 <div name="buttonDiv">
@@ -1552,7 +1576,7 @@
                                     에디션 정보
                                     <a data-toggle="collapse" href="#editionInfoBodyDiv" role="button"
                                        aria-expanded="false"
-                                       aria-controls="ditionInfoBodyDiv">
+                                       aria-controls="editionInfoBodyDiv">
                                         열기/닫기
                                     </a>
                                 </h2>
@@ -1782,6 +1806,14 @@
                                         노트
                                     </button>
                                     <button type="button" class="btn btn-default btn-block"
+                                            onclick="openInformationGenerationModal()">
+                                        정보 생성
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-block"
+                                            onclick="openQuestionGenerationModal()">
+                                        질문 생성
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-block"
                                             onclick="openSoundEffectModal()">
                                         소리 효과
                                     </button>
@@ -1846,6 +1878,9 @@
 <%@ include file="/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" %>
 
 <%@ include file="/WEB-INF/jsp/game/noteModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/informationGenerationModal.jspf" %>
+<%@ include file="/WEB-INF/jsp/game/questionGenerationModal.jspf" %>
+
 <%@ include file="/WEB-INF/jsp/game/soundEffectModal.jspf" %>
 <%@ include file="/WEB-INF/jsp/game/qrLoginModal.jspf" %>
 

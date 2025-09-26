@@ -1,0 +1,143 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    $(() => {
+        const $questionGenerationModal = $("#questionGenerationModal");
+        $questionGenerationModal.on('hide.bs.modal', event => {
+            saveGameStatus();
+        });
+    });
+
+    const questionGenerationModal = {
+        questionMessageHistoryList,
+        open: (questionGenerationList, questionMessageHistoryList) => {
+            questionGenerationModal.questionMessageHistoryList = questionMessageHistoryList;
+
+            const $modal = $("#questionGenerationModal");
+
+            const $select = $modal.find("select");
+            const optionsHtml = questionGenerationList
+                .reduce((prev, next) => {
+                    return prev + `<option value="\${next}">\${next}</option>`;
+                }, `<option value="">선택</option>`);
+            $select.append(optionsHtml);
+
+            questionGenerationModal.renderQuestionMessageHistoryOl();
+
+            $modal.modal("show");
+        },
+        close: () => {
+        },
+        selectQuestion: () => {
+            const $modal = $("#questionGenerationModal");
+            const $select = $modal.find("select");
+            const value = $select.val();
+            if (value === "") {
+                return;
+            }
+
+            const $questionInput = $modal.find("input[name='questionInput']");
+            $questionInput.val(value);
+        },
+        renderQuestionMessageHistoryOl: () => {
+            const $modal = $("#questionGenerationModal");
+
+            const $questionMessageHistoryOl = $modal.find("ol[name='questionMessageHistoryOl']");
+
+            const questionMessageHistoryHtml = questionGenerationModal.questionMessageHistoryList
+                .reduce((prev, next) => {
+                    return prev + "<li data-question='" + next + "'>" + next + "<span class='text-red'>[삭제]</span></li>";
+                }, "");
+
+            $questionMessageHistoryOl.html(questionMessageHistoryHtml);
+
+            $questionMessageHistoryOl.find("li > span").on("click", event => {
+                const $li = $(event.currentTarget).parent(); // 클릭된 <i>의 부모 li 요소
+                const question = $li.data("question"); // data-question 값 가져오기
+
+                questionGenerationModal.questionMessageHistoryList =
+                    questionGenerationModal.questionMessageHistoryList.filter(item => {
+                        return item !== question;
+                    });
+
+                $li.remove();
+            });
+        },
+        showQuestionMessage: () => {
+            const $modal = $("#questionGenerationModal");
+            const $questionInput = $modal.find("input[name='questionInput']");
+            const question = $questionInput.val();
+
+            if (question.trim() === "") {
+                alert("표시할 질문이 없습니다.");
+                return;
+            }
+
+            questionGenerationModal.questionMessageHistoryList.push(question);
+
+            $modal.find("div[name='questionEditDiv']").hide();
+
+            const $questionMessageDiv = $modal.find("div[name='questionMessageDiv']");
+            $questionMessageDiv.find("h1").text(question);
+            $questionMessageDiv.css("display", "flex");
+
+            $modal.find("ol[name='questionMessageHistoryOl']").hide();
+
+            $modal.find("button[name='showQuestionMessageButton']").hide();
+            $modal.find("button[name='hideQuestionMessageButton']").show();
+        },
+        hideQuestionMessage: () => {
+            const $modal = $("#questionGenerationModal");
+
+            $modal.find("div[name='questionEditDiv']").show();
+
+            const $questionMessageDiv = $modal.find("div[name='questionMessageDiv']");
+            $questionMessageDiv.find("h1").text("");
+            $questionMessageDiv.hide();
+
+            questionGenerationModal.renderQuestionMessageHistoryOl();
+            $modal.find("ol[name='questionMessageHistoryOl']").show();
+
+            $modal.find("button[name='showQuestionMessageButton']").show();
+            $modal.find("button[name='hideQuestionMessageButton']").hide();
+        }
+    }
+</script>
+
+<!-- Original Modal -->
+<div class="modal fade" id="questionGenerationModal" role="dialog"
+     aria-labelledby="questionGenerationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">질문 생성</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="questionEditDiv">
+                    <select class="form-control" onchange="questionGenerationModal.selectQuestion()"></select>
+                    <hr>
+                    <input type="text" name="questionInput" class="form-control">
+                    <hr>
+                    <ol name="questionMessageHistoryOl"></ol>
+                </div>
+                <div name="questionMessageDiv" style="height: 60vh; display: none; align-items: center;">
+                    <h1></h1>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-block" name="showQuestionMessageButton"
+                        onclick="questionGenerationModal.showQuestionMessage()">보이기
+                </button>
+                <button type="button" class="btn btn-warning btn-block display-none" name="hideQuestionMessageButton"
+                        onclick="questionGenerationModal.hideQuestionMessage()">숨기기
+                </button>
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,143 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<script>
+    $(() => {
+        const $informationGenerationModal = $("#informationGenerationModal");
+        $informationGenerationModal.on('hide.bs.modal', event => {
+            saveGameStatus();
+        });
+    });
+    
+    const informationGenerationModal = {
+        informationMessageHistoryList,
+        open: (informationGenerationList, informationMessageHistoryList) => {
+            informationGenerationModal.informationMessageHistoryList = informationMessageHistoryList;
+
+            const $modal = $("#informationGenerationModal");
+
+            const $select = $modal.find("select");
+            const optionsHtml = informationGenerationList
+                .reduce((prev, next) => {
+                    return prev + `<option value="\${next}">\${next}</option>`;
+                }, `<option value="">선택</option>`);
+            $select.append(optionsHtml);
+
+            informationGenerationModal.renderInformationMessageHistoryOl();
+
+            $modal.modal("show");
+        },
+        close: () => {
+        },
+        selectInformation: () => {
+            const $modal = $("#informationGenerationModal");
+            const $select = $modal.find("select");
+            const value = $select.val();
+            if (value === "") {
+                return;
+            }
+
+            const $informationInput = $modal.find("input[name='informationInput']");
+            $informationInput.val(value);
+        },
+        renderInformationMessageHistoryOl: () => {
+            const $modal = $("#informationGenerationModal");
+
+            const $informationMessageHistoryOl = $modal.find("ol[name='informationMessageHistoryOl']");
+
+            const informationMessageHistoryHtml = informationGenerationModal.informationMessageHistoryList
+                .reduce((prev, next) => {
+                    return prev + "<li data-information='" + next + "'>" + next + "<span class='text-red'>[삭제]</span></li>";
+                }, "");
+
+            $informationMessageHistoryOl.html(informationMessageHistoryHtml);
+
+            $informationMessageHistoryOl.find("li > span").on("click", event => {
+                const $li = $(event.currentTarget).parent(); // 클릭된 <i>의 부모 li 요소
+                const information = $li.data("information"); // data-information 값 가져오기
+
+                informationGenerationModal.informationMessageHistoryList =
+                    informationGenerationModal.informationMessageHistoryList.filter(item => {
+                        return item !== information;
+                    });
+
+                $li.remove();
+            });
+        },
+        showInformationMessage: () => {
+            const $modal = $("#informationGenerationModal");
+            const $informationInput = $modal.find("input[name='informationInput']");
+            const information = $informationInput.val();
+
+            if (information.trim() === "") {
+                alert("표시할 정보가 없습니다.");
+                return;
+            }
+
+            informationGenerationModal.informationMessageHistoryList.push(information);
+
+            $modal.find("div[name='informationEditDiv']").hide();
+
+            const $informationMessageDiv = $modal.find("div[name='informationMessageDiv']");
+            $informationMessageDiv.find("h1").text(information);
+            $informationMessageDiv.css("display", "flex");
+
+            $modal.find("ol[name='informationMessageHistoryOl']").hide();
+
+            $modal.find("button[name='showInformationMessageButton']").hide();
+            $modal.find("button[name='hideInformationMessageButton']").show();
+        },
+        hideInformationMessage: () => {
+            const $modal = $("#informationGenerationModal");
+
+            $modal.find("div[name='informationEditDiv']").show();
+
+            const $informationMessageDiv = $modal.find("div[name='informationMessageDiv']");
+            $informationMessageDiv.find("h1").text("");
+            $informationMessageDiv.hide();
+
+            informationGenerationModal.renderInformationMessageHistoryOl();
+            $modal.find("ol[name='informationMessageHistoryOl']").show();
+
+            $modal.find("button[name='showInformationMessageButton']").show();
+            $modal.find("button[name='hideInformationMessageButton']").hide();
+        }
+    }
+</script>
+
+<!-- Original Modal -->
+<div class="modal fade" id="informationGenerationModal" role="dialog"
+     aria-labelledby="informationGenerationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="">정보 생성</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div name="informationEditDiv">
+                    <select class="form-control" onchange="informationGenerationModal.selectInformation()"></select>
+                    <hr>
+                    <input type="text" name="informationInput" class="form-control">
+                    <hr>
+                    <ol name="informationMessageHistoryOl"></ol>
+                </div>
+                <div name="informationMessageDiv" style="height: 60vh; display: none; align-items: center;">
+                    <h1></h1>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-block" name="showInformationMessageButton"
+                        onclick="informationGenerationModal.showInformationMessage()">보이기
+                </button>
+                <button type="button" class="btn btn-warning btn-block display-none" name="hideInformationMessageButton"
+                        onclick="informationGenerationModal.hideInformationMessage()">숨기기
+                </button>
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

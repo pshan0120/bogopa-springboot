@@ -7,6 +7,7 @@
         playedCharacterList: [],
         playerList: [],
         playStatus: {},
+        playerSetting: {},
         open: async playId => {
             townModal.selectedEditionId = null;
             townModal.selectedCharacterList = [];
@@ -29,6 +30,9 @@
 
             const playerSetting = initializationSetting.player
                 .find(player => townModal.playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
+
+            townModal.playerSetting = playerSetting;
+
             const roleInitializationHtml = `
                 <span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
                 <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
@@ -173,6 +177,48 @@
                 ctx.font = (seatRadius * 0.4) + "px sans-serif";
                 ctx.fillText(icons, x, y + seatRadius * 0.35);
             }
+
+            const img = new Image();
+            img.src = "https://wiki.bloodontheclocktower.com/skins/pivot/assets/images/logo.png";
+            img.onload = () => {
+                const imgSize = width * 0.18;
+
+                const imgX = centerX - imgSize / 2;
+                const imgY = centerY - imgSize * 1.0;
+
+                ctx.drawImage(img, imgX, imgY, imgSize, imgSize);
+
+                ctx.font = "bold " + (width * 0.04) + "px sans-serif";
+                ctx.fillStyle = "#fff";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                let currentY = imgY + imgSize + 5;
+                ctx.fillText(playStatus.edition.name_kr, centerX, currentY);
+
+                ctx.font = (width * 0.025) + "px sans-serif";
+                ctx.fillStyle = "#ddd";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                currentY += width * 0.06;
+                ctx.fillText("(" + playStatus.edition.name + ")", centerX, currentY);
+
+                ctx.font = (width * 0.035) + "px sans-serif";
+                ctx.fillStyle = "#ddd";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                currentY += width * 0.06 + 1;
+
+                const roleInitializationText = `\${townModal.playerSetting.townsFolk} / \${townModal.playerSetting.outsider} / \${townModal.playerSetting.minion} / \${townModal.playerSetting.demon}`;
+                ctx.fillText(roleInitializationText, centerX, currentY);
+
+                ctx.font = (width * 0.035) + "px sans-serif";
+                ctx.fillStyle = townModal.playStatus.isDay ? "#fddb01" : "#9d8909";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                currentY += width * 0.06 + 2;
+
+                ctx.fillText(townModal.createDaySpanText(), centerX, currentY);
+            };
         },
         createDaySpanText: () => townModal.createDayCountText() + " " + townModal.createDayAndNightEmoji(),
         createDayCountText: () => (townModal.playStatus.dayCount ?? "-") + "일차",

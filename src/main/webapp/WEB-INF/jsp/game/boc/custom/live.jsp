@@ -15,6 +15,7 @@
         let playedCharacterList = [];
         let playerList = [];
         let playStatus = {};
+        let playerSetting = {};
 
         $(async () => {
             await initialize();
@@ -35,16 +36,17 @@
             const $townDiv = $("#townDiv");
             const $settingDiv = $townDiv.find("div[name='settingDiv']");
 
-            await $settingDiv.find("span[name='daySpan']").text(createDaySpanText());
+            // await $settingDiv.find("span[name='daySpan']").text(createDaySpanText());
 
-            const playerSetting = initializationSetting.player
+            playerSetting = initializationSetting.player
                 .find(player => playerList.length === player.townsFolk + player.outsider + player.minion + player.demon);
-            const roleInitializationHtml = `
-                <span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
-                <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
-                <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
-                <span class="text-danger">악마 \${playerSetting.demon}명</span>`;
-            $settingDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
+
+            // const roleInitializationHtml = `
+            //     <span class="text-primary">마을주민 \${playerSetting.townsFolk}명</span>,
+            //     <span class="text-info">이방인 \${playerSetting.outsider}명</span>,
+            //     <span class="text-warning">하수인 \${playerSetting.minion}명</span>,
+            //     <span class="text-danger">악마 \${playerSetting.demon}명</span>`;
+            // $settingDiv.find("span[name='roleInitialization']").html(roleInitializationHtml);
 
             if (Object.keys(playStatus).length === 0) {
                 const htmlString = `게임이 시작되지 않았습니다.`;
@@ -90,7 +92,7 @@
             const $townDiv = $("#townDiv");
             const $settingDiv = $townDiv.find("div[name='settingDiv']");
 
-            await $settingDiv.find("span[name='daySpan']").text(createDaySpanText());
+            // await $settingDiv.find("span[name='daySpan']").text(createDaySpanText());
 
             if (playStatus.isDay) {
                 await renderTown();
@@ -170,6 +172,48 @@
                 ctx.font = (seatRadius * 0.4) + "px sans-serif";
                 ctx.fillText(icons, x, y + seatRadius * 0.35);
             }
+
+            const img = new Image();
+            img.src = "https://wiki.bloodontheclocktower.com/skins/pivot/assets/images/logo.png";
+            img.onload = () => {
+                const imgSize = width * 0.18;
+
+                const imgX = centerX - imgSize / 2;
+                const imgY = centerY - imgSize * 1.0;
+
+                ctx.drawImage(img, imgX, imgY, imgSize, imgSize);
+
+                ctx.font = "bold " + (width * 0.04) + "px sans-serif";
+                ctx.fillStyle = "#fff";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                let currentY = imgY + imgSize + 5;
+                ctx.fillText(playStatus.edition.name_kr, centerX, currentY);
+
+                ctx.font = (width * 0.025) + "px sans-serif";
+                ctx.fillStyle = "#ddd";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                currentY += width * 0.06;
+                ctx.fillText("(" + playStatus.edition.name + ")", centerX, currentY);
+
+                ctx.font = (width * 0.035) + "px sans-serif";
+                ctx.fillStyle = "#ddd";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                currentY += width * 0.06 + 1;
+
+                const roleInitializationText = `\${playerSetting.townsFolk} / \${playerSetting.outsider} / \${playerSetting.minion} / \${playerSetting.demon}`;
+                ctx.fillText(roleInitializationText, centerX, currentY);
+
+                ctx.font = (width * 0.035) + "px sans-serif";
+                ctx.fillStyle = playStatus.isDay ? "#fddb01" : "#9d8909";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                currentY += width * 0.06 + 2;
+
+                ctx.fillText(createDaySpanText(), centerX, currentY);
+            };
         }
 
         const createDaySpanText = () => createDayCountText() + " " + createDayAndNightEmoji();
