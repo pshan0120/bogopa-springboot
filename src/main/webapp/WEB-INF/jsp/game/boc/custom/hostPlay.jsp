@@ -20,6 +20,8 @@
             7. 그리모어 표시 기능
             8. 정보/질문 생성 기능 : 완료
             9. 마을광장 개선 : 완료
+            10. 투표 수정 : 밤/낮 단계로 이동시 투표 초기화
+            11. 생사귀 global reminder : 완료
          */
         const PLAY_ID = ${playId};
         let editionList = [];
@@ -1098,6 +1100,7 @@
 
             playStatus.isDay = false;
             playStatus.dayCount = playStatus.dayCount ? ++playStatus.dayCount : 2;
+            // TODO: 투표 초기화
 
             const $playerStatusDiv = $("#playerStatusDiv");
             $playerStatusDiv.find("span[name='daySpan']").text(createDaySpanText());
