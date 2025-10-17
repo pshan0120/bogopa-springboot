@@ -125,7 +125,7 @@
             document.getElementById("baseMinutes").value = 7;
             document.getElementById("baseBlind").value = 100;
 
-            document.getElementById("level").textContent = document.getElementById("modeSelect").value + " MODE: LEVEL 1";
+            document.getElementById("level").textContent = document.getElementById("modeSelect").value + " LEVEL 1";
             document.getElementById("blinds").textContent = "- / -";
             document.getElementById("next-level").textContent = "-";
             document.getElementById("next-blinds").textContent = "-";
@@ -190,7 +190,7 @@
             if (currentLevel > blindLevels.length) currentLevel = blindLevels.length;
 
             document.getElementById("level").textContent =
-                document.getElementById("modeSelect").value + " MODE: LEVEL " + currentLevel;
+                document.getElementById("modeSelect").value + " LEVEL " + currentLevel;
 
             document.getElementById("blinds").textContent =
                 formatNumberWithComma(blind) + " / " + formatNumberWithComma(blind * 2);
@@ -292,7 +292,7 @@
         <div class="col-12">
             <div class="header">
                 <span class="game-name">Friendly Game</span>
-                 <span class="level" id="level">NORMAL MODE: LEVEL 1</span>
+                 <span class="level" id="level">NORMAL LEVEL 1</span>
             </div>
         </div>
     </div>
