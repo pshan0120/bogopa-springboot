@@ -205,5 +205,15 @@
         "jsonFileName": "naughty-or-nice.json",
         "description": "",
         "note": ""
+    },
+    {
+        "id": "lol",
+        "name": "League Of Legend",
+        "name_kr": "리그 오브 레전드",
+        "type": "full",
+        "jsonFileName": "league-of-legend.json",
+        "description": "",
+        "note": ""
     }
+
 ]

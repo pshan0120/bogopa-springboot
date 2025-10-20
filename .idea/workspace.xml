@@ -23,22 +23,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="&quot;MODE&quot; 문구 제거 및 텍스트 간결화&#10;&#10;- &quot;MODE&quot; 문구를 제거하여 텍스트를 간결하게 수정&#10;- LEVEL 표시 방식 통일로 가독성 개선">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/non/nutcracker.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/boc/icons/non/rudolph.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/naughty-or-nice.json" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 캐릭터 번역 및 기능 설명 업데이트&#10;&#10;- &quot;레이븐키퍼&quot;를 &quot;까마귀사육사&quot;로 변경&#10;- &quot;슬레이어&quot;를 &quot;처단자&quot;로 변경&#10;- 신규 캐릭터 추가 및 JSON 데이터 업데이트">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/league-of-legend.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/expertRoleGuideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/nightStepGuideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/roleGuideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/guideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/ravenKeeper.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/slayer.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/slayer.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/game/boc/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/game/boc/roles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/editions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinxes/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/jinxes/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/naughty-or-nice.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/naughty-or-nice.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +99,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/dev/bogopa/src/main/webapp/images/fo/boc/icons/non",
+    "last_opened_file_path": "C:/dev/bogopa/src/main/webapp/resources/assets/game/boc/data/scripts",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -128,8 +118,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\bogopa\src\main\webapp\images\fo\boc\icons\non" />
       <recent name="C:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\scripts" />
+      <recent name="C:\dev\bogopa\src\main\webapp\images\fo\boc\icons\non" />
       <recent name="C:\dev\bogopa\src\main\webapp\WEB-INF\jsp\game" />
       <recent name="C:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\questions" />
       <recent name="C:\dev\bogopa\src\main\webapp\resources\assets\game\boc\data\informations" />
@@ -400,7 +390,7 @@
       <workItem from="1759905961336" duration="5690000" />
       <workItem from="1760347882071" duration="318000" />
       <workItem from="1760686046546" duration="4166000" />
-      <workItem from="1760958963157" duration="8853000" />
+      <workItem from="1760958963157" duration="11942000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -745,7 +735,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="210" />
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -778,7 +768,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="추가: 마을 광장 Live 기능 및 관련 로직 구현&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 컨트롤러 메서드 추가&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현&#10;- townModal 및 clientPlay.jsp에 Live 기능 연결 및 버튼 추가" />
     <MESSAGE value="추가: 마을 광장 Live 기능 지원 및 UI 개선&#10;&#10;- `/game/boc-custom/play/live/{playId}` 엔드포인트 및 관련 컨트롤러 메서드 추가.&#10;- live.jsp 생성 및 실시간 렌더링 로직 구현.&#10;- townModal 및 clientPlay.jsp에 Live 관련 버튼과 연결 작업 수행.&#10;- votable UI의 선 굵기 조정으로 가시성 개선." />
     <MESSAGE value="수정: 마을 광장 Live 상태를 낮/밤으로 변경&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 리팩토링.&#10;- 관련 버튼 이름 및 로직을 낮/밤 전환 기능으로 변경." />
     <MESSAGE value="수정: 낮/밤 전환 로직 및 UI 리팩토링&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 변경.&#10;- 관련 버튼 이름 및 로직 업데이트." />
@@ -803,7 +792,8 @@
     <MESSAGE value="수정: 투표 초기화 로직 및 생사귀 리마인더 추가&#10;&#10;- executionModal 투표 관련 상태 초기화 로직 추가.&#10;- 생사귀 관련 global reminder 항목 추가 및 번역 필드 수정.&#10;- 밤/낮 단계 전환 시 투표 초기화 로직 추가." />
     <MESSAGE value="추가: 포커 타이머 모드별 블라인드 설정 기능&#10;&#10;- SLOW, NORMAL, FAST 모드 추가 및 각 모드별 블라인드/안티 레벨 설정 구현.&#10;- 모드 선택에 따른 UI 업데이트 및 기본 초기화 처리 추가.&#10;- 타이머 관련 계산 및 표시 로직 미세 조정." />
     <MESSAGE value="&quot;MODE&quot; 문구 제거 및 텍스트 간결화&#10;&#10;- &quot;MODE&quot; 문구를 제거하여 텍스트를 간결하게 수정&#10;- LEVEL 표시 방식 통일로 가독성 개선" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;MODE&quot; 문구 제거 및 텍스트 간결화&#10;&#10;- &quot;MODE&quot; 문구를 제거하여 텍스트를 간결하게 수정&#10;- LEVEL 표시 방식 통일로 가독성 개선" />
+    <MESSAGE value="수정: 캐릭터 번역 및 기능 설명 업데이트&#10;&#10;- &quot;레이븐키퍼&quot;를 &quot;까마귀사육사&quot;로 변경&#10;- &quot;슬레이어&quot;를 &quot;처단자&quot;로 변경&#10;- 신규 캐릭터 추가 및 JSON 데이터 업데이트" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정: 캐릭터 번역 및 기능 설명 업데이트&#10;&#10;- &quot;레이븐키퍼&quot;를 &quot;까마귀사육사&quot;로 변경&#10;- &quot;슬레이어&quot;를 &quot;처단자&quot;로 변경&#10;- 신규 캐릭터 추가 및 JSON 데이터 업데이트" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
