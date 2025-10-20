@@ -53,7 +53,7 @@ class Role {
 
         if (player.name === Slayer.name
             && !player.skillAvailable) {
-            playerStatusList.push("슬레이어 능력 없음");
+            playerStatusList.push("처단자 능력 없음");
         }
 
         if (player.name === Butler.name
@@ -274,7 +274,7 @@ class Monk extends TownsFolkRole {
 
 class RavenKeeper extends TownsFolkRole {
     static name = "ravenkeeper";
-    static title = "레이븐키퍼";
+    static title = "까마귀사육사";
     static description = "만약 당신이 밤에 죽는다면, 당신은 플레이어를 선택한 뒤 그 사람의 역할을 알게 됩니다.";
 
     constructor() {
@@ -295,7 +295,7 @@ class Virgin extends TownsFolkRole {
 
 class Slayer extends TownsFolkRole {
     static name = "slayer";
-    static title = "슬레이어";
+    static title = "처단자";
     static description = "게임 중 한 번, 낮에 공개적으로 플레이어를 지목합니다. 악마를 제대로 지목했다면 그 악마는 사망합니다.";
 
     constructor() {

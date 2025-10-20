@@ -2161,7 +2161,7 @@
         "edition": "",
         "team": "townsfolk",
         "firstNight": 43,
-        "firstNightReminder": "특정 순서 없이 악한 참가자 1명을 포함한 3명의 참가자를 가리킵니다.",
+        "firstNightReminder": "특정 순서 없이 악한 참가자 1명과 선한 참가자 2명을 가리킵니다.",
         "firstNightReminder_en": "Point to 3 players including one evil player, in no particular order.",
         "otherNight": 0,
         "otherNightReminder": "",
@@ -2575,13 +2575,13 @@
     },
     {
         "id": "ravenkeeper",
-        "name": "레이븐키퍼",
+        "name": "까마귀사육사",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
         "firstNightReminder": "",
         "otherNight": 42,
-        "otherNightReminder": "만약 레이븐키퍼가 오늘 밤 죽었다면: 레이븐키퍼가 참가자를 가리킵니다. 그 참가자의 역할 토큰을 보여줍니다.",
+        "otherNightReminder": "만약 까마귀사육사가 오늘 밤 죽었다면: 까마귀사육사가 참가자를 가리킵니다. 그 참가자의 역할 토큰을 보여줍니다.",
         "otherNightReminder_en": "If the Ravenkeeper died tonight: The Ravenkeeper points to a player. Show that player's character token.",
         "reminders": [],
         "setup": false,
@@ -2803,7 +2803,7 @@
     },
     {
         "id": "slayer",
-        "name": "슬레이어",
+        "name": "처단자",
         "edition": "tb",
         "team": "townsfolk",
         "firstNight": 0,
@@ -3174,7 +3174,7 @@
             "No ability"
         ],
         "setup": false,
-        "ability": "당신이 처음 재판에 지명받았을 때, 만약 당신을 지명한 사람이 마을주민이라면 그 참가자는 처녀 대신 즉시 처형됩니다.",
+        "ability": "당신이 처음 재판에 지명받았을 때, 만약 당신을 지명한 사람이 마을주민이라면 그 참가자는 즉시 처형됩니다.",
         "image": "/images/fo/boc/icons/townsfolk/virgin.webp"
     },
     {
@@ -3258,7 +3258,7 @@
         "edition": "",
         "team": "minion",
         "firstNight": 18,
-        "firstNightReminder": "과부가 필요로 하는 만큼 그리모아를 보여줍니다. 과부가 참가자를 가리킵니다. 그 참가자는 중독됩니다. 선한 참가자를 깨웁니다. '이 역할들이 플레이에 참여하고 있습니다' 카드를 보여주고, 그 다음 과부 역할 토큰을 보여줍니다.",
+        "firstNightReminder": "과부가 필요로 하는 만큼 그리모어를 보여줍니다. 과부가 참가자를 가리킵니다. 그 참가자는 중독됩니다. 선한 참가자를 깨웁니다. '이 역할들이 플레이에 참여하고 있습니다' 카드를 보여주고, 그 다음 과부 역할 토큰을 보여줍니다.",
         "firstNightReminder_en": "Show the Grimoire to the Widow for as long as they need. The Widow points to a player. That player is poisoned. Wake a good player. Show the 'These characters are in play' card, then the Widow character token.",
         "otherNight": 0,
         "otherNightReminder": "",
@@ -3275,7 +3275,7 @@
             "Knows"
         ],
         "setup": false,
-        "ability": "첫날 밤, 당신은 모든 참가자의 역할을 알게 됩니다. 그리고 1명의 참가자를 선택합니다. 그는 과부가 죽거나 역할이 바뀔 때까지 중독됩니다. 만약 과부가 중독되거나 취했다면 그 동안만 그는 독이 사라집니다. 이와 별개로 선한 참가자 중 1명은 과부가 참여중이라는 것을 알게 됩니다.",
+        "ability": "첫날 밤, 당신은 모든 참가자의 역할을 알게 됩니다. 그리고 1명의 참가자를 선택합니다. 그는 과부가 없어질 때까지 중독됩니다. 만약 과부가 중독되거나 취했다면 그 동안만 그는 독이 사라집니다. 이와 별개로 선한 참가자 중 1명은 과부가 참여중이라는 것을 알게 됩니다.",
         "image": "/images/fo/boc/icons/minion/widow.webp"
     },
     {
@@ -4659,5 +4659,475 @@
         "team": "fabled",
         "ability": "chill하게 하고 재미있게 하는 사람은 이야기꾼이 이뻐해 줌",
         "image": "/images/fo/boc/icons/siij/chill_lovekorea_v2.webp"
+    },
+
+    {
+        "id": "johnmcclane",
+        "name": "존 맥클레인",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
+            "No ability"
+        ],
+        "setup": false,
+        "ability": "게임 중 한 번, 낮에 공개적으로 '이피 카이-예이'라고 말하며 참가자를 선택합니다. 악마를 제대로 선택했다면 그 악마는 사망합니다.",
+        "ability_en": "Once per game, during the day, Say \"Yipee Ki-Yay\" and publicly choose a player: if they are the Demon, they die.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/johnmcclane.webp"
+    },
+    {
+        "id": "rudolph",
+        "name": "루돌프",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 2,
+        "otherNightReminder": "이전에 보호받던 참가자는 더 이상 보호받지 않습니다. 루돌프는 자신이 아닌 참가자를 가리킵니다. 그 참가자를 '보호됨'으로 표시합니다.",
+        "otherNightReminder_en": "The previously protected player is no longer protected. The Monk points to a player not themself. Mark that player 'Protected'.",
+        "reminders": [
+            "보호됨"
+        ],
+        "reminders_en": [
+            "Protected"
+        ],
+        "setup": false,
+        "ability": "첫날 밤을 제외한 매일 밤, 당신은 당신을 제외한 참가자를 선택합니다. 오늘 밤 악마가 그를 해치려 한다면 허탕치게 됩니다.",
+        "ability_en": "Each night*, choose a player (not yourself): you guide their sleight tonight, they are safe from the Demon.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/rudolph.webp"
+    },
+    {
+        "id": "nutcracker",
+        "name": "호두까기 인형",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [],
+        "setup": false,
+        "ability": "당신은 악마의 공격과 각종 부정적 효과로부터 안전합니다.",
+        "ability_en": "You are safe from the Demon.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/nutcracker.webp"
+    },
+    {
+        "id": "tinytim",
+        "name": "타이니 팀",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [
+            "능력 없음"
+        ],
+        "reminders_en": [
+            "No ability"
+        ],
+        "setup": false,
+        "ability": "당신이 처음 재판에 지명받았을 때, 만약 당신을 지명한 사람이 마을주민이라면 그 참가자는 즉시 처형됩니다.",
+        "ability_en": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/tinytim.webp"
+    },
+    {
+        "id": "papa_elf",
+        "name": "파파 엘프",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 7,
+        "firstNightReminder": "선한 참가자 1명을 가리킵니다.",
+        "firstNightReminder_en": "Point to 1 good player.",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [
+            "알기"
+        ],
+        "reminders_en": [
+            "Know"
+        ],
+        "setup": false,
+        "ability": "당신은 착한 아이 목록에 있는 선한 참가자 1명을 알면서 시작합니다.",
+        "ability_en": "You start knowing a player on the Nice List",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/papa_elf.webp"
+    },
+    {
+        "id": "buddy",
+        "name": "버디",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 5,
+        "firstNightReminder": "버디의 살아있는 악한 이웃의 수에 대한 손가락 신호(0, 1, 2)를 보여줍니다.",
+        "firstNightReminder_en": "Show the finger signal (0, 1, 2) for the number of evil alive neighbours of the Empath.",
+        "otherNight": 6,
+        "otherNightReminder": "악한 이웃의 수에 대한 손가락 신호(0, 1, 2)를 보여줍니다.",
+        "otherNightReminder_en": "Show the finger signal (0, 1, 2) for the number of evil neighbours.",
+        "reminders": [],
+        "reminders_en": [],
+        "setup": false,
+        "ability": "매일 밤, 당신은 좌우에 있는 살아있는 두 이웃 중 얼마나 많은 사람이 못된 아이 목록에 있는지 알게 됩니다.",
+        "ability_en": "Each night, you learn how many of your 2 alive neighbours are on the Naughty List.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/buddy.webp"
+    },
+    {
+        "id": "santa",
+        "name": "산타클로스",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 6,
+        "firstNightReminder": "산타클로스가 두 명의 참가자를 가리킵니다. 그 참가자 중 하나가 악마인지에 대해 고개 신호(예라고 끄덕임, 아니오라고 흔듦)를 보여줍니다.",
+        "firstNightReminder_en": "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
+        "otherNight": 7,
+        "otherNightReminder": "산타클로스가 두 명의 참가자를 가리킵니다. 그 참가자 중 하나가 악마인지에 대해 고개 신호('예'라고 끄덕임, '아니오'라고 흔듦)를 보여줍니다.",
+        "otherNightReminder_en": "The Fortune Teller points to two players. Show the head signal (nod 'yes', shake 'no') for whether one of those players is the Demon.",
+        "reminders": [
+            "빨간 청어"
+        ],
+        "reminders_en": [
+            "Red herring"
+        ],
+        "setup": false,
+        "ability": "매일 밤, 당신은 당신이 지정한 2명의 참가자 중 악마가 있는지 알게 됩니다. 다만 실제로는 선한 참가자지만 당신에게는 악마로 보이는 사람이 1명 있습니다.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/santa.webp"
+    },
+    {
+        "id": "christmasspirit",
+        "name": "크리스마스 정령",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [],
+        "setup": false,
+        "ability": "만약 단 세명의 참가자만 살아남았고 재판으로 아무도 죽지 않는다면 모두들 크리스마스 정령을 받아들였기에 당신의 팀은 승리합니다. 만약 당신이 밤에 죽는다면 다른 참가자가 당신 대신 희생될 수 있습니다.",
+        "ability_en": "If only 3 players live & no execution occurs, everyone has embraced the Christmas Spirit and your team wins. If you die at night, another player might die instead.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/christmasspirit.webp"
+    },
+    {
+        "id": "listkeeper",
+        "name": "명단 관리자",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 8,
+        "firstNightReminder": "특정 순서 없이 악한 참가자 1명과 선한 참가자 2명을 가리킵니다.",
+        "firstNightReminder_en": "Point to 3 players including one evil player, in no particular order.",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [
+            "보임"
+        ],
+        "reminders_en": [
+            "Seen"
+        ],
+        "setup": false,
+        "ability": "당신은 시작할 때 세 명의 참가자를 알게 되는데 그 중 1명만이 못된 아이 목록에 있습니다.",
+        "ability_en": "You start knowing 3 players, 1 and only 1 of which is on the Naughty List.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/listkeeper.webp"
+    },
+    {
+        "id": "mistletoemonitor",
+        "name": "겨우살이 감시자",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 4,
+        "firstNightReminder": "인접한 악한 참가자 쌍의 수에 대한 손가락 신호(0, 1, 2, …)를 보여줍니다.",
+        "firstNightReminder_en": "Show the finger signal (0, 1, 2, …) for the number of pairs of neighbouring evil players.",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "otherNightReminder_en": "",
+        "reminders": [],
+        "reminders_en": [],
+        "setup": false,
+        "ability": "첫날 밤, 당신은 악한 참가자 몇 쌍이 겨우살이 아래에서 키스를 나눴는지 알고 시작합니다. 예를 들어 악한 참가자가 세 명 연달아 앉아 있다면 숫자 2를 알게 됩니다.",
+        "ability_en": "You start knowing how many pairs of evil players are sharing a kiss under the mistletoe",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/mistletoemonitor.webp"
+    },
+    {
+        "id": "giftwrapper",
+        "name": "선물 포장 담당자",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 8,
+        "otherNightReminder": "만약 오늘 참가자가 처형되었다면: 그 참가자의 역할 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If a player was executed today: Show that player's character token.",
+        "reminders": [
+            "처형됨"
+        ],
+        "reminders_en": [
+            "Executed"
+        ],
+        "setup": false,
+        "ability": "첫날 밤을 제외한 매일 밤, 당신은 오늘 처형된 참가자가 남긴 선물을 받아봅니다. 그러면 그의 역할을 알게 됩니다.",
+        "ability_en": "Each night*, you receive a gift from the player that died by execution today. you learn their role.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/giftwrapper.webp"
+    },
+    {
+        "id": "kevin",
+        "name": "케빈",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 5,
+        "otherNightReminder": "만약 케빈이 오늘 밤 죽었다면: 케빈은 참가자를 가리킵니다. 그 참가자의 역할 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If Kevin died tonight: Kevin points to a player. Show that player's character token.",
+        "reminders": [],
+        "setup": false,
+        "ability": "만약 당신이 밤에 죽는다면, 당신은 함정에 빠뜨릴 참가자를 선택합니다. 그러면 그 사람의 역할을 알게 됩니다.",
+        "ability_en": "If you die at night, you choose a player to trap. you learn their character.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/kevin.webp"
+    },
+    {
+        "id": "mrsclaus",
+        "name": "클로스 여사",
+        "edition": "non",
+        "team": "townsfolk",
+        "firstNight": 3,
+        "firstNightReminder": "게임에 참여중인 이방인의 캐릭터 토큰을 보여줍니다. 두 명의 참가자를 가리키는데, 그 중 하나가 그 캐릭터입니다.",
+        "firstNightReminder_en": "Show the character token of an Outsider in play. Point to two players, one of which is that character.",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "otherNightReminder_en": "",
+        "reminders": [
+            "이방인",
+            "틀림"
+        ],
+        "reminders_en": [
+            "Outsider",
+            "Wrong"
+        ],
+        "setup": false,
+        "ability": "첫날 밤, 당신은 이야기꾼이 지정한 2명의 참가자 중 1명이 어떤 역할을 가진 이방인인지 알고 시작합니다.",
+        "ability_en": "You start knowing that 1 of 2 players is a particular Outsider.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/mrsclaus.webp"
+    },
+    {
+        "id": "festivefool",
+        "name": "축제 바보",
+        "edition": "non",
+        "team": "outsider",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "firstNightReminder_en": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "otherNightReminder_en": "",
+        "reminders": [],
+        "reminders_en": [],
+        "remindersGlobal": [
+            "술에 취함"
+        ],
+        "remindersGlobal_en": [
+            "Drunk"
+        ],
+        "special": [
+            {
+                "type": "selection",
+                "name": "bag-disabled"
+            }
+        ],
+        "setup": true,
+        "ability": "당신은 축제 분위기에 빠져 너무 취해 버렸습니다. 당신은 자신이 마을주민 역할이라고 생각하지만, 사실은 아닙니다.",
+        "ability_en": "You do not know you are the Festive Fool. You think you are a Townsfolk character, but you've had a bit too much Christmas Spirit",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/festivefool.webp"
+    },
+    {
+        "id": "christmasangel",
+        "name": "크리스마스 천사",
+        "edition": "non",
+        "team": "outsider",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [],
+        "setup": false,
+        "ability": "만약 당신이 재판을 통해 처형된다면 당신의 팀은 패배합니다.",
+        "ability_en": "If you die by execution, your team loses.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/christmasangel.webp"
+    },
+    {
+        "id": "jackskellington",
+        "name": "잭 스켈링턴",
+        "edition": "non",
+        "team": "outsider",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [],
+        "setup": false,
+        "ability": "당신은 다른 사람들에게 마치 못된 아이 목록에 있는 하수인이나 악마인 것처럼 보이지만 실제로는 선한 사람입니다. 죽을 때에도 다른 사람들에게 당신은 하수인이나 악마로 보입니다.",
+        "ability_en": "You might register as on the Naughty List & as a Minion or Demon, even if dead.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/jackskellington.webp"
+    },
+    {
+        "id": "ninnymuggins",
+        "name": "닌니 머긴스",
+        "edition": "non",
+        "team": "outsider",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "firstNightReminder_en": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "otherNightReminder_en": "",
+        "reminders": [],
+        "reminders_en": [],
+        "setup": false,
+        "ability": "당신이 죽으면 공개적으로 참가자 1명을 선택해야 합니다. 만약 그 참가자가 못된 아이 목록에 있다면 당신의 팀은 패배합니다.",
+        "ability_en": "When you learn that you died, publicly choose 1 alive player: if they are on the naught list, your team loses.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/ninnymuggins.webp"
+    },
+    {
+        "id": "jackfrost",
+        "name": "잭 프로스트",
+        "edition": "non",
+        "team": "minion",
+        "firstNight": 1,
+        "firstNightReminder": "잭 프로스트가 참가자를 가리킵니다. 그 참가자는 중독됩니다.",
+        "firstNightReminder_en": "The Poisoner points to a player. That player is poisoned.",
+        "otherNight": 1,
+        "otherNightReminder": "이전에 중독된 참가자는 더 이상 중독되지 않습니다. 잭 프로스트가 참가자를 가리킵니다. 그 참가자는 중독됩니다.",
+        "otherNightReminder_en": "The previously poisoned player is no longer poisoned. The Poisoner points to a player. That player is poisoned.",
+        "reminders": [
+            "중독됨"
+        ],
+        "reminders_en": [
+            "Poisoned"
+        ],
+        "setup": false,
+        "ability": "매일 밤, 당신은 1명의 참가자를 선택합니다. 그 참가자는 오늘 밤부터 내일 해 질 녘까지 꽁꽁 얼어버립니다(중독).",
+        "ability_en": "Each night, choose a player: they are frozen (poisoned) tonight and tomorrow day.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/jackfrost.webp"
+    },
+    {
+        "id": "thegrinch",
+        "name": "그린치",
+        "edition": "non",
+        "team": "minion",
+        "firstNight": 2,
+        "firstNightReminder": "그린치가 필요로 하는 만큼 그리모어를 보여줍니다. 그린치가 참가자를 가리킵니다. 그 참가자는 중독됩니다. 선한 참가자를 깨웁니다. '이 역할들이 플레이에 참여하고 있습니다' 카드를 보여주고, 그 다음 그린치 역할 토큰을 보여줍니다.",
+        "firstNightReminder_en": "Show the Grimoire to the Grinch for as long as they need. The Grinch points to a player. That player is poisoned. Wake a good player. Show the 'These characters are in play' card, then the Grinch character token.",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "reminders": [
+            "중독됨"
+        ],
+        "reminders_en": [
+            "Poisoned"
+        ],
+        "remindersGlobal": [
+            "알기"
+        ],
+        "remindersGlobal_en": [
+            "Knows"
+        ],
+        "setup": false,
+        "ability": "첫날 밤, 당신은 모든 참가자의 역할을 알게 됩니다. 그리고 1명의 참가자를 선택합니다. 그는 그린치가 없어질 때까지 중독됩니다. 만약 그린치가 중독되거나 취했다면 그 동안만 그는 독이 사라집니다. 이와 별개로 선한 참가자 중 1명은 그린치가 참여중이라는 것을 알게 됩니다.",
+        "ability_en": "On your 1st night, look at the Grimoire and choose a player: they are poisoned. 1 good player knows The Grinch is in play.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/thegrinch.webp"
+    },
+    {
+        "id": "scrooge",
+        "name": "스크루지",
+        "edition": "non",
+        "team": "minion",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "firstNightReminder_en": "",
+        "otherNight": 0,
+        "otherNightReminder": "",
+        "otherNightReminder_en": "",
+        "reminders": [],
+        "reminders_en": [],
+        "setup": true,
+        "ability": "게임을 시작할 때 마을주민 역할 2명을 이방인 역할로 교체합니다. [+2 이방인]",
+        "ability_en": "There are extra Outsiders in play. [+2 Outsiders]",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/scrooge.webp"
+    },
+    {
+        "id": "badsanta",
+        "name": "나쁜 산타",
+        "edition": "non",
+        "team": "minion",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "otherNight": 3,
+        "otherNightReminder": "만약 나쁜 산타가 오늘 악마가 되었다면: '당신은' 카드를 보여주고, 그 다음 악마 토큰을 보여줍니다.",
+        "otherNightReminder_en": "If the Bad Santa became the Demon today: Show the 'You are' card, then the demon token.",
+        "reminders": [
+            "악마"
+        ],
+        "reminders_en": [
+            "Demon"
+        ],
+        "setup": false,
+        "ability": "만약 여행자를 제외한 5명 이상의 참가자가 살아있지만 악마가 죽는다면 당신은 악마가 됩니다. 예를 들어 5명이 남아있었고 악마가 처형되어 4명이 되는 순간, 나쁜 산타는 악마가 됩니다.",
+        "ability_en": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don’t count)",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/badsanta.webp"
+    },
+    {
+        "id": "krampus",
+        "name": "크람푸스",
+        "edition": "non",
+        "team": "demon",
+        "firstNight": 0,
+        "firstNightReminder": "",
+        "firstNightReminder_en": "",
+        "otherNight": 4,
+        "otherNightReminder": "크람푸스가 3명의 참가자를 선택합니다. 첫 번째 참가자를 발표하고, 선물을 받기 위해 고개를 끄덕이거나 거절하기 위해 고개를 흔들도록 깨웁니다. 그에 따라 죽이거나 부활시킨 후, 재우고 다음 참가자를 발표합니다. 만약 이 과정 후 3명 모두 살아있다면, 3명 모두 죽습니다.",
+        "otherNightReminder_en": "The Al-Hadikhia chooses 3 players. Announce the first player, wake them to nod yes to live or shake head no to die, kill or resurrect accordingly, then put to sleep and announce the next player. If all 3 are alive after this, all 3 die.",
+        "reminders": [
+            "1",
+            "2",
+            "3",
+            "죽음을 선택함",
+            "생명을 선택함"
+        ],
+        "reminders_en": [
+            "1",
+            "2",
+            "3",
+            "Chose death",
+            "Chose life"
+        ],
+        "setup": false,
+        "ability": "첫날 밤을 제외한 매일 밤, 선물을 받을 3명의 참가자를 선택할 수 있습니다(이 참가자들은 공개됩니다). 그 참가자들은 선물을 열어볼 것인지(살 것인지) 거절할 것인지(죽을 것인지) 결정합니다. 만약 모두 열어봤다면 모두 죽습니다.",
+        "ability_en": "Each night*, choose 3 players to receive a gift (all players learn who): each silently chooses if they wish to open their gift (live) or refuse (die), but if all players live, all die.",
+        "flavor": "",
+        "image": "/images/fo/boc/icons/non/krampus.webp"
     }
 ]

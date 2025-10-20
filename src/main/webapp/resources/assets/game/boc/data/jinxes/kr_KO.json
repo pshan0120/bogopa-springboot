@@ -153,7 +153,7 @@
             {
                 "id": "ravenkeeper",
                 "reason": "Each night*, the Leviathan chooses an alive player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die.",
-                "reason_kr": "매일 밤*, 레비아탄은 살아있는 참가자(이전 밤과 다른)를 선택합니다: 선택된 레이븐키퍼는 능력을 사용하지만 죽지 않습니다."
+                "reason_kr": "매일 밤*, 레비아탄은 살아있는 참가자(이전 밤과 다른)를 선택합니다: 선택된 까마귀사육사는 능력을 사용하지만 죽지 않습니다."
             },
             {
                 "id": "sage",
@@ -461,7 +461,7 @@
             {
                 "id": "slayer",
                 "reason": "If the Slayer slays the Lleech's host, the host dies.",
-                "reason_kr": "슬레이어가 꺼머리의 숙주를 죽이면, 숙주가 죽습니다."
+                "reason_kr": "처단자가 꺼머리의 숙주를 죽이면, 숙주가 죽습니다."
             },
             {
                 "id": "heretic",
@@ -516,7 +516,7 @@
             {
                 "id": "ravenkeeper",
                 "reason": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die.",
-                "reason_kr": "매일 밤*, 폭동은 살아있는 선량한 참가자(이전 밤과 다른)를 선택합니다: 선택된 레이븐키퍼는 능력을 사용하지만 죽지 않습니다."
+                "reason_kr": "매일 밤*, 폭동은 살아있는 선량한 참가자(이전 밤과 다른)를 선택합니다: 선택된 까마귀사육사는 능력을 사용하지만 죽지 않습니다."
             },
             {
                 "id": "sage",
