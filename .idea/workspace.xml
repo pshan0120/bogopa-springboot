@@ -23,10 +23,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 배경음악 및 효과음 추가 및 경로 정리&#10;&#10;- LOL 효과음 추가 및 배경음악 레이아웃 변경.&#10;- 효과음 관련 파일 경로 &quot;/effect/&quot;로 통일.&#10;- 사용 코드 및 JSON 업데이트로 기능 강화.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" afterDir="false" />
-    </list>
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 배경음악 및 효과음 추가 및 경로 정리&#10;&#10;- LOL 효과음 추가 및 배경음악 레이아웃 변경.&#10;- 효과음 관련 파일 경로 &quot;/effect/&quot;로 통일.&#10;- 사용 코드 및 JSON 업데이트로 기능 강화." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -390,7 +387,7 @@
       <workItem from="1760958963157" duration="12077000" />
       <workItem from="1761113141093" duration="1824000" />
       <workItem from="1761204668701" duration="6952000" />
-      <workItem from="1761284561026" duration="5303000" />
+      <workItem from="1761284561026" duration="5504000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -735,7 +732,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="214" />
+    <option name="localTasksCounter" value="215" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -5263,7 +5263,7 @@
     "edition": "lol",
     "team": "townsfolk",
     "firstNight": 10,
-    "firstNightReminder": "매일 밤, 1명을 선택하게 합니다.",
+    "firstNightReminder": "매일 밤, 1명을 선택하게 합니다. 어제 선택한 소환사를 선택한 경우, 그 소환사의 성향(선/악)을 알려 줍니다.",
     "otherNight": 7,
     "otherNightReminder": "매일 밤, 1명을 선택하게 합니다. 어제 선택한 소환사를 선택한 경우, 그 소환사의 성향(선/악)을 알려 줍니다.",
     "reminders": [
