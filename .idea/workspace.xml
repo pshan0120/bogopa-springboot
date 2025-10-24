@@ -23,9 +23,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 캐릭터 번역 및 신규 데이터 업데이트&#10;&#10;- &quot;레이븐키퍼&quot;를 &quot;까마귀사육사&quot;로, &quot;슬레이어&quot;를 &quot;처단자&quot;로 변경&#10;- JSON 파일에 신규 캐릭터 및 데이터 추가&#10;- 관련 번역 및 스크립트 변경 사항 반영">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 캐릭터 데이터와 번역 업데이트&#10;&#10;- &quot;술에 취함&quot;을 &quot;만취&quot;로 변경&#10;- 신규 LOL 캐릭터 JSON 데이터 추가 및 firstNight/otherNight 세부 사항 수정&#10;- 관련 번역, 리마인더 및 게임 로직 업데이트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/executionModal.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/troubleBrewing/jspf/execution.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/soundEffectModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/soundEffectModal.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -389,7 +394,8 @@
       <workItem from="1760686046546" duration="4166000" />
       <workItem from="1760958963157" duration="12077000" />
       <workItem from="1761113141093" duration="1824000" />
-      <workItem from="1761204668701" duration="5824000" />
+      <workItem from="1761204668701" duration="6952000" />
+      <workItem from="1761284561026" duration="4448000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -734,7 +740,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="212" />
+    <option name="localTasksCounter" value="213" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -767,7 +773,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="수정: 마을 광장 Live 상태를 낮/밤으로 변경&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 리팩토링.&#10;- 관련 버튼 이름 및 로직을 낮/밤 전환 기능으로 변경." />
     <MESSAGE value="수정: 낮/밤 전환 로직 및 UI 리팩토링&#10;&#10;- townLiveOn/townLiveOff를 changeToDay/changeToNight로 변경.&#10;- 관련 버튼 이름 및 로직 업데이트." />
     <MESSAGE value="live.jsp 및 townModal.jspf 좌석 스타일 수정&#10;&#10;- 좌석 크기(seatRadius) 및 색상 그라데이션 값 조정.&#10;- 투표 가능 상태의 외곽선 두께 및 색상 변경.&#10;- 관련 UI 변경으로 사용자 경험 향상 기대." />
     <MESSAGE value="UI 요소 수정 및 스타일 업데이트&#10;&#10;- '투표 ○/×'를 '투표권 ○/×'로 변경하여 의미 명확화&#10;- 색상 그라데이션 및 선 스타일 변경으로 시각적 개선&#10;- 제목 태그 크기 조정 및 레이아웃 수정" />
@@ -792,7 +797,8 @@
     <MESSAGE value="&quot;MODE&quot; 문구 제거 및 텍스트 간결화&#10;&#10;- &quot;MODE&quot; 문구를 제거하여 텍스트를 간결하게 수정&#10;- LEVEL 표시 방식 통일로 가독성 개선" />
     <MESSAGE value="수정: 캐릭터 번역 및 기능 설명 업데이트&#10;&#10;- &quot;레이븐키퍼&quot;를 &quot;까마귀사육사&quot;로 변경&#10;- &quot;슬레이어&quot;를 &quot;처단자&quot;로 변경&#10;- 신규 캐릭터 추가 및 JSON 데이터 업데이트" />
     <MESSAGE value="수정: 캐릭터 번역 및 신규 데이터 업데이트&#10;&#10;- &quot;레이븐키퍼&quot;를 &quot;까마귀사육사&quot;로, &quot;슬레이어&quot;를 &quot;처단자&quot;로 변경&#10;- JSON 파일에 신규 캐릭터 및 데이터 추가&#10;- 관련 번역 및 스크립트 변경 사항 반영" />
-    <option name="LAST_COMMIT_MESSAGE" value="수정: 캐릭터 번역 및 신규 데이터 업데이트&#10;&#10;- &quot;레이븐키퍼&quot;를 &quot;까마귀사육사&quot;로, &quot;슬레이어&quot;를 &quot;처단자&quot;로 변경&#10;- JSON 파일에 신규 캐릭터 및 데이터 추가&#10;- 관련 번역 및 스크립트 변경 사항 반영" />
+    <MESSAGE value="수정: 캐릭터 데이터와 번역 업데이트&#10;&#10;- &quot;술에 취함&quot;을 &quot;만취&quot;로 변경&#10;- 신규 LOL 캐릭터 JSON 데이터 추가 및 firstNight/otherNight 세부 사항 수정&#10;- 관련 번역, 리마인더 및 게임 로직 업데이트" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정: 캐릭터 데이터와 번역 업데이트&#10;&#10;- &quot;술에 취함&quot;을 &quot;만취&quot;로 변경&#10;- 신규 LOL 캐릭터 JSON 데이터 추가 및 firstNight/otherNight 세부 사항 수정&#10;- 관련 번역, 리마인더 및 게임 로직 업데이트" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

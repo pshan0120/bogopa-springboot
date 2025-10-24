@@ -468,7 +468,7 @@
                 <div name="votedPlayerListDiv"></div>
                 <hr>
                 <h4>clock-bell-chimes</h4>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/clock-bell-chimes-78190.mp3"
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/clock-bell-chimes-78190.mp3"
                        controls></audio>
                 <hr>
                 <h3>처형 후보 플레이어</h3>

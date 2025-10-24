@@ -46,19 +46,25 @@
                 <li role="presentation">
                     <a href="#backgroundMusic1TabContent" id="backgroundMusic1Tab" role="tab" data-toggle="tab"
                        aria-expanded="true">
-                        리스트#1
+                        #1
                     </a>
                 </li>
                 <li role="presentation">
                     <a href="#backgroundMusic2TabContent" id="backgroundMusic2Tab" role="tab" data-toggle="tab"
                        aria-expanded="false">
-                        리스트#2
+                        #2
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#backgroundMusic3TabContent" id="backgroundMusic3Tab" role="tab" data-toggle="tab"
+                       aria-expanded="false">
+                        #3
                     </a>
                 </li>
                 <li role="presentation" class="">
-                    <a href="#backgroundMusic3TabContent" id="backgroundMusic3Tab" role="tab" data-toggle="tab"
+                    <a href="#backgroundMusic4TabContent" id="backgroundMusic4Tab" role="tab" data-toggle="tab"
                        aria-expanded="false">
-                        효과음
+                        #4
                     </a>
                 </li>
             </ul>
@@ -131,13 +137,210 @@
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="backgroundMusic3TabContent"
                      aria-labelledby="backgroundMusicTab">
+                    <h4>롤 - 환영합니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 환영합니다..mp3"
+                           controls></audio>
+
+                    <h4>롤 - 소환사의 협곡에 오신것을 환영합니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 소환사의 협곡에 오신것을 환영합니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 미니언 생성까지 30초 남았습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 미니언 생성까지 30초 남았습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 미니언들이 생성되었습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 미니언들이 생성되었습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 처형되었습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 처형되었습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 승리</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 승리.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 패배</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 패배.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 아군이 당했습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 아군이 당했습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 퍼스트블러드</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 퍼스트블러드.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 더블킬</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 더블킬.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 트리플킬</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 트리플킬.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 쿼드라킬</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 쿼드라킬.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 펜타킬</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 펜타킬.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 전설의킬</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 전설의킬.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 마무리</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 마무리.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 소환사 한 명이 게임을 종료했습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 소환사 한 명이 게임을 종료했습니다..mp3"
+                           controls></audio>
+
+                    <h4>롤 - 소환사가 다시 연결되었습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 소환사가 다시 연결되었습니다..mp3"
+                           controls></audio>
+
+                    <h4>롤 - 도저히 막을 수 없습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 도저히 막을 수 없습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 전설의 출현</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 전설의 출현.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 전장의 지배자</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 전장의 지배자.mp3"
+                           controls></audio>
+
+                    <h4>롤 - Aced</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - Aced.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 적을 도저히 막을 수 없습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 적을 도저히 막을 수 없습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 적이 학살중</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 적이 학살중.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 적을 처치했습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 적을 처치했습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 학살중입니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 학살중입니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 제압되었습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 제압되었습니다.mp3"
+                           controls></audio>
+
+                    <h4>롤 - 미쳐날뛰고있습니다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/롤 - 미쳐날뛰고있습니다.mp3"
+                           controls></audio>
+
+                    <h4>녹턴 - 밤</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/녹턴 - 밤.mp3"
+                           controls></audio>
+
+                    <h4>녹턴 - 어둠을 맞이하라</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/녹턴 - 어둠을 맞이하라.mp3"
+                           controls></audio>
+
+                    <h4>가렌 - 데마시아</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/가렌 - 데마시아.mp3"
+                           controls></audio>
+
+                    <h4>리신 - 이쿠 (긴 버전)</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/리신 - 이쿠 (긴 버전).mp3"
+                           controls></audio>
+
+                    <h4>리신 - 이쿠 (짧은 버전)</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/리신 - 이쿠 (짧은 버전).mp3"
+                           controls></audio>
+
+                    <h4>리신 - 당신의 뜻대로 싸우겠소</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/리신 - 당신의 뜻대로 싸우겠소.mp3"
+                           controls></audio>
+
+                    <h4>가렌 - 정의의 전장으로</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/가렌 - 정의의 전장으로.mp3"
+                           controls></audio>
+
+                    <h4>그라가스 - 네가 사는거라면 나도 끼지</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/그라가스 - 네가 사는거라면 나도 끼지.mp3"
+                           controls></audio>
+
+                    <h4>미스포춘 - 행운은 멍청이를 싫어하는 법이지</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/미스포춘 - 행운은 멍청이를 싫어하는 법이지.mp3"
+                           controls></audio>
+
+                    <h4>케이틀린 - 이사건은 내가 맡죠</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/케이틀린 - 이사건은 내가 맡죠.mp3"
+                           controls></audio>
+
+                    <h4>케이틀린 - 빵 헤드샷</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/케이틀린 - 빵 헤드샷.mp3"
+                           controls
+                    ></audio>
+
+                    <h4>트린다미어 - 손 쉬운 사냥이 되겠군</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/트린다미어 - 손 쉬운 사냥이 되겠군.mp3"
+                           controls></audio>
+
+                    <h4>블리츠랭크 - 시스템가동 준비완료</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/블리츠랭크 - 시스템가동 준비완료.mp3"
+                           controls></audio>
+
+                    <h4>블리츠크랭크 - 웃음 감정 표현(2)</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/블리츠크랭크 - 웃음 감정 표현(2).mp3"
+                           controls></audio>
+
+                    <h4>블리츠크랭크 - 인간시대의 끝이</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/블리츠크랭크 - 인간시대의 끝이.mp3"
+                           controls></audio>
+
+                    <h4>트위스티드페이트 - 행운의 여신이 내게 미소를 짓는군</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/effect/lol/트위스티드페이트 - 행운의 여신이 내게 미소를 짓는군.mp3"
+                           controls></audio>
+
+
+                    <h4>잭스 - 쨔잔 내가 돌아왔다</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/잭스 - 쨔잔 내가 돌아왔다.mp3"
+                           controls></audio>
+
+                    <h4>티모 - 핫 둘 셋 넷</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/티모 - 핫 둘 셋 넷.mp3"
+                           controls></audio>
+
+                    <h4>티모 - 웃음소리</h4>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/lol/티모 - 웃음소리.mp3"
+                           controls></audio>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="backgroundMusic4TabContent"
+                     aria-labelledby="backgroundMusicTab">
                     <h4>닭 소리</h4>
                     <audio name="backgroundMusic"
-                           src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
-                           controls loop></audio>
+                           src="https://bogopayo.cafe24.com/sound/effect/cock-rooster-cockerel-scream-sound-100787.mp3"
+                           controls></audio>
                     <h4>교회 종 소리</h4>
-                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3"
-                           controls loop></audio>
+                    <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/church-bell-5993.mp3"
+                           controls></audio>
                 </div>
             </div>
         </div>

@@ -35,47 +35,47 @@
                 <h3>
                     교회 종 소리
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/church-bell-5993.mp3" controls></audio>
 
                 <h3>
                     시계 종 소리
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/clock-bell-chimes-78190.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/clock-bell-chimes-78190.mp3" controls></audio>
 
                 <h3>
                     닭 소리
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/cock-rooster-cockerel-scream-sound-100787.mp3" controls></audio>
 
                 <h3>
                     부엉이 소리
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/scops-owl-57475.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/scops-owl-57475.mp3" controls></audio>
 
                 <h3>
                     남자 비명
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/male-scream-in-fear-123079.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/male-scream-in-fear-123079.mp3" controls></audio>
 
                 <h3>
                     승리 축하
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/level-win-6416.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/level-win-6416.mp3" controls></audio>
 
                 <h3>
                     악마의 웃음
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/evil-laugh-21137.mp3" controls></audio>
 
                 <h3>
                     할로윈 8bit
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/halloween-8-bit-forward-reverse-13-13-13-19741.mp3" controls></audio>
 
                 <h3>
                     Samba de Janeiro
                 </h3>
-                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/Samba de Janeiro- Bellini.mp3" controls></audio>
+                <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/Samba de Janeiro- Bellini.mp3" controls></audio>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-block" data-dismiss="modal">닫기</button>

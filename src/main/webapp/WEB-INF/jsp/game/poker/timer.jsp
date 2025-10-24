@@ -72,7 +72,7 @@
         let begun = false;
 
         let clockInterval = null;
-        const audio = new Audio("https://bogopayo.cafe24.com/sound/countdown-10-to-1.mp3");
+        const audio = new Audio("https://bogopayo.cafe24.com/sound/effect/countdown-10-to-1.mp3");
 
         $(() => {
             console.log("Document ready - initializing DOM elements");

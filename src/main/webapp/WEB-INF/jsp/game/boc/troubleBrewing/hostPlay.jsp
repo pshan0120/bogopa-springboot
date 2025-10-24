@@ -440,11 +440,11 @@
         }
 
         const winByGood = () => {
-            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/level-win-6416.mp3" controls></audio>`);
+            messageModal.open(`선한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/effect/level-win-6416.mp3" controls></audio>`);
         }
 
         const winByEvil = () => {
-            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/evil-laugh-21137.mp3" controls></audio>`);
+            messageModal.open(`악한 편이 승리했습니다.<hr><audio name="victoryOfGood" src="https://bogopayo.cafe24.com/sound/effect/evil-laugh-21137.mp3" controls></audio>`);
         }
 
         const openMessageModal = messageHtml => {
@@ -1119,11 +1119,11 @@
                         </h3>
                         <h4>닭 소리</h4>
                         <audio name="backgroundMusic"
-                               src="https://bogopayo.cafe24.com/sound/cock-rooster-cockerel-scream-sound-100787.mp3"
+                               src="https://bogopayo.cafe24.com/sound/effect/cock-rooster-cockerel-scream-sound-100787.mp3"
                                controls></audio>
                         <hr>
                         <h4>church-bell</h4>
-                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/church-bell-5993.mp3"
+                        <audio name="backgroundMusic" src="https://bogopayo.cafe24.com/sound/effect/church-bell-5993.mp3"
                                controls></audio>
                         <hr>
                         <div name="flowDiv"></div>
