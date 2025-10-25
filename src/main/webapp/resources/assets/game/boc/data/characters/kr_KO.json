@@ -2692,7 +2692,7 @@
   },
   {
     "id": "savant",
-    "name": "학자",
+    "name": "천재",
     "edition": "snv",
     "team": "townsfolk",
     "firstNight": 0,
@@ -5577,5 +5577,16 @@
     "ability": "첫날 밤을 제외한 매일 밤, 참가자 2명을 선택합니다. 그들은 죽습니다. 어젯밤에 선택한 죽은 참가자를 토해낼 수도 있습니다.",
     "flavor": "",
     "image": "/images/fo/boc/icons/lol/tahmkench.webp"
+  },
+  {
+    "id": "poro",
+    "firstNightReminder": "",
+    "otherNightReminder": "",
+    "reminders": [],
+    "setup": true,
+    "name": "포로",
+    "team": "fabled",
+    "ability": "이야기꾼은 원할 때 배경음악과 효과음을 들려줄 수 있습니다.",
+    "image": "/images/fo/boc/icons/lol/poro.webp"
   }
 ]

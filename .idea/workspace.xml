@@ -16,14 +16,18 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="bogopa:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: 배경음악 및 효과음 추가 및 경로 정리&#10;&#10;- LOL 효과음 추가 및 배경음악 레이아웃 변경.&#10;- 효과음 관련 파일 경로 &quot;/effect/&quot;로 통일.&#10;- 사용 코드 및 JSON 업데이트로 기능 강화." />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: workspace.xml 및 character 데이터 파일 업데이트&#10;&#10;- workspace.xml에서 작업 시간 및 task 카운터 정보 변경&#10;- characters/kr_KO.json에 첫째 날 설명 추가 및 수정">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/league-of-legend.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/scripts/league-of-legend.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -387,7 +391,8 @@
       <workItem from="1760958963157" duration="12077000" />
       <workItem from="1761113141093" duration="1824000" />
       <workItem from="1761204668701" duration="6952000" />
-      <workItem from="1761284561026" duration="5504000" />
+      <workItem from="1761284561026" duration="5705000" />
+      <workItem from="1761371871623" duration="1119000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -732,7 +737,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="215" />
+    <option name="localTasksCounter" value="216" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -765,7 +770,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="UI 요소 수정 및 스타일 업데이트&#10;&#10;- '투표 ○/×'를 '투표권 ○/×'로 변경하여 의미 명확화&#10;- 색상 그라데이션 및 선 스타일 변경으로 시각적 개선&#10;- 제목 태그 크기 조정 및 레이아웃 수정" />
     <MESSAGE value="업데이트: 게임 캐릭터 데이터 및 낮/밤 상태 관리 개선&#10;&#10;- 캐릭터 능력 설명 및 리마인더 텍스트 수정&#10;- 낮/밤 상태 변경 로직에 날짜 표시 및 확인 모달 추가&#10;- UI 개선: 날짜 및 낮/밤 정보를 명확히 표시" />
     <MESSAGE value="한글화 및 다국어 지원 추가&#10;&#10;- 캐릭터 이름, 능력 설명, 리마인더 등 한글 번역 추가&#10;- 기존의 영어 데이터와 다국어 지원 병행 가능하도록 구조 수정&#10;- 일부 이미지 경로 수정" />
     <MESSAGE value="Day/Night 상태 텍스트 생성 로직 추가&#10;&#10;- Day/Night 상태에 따라 텍스트 형식 및 이모지를 생성하는 함수 추가&#10;- 관련 화면들에 Day/Night 상태 표시 로직 통합&#10;- CSS 수정 및 UI 개선 사항 적용 (배경 그라데이션 및 텍스트 위치 변경)" />
@@ -790,7 +794,8 @@
     <MESSAGE value="수정: 캐릭터 데이터와 번역 업데이트&#10;&#10;- &quot;술에 취함&quot;을 &quot;만취&quot;로 변경&#10;- 신규 LOL 캐릭터 JSON 데이터 추가 및 firstNight/otherNight 세부 사항 수정&#10;- 관련 번역, 리마인더 및 게임 로직 업데이트" />
     <MESSAGE value="수정: 배경음악 및 효과음 추가 및 경로 정리&#10;&#10;- LOL 효과음 추가 및 배경음악 레이아웃 변경.&#10;- 효과음 관련 파일 경로 &quot;/" />
     <MESSAGE value="수정: 배경음악 및 효과음 추가 및 경로 정리&#10;&#10;- LOL 효과음 추가 및 배경음악 레이아웃 변경.&#10;- 효과음 관련 파일 경로 &quot;/effect/&quot;로 통일.&#10;- 사용 코드 및 JSON 업데이트로 기능 강화." />
-    <option name="LAST_COMMIT_MESSAGE" value="수정: 배경음악 및 효과음 추가 및 경로 정리&#10;&#10;- LOL 효과음 추가 및 배경음악 레이아웃 변경.&#10;- 효과음 관련 파일 경로 &quot;/effect/&quot;로 통일.&#10;- 사용 코드 및 JSON 업데이트로 기능 강화." />
+    <MESSAGE value="수정: workspace.xml 및 character 데이터 파일 업데이트&#10;&#10;- workspace.xml에서 작업 시간 및 task 카운터 정보 변경&#10;- characters/kr_KO.json에 첫째 날 설명 추가 및 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정: workspace.xml 및 character 데이터 파일 업데이트&#10;&#10;- workspace.xml에서 작업 시간 및 task 카운터 정보 변경&#10;- characters/kr_KO.json에 첫째 날 설명 추가 및 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
