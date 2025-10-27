@@ -72,13 +72,14 @@
             const fontClass = Character.calculateCharacterNameClass(next.team);
             return prev +
                 `<li class="\${fontClass} mb-4">
-                    <h4 class="\${fontClass}">\${next.name}</h4>
+                    <h4 class="\${fontClass}">\${next.name}</i></h4>
                     <div class="row">
                         <div class="col-3 pl-0 pr-0">
                             <img src="\${next.image}" class="img-responsive img-thumbnail m-auto">
                         </div>
                         <div class="col-9">
-                            <small>\${next.ability}</small>
+                            <div><small>\${next.ability}</small></div>
+                            <div><small><i>\${next.flavor ?? ""}</i></small></div>
                         </div>
                     </div>
                 </li>`;

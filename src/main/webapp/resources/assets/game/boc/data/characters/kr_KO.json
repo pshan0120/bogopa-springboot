@@ -107,7 +107,7 @@
       "?"
     ],
     "setup": false,
-    "ability": "당신은 스스로의 능력이 무엇인지 모르며, 어떤 능력인지는 이야기꾼이 게임 시작시 정합니다. 매일 당신은 이야기꾼에게 개인적으로 자신의 능력이 무엇인지 추측합니다. 이야기꾼은 '다름', '비슷', '근접', '일치' 중 하나로 대답할 것입니다.",
+    "ability": "당신은 스스로의 능력이 무엇인지 모르며, 어떤 능력인지는 이야기꾼이 게임 시작 시 정합니다. 매일 당신은 이야기꾼에게 개인적으로 자신의 능력이 무엇인지 추측합니다. 이야기꾼은 '다름', '비슷', '근접', '일치' 중 하나로 대답할 것입니다.",
     "image": "/images/fo/boc/icons/townsfolk/amnesiac.webp"
   },
   {
@@ -2956,14 +2956,14 @@
   },
   {
     "id": "summoner",
-    "name": "소환사",
+    "name": "참가자",
     "edition": "",
     "team": "minion",
     "firstNight": 8,
     "firstNightReminder": "'이 역할들은 플레이에 참여하지 않습니다' 카드를 보여줍니다. 플레이에 참여하지 않는 선한 역할의 토큰 3개를 보여줍니다.",
     "firstNightReminder_en": "Show the 'These characters are not in play' card. Show 3 character tokens of good characters not in play.",
     "otherNight": 19,
-    "otherNightReminder": "만약 3번째 밤이라면, 소환사를 깨웁니다. 그들은 참가자와 역할 시트의 악마를 가리킵니다 - 그 참가자는 그 악마가 됩니다.",
+    "otherNightReminder": "만약 3번째 밤이라면, 참가자를 깨웁니다. 그들은 참가자와 역할 시트의 악마를 가리킵니다 - 그 참가자는 그 악마가 됩니다.",
     "otherNightReminder_en": "If it is the 3rd night, wake the Summoner. They point to a player and a Demon on the character sheet - that player becomes that Demon.",
     "reminders": [
       "밤 1",
@@ -4252,6 +4252,7 @@
     ],
     "setup": false,
     "ability": "첫날 밤, 참가중인 역할을 알게 됩니다. 그 역할로 '광기' 했다면, 그 역할은 밤에 사망할 수 없습니다.",
+    "flavor": "\"우렁각시는 서방님을 지켜줘요\"",
     "image": "/images/fo/boc/icons/siij/snailbride.webp"
   },
   {
@@ -4268,6 +4269,7 @@
     ],
     "setup": false,
     "ability": "첫날 밤, 참가중인 하수인 역할 하나를 알고 시작합니다. 게임 중 1번 공개적으로 망나니임을 선언하고 지목할 수 있습니다. 해당 하수인을 지목했다면 무조건(어둑시니마저) 처형시킵니다.",
+    "flavor": "\"칼 잘못 휘두르면 망하니\"",
     "image": "/images/fo/boc/icons/siij/executioner.webp"
   },
   {
@@ -4286,6 +4288,7 @@
     ],
     "setup": false,
     "ability": "첫날 낮, 악한 자에 대한 법을 이야기하세요. 처음으로 법이 어겨졌다면, 당신은 그 사실을 알게 됩니다. 단, 너무 강력한 법을 만들면 밤에 사망할 수도 있습니다.",
+    "flavor": "",
     "image": "/images/fo/boc/icons/siij/secretroyalinspector.webp"
   },
   {
@@ -4300,6 +4303,7 @@
     "reminders": [],
     "setup": false,
     "ability": "첫날 밤, 참가자를 선택합니다. 선택한 참가자와 이웃들의 역할 유형의 수를 알려줍니다.(역할 유형 : 마을주민, 이방인, 하수인, 악마)",
+    "flavor": "",
     "image": "/images/fo/boc/icons/siij/mendicantmonk.webp"
   },
   {
@@ -4316,6 +4320,7 @@
     ],
     "setup": true,
     "ability": "첫날 밤을 제외한 매일 밤, 참가자 1명을 선택 합니다. 선택한 참가자는 사망할 수 있습니다. 이방인이라면, 참가중이지 않은 마을주민으로 바뀝니다. [+0 또는 +1 이방인]",
+    "flavor": "",
     "image": "/images/fo/boc/icons/siij/tavernmistress.webp"
   },
   {
@@ -4333,6 +4338,7 @@
     ],
     "setup": true,
     "ability": "매일 밤, 이야기꾼이 질문을 합니다. 낮에 이야기꾼을 찾아가 정답을 말하면, 그날 밤, 새로운 질문을 듣습니다. '중독'이나 '만취'상태라면, 오답을 말해도 이야기꾼이 새로운 질문을 합니다.",
+    "flavor": "",
     "image": "/images/fo/boc/icons/siij/peddlerguildsman.webp"
   },
   {
@@ -4349,6 +4355,7 @@
     ],
     "setup": false,
     "ability": "매일 밤, 마을에 대한 정보를 알게 됩니다. 무당에 대해서 '광기'한다면, 언제라도 사망할 수 있습니다.",
+    "flavor": "\"천지신명 천지신명 비나이다 비나이다\"",
     "image": "/images/fo/boc/icons/siij/shaman.webp"
   },
   {
@@ -4366,6 +4373,7 @@
     ],
     "setup": true,
     "ability": "매일 밤, 살아있는 참가자(본인 제외)를 선택하고 1 또는 0의 정보를 받습니다. 1과 0이 어떤 값인지는 모르고 시작합니다. (1과 0의 정보 : 마을주민 / 이방인 + 하수인 + 악마)",
+    "flavor": "\"심봤다를 언제 외쳐야 할까요\"",
     "image": "/images/fo/boc/icons/siij/ginsenggatherer.webp"
   },
   {
@@ -4382,6 +4390,7 @@
     ],
     "setup": false,
     "ability": "매일 낮, 공개적으로 놀음패들과 이웃한 참가자 1명에게 놀음패 가입을 권유할 수 있습니다. 만약 사악한 참가자가 놀음패에 가입하거나, 기존 가입자가 사악해진다면, 모두 처형 됩니다.",
+    "flavor": "\"신규회원 모집\"",
     "image": "/images/fo/boc/icons/siij/liondancersofbukcheong.webp"
   },
   {
@@ -4398,6 +4407,7 @@
     ],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, 낮에 처형이 있었다면, 이야기꾼으로부터 정보를 듣습니다. 사악한 참가자가 처형되었었다면, 잘못된 정보를 알게 됩니다.",
+    "flavor": "\"식리인은 죽어도 무언가를 받아냅니다.\"",
     "image": "/images/fo/boc/icons/siij/villageaccountant.webp"
   },
   {
@@ -4414,6 +4424,7 @@
     ],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, 도자기를 만듭니다. 오늘 낮, 악마와 함께 투표했다면, 도자기가 깨졌음을 알게됩니다.",
+    "flavor": "\"도자기가 깨졌다면, 전날을 상기해 보세요.\"",
     "image": "/images/fo/boc/icons/siij/ceramicartisan.webp"
   },
   {
@@ -4430,6 +4441,7 @@
     ],
     "setup": false,
     "ability": "게임 당 1번, 낮에 이야기꾼을 찾아와 원하는 능력을 말한다면, 이야기꾼은 조건을 말합니다. 이야기꾼의 조건과 당신의 제안이 곧 당신의 능력입니다.",
+    "flavor": "\"하루가 지날수록 더 강력한 능력을 제안 할 수 있습니다.\"",
     "image": "/images/fo/boc/icons/siij/taoisthermit.webp"
   },
   {
@@ -4446,6 +4458,7 @@
     ],
     "setup": false,
     "ability": "게임 당 1번, 마을에 누군가의 첫 지명이 있기 전, 본인이 착호갑사임을 공개적으로 주장 한다면, 오늘밤까지 착호갑사와 사악한 참가자만 '사망'할 수 있습니다.",
+    "flavor": "\"제가 사실 초코박사입니다.\"",
     "image": "/images/fo/boc/icons/siij/tigerslayingguard.webp"
   },
   {
@@ -4460,6 +4473,7 @@
     "reminders": [],
     "setup": true,
     "ability": "참가중인 마을주민 혹은 악마의 블러프 역할 중 1개를 받지만, 당신은 따라귀입니다.",
+    "flavor": "\"이 마을에 나랑 같은 직업을 가진 따라귀가 있는거 같아요. 설마 나인가..?\"",
     "image": "/images/fo/boc/icons/siij/mimicghost.webp"
   },
   {
@@ -4489,6 +4503,7 @@
     ],
     "setup": true,
     "ability": "마을주민 역할을 받고 능력도 정상적이지만, 당신은 생사귀입니다. 이웃한 마을주민 2명이 만취합니다. 당신이 사망한다면, 생사귀가 사망했음을 말해줍니다. 생사귀로 인해 만취한 마을주민들은 건강해집니다.",
+    "flavor": "",
     "image": "/images/fo/boc/icons/siij/lifeanddeathghost.webp"
   },
   {
@@ -4503,6 +4518,7 @@
     "reminders": [],
     "setup": false,
     "ability": "자신이 죽었다는 사실을 알게 되면, 공개적으로 도깨비임을 주장하고 살아있는 참가자 1명을 선택하여 대신 죽게 합니다. 만약 그 참가자가 악한 편이라면, 당신의 팀은 패배합니다.",
+    "flavor": "\"내가 누구게~?\"",
     "image": "/images/fo/boc/icons/siij/dokkaebi.webp"
   },
   {
@@ -4517,6 +4533,7 @@
     "reminders": [],
     "setup": false,
     "ability": "당신이 사망한다면, 하수인들은 그리모어를 봅니다. 마을주민으로 '광기'한다면, 당신은 밤에 사망하지 않습니다.",
+    "flavor": "",
     "image": "/images/fo/boc/icons/siij/bulgasal.webp"
   },
   {
@@ -4533,6 +4550,7 @@
     ],
     "setup": false,
     "ability": "창귀의 '저주'에 걸린 사람이 없다면, 매일 밤, 참가자 1명을 선택해 '저주' 합니다. 낮이 되면 저주에 걸린 참가자가 누구인지 모두가 알게 됩니다. 첫날 밤을 제외한 매일 밤, 저주에 걸린 참가자는 창귀의 선택으로 양 옆 참가자 중 1명을 사망시킵니다.",
+    "flavor": "\"창귀는 호랑이를 무서워해요.\"",
     "image": "/images/fo/boc/icons/siij/changgwi.webp"
   },
   {
@@ -4550,6 +4568,7 @@
     ],
     "setup": false,
     "ability": "첫날 밤, 참가자 1명을 '선택'합니다. 태자귀가 처형 당한다면, 선택 된 참가자 1명은 사악해지고, 그날 밤, 서로를 알게 됩니다.",
+    "flavor": "\"태자귀의 엄마는 누구?\"",
     "image": "/images/fo/boc/icons/siij/crownprinceghost.webp"
   },
   {
@@ -4564,6 +4583,7 @@
     "reminders": [],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, 참가자 1명을 선택해 가위바위보를 합니다. 패자는 사망합니다. 어둑시니에게 선택된 참가자는 '어둑시니가 없음'을 '광기' 해야합니다. 광기를 깰 경우 참가자 팀은 패배합니다. 어둑시니는 오직 가위바위보에서 패배하거나 또는 망나니에 의해서만 사망합니다.",
+    "flavor": "\"어둑시니가 당신을 조용히 쳐다봅니다.\"",
     "image": "/images/fo/boc/icons/siij/darknessspirit.webp"
   },
   {
@@ -4583,6 +4603,7 @@
     ],
     "setup": true,
     "ability": "중복된 선한 역할이 존재하고, 그 중 1명은 중독된 상태입니다. 첫날 밤, 당신은 그 역할과 중독된 자가 누구인지 알고 있습니다. 장산범이 사망할 경우, 그날 밤 중독된 자는 장산범이 누구인지 알게 됩니다.",
+    "flavor": "\"장산범은 사람을 홀려요!\"",
     "image": "/images/fo/boc/icons/siij/jangsantiger.webp"
   },
   {
@@ -4605,6 +4626,7 @@
     ],
     "setup": true,
     "ability": "매일 밤, 하수인들이 선택한 참가자 1명은 그 날 낮까지 사악한 원귀가 됩니다. 다음 날 밤 해당 참가자는 원래대로 돌아오며 하수인들이 새로운 원귀를 선택할 때 사망합니다. [악마 없음, +1 마을주민]",
+    "flavor": "\"어려운거 알아요. 저도 어려워요\"",
     "image": "/images/fo/boc/icons/siij/vengefulspirit.webp"
   },
   {
@@ -4621,7 +4643,8 @@
       "매혹된 자의 지명에 의한 죽음"
     ],
     "setup": true,
-    "ability": "첫날 밤을 제외한 매일 밤, 당신은 참가자를 선택하고 그 참가자는 사망합니다. 구미호를 알고 있는 매혹된 참가자가 1명 있으며, 그는 당신이 죽는다면 사악해집니다. 매혹된 참가자의 지명으로 당신이 처형 될 경우, 그는 새로운 구미호가 됩니다. 4인 이하일 경우 새로운 구미호가 탄생하지 않습니다.",
+    "ability": "첫날 밤을 제외한 매일 밤, 당신은 참가자를 선택하고 그 참가자는 사망합니다. 게임 시작 시 구미호를 알고 있는 매혹된 참가자가 1명 있으며, 그는 당신이 죽는다면 사악해집니다. 구미호는 매혹된 참가자가 누구인지 모릅니다. 매혹된 참가자의 지명으로 당신이 처형 될 경우, 그는 새로운 구미호가 됩니다. 4인 이하일 경우 새로운 구미호가 탄생하지 않습니다.",
+    "flavor": "\"조선 최고의 미인\"",
     "image": "/images/fo/boc/icons/siij/ninetailedfox.webp"
   },
   {
@@ -4638,6 +4661,7 @@
     ],
     "setup": true,
     "ability": "선한 참가자가 사망하면, 오늘 밤, 사악한 호환마마가 되고, 다른 사악한 참가자들을 알게 됩니다. 사악한 참가자들만 투표할 경우 0표로 집계되며, 가장 많은 표가 나온다면 처형됩니다. 5일 황혼에 승리를 선언합니다. [-1 이방인]",
+    "flavor": "\"천연두를 호환마마로 불렀대요.\"",
     "image": "/images/fo/boc/icons/siij/tigersandplague.webp"
   },
   {
@@ -4654,6 +4678,7 @@
     ],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, (비록 당신이 죽더라도) 참가자를 선택합니다. 그는 죽습니다. 당신을 처음으로 지명한 참가자는 숙주가 되며, 숙주가 사망해야 백각귀도 사망합니다. (지명한 참가자는 숙주가 된 사실은 모릅니다.)",
+    "flavor": "\"나에게 뻗은 손가락을 저주하리\"",
     "image": "/images/fo/boc/icons/siij/hundredlegsghost.webp"
   },
   {
@@ -5150,8 +5175,8 @@
       "능력 없음"
     ],
     "setup": false,
-    "ability": "게임 당 한 번, 낮에 공개적으로 자신이 가렌임을 선언한 후 1명을 지목합니다. 하수인을 지목한 경우 해당 소환사는 처형됩니다.",
-    "flavor": "",
+    "ability": "게임 당 한 번, 낮에 공개적으로 자신이 가렌임을 선언한 후 1명을 지목합니다. 하수인을 지목한 경우 해당 참가자는 처형됩니다.",
+    "flavor": "\"내 검과 심장은 데마시아의 것이다!\"",
     "image": "/images/fo/boc/icons/lol/garen.webp"
   },
   {
@@ -5159,7 +5184,7 @@
     "name": "애쉬",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 7,
+    "firstNight": 10,
     "firstNightReminder": "애쉬의 맞은편 자리에 있는 참가자 중 하수인이 있는지 알려줍니다. 만약 맞은편이 불분명하다면 애쉬에게 가운데 사람을 고르게 합니다.",
     "otherNight": 0,
     "otherNightReminder": "",
@@ -5167,7 +5192,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "게임 시작 시, 당신의 맞은 편 3명 중 하수인이 있는지를 알 수 있습니다.",
-    "flavor": "",
+    "flavor": "\"화살 한 발로 세상을 평정해 주지.\"",
     "image": "/images/fo/boc/icons/lol/ashe.webp"
   },
   {
@@ -5175,17 +5200,17 @@
     "name": "브라움",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 4,
+    "firstNight": 6,
     "firstNightReminder": "매일 밤, 1명을 선택하게 합니다. 오늘 밤, 그 대신 브라움이 선택됩니다.",
-    "otherNight": 4,
-    "otherNightReminder": "매일 밤, 1명을 선택하게 합니다. 오늘 밤, 그 대신 브라움이 선택됩니다.",
+    "otherNight": 5,
+    "otherNightReminder": "기존 모든 '보호' 리마인더를 제거합니다. 매일 밤, 1명을 선택하게 합니다. 오늘 밤, 그 대신 브라움이 선택됩니다.",
     "reminders": [
       "보호"
     ],
     "reminders_en": [],
     "setup": false,
     "ability": "매일 밤, 1명을 선택합니다. 오늘 밤, 그 대신 당신이 선택됩니다.",
-    "flavor": "",
+    "flavor": "\"가장 듬직한 심장이 되어드리지.\"",
     "image": "/images/fo/boc/icons/lol/braum.webp"
   },
   {
@@ -5193,7 +5218,7 @@
     "name": "자야",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 8,
+    "firstNight": 11,
     "firstNightReminder": "게임 시작 시, 가장 가까운 방향으로 자야와 라칸 사이에 얼마나 많은 악한 참가자가 있는지 숫자로 알려줍니다.",
     "otherNight": 0,
     "otherNightReminder": "",
@@ -5201,7 +5226,7 @@
     "reminders_en": [],
     "setup": true,
     "ability": "게임 시작 시, 가장 가까운 방향으로 자야와 라칸 사이에 몇 명의 악한 참가자가 있는지 알 수 있습니다. [+1 라칸]",
-    "flavor": "",
+    "flavor": "\"댄스 파티에 내가 빠질 수는 없지.\"",
     "image": "/images/fo/boc/icons/lol/xayah.webp"
   },
   {
@@ -5211,13 +5236,13 @@
     "team": "townsfolk",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 9,
+    "otherNight": 17,
     "otherNightReminder": "만약 오늘 참가자가 처형되었다면: 그 참가자의 역할 토큰을 보여줍니다.",
     "reminders": [],
     "reminders_en": [],
     "setup": false,
-    "ability": "첫날 밤을 제외한 매일 밤, 처형당한 소환사의 역할을 알게 됩니다.",
-    "flavor": "",
+    "ability": "첫날 밤을 제외한 매일 밤, 처형당한 참가자의 역할을 알게 됩니다.",
+    "flavor": "\"두려워 마라. 네 시체는, 잘 써 주마.\"",
     "image": "/images/fo/boc/icons/lol/yorick.webp"
   },
   {
@@ -5227,7 +5252,7 @@
     "team": "townsfolk",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 18,
+    "otherNight": 13,
     "otherNightReminder": "두 번째 죽음이 생길 때, 무효화하고 질리언에게 만취 리마인더를 추가합니다. 만약 이미 만취 리마인더가 있다면 밤이 종료될 때 제거합니다.",
     "reminders": [
       "만취"
@@ -5235,7 +5260,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "매일 밤마다 최초로 두 명 이상이 죽게 될 때, 2번째 죽음을 무효화하고, 질리언은 다음 밤이 종료될 때까지 만취합니다.",
-    "flavor": "",
+    "flavor": "\"그리할 줄 알고 있었소.\"",
     "image": "/images/fo/boc/icons/lol/zilean.webp"
   },
   {
@@ -5246,15 +5271,15 @@
     "firstNight": 0,
     "firstNightReminder": "",
     "otherNight": 17,
-    "otherNightReminder": "'죽음 면역 2일 남음'이라면 '죽음 면역 1일 남음'로 교체합니다. '죽음 면역 1일 남음'이라면 제거합니다.",
+    "otherNightReminder": "'불사 2일 남음'이라면 '불사 1일 남음'로 교체합니다. '불사 1일 남음'이라면 제거합니다.",
     "reminders": [
-      "죽음 면역 2일 남음",
-      "죽음 면역 1일 남음"
+      "불사 2일 남음",
+      "불사 1일 남음"
     ],
     "reminders_en": [],
     "setup": false,
     "ability": "죽음에 처하게 된다면 1번 죽음을 피하고, 내일 밤이 종료될 때까지 죽음에 면역입니다.",
-    "flavor": "",
+    "flavor": "\"손 쉬운 사냥이 되겠군!\"",
     "image": "/images/fo/boc/icons/lol/tryndamere.webp"
   },
   {
@@ -5262,17 +5287,17 @@
     "name": "리신",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 10,
-    "firstNightReminder": "매일 밤, 1명을 선택하게 합니다. 어제 선택한 소환사를 선택한 경우, 그 소환사의 성향(선/악)을 알려 줍니다.",
-    "otherNight": 7,
-    "otherNightReminder": "매일 밤, 1명을 선택하게 합니다. 어제 선택한 소환사를 선택한 경우, 그 소환사의 성향(선/악)을 알려 줍니다.",
+    "firstNight": 13,
+    "firstNightReminder": "매일 밤, 1명을 선택하게 합니다. 어제 선택한 참가자를 선택한 경우, 그 참가자의 성향(선/악)을 알려 줍니다.",
+    "otherNight": 15,
+    "otherNightReminder": "매일 밤, 1명을 선택하게 합니다. 어제 선택한 참가자를 선택한 경우, 그 참가자의 성향(선/악)을 알려 줍니다.",
     "reminders": [
       "선택"
     ],
     "reminders_en": [],
     "setup": false,
-    "ability": "매일 밤, 1명을 선택합니다. 어제 선택한 소환사를 선택한 경우, 그 소환사의 성향을 알게 됩니다.",
-    "flavor": "",
+    "ability": "매일 밤, 1명을 선택합니다. 어제 선택한 참가자를 선택한 경우, 그 참가자의 성향을 알게 됩니다.",
+    "flavor": "\"당신의 뜻대로, 싸우겠소.\"",
     "image": "/images/fo/boc/icons/lol/leesin.webp"
   },
   {
@@ -5280,9 +5305,9 @@
     "name": "유미",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 2,
+    "firstNight": 5,
     "firstNightReminder": "매일 밤, 1명을 선택하게 합니다. 해당 참가자의 모든 '만취', '중독' 리마인더를 제거하고 '건강' 리마인더를 추가합니다.",
-    "otherNight": 2,
+    "otherNight": 4,
     "otherNightReminder": "기존 모든 '건강' 리마인더를 제거합니다. 매일 밤, 1명을 선택하게 합니다. 해당 참가자의 모든 '만취', '중독' 리마인더를 제거하고 '건강' 리마인더를 추가합니다.",
     "reminders": [
       "건강"
@@ -5290,7 +5315,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "매일 밤, 1명을 선택합니다. 그는 즉시 술에서 깨고 건강해집니다. 또한, 오늘 낮까지 중독이나 만취 상태가 되지 않습니다.",
-    "flavor": "",
+    "flavor": "\"너랑, 유미랑! 우리 함께 잘해보자고!\"",
     "image": "/images/fo/boc/icons/lol/yuumi.webp"
   },
   {
@@ -5298,9 +5323,9 @@
     "name": "미스 포츈",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 6,
+    "firstNight": 9,
     "firstNightReminder": "게임 당 한 번, 밤에 두 명을 선택하게 합니다. 악 팀만 두 명을 선택한 경우, 그들에게 '만취' 리마인더를 추가합니다.",
-    "otherNight": 6,
+    "otherNight": 14,
     "otherNightReminder": "게임 당 한 번, 밤에 두 명을 선택하게 합니다. 악 팀만 두 명을 선택한 경우, 그들에게 '만취' 리마인더를 추가합니다.",
     "reminders": [
       "만취"
@@ -5308,7 +5333,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "게임 당 한 번, 밤에 두 명을 선택합니다. 악 팀만 두 명을 선택한 경우, 그들은 오늘 밤 만취합니다.",
-    "flavor": "",
+    "flavor": "\"행운은 멍청이를 싫어하는 법이지.\"",
     "image": "/images/fo/boc/icons/lol/missfortune.webp"
   },
   {
@@ -5316,7 +5341,7 @@
     "name": "라칸",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 9,
+    "firstNight": 12,
     "firstNightReminder": "게임 시작 시, 가장 가까운 방향으로 자야와 라칸 사이에 얼마나 많은 악한 참가자가 있는지 숫자로 알려줍니다.",
     "otherNight": 0,
     "otherNightReminder": "",
@@ -5324,7 +5349,7 @@
     "reminders_en": [],
     "setup": true,
     "ability": "게임 시작 시, 가장 가까운 방향으로 자야와 라칸 사이에 몇 명의 악한 참가자가 있는지 알 수 있습니다. [+1 자야]",
-    "flavor": "",
+    "flavor": "\"한번 신나게 춰볼까!\"",
     "image": "/images/fo/boc/icons/lol/rakan.webp"
   },
   {
@@ -5332,18 +5357,18 @@
     "name": "케이틀린",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 5,
-    "firstNightReminder": "매일 밤, 본인을 제외한 1명을 선택하게 합니다. 해당 참가자에게 '덫' 리마인더를 추가합니다. 밤마다 최초 1번 대상이 지목되었다면 지목한 참가자에게 '만취' 리마인더를 추가합니다.",
-    "otherNight": 5,
-    "otherNightReminder": "매일 밤, 본인을 제외한 1명을 선택하게 합니다. 해당 참가자에게 '덫' 리마인더를 추가합니다. 밤마다 최초 1번 대상이 지목되었다면 지목한 참가자에게 '만취' 리마인더를 추가합니다.",
+    "firstNight": 7,
+    "firstNightReminder": "매일 밤, 본인을 제외한 1명을 선택하게 합니다. 해당 참가자에게 '덫' 리마인더를 추가합니다. 그가 밤에 선택되었고 '덫' 리마인더가 있다면, 지목한 참가자에게 '만취' 리마인더를 추가합니다.",
+    "otherNight": 6,
+    "otherNightReminder": "기존 모든 '덫' 리마인더를 제거합니다. 매일 밤, 본인을 제외한 1명을 선택하게 합니다. 해당 참가자에게 '덫' 리마인더를 추가합니다. 그가 밤에 선택되었고 '덫' 리마인더가 있다면, 지목한 참가자에게 '만취' 리마인더를 추가합니다.",
     "reminders": [
       "덫",
       "만취"
     ],
     "reminders_en": [],
     "setup": false,
-    "ability": "매일 밤, 본인을 제외한 1명을 선택하여 요들잡이 덫을 설치합니다. 밤마다 최초 1번 그가 지목되었다면 지목한 소환사는 만취합니다.",
-    "flavor": "",
+    "ability": "매일 밤, 본인을 제외한 1명을 선택하여 밤 동안 유지되는 덫을 설치합니다. 그날 밤 최초 1번, 그가 다른 참가자에게 선택되었다면 그를 선택한 참가자는 만취합니다.",
+    "flavor": "\"이 사건은 내가 맡죠.\"",
     "image": "/images/fo/boc/icons/lol/caitlyn.webp"
   },
   {
@@ -5351,19 +5376,17 @@
     "name": "트위스티드 페이트",
     "edition": "lol",
     "team": "townsfolk",
-    "firstNight": 11,
-    "firstNightReminder": "어떤 소속을 알려줄 지 결정한 뒤, 해당 소속 임의의 참가자 1명에게 리마인더를 추가해 둡니다. 트위스티드 페이트를 깨운 뒤 해당 참가자를 가리킵니다.",
-    "otherNight": 8,
-    "otherNightReminder": "리마인더가 없는, 해당 소속 임의의 참가자 1명에게 리마인더를 추가해 둡니다. 트위스티드 페이트를 깨운 뒤 해당 참가자를 가리킵니다.",
+    "firstNight": 14,
+    "firstNightReminder": "마을주민/하수인/이방인 참가자 중 1명에게 '알려짐' 리마인더를 추가해 둡니다. 트위스티드 페이트를 깨운 뒤 해당 참가자를 가리킵니다.",
+    "otherNight": 16,
+    "otherNightReminder": "'알려짐' 리마인더가 없는 마을주민/하수인/이방인 참가자 중 1명에게 리마인더를 추가해 둡니다. 트위스티드 페이트를 깨운 뒤 해당 참가자를 가리킵니다.",
     "reminders": [
-      "마을주민",
-      "하수인",
-      "이방인"
+      "알려짐"
     ],
     "reminders_en": [],
     "setup": true,
-    "ability": "매일 밤, (마을주민/하수인/이방인)인 소환사 중 1명을 알게 됩니다. 해당 소환사가 어떤 소속인지는 알 수 없습니다. [+1 이방인]",
-    "flavor": "",
+    "ability": "매일 밤, (마을주민/하수인/이방인)인 참가자 중 1명을 알게 됩니다. 해당 참가자가 어떤 소속인지는 알 수 없습니다. [+1 이방인]",
+    "flavor": "\"행운의 여신이, 내게 미소를 짓는군.\"",
     "image": "/images/fo/boc/icons/lol/twistedfate.webp"
   },
   {
@@ -5373,16 +5396,16 @@
     "team": "outsider",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 17,
-    "otherNightReminder": "낮에 우디르가 지명했던 참가자의 '만취' 리마인더를 제거합니다.",
+    "otherNight": 1,
+    "otherNightReminder": "낮에 우디르가 지명했던 참가자의 '만취' 리마인더를 제거합니다. 만약 '지명 실패' 리마인더가 있다면 사망합니다.",
     "reminders": [
-      "만취",
-      "지명 실패"
+      "지명 성공(만취)",
+      "지명 실패(사망)"
     ],
     "reminders_en": [],
     "setup": false,
-    "ability": "매일 낮, 당신이 지명하는 소환사는 오늘 밤이 끝날 때까지 만취합니다. 만약 어제와 똑같은 소환사를 지명하거나, 혹은 선한 참가자를 지명하지 않았다면 오늘 밤 당신은 죽습니다.",
-    "flavor": "",
+    "ability": "매일 낮, 당신이 지명하는 참가자는 오늘 밤이 끝날 때까지 만취합니다. 만약 어제와 똑같은 참가자를 지명하거나, 혹은 선한 참가자를 지명하지 않았다면 오늘 밤 당신은 사망합니다.",
+    "flavor": "\"갈등은 프렐요드의 원동력이지.\"",
     "image": "/images/fo/boc/icons/lol/udyr.webp"
   },
   {
@@ -5392,7 +5415,7 @@
     "team": "outsider",
     "firstNight": 3,
     "firstNightReminder": "홀수, 또는 짝수번째 밤에 그라가스의 이웃한 마을주민에게 '~번째 만취' 리마인더를 추가하거나, 이미 있다면 제거합니다.",
-    "otherNight": 3,
+    "otherNight": 2,
     "otherNightReminder": "홀수, 또는 짝수번째 밤에 그라가스의 이웃한 마을주민에게 '~번째 만취' 리마인더를 추가하거나, 이미 있다면 제거합니다.",
     "reminders": [
       "홀수번째 만취",
@@ -5401,7 +5424,7 @@
     "reminders_en": [],
     "setup": true,
     "ability": "살아있는 이웃한 마을주민은 생사에 관계 없이 홀수번째 밤과 짝수번째 밤에 번갈아가면서 만취합니다. 어느 번째 밤에 취하는지는 임의적입니다.",
-    "flavor": "",
+    "flavor": "\"네가 사는 거라면 나도 끼지~\"",
     "image": "/images/fo/boc/icons/lol/gragas.webp"
   },
   {
@@ -5417,7 +5440,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "중독, 만취, 광기의 대상이 될 경우 본인 대신 살아있는 이웃한 선팀이 대상으로 지목됩니다.",
-    "flavor": "",
+    "flavor": "\"시스템 가동. 준비 완료.\"",
     "image": "/images/fo/boc/icons/lol/blitzcrank.webp"
   },
   {
@@ -5425,8 +5448,8 @@
     "name": "레나타 글라스크",
     "edition": "lol",
     "team": "outsider",
-    "firstNight": 12,
-    "firstNightReminder": "임의의 마을주민 둘을 지정한 뒤 각자 따로 깨우고 '레나타 글라스크' 토큰을 보여준 뒤, 상대방을 가르키면서 악마 토큰을 보여줍니다.",
+    "firstNight": 2,
+    "firstNightReminder": "임의의 마을주민 2명을 지정한 뒤 각자 따로 깨우고 상대방을 가르키면서 악마 토큰을 보여줍니다. 둘 다 '광기' 리마인더를 추가합니다.",
     "otherNight": 0,
     "otherNightReminder": "",
     "reminders": [
@@ -5435,8 +5458,8 @@
     ],
     "reminders_en": [],
     "setup": true,
-    "ability": "게임 시작시, 임의의 마을주민 둘에게 서로가 악마라는 광기에 빠지게 합니다. 광기를 어기면 처형될 수 있습니다. 둘 중 1명이 처형당하면 광기가 풀립니다.",
-    "flavor": "",
+    "ability": "게임 시작 시, 임의의 마을주민 2명에게 서로가 악마라는 광기에 빠지게 합니다. 그들은 레나타의 존재를 모릅니다. 광기를 어기면 처형될 수 있으며, 둘 중 1명이 처형당하면 광기가 풀립니다.",
+    "flavor": "\"살고 싶으면 글라스크 님이라고 불러라.\"",
     "image": "/images/fo/boc/icons/lol/renataglasc.webp"
   },
   {
@@ -5444,17 +5467,17 @@
     "name": "이블린",
     "edition": "lol",
     "team": "minion",
-    "firstNight": 13,
-    "firstNightReminder": "매일 밤, 두 명을 선택하게 합니다. 각자 따로 깨우고 '이블린' 토큰을 보여준 뒤, 상대방을 가르키면서 악마 토큰을 보여줍니다. 둘 다 '광기' 리마인더를 추가합니다.",
-    "otherNight": 11,
-    "otherNightReminder": "기존 모든 '광기' 리마인더를 제거합니다. 매일 밤, 두 명을 선택하게 합니다. 각자 따로 깨우고 '이블린' 토큰을 보여준 뒤, 상대방을 가르키면서 악마 토큰을 보여줍니다. 둘 다 '광기' 리마인더를 추가합니다.",
+    "firstNight": 8,
+    "firstNightReminder": "매일 밤, 두 명을 선택하게 합니다. 각자 따로 깨우고 상대방을 가르키면서 악마 토큰을 보여줍니다. 둘 다 '광기' 리마인더를 추가합니다.",
+    "otherNight": 7,
+    "otherNightReminder": "기존 모든 '광기' 리마인더를 제거합니다. 매일 밤, 두 명을 선택하게 합니다. 각자 따로 깨우고 상대방을 가르키면서 악마 토큰을 보여줍니다. 둘 다 '광기' 리마인더를 추가합니다.",
     "reminders": [
       "광기"
     ],
     "reminders_en": [],
     "setup": false,
-    "ability": "매일 밤, 두 명을 선택합니다. 그 둘은 황홀한 저주에 빠져 서로가 악마라는 광기에 빠지게 합니다. 어기면 처형될 수 있습니다.",
-    "flavor": "",
+    "ability": "매일 밤, 두 명을 선택합니다. 그 둘은 황홀한 저주에 빠져 서로가 악마라는 광기에 빠지게 합니다. 그들은 이블린의 존재를 모릅니다. 어기면 처형될 수 있습니다.",
+    "flavor": "\"날 원하잖아, 그렇지?\"",
     "image": "/images/fo/boc/icons/lol/evelynn.webp"
   },
   {
@@ -5470,7 +5493,7 @@
     "reminders_en": [],
     "setup": true,
     "ability": "첫날 밤, 비밀 단어(혹은 문장)를 알게 됩니다. 게임 중 1번, 낮에 공개적으로 이를 말한다면 잠시 후 강제로 밤이 됩니다.",
-    "flavor": "",
+    "flavor": "\"어둠을... 맞이하라...!\"",
     "image": "/images/fo/boc/icons/lol/nocturne.webp"
   },
   {
@@ -5478,9 +5501,9 @@
     "name": "신지드",
     "edition": "lol",
     "team": "minion",
-    "firstNight": 1,
+    "firstNight": 4,
     "firstNightReminder": "독살범이 참가자를 가리킵니다. 그 참가자는 중독됩니다.",
-    "otherNight": 1,
+    "otherNight": 3,
     "otherNightReminder": "이전에 중독된 참가자는 더 이상 중독되지 않습니다. 신지드가 참가자를 가리킵니다. 그 참가자는 중독됩니다.",
     "reminders": [
       "중독"
@@ -5488,7 +5511,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "매일 밤 1명을 선택합니다. 그는 내일 낮까지 중독됩니다.",
-    "flavor": "",
+    "flavor": "\"한잔 하겠나!\"",
     "image": "/images/fo/boc/icons/lol/singed.webp"
   },
   {
@@ -5498,7 +5521,7 @@
     "team": "minion",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 16,
+    "otherNight": 12,
     "otherNightReminder": "'영광스러운 죽음' 리마인더가 있다면 1명을 선택하게 합니다. 그 참가자는 사망합니다. '영광스러운 죽음' 리마인더를 제거합니다.",
     "reminders": [
       "영광스러운 죽음"
@@ -5506,7 +5529,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "처형되거나 죽은 경우, 그날 밤 1명을 선택합니다. 그는 죽습니다.",
-    "flavor": "",
+    "flavor": "\"휴식은... 산 자를 위한... 것이다..!\"",
     "image": "/images/fo/boc/icons/lol/sion.webp"
   },
   {
@@ -5516,13 +5539,13 @@
     "team": "demon",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 12,
+    "otherNight": 8,
     "otherNightReminder": "첫날 밤을 제외한 매일 밤, 1명을 선택합니다. 그는 죽습니다. 그 후, 선택한 사람과 양 옆이 모두 죽어있다면 1명을 더 선택할 수 있습니다.",
     "reminders": [],
     "reminders_en": [],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, 1명을 선택합니다. 그는 죽습니다. 그 후, 선택한 사람과 양 옆이 모두 죽어있다면 1명을 더 선택할 수 있습니다.",
-    "flavor": "",
+    "flavor": "\"변화란 좋은 거야.\"",
     "image": "/images/fo/boc/icons/lol/khazix.webp"
   },
   {
@@ -5532,10 +5555,9 @@
     "team": "demon",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 13,
+    "otherNight": 9,
     "otherNightReminder": "첫날 밤을 제외한 매일 밤, 1명을 선택하게 합니다. 그는 죽습니다. 리마인더를 교체하다가 D-Day 면 3명을 선택하게 합니다.",
     "reminders": [
-      "D-3",
       "D-2",
       "D-1",
       "D-Day"
@@ -5543,7 +5565,7 @@
     "reminders_en": [],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, 1명을 선택합니다. 그는 죽습니다. 4번째 밤에는 1명 대신 3명을 선택합니다.",
-    "flavor": "",
+    "flavor": "\"학살의 현장에서 난, 피어오른다. 붉은 여명에 피어나는... 꽃처럼.\"",
     "image": "/images/fo/boc/icons/lol/jhin.webp"
   },
   {
@@ -5553,13 +5575,13 @@
     "team": "demon",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 14,
+    "otherNight": 10,
     "otherNightReminder": "첫날 밤을 제외한 매일 밤, 1명을 선택합니다. 그는 죽습니다. 선택한 사람의 양 옆이 모두 살아있다면 그 중 1명을 더 선택할 수 있습니다.",
     "reminders": [],
     "reminders_en": [],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, 1명을 선택합니다. 그는 죽습니다. 선택한 사람의 양 옆이 모두 살아있다면 그 중 1명을 더 선택할 수 있습니다.",
-    "flavor": "",
+    "flavor": "\"공포...\"",
     "image": "/images/fo/boc/icons/lol/fiddlesticks.webp"
   },
   {
@@ -5569,13 +5591,13 @@
     "team": "demon",
     "firstNight": 0,
     "firstNightReminder": "",
-    "otherNight": 15,
+    "otherNight": 11,
     "otherNightReminder": "첫날 밤을 제외한 매일 밤, 참가자 2명을 선택합니다. 그들은 죽습니다. 어젯밤에 선택한 죽은 참가자를 토해낼 수도 있습니다.",
     "reminders": [],
     "reminders_en": [],
     "setup": false,
     "ability": "첫날 밤을 제외한 매일 밤, 참가자 2명을 선택합니다. 그들은 죽습니다. 어젯밤에 선택한 죽은 참가자를 토해낼 수도 있습니다.",
-    "flavor": "",
+    "flavor": "\"왕이든 폭군이든 마음대로 불러라. 강물은, 망자의 이름까지 기억해주진 않으니까.\"",
     "image": "/images/fo/boc/icons/lol/tahmkench.webp"
   },
   {
