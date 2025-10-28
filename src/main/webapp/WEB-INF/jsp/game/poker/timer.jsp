@@ -32,6 +32,77 @@
                 opacity: 0;
             }
         }
+
+        #donateBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffcc00;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            z-index: 9999;
+        }
+
+        #donateBtn:hover {
+            background-color: #ffd633;
+            transform: scale(1.05);
+        }
+
+        /* 모달 배경 */
+        .donate-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+        }
+
+        /* 모달 내용 */
+        .donate-modal {
+            background: #222;
+            color: #fff;
+            width: 90%;
+            max-width: 400px;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .donate-modal h2 {
+            margin-top: 0;
+            color: #ffcc00;
+        }
+
+        .donate-modal img {
+            margin: 10px 0;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .close-donate-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .close-donate-modal:hover {
+            color: #fff;
+        }
     </style>
 
     <script>
@@ -77,12 +148,31 @@
         $(() => {
             console.log("Document ready - initializing DOM elements");
 
+            const donateBtn = document.getElementById("donateBtn");
+            donateBtn.addEventListener("click", () => toggleDonateModal(true));
+
+            // ESC 키 닫기
+            document.addEventListener("keydown", e => {
+                if (e.key === "Escape") toggleDonateModal(false);
+            });
+
+            // 배경 클릭 시 닫기
+            const donateModal = document.getElementById("donateModal");
+            donateModal.addEventListener("click", e => {
+                if (e.target === donateModal) toggleDonateModal(false);
+            });
+
             blindLevels = BLIND_LEVEL_NORMAL;
 
             setInterval(updateClock, 1000);
 
             updateClock();
         });
+
+        const toggleDonateModal = show => {
+            const donateModal = document.getElementById("donateModal");
+            donateModal.style.display = show ? "block" : "none";
+        };
 
         const updateClock = () => {
             const now = new Date();
@@ -287,6 +377,30 @@
 </head>
 
 <body class="bg-default">
+<!-- Floating Button -->
+<button id="donateBtn">☕ 후원하기</button>
+
+<!-- Modal -->
+<div class="donate-modal-overlay" id="donateModal">
+    <div class="donate-modal">
+        <span class="close-donate-modal" onclick="toggleDonateModal(false)">✖</span>
+        <h2>개발자에게 커피 한 잔 사주기 ☕</h2>
+        <p>이 타이머가 도움이 되셨다면<br>작은 응원이 큰 힘이 됩니다!</p>
+
+        <div style="margin-top:15px;">
+            <a href="https://toss.me/yourname" target="_blank"
+               style="display:inline-block;background:#0064FF;color:#fff;padding:10px 20px;
+                      border-radius:6px;text-decoration:none;font-weight:bold;margin:5px;">
+                💙 토스로 후원하기
+            </a>
+        </div>
+
+        <div style="margin-top:15px;">
+            <p style="font-size:14px;color:#ccc;">또는 카카오페이 QR을 스캔해주세요</p>
+            <img src="/images/kakaopay_qr.png" alt="카카오페이 후원 QR" width="160">
+        </div>
+    </div>
+</div>
 <div class="wrap">
     <div class="row" style="font-size: x-large;">
         <div class="col-12">

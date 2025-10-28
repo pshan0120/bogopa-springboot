@@ -23,10 +23,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: workspace.xml 및 캐릭터 데이터 업데이트&#10;&#10;- 작업 시간, task 카운터 정보 변경&#10;- kr_KO.json에 캐릭터 추가 및 정보 수정&#10;- LOL 스크립트와 포로 캐릭터 관련 파일 추가">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터 추가 및 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/guide/characterGuideModal.jspf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/assets/game/boc/data/characters/kr_KO.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -393,7 +392,8 @@
       <workItem from="1761204668701" duration="6952000" />
       <workItem from="1761284561026" duration="5705000" />
       <workItem from="1761371871623" duration="1439000" />
-      <workItem from="1761561492221" duration="11980000" />
+      <workItem from="1761561492221" duration="12032000" />
+      <workItem from="1761630355398" duration="4487000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -738,7 +738,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="217" />
+    <option name="localTasksCounter" value="218" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -771,8 +771,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="한글화 및 다국어 지원 추가&#10;&#10;- 캐릭터 이름, 능력 설명, 리마인더 등 한글 번역 추가&#10;- 기존의 영어 데이터와 다국어 지원 병행 가능하도록 구조 수정&#10;- 일부 이미지 경로 수정" />
-    <MESSAGE value="Day/Night 상태 텍스트 생성 로직 추가&#10;&#10;- Day/Night 상태에 따라 텍스트 형식 및 이모지를 생성하는 함수 추가&#10;- 관련 화면들에 Day/Night 상태 표시 로직 통합&#10;- CSS 수정 및 UI 개선 사항 적용 (배경 그라데이션 및 텍스트 위치 변경)" />
     <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads" />
     <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads 스크립트 추가로 광고 기능 도입" />
     <MESSAGE value="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가" />
@@ -796,7 +794,9 @@
     <MESSAGE value="수정: 배경음악 및 효과음 추가 및 경로 정리&#10;&#10;- LOL 효과음 추가 및 배경음악 레이아웃 변경.&#10;- 효과음 관련 파일 경로 &quot;/effect/&quot;로 통일.&#10;- 사용 코드 및 JSON 업데이트로 기능 강화." />
     <MESSAGE value="수정: workspace.xml 및 character 데이터 파일 업데이트&#10;&#10;- workspace.xml에서 작업 시간 및 task 카운터 정보 변경&#10;- characters/kr_KO.json에 첫째 날 설명 추가 및 수정" />
     <MESSAGE value="수정: workspace.xml 및 캐릭터 데이터 업데이트&#10;&#10;- 작업 시간, task 카운터 정보 변경&#10;- kr_KO.json에 캐릭터 추가 및 정보 수정&#10;- LOL 스크립트와 포로 캐릭터 관련 파일 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="수정: workspace.xml 및 캐릭터 데이터 업데이트&#10;&#10;- 작업 시간, task 카운터 정보 변경&#10;- kr_KO.json에 캐릭터 추가 및 정보 수정&#10;- LOL 스크립트와 포로 캐릭터 관련 파일 추가" />
+    <MESSAGE value="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터" />
+    <MESSAGE value="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터 추가 및 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터 추가 및 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
