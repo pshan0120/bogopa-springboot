@@ -16,14 +16,16 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war exploded" />
+      <artifact name="bogopa:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터 추가 및 수정">
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼 스타일 및 모달 레이아웃 추가  &#10;- ESC 키 및 외부 클릭 시 모달 닫기 기능 구현  &#10;- 타이머 사용 가이드 내용 및 레이아웃 구성">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/donation/kakaopay.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/donation/toss.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" afterDir="false" />
     </list>
@@ -393,7 +395,8 @@
       <workItem from="1761284561026" duration="5705000" />
       <workItem from="1761371871623" duration="1439000" />
       <workItem from="1761561492221" duration="12032000" />
-      <workItem from="1761630355398" duration="4487000" />
+      <workItem from="1761630355398" duration="5775000" />
+      <workItem from="1761719795640" duration="2422000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -738,7 +741,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <option name="localTasksCounter" value="219" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -771,9 +774,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads" />
-    <MESSAGE value="포맷 수정 및 광고 스크립트 추가&#10;&#10;- 프로그램 코드의 불필요한 공백 수정 및 일관성 유지&#10;- Google Ads 스크립트 추가로 광고 기능 도입" />
-    <MESSAGE value="포커 토너먼트 타이머 추가&#10;&#10;- PokerController 추가 및 타이머 JSP 페이지 생성&#10;- game.jsp에 포커 타이머 버튼 추가" />
     <MESSAGE value="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트" />
     <MESSAGE value="추가: 포커 토너먼트 타이머 데이터 및 설정 업데이트&#10;&#10;- 블라인드 레벨 및 Antes 데이터 변경&#10;- 타이머 관련 주석 및 불필요한 코드 정리&#10;- workspace.xml의 변경 기록 갱신 및 커밋 메세지 업데이트" />
     <MESSAGE value="추가: 캐릭터 데이터 수정 및 설정 업데이트&#10;&#10;- setup 값 및 능력 설명 수정&#10;- JSP에서 캐릭터 관련 표시 로직 개선&#10;- 기타 부정확한 텍스트 수정 및 정리" />
@@ -796,7 +796,10 @@
     <MESSAGE value="수정: workspace.xml 및 캐릭터 데이터 업데이트&#10;&#10;- 작업 시간, task 카운터 정보 변경&#10;- kr_KO.json에 캐릭터 추가 및 정보 수정&#10;- LOL 스크립트와 포로 캐릭터 관련 파일 추가" />
     <MESSAGE value="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터" />
     <MESSAGE value="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터 추가 및 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="수정: workspace.xml과 캐릭터 데이터 변경 사항 반영&#10;&#10;- 작업 시간 및 task 카운터 관련 데이터 수정&#10;- kr_KO.json에 캐릭터 추가, 능력 및 플레이버 텍스트 업데이트&#10;- LOL 관련 스크립트와 캐릭터 데이터 추가 및 수정" />
+    <MESSAGE value="수정" />
+    <MESSAGE value="추가: 타이머 페이지에 후원 버튼 및 모달 기능 구현&#10;&#10;- 후원 버튼 및 모달 스타일 추가&#10;- ESC 키 및 배경 클릭으로 모달 닫기 기능 구현&#10;- 토스와 카카오페이를 통한 후원 유도 레이아웃 구성" />
+    <MESSAGE value="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼 스타일 및 모달 레이아웃 추가  &#10;- ESC 키 및 외부 클릭 시 모달 닫기 기능 구현  &#10;- 타이머 사용 가이드 내용 및 레이아웃 구성" />
+    <option name="LAST_COMMIT_MESSAGE" value="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼 스타일 및 모달 레이아웃 추가  &#10;- ESC 키 및 외부 클릭 시 모달 닫기 기능 구현  &#10;- 타이머 사용 가이드 내용 및 레이아웃 구성" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

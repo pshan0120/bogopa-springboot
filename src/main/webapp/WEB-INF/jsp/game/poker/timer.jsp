@@ -33,6 +33,20 @@
             }
         }
 
+        /* 모바일 화면에서는 숨김 */
+        @media (max-width: 768px) {
+            .hide-on-mobile {
+                display: none;
+            }
+        }
+
+        /* PC 화면에서는 표시 */
+        @media (min-width: 769px) {
+            .hide-on-mobile {
+                display: inline; /* 또는 block, inline-block으로 조정 */
+            }
+        }
+
         #donateBtn {
             position: fixed;
             bottom: 20px;
@@ -103,6 +117,76 @@
         .close-donate-modal:hover {
             color: #fff;
         }
+
+        /* 가이드 버튼 스타일 */
+        #guideBtn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #37aee2; /* 색상 */
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px; /* 글자와 이모지 크기 */
+            border: none;
+            border-radius: 25px;
+            padding: 12px 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* 텍스트와 이모지 간 간격 */
+        }
+
+        #guideBtn:hover {
+            background-color: #5cc6f2;
+            transform: scale(1.05);
+        }
+
+        /* 가이드 모달 배경 */
+        .guide-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+        }
+
+        /* 가이드 모달 내용 */
+        .guide-modal {
+            background: #222;
+            color: #fff;
+            width: 90%;
+            max-width: 400px;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .guide-modal h2 {
+            margin-top: 0;
+            color: #37aee2;
+        }
+
+        .close-guide-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .close-guide-modal:hover {
+            color: #fff;
+        }
     </style>
 
     <script>
@@ -160,6 +244,28 @@
             const donateModal = document.getElementById("donateModal");
             donateModal.addEventListener("click", e => {
                 if (e.target === donateModal) toggleDonateModal(false);
+            });
+
+            // 가이드 버튼 및 모달 관련 코드
+            const guideBtn = document.getElementById('guideBtn');
+            const guideModalOverlay = document.querySelector('.guide-modal-overlay');
+            const closeGuideModal = document.querySelector('.close-guide-modal');
+
+            // 버튼 클릭 시 모달 열기
+            guideBtn.addEventListener('click', () => {
+                guideModalOverlay.style.display = 'block';
+            });
+
+            // 닫기 버튼 클릭 시 모달 닫기
+            closeGuideModal.addEventListener('click', () => {
+                guideModalOverlay.style.display = 'none';
+            });
+
+            // 모달 외부 클릭 시 모달 닫기
+            guideModalOverlay.addEventListener('click', (e) => {
+                if (e.target === guideModalOverlay) {
+                    guideModalOverlay.style.display = 'none';
+                }
             });
 
             blindLevels = BLIND_LEVEL_NORMAL;
@@ -378,35 +484,60 @@
 
 <body class="bg-default">
 <!-- Floating Button -->
-<button id="donateBtn">☕ 후원하기</button>
+<button id="donateBtn">☕ <span class="hide-on-mobile">후원하기</span></button>
 
 <!-- Modal -->
 <div class="donate-modal-overlay" id="donateModal">
     <div class="donate-modal">
         <span class="close-donate-modal" onclick="toggleDonateModal(false)">✖</span>
         <h2>개발자에게 커피 한 잔 사주기 ☕</h2>
-        <p>이 타이머가 도움이 되셨다면<br>작은 응원이 큰 힘이 됩니다!</p>
+        <p>후원하면 에어라인 핸드가 들어올지도 모릅니다!</p>
 
         <div style="margin-top:15px;">
-            <a href="https://toss.me/yourname" target="_blank"
-               style="display:inline-block;background:#0064FF;color:#fff;padding:10px 20px;
-                      border-radius:6px;text-decoration:none;font-weight:bold;margin:5px;">
-                💙 토스로 후원하기
-            </a>
+            <p style="font-size:14px;color:#ccc;">토스 QR을 스캔해주세요</p>
+            <img src="/images/fo/donation/toss.png" alt="카카오페이 후원 QR" width="160">
         </div>
 
         <div style="margin-top:15px;">
             <p style="font-size:14px;color:#ccc;">또는 카카오페이 QR을 스캔해주세요</p>
-            <img src="/images/kakaopay_qr.png" alt="카카오페이 후원 QR" width="160">
+            <img src="/images/fo/donation/kakaopay.png" alt="카카오페이 후원 QR" width="160">
         </div>
     </div>
 </div>
+
+<!-- 가이드 버튼 -->
+<button id="guideBtn">💡 <span class="hide-on-mobile">가이드</span></button>
+
+<!-- 가이드 모달 -->
+<div class="guide-modal-overlay">
+    <div class="guide-modal">
+        <span class="close-guide-modal">&times;</span>
+        <h2>가이드</h2>
+        <p class="text-left" style="font-size: 12px;">
+            1. 이 타이머는 무료입니다. 편하게 사용하세요.<br/>
+            2. 기본 라운드 시간은 7분이며, 언제든 변경 가능합니다. TIME 값을 바꾼 뒤 UPDATE 를 누르면 적용되요.<br/>
+            3. BLIND 역시 마찬가지의 방식으로 변경 가능합니다.<br/>
+            4. BLIND는 MODE에 따라 다르게 설정해 두었습니다.<br/>
+             1) SLOW : 캐시게임에서 씁니다.<br/>
+              - 100, 200, 400, 600, 800, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000, 28000, 29000, 30000<br/>
+             2) NORMAL : 가장 표준에 가깝습니다.<br/>
+              - 100, 200, 300, 500, 700, 1000, 1500, 2000, 3000, 4000, 5000, 6000, 8000, 10000, 15000, 20000, 30000, 50000, 100000<br/>
+             3) FAST : 빠른 진행이 필요할 때 씁니다.<br/>
+              - 100, 200, 300, 500, 1000, 1500, 2000, 3000, 5000, 10000, 20000, 30000, 50000, 100000<br/>
+            5. RESET 을 누르면 초기화됩니다.<br/>
+            <br/>
+            ※ 문의/개선사항은 <a href="mailto:pshan0120@gmail.com">pshan0120@gmail.com</a>으로 보내주세요.<br/>
+            ※ 서비스 배포시 일시적으로 접속이 막힐 수 있습니다.
+        </p>
+    </div>
+</div>
+
 <div class="wrap">
     <div class="row" style="font-size: x-large;">
         <div class="col-12">
             <div class="header">
                 <span class="game-name">Friendly Game</span>
-                 <span class="level" id="level">NORMAL LEVEL 1</span>
+                <span class="level" id="level">NORMAL LEVEL 1</span>
             </div>
         </div>
     </div>
