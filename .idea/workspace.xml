@@ -16,18 +16,18 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bogopa:war" />
+      <artifact name="bogopa:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼 스타일 및 모달 레이아웃 추가  &#10;- ESC 키 및 외부 클릭 시 모달 닫기 기능 구현  &#10;- 타이머 사용 가이드 내용 및 레이아웃 구성">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/donation/kakaopay.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/fo/donation/toss.png" afterDir="false" />
+    <list default="true" id="860dd420-f0bb-4517-b5af-904b8a72e332" name="Changes" comment="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼과 스타일 추가, 모바일/PC 스타일 분리&#10;- ESC 키 및 외부 클릭으로 모달 닫기 기능 구현&#10;- 타이머 사용 가이드 내용 및 레이아웃 구성">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/poker/timer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/include/fo/includeHeader.jspf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/hostPlay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/game/boc/custom/jspf/backgroundMusic.jspf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -396,7 +396,11 @@
       <workItem from="1761371871623" duration="1439000" />
       <workItem from="1761561492221" duration="12032000" />
       <workItem from="1761630355398" duration="5775000" />
-      <workItem from="1761719795640" duration="2422000" />
+      <workItem from="1761719795640" duration="2771000" />
+      <workItem from="1762158906736" duration="2000" />
+      <workItem from="1764230550103" duration="1313000" />
+      <workItem from="1765679776176" duration="4323000" />
+      <workItem from="1765722085292" duration="2924000" />
     </task>
     <task id="LOCAL-00135" summary="setCharacter">
       <created>1720814278965</created>
@@ -741,7 +745,7 @@
       <option name="project" value="LOCAL" />
       <updated>1727715708857</updated>
     </task>
-    <option name="localTasksCounter" value="219" />
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -774,8 +778,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="추가: 포커 토너먼트 타이머 기능 및 UI 개선&#10;&#10;- 현재 시간, 플레이 시간, Prev Blinds 등 표시 기능 추가&#10;- 타이머 애니메이션 및 Blinds 시각적 개선&#10;- 관련 자바스크립트 함수 및 스타일 업데이트" />
-    <MESSAGE value="추가: 포커 토너먼트 타이머 데이터 및 설정 업데이트&#10;&#10;- 블라인드 레벨 및 Antes 데이터 변경&#10;- 타이머 관련 주석 및 불필요한 코드 정리&#10;- workspace.xml의 변경 기록 갱신 및 커밋 메세지 업데이트" />
     <MESSAGE value="추가: 캐릭터 데이터 수정 및 설정 업데이트&#10;&#10;- setup 값 및 능력 설명 수정&#10;- JSP에서 캐릭터 관련 표시 로직 개선&#10;- 기타 부정확한 텍스트 수정 및 정리" />
     <MESSAGE value="수정: 한글 문구 및 설정 관련 문자열 수정&#10;&#10;- '일차'를 '번째'로 변경하여 문구 통일성 개선.&#10;- 캐릭터 정보에서 setup 상태 표시 추가.&#10;- JSON 데이터의 일부 오탈자 수정 및 문맥 개선.&#10;- setup 값 변경으로 로직 및 설정 업데이트." />
     <MESSAGE value="번역 수정" />
@@ -799,7 +801,9 @@
     <MESSAGE value="수정" />
     <MESSAGE value="추가: 타이머 페이지에 후원 버튼 및 모달 기능 구현&#10;&#10;- 후원 버튼 및 모달 스타일 추가&#10;- ESC 키 및 배경 클릭으로 모달 닫기 기능 구현&#10;- 토스와 카카오페이를 통한 후원 유도 레이아웃 구성" />
     <MESSAGE value="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼 스타일 및 모달 레이아웃 추가  &#10;- ESC 키 및 외부 클릭 시 모달 닫기 기능 구현  &#10;- 타이머 사용 가이드 내용 및 레이아웃 구성" />
-    <option name="LAST_COMMIT_MESSAGE" value="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼 스타일 및 모달 레이아웃 추가  &#10;- ESC 키 및 외부 클릭 시 모달 닫기 기능 구현  &#10;- 타이머 사용 가이드 내용 및 레이아웃 구성" />
+    <MESSAGE value="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼 스타일 및 모달 레이아웃 추가  &#10;- ESC 키 및 외부 클릭 시 모달 닫기 기능 구현  &#10;- 타이머 사용 가이드 내용 및 레이아웃 구성  " />
+    <MESSAGE value="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼과 스타일 추가, 모바일/PC 스타일 분리&#10;- ESC 키 및 외부 클릭으로 모달 닫기 기능 구현&#10;- 타이머 사용 가이드 내용 및 레이아웃 구성" />
+    <option name="LAST_COMMIT_MESSAGE" value="추가: 가이드 버튼 및 모달 기능 구현&#10;&#10;- 가이드 버튼과 스타일 추가, 모바일/PC 스타일 분리&#10;- ESC 키 및 외부 클릭으로 모달 닫기 기능 구현&#10;- 타이머 사용 가이드 내용 및 레이아웃 구성" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

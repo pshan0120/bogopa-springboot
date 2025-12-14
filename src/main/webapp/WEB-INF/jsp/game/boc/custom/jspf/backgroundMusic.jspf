@@ -134,6 +134,49 @@
                     <audio name="backgroundMusic"
                            src="https://bogopayo.cafe24.com/sound/bgm/manzhao-shanghai-yuanjing.mp3"
                            controls loop></audio>
+
+                    <hr>
+
+                    <h4>magic-christmas-126686</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/magic-christmas-126686.mp3"
+                           controls loop></audio>
+                    <h4>colt-fingaz-home-alone-319714</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/colt-fingaz-home-alone-319714.mp3"
+                           controls loop></audio>
+                    <h4>christmas-synthwave-442829</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/christmas-synthwave-442829.mp3"
+                           controls loop></audio>
+                    <h4>we-wish-you-a-merry-christmas-444573</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/we-wish-you-a-merry-christmas-444573.mp3"
+                           controls loop></audio>
+                    <h4>magical-christmas-music-414658</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/magical-christmas-music-414658.mp3"
+                           controls loop></audio>
+                    <h4>christmas-christmas-music-441754</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/christmas-christmas-music-441754.mp3"
+                           controls loop></audio>
+                    <h4>christmas-447470</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/christmas-447470.mp3"
+                           controls loop></audio>
+                    <h4>christmas-holidays-270797</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/christmas-holidays-270797.mp3"
+                           controls loop></audio>
+                    <h4>christmas-christmas-music-444109</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/christmas-christmas-music-444109.mp3"
+                           controls loop></audio>
+                    <h4>christmas-holiday-festive-cheer-snow-441518</h4>
+                    <audio name="backgroundMusic"
+                           src="https://bogopayo.cafe24.com/sound/bgm/christmas/christmas-holiday-festive-cheer-snow-441518.mp3"
+                           controls loop></audio>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="backgroundMusic3TabContent"
                      aria-labelledby="backgroundMusicTab">
