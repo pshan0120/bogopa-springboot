@@ -226,7 +226,7 @@
                     return prev +
                         `<div class="col-4 text-center pt-2 \${fontClass}" name="\${next.id}">
                             <small class="\${fontClass}">\${next.setup ? "*" : ""}\${next.name}</small>
-                            <img src="\${next.image}" class="img-responsive img-rounded m-auto" />
+                            <img src="\${next.image}" class="img-responsive img-thumbnail m-auto" />
                         </div>`;
                 }
 
@@ -1426,7 +1426,8 @@
     </div>
     <!-- Page content -->
     <div class="row">
-        <div class="col-md-6 col-xs-12">
+<%--        <div class="col-md-6 col-xs-12">--%>
+        <div class="col-md-12">
             <div class="container mt--7">
 
                 <div class="row">
@@ -1837,32 +1838,32 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-xs-12">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">
-                        <div class="card shadow">
-                            <div class="card-header bg-white border-0">
-                                <h2>
-                                    Pocket Grimoire
-                                    <a data-toggle="collapse" href="#pocketGrimoireBodyDiv" role="button"
-                                       aria-expanded="false"
-                                       aria-controls="pocketGrimoireDiv">
-                                        열기/닫기
-                                    </a>
-                                </h2>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="collapse" id="pocketGrimoireBodyDiv">
-                                    <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/"
-                                            height="700" width="100%"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--        <div class="col-md-6 col-xs-12">--%>
+<%--            <div class="container">--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-xl-12 mb-2 mt-2 mb-xl-0">--%>
+<%--                        <div class="card shadow">--%>
+<%--                            <div class="card-header bg-white border-0">--%>
+<%--                                <h2>--%>
+<%--                                    Pocket Grimoire--%>
+<%--                                    <a data-toggle="collapse" href="#pocketGrimoireBodyDiv" role="button"--%>
+<%--                                       aria-expanded="false"--%>
+<%--                                       aria-controls="pocketGrimoireDiv">--%>
+<%--                                        열기/닫기--%>
+<%--                                    </a>--%>
+<%--                                </h2>--%>
+<%--                            </div>--%>
+<%--                            <div class="card-body p-0">--%>
+<%--                                <div class="collapse" id="pocketGrimoireBodyDiv">--%>
+<%--                                    <iframe id="pocketGrimoireIframe" src="https://www.pocketgrimoire.co.uk/en_GB/"--%>
+<%--                                            height="700" width="100%"></iframe>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </div>
 
     <%@ include file="/WEB-INF/jsp/fo/footer.jsp" %>
