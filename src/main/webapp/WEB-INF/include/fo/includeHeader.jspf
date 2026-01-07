@@ -52,8 +52,7 @@
 <%--<link href="<c:url value='/vendors/argon/css/argon-dashboard.css?v=1.1.3'/>" rel="stylesheet"/>--%>
 <link href="<c:url value='/vendors/argon/css/argon-dashboard.min.css?v=1.1.3'/>" rel="stylesheet"/>
 <%--<link rel="stylesheet" href="https://bogopayo.cafe24.com/css/argon-dashboard.min.css"/>--%>
-<%--<link rel="stylesheet" href="<c:url value='/css/fo/common.css'/>">--%>
-<link rel="stylesheet" href="/css/fo/common.css">
+<link rel="stylesheet" href="<c:url value='/css/fo/common.css?v=1.0.0'/>">
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">

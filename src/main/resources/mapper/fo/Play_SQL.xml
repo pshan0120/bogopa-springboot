@@ -283,14 +283,12 @@
 				p.sttsCd,
 				cdNm('C002', p.sttsCd) AS sttsNm
 			FROM
-				play p,
-				playMmbr pm,
+				play p
+				LEFT JOIN playMmbr pm ON p.playNo = pm.playNo,
 				club c,
 				game g,
 				mmbr m
 			WHERE
-				p.playNo = pm.playNo
-			AND
 				p.clubNo = c.clubNo
 			AND
 				p.gameNo = g.gameNo
