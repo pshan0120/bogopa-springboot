@@ -12,6 +12,7 @@
 	<task:executor id="asyncExecutor" pool-size="5-10" queue-capacity="1000" rejection-policy="ABORT" />
 	<task:annotation-driven executor="asyncExecutor" />
 	
+	<!-- 
 	<bean id="encryptorConfig" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
 		<property name="algorithm" value="PBEWithMD5AndDES" />
 		<property name="password" value="bogopa" />
@@ -19,6 +20,8 @@
 	<bean id="encryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
 		<property name="config" ref="encryptorConfig" />
 	</bean>
+	-->
+	<!-- 
 	<bean class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">
 		<constructor-arg ref="encryptor" />
 		<property name="locations">
@@ -27,7 +30,9 @@
 			</list>
 		</property>
 	</bean>
+	 -->
 	
+	<!-- 
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClass}" />
 		<property name="url" value="${jdbc.url}" />
@@ -44,5 +49,6 @@
 			</bean>
 		</property>
 	</bean>
+	-->
 	
 </beans>

@@ -11,11 +11,11 @@ public abstract class CustomPageRequest extends PageRequest {
 
     private Boolean descending;
     private String sortBy;
-    private int offset;
+    private long offset;
     private Sort.Direction direction;
 
     public CustomPageRequest(int page, int size, Boolean descending, String sortBy) {
-        super(page, size);
+        super(page, size, Sort.unsorted());
         this.descending = descending;
         this.sortBy = sortBy;
     }

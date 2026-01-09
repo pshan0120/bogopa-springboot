@@ -1,0 +1,5 @@
+{
+    "maven.executable.path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.12\\bin\\mvn.cmd",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic"
+}
