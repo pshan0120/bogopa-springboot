@@ -1,4 +1,26 @@
-# Project exclude paths
+# Target directory (Maven)
 /target/
-.idea
-workspace.xml
+
+# IDE specific files
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+.springBeans
+.externalToolBuilders/
+.factorypath
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+tmp/
+
+# Build tools and cache
+.rebel.xml.bak
+node_modules/
+dist/
