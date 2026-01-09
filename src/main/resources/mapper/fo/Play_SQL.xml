@@ -1404,7 +1404,33 @@
 					p.sttsCd,
 					cdNm('C002', p.sttsCd) AS sttsNm,
 					DATE_FORMAT(p.strtDt, "%Y.%m.%d %H:%i") AS strtDt,
-					IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt
+					IFNULL(DATE_FORMAT(p.endDt, "%Y.%m.%d %H:%i"), '') AS endDt,
+					(SELECT
+						 GROUP_CONCAT(IFNULL(m3.prflImgFileNm, 'default') ORDER BY m3.mmbrNo SEPARATOR ',')
+					 FROM
+						 play p3,
+						 playMmbr pm3,
+						 mmbr m3
+					 WHERE
+						 p3.playNo = pm3.playNo
+					   AND
+						 pm3.mmbrNo = m3.mmbrNo
+					   AND
+						 p3.playNo = p.playNo
+					) AS playMmbrPrflImgFileNms,
+					(SELECT
+						 GROUP_CONCAT(m2.mmbrNo ORDER BY m2.mmbrNo SEPARATOR ',')
+					 FROM
+						 play p2,
+						 playMmbr pm2,
+						 mmbr m2
+					 WHERE
+						 p2.playNo = pm2.playNo
+					   AND
+						 pm2.mmbrNo = m2.mmbrNo
+					   AND
+						 p2.playNo = p.playNo
+					) AS playMmbrNos
 				FROM
 					play p,
 					game g,

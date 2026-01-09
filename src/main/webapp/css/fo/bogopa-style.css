@@ -1,0 +1,462 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   Project: BOGOPA Premium Portal Theme
+   Version: 2.0
+   Author: AI Assistant
+   ========================================================================== */
+
+/* 1. Variables & Reset */
+:root {
+    /* Colors */
+    --bg-dark: #0d1117;
+    --bg-card: #161b22;
+    --text-main: #c9d1d9;
+    --text-bright: #ffffff;
+    --text-dim: #8b949e;
+    --accent-color: #58a6ff;
+    --accent-glow: rgba(88, 166, 255, 0.4);
+    --border-color: #30363d;
+    --glass-bg: rgba(22, 27, 34, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    /* Layout */
+    --container-width: 1200px;
+    --header-height: 80px;
+
+    /* Effects */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --glass-blur: blur(12px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+/* 2. Utility Classes */
+.preview-container {
+    width: 100%;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(88, 166, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(139, 148, 158, 0.05) 0%, transparent 40%);
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* 3. Navigation */
+.modern-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: var(--header-height);
+    background: rgba(13, 17, 23, 0.8);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-bright);
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--accent-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-color);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-bright);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* 4. Hero Section */
+.hero-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #fff 0%, #8b949e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-title span {
+    background: linear-gradient(135deg, #58a6ff 0%, #1f6feb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+/* 5. Components - Cards */
+.modern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.premium-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(88, 166, 255, 0.3);
+    background: rgba(22, 27, 34, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-tag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-size: 1.05rem;
+    color: var(--text-bright);
+    margin: 0.5rem 0 1rem 0;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--glass-border);
+    background: transparent !important;
+    color: inherit !important;
+}
+
+.club-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #2a2a2e;
+    overflow: hidden;
+}
+
+.avatar-sm img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-avatars {
+    display: flex;
+    margin-left: -8px;
+}
+
+.player-avatars .avatar-sm {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--bg-card);
+    margin-left: -8px;
+}
+
+/* 6. Components - List */
+.modern-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: rgba(22, 27, 34, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    transition: var(--transition);
+}
+
+.list-item:hover {
+    background: var(--bg-card);
+    border-color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.type-badge {
+    background: rgba(88, 166, 255, 0.1);
+    color: var(--accent-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.item-title {
+    font-weight: 500;
+    color: var(--text-bright);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-nick {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.item-date {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+/* Search Bar & Inputs */
+.search-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    display: flex;
+    background: rgba(22, 27, 34, 0.8);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    padding: 0.5rem;
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-bright);
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-btn {
+    background: var(--accent-color);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Tabs */
+.modern-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 1rem;
+    padding-left: 0;
+}
+
+.modern-tab-item {
+    color: var(--text-dim);
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    transition: var(--transition);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modern-tab-item:hover {
+    color: var(--text-bright);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modern-tab-item.active {
+    color: var(--bg-dark);
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-bright);
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modern-nav {
+        padding: 0 1.5rem;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: var(--bg-card);
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--glass-border);
+        gap: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 1rem 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .modern-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .list-item {
+        grid-template-columns: 1fr auto;
+        gap: 0.5rem;
+    }
+
+    .item-nick,
+    .item-date {
+        display: none;
+    }
+
+    /* Simple mobile fix for list, can be improved */
+}

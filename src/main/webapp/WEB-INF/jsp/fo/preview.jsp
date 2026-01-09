@@ -1,62 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
             <!DOCTYPE html>
             <html lang="ko">
 
             <head>
-                <title>보고파</title>
-                <%@ include file="/WEB-INF/include/fo/includeHeader.jspf" %>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title>보고파 - Premium Portal</title>
+                <link rel="stylesheet" href="<c:url value='/css/fo/bogopa-style.css'/>">
+                <link href="<c:url value='/vendors/argon/js/plugins/@fortawesome/fontawesome-free/css/all.min.css'/>"
+                    rel="stylesheet" />
+                <script src="<c:url value='/vendors/argon/js/plugins/jquery/dist/jquery.min.js'/>"></script>
             </head>
 
             <body>
 
                 <div class="preview-container">
-                    <!-- Navigation -->
                     <nav class="modern-nav">
-                        <a href="<c:url value='/'/>" class="logo">BOGO<span>PA</span></a>
-
+                        <a href="#" class="logo">BOGO<span>PA</span></a>
                         <button class="menu-toggle" id="mobileMenuBtn">
                             <i class="fas fa-bars"></i>
                         </button>
-
                         <div class="nav-links" id="navLinks">
-                            <a href="<c:url value='/guide'/>"><i class="fas fa-info-circle"></i> 이용안내</a>
-                            <a href="<c:url value='/club'/>"><i class="fas fa-users"></i> 모임</a>
-                            <a href="<c:url value='/play'/>"><i class="fas fa-history"></i> 플레이기록</a>
-                            <a href="<c:url value='/play'/>"><i class="fas fa-gamepad"></i> 게임하기</a>
-
-                            <c:choose>
-                                <c:when test="${empty sessionScope.loginMember}">
-                                    <a href="<c:url value='/login/page'/>"><i class="fas fa-sign-in-alt"></i> 로그인</a>
-                                    <a href="<c:url value='/join/page'/>"><i class="fas fa-user-plus"></i> 회원가입</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="<c:url value='/my/page'/>"><i class="fas fa-user"></i> 마이페이지</a>
-                                    <a href="<c:url value='/login/logout'/>"><i class="fas fa-sign-out-alt"></i>
-                                        로그아웃</a>
-                                </c:otherwise>
-                            </c:choose>
+                            <a href="#"><i class="fas fa-info-circle"></i> 이용안내</a>
+                            <a href="#"><i class="fas fa-users"></i> 모임</a>
+                            <a href="#"><i class="fas fa-history"></i> 플레이기록</a>
+                            <a href="#"><i class="fas fa-gamepad"></i> 게임하기</a>
+                            <a href="#"><i class="fas fa-user-plus"></i> 회원가입</a>
+                            <a href="#"><span style="color:var(--accent-color)">로그인</span></a>
                         </div>
                     </nav>
 
-                    <!-- Hero Section -->
                     <header class="hero-section">
                         <h1 class="hero-title">보<span>드게임 하</span>고파</h1>
                         <p class="hero-subtitle">보드게임.. 하고 갈래요?</p>
                     </header>
 
-                    <!-- Recent Plays -->
+                    <!-- Recent PlaysSection -->
                     <section>
                         <div class="section-header">
                             <h2 class="section-title">최근 등록된 플레이</h2>
-                            <a href="<c:url value='/play'/>"
-                                style="color:var(--accent-color); font-size: 0.8rem; text-decoration:none;">전체보기 <i
-                                    class="fas fa-chevron-right"></i></a>
+                            <a href="#" style="color:var(--accent-color); font-size: 0.8rem; text-decoration:none;">전체보기
+                                <i class="fas fa-chevron-right"></i></a>
                         </div>
 
-                        <div class="modern-grid" id="playGrid">
+                        <div class="modern-grid">
                             <c:choose>
                                 <c:when test="${empty playRecordList}">
                                     <div class="premium-card"
@@ -66,22 +55,20 @@
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach var="play" items="${playRecordList}">
-                                        <a href="<c:url value='/play'/>" class="premium-card"
-                                            style="display: block; text-decoration: none; color: inherit;">
+                                        <div class="premium-card">
                                             <div class="card-tag">${play.gameNm}</div>
                                             <h3 class="card-title">${play.playNm}</h3>
                                             <div
                                                 style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem;">
-                                                <i class="far fa-calendar-alt mr-1"></i> ${fn:substring(play.strtDt, 0,
-                                                16)}
+                                                <i class="far fa-calendar-alt mr-1"></i> ${play.strtDt}
                                             </div>
 
                                             <div class="club-info">
                                                 <div class="avatar-sm">
                                                     <c:choose>
                                                         <c:when test="${not empty play.clubPrflImgFileNm}">
-                                                            <img src="https://bogopayo.cafe24.com/img/club/${play.clubNo}/${play.clubPrflImgFileNm}"
-                                                                onerror="this.src='https://bogopayo.cafe24.com/img/club/default.png'">
+                                                            <img
+                                                                src="https://bogopayo.cafe24.com/img/club/${play.clubNo}/${play.clubPrflImgFileNm}">
                                                         </c:when>
                                                         <c:otherwise>
                                                             <img src="https://bogopayo.cafe24.com/img/club/default.png">
@@ -92,56 +79,38 @@
                                             </div>
 
                                             <div class="card-footer">
+                                                <span style="font-size: 0.8rem; font-weight: 600;">참여 인원</span>
                                                 <div class="player-avatars">
-                                                    <c:set var="mmbrImgList"
-                                                        value="${fn:split(play.playMmbrPrflImgFileNms, ',')}" />
-                                                    <c:set var="mmbrNoList"
-                                                        value="${fn:split(play.playMmbrNos, ',')}" />
-
-                                                    <c:forEach var="imgFile" items="${mmbrImgList}" varStatus="status">
-                                                        <c:if test="${status.index < 10}">
-                                                            <div class="avatar-sm" style="background-color: white;">
-                                                                <c:choose>
-                                                                    <c:when
-                                                                        test="${imgFile eq 'default' or empty imgFile}">
-                                                                        <img src="https://bogopayo.cafe24.com/img/mmbr/default.png"
-                                                                            style="width:100%; height:100%; object-fit:cover; opacity: 0.9;">
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <img src="https://bogopayo.cafe24.com/img/mmbr/${mmbrNoList[status.index]}/${imgFile}"
-                                                                            style="width:100%; height:100%; object-fit:cover;"
-                                                                            onerror="this.src='https://bogopayo.cafe24.com/img/mmbr/default.png'">
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </div>
-                                                        </c:if>
+                                                    <c:forEach begin="1"
+                                                        end="${play.playMmbrCnt > 4 ? 4 : play.playMmbrCnt}">
+                                                        <div class="avatar-sm">
+                                                            <img src="https://bogopayo.cafe24.com/img/mmbr/default.png">
+                                                        </div>
                                                     </c:forEach>
-
-                                                    <c:if test="${fn:length(mmbrImgList) > 10}">
+                                                    <c:if test="${play.playMmbrCnt > 4}">
                                                         <div class="avatar-sm"
                                                             style="background:#21262d; display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:var(--accent-color); font-weight:bold;">
-                                                            +${fn:length(mmbrImgList) - 10}
+                                                            +${play.playMmbrCnt - 4}
                                                         </div>
                                                     </c:if>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </div>
                                     </c:forEach>
                                 </c:otherwise>
                             </c:choose>
                         </div>
                     </section>
 
-                    <!-- New Posts -->
+                    <!-- New Posts Section -->
                     <section style="margin-top: 6rem;">
                         <div class="section-header">
                             <h2 class="section-title">새로운 게시글</h2>
-                            <a href="<c:url value='/club'/>"
-                                style="color:var(--accent-color); font-size: 0.8rem; text-decoration:none;">더보기 <i
-                                    class="fas fa-chevron-right"></i></a>
+                            <a href="#" style="color:var(--accent-color); font-size: 0.8rem; text-decoration:none;">더보기
+                                <i class="fas fa-chevron-right"></i></a>
                         </div>
 
-                        <div class="modern-list" id="boardGrid">
+                        <div class="modern-list">
                             <c:choose>
                                 <c:when test="${empty clubBrdList}">
                                     <div style="padding: 4rem; text-align: center; color: var(--text-dim);">조회결과가 없습니다.
@@ -149,16 +118,15 @@
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach var="brd" items="${clubBrdList}">
-                                        <a href="<c:url value='/club'/>" class="list-item"
-                                            style="display: grid; text-decoration: none; color: inherit;">
+                                        <div class="list-item">
                                             <div class="type-badge">${brd.brdTypeNm}</div>
-                                            <span class="item-title">${brd.title}</span>
+                                            <a href="#" class="item-title">${brd.title}</a>
                                             <div class="item-nick">
                                                 <div class="avatar-sm" style="width:24px; height:24px;">
                                                     <c:choose>
                                                         <c:when test="${not empty brd.prflImgFileNm}">
-                                                            <img src="https://bogopayo.cafe24.com/img/mmbr/${brd.mmbrNo}/${brd.prflImgFileNm}"
-                                                                onerror="this.src='https://bogopayo.cafe24.com/img/mmbr/default.png'">
+                                                            <img
+                                                                src="https://bogopayo.cafe24.com/img/mmbr/${brd.mmbrNo}/${brd.prflImgFileNm}">
                                                         </c:when>
                                                         <c:otherwise>
                                                             <img src="https://bogopayo.cafe24.com/img/mmbr/default.png">
@@ -167,8 +135,8 @@
                                                 </div>
                                                 ${brd.nickNm}
                                             </div>
-                                            <div class="item-date">${fn:substring(brd.insDt, 0, 10)}</div>
-                                        </a>
+                                            <div class="item-date">${brd.insDt}</div>
+                                        </div>
                                     </c:forEach>
                                 </c:otherwise>
                             </c:choose>
@@ -179,12 +147,10 @@
                         <p>&copy; 2026 BOGOPA THEATER. All Operations Classified.</p>
                         <p style="margin-top: 0.5rem; opacity: 0.5;">섬마을제이드 | pshan0120@naver.com</p>
                     </footer>
-
                 </div>
 
                 <script>
                     $(document).ready(function () {
-                        // Mobile Menu Toggle
                         $('#mobileMenuBtn').click(function () {
                             $('#navLinks').toggleClass('active');
                         });
